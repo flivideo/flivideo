@@ -42,3 +42,7 @@
 # And the shared Claude configuration
 !.claude/
 !.claude/**
+
+# And the docs folder
+!docs/
+!docs/**

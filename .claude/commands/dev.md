@@ -22,7 +22,7 @@ Implement features and fixes based on FR/NFR specifications from the product own
 
 ## Reading Work
 
-Use the `handover-queue` skill to check `docs/handover-queue.md` for pending work.
+Check `docs/backlog.md` for items marked "With Developer", then read the linked PRD file.
 
 Or receive direct instructions from David.
 
@@ -30,8 +30,8 @@ Or receive direct instructions from David.
 
 ```
 docs/
-├── prd/           # Feature specs
-├── backlog.md     # Requirements with status
+├── prd/           # Individual requirement specs (FR-XX.md)
+├── backlog.md     # Requirements INDEX with status
 ├── changelog.md   # Implementation history
 └── planning/      # Architecture docs
 ```
@@ -40,8 +40,9 @@ docs/
 
 ### Step 1: Understand the Requirement
 
-- Read spec from `docs/backlog.md` or `docs/prd/`
-- Check `docs/handover-queue.md` for full context
+- Check `docs/backlog.md` for items with status "With Developer"
+- Read the linked PRD file in `docs/prd/fr-XX-name.md`
+- PRD contains everything: user story, acceptance criteria, technical notes
 - Clarify ambiguities before starting
 
 ### Step 2: Plan the Work
@@ -56,33 +57,46 @@ For multi-step tasks:
 - Make minimal changes - don't over-engineer
 - Test by running the dev server if needed
 
-### Step 4: Handover to PO
+### Step 4: Complete the PRD
 
-Use the `handover-queue` skill to mark work complete, or provide:
+When done, fill in the "Completion Notes" section of the PRD file:
 
 ```markdown
-## FR-XX: Title - Handover
+## Completion Notes
 
-### Summary
-[1-3 sentences on what was built]
+**What was done:**
+- [Bullet points of changes]
 
-### What was implemented
-[Bullet points of changes]
-
-### Files changed
+**Files changed:**
 - `path/to/file.ts` (new/modified)
 
-### Testing notes
+**Testing notes:**
 - [How to verify it works]
 
-### Status
-[Complete / Needs review / Blocked]
-
----
-**TL;DR:** [One sentence summary]
+**Status:** Complete
 ```
 
-### Step 5: Commit
+### Step 5: Notify PO
+
+Provide summary to PO:
+```markdown
+## FR-XX: Title - Complete
+
+**Summary:** [1-2 sentences]
+
+**What was implemented:** [Bullet points]
+
+**Files changed:** [List]
+
+**Testing:** [How to verify]
+
+---
+**TL;DR:** [One sentence]
+```
+
+PO will update backlog.md status → "Implemented" and add changelog entry.
+
+### Step 6: Commit
 
 When asked to commit:
 - Stage relevant changes
@@ -105,7 +119,7 @@ Always note in handover:
 
 - Ask clarifying questions early
 - Report blockers immediately
-- Provide handover summaries after completing features
+- Provide completion summaries after finishing features
 
 ## Related Agents
 

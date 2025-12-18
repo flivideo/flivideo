@@ -8,10 +8,10 @@ Documentation for [Project Name] - [brief description].
 
 | Document | Purpose |
 |----------|---------|
-| [backlog.md](backlog.md) | Active requirements (FRs/NFRs) |
+| [backlog.md](backlog.md) | Requirements index with status |
 | [changelog.md](changelog.md) | Implementation history |
 | [brainstorming-notes.md](brainstorming-notes.md) | Ideas and exploration |
-| [handover-queue.md](handover-queue.md) | PO ↔ Dev communication |
+| [prd/](prd/) | Individual requirement specs |
 
 ---
 
@@ -19,13 +19,12 @@ Documentation for [Project Name] - [brief description].
 
 ```
 docs/
-├── prd/                  # Feature specs (complex requirements)
+├── prd/                  # Individual requirement specs (FR-XX, NFR-XX)
 ├── planning/             # Architecture, initial requirements
-├── uat/                  # User Acceptance Testing
-├── backlog.md            # Active requirements
+├── uat/                  # User Acceptance Testing results
+├── backlog.md            # Requirements index (status tracking)
 ├── changelog.md          # Version history
 ├── brainstorming-notes.md
-├── handover-queue.md     # PO ↔ Dev handovers
 └── README.md             # This file
 ```
 
@@ -39,22 +38,22 @@ Stakeholder (David)
        ▼
 ┌─────────────────┐
 │  /po Agent      │  ← Requirements gathering
-│  backlog.md     │  ← Document FRs/NFRs
+│  backlog.md     │  ← Index with status
 │  prd/*.md       │  ← Detailed specs
 └────────┬────────┘
-         │ handover (via handover-queue.md)
+         │ status → "With Developer"
          ▼
 ┌─────────────────┐
-│  /dev Agent     │  ← Implementation
-│  [project]/     │  ← Code changes
+│  /dev Agent     │  ← Reads PRD, implements
+│  [code]         │  ← Code changes
 └────────┬────────┘
-         │ completion
+         │ status → "Implemented"
          ▼
 ┌─────────────────┐
-│  /uat Agent     │  ← Testing
+│  /uat Agent     │  ← Testing (optional)
 │  uat/*.md       │  ← Test results
 └────────┬────────┘
-         │ verified
+         │
          ▼
 ┌─────────────────┐
 │  changelog.md   │  ← History updated

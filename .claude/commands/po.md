@@ -19,10 +19,10 @@ All product documentation lives in `docs/`:
 
 ```
 docs/
-├── prd/                    # Complex feature specs
+├── prd/                    # Individual requirement specs (FR-XX, NFR-XX)
 ├── planning/               # Architecture, initial requirements
 ├── uat/                    # Test results
-├── backlog.md              # Active requirements with status
+├── backlog.md              # Requirements INDEX with status
 ├── changelog.md            # Implementation history
 ├── brainstorming-notes.md  # Ideas, exploration
 └── README.md               # Documentation index
@@ -45,51 +45,44 @@ If these files don't exist, use the `po-templates` skill to scaffold them.
 
 ### Writing Requirements
 
-**Simple (1-2 paragraphs):** Inline in `backlog.md`
-```
-| N | FR-X: Name (see below) | Date | Pending |
+**Every requirement gets its own PRD file:**
+
+1. Create `docs/prd/fr-XX-short-name.md` (use `po-templates` skill for template)
+2. Add row to `docs/backlog.md` table with link to PRD
+
+```markdown
+| # | Requirement | Added | Status |
+|---|-------------|-------|--------|
+| 2 | [FR-2: JSON Config](prd/fr-02-json-config.md) | 2025-12-18 | Pending |
 ```
 
-**Complex (>50 lines, API specs, phases):** Separate file in `docs/prd/`
-```
-| N | FR-X: Name (see spec) | Date | Pending |
-```
+The PRD file IS the handover - it must be self-contained with:
+- User story
+- Problem description
+- Solution approach
+- Acceptance criteria
+- Technical notes
 
 ### Developer Handover
 
-**CRITICAL: Handovers must be COMPLETE and SELF-CONTAINED.**
-
-Use the `handover-queue` skill to write handovers to `docs/handover-queue.md`.
-
-Handover structure:
-```markdown
-### FR-XX: Feature Name
-**Created:** YYYY-MM-DD
-**Status:** Pending
-
-**Problem:** [One sentence]
-
-**Implementation:**
-[Full details - files, code snippets, acceptance criteria]
-[Dev works from this alone - no hunting through other files]
-```
+When ready for development:
+1. Ensure PRD file is complete and self-contained
+2. Update `backlog.md` status → `With Developer`
+3. Dev reads PRD directly - no separate handover needed
 
 ### After Implementation
 
-When developer provides completion summary:
-
-1. Verify implementation matches requirement
-2. Update `backlog.md` status → `Implemented YYYY-MM-DD`
+When developer completes work:
+1. Dev fills in "Completion Notes" section in PRD
+2. Update `backlog.md` status → `Implemented`
 3. Add entry to `changelog.md`
-4. Use `handover-queue` skill to process completed items
 
 ## Status Indicators
 
 In `backlog.md`:
-- `Pending` - Not yet implemented
-- `With Developer` - Handover sent
-- `Awaiting Verification` - Implemented, needs testing
-- `Implemented YYYY-MM-DD` - Complete
+- `Pending` - Ready for development
+- `With Developer` - Currently being implemented
+- `Implemented` - Complete
 - `Needs Rework` - Issues found
 
 ## Patterns
@@ -97,6 +90,9 @@ In `backlog.md`:
 ### Requirement Numbering
 - **FR-X** - Functional Requirements (user-facing)
 - **NFR-X** - Non-Functional Requirements (technical)
+
+### File Naming
+Use kebab-case: `fr-02-json-config.md`, `nfr-01-performance.md`
 
 ### UI Mockups
 Use ASCII art:
@@ -110,7 +106,7 @@ Use ASCII art:
 
 ## Related Agents
 
-- `/dev` - Implements your specs
+- `/dev` - Implements your specs (reads PRD files directly)
 - `/uat` - Tests implementations
 - `/brainstorming-agent` - Idea capture
 - `/progress` - Quick status check
