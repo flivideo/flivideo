@@ -1,0 +1,44 @@
+# =============================================================================
+# FliVideo Shared Configuration Repository
+# =============================================================================
+#
+# PURPOSE:
+# This is a minimal git repo that ONLY tracks shared Claude Code configuration
+# (commands and skills) used across all FliVideo projects.
+#
+# WHY THIS EXISTS:
+# - FliVideo is NOT a monorepo - each subproject (flihub, flideck, etc.) has
+#   its own independent git repository
+# - We wanted shared /po, /dev, /uat commands that all projects inherit
+# - Claude Code looks up the directory tree for .claude/ folders, so placing
+#   shared config here makes it available to all child projects
+# - Without this repo, the .claude/ files would be untracked and at risk
+#
+# STRUCTURE:
+# /Users/davidcruwys/dev/ad/flivideo/
+# ├── .git/                    ← This repo (tracks only .claude/)
+# ├── .gitignore               ← This file
+# ├── .claude/                 ← TRACKED - shared commands & skills
+# │   ├── commands/            ← /po, /dev, /uat, /progress, /brainstorming-agent
+# │   └── skills/              ← handover-queue, po-templates
+# ├── flihub/                  ← IGNORED - separate git repo
+# ├── flideck/                 ← IGNORED - separate git repo
+# └── [other projects]/        ← IGNORED - separate git repos
+#
+# HOW INHERITANCE WORKS:
+# When you run Claude Code in /flivideo/flideck/, it finds:
+#   1. /flivideo/flideck/.claude/     (project-specific overrides)
+#   2. /flivideo/.claude/             (shared commands - THIS REPO)
+#   3. ~/.claude/                     (user-level config)
+#
+# =============================================================================
+
+# Ignore everything by default
+*
+
+# Except this file
+!.gitignore
+
+# And the shared Claude configuration
+!.claude/
+!.claude/**
