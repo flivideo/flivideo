@@ -1,7 +1,8 @@
 # FliVideo Standard Architecture v1.0
 
-**Status**: Baseline / Aspirational
+**Status**: Implemented across all projects
 **Date**: 2026-02-11
+**Last Updated**: 2026-02-14
 **Purpose**: Canonical reference architecture for all FliVideo projects
 **Approach**: Union of all features from FliDeck, FliGen, FliHub, and Storyline App
 
@@ -13,7 +14,7 @@ This document defines the **standard architecture** for FliVideo family projects
 
 **What this is:**
 - Source of truth for new projects
-- Target state for existing projects
+- **IMPLEMENTED** state for existing projects (as of Feb 2026)
 - Reference for architectural decisions
 - Template extraction specification
 
@@ -21,6 +22,12 @@ This document defines the **standard architecture** for FliVideo family projects
 - A requirement that all projects must have all features
 - A one-size-fits-all solution (see selection guide)
 - Immutable (will evolve based on learnings)
+
+**Implementation Status (Feb 2026):**
+- ✅ Core architecture implemented in all 4 apps
+- ✅ Quality tooling (testing, linting, CI) implemented in all 4 apps
+- ✅ Environment validation and logging implemented in all 4 apps
+- 🔄 Advanced features (feature-based architecture, shared configs) in planning
 
 ---
 
@@ -901,11 +908,12 @@ Brief description
 
 ---
 
-## 12. Testing (Aspirational - Not Yet Implemented)
+## 12. Testing (✅ Implemented as of Feb 2026)
 
 ### 12.1 Frontend Testing
 
 **Tools**: Vitest + Testing Library
+**Status**: Implemented in all 4 apps (FliGen, FliHub, FliDeck, Storyline App)
 
 ```json
 {
@@ -924,6 +932,7 @@ Brief description
 ### 12.2 Backend Testing
 
 **Tools**: Vitest + Supertest
+**Status**: Implemented in all 4 apps (FliGen, FliHub, FliDeck, Storyline App)
 
 ```json
 {
@@ -937,9 +946,11 @@ Brief description
 
 ---
 
-## 13. CI/CD (Aspirational - Not Yet Implemented)
+## 13. CI/CD (✅ Implemented as of Feb 2026)
 
 ### 13.1 GitHub Actions
+
+**Status**: Implemented in all 4 apps with lint, typecheck, and test jobs
 
 **File**: `.github/workflows/ci.yml`
 
@@ -1020,24 +1031,33 @@ Level 3: FliVideo Standard Architecture (this document)
 - ✅ Git hooks (gitleaks)
 - ✅ Documentation standards
 
-**What's aspirational** (not yet in all projects):
-- ⚠️ Testing setup (Vitest)
-- ⚠️ CI/CD (GitHub Actions)
+**What's implemented** (as of Feb 2026):
+- ✅ Testing setup (Vitest) - All 4 apps
+- ✅ CI/CD (GitHub Actions) - All 4 apps
+- ✅ Zod environment validation - All 4 apps
+- ✅ Pino structured logging - All 4 apps
+- ✅ ESLint 9 + Prettier - All 4 apps
+
+**What's still aspirational**:
 - ⚠️ Consistent security middleware across all projects
 - ⚠️ Scoped package names in all projects
+- ⚠️ Feature-based architecture refactoring
+- ⚠️ Shared configuration packages
 
 ---
 
 ## 16. Next Steps
 
-1. **Use as reference** for new projects
-2. **Compare external repos** to this baseline (in progress)
-3. **Extract to template** for easy project generation
-4. **Implement missing features** in existing projects
-5. **Evolve to v2.0** based on learnings
+1. ✅ **Use as reference** for new projects - COMPLETE
+2. ✅ **Compare external repos** to this baseline - COMPLETE (see external-repos-analysis.md)
+3. ✅ **Implement quality tooling** in all existing projects - COMPLETE (Feb 2026)
+4. 🔄 **Extract to template** for easy project generation - IN PLANNING
+5. 🔄 **Implement advanced features** (feature-based architecture, shared configs)
+6. 🔄 **Evolve to v2.0** based on learnings
 
 ---
 
 **Document Status**: Living document - will evolve based on learnings
 **Review Cadence**: Quarterly (next review: 2026-05-11)
 **Owner**: David Cruwys / FliVideo Team
+**Last Updated**: 2026-02-14
