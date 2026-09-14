@@ -1,10 +1,12 @@
 # @flivideo/config
 
-Shared configuration for **FliStack** - the FliVideo technology stack.
+Shared configuration for the **FliVideo technology stack**.
 
-## What is FliStack?
+> The name *FliStack* now belongs to the Creator Stack catalogue app (`flivideo/flistack`). It was dropped from this package on 2026-09-14 (David's ruling at the FliStack gate).
 
-FliStack is the standardized technology stack used across all FliVideo projects:
+## What is the FliVideo technology stack?
+
+The FliVideo technology stack is the standardized stack used across all FliVideo projects:
 
 - **RVETS Core**: React, Vite, Express, TypeScript, Socket.io
 - **Quality Tools**: Vitest, ESLint, Prettier, Zod, Pino
@@ -120,7 +122,7 @@ export default mergeConfig(
 cp node_modules/@flivideo/config/prettier/.prettierignore .prettierignore
 ```
 
-## FliStack Philosophy
+## Philosophy
 
 ### Technology Choices
 
@@ -143,7 +145,7 @@ cp node_modules/@flivideo/config/prettier/.prettierignore .prettierignore
 4. **Best Practices**: Battle-tested configs from real projects
 5. **Time Savings**: No bikeshedding over formatting rules
 
-## Apps Using FliStack
+## Apps using this config
 
 - **FliGen**: CLI generator for FliVideo projects
 - **Storyline App**: Video content planning and review

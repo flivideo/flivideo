@@ -1,7 +1,7 @@
 {
   "name": "@flivideo/config",
   "version": "1.0.0",
-  "description": "Shared configuration for FliStack (FliVideo technology stack)",
+  "description": "Shared configuration for the FliVideo technology stack",
   "main": "index.js",
   "type": "module",
   "exports": {
@@ -27,7 +27,6 @@
   },
   "keywords": [
     "flivideo",
-    "flistack",
     "config",
     "eslint",
     "vitest",
