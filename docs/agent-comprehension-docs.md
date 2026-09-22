@@ -6,12 +6,22 @@ first run on FliStudio, FliHub, FliCut, FliCast and fli-core in parallel, one se
 
 **Audience**: the agents that work in the repo. Humans get SYSTEM.md and the README as a by-product.
 
-> ⚠️ **Known gap (measured 2026-09-22): step 1 cannot run on any Fli repo yet.** `schema-mirror` ships only a Python
-> extractor; `detect_stack.py` reports TypeScript and zod as `[GAP] … UNMIRRORED` (FliStudio: 84 TS files; fli-core: 30).
-> Until a TypeScript/zod extractor exists (one piece of work, in the skill, per its `references/adding-a-stack.md` — never
-> per app, never in parallel), run **steps 2 and 3 only** and have AGENT-NOTES point at the real schema source files.
-> Never commit a "mirror" of a repo's incidental Python scripts — that is the partial-mirror-reads-as-complete failure.
-> fli-core's list of declaring files (the input for that extractor) is in its first run's report.
+> **Step 1 on a TypeScript repo** (TS + zod extractor added 2026-09-22, dev-team 0.3.0; piloted on fli-core and
+> FliStudio, both committed and verifying). Run `npm install` in the repo first — the extractor parses with the repo's
+> own `typescript` and refuses (exit 3) rather than guess. `S` = the schema-mirror skill's `scripts/` dir
+> (`/Users/davidcruwys/dev/ad/appydave-plugins/dev-team/skills/schema-mirror/scripts`):
+>
+> ```bash
+> python3 $S/detect_stack.py .                                                   # typescript/zod must show [OK ]
+> python3 $S/extract_typescript.py . -o docs/schema-mirror.json                  # one run covers TS and zod
+> python3 $S/render_mirror.py docs/schema-mirror.json -o docs/schema-mirror.md
+> python3 $S/verify_mirror.py docs/schema-mirror.json                            # must exit 0
+> ```
+>
+> Then read the page's **Cannot be mirrored** table before trusting it: schemas built by helpers (`scanned(...)`,
+> `zoneScan(...)`, `callResult(...)`) and bases imported from `@flivideo/core` are named gaps, not absences — an app's
+> mirror links to core's schemas by name and fli-core's own mirror holds their shape. A repo's incidental Python
+> scripts are listed there as not covered; never commit a separate "mirror" of them as if it were the app.
 
 ---
 
