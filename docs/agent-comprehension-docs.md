@@ -6,6 +6,13 @@ first run on FliStudio, FliHub, FliCut, FliCast and fli-core in parallel, one se
 
 **Audience**: the agents that work in the repo. Humans get SYSTEM.md and the README as a by-product.
 
+> ⚠️ **Known gap (measured 2026-09-22): step 1 cannot run on any Fli repo yet.** `schema-mirror` ships only a Python
+> extractor; `detect_stack.py` reports TypeScript and zod as `[GAP] … UNMIRRORED` (FliStudio: 84 TS files; fli-core: 30).
+> Until a TypeScript/zod extractor exists (one piece of work, in the skill, per its `references/adding-a-stack.md` — never
+> per app, never in parallel), run **steps 2 and 3 only** and have AGENT-NOTES point at the real schema source files.
+> Never commit a "mirror" of a repo's incidental Python scripts — that is the partial-mirror-reads-as-complete failure.
+> fli-core's list of declaring files (the input for that extractor) is in its first run's report.
+
 ---
 
 ## The three steps — in this order
