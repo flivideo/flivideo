@@ -4,7 +4,7 @@ title: Doc skills — improvement plan (from the blind review)
 description: "One ranked change plan for dev-team:schema-mirror, system-context and craft-readme, plus doc-drift as the layer over them, synthesised from three independent reviews of the 2026-09-23 runs on six Fli repos."
 created: 2026-09-23
 timestamp: 2026-09-23
-status: proposed — awaiting David's go
+status: applied 2026-09-23 — appydave-plugins 320ec2b (dev-team 0.4.0, appydave 10.2.0); app re-runs dispatched to flivideo-orch
 ---
 
 # Doc skills — improvement plan
