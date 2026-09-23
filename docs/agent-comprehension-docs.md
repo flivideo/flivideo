@@ -80,5 +80,10 @@ cites facts instead of restating them, and a later `verify_mirror.py` run catche
 
 ## Re-running later
 
-Step 1's verify mode is the cheap check: run it after any schema change; exit 1 means regenerate the mirror and re-read
-AGENT-NOTES for anything the change invalidated. Full re-run of 2 and 3 only when the app's shape has changed.
+Run **`/dev-team:doc-drift` in doc-set mode** ("check the doc set" / "are the docs stale" / "refresh the docs") in the
+repo. It runs the three steps' gates in order — `verify_mirror.py` (step 1), `check_context.py` (step 2),
+`check_readme.py --ref origin/main` (step 3), each exiting 0 = pass, 1 = drift, 2 = path/usage error — reports a verdict
+per file, and regenerates **only what failed**, in order 1 → 2 → 3. A regenerated mirror always re-triggers the step-2
+check, since AGENT-NOTES may name a value the mirror just changed. The mirror is regenerated, never hand-edited.
+
+Step 1's verify on its own is still the cheapest check after a schema change.
