@@ -79,13 +79,14 @@ All HTTP on `127.0.0.1:5101`. FliHub has no CLI and no MCP.
 
 - FliHub is being rebuilt, so it will **not** adopt the shared agent layer the other apps are getting.
 
-## Step 3 — Bring in the camera footage (Pocket 4) · MISSING
+## Step 3 — Bring in the camera footage (Pocket 4) · MISSING as a capability, NOT blocking d04
 
 - There is **no capability** that copies or registers footage. FliStudio only *reads* a top-level
   `footage/` folder: it lists the files (`assets.list`) and offers them in Start an edit.
 - **Today**: a person copies the clips into `<project>/footage/` by hand (Finder or `cp`), renamed to
   `NN-<name>-<clip>.mp4`, with transcripts beside them. That's what D01 did.
-- **Needs a ruling** before it can be built: FliStudio may not write into a project folder without
+- **For d04 this doesn't block**: the footage is already on the M4 (D01's `footage/`), so an agent copies 3–4 clips into d04's `footage/` with a plain shell copy.
+- **Needs a ruling** before a proper import capability can be built: FliStudio may not write into a project folder without
   David's word. A `footage.import` must settle copy vs move, the source (card, folder), and renaming.
 
 ## Step 4 — Record screencast demos (FliCast)
@@ -142,8 +143,8 @@ Ordered by how early they stop the run.
 
 1. **Recording is human-only.** Ecamm record (FliHub) and FliCast record/stop are a person's action by design. Autopilot means "a person presses record; agents do everything else".
 2. **No agent can quit or restart an app.** Only `scripts/app.sh` from a shell. FliStudio `app.stop` / `app.restart` for every app is being built now.
-3. **Camera footage has no import.** A person copies Pocket 4 clips into `footage/`. `footage.import` needs David's ruling on copy vs move, source and renaming.
-4. **FliHub's aspect-check race.** An agent that renames a take too fast skips the check silently.
+3. **Camera footage has no import capability.** Not blocking d04 (D01's clips are already local, so a shell copy does it). A proper `footage.import` for new camera cards still needs a ruling on copy vs move, source and renaming.
+4. **FliHub's aspect-check race.** An agent that renames a take too fast skips the check silently. Being fixed.
 5. **FliCut transcription needs a window.** No headless verb transcribes an existing edit (the separate `process:true` pipeline does, for a new one).
 6. **FliCut cutting over HTTP is clip-level only.** Word-level split/trim is window-only, and an open window overwrites agent edits on its next save (FC-33).
 7. **Transcription is done three times, differently.** FliHub (no word timings), FliCut (word timings), FliCast (captions). FliTools, one shared service, is designed but not built.

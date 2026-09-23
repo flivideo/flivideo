@@ -99,7 +99,7 @@ is one typed, dry-runnable, reversible call rather than a mouse job.
 ### Open FliCast on a brand's video project (the open contract)
 1. `scripts/app.sh start --brand appydave --project a01-xmen [--video xmen]` (FliStudio's door 2 runs the same line)
    builds, then starts FliCast **as its own macOS app** through LaunchServices, the flags as its argv → one resolver
-   (`src/main/open-context.ts`) over `@flivideo/core` v0.4.1. Already running? The same command re-points it through
+   (`src/main/open-context.ts`) over `@flivideo/core` v0.7.0. Already running? The same command re-points it through
    `flicast context select` instead of restarting; `app.sh show` brings it forward.
 2. The context belongs to the run (never written to settings). A refusal is typed (`unknown-brand`,
    `project-ambiguous` …) and leaves the previous context untouched.

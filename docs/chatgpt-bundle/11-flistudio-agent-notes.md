@@ -29,7 +29,14 @@ Only what the code cannot tell you. Everything here failed the derivation test o
 
 - **A new capability is declared, never routed.** Add it to `CAPABILITIES` in `shared/src/contracts.ts` and to
   `HANDLERS` in `server/src/capabilities/registry.ts`; HTTP, CLI and pickers follow. Then update the counted lists in
-  `capabilities.test.ts` and `cli.test.ts` (both assert the exact set) and the README / spec §6.3 table.
+  `capabilities.test.ts` and `cli.test.ts` (both assert the exact set), the spec §6.3 table, and run
+  `npm run api:openrpc` (`api/openrpc.json` is byte-compared by `api:check` and `door.test.ts`; prettier ignores it).
+- **Decide the fence when you declare it.** `humanOnly: true`, or `{ when(input), note }` for the part only a person may
+  do (fli-core `defineCapability`). `callCapability(ctx, name, input, principal)` enforces it for `agent:*` and `cli`;
+  the screens call as `human:ui`, the CLI as `cli` (or `--as agent:<name>`, never human). A new refusal name needs a
+  frozen code in `FAILURE_CODES` (`shared/src/contracts.ts`) — append, never renumber.
+- HTTP tests that play the screens send `x-fli-principal: human:ui`; with no header a caller is `agent:anonymous`.
+  The built server (e2e) requires the bearer token — the drill reads it from the fixture home's control file.
 - Handlers **throw `Refusal(code, message)`** with a code from the shared failure vocabulary; `callCapability` turns it
   into `{ ok: false, error }`. Never return an error object from a handler.
 - Every module takes `StudioConfig` instead of calling `os.homedir()`. Tests build it over a fixture estate

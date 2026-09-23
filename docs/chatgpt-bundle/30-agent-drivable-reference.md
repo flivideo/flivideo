@@ -57,6 +57,10 @@ Each item: **what** · why it matters · **where in FliCast** · **check in anot
   refused in front of the reader. *Where:* ADR-0008, `src/main/api-console.ts`, `src/preload/console.ts`,
   `src/main/ipc/console-call.ts`. *Check:* can a person fire any verb as an agent without writing code, and see the
   refusals the fence makes?
+- [ ] **The suite's control plane — the same page in every app.** "agent door open" opens `@flivideo/core`'s
+  `renderApiPage(openrpc, { console })` (v0.7.0), generated to `api/control-plane.html` and fired through
+  `window.fliConsole` as `agent:console`. *Where:* `scripts/gen-control-plane.mjs`, ADR-0008 § Amendment.
+  *Check:* does the app render fli-core's page from its own spec, rather than hand-rolling a console?
 
 ## 4 · Refusals are data
 
@@ -126,6 +130,7 @@ A `quit` exists only as a test hook (`APP_TEST_HOOKS=1`, over the main-process i
 | lab paths (`labPath`) | OpenRPC + capability-surface generators, the console |
 | video folder / file naming (`videoFolderName` / `videoFileName`) | failure codes + typed refusal details |
 | window positions (`placeWindow` / `loadWindow` / `trackWindow`) | the LaunchServices launcher, the uat harness |
+| the control-plane page (`renderApiPage`, v0.7.0) · suite refusal codes (`SUITE_FAILURE_CODES`, FliCast's numbers) | FliCast's own capability page, its preload bridge |
 
 FliCast's door-2 resolution chain (`src/main/open-context.ts`) is hand-rolled over fli-core because fli-core's
 `resolveOpenContext` refuses plain folders; it moves into fli-core when `acceptFolders` ships.
