@@ -26,10 +26,10 @@ from outputs, not from their SKILL.md text.
 |---|---|---|---|
 | FliCut | 1, 2, 3 | d992f4d … 47594d8 | landed |
 | FliCast | 1, 2, 3 | 3a535b3 (mirror, verify OK, 470 structures / 135 closed sets, 16 refactor findings reported, not fixed) · fba04a5 (SYSTEM + AGENT-NOTES, `commit: b061e5e`, AGENT-NOTES 210 → 190 lines) · c3db70e (README) | landed |
-| Teletubby | 1, 2, 3 (first time) | "docs: agent-comprehension doc run"; SYSTEM/AGENT-NOTES `commit: 806729c`; ADR-004 + README now say Scribe writes scripts | landed — but the `@docs/AGENT-NOTES.md` line is **not** in CLAUDE.md (the window won't edit CLAUDE.md on a peer's request; waiting on David) |
-| FliStudio | re-run 1, refresh 2, 3 (after the trash change) | — | running |
-| FliHub | 1 (first time), refresh 2, light 3 (after the trash change) | — | running |
-| fli-core | README link to the mirror only | — | dispatched |
+| Teletubby | 1, 2, 3 (first time) | "docs: agent-comprehension doc run"; SYSTEM/AGENT-NOTES `commit: 806729c`; ADR-004 + README now say Scribe writes scripts | landed; follow-up 9015c03; **mirror hand-corrected deef359 — a generated file edited by hand, overwritten on the next regeneration**; FliCut zod note 19725fe. The `@docs/AGENT-NOTES.md` line is **not** in CLAUDE.md (the window won't edit CLAUDE.md on a peer's request; waiting on David) |
+| FliStudio | re-run 1, refresh 2, 3 (after the trash change) | mirror regenerated (149 structures; verify 57 diffs → exit 0) · SYSTEM + AGENT-NOTES `commit: 81d909a` (46ce2c6) · README links mirror + map | landed |
+| FliHub | 1 (first time), refresh 2, light 3 (after the trash change ae2d9b1) | — | running |
+| fli-core | README link to the mirror only | README links docs/schema-mirror.md (v0.6.0) | landed |
 | FliTools | — | — | held: no code, no remote |
 
 ## Defects found
@@ -46,6 +46,8 @@ from outputs, not from their SKILL.md text.
    Severity: high — the mirror looks complete and verified while missing the core contracts.
    **Teletubby is worse**: same import pattern, and its mirror page states "Cannot be mirrored: Nothing"
    while every Zod schema is missing — the page asserts completeness it does not have.
+   **Consequence seen:** Teletubby's mirror was hand-corrected (deef359) to cover the gap, which the
+   generator will silently undo. Fix the extractor rather than the page.
 2. **Nothing runs verify.** FliStudio's mirror drifted 53 differences within a day of generation
    (verify run 2026-09-23). Drift is only caught when someone thinks to run it.
 
