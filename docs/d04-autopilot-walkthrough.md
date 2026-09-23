@@ -37,7 +37,7 @@ autopilot".
 
 | App | Door (HTTP) | Auth today | CLI | MCP |
 |---|---|---|---|---|
-| FliStudio | `127.0.0.1:7151` · `POST /api/call {name, input}` · `GET /api/capabilities` | loopback only, no token (token + principals being built) | `bin/flistudio <capability> --flag …` (works with the server down) | none |
+| FliStudio | `127.0.0.1:7151` · `POST /api/call {name, input}` · `GET /api/capabilities` | loopback only; bearer token from its control file (`control.json`) + `x-fli-principal` | `bin/flistudio <capability> --flag …` (works with the server down) | none |
 | FliHub | `127.0.0.1:5101` · ~150 REST routes | loopback only (127.0.0.1 + ::1), no token; foreign browser origins refused | none | none |
 | FliCast | `127.0.0.1:7131` · `POST /v1/call`, `/v1/rpc` | bearer token from `control.json` | `node bin/flicast.mjs <verb> --json --as agent:x` | `flicast_describe`, `flicast_call` |
 | FliCut | `127.0.0.1:7121` · REST under `/api/` | bearer token from `control.json` | `bin/flicut` (3 commands) | none |
@@ -155,5 +155,5 @@ Ordered by how early they stop the run.
 7. **Transcription is done three times, differently.** FliHub (no word timings), FliCut (word timings), FliCast (captions). FliTools, one shared service, is designed but not built.
 8. **FliCast can't list real mic/camera devices for an agent** (`recording.devices` is human-only), so an agent can pick only "main" / "none" or known ids.
 9. **Teletubby opens the wrong script set** when a project already has one attached, and there is no link between a script and a FliHub take.
-10. **Uneven agent doors.** FliStudio has no token yet; FliHub has no token, CLI, MCP or capability list; only FliCast has MCP. The shared agent layer (fli-core: capability contract, human-only flag, numbered refusals, discovery file, OpenRPC docs page and console, lifecycle verbs) is being built now and adopted by FliStudio, Teletubby and FliCut.
+10. **Uneven agent doors.** FliHub has no token, CLI, MCP or capability list; only FliCast has MCP. The shared agent layer (fli-core: capability contract, human-only flag, numbered refusals, discovery file, OpenRPC docs page and console, lifecycle verbs) is built (fli-core v0.7–0.8) and adopted by FliStudio, FliCast, Teletubby and FliCut; FliTools (7161) is built on it too.
 11. **Not yet watched live end to end.** Start an edit → FliCut and the FliCast naming change are proven in tests, not on a real run this week.
