@@ -95,9 +95,9 @@ Every active app is documented by one method, in three steps:
 - `docs/AGENT-NOTES.md` — pitfalls and conventions (for agents; loaded through the app's `CLAUDE.md`)
 - `README.md` — the front door
 
-Coverage on 2026-09-23: FliStudio has all three steps (mirror drifted); fli-core has the mirror
-(current); FliHub, FliCut and FliCast have steps 2–3 but no mirror; Teletubby has a README only;
-FliTools has none yet. Check a mirror with:
+Coverage changes as runs land, so it is not recorded here. The 2026-09-23 refresh of every active app
+is tracked in `docs/briefs/doc-skills-blind-review.md`; to see the real state, look in the app's
+`docs/`. FliTools has no docs yet. Check a mirror with:
 `python3 /Users/davidcruwys/dev/ad/appydave-plugins/dev-team/skills/schema-mirror/scripts/verify_mirror.py <repo>/docs/schema-mirror.json`
 
 ---
