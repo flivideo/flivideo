@@ -71,3 +71,7 @@ Teletubby's hand-corrected mirror (`deef359`) is then replaced by a generated on
 - FliStudio's CLAUDE.md "writes only fli.studio.json" contradicts its AGENT-NOTES.
 - Teletubby's CLAUDE.md now loads `@docs/AGENT-NOTES.md` (teletubby 6547eca, David's go).
 - FliHub's main checkout on the M4 is 2 commits behind origin (flivideo-orch told).
+
+## Follow-ups found by the re-runs
+
+- schema-mirror: an **object whose values are zod schemas** (Teletubby `INPUT` in `src/core/input-shapes.ts:78` — every verb's input schema) is not read; the census lists it under "never read" (object constant), so it is disclosed, not silent. Extractor improvement: walk object-literal values that are zod schemas. Found in Teletubby re-run a5c44a7, verified in brains 2026-09-23 (all three gates exit 0).
