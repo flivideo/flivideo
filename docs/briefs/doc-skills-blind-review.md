@@ -26,7 +26,7 @@ from outputs, not from their SKILL.md text.
 |---|---|---|---|
 | FliCut | 1, 2, 3 | d992f4d … 47594d8 | landed |
 | FliCast | 1, 2, 3 | 3a535b3 (mirror, verify OK, 470 structures / 135 closed sets, 16 refactor findings reported, not fixed) · fba04a5 (SYSTEM + AGENT-NOTES, `commit: b061e5e`, AGENT-NOTES 210 → 190 lines) · c3db70e (README) | landed |
-| Teletubby | 1, 2, 3 (first time) | — | running |
+| Teletubby | 1, 2, 3 (first time) | "docs: agent-comprehension doc run"; SYSTEM/AGENT-NOTES `commit: 806729c`; ADR-004 + README now say Scribe writes scripts | landed — but the `@docs/AGENT-NOTES.md` line is **not** in CLAUDE.md (the window won't edit CLAUDE.md on a peer's request; waiting on David) |
 | FliStudio | re-run 1, refresh 2, 3 (after the trash change) | — | running |
 | FliHub | 1 (first time), refresh 2, light 3 (after the trash change) | — | running |
 | fli-core | README link to the mirror only | — | dispatched |
@@ -44,6 +44,8 @@ from outputs, not from their SKILL.md text.
    schema there (edit file, settings, HTTP bodies) is missing from FliCut's mirror, **with no gap entry**,
    and `verify_mirror.py` still exits 0. Reported by flivideo-orch; reproduced in brains 2026-09-23.
    Severity: high — the mirror looks complete and verified while missing the core contracts.
+   **Teletubby is worse**: same import pattern, and its mirror page states "Cannot be mirrored: Nothing"
+   while every Zod schema is missing — the page asserts completeness it does not have.
 2. **Nothing runs verify.** FliStudio's mirror drifted 53 differences within a day of generation
    (verify run 2026-09-23). Drift is only caught when someone thinks to run it.
 
