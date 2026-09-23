@@ -24,6 +24,10 @@ picker, and an agent can do the same through a CLI.
   `shared/src/contracts.ts` (name, zod input/output, side effects, failure codes) and bound to handlers in
   `server/src/capabilities/registry.ts`. The HTTP door (`POST /api/call`), the CLI (`bin/flistudio`) and the screens all
   go through `callCapability`, so they cannot disagree. `GET /api/capabilities` publishes JSON Schemas for agents.
+  Since fli-core v0.7.0 every call also names its **principal** (`human:ui`, `cli`, `agent:<name>`), and the ★ fence
+  inside `callCapability` refuses human-only calls (emptying the trash, applying a layout move, stopping FliHub) for
+  agents and the CLI. `POST /api/call` and JSON-RPC `POST /api/rpc` need the bearer token the server publishes in its
+  control file; `/api/docs` and `/api/console` render the generated OpenRPC (`api/openrpc.json`).
 - **Zones and layouts** — a project is read as zones: FliHub's recordings and transcripts (under `hub/` in the hub
   layout, at the top in the legacy one — fli-core's `projectLayout()` decides, self-healing: no recordings anywhere →
   hub), `videos/<name>/`, `cast/`, footage-like folders no zone claims, the apps' `fli.<app>…json` files and `-trash/`
@@ -123,6 +127,9 @@ These compose as: brand root → listing (members, other folders, archive) → o
   `file:` path or copied source, so every Fli app reads the same rules at a known version.
 
 ## Non-obvious Constraints
+- **The fence is a contract, not a lock.** The token keeps other machines and web pages out; a local process that
+  reads the control file and claims `human:ui` is not stopped. The fence guides cooperating agents — the same stance as
+  FliCast's. The CLI can never call as a human, so David empties trash and applies moves from the screens.
 
 - **The screen follows the disk, not the server's own writes** (R33). `server/src/estate/watch.ts` watches every brand
   root (`fs.watch`, recursive) and emits `estate:changed { brand, folders }`, debounced; the page refetches any call for

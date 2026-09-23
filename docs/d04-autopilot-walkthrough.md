@@ -44,8 +44,7 @@ autopilot".
 | Teletubby | `127.0.0.1:7111` · `POST /api/invoke` | bearer token from `control.json` | `bin/teletubby.mjs call <verb> --input '{…}'` | none |
 
 Every app is started, stopped and restarted from a shell with `scripts/app.sh start|stop|restart
---brand … --project …`. **No app can be quit by an agent through its door yet.** FliStudio is adding
-`app.stop` / `app.restart` for all of them now.
+--brand … --project …`. Agents can now quit and restart apps: FliStudio `app.stop` / `app.restart` for every app, and `system.quit` / `system.restart` on FliCast, FliCut and Teletubby (via fli-core's shared agent layer, v0.7.3).
 
 ---
 
@@ -148,7 +147,7 @@ All HTTP on `127.0.0.1:5101`. FliHub has no CLI and no MCP.
 Ordered by how early they stop the run.
 
 1. **Recording is human-only.** Ecamm record (FliHub) and FliCast record/stop are a person's action by design. Autopilot means "a person presses record; agents do everything else".
-2. **No agent can quit or restart an app.** Only `scripts/app.sh` from a shell. FliStudio `app.stop` / `app.restart` for every app is being built now.
+2. ~~No agent can quit or restart an app.~~ **Built 2026-09-23**: FliStudio `app.stop` / `app.restart` for every app (FliHub human-only), and `system.status` / `quit` / `restart` on FliCast, FliCut and Teletubby's own doors (refused as `app-busy` mid-take, mid-transcription or mid-export; force is human-only). Not yet exercised live.
 3. **Camera footage has no import capability.** Not blocking d04 (D01's clips are already local, so a shell copy does it). A proper `footage.import` for new camera cards still needs a ruling on copy vs move, source and renaming.
 4. **FliHub's aspect-check race.** An agent that renames a take too fast skips the check silently. Being fixed.
 5. **FliCut transcription needs a window.** No headless verb transcribes an existing edit (the separate `process:true` pipeline does, for a new one).

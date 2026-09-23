@@ -14,7 +14,7 @@ brand and project to open. It holds no business logic and no app code.
 - Source of the rules: FliStudio's spec §3–§5, roadmap §1 and open contract §5 — `~/dev/ad/flivideo/flistudio/docs/`
   (`specification.md`, `roadmap.md`, `open-contract.md`).
 
-**Status:** active, v0.7.0 · True at bc295f4 (2026-09-23)
+**Status:** active, v0.7.3 · True at 62eab47 (2026-09-23)
 
 ## Install
 
@@ -23,7 +23,7 @@ Pin a tag. Never use a `file:` path.
 ```json
 {
   "dependencies": {
-    "@flivideo/core": "github:flivideo/fli-core#v0.7.0"
+    "@flivideo/core": "github:flivideo/fli-core#v0.7.3"
   }
 }
 ```
@@ -32,7 +32,12 @@ The package builds itself on install (`prepare` → `tsc`), so the git dependenc
 
 ```ts
 import { parseAppFile, labPath, listProjects } from '@flivideo/core';
+import { SystemStatus, AppBusyDetails } from '@flivideo/core/contracts'; // browser-safe: zod only, no node:*
 ```
+
+Browser code (a renderer, a Vite bundle) imports from **`@flivideo/core/contracts`**: the agent-drivable layer and the
+pure naming parsers, with no `node:*` in its import graph. The main entry reads the disk and will not bundle for a
+browser. Both entries re-export `z` (zod 4): an app still on zod 3 declares its capability shapes with it.
 
 ## Exports
 
@@ -103,7 +108,7 @@ const gate = authorize('project.empty-trash', CAPS['project.empty-trash'], 'agen
 { codes })` answers JSON-RPC 2.0 with `data.failureMode` on every error.
 - **Page**: `renderApiPage(doc)` is the read-only reference; `renderApiPage(doc, { console: { rpcPath } })` is the
   console — pick a verb, fill the fields, fire it as a principal, see the answer (human-only verbs refuse in front of
-  you). Self-contained, light-only.
+  you). `console.dryRun: true` adds a Dry run box (v0.7.1). Self-contained, light-only.
 - **Lifecycle**: `LIFECYCLE_CAPABILITIES` (`system.status`, `system.quit`, `system.restart`; `force` is human-only;
   a busy app refuses `app-busy`) and `appScriptArgs(verb, open?)` for driving `scripts/app.sh` from outside.
 

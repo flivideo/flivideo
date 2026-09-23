@@ -82,15 +82,16 @@ Each item: **what** · why it matters · **where in FliCast** · **check in anot
 
 | Action | Agent via door / CLI / MCP | Agent via shell | Human only |
 |---|---|---|---|
-| Is it up? | `GET /v1/health`, `system.diagnostics`, `system.appVersion` | `scripts/app.sh status` | — |
+| Is it up? | `GET /v1/health`, `system.status` (pid, startedAt, context, busy), `system.diagnostics` | `scripts/app.sh status` | — |
 | Start (on a project) | — (the app must be up to answer) | `scripts/app.sh start [--brand --project]` | — |
 | Bring to front | — | `scripts/app.sh show` | — |
 | Open / close / list projects | `project.open`, `project.close`, `project.list`, `project.create` | — | picking a path (`project.pickPath` ★) |
 | Logs | `system.logs`, `flicast logs --tail N` | `scripts/app.sh logs` | — |
-| **Quit** | **No verb.** An agent cannot quit FliCast through the door, the CLI or MCP today | `scripts/app.sh stop` (a Quit Apple event to the bundle id) | ⌘Q |
-| **Restart / relaunch** | **No.** `recording.relaunch` is ★ human-only | `scripts/app.sh restart` | Relaunch FliCast button |
+| **Quit** | `system.quit` — the orderly quit after the reply; refused `app-busy` (details `busy`) during a take or a running task | `scripts/app.sh stop` (a Quit Apple event to the bundle id) | ⌘Q · `system.quit { force: true }` |
+| **Restart / relaunch** | `system.restart` — starts again on the CURRENT brand/project/video; same `app-busy` rule. (`recording.relaunch`, for a new grant, stays ★) | `scripts/app.sh restart` | Relaunch FliCast button · `system.restart { force: true }` |
 
-A `quit` exists only as a test hook (`APP_TEST_HOOKS=1`, over the main-process inspector), not on any door.
+The three are `@flivideo/core` v0.7.0's lifecycle contract (`src/core/ops/lifecycle.ts`): the same shapes in every Fli app.
+`force: true` is refused for agents and the CLI in the core; the door refuses every `human:*` principal, so only the UI can force.
 *Check:* list which rows another app can do without a person — and which it can do only from a shell.
 
 ## 7 · The launcher (macOS permissions follow the app, not the launcher's parent)

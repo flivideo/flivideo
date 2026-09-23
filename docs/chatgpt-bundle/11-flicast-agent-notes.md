@@ -16,8 +16,7 @@ mirrored" table is real: `defineCapability(...)` results are not expanded, so a 
 ## Tooling
 
 - `@appydave/core` is a `file:` link to `../../apps/appydave-foundation/packages/core/dist`: build that repo first
-  (`bun install --frozen-lockfile && bun run build`). Unbuilt, typecheck cannot find the module and main-process
-  test files fail to load while `npm run build` still passes.
+  (`bun install --frozen-lockfile && bun run build`). Unbuilt, typecheck and main-process tests fail; the build passes.
 - After `npm install`, if `node_modules/electron/dist` is empty run `node node_modules/electron/install.js`.
 - `npm run build` is part of every gate: some failures exist only in the bundled main process (a CommonJS default
   import — resolve `mod.compare ? mod : mod.default` once). Golden-frame tests: `npm run test:golden` after a build.
@@ -31,12 +30,11 @@ mirrored" table is real: `defineCapability(...)` results are not expanded, so a 
   launcher: never delete or re-sign it casually. Raise a running FliCast with `app.sh show`, never
   `open -a node_modules/electron/dist/Electron.app` (that starts a bare Electron showing its default window). A
   non-default `FLICAST_HOME` gets its own bundle id, so a test's `stop`/`show` never reaches the person's app;
-  `FLICAST_LAUNCH_HIDDEN=1` checks a launch without showing it. `npm run dev` (HMR) inherits its parent's grant.
+  `FLICAST_LAUNCH_HIDDEN=1` launches unseen. `npm run dev` (HMR) inherits its parent's grant.
 - Another Electron may already hold the uat CDP ports (9333/9334): every story then reads an empty page and
   "__appTestHooks not reachable". Check with `lsof`, move the run with `UAT_RENDERER_PORT` / `UAT_MAIN_PORT` /
   `UAT_SERVICE_PORT`. Never kill the other app.
-- Every uat or screenshot run opens a window (the fake engine's read "Screen Recording denied" by design): on a
-  machine a person is using, batch them into one announced run.
+- Every uat or screenshot run opens a window: on a machine a person is using, batch them into one announced run.
 - Windows reopen from `@flivideo/core`'s shared store. A run with its own `FLICAST_HOME` uses the `flicast/scratch*`
   keys (`src/main/window-keys.ts`); point `FLICAST_WINDOW_STATE` at a scratch file when a check must not move the
   person's saved spot. The uat harness restores position only (`FLICAST_WINDOW_RESTORE=position`).
@@ -82,6 +80,8 @@ mirrored" table is real: `defineCapability(...)` results are not expanded, so a 
   draws a typing run as one press per word (`shown` counts words). Read `overlay.get` before blaming the compositor.
   SYSTEM.md § Non-obvious Constraints has the full rule.
 - `app.on('activate')` must count editor windows only (the hidden render worker is a window too).
+- The renderer imports core by path, never `@core/index` or `@flivideo/core` (it pulls `node:fs`): only the build
+  fails. Hence `refusal-details.ts` restates `AppBusyDetails`.
 
 ## Decisions worth knowing
 
@@ -90,8 +90,8 @@ mirrored" table is real: `defineCapability(...)` results are not expanded, so a 
 - A cast rename that moves files is not an undo entry (undo would point at `cast/<a>/`): fresh undo stack.
 - No git inside projects (ADR-0002); `audio.improve`'s `-improved.m4a` beside the mic take is the one derived file
   kept in a project.
-- Door-2 resolution is a hand-rolled chain over `@flivideo/core` because `resolveOpenContext` refuses plain folders;
-  delete it when fli-core ships `acceptFolders`.
+- Door-2 resolution is hand-rolled because fli-core's `resolveOpenContext` refuses plain folders; drop it for
+  `acceptFolders`.
 - The RecordKit adapter is the one file an SDK upgrade touches; video-side own-window exclusion is
   `setContentProtection(true)` (`excludedProcessIDs` exists only on system audio).
 - A refusal's `message` is neutral fact; retry facts go in typed `details` (ADR-0007). Codes are never renumbered.

@@ -25,17 +25,18 @@ those in source. Never copy a shape into prose.
   saves, exports or the control surface. HMR reloads the renderer but never main, and the log
   looks clean either way. Restarting repaints David's window, so the live-instrument rule in
   CLAUDE.md applies.
-- Use `FLICUT_HEADLESS=1` for API-only runs. It gives the full control surface with no window
-  (`src/main/index.ts`).
-- The control port is 7121 (`FLICUT_CONTROL_PORT`). The port and token are both in
-  `<userData>/control.json`, mode 0600. `bin/flicut` reads it: exit 0 ok, 2 refused, 3 not
-  running.
+- `FLICUT_HEADLESS=1`: the full control surface, no window.
+- Control port 7121 (`FLICUT_CONTROL_PORT`); port, token and pid in `<userData>/control.json` (0600). `bin/flicut`:
+  exit 0 ok, 2 refused, 3 not running or stale pid.
+- **Every HTTP verb goes through `ControlSurface.call`** (the ★ fence, ADR-0005). A new route is a contract in
+  `capabilities.ts` plus a handler — never a route that skips the seam. Contract shapes use `z` from
+  `@flivideo/core` (zod 4), not `@appydave/core`'s. Then `npm run api:openrpc`; `api:check` fails on a stale spec,
+  and failure codes are append-only.
 - If you override `HOME` to isolate a run, also set `DEEP_FILTER_BIN` and `FLICUT_MLX_WHISPER`.
   Otherwise the audio arms stall after `hp.wav`.
 - Any `FLICUT_*` override must come with `APPYTRON_HOME`. Without it, the env value gets saved
   into the real `settings.json`.
-- Use `command grep`, not bare `grep -r`. The shim follows `.gitignore` and returns a clean zero for
-  files it never read.
+- Use `command grep`, not bare `grep -r` (the shim skips `.gitignore`d files and still exits clean).
 - To prove a fix, run the test against the pre-fix `src/` first and watch it fail
   (`git stash push -u -- src scripts`). Without `-u` a NEW module stays on disk and the "pre-fix"
   run silently passes.
@@ -61,12 +62,9 @@ those in source. Never copy a shape into prose.
 - **`EPSILON` (1e-6 s) is float fuzz. `1 / project.metadata.framerate` is the model's minimum.**
   Never swap one for the other, and never hardcode a framerate. `DEFAULT_FPS` is only allowed
   where no project exists (`docs/units-contract.md`).
-- **The `sha` field in history entries is a six-digit snapshot id**, not a git SHA. It kept the
-  name so the renderer stayed unchanged.
-- **Values imported by the renderer:** `prose.ts` is also value-imported (by `Script.tsx`), and it
-  is safe because it imports types only. So is `audio-arms.ts` (by `Editor.tsx`, the export panel's
-  checkboxes), which imports nothing. A new renderer-safe file must value-import nothing that
-  reaches Zod; the lists in `defaults.ts` and CLAUDE.md lag the code.
+- **History entries' `sha` is a six-digit snapshot id**, not a git SHA.
+- **Renderer value-imports** also include `prose.ts` (types only) and `audio-arms.ts` (imports
+  nothing). A new one must reach no Zod; the lists in `defaults.ts` and CLAUDE.md lag the code.
 
 ## Pitfalls
 

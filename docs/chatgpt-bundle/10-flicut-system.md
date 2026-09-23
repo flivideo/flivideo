@@ -162,6 +162,17 @@ engine only writes proposals. The exporter only reads kept clips.
   - *Alternative considered*: a CLI that edits the files directly.
   - *Why rejected* `[inferred]`: that would skip the Zod validation, the undo snapshots and the
     per-edit write serialisation that `ProjectStore` provides.
+- **One seam under every HTTP door (ADR-0005, fli-core v0.7.3)**: each REST route and each JSON-RPC
+  call (`/api/rpc`) is a named capability (`src/main/capabilities.ts`) run through
+  `ControlSurface.call`, which applies fli-core's ★ fence before any handler. The spec
+  (`api/openrpc.json`), the reference page (`/api/docs`) and the console (`/api/console`) are
+  generated from the same contracts. Agents can quit or restart FliCut (`system.quit` /
+  `system.restart`, or `bin/flicut quit|restart`) unless it is busy transcribing, exporting,
+  running a job or saving. `force` is a person's, and so is `overwrite: true` on an export.
+  - *Alternative considered*: JSON-RPC only, or moving the window onto the core as well.
+  - *Why rejected*: FliStudio, the CLI and the skill call the REST paths; moving the window is the
+    audit's L item and would change the live instrument. The window's IPC still bypasses the
+    seam, so FC-33 stands.
 
 ## Non-obvious Constraints
 
