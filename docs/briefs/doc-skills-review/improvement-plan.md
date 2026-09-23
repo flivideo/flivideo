@@ -14,7 +14,7 @@ status: applied 2026-09-23 — appydave-plugins 320ec2b (dev-team 0.4.0, appydav
 **For Agents**:
 - Sources: `schema-mirror.md`, `system-context.md`, `craft-readme.md` in this folder (the findings and
   evidence), and the evidence log `../doc-skills-blind-review.md`.
-- Skills live in `/Users/davidcruwys/dev/ad/appydave-plugins/dev-team/skills/`. Nothing here is applied yet.
+- Skills live in `/Users/davidcruwys/dev/ad/appydave-plugins/dev-team/skills/`. Waves 1–3 applied in 320ec2b.
 
 ---
 
@@ -69,5 +69,5 @@ Teletubby's hand-corrected mirror (`deef359`) is then replaced by a generated on
 - FliHub + FliCast READMEs call fli-core / FliHub **private** — both are public on GitHub.
 - Stale versions in READMEs: fli-core install pins `#v0.1.0` (now v0.6.0); FliCut says core v0.1.0 (pins v0.5.0).
 - FliStudio's CLAUDE.md "writes only fli.studio.json" contradicts its AGENT-NOTES.
-- Teletubby's CLAUDE.md lacks `@docs/AGENT-NOTES.md` (awaiting David).
+- Teletubby's CLAUDE.md now loads `@docs/AGENT-NOTES.md` (teletubby 6547eca, David's go).
 - FliHub's main checkout on the M4 is 2 commits behind origin (flivideo-orch told).
