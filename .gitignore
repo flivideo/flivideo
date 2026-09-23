@@ -46,3 +46,6 @@
 # And the docs folder
 !docs/
 !docs/**
+
+# And the ecosystem map (front door)
+!README.md
