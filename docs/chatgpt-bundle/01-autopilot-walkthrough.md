@@ -1,7 +1,7 @@
-<!-- FliVideo source bundle · end-to-end walkthrough · generated from docs/d03-autopilot-walkthrough.md -->
+<!-- FliVideo source bundle · end-to-end walkthrough · generated from docs/d04-autopilot-walkthrough.md -->
 
 
-# FliVideo end to end — a test video on autopilot
+# FliVideo end to end — test video d04 on autopilot
 
 **Purpose**: Show, step by step, how far an agent can drive one real video through the FliVideo suite
 today, and exactly where it stops. The gap list at the end is the input for designing "FliVideo on
@@ -15,9 +15,15 @@ autopilot".
 - The central map is `README.md` in this repo. Per-app detail is in each app's `docs/SYSTEM.md` and
   `docs/AGENT-NOTES.md`.
 
-> **Naming note.** The project code `d03` is already taken in AppyDave (`d03-cutty-presenter-tracking`).
-> FliStudio gives a new project the next free code, so a new test video would be **`d04-…`**. "D03" below
-> means "the next test video".
+> **The test video is `d04`** (David, 2026-09-23). The code `d03` is already taken in AppyDave
+> (`d03-cutty-presenter-tracking`).
+>
+> **Starter media (David):** re-recording takes and re-shooting footage is slow, so the d04 run starts
+> from D01's material (`v-appydave/d01-flivideo-tour`): its **4 FliHub takes** (`hub/recordings/01-1-intro`,
+> `01-2-intro`, `02-1-overview`, `03-1-outro`, with transcripts) and **3–4 of its Pocket 4 footage clips**
+> (`footage/NN-<name>-<clip>.mp4`, with `.txt` transcripts). They are copied into d04 as if they had just
+> been recorded, so steps 2 and 3 can be exercised without a camera. Not done yet; this is the plan for the
+> first autopilot run.
 
 ---
 
@@ -39,7 +45,7 @@ Every app is started, stopped and restarted from a shell with `scripts/app.sh st
 
 ## Step 1 — Create the project (FliStudio) · WORKS
 
-- **Call**: `project.create {brand:"appydave", name:"…", aspect:"16:9", shape:"single", languages:["en"]}`
+- **Call**: `project.create {brand:"appydave", name:"<d04 name>", code:"d04", aspect:"16:9", shape:"single", languages:["en"]}`
   - CLI: `bin/flistudio project.create --brand appydave --name "…" --aspect 16:9 --shape single`
 - **Writes**: `<brand root>/<code>-<slug>/fli.studio.json` (id + intents). The code is the next free one;
   pass `code` to choose. New projects use the **hub** layout, so recordings go under `hub/`.

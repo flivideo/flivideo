@@ -22,5 +22,5 @@ for a in flistudio flihub flicast flicut teletubby; do
 done
 clean $R/fli-core/README.md        $B/20-fli-core-readme.md         "fli-core README"
 clean $R/flicast/docs/agent-drivable-reference.md $B/30-agent-drivable-reference.md "agent-drivable reference (FliCast)"
-clean $R/docs/d03-autopilot-walkthrough.md $B/01-autopilot-walkthrough.md "end-to-end walkthrough"
+clean $R/docs/d04-autopilot-walkthrough.md $B/01-autopilot-walkthrough.md "end-to-end walkthrough"
 echo built; ls $B
