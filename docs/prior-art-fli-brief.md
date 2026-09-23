@@ -236,7 +236,7 @@ Carries into (suggestion): **Content Intelligence** (missing app), with affiliat
 - **Chapters folder**: original `chapters/` at project/episode root; FliHub today uses `recordings/-chapters/` — `/Users/davidcruwys/dev/ad/flivideo/flihub/shared/paths.ts:44,77`.
 - **Editor**: original named Gling as final assembler from approved segments; today FliCut edits in-house.
 - **Shorts**: original allowed shorts as separate linked projects. David ruled 2026-09-23 that shorts spun off one long-form video live **inside that project's `videos/`**, not as separate projects.
-- **Multi-video projects**: David ruled 2026-09-23 that Kybernesis ×10 and Beauty & Joy ×3 are standalone multi-video projects — the nearest modern equivalent of the Container Project.
+- **Multi-video projects**: David ruled 2026-09-23 that Kybernesis ×10 and Beauty & Joy ×3 are standalone multi-video projects. Both are stored with the shape hint `shorts` (many shorts in one project) — see `/Users/davidcruwys/dev/ad/brains/video-as-code/project-folder-convention.md` §8, which owns the shape vocabulary. The Container Project is prior art for the separate `episodes` hint, not a description of these two.
 - **Segment naming was never consistent** across the old docs: `1-1-intro` (fli-video.md), `02-1-content` (core-concepts, naming spec), `02-a-content` letters (technical-specifications). Don't treat any one as canonical.
 
 ---
