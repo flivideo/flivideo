@@ -78,3 +78,18 @@ Teletubby's hand-corrected mirror (`deef359`) is then replaced by a generated on
 - check_context.py (fixed in dev-team 0.4.1): README.md in SYSTEM.md's `sources:` made every README refresh re-stale step 2 — documentation-only paths no longer count; a mirror-only repo (fli-core) now exits 3 = not applicable instead of failing.
 - schema-mirror (FliCut 55eb9fd, recorded in flicut `docs/schema-mirror.known-gaps.json`): (1) 23 exported **scalar constants** are neither mirrored nor counted by the census — the census under-reports, which undermines its "declared = mirrored + gaps + not read" promise; (2) `z.infer` aliases of zod **object** schemas are missing. Together with the object/array-constant gap above, these are one extractor pass: census must count every exported declaration, and the mirror must read constants of literals and `z.infer` aliases.
 - check_context.py (fixed in dev-team 0.4.2): did not flag `context.globs.json` left in `docs/` although the skill says it belongs at the root.
+
+## Final verify — 2026-09-23 (brains, dev-team 0.4.2, against pushed state)
+
+| App | a mirror | b context | c README | at |
+|---|---|---|---|---|
+| Teletubby | 0 | 0 | 0 | a5c44a7 |
+| FliStudio | 0 | 0 | 0 | 9dafd9f |
+| fli-core | 0 | 3 (n/a — mirror-only by design) | 0 | 94a5072 |
+| FliCut | 0 | 0 | 0 | 5b6752d |
+| FliCast | 0 | 0 | 0 | 722d9e5 |
+| FliHub | 0 | 1* | 1* | 283935b (checked in a clone of origin/main; the M4 main checkout is 4 behind, pull awaits David) |
+
+\* FliHub's only findings are links/sources that leave the repo (`../fli-core/src/classify.ts`, `../docs/agent-comprehension-docs.md`, `../README.md`). They resolve on the M4 because the sibling folders exist, but are **dead on GitHub** and for anyone who clones one repo.
+
+**Open follow-up (proposed, not done):** cross-repo relative paths. Suite template should link the suite map by URL (`https://github.com/flivideo/flivideo#readme`), not `../README.md`; system-context should forbid `sources:` outside the repo (cite the sibling repo by name instead); both gates should report an out-of-repo path as its own finding rather than "does not exist".
