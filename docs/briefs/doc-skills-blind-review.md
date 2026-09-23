@@ -4,7 +4,7 @@ title: Blind review of the three doc skills — evidence log
 description: "Collects evidence from the 2026-09-23 doc runs (schema-mirror → system-context → craft-readme) across the Fli apps, as input for an independent review of the three dev-team skills once all runs land."
 created: 2026-09-23
 timestamp: 2026-09-23
-status: runs complete — review pending
+status: review complete — see doc-skills-review/improvement-plan.md
 ---
 
 # Blind review of the three doc skills — evidence log
