@@ -67,7 +67,8 @@ is Scribe's job.
 | FliBrief | built for the external video-editing company: Editor Briefs for an outside editor. Also held the original Dec-2025 vision. Useful parts harvested into `docs/prior-art-fli-brief.md` | `/Users/davidcruwys/dev/ad/flivideo/fli-brief` |
 | FliGen | video generation; no real work since Feb 2026 | `/Users/davidcruwys/dev/ad/flivideo/fligen` |
 | FliVoice | ElevenLabs voice agent; no git repo of its own | `/Users/davidcruwys/dev/ad/flivideo/flivoice` |
-| flihub-storage-panel, flihub-disk-observability | loose FliHub spin-offs; no git repos of their own | `/Users/davidcruwys/dev/ad/flivideo/flihub-storage-panel`, `…/flihub-disk-observability` |
+| flihub-storage-panel | not an app: a FliHub **git worktree** on branch `storage-panel`, fully merged into main (April 2026). Remove with `git -C flihub worktree remove ../flihub-storage-panel` | `/Users/davidcruwys/dev/ad/flivideo/flihub-storage-panel` |
+| flihub-disk-observability | not an app: empty folders (`client/…`), no files | `/Users/davidcruwys/dev/ad/flivideo/flihub-disk-observability` |
 | `@flivideo/config` | shared lint config; superseded by fli-core | `/Users/davidcruwys/dev/ad/flivideo/packages/@flivideo/config` |
 
 **Outside the pipeline:** FliDeck (`/Users/davidcruwys/dev/ad/flivideo/flideck`) is a general viewer
