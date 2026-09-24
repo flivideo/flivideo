@@ -172,7 +172,8 @@ engine only writes proposals. The exporter only reads kept clips.
   - *Alternative considered*: JSON-RPC only, or moving the window onto the core as well.
   - *Why rejected*: FliStudio, the CLI and the skill call the REST paths; moving the window is the
     audit's L item and would change the live instrument. The window's IPC still bypasses the
-    seam, so FC-33 stands.
+    seam; FC-33 is closed separately (outside writes are pushed to the window, and a window save
+    that has not seen one is refused, `src/main/edit-sync.ts`).
 
 ## Non-obvious Constraints
 
@@ -257,11 +258,9 @@ engine only writes proposals. The exporter only reads kept clips.
   renderer, including `src/shared`, but never main. The log looks clean either way. Saves and
   exports then run the old model against the new renderer. Restart after changing `src/shared` or
   `src/main`.
-- **Window stale after an API write (FC-33, open)**: control-surface writes such as `POST …/cuts`
-  and `PATCH …/segments/:id` go to disk and are not pushed to the renderer. Only context changes
-  are pushed (`context:changed`). The renderer's next save sends its whole in-memory project, which
-  `[inferred from code]` silently replaces the API's change. Undo still has it, because the API
-  write saved its own snapshot.
+- **"This edit was changed outside the window" (FC-33, fixed 2026-09-23)**: an agent wrote the edit
+  while David's save was in flight. His change was refused, not written, and the window now shows
+  the disk. It is by design: before the fix the window's save silently replaced the agent's write.
 - **Hand-off made the edit, but nothing happened**: FliCut was running with its window closed. Fixed
   2026-09-22 (`bringUpForHandoff` opens a window when none exists and logs `[handoff] …`). If it
   recurs, `GET /api/status` shows `window.open:false` and `transcribing:null`.

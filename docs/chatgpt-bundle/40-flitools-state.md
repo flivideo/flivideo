@@ -1,31 +1,55 @@
-<!-- FliVideo source bundle · FliTools state · written 2026-09-23 from the flitools session -->
+<!-- FliVideo source bundle · FliTools state · hand-written 2026-09-24 from flitools git log, /health, docs/architecture.md and api/openrpc.json -->
 
-# FliTools — state on 2026-09-23
+# FliTools — current state (2026-09-24)
 
-**What it is**: the shared-tools service for the FliVideo suite, starting with transcription. One
-always-on service that every app, skill and agent calls, instead of each app transcribing on its own.
+FliTools is the suite's shared local service. Its first capability is transcription. **It is built and
+running** (the earlier "design only, no code" note is out of date).
 
-**State**: design half-ruled. **No code and no endpoint exist yet.**
+## What exists
+- **v0.1.0**, Node + TypeScript on the fli-core agent layer. Runs on **127.0.0.1:7161** under launchd
+  (`com.appydave.flitools`, RunAtLoad + KeepAlive; logs in `~/Library/Logs/flitools/`).
+- Repo: **github.com/flivideo/flitools** (private).
+- **JSON-RPC** at `POST /api/rpc`: `transcribe.run`, `transcribe.find`, `transcribe.job`, `transcribe.jobs`,
+  `system.status`, `system.quit`, `system.restart`. REST shortcuts: `POST /api/transcribe`,
+  `POST /api/transcribe/upload`, `GET /api/transcript?path=`, `GET /api/jobs`. Console at `/docs`, spec at
+  `/api/openrpc.json`.
+- **Engines**: Groq `whisper-large-v3` first (word + segment timings); on any Groq failure it falls back
+  to local `mlx_whisper` large-v3. One job at a time.
+- **Output** `flitools.transcript/1`: word-timed JSON plus `.srt` and `.txt`, saved beside the recording
+  (`hub/recordings/X` → `hub/transcripts/X.*`; anything else → `transcripts/` beside it).
+- **Reuse**: the same content (by sha256) is never transcribed twice.
+- **Queue** is agent-queryable and scoped by **project code** (e.g. `d04`, stable across renames) **and**
+  requesting app (`x-fli-principal: agent:<app>`). No cross-app coalescing.
+- **Overwrite guard**: it never writes over another app's transcript files unless the caller passes
+  `save_to` or `force_save`.
+- **Default vocabulary**: FliVideo, FliHub, FliCast, FliCut, FliStudio, FliTools, fli-core, Teletubby,
+  AppyDave, AITLDR, Ecamm, Pocket 4 (a caller's list is appended).
 
-## Ruled (David)
-1. The service always **returns word-timed JSON**. By default it also saves `json` / `srt` / `txt` into a
-   `transcripts/` folder beside the recording. The caller can pass `save_to`, or `save:false`.
-2. It **reuses** an existing transcript of the same content, so each recording is transcribed once.
-3. **Engine**: Groq first, local mlx-whisper as the fallback. Jobs run one at a time, queued.
-4. **Two levels of transcript**: the raw one (the canonical recording, owned by FliTools) sits beside the
-   recording. The edited one (the cut, with ums and bad takes removed) is derived by FliCut from the raw
-   words and lives with the edit.
+## Who calls it
+- **FliStudio** `footage.import`: copies clips into `footage/` and queues each one (via fli-core's
+  FliTools client, v0.8.0+).
+- **FliCast** export: a spoken cast export is auto-submitted.
+- **Not migrated yet**: FliHub (still transcribes on its own, no word timings) and FliCut (its own
+  mlx-whisper on edit open). In the d04 run every file was transcribed twice because of this.
 
-## Open
-- **Gateway**: do apps and skills call FliTools over HTTP directly (with fli-core carrying only a thin
-  typed client and "where is this recording's transcript"), or go through fli-core?
-- Where the code lives, whether it builds on the AppySentinel boilerplate or starts fresh.
-- A slot for a Claude Agent SDK chat (talk to a project's transcripts, e.g. "write me an intro"), shown
-  as one reusable chat component in every app.
+## Known limits
+- The queue lives in memory; a restart forgets job history (transcripts and the cache stay).
+- No memory guard beyond one job at a time (a long mlx fallback can use ~17 GiB).
+- Vocabulary is per call; merging FliHub's dictionary with FliCut's is still open.
 
-## Transcription today vs planned
-- **Today**: FliHub transcribes a take when it is promoted (no word timings). FliCut re-transcribes every
-  clip itself with word timings when an edit opens. FliCast transcribes only on "Generate captions".
-  None of them reuses the others' work.
-- **Planned**: every app asks FliTools; the raw word-timed transcript is made once beside the recording;
-  FliCut builds its cut from it.
+## Designed but not built
+- **Agent SDK chat** (`chat.open/send/close` per video project, over its transcripts) — a design slot only.
+
+## Candidate next capabilities (for discussion, not decided)
+- **Overlay render endpoint** (from the FilmStudio study): `overlay.create`, `overlay.render` (task:
+  HyperFrames → alpha layer, content-hash cache), `overlay.frames` (PNG checks). Review and placement
+  would live in FliEdit (or FliCut until FliEdit exists).
+- **Brand glossary** as the Whisper prompt, shared by every app.
+- **FliHub and FliCut transcription migration** onto FliTools (one transcript per file, word-timed).
+- Transcription hardening seen in FilmStudio: chunking, timestamp validation, script alignment, media
+  normalise/probe, transcript search.
+
+## Open proposal — not decided
+**FliGate** (one MCP door for the whole suite, generated from each app's OpenRPC) is an **open proposal**.
+It is to be weighed against a **shared fli-core adapter** and **MCP delivered as a plugin** (and any other
+option found), in a written pros-and-cons proposal decided with David. It is not settled.

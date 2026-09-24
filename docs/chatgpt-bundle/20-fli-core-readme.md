@@ -14,7 +14,7 @@ brand and project to open. It holds no business logic and no app code.
 - Source of the rules: FliStudio's spec §3–§5, roadmap §1 and open contract §5 — `~/dev/ad/flivideo/flistudio/docs/`
   (`specification.md`, `roadmap.md`, `open-contract.md`).
 
-**Status:** active, v0.7.3 · True at 62eab47 (2026-09-23)
+**Status:** active, v0.10.0 · True at deb64e9 (2026-09-24)
 
 ## Install
 
@@ -23,7 +23,7 @@ Pin a tag. Never use a `file:` path.
 ```json
 {
   "dependencies": {
-    "@flivideo/core": "github:flivideo/fli-core#v0.7.3"
+    "@flivideo/core": "github:flivideo/fli-core#v0.10.0"
   }
 }
 ```
@@ -57,7 +57,7 @@ browser. Both entries re-export `z` (zod 4): an app still on zod 3 declares its 
 | `nextCode(listing, letter)`                                                                                                                                                                                                                                                                                                      | Next `<letter><NN>` after every live, other and archived code (archived ranges like `a01-a49` count whole); refuses when anything is unscanned                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `BrandSettings`, `readBrandSettings(brandRoot)`                                                                                                                                                                                                                                                                                  | `<brandRoot>/fli.brand.json` = `{ schema: 1, brand, colour }`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | `MachineSettings`, `readMachineSettings(opts?)`                                                                                                                                                                                                                                                                                  | `~/.fli/machine.json` = `{ schema: 1, brandRoots?, labRoot?, apps? }`; missing → defaults (`labRoot` = `~/fli/lab`)                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `labPath({ brandRoot \| brand, project, app, subject? }, machine?)`                                                                                                                                                                                                                                                              | `<labRoot>/<brand folder>/<code>-<project>/<app>/[<subject>/]`. Pass `brandRoot` (from `resolveBrandRoot`): the folder is its basename. `brand` (`appydave` → `v-appydave`) is right only when the root is named `v-<key>`. Never touches the disk                                                                                                                                                                                                                                                                                                                     |
+| `labPath({ brandRoot \| brand, project, app, subject? }, machine?)`                                                                                                                                                                                                                                                              | `<labRoot>/<brand folder>/<code>-<project>/<app>/[<subject>/]`. Pass `brandRoot` (from `resolveBrandRoot`): the folder is its basename. `brand` (`appydave` → `v-appydave`) is right only when the root is named `v-<key>`. Never touches the disk. **`resolveLabPath` (v0.9.0)** is the one to call when opening a project: it finds the lab by _code_, renaming a lab left under an old project name into place (FC-40)                                                                                                                                              |
 | `OpenContext`, `OpenArgs`, `parseOpenArgs(argv, env?, opts?)`                                                                                                                                                                                                                                                                    | The open contract: `--brand`, `--project`, `--video` (and `--x=value`), then `FLIVIDEO_BRAND` / `FLIVIDEO_PROJECT` / `FLIVIDEO_VIDEO`; argv wins. Returns `{ context, missing }`. Pure                                                                                                                                                                                                                                                                                                                                                                                 |
 | `resolveOpenContext(args, { brands, machine?, home?, requireVideo? })`, `OpenContextResult`                                                                                                                                                                                                                                      | Door 2 end to end: `parseOpenArgs(...).context` → `resolved` with an `OpenContext`, or a refusal saying why (the codes are in [docs/schema-mirror.md](docs/schema-mirror.md)). Read-only; never falls back to another project                                                                                                                                                                                                                                                                                                                                          |
 | `placeWindow(saved, displays, opts)`, `loadWindow(key)`, `saveWindow(key, state)` / `saveWindowSync`, `trackWindow(win, key, opts?)`, `windowKey(app, role)`, `importWindowState(old, keyOf)`, `windowStatePath()`                                                                                                               | Windows reopen where they were left (David 2026-09-22): ONE store `~/.fli/window-state.json` (the real home, not `$HOME`) keyed `<app>/<role>` (`flicut/main`, `flicast/editor`, `teletubby/prompter`). A spot is kept while its title strip is grabbable on a current display; a monitor that is gone → centred on the main screen, clamped, never off-screen. `keepSize: false` restores position only. `trackWindow` saves after a move/resize settles and synchronously on close. Electron-free: pass `screen` displays and the `BrowserWindow`. Saves never throw |
@@ -111,6 +111,28 @@ const gate = authorize('project.empty-trash', CAPS['project.empty-trash'], 'agen
   you). `console.dryRun: true` adds a Dry run box (v0.7.1). Self-contained, light-only.
 - **Lifecycle**: `LIFECYCLE_CAPABILITIES` (`system.status`, `system.quit`, `system.restart`; `force` is human-only;
   a busy app refuses `app-busy`) and `appScriptArgs(verb, open?)` for driving `scripts/app.sh` from outside.
+
+## Asking FliTools for a transcript (v0.8.0)
+
+FliTools (`~/dev/ad/flivideo/flitools`) is the one transcription service. Apps call it through this client, never
+their own engine: `transcribeQueued(path, { app, project })` queues a recording (FliTools writes `json`/`srt`/`txt`
+beside it), `transcriptFor(path, { app })` says whether a current transcript exists, `transcriptJobs({ project },
+{ app })` reads the app's own queue. Each answers `ok`, `refused` (FliTools' named refusal) or `unavailable` (not
+running) — never a throw. Node only: it reads FliTools' control file.
+
+## Folder access — one pattern for every app (v0.10.0)
+
+David approved it on 2026-09-24. Wherever an app shows a location, it shows two quiet icons right after it, in this
+order: FliHub's outline **folder** ("Open in Finder") and **`>_`** ("Copy full path"). They stay hidden until the
+line or row is pointed at, and are visible on touch screens and on keyboard focus. A copy confirms with a tick in place
+of the icon for about a second, not a toast. A file opens Finder with the file selected. Clicking an icon never opens
+the row.
+
+The server half is `revealPath(abs, { roots })`. It opens a folder, or a file selected (`open -R`), and only inside
+the roots the app passes (a brand root, a project), with links resolved. It answers `revealed` or `refused` with a
+reason. A reveal raises a window on the person's screen, so make the capability that calls it ★ human-only. Each app
+draws the icons in its own stack (there is no shared UI code): the icon, the words and the behaviour above are the
+shared part.
 
 ## Data shapes
 

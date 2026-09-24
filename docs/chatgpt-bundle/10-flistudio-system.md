@@ -28,6 +28,18 @@ picker, and an agent can do the same through a CLI.
   inside `callCapability` refuses human-only calls (emptying the trash, applying a layout move, stopping FliHub) for
   agents and the CLI. `POST /api/call` and JSON-RPC `POST /api/rpc` need the bearer token the server publishes in its
   control file; `/api/docs` and `/api/console` render the generated OpenRPC (`api/openrpc.json`).
+- **Rename re-points** (G14, d04 UAT) — `project.rename` first asks each running app what it has open, then renames,
+  then switches exactly the apps that had this project open to the new folder (door 3, as `app.launch` does). Asking
+  after the move is useless: FliHub then reports nothing and the others name a folder that is gone. The code is the
+  project's lasting key; the folder name is display (apps' labs follow by code — fli-core `resolveLabPath`).
+- **Folder access** (David 2026-09-24) — every location the screens show carries FliHub's two icons: Open in Finder
+  (`path.reveal`, ★ human-only, fli-core `revealPath` confined to the brand root or project) and Copy full path
+  (client only). `PathActions` / `Here` place them; `ProjectLocation` gives a screen's parts the project's absolute
+  path, so each spot passes only a relative one.
+- **Footage and FliTools** — Pocket 4 clips come in through `footage.import`, which copies (never moves) into
+  `footage/` and queues each clip with FliTools, the one transcription service (fli-core's thin client, as
+  `agent:flistudio`). FliTools writes `footage/transcripts/<name>.{json,srt,txt}`; `footage.list` reads each clip's
+  state back from FliTools' queue (in memory — a FliTools restart forgets jobs, not transcripts).
 - **Zones and layouts** — a project is read as zones: FliHub's recordings and transcripts (under `hub/` in the hub
   layout, at the top in the legacy one — fli-core's `projectLayout()` decides, self-healing: no recordings anywhere →
   hub), `videos/<name>/`, `cast/`, footage-like folders no zone claims, the apps' `fli.<app>…json` files and `-trash/`

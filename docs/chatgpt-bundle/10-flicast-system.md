@@ -81,8 +81,12 @@ is one typed, dry-runnable, reversible call rather than a mouse job.
    and JSON-RPC 2.0 at `POST /v1/rpc`, with integer error codes that are never renumbered (ADR-0006).
 3. The app serves its own reference at `GET /v1/docs` (the generated `api/capability-surface.html`) and
    `GET /v1/openrpc.json`. The same page opens inside FliCast as the capability console (status line
-   `N capabilities` / `agent door open`, or Help → Capability console…), where every verb is callable
-   as `agent:console` and the ★ verbs are attempted and refused in front of the reader (ADR-0008).
+   `N capabilities`, or Help → Capability console…), where every verb is callable as `agent:console` and
+   the ★ verbs are attempted and refused in front of the reader (ADR-0008). `agent door open` opens the
+   suite's control plane instead — `@flivideo/core`'s `renderApiPage` over the same `openrpc.json`, with
+   a dry-run box (ADR-0008 § Amendment).
+4. An agent can see and end the run: `system.status` (pid, context, what is busy), `system.quit` /
+   `system.restart` — fli-core's lifecycle contract, refused `app-busy` during a take or a running task.
 
 ### Export
 1. `export.start { presetId, path, overwrite? }` is a Task: it returns a `taskId` at once; progress
@@ -226,6 +230,8 @@ is one typed, dry-runnable, reversible call rather than a mouse job.
 - Does NOT copy, move or delete a cast project yet (`unsupported`). Rename works (2026-09-22): the three places —
   document, `cast/<name>/`, lab folder — move together, and a rename that moves files starts a fresh undo stack. Copy /
   move / delete need the same three places handled. Packages can do all four.
+- Does NOT transcribe; FliTools does. A spoken cast exported into `videos/` is sent to it (d04 D9) and
+  its files land in `videos/<name>/transcripts/`.
 - Does NOT cut talking-head video by transcript; that is FliCut. Does NOT plan or write scripts; that
   is Storyline. Does NOT run a daemon or a TUI; the CLI is the terminal surface and the app must be up.
 - Does NOT ship: no packaging, signing or notarisation has been run; the RecordKit helper must be

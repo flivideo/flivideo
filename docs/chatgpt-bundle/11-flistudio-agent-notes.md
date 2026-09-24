@@ -41,7 +41,8 @@ Only what the code cannot tell you. Everything here failed the derivation test o
   into `{ ok: false, error }`. Never return an error object from a handler.
 - Every module takes `StudioConfig` instead of calling `os.homedir()`. Tests build it over a fixture estate
   (`server/src/test/fixture-estate.ts`); never point a test at the live estate, `~/.config/appydave` or `~/.fli`.
-- `slugify` exists twice (server `identity.ts`, client `format.ts`) for the create preview — change both together.
+- `slugify` and `withoutOwnCode` exist twice (server `identity.ts`, client `format.ts`) for the create preview — change
+  both together. A name starting with the project's own code (`d04 intro`) loses that copy, with a warning.
 - The screens edit in place by **double-click** (folder code chip, project name). David rejected a separate edit field
   next to a read-only one (2026-09-22) — keep one element that becomes editable.
 
@@ -50,6 +51,10 @@ Only what the code cannot tell you. Everything here failed the derivation test o
 - **Never announce a write from inside a capability.** The server reflects the disk (R33, `estate/watch.ts` →
   `estate:changed`, and `useCall` refetches per brand). A new write path is live for free; a new screen gets it by
   reading through `useCall` with a `brand` input. Emitting from handlers would miss the CLI, which runs in-process.
+- **`path.reveal` runs `open` through an injected `ctx.reveal`.** Tests pass a stub; without one, under vitest it
+  throws rather than open Finder, and the e2e server gets a no-op from `FLISTUDIO_NO_REVEAL=1`. The location icons
+  are `span role="button"` (they sit in clickable rows and the brand card) and the `>_` glyph is CSS, so it never
+  joins a line's text — assert on `data-path`, not on text.
 - **A launch raises the app's window through an injected `Revealer`** (`launch/reveal.ts`), passed only by the running
   server and the CLI. Tests pass none; the e2e server runs with `FLISTUDIO_NO_REVEAL=1`. Never call `realRevealer` from
   a test — it opens real windows on David's screen.
@@ -75,13 +80,17 @@ Only what the code cannot tell you. Everything here failed the derivation test o
   changes. FliStudio must keep its own state (recents) right and tell the apps; v1 only reports which apps have work.
 - **R4 / L4: read-only over every app.** Never write an app's store or any `fli.<app>…json`. A gap in what an app
   accepts is a ticket in that app's repo, not a workaround here (spec §10).
-- **First write into a live project folder needs David's OK** (spec §10), except `fli.studio.json` via create/adopt/settings/
-  rename and `export.place`.
+- **The lane rule replaced "writes only fli.studio.json"** (David 2026-09-23). A new write into a project is fine when it
+  is FliStudio's own job and goes through a capability; a write into another app's area, a move or overwrite of a
+  source, or a delete is not — the last only on David's word (human-only in the contract).
 
 ## Scope limits
 
 - Deletes only inside a project's `-trash/` (`project.empty-trash { confirm: true }`, David 2026-09-23). Never touch
   `recording-shadows/` (retired; removal waits on David).
+- Copies into a project only through `footage.import` (d04 D5: copy, never move, never over a file). Transcripts are
+  FliTools' job (fli-core `transcribeQueued`), never FliStudio's; tests point `flitoolsControlFile` at a stub under the
+  fixture home — the real FliTools is reached only with `FLISTUDIO_FLITOOLS_CONTROL`.
 - Does NOT move or rename files inside a project — except `project.migrate-layout { apply: true }`, which
   moves `recordings/` + `recording-transcripts/` under `hub/` only on David's "move" (dry run by default).
 - **Project intents** (`aspect`, `languages`, `shape`) live in `fli.studio.json`. Write only the fields that changed: FliCut

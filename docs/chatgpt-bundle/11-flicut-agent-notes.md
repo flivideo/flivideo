@@ -77,17 +77,16 @@ those in source. Never copy a shape into prose.
   legacy history dir is `_legacy/flicut/<folder>-<sha1(abspath)[:8]>` for exactly this reason.
 - **`path.relative` never fails.** Contract edits need `assertInsideProject` too, or a
   `../../Volumes/T7/…` path gets written as if it were relative.
-- **Only context changes reach the renderer (FC-33, open).** A control-surface write to a project
-  that is open in the window isn't pushed there, and the window's next save overwrites it. Don't
-  write over the API to an edit David has open unless he knows.
+- **Only the window's own saves and undos use `getStore('window')`** (FC-33, `edit-sync.ts`). Every
+  other writer is `external`: pushed to the window; a window save that hasn't seen it is refused
+  (`edit-changed`). A window write path with the wrong origin loses that.
 - **Keep audit mode off on open.** `open()` forces `inverseCuts: false`. Don't restore it from
   `viewState.json`.
 - **Never let the arm be picked by a number.** Report LUFS/SNR, never rank arms, never
   auto-select one. David chose a100 by ear: the export panel ticks it (`EXPORT_DEFAULT_ARMS`,
   hard-coded) and the API cascade defaults to it. Don't add a remembered or Home-screen default.
-- **Transcription only runs when a window has the edit open** (`Editor.tsx` effect). Anything that
-  creates an edit for David (the hand-off) must make sure a window exists — ask Electron
-  (`BrowserWindow.getAllWindows()`), never trust a remembered `hostWindow`.
+- **The window auto-transcribes only an edit it has open**; agents use `edit.transcribe`. Both take
+  `claimTranscription`. A hand-off must still check a window exists (`BrowserWindow.getAllWindows()`).
 - **Every new transcribe path must call `dropPlaceholderClips` first** (FC-39). `store.create` builds
   clips on a placeholder whole-file take; `applyProposals` matches by `mediaId:takeIndex` and keeps
   the stale clip, so each file plays twice.
@@ -107,9 +106,9 @@ those in source. Never copy a shape into prose.
 - **Future B, and take-splitting is abandoned** (ADR-0002). The transcript is written only by
   transcription. Re-read the ADR before building anything that needs "one take = one clip". That
   invariant is gone on purpose.
-- **Undo is lab snapshots** (ADR-0004). A `baseline: on disk` snapshot is recorded when the newest
-  snapshot ≠ the disk, and it must run inside the same `serialise()` step as the write. Inside that
-  step, call `recordLocked`, not `record`, which would deadlock on its own lock.
+- **Undo walks a cursor over lab snapshots** (ADR-0004, ADR-0006): undo/redo record nothing; a
+  write after undo drops the redo branch. `baseline: on disk` compares disk with the CURRENT entry,
+  inside the write's `serialise()` step — call `recordLocked` there, never `record` (deadlock).
 - **Legacy edits are never converted on open.** Converting one would change a live edit under
   David. Only their undo history moves to the lab.
 
