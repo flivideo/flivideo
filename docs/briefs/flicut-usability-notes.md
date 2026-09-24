@@ -108,3 +108,5 @@ just play · speed · show cuts · skip cuts · split · pace · zoom).
   2. Contextual key strip inside the loupe and the other modes, shown only while you're in them.
   3. `?` opens a cheat sheet of every shortcut, grouped by job, with search; it can be **pinned** beside the editor (orch's call, since David didn't pick between print and pin).
   4. A "how FliCut works" page: the modes, the loupe, the chips, undo/history. For coming back after weeks away.
+- **§4 Pick the best take: approved as recommended.** A simple version first: FliCut groups repeated takes as "↺ take N of M" chips and you click the one to keep. "Pick the best one for me" comes later.
+- **§4 Fix a misheard word: yes, but David wants it thought through properly** (*"think about the different scenarios of bad wording … it's very simplistic at the moment"*). The scenario discussion is in progress.
