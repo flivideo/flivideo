@@ -109,4 +109,8 @@ just play · speed · show cuts · skip cuts · split · pace · zoom).
   3. `?` opens a cheat sheet of every shortcut, grouped by job, with search; it can be **pinned** beside the editor (orch's call, since David didn't pick between print and pin).
   4. A "how FliCut works" page: the modes, the loupe, the chips, undo/history. For coming back after weeks away.
 - **§4 Pick the best take: approved as recommended.** A simple version first: FliCut groups repeated takes as "↺ take N of M" chips and you click the one to keep. "Pick the best one for me" comes later.
-- **§4 Fix a misheard word: yes, but David wants it thought through properly** (*"think about the different scenarios of bad wording … it's very simplistic at the moment"*). The scenario discussion is in progress.
+- **§4 Fix a misheard word: yes, thought through as 8 bad-wording cases.** The cases: (1) own names misheard repeatedly, (2) one-off mishearing, (3) said it wrong, (4) style/format, (5) split/merged words, (6) missing/invented words, (7) filler misjudged, (8) people/place names. David: *"almost all of them from the eight listed are real."*
+  - **Case 3 (said it wrong): no decision yet.** It needs more software; re-recording is *not* the answer for now.
+  - **Corrections stay in the FliCut edit.** They do NOT write back to the raw transcript: *"it is crossing a boundary … I will say no."*
+  - **Dictionaries and wording rules live in FliStudio, not FliCut** (RULING): usually **global**, sometimes **project-level**. FliCut (and FliTools, FliHub, the rest) *use* them. *"FliCut just uses the information. That way, the other tools can also use it if needed."* This implies FliStudio owns a word-rules store, with FliTools' vocabulary and FliCut's dictionary reading from it.
+  - Fixing words in FliHub is wanted but **out of scope** for this work.
