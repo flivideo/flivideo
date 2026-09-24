@@ -127,3 +127,8 @@ just play · speed · show cuts · skip cuts · split · pace · zoom).
   9. agent verbs throughout
 
   **Help is built alongside each piece** (every new control ships with its tooltip, key-strip and cheat-sheet entry; the how-it-works page grows with it). **The central word store is a separate job** (FliStudio owns it; FliTools and FliCut consume it).
+- **Trim mock questions answered** (https://claude.ai/artifact/GoVGaZPzBq28U86c3yBJJy):
+  1. A hand-set in/out is **exact**; the 0.15 s auto-padding applies only to FliCut's own pause/filler cuts (write the ADR amending ADR-0003 decision 3).
+  2. ←/→ move the playhead, `,` `.` nudge, I/O set in/out, and inverse moves off I.
+  3. A drag or I/O **commits at once**, one undo step each; typed timecodes commit on Enter.
+- **Batch released to the flicut window 2026-09-24** (David: *"send the batch"*).
