@@ -103,4 +103,8 @@ just play · speed · show cuts · skip cuts · split · pace · zoom).
   - It appears **inline under the words** (not in a side panel).
   - Play around = **2 s before, 1 s after** (to be tuned after use).
 - **§3 Precision patterns: all 13 to be implemented** as mapped in the loupe column.
-- **New requirement: help.** *"we should have good, easy-to-access help because I won't remember any of [the keys]"*. Proposal pending his answer (see the next section of the walk).
+- **New requirement: help** (*"we should have good, easy-to-access help because I won't remember any of [the keys]"*). **Approved: all three layers plus a how-it-works page.**
+  1. Tooltips on every control (what it does · its key).
+  2. Contextual key strip inside the loupe and the other modes, shown only while you're in them.
+  3. `?` opens a cheat sheet of every shortcut, grouped by job, with search; it can be **pinned** beside the editor (orch's call, since David didn't pick between print and pin).
+  4. A "how FliCut works" page: the modes, the loupe, the chips, undo/history. For coming back after weeks away.
