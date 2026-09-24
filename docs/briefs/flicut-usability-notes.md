@@ -115,3 +115,15 @@ just play · speed · show cuts · skip cuts · split · pace · zoom).
   - **Dictionaries and wording rules live in FliStudio, not FliCut** (RULING): levels **global? → brand → project**. David: *"What I'm calling global probably is brand level … Maybe I do need both levels."* Design with all three and let global be optional/empty. **One centralised word store for the whole suite** (FliTools' vocabulary included). FliCut (and FliTools, FliHub, the rest) *use* them. *"FliCut just uses the information. That way, the other tools can also use it if needed."* This implies FliStudio owns a word-rules store, with FliTools' vocabulary and FliCut's dictionary reading from it.
   - Fixing words in FliHub is wanted but **out of scope** for this work.
 - **§5 Every key is also a verb: approved.** Agents may make the fine edits themselves (`cut.nudge`, `take.choose`, `word.correct`, …). This is a **tentative** yes (*"I'm going to say yes, but I'm not sure in reality"*). Default working rule until he's used it: agents **propose** and David approves in the loupe; in an explicit autopilot pass (like d04) they apply directly, and every change is an undoable history entry. Revisit after real use.
+- **§6 Build order: approved.**
+  1. cut loupe
+  2. nudge by edge (←/→ = playhead; `,` `.` nudge)
+  3. fixed-step drag (⌥ finer)
+  4. mode switch
+  5. chips
+  6. two-lane timeline
+  7. pick best take
+  8. fix misheard word
+  9. agent verbs throughout
+
+  **Help is built alongside each piece** (every new control ships with its tooltip, key-strip and cheat-sheet entry; the how-it-works page grows with it). **The central word store is a separate job** (FliStudio owns it; FliTools and FliCut consume it).
