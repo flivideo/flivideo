@@ -80,8 +80,16 @@ just play · speed · show cuts · skip cuts · split · pace · zoom).
 15. **Export and know what I got** — length, files, where they went.
 16. **Pick up where I left off** — reopen exactly as I left it.
 17. **Let an agent do a pass, then review it** — it proposes, I approve.
+18. **Fine-grain control (David, 2026-09-24)** — zoom into a tight spot and move an edge by 1–2 frames
+    without the drag jumping 20–30; a modifier that re-scales the timeline (or works around the words
+    on screen) for precision; zoomed-in waveform and picture frames to *see* the exact spot. His words:
+    *"The problem with a tool like Gling is that it only has one level of visibility … There's never really
+    a modify key … If you try to drag a line, you could move 20 or 30 frames at a time when you only want to
+    move one or two frames, but you also want to visualise that … seeing visible waveforms and pictorial
+    forms in a zoomed-in aspect would actually be a lovely capability."*
 
 ### What "real usability" means here
+- **Usability is number one; layout and visualisation come right behind it** (David: "usability has to be number one, and then how it's all laid out and visualised is also incredibly important").
 - **The video is the truth.** Every action shows its effect on the finished video at once.
 - **Nothing is lost.** Everything is reversible, and I can always see what's hidden.
 - **Name controls by the job, not the mechanism** ("play finished video", not "skip cuts").
