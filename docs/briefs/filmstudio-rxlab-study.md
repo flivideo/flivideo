@@ -65,3 +65,34 @@ model for FliEdit, a feature donor, or its own thing — with the reasoning.
 
 ## Out of scope
 Building anything in any Fli repo. Buying a licence. Installing or running the app without David's go.
+
+## Phase 2 ruling + widened phase 3 (David, 2026-09-24)
+
+**Phase 2**: David — *"Make sure it's down in an upstream repo for now. A"*. Option A only: shallow
+clone of `https://github.com/rxtech-lab/film-workflow` into
+`/Users/davidcruwys/dev/upstream/repos/filmstudio-study/` (`.gitignore` = `*`). Read-only — no build,
+no DMG, no running the app, no RxLab account or credits.
+
+**Phase 3, widened** (run as a multi-agent pass from flivideo-orch; `filmstudio-rsch` reviews):
+1. **Capability buckets** — every feature from the cloned source, the 17 design docs, the ~70 MCP
+   tools, the SwiftData schema and release notes (not marketing alone), grouped: capture/recording ·
+   screen-action logging + auto-zoom · timeline/sequence editing · effects · captions/transcription ·
+   generative audio (music, TTS) · generative image/video · motion graphics/overlays (Remotion) ·
+   export · agent/MCP surface · project/data model · accounts/credits. Per feature: what it does ·
+   local vs RxLab server · MCP tool name · proving source file/doc.
+2. **Mapping** — each feature → FliHub / FliCut / FliCast / Teletubby / FliTools / FliStudio / Scribe /
+   Storyline / FliEdit, or an invented app (named + justified), or "not wanted". Per feature: what it
+   looks like as an agent-drivable capability in the fli-core contract style, rough effort.
+3. **Generative overlays comparison (required)** — locate and read our own overlay work on disk first
+   (FliCast Overlay/Style panels in `/Users/davidcruwys/dev/ad/flivideo/flicast`; any Remotion work;
+   the HyperFrames skills + brain via the global SKILL.md sweep and `ls /Users/davidcruwys/dev/ad/brains/`).
+   Compare those with FilmStudio's Remotion-through-system-WebKit; state which app owns overlay generation.
+4. **Verdict** — model for FliEdit / donor to several apps / its own thing, with reasoning; the
+   "where does compute happen" answer per `/Users/davidcruwys/dev/ad/brains/screen-studio/`; Remotion's
+   licence as it applies to a FliEdit we build.
+5. **Licence rule** — the repo has no licence: read and borrow ideas, architecture and file formats;
+   never copy its code into any Fli repo. Stated in the brain.
+
+Deliverables in `/Users/davidcruwys/dev/ad/brains/filmstudio/`: buckets (extend the inventory),
+FliVideo mapping incl. invented apps, overlay comparison, verdict. Out of scope: DMG, installing or
+running FilmStudio, an RxLab account or credits, building in any Fli repo, copying FilmStudio code.
