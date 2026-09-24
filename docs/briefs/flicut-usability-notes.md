@@ -95,3 +95,12 @@ just play · speed · show cuts · skip cuts · split · pace · zoom).
 - **Name controls by the job, not the mechanism** ("play finished video", not "skip cuts").
 - **Modes are visible.** I can always tell what state I'm in (auditing, skipping, trimming).
 - **One obvious way to do each job.** The keyboard for speed, the mouse for precision.
+
+## Blueprint decisions (David, 2026-09-24, walking https://claude.ai/artifact/LPsaH4jcz2rhS2WxCvTSFg)
+- **§1 Layout: approved as recommended.** One mode switch (Watch finished · Review cuts · Hear removed) replaces show/skip/inverse; edits open in **Review cuts**. Removed material as chips; two-lane timeline; both clocks; inspector.
+- **§2 Cut loupe: approved** ("This feels really cool").
+  - Opens on **⌥-click a cut** (or Enter on a selected cut); Esc closes. A plain click only selects.
+  - It appears **inline under the words** (not in a side panel).
+  - Play around = **2 s before, 1 s after** (to be tuned after use).
+- **§3 Precision patterns: all 13 to be implemented** as mapped in the loupe column.
+- **New requirement: help.** *"we should have good, easy-to-access help because I won't remember any of [the keys]"*. Proposal pending his answer (see the next section of the walk).
