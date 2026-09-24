@@ -48,3 +48,42 @@ been viewed from any sort of serious usability point of view because nothing fee
   before any redesign.
 - Group the toolbar by job (View · Playback · Edit), with plain labels and a one-line tooltip each.
 - Make view toggles show their effect (e.g. skip cuts → strip gaps / a player badge "skipping cuts").
+
+## Product first — what a human wants to do in a Gling-style cut editor (orch, 2026-09-24)
+
+David: *"even before you do usability research, I want you to think about the product … what real
+usability means for a human … What sort of things would I want to be able to do? It should just be a
+simple list."*
+
+Grounding: Gling's own framing ("edit the video by editing the transcript — delete a sentence and the
+video follows"; one-click cut silences / bad takes / filler words — https://www.gling.ai/save-time,
+https://www.gling.ai/), and our Gling teardown
+`/Users/davidcruwys/dev/ad/brains/video-editing-as-code/gling-ui-surface-map.md` (the WORD is the unit;
+silence/filler/bad take are *labels the AI puts on takes* that you accept or reverse; Gling's toolbar is
+just play · speed · show cuts · skip cuts · split · pace · zoom).
+
+### The jobs (a human, editing a talking-head rough cut)
+1. **Watch it as the viewer will** — play the finished edit start to finish, cuts skipped.
+2. **Read it like a script** — the transcript is the video; delete a sentence, the video follows.
+3. **See what the AI took out, and why** — pause / um / bad take, and how much in total.
+4. **Overrule the AI** — keep or remove one cut, or a whole kind of cut, in one place.
+5. **Pick the best take** — when I said a line three times, choose which one stays.
+6. **Check a join sounds natural** — play a few seconds either side of a cut.
+7. **Set the pace** — tighter or looser pauses for the whole video, hearing the result before committing.
+8. **Set exact start and end** — frame-accurate in/out on a clip (lead-in, lead-out).
+9. **Find a moment** — search a word, jump to the next cut or the next clip.
+10. **Move fast** — play/pause, J/K/L, speed shown on screen, frame step.
+11. **Know where I am** — time in the finished video and which source clip I'm in.
+12. **Fix a misheard word** — correct the transcript without changing the cut.
+13. **Undo anything** — step back and forward, see the history, jump to a point.
+14. **Hear clean audio** — compare raw vs enhanced and choose.
+15. **Export and know what I got** — length, files, where they went.
+16. **Pick up where I left off** — reopen exactly as I left it.
+17. **Let an agent do a pass, then review it** — it proposes, I approve.
+
+### What "real usability" means here
+- **The video is the truth.** Every action shows its effect on the finished video at once.
+- **Nothing is lost.** Everything is reversible, and I can always see what's hidden.
+- **Name controls by the job, not the mechanism** ("play finished video", not "skip cuts").
+- **Modes are visible.** I can always tell what state I'm in (auditing, skipping, trimming).
+- **One obvious way to do each job.** The keyboard for speed, the mouse for precision.
