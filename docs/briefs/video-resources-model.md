@@ -11,7 +11,7 @@ status: proposal — waiting on David (nothing built)
 **Purpose**: David wants one place per video for its "resources" — what launches it on YouTube, what goes to Skool,
 where affiliate links plug in, and the artefacts made for it — visible in a UI and, above all, driven by agents through
 verbs. This doc is detailed enough to build the whole thing in one pass. Nothing is built until David approves it and
-the mock (https://claude.ai/artifact/GovQGoVjJ7McNEzGsXv1wL).
+the mock (mock v2: https://claude.ai/artifact/GovQGoVjJ7McNEzGsXv1wL).
 
 **Ask of David**: the decisions in §9 (each has a recommendation). The rest is design.
 
@@ -72,8 +72,18 @@ apart); `download` (app-02 "downloads"); `affiliate-slot` as a *slot*, not a lin
 | thumbnail images | wherever the generator writes them (thumbs-work: "output folder not decided") — the resource holds the path | a project folder for them (§9 Q6) |
 
 **Why one file per project, not per video**: a title idea often exists before any `videos/<name>/` folder does, and a
-single-video project needs no name at all. `video` is a field: a `videos/` folder name, or `null` for "the project's
-video". The file sits at the project top next to `fli.words.json` (D1 naming: FliStudio's own file, `fli.<segment>.json`).
+single-video project needs no name at all. `video` is a field: a video name in the `videos/` naming (kebab-case — the
+folder need not exist yet), or `null` for "the project's video". The file sits at the project top next to
+`fli.words.json` (D1 naming: FliStudio's own file, `fli.<segment>.json`).
+
+**The kind registry lives in the same files, levelled like the word store** (§8): `kinds` and `groups` blocks in
+`~/.config/appydave/fli.resources.json` (global, seeded with the standard kinds), `v-<brand>/fli.resources.json`
+(brand) and `<project>/fli.resources.json` (project). One file shape at every level; `resources` is used at the project
+level only for now.
+
+**How you get to it (v2 of the mock)**: `RESOURCES <count>` in the rail's *In this project* group (the count is every
+non-retired resource in the project, all videos), and a one-line summary on the project page — "Resources 11 · 5 chosen:
+titles, thumbnails, description… · 4 titles · 4 thumbnails" — generated from the registry, which opens the panel.
 
 ---
 
@@ -100,7 +110,25 @@ Resource = {
   added: Stamp,                   // {at, by} — who added it (human:ui, cli, agent:tuber…)
   changed: Stamp,                 // who changed it last
 }
-ResourcesFile = { schema: 1, resources: Resource[] }
+// The registry — data, levelled global → brand → project, lower level wins on the same key
+ResourceGroup = { group: string, label: string, order: number, changed: Stamp }
+ResourceKind = {
+  kind: string,                  // the key resources use
+  group: string,                 // a ResourceGroup key; unknown → 'other'
+  label: string,                 // "Shorts hooks"
+  value: 'text' | 'url' | 'path' | 'image' | 'list' | 'chapters' | 'ref', // which renderer draws it (§8)
+  many: boolean,                 // candidates expected
+  choose: 'none' | 'one' | 'one+test' | 'published', // the choosing rule the verbs enforce
+  hint?: string,                 // one line for the ⓘ and for agents
+  changed: Stamp,
+}
+ResourcesFile = {
+  schema: 1,
+  groups: ResourceGroup[],       // may be empty at any level
+  kinds: ResourceKind[],
+  off: { kind?: string, group?: string, changed: Stamp }[], // a lower level hides an inherited row
+  resources: Resource[],         // project level only (for now)
+}
 ```
 
 - `Stamp` is fli-core's (v0.11.0), the same as the word store's: `by` is the caller's principal.
@@ -142,10 +170,13 @@ Declared like the rest (`shared/src/contracts.ts` + `HANDLERS`); every write sta
 | `resources.tag` | `{ brand, project, id, add?, remove? }` | Adds and removes tags |
 | `resources.status` | `{ brand, project, id, status }` | Sets the status; `chosen` demotes the other chosen of that video + kind; warns past 3 `in-test` |
 | `resources.remove` | `{ brand, project, id }` | Removes the entry (never a file) |
-| `resources.kinds` | `{}` | The kind registry (§8) — so an agent knows what exists and what "value" each kind takes |
+| `resources.kinds` | `{ brand?, project? }` | The merged registry (groups + kinds, each with the level it came from) — so an agent knows what exists and how each kind is valued and chosen |
+| `resources.kinds.add` | `{ level, brand?, project?, kind? , group? }` | Adds or replaces a kind or group row at one level (stamped) |
+| `resources.kinds.remove` | `{ level, brand?, project?, kind? , group? }` | Removes a row, or (for an inherited one) turns it off at that level |
 
-Refusals reuse the vocabulary: `project-not-found`, `video-not-found` (a `video` that is not a `videos/` folder and not
-`null`), `invalid-input`, plus one new frozen code `resource-not-found`.
+Refusals reuse the vocabulary: `project-not-found`, `invalid-input` (a `video` that is not a kebab video name or
+`null`), plus one new frozen code `resource-not-found`. A `video` whose folder does not exist yet is allowed — ideas come
+first.
 
 **Readers**: `video.text` gains the chosen title and description; apps read `fli.resources.json` themselves through a
 fli-core `readResources()` (as with `readWords`), so nothing needs FliStudio running to read.
@@ -161,19 +192,31 @@ fli-core `readResources()` (as with `readWords`), so nothing needs FliStudio run
 | affiliate | FliStudio (the slot) | FliHub brand-config (the link) | a future affiliate app owns links; slots keep pointing |
 | artefact | FliStudio | Claude sessions (artifacts, pages), David | — |
 
-The **UI** is a Resources panel on the project page, per video (mock, §10). The **agent route** is the verbs — and is
+The **UI** is a Resources panel on the project page, per video (mock v2: https://claude.ai/artifact/GovQGoVjJ7McNEzGsXv1wL). The **agent route** is the verbs — and is
 the one David will use most.
 
 ---
 
 ## 8. How new ideas get in fast
 
-- `kind` is **an open word**, not an enum. `resources.add { kind: 'shorts-hook' }` works today: the record stores it,
-  the UI shows it in an "other" group with its text / url / path, and every verb handles it.
-- The **kind registry** (group, label, value field, many?, choosing rule) is a data table in fli-core. Adding a row gives
-  the kind its group and choosing rule. That is a code release of a list, not a migration — no file on disk changes.
-- Anything a kind needs beyond `text`/`url`/`path`/`tags` goes in `meta`, so the file schema stays `1`.
-- A new producer (a new agent, a new app) needs nothing but the verbs and a `ref.schema` name for its own record.
+The panel, the summary line and every verb are driven by the **registry as data**; the only code is one renderer per
+**value type** and one rule per **choosing rule**. The mock proves it: its second video (`guest-interview`) uses
+`shorts-hook`, `sponsor-read`, `code-repo` and `guest-bio`, and the same function draws it.
+
+**Exactly what changes when a new idea appears:**
+
+| The new idea | Example | What changes |
+|---|---|---|
+| A new kind, and nobody has described it | `guest-bio` | **Nothing.** `resources.add { kind: 'guest-bio', text }` works; it shows under **Other**, drawn as text, choosing rule `none` |
+| A new kind that should sit in a group, have a label or be chosen | `shorts-hook` (many, `one+test`) | **One registry row** — a file edit or `resources.kinds.add`, at the level it belongs to (project for a one-off, brand for AppyDave, global for everyone) |
+| A new group | `sponsor` | **One group row** (plus its kinds' rows) |
+| A kind that stops applying somewhere | no `skool-post` for a client brand | **One `off` row** at that brand |
+| Extra data a kind needs | a sponsor read's deadline, a repo's branch | **Nothing** — it goes in `meta`, stored as given, shown behind the ⓘ |
+| A new **value type** — a new way to *draw* a value | a playable audio clip, a timecode range on the video | **Code**: one renderer in the panel (and, if it is validated, its shape in fli-core). Until then the kind can use `text` or `url` and still work |
+| A new **choosing rule** | "rank 1–5", "one per platform" | **Code**: one rule in `resources.status` |
+| A new producer (agent, app) | a sponsor-tracking agent | **Nothing** — the verbs, plus a `ref.schema` name for its own record |
+
+No file on disk is ever migrated for any of these: the file schema stays `1`.
 
 ---
 
@@ -193,6 +236,11 @@ the one David will use most.
    hold whatever path is written. Recommend `<project>/thumbnails/` when David picks.
 7. **Is YLO's `launch.json` name OK?** It breaks D1 ("no generic names") — `fli.ylo.json` would fit. → YLO's call; flag
    only.
+8. **Which level does the standard registry live at?** → **Global** (`~/.config/appydave/fli.resources.json`, git-synced
+   like `fli.words.json`), seeded once with §2's kinds. Brand and project rows only add or switch off. Alternative: ship
+   the defaults in fli-core code — rejected, because then adding a standard kind needs a release.
+9. **Where does "Resources" sit in the rail?** → **In *In this project*, after Videos, with a count**, plus the summary
+   line on the project page (mock v2). Alternative: under *Do* — rejected, it is project material, not an action.
 
 ---
 
@@ -211,10 +259,12 @@ That is the general model's first instance: the same verb and file carry titles 
 
 ## 11. Build plan (one pass, after approval)
 
-1. fli-core v0.12.0: `Resource`, `ResourcesFile`, `ResourceKind` registry, `readResources`, pure `addResource` /
-   `setStatus` (with the demote rule) / `tagResource` / `removeResource`, `writeResourcesFile`.
-2. FliStudio: the 7 verbs, `resource-not-found`, the Resources panel (mock), `video.text` gains chosen title +
-   description; tests on fixture estates.
+1. fli-core v0.12.0: `Resource`, `ResourceKind`, `ResourceGroup`, `ResourcesFile`, `readResources` (merging the
+   registry global → brand → project), pure `addResource` / `setStatus` (the choosing rules) / `tagResource` /
+   `removeResource` / `addKind` / `removeKind`, `writeResourcesFile`; the standard kinds as a seed file, not as code.
+2. FliStudio: the 9 verbs, `resource-not-found`, the rail entry + summary line + a panel generated from the registry
+   (renderers per value type), `video.text` gains chosen title + description; seed the global registry; tests on
+   fixture estates, including a kind with no row and a project-level kind.
 3. Producers, each in its own window: Tuber (`resources.add` titles), thumbs-work (thumbnail + generation_record), YLO
    (recommended candidates), FliHub ticket (published title).
 
