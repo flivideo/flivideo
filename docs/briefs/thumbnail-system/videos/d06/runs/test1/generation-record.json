@@ -1,0 +1,22 @@
+{
+  "thumbnail_id": "d06.a1.r1",
+  "spec_ref": "videos/d06/specs/d06-a1-creator-ecosystem.json",
+  "spec_version": "1.0",
+  "spec_sha": "2fa0a8d97d92aec62676c1b3ccfcfe4366889fdd",
+  "brand_id": "brand.appydave.light.v1",
+  "recipe": "creator_ecosystem",
+  "presenter": { "library_id": "presenter.appydave.v1", "role": "shocked", "file_id": "headshot-appydave-58.png", "resolved_path": "/Volumes/T7/Sync/david-profile/ash-dave-2024-headshots/jpg-transparent/headshot-appydave-58.png" },
+  "reference_assets": [
+    { "id": "presenter", "file_id": "headshot-appydave-58.png" },
+    { "id": "face_wall", "file_id": "headshot-appydave-29.png" }, { "id": "face_wall", "file_id": "headshot-appydave-86.png" },
+    { "id": "face_wall", "file_id": "headshot-appydave-20.png" }, { "id": "face_wall", "file_id": "headshot-appydave-30.png" },
+    { "id": "face_wall", "file_id": "headshot-appydave-33.png" }, { "id": "face_wall", "file_id": "headshot-appydave-13.png" }
+  ],
+  "generation": { "tool": "chatgpt-web", "model": "ChatGPT image_gen (model name not exposed; composer showed 'Medium')", "size": "1672x941", "output_size": "1280x720", "seed": null, "conversation_id": "6ab895fb-3c70-83ec-8a46-e4612c6ebeb9", "gen_id": "file_00000000fd9082078d48d74fad6d4c18", "created": "2026-09-27T01:16:00Z" },
+  "text_layer": { "headline": "WHICH ME?", "render_mode": "post_composite" },
+  "files": { "background": "videos/d06/runs/test1/d06-a1-test1.png", "final": "videos/d06/runs/test1/d06-a1-test1-final.png" },
+  "quality": {
+    "passed": ["identity_preservation (all 7 faces match the supplied cutouts, including c58's own eye look)", "light_mode_compliance", "composition (3x2 wall left, hero right, per spec)", "labels match manifest expressions", "no headline rendered by model", "mobile_readability at 320x180"],
+    "flagged": ["ChatGPT gave no QC report (final assistant message empty)", "hero slightly overlaps the CONFIDENT card"]
+  }
+}

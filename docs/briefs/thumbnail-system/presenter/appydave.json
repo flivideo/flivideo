@@ -12,7 +12,7 @@
     "manifest_url": "https://claude.ai/artifact/EZbkmPK3zb8Vfi7u5soeQF (manifest.json, agents.md; favourites in db collection 'prefs')",
     "manifest_local": "/Volumes/T7/Sync/david-profile/ash-dave-2024-headshots/headshots-manifest.json",
     "id_scheme": "cid cN == file headshot-appydave-N.png (stable)",
-    "private": "The artefact is private: only Claude sessions can read it. Chat image tools (ChatGPT) need the PNGs attached plus the 'Copy for AI' block pasted."
+    "private": "Shared 'anyone with the link' (view only). A plain script fetch gets Cloudflare's bot check (HTTP 403, 2026-09-27); whether ChatGPT's browsing can read it is untested. Image generation needs the PNGs attached regardless, so attach them from cutout.path."
   },
   "identity_policy": {
     "preserve_face": true,

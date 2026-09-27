@@ -43,6 +43,9 @@ AppyDave: warm, practical builder. **Light mode only.** Brand config: `../../bra
 - The outro promises that the thumbnail **uses one of the tagged headshots**. So the face is in: this answers "face or no face" for d06.
 - Nothing else has been decided.
 
+## Note from David (2026-09-27)
+The original 9-tile ChatGPT board (`../../source/board-2026-09-26.png`) almost works as a d06 thumbnail in its own right. It shows many expressions, every one fits the video, and it's literally the thing the video is about. It's not chosen, but it's a strong signal for the `creator_ecosystem` "wall of faces" direction (spec a1), and possibly a new recipe: *the board as the thumbnail*.
+
 ## What's missing
 Edit, titles sign-off, chapters/timestamps, CTA links.
 

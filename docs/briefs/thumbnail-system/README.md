@@ -51,7 +51,7 @@ fact sheet ─► recipe pick ─► JSON spec ─► image ─► text layer �
 | Input | Frequency | Location |
 |---|---|---|
 | Brand rules | once | `brands/appydave.json` (derived from the `brand-dave:brand` skill) |
-| Presenter portraits | once, refreshed | **Headshot Picker artefact** (from portraits-rsch): https://claude.ai/artifact/EZbkmPK3zb8Vfi7u5soeQF, with `manifest.json`, `agents.md` and favourites in db `prefs`. It's private, so only Claude can read it, and ChatGPT gets the attached PNGs. Local files: `/Volumes/T7/Sync/david-profile/ash-dave-2024-headshots/jpg-transparent/` (106 cutouts; search `…/headshots-manifest.json`). The T7 is external: a missing path means it's unmounted, not deleted. |
+| Presenter portraits | once, refreshed | **Headshot Picker artefact** (from portraits-rsch): https://claude.ai/artifact/EZbkmPK3zb8Vfi7u5soeQF, with `manifest.json`, `agents.md` and favourites in db `prefs`. Shared with anyone who has the link, but a script fetch hits Cloudflare's bot check. Always attach the PNGs to image tools. Local files: `/Volumes/T7/Sync/david-profile/ash-dave-2024-headshots/jpg-transparent/` (106 cutouts; search `…/headshots-manifest.json`). The T7 is external: a missing path means it's unmounted, not deleted. |
 | Recipes | once, grows | `recipes.md` |
 | Fact sheet + `thumbnail_assets` | every video | `…/docs/briefs/<batch>/dNN-factsheet.md` |
 | Real screenshots / frames | when the recipe needs them | listed in `thumbnail_assets` |
