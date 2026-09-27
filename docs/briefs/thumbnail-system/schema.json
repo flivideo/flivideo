@@ -141,5 +141,43 @@
     "Text spelling verified",
     "Mobile-size readability confirmed",
     "Output reviewed before publication"
-  ]
+  ],
+  "generation_record": {
+    "_note": "Written once per generated image, AFTER generation; not part of the creative spec. Consumed by FliStudio as the `meta` of a thumbnail resource (ref.schema = \"thumbnail.generation\"). Selection status (candidate / in YouTube test / chosen) is deliberately NOT here: FliStudio owns it.",
+    "thumbnail_id": "Spec id + run number, e.g. d03.a1.r1",
+    "spec_ref": "Path of the spec relative to this folder, e.g. specs/d03-a1-detection-overlay.json",
+    "spec_version": "Spec `version` at generation time",
+    "spec_sha": "Git blob sha of the spec file at generation time",
+    "brand_id": "Brand config id, e.g. brand.appydave.light.v1",
+    "recipe": "Recipe id from recipes.json",
+    "presenter": {
+      "library_id": "Presenter library id",
+      "role": "Portrait role used",
+      "file_id": "Portrait file id (authoritative; use this, not the path)",
+      "resolved_path": "Snapshot of where the file was read from; informational only"
+    },
+    "reference_assets": "Array of {id, file_id} for every attached asset",
+    "generation": {
+      "tool": "chatgpt-web | imagedrip | kie | other",
+      "model": "Model name as reported by the tool",
+      "size": "Requested generation size",
+      "output_size": "Final delivered size, normally 1280x720",
+      "seed": "Seed if the tool exposes one, else null",
+      "conversation_id": "Chat id when generated in a chat (must be a fresh chat for repeatability)",
+      "gen_id": "Tool's generation id from image metadata (provenance only)",
+      "created": "ISO-8601 UTC timestamp"
+    },
+    "text_layer": {
+      "headline": "Headline actually composited",
+      "render_mode": "post_composite | model_generated"
+    },
+    "files": {
+      "background": "Path to the image before the text layer",
+      "final": "Path to the finished thumbnail"
+    },
+    "quality": {
+      "passed": "quality_checks that passed",
+      "flagged": "quality_checks needing manual review"
+    }
+  }
 }

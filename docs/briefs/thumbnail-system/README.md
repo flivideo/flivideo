@@ -12,7 +12,7 @@
 
 | File | What |
 |---|---|
-| `schema.json` | the universal thumbnail spec, with a description for every field (a field dictionary, not a JSON Schema validator) |
+| `schema.json` | the universal thumbnail spec, plus a `generation_record` section (one per generated image, read by FliStudio as a resource `meta`; selection status lives in FliStudio), with a description for every field (a field dictionary, not a JSON Schema validator) |
 | `brands/appydave.json` | AppyDave brand config (`brand.appydave.light.v1`): light mode forced, dark areas ≤25% and contained |
 | `presenter/appydave.json` | presenter library manifest by role. Location TBD from portraits-rsch; interim fallback is the T7 cutouts |
 | `rendering.json` | global rendering defaults (1280×720, one thumbnail per job, text composited afterwards) |
