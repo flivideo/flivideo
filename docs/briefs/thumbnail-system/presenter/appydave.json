@@ -96,5 +96,20 @@
     "missing_gesture": "Use an approved portrait and composite without changing the gesture, or generate a proposed variation for identity review",
     "missing_expression": "Select the closest available natural expression",
     "missing_file": "Report missing asset; do not substitute another person"
+  },
+  "usage_rule": {
+    "default": "identity_reference",
+    "meaning": "Library photos teach the model WHO David is (face, glasses, hair, age, build, shirt). The model then CREATES the pose, expression, gaze and lighting the story needs. Do not pick a photo because its expression matches and paste it.",
+    "pick_references_by": [
+      "clear frontal and three-quarter faces",
+      "outfit matching the thumbnail series",
+      "lighting close to the target scene",
+      "2-4 references, not 1"
+    ],
+    "literal_use_only_when": [
+      "the video is about the photos themselves (e.g. d06 candidate cards)",
+      "an exact existing pose is explicitly wanted"
+    ],
+    "why": "David 2026-09-27: the board was made from 3 neutral/standing shots + 1 expression and invented 8 brilliant expressions; test 1 copied cutouts and looked like Canva. Test 2 (reference mode) invented a pointing pose that exists nowhere in the library and reached board quality."
   }
 }

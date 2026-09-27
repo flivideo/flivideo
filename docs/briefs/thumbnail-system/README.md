@@ -59,6 +59,9 @@ fact sheet ─► recipe pick ─► JSON spec ─► image ─► text layer �
 
 ## Presenter slot (pluggable)
 
+**Library photos are identity references, not stock poses.** The model invents the performance (see `presenter/appydave.json` → `usage_rule`). Copying a cutout by expression match is what made test 1 look like Canva.
+
+
 Specs never embed or upload photos. They name a **role** (e.g. `surprised`, `pointing-right`) plus an optional file id. The library is resolved at run time: the portraits-rsch location once it's decided, otherwise the 2024 cutouts. Changing the library changes no spec.
 
 ## Status and next step
