@@ -110,6 +110,29 @@
       "the video is about the photos themselves (e.g. d06 candidate cards)",
       "an exact existing pose is explicitly wanted"
     ],
-    "why": "David 2026-09-27: the board was made from 3 neutral/standing shots + 1 expression and invented 8 brilliant expressions; test 1 copied cutouts and looked like Canva. Test 2 (reference mode) invented a pointing pose that exists nowhere in the library and reached board quality."
+    "why": "David 2026-09-27: the board was made from 3 neutral/standing shots + 1 expression and invented 8 brilliant expressions; test 1 copied cutouts and looked like Canva. Test 2 (reference mode) invented a pointing pose that exists nowhere in the library and reached board quality.",
+    "reference_pool": {
+      "source": "Headshot Picker db collection 'prefs' where fav=true (David's approved likeness set, mostly neutrals)",
+      "read_with": "ArtifactData list prefs, url https://claude.ai/artifact/EZbkmPK3zb8Vfi7u5soeQF",
+      "as_of_2026-09-27": {
+        "grey_shirt": [
+          "c3",
+          "c2",
+          "c6",
+          "c9",
+          "c11",
+          "c12"
+        ],
+        "black_shirt": [
+          "c84",
+          "c87",
+          "c90",
+          "c105"
+        ]
+      },
+      "pick_by": "outfit + angle for the scene, NEVER expression",
+      "david_does": "curate favourites once; never picks per thumbnail",
+      "gap": "no grey-shirt three-quarter-head reference yet"
+    }
   }
 }

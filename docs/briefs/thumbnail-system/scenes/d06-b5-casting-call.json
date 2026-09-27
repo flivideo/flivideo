@@ -1,0 +1,23 @@
+{
+  "id": "d06.b5",
+  "video": "d06: I turned my 106 headshots into an AI picker",
+  "prose": "An AI casting director auditions five of my faces and picks one for the thumbnail.",
+  "scene": {
+    "setting": "casting-audition room, plain back wall, soft daylight",
+    "event": "a friendly white robot casting director at a desk points at the winning Dave",
+    "subjects": [
+      "five Daves on chairs in a row, each holding a numbered card 1-5, each a different face: hopeful, sceptical, over-acted shock, bored, smug",
+      "the winner (right end) half-stands with a big delighted grin and a yellow CAST sticker on his chest"
+    ],
+    "props": ["robot with headphones and clipboard, cute app-mascot design", "desk with coffee cup"],
+    "labels": ["1", "2", "3", "4", "5", "CAST"],
+    "mood": "bright, playful, funny"
+  },
+  "presenter": {
+    "identity_references": ["headshot-appydave-3.png", "headshot-appydave-11.png", "headshot-appydave-9.png"],
+    "outfit": "light blue-grey shirt",
+    "rule": "references show who Dave is; invent every expression and pose"
+  },
+  "headline_zone": "top-right of the back wall",
+  "headline": "AI CAST MY FACE"
+}

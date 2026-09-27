@@ -1,0 +1,69 @@
+{
+ "task": "Generate ONE finished 16:9 YouTube thumbnail image from this JSON. Keys are semantic; values are what I want.",
+ "scene": {
+  "setting": "casting-audition room, plain back wall, soft daylight",
+  "event": "a friendly white robot casting director at a desk points at the winning Dave",
+  "subjects": [
+   "five Daves on chairs in a row, each holding a numbered card 1-5, each a different face: hopeful, sceptical, over-acted shock, bored, smug",
+   "the winner (right end) half-stands with a big delighted grin and a yellow CAST sticker on his chest"
+  ],
+  "props": [
+   "robot with headphones and clipboard, cute app-mascot design",
+   "desk with coffee cup"
+  ],
+  "labels": [
+   "1",
+   "2",
+   "3",
+   "4",
+   "5",
+   "CAST"
+  ],
+  "mood": "bright, playful, funny"
+ },
+ "presenter": {
+  "identity_references": [
+   "headshot-appydave-3.png",
+   "headshot-appydave-11.png",
+   "headshot-appydave-9.png"
+  ],
+  "outfit": "light blue-grey shirt",
+  "rule": "references show who Dave is; invent every expression and pose"
+ },
+ "headline_zone": "top-right of the back wall (leave clear; the headline is added afterwards)",
+ "brand": {
+  "brand": "AppyDave",
+  "palette": {
+   "yellow": "#ffde59 (one accent)",
+   "brown": "#342d2d",
+   "cream": "#faf5ec",
+   "amber": "#c8841a"
+  },
+  "headline_font": "Bebas Neue (added later, not by you)",
+  "presenter": "Dave: middle-aged man, short grey curly hair, black rectangular glasses; match the attached headshots"
+ },
+ "style": {
+  "look": "bright natural editorial YouTube-creator photo, real rooms, soft daylight key on face, a few warm practical lamps, background darker than face but readable",
+  "graphics": "crisp flat modern UI and icons, clean saturated colours for meaning, yellow only as an accent",
+  "glow": "only where a real screen or lamp emits light",
+  "never": [
+   "particles",
+   "light trails",
+   "lens flares",
+   "crowns",
+   "neon rims",
+   "golden haze",
+   "all-amber HDR grade",
+   "sci-fi holograms",
+   "text other than what scene.labels lists"
+  ],
+  "style_reference": "style-reference-board.png (match its rendering, not its content)"
+ },
+ "attach": [
+  "style-reference-board.png",
+  "headshot-appydave-3.png",
+  "headshot-appydave-11.png",
+  "headshot-appydave-9.png"
+ ],
+ "output": "the image only, then one line: what you would change"
+}

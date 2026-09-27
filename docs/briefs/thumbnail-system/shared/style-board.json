@@ -1,0 +1,17 @@
+{
+  "look": "bright natural editorial YouTube-creator photo, real rooms, soft daylight key on face, a few warm practical lamps, background darker than face but readable",
+  "graphics": "crisp flat modern UI and icons, clean saturated colours for meaning, yellow only as an accent",
+  "glow": "only where a real screen or lamp emits light",
+  "never": [
+    "particles",
+    "light trails",
+    "lens flares",
+    "crowns",
+    "neon rims",
+    "golden haze",
+    "all-amber HDR grade",
+    "sci-fi holograms",
+    "text other than what scene.labels lists"
+  ],
+  "style_reference": "style-reference-board.png (match its rendering, not its content)"
+}

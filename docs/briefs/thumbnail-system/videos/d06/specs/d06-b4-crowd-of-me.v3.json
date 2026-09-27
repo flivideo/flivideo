@@ -1,0 +1,106 @@
+{
+  "id": "d06.b4",
+  "version": "3.0",
+  "schema_version": "1.2",
+  "art_direction": "A bright, funny YouTube thumbnail: a huge crowd of the same man, dozens of Daves packed in rows like a school class photo or a stadium stand, in a warm home-studio room. Each Dave has a different expression (grinning, thinking, shocked, sceptical, smug), some in a light blue-grey shirt, some in a dark navy shirt. In the front, larger and sharper, the real Dave turns to camera with one eyebrow raised and a knowing half-smile, arms crossed, as if to say 'which one is real?'. Keep the TOP-LEFT QUARTER as a plain, slightly darker wall with no faces, for a headline.",
+  "style_id": "style.appydave.board.v1",
+  "video": {
+    "id": "D06",
+    "brand_id": "brand.appydave.thumbnail.v2",
+    "topic": "AI-powered headshot selection",
+    "working_title": "I Turned My Headshots Into an AI Picker",
+    "audience": [
+      "YouTube creators",
+      "AI automation enthusiasts",
+      "Creators automating content production"
+    ],
+    "promise": "Demonstrate a system that uses 106 tagged headshots and AI to select an appropriate thumbnail portrait",
+    "verified_facts": {
+      "headshot_count": 106,
+      "headshots_tagged": true,
+      "ai_selects_headshot": true
+    },
+    "unverified_details": [
+      "Specific scoring algorithm",
+      "Selection accuracy",
+      "Processing speed"
+    ],
+    "fact_sheet": "/Users/davidcruwys/dev/ad/flivideo/docs/briefs/thumbnail-system/videos/d06/d06-factsheet.md"
+  },
+  "creative": {
+    "recipe": "crowd_of_me",
+    "story": "106 versions of me, and only one is real"
+  },
+  "presenter": {
+    "library_id": "presenter.appydave.v1",
+    "usage": "identity_reference",
+    "reference_pool": "David's favourites (neutrals); expression and pose are set here, not by the photo",
+    "references": [
+      {
+        "cid": "c3",
+        "file_id": "headshot-appydave-3.png",
+        "from": "David favourites (picker prefs)"
+      },
+      {
+        "cid": "c9",
+        "file_id": "headshot-appydave-9.png",
+        "from": "David favourites (picker prefs)"
+      },
+      {
+        "cid": "c90",
+        "file_id": "headshot-appydave-90.png",
+        "from": "David favourites (picker prefs)"
+      },
+      {
+        "cid": "c105",
+        "file_id": "headshot-appydave-105.png",
+        "from": "David favourites (picker prefs)"
+      }
+    ],
+    "performance_to_create": {
+      "expression": "One eyebrow raised, knowing half-smile",
+      "pose": "Arms crossed, turned to camera",
+      "position": "Front right, largest figure"
+    }
+  },
+  "text_layer": {
+    "headline": "106 OF ME",
+    "alternates": [
+      "WHICH ONE IS REAL?",
+      "MEET MY 106 CLONES"
+    ],
+    "render_mode": "post_composite",
+    "font": "Bebas Neue",
+    "size_px": 88,
+    "minimum_size_px": 64,
+    "bbox": [
+      25,
+      35,
+      200,
+      480
+    ],
+    "color": "#faf5ec",
+    "accent": {
+      "words": [
+        "106"
+      ],
+      "color": "#ffde59"
+    },
+    "zone_named_in_art_direction": true
+  },
+  "rendering": {
+    "generate_final_text_in_image": false,
+    "use_reference_photographs": true,
+    "style_reference_attached": true
+  },
+  "variations": {
+    "count": 1
+  },
+  "quality_checks": [
+    "Looks like the style reference board, not a light show",
+    "Presenter recognisable",
+    "One clear visual event",
+    "Headline zone left clear as named",
+    "No banned effects"
+  ]
+}

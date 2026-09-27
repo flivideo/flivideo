@@ -1,0 +1,17 @@
+{
+  "id": "style.appydave.board.v1",
+  "reference_image": "style-reference-board.png",
+  "reference_use": "Match HOW the attached board is rendered (lighting, colour, finish, graphic style). Do NOT copy its content or layout.",
+  "look": "Bright, natural, editorial YouTube-creator look. Real rooms (home studio, office, desk) with soft daylight-style key light on the face and a few warm practical lamps; background darker than the face but still readable, never black. Faces bright, sharp and expressive. Graphics are crisp, flat, modern UI and infographic elements: rounded tiles, clean labels, simple icons, arrows. Clean saturated colours used for meaning (teal, purple, green, red, blue are all fine); AppyDave yellow #ffde59 is ONE accent, not the lighting colour.",
+  "glow_rule": "Glow only where a real screen or lamp would emit light. Subtle.",
+  "banned": [
+    "particles, sparkles, dust motes",
+    "light trails, streaks, speed lines of light",
+    "lens flares, god rays",
+    "golden haze or an all-amber / orange-teal HDR grade",
+    "crowns, trophies, halos",
+    "neon rims around objects",
+    "sci-fi holograms"
+  ],
+  "why": "David 2026-09-27: v2 concepts right but 'overboard, some big light show'; the 9-tile board is the style bar."
+}

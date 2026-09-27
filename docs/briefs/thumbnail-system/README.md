@@ -8,6 +8,21 @@
 
 ---
 
+## THE METHOD (v3, 2026-09-27): prose → JSON → chat
+
+```
+prose idea ──► scenes/<id>.json ──► tools/build_prompt.py ──► ONE compact JSON (~2.3k chars)
+ (1 line)      (scene, presenter     (merges shared/brand-appydave.json    pasted into a FRESH chat
+               refs, headline zone)   + shared/style-board.json)           + attach: style-reference-board.png
+                                                                              + 2-4 favourite headshots
+                                        image ──► tools/composite_headline.py (auto calmest zone) ──► final
+```
+
+- **Per thumbnail you write one small file:** `scenes/<id>.json`. Example: `scenes/d06-b5-casting-call.json`.
+- **Shared, written once:** `shared/brand-appydave.json` and `shared/style-board.json` (+ `style/style-reference-board.png`).
+- **Proven:** the compact JSON run (`videos/d06/runs/b5-compact/`) matched or beat the 12k-char brief run (`b5-v3`) for the same idea.
+- Everything below (schema.json, specs/, execution-instructions.md) is the **v1/v2 history** that led here. Keep it for reference; don't use it for new runs.
+
 ## Where things are
 
 | File | What |
@@ -28,6 +43,10 @@
 | `source/chatgpt-method-2026-09-27.md` | ChatGPT's raw answer, which the files above were built from |
 
 Fact sheets for d01–d03 and the reference photos are in `/Users/davidcruwys/dev/ad/flivideo/docs/briefs/thumb-research-2026-09-26/`.
+
+## Style
+
+`style/appydave-board-style.v1.json` + `style/style-reference-board.png` (the 9-tile board), attached to every run as a **style reference**. It bans particles, light trails, crowns, lens flares and all-gold grades, the "light show" David rejected in the v2 runs.
 
 ## Run order
 
@@ -59,7 +78,7 @@ fact sheet ─► recipe pick ─► JSON spec ─► image ─► text layer �
 
 ## Presenter slot (pluggable)
 
-**Library photos are identity references, not stock poses.** The model invents the performance (see `presenter/appydave.json` → `usage_rule`). Copying a cutout by expression match is what made test 1 look like Canva.
+**Library photos are identity references, not stock poses.** References come from **David's favourites** in the picker (his approved-likeness set, mostly neutrals), chosen by outfit and angle, never by expression. David curates favourites once and never picks per thumbnail. The model invents the performance (see `presenter/appydave.json` → `usage_rule`). Copying a cutout by expression match is what made test 1 look like Canva.
 
 
 Specs never embed or upload photos. They name a **role** (e.g. `surprised`, `pointing-right`) plus an optional file id. The library is resolved at run time: the portraits-rsch location once it's decided, otherwise the 2024 cutouts. Changing the library changes no spec.

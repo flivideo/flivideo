@@ -1,0 +1,101 @@
+{
+  "id": "d06.b5",
+  "version": "3.0",
+  "schema_version": "1.2",
+  "art_direction": "A bright, playful YouTube thumbnail: a casting-audition room with a plain back wall and soft daylight. A row of five Daves sits on chairs, each holding a numbered audition card and pulling a different face (hopeful, sceptical, over-acting shock, bored, smug). At a desk in the foreground-left, a friendly rounded white robot casting director with headphones and a clipboard (clean product-design look, like a cute app mascot) points at one Dave. That Dave, the grey-shirt one on the right, stands up with a big delighted grin, a bright yellow 'CAST' sticker on his chest. Keep the TOP-RIGHT area of the back wall clear for a headline.",
+  "style_id": "style.appydave.board.v1",
+  "video": {
+    "id": "D06",
+    "brand_id": "brand.appydave.thumbnail.v2",
+    "topic": "AI-powered headshot selection",
+    "working_title": "I Turned My Headshots Into an AI Picker",
+    "audience": [
+      "YouTube creators",
+      "AI automation enthusiasts",
+      "Creators automating content production"
+    ],
+    "promise": "Demonstrate a system that uses 106 tagged headshots and AI to select an appropriate thumbnail portrait",
+    "verified_facts": {
+      "headshot_count": 106,
+      "headshots_tagged": true,
+      "ai_selects_headshot": true
+    },
+    "unverified_details": [
+      "Specific scoring algorithm",
+      "Selection accuracy",
+      "Processing speed"
+    ],
+    "fact_sheet": "/Users/davidcruwys/dev/ad/flivideo/docs/briefs/thumbnail-system/videos/d06/d06-factsheet.md"
+  },
+  "creative": {
+    "recipe": "casting_call",
+    "story": "An AI casting director picks which of my faces gets the thumbnail"
+  },
+  "presenter": {
+    "library_id": "presenter.appydave.v1",
+    "usage": "identity_reference",
+    "reference_pool": "David's favourites (neutrals); expression and pose are set here, not by the photo",
+    "references": [
+      {
+        "cid": "c3",
+        "file_id": "headshot-appydave-3.png",
+        "from": "David favourites (picker prefs)"
+      },
+      {
+        "cid": "c11",
+        "file_id": "headshot-appydave-11.png",
+        "from": "David favourites (picker prefs)"
+      },
+      {
+        "cid": "c9",
+        "file_id": "headshot-appydave-9.png",
+        "from": "David favourites (picker prefs)"
+      }
+    ],
+    "performance_to_create": {
+      "expression": "Big delighted grin (winner); other Daves each a different face",
+      "pose": "Winner half-standing from chair",
+      "position": "Right side"
+    }
+  },
+  "text_layer": {
+    "headline": "AI CAST MY FACE",
+    "alternates": [
+      "THE AUDITION",
+      "WHICH DAVE GETS THE JOB?"
+    ],
+    "render_mode": "post_composite",
+    "font": "Bebas Neue",
+    "size_px": 88,
+    "minimum_size_px": 64,
+    "bbox": [
+      30,
+      560,
+      200,
+      965
+    ],
+    "color": "#faf5ec",
+    "accent": {
+      "words": [
+        "CAST"
+      ],
+      "color": "#ffde59"
+    },
+    "zone_named_in_art_direction": true
+  },
+  "rendering": {
+    "generate_final_text_in_image": false,
+    "use_reference_photographs": true,
+    "style_reference_attached": true
+  },
+  "variations": {
+    "count": 1
+  },
+  "quality_checks": [
+    "Looks like the style reference board, not a light show",
+    "Presenter recognisable",
+    "One clear visual event",
+    "Headline zone left clear as named",
+    "No banned effects"
+  ]
+}
