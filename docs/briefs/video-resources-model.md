@@ -3,7 +3,7 @@ type: brief
 title: Video resources model
 description: "One per-video record of everything that belongs to a video — launch titles and thumbnails (many candidates, some chosen), chapters, tags, description, community links, affiliate slots, artefacts — held by FliStudio, readable and writable by agents."
 created: 2026-09-27
-status: proposal — waiting on David (nothing built)
+status: built (thin slice, 2026-09-27) — fli-core v0.12.0, FliStudio 5bf1e74; defaults in use, revisit after real use
 ---
 
 # Video resources model
@@ -55,6 +55,8 @@ A **resource** is one thing that belongs to a video. Its **kind** says what it i
 | **artefact** | `artifact` | `url` (claude.ai/artifact/…) | no | `published` | Claude sessions |
 | | `page` | `url` or `path` (HTML) | no | — | Claude sessions |
 | | `file` | `path` | no | — | anyone |
+| | `image` | `path` (a kept copy; the url is provenance) | yes | — | anyone |
+| **conversations** | `session` | `meta`: session_id, session_name, session_web, machine, cwd, transcript, resume, started_from, note, tool (claude-code \| chatgpt…) | yes | — | any Claude Code session (skill recipe), David |
 | **other** | anything new | any | — | — | — |
 
 Found by the research and added: `description`, `chapters` and `keywords` as separate kinds (app-02 and YLO keep them
@@ -220,27 +222,21 @@ No file on disk is ever migrated for any of these: the file schema stays `1`.
 
 ---
 
-## 9. Decisions for David (each with a recommendation)
+## 9. Decisions — defaults in use, revisit after real use
 
-1. **FliStudio holds it, in `<project>/fli.resources.json`, one file per project with a `video` field per resource?**
-   → **Yes.** The code agrees (§1). Per-video files break down for ideas made before a video folder exists.
-2. **YLO's `launch.json` and this store — who holds "chosen"?** → **This store.** YLO keeps its workshop (scores,
-   analysis, the 3 variant slots) and adds what it recommends as resources with `ref: ylo.launch`. One place answers
-   "which title is live". Otherwise YLO's `locked` slot and FliStudio's `chosen` can disagree.
-3. **Brand-wide links (Skool URL, affiliates) — move them out of FliHub's `brand-config.json`?** → **Not now.** Point
-   at them (`ref: flihub.brand-config`). Move them when the affiliate app exists.
-4. **The published title — FliHub's `.flihub-state.json title` or `status: published` here?** → **Here**, and FliHub
-   reads it later (a FliHub ticket). Until then both exist and FliHub's is the one YouTube got.
-5. **More than 3 in the YouTube test: refuse or warn?** → **Warn.** David: "don't cap it at 3".
-6. **Where do thumbnail image files go?** → **Not decided here.** thumbs-work says the output folder is open; resources
-   hold whatever path is written. Recommend `<project>/thumbnails/` when David picks.
-7. **Is YLO's `launch.json` name OK?** It breaks D1 ("no generic names") — `fli.ylo.json` would fit. → YLO's call; flag
-   only.
-8. **Which level does the standard registry live at?** → **Global** (`~/.config/appydave/fli.resources.json`, git-synced
-   like `fli.words.json`), seeded once with §2's kinds. Brand and project rows only add or switch off. Alternative: ship
-   the defaults in fli-core code — rejected, because then adding a standard kind needs a release.
-9. **Where does "Resources" sit in the rail?** → **In *In this project*, after Videos, with a count**, plus the summary
-   line on the project page (mock v2). Alternative: under *Do* — rejected, it is project material, not an action.
+David (2026-09-27): *"are we just learning as we go and evolving and keeping our flexibility in place (because until you
+use something, it's hard for the decisions to even make sense)?"* So every recommendation below is the **working
+default**, built as described, and open to change once it has been used.
+
+1. FliStudio holds it, in `<project>/fli.resources.json`, one file per project with a `video` per resource.
+2. This store holds "chosen"; YLO keeps its workshop and points in with `ref: ylo.launch`.
+3. Brand links stay in FliHub's `brand-config.json`; resources point at them.
+4. The published title will live here (`status: published`); FliHub reads it later (a FliHub ticket).
+5. More than 3 in the YouTube test warns, never refuses.
+6. Thumbnail images: wherever the generator writes them — or copied in with `resources.add { file }` (§12).
+7. YLO's `launch.json` name breaks D1 — YLO's call; flagged only.
+8. The standard registry is data at global level (`~/.config/appydave/fli.resources.json`), seeded through the verbs.
+9. Resources sits in *In this project* with a count, plus the summary line on the project page.
 
 ---
 
@@ -269,3 +265,28 @@ That is the general model's first instance: the same verb and file carry titles 
    (recommended candidates), FliHub ticket (published title).
 
 Out of scope: the launch optimiser itself, the affiliate app, any Skool integration, YouTube uploads.
+
+## 12. Added from real use (2026-09-27, built)
+
+**A. Links go stale — keep a local copy.** David referenced an image by a ChatGPT `blob:` URL, dead outside its tab.
+Rule: anything that is a file (image, pdf, download) is kept as a **file**. `resources.add { file: "/abs/…" }` copies it
+into `<project>/resources/<video or project>/` (never a move, never over a file — `ref.png`, then `ref-2.png`) and stores
+it as `path`; the `url` stays only as provenance. Claude artifacts stay url-first (an HTML snapshot can come later).
+
+**B. Private provenance lives on the video, not on the public artefact.** The Headshot picker carried a "WHERE THIS
+CAME FROM" block (session, machine, transcript, resume line, build script, source manifest). That now lives on d06 as a
+`session` resource (audience `internal`), pointing at the artefact with `ref: { schema: "resource", id }`. *"AI needs
+these references to go back and analyse later."*
+
+**C. "Attach this conversation to the video."** Any Claude Code session can file itself: the `flivideo:flistudio` skill
+(appydave-plugins flivideo 1.6.0) runs `scripts/attach_session.py --note "<why useful>" [--project] [--video]`, which
+identifies the session with no questions — `$CLAUDE_CODE_SESSION_ID`, the web link from `$CLAUDE_CODE_BRIDGE_SESSION_ID`,
+name and cwd from `~/.claude/sessions/*.json`, hostname, the transcript under `~/.claude/projects/`, the resume line —
+defaults to the project FliHub has open, and calls `resources.add { kind: "session" }`. A ChatGPT conversation is the
+same kind with its `url` and `meta.tool: "chatgpt"`.
+
+**First records (d06-presenter-headshot-artefact):** `r_d2d959b237` Headshot picker (artifact, published, skool +
+internal) · `r_83945eb0bc` Headshot picker — how it was made (session, internal, → r_d2d959b237) · `r_3cb45d4abe`
+Elephant Sanctuary Clips (artifact, internal) · `r_4af9abfdb9` the FliStudio build session itself (session, filed by the
+skill recipe).
+
