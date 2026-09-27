@@ -1,0 +1,48 @@
+{
+  "id": "brand.appydave.thumbnail.v2",
+  "mode": "adaptive",
+  "palette": {
+    "cream": "#faf5ec",
+    "brown": "#342d2d",
+    "yellow": "#ffde59",
+    "amber": "#c8841a"
+  },
+  "approved_environments": {
+    "cinematic_dark": {
+      "allowed": true,
+      "background": [
+        "#242022",
+        "#342d2d"
+      ],
+      "headline": "#faf5ec",
+      "accent": "#ffde59"
+    },
+    "editorial_light": {
+      "allowed": true,
+      "background": [
+        "#faf5ec"
+      ],
+      "headline": "#342d2d",
+      "accent": "#ffde59"
+    },
+    "hybrid_photographic": {
+      "allowed": true,
+      "background": "Context-dependent photographic environment",
+      "headline": "Choose for contrast",
+      "accent": "#ffde59"
+    }
+  },
+  "selection_rule": "Choose the environment that best supports the visual story",
+  "forbidden": [
+    "Checkerboard transparency as final background",
+    "Unmotivated neon effects",
+    "Flat presentation-slide layouts unless explicitly requested",
+    "Decorative elements unrelated to the video's story"
+  ],
+  "typography": {
+    "headline_font": "Bebas Neue",
+    "label_font": "Oswald",
+    "note": "from brand-dave:brand"
+  },
+  "status": "EXPERIMENT: thumbnail-only brand config; light-only rule relaxed for thumbnails pending David ruling (evidence: all 9 board tiles he would use are mostly dark)"
+}

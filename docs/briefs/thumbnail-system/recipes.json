@@ -1,6 +1,6 @@
 {
   "catalogue_id": "thumbnail.recipes.v1",
-  "version": "1.0",
+  "version": "1.1",
   "recipes": [
     {
       "id": "creator_ecosystem",
@@ -241,6 +241,37 @@
       ],
       "related_recipes": [
         "agent_pipeline_hero"
+      ]
+    },
+    {
+      "id": "ai_selection_reveal",
+      "layout_family": "decision_reveal",
+      "story_shape": "A system evaluates many candidates and selects one",
+      "dramatic_event": "One result emerges from a collection",
+      "visual_hook": "A single highlighted winner",
+      "layout": "Receding candidates, dominant selection and optional human reaction",
+      "presenter_role": "Surprised, curious or confident",
+      "required_assets": [
+        "Candidate images",
+        "Selected image or approved illustrative selection",
+        "Optional presenter portrait"
+      ],
+      "typical_graphics": [
+        "Selection border",
+        "Directional flow",
+        "Subtle evaluation indicators"
+      ],
+      "preferred_environment": "cinematic_dark",
+      "lighting": "High-contrast editorial lighting with one strongly illuminated result",
+      "visual_hierarchy": [
+        "Selected result",
+        "Human reaction",
+        "Candidate collection"
+      ],
+      "when_not_to_use": [
+        "Videos without a meaningful selection process",
+        "Situations where the selected result cannot be represented accurately",
+        "Topics that require detailed numerical comparisons"
       ]
     }
   ],

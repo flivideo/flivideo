@@ -65,3 +65,39 @@ Produce a selection board showing the individual thumbnails together.
 - A brief quality-control report identifying any unresolved issues.
 
 Do not treat generated examples as approved publishing assets until the user has reviewed them.
+
+
+---
+
+## Thumbnail Director — Creative Generation Rules v2.0
+
+**Creative quality is the primary objective.** The JSON specification is a production contract, not a substitute for art direction.
+
+Every thumbnail specification must begin with a short art-direction paragraph describing the intended finished image in natural language.
+
+Before generating, identify the video's central visual story. Determine what the viewer should understand immediately and which visual event communicates that story.
+
+Select the recipe that best represents that event. Do not force a video into an unsuitable recipe simply because it already exists in the catalogue.
+
+Choose the visual environment that supports the story. Dark cinematic backgrounds, light editorial environments and hybrid photographic scenes are all permitted when consistent with the brand.
+
+Use the supplied photographs to preserve presenter identity. Do not automatically paste an unchanged cutout into every scene. Choose between original-photo compositing and identity-preserving generation according to the required pose, perspective, lighting and interaction.
+
+When generating a scene, prioritize coherent photographic lighting, depth, believable object relationships and visual hierarchy.
+
+Avoid checkerboard transparency patterns, flat presentation-slide compositions, generic science-fiction decorations and collections of unrelated objects.
+
+The supporting graphics must communicate something meaningful about the video's subject. Prefer one strong visual event over many decorative elements.
+
+Generate the visual composition without final headline typography. Composite exact text afterwards.
+
+Before accepting a result, evaluate it as a finished YouTube thumbnail rather than merely checking whether it follows the JSON fields.
+
+If a result is technically compliant but visually weak, revise its creative direction instead of simply adjusting coordinates, colors or font sizes.
+
+## Creative acceptance gate (before QC)
+- Clear visual event: is it obvious what is HAPPENING, not just what objects are there?
+- Meaningful interaction: do the presenter, objects and graphics relate?
+- Cinematic cohesion: are lighting, shadow, perspective and depth unified?
+- One dominant idea.
+- Finished-thumbnail quality: ready for a pro channel, not a slide or mockup.
