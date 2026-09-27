@@ -1,0 +1,98 @@
+{
+  "id": "brand.appydave.light.v1",
+  "name": "AppyDave",
+  "version": "1.0",
+  "mode": "light_only",
+  "colors": {
+    "canvas": "#faf5ec",
+    "text": "#342d2d",
+    "accent": "#ffde59",
+    "secondary": "#c8841a",
+    "supporting_neutral": "#e8e0d4",
+    "problem": "#d94b40",
+    "success": "#268f83"
+  },
+  "color_semantics": {
+    "yellow": "Highlights, arrows, calls to action and emphasis",
+    "brown": "Headlines, outlines and primary labels",
+    "amber": "Secondary emphasis and warm lighting",
+    "red": "Problems, warnings and clipped audio",
+    "teal": "Successful processing and clean results"
+  },
+  "background": {
+    "required_base": "#faf5ec",
+    "allow_subtle_texture": true,
+    "allow_warm_gradient": true,
+    "allow_full_dark_background": false,
+    "allow_dark_vignette": false,
+    "allow_dark_photo_background": false,
+    "dark_regions": {
+      "permitted": [
+        "Contained software interfaces",
+        "Waveform panels",
+        "Small diagram elements",
+        "Text and outlines",
+        "Subtle contact shadows"
+      ],
+      "maximum_canvas_coverage_percent": 25,
+      "must_be_visually_contained": true
+    }
+  },
+  "visual_style": {
+    "personality": [
+      "Warm",
+      "Practical",
+      "Curious",
+      "Hands-on builder",
+      "Technically sophisticated"
+    ],
+    "photography": "Natural editorial photography",
+    "graphics": "Clean editorial technology design",
+    "lighting": "Soft neutral key light with optional warm rim",
+    "complexity": "Low to medium",
+    "avoid": [
+      "Full-screen dark cinematic backgrounds",
+      "Generic science-fiction imagery",
+      "Unnecessary neon effects",
+      "Excessive glow",
+      "Decorative clutter",
+      "Artificial facial exaggeration"
+    ]
+  },
+  "typography": {
+    "primary_font": "Bebas Neue",
+    "fallback_font": "Oswald",
+    "headline_weight": 400,
+    "label_weight": 700,
+    "headline_case": "uppercase",
+    "headline_color": "#342d2d",
+    "minimum_headline_size_px": 64,
+    "preferred_headline_size_px": 88,
+    "minimum_label_size_px": 28,
+    "headline_font": "Bebas Neue",
+    "label_font": "Oswald",
+    "note": "Bebas Neue is single-weight; Oswald for labels, tags, ghost words. Source: brand-dave:brand (ChatGPT proposed Inter, overridden)."
+  },
+  "layout": {
+    "aspect_ratio": "16:9",
+    "width": 1280,
+    "height": 720,
+    "outer_safe_margin_px": 48,
+    "maximum_primary_focal_points": 2,
+    "maximum_headline_lines": 3,
+    "maximum_headline_words": 6
+  },
+  "identity": {
+    "preserve_presenter_identity": true,
+    "prefer_original_photo_compositing": true,
+    "allow_generated_pose_variations": true,
+    "require_identity_review_for_generated_faces": true
+  },
+  "text_policy": {
+    "default_render_mode": "post_composite",
+    "allow_model_generated_final_headline": false,
+    "allow_authentic_ui_text_in_screenshots": true,
+    "allow_model_generated_decorative_text": false
+  },
+  "source": "ChatGPT extraction 2026-09-27, palette + fonts reconciled with brand-dave:brand skill"
+}

@@ -1,0 +1,52 @@
+{
+  "id": "text_layer.contract.v1",
+  "version": "1.0",
+  "default": {
+    "render_mode": "post_composite",
+    "reason": "Exact spelling, consistent typography, editable headlines and predictable layout",
+    "font_family": "Bebas Neue",
+    "font_fallback": "Oswald",
+    "font_weight": 400,
+    "text_transform": "uppercase",
+    "text_color": "#342d2d",
+    "preferred_font_size_px": 88,
+    "minimum_font_size_px": 64,
+    "minimum_label_size_px": 28,
+    "maximum_headline_words": 6,
+    "maximum_headline_lines": 3,
+    "safe_margin_px": 48,
+    "mobile_preview": {
+      "width": 320,
+      "height": 180,
+      "require_legibility": true
+    }
+  },
+  "fields": {
+    "headline": "Primary thumbnail headline",
+    "alternates": "Alternative headlines for selection or testing",
+    "render_mode": "post_composite or model_generated",
+    "font": "Font family",
+    "weight": "Numeric font weight",
+    "size_px": "Target headline font size",
+    "minimum_size_px": "Minimum permitted headline font size",
+    "position": "Human-readable placement instruction",
+    "bbox": "Normalized text region [top,left,bottom,right]",
+    "safe_margin_px": "Minimum distance from canvas edges",
+    "color": "Headline color",
+    "labels": "Supporting labels rendered separately",
+    "callout": "Optional explanatory annotation"
+  },
+  "exceptions": {
+    "authentic_screenshot_text": "Preserve text already present in authentic screenshots",
+    "model_generated_text": "Only permit for experimental designs; not final production headlines",
+    "tiny_interface_text": "May be simplified or omitted if illegible"
+  },
+  "validation": {
+    "headline_fits_bbox": true,
+    "headline_does_not_cover_hero": true,
+    "headline_does_not_cover_critical_ui": true,
+    "spelling_verified": true,
+    "mobile_preview_checked": true,
+    "reduce_words_before_reducing_font_size": true
+  }
+}

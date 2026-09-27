@@ -1,0 +1,157 @@
+{
+  "id": "d01.a2",
+  "version": "1.0",
+  "video": {
+    "id": "D01",
+    "brand_id": "brand.appydave.light.v1",
+    "topic": "FliVideo recording and automation",
+    "working_title": "The Apps and Agents I Use to Automate My YouTube",
+    "audience": "Creators who film themselves",
+    "promise": "Show how custom applications and agents organize recording, transcripts and editing",
+    "fact_sheet": "/Users/davidcruwys/dev/ad/flivideo/docs/briefs/thumb-research-2026-09-26/d01-factsheet.md"
+  },
+  "creative": {
+    "recipe": "creator_interface",
+    "story": "The presenter demonstrates the system he built",
+    "hero": "Presenter",
+    "secondary_hero": "FliHub recording interface",
+    "emotion": "Confidence and thoughtful curiosity",
+    "visual_metaphor": "Human creator in control of software",
+    "style": "Premium editorial software photography",
+    "reference_tile": "D01 A2"
+  },
+  "presenter": {
+    "library_id": "presenter.appydave.v1",
+    "portrait_role": "thinking",
+    "file_id": null,
+    "preferred_asset": "headshot-appydave-103.png",
+    "expression": "Thoughtful and approachable",
+    "pose": "Hand near chin",
+    "gesture_status": "Thinking gesture requires a reviewed variation",
+    "framing": "Medium close-up",
+    "position": "Right foreground",
+    "bbox": [
+      100,
+      520,
+      960,
+      980
+    ],
+    "lighting": "Soft neutral frontal light with subtle warm edge"
+  },
+  "assets": {
+    "required": [
+      {
+        "id": "presenter",
+        "source": "portrait_library",
+        "role": "thinking",
+        "status": "provided_without_requested_gesture"
+      },
+      {
+        "id": "interface",
+        "source": "<VIDEO_ASSETS_ROOT>/D01/flithub-inbox.png",
+        "status": "required"
+      }
+    ],
+    "optional": [
+      "Authentic video-preview frame",
+      "Transcript-status screenshot",
+      "Recording waveform"
+    ],
+    "asset_requirements": {
+      "preserve_interface_structure": true,
+      "preserve_real_product_identity": true,
+      "do_not_fabricate_real_recording_data": true
+    }
+  },
+  "composition": {
+    "canvas": [
+      1280,
+      720
+    ],
+    "background": "Cream studio with a large contained software window",
+    "layout": "Interface left and center, presenter right",
+    "primary_region": {
+      "bbox": [
+        100,
+        520,
+        960,
+        980
+      ],
+      "content": "Presenter foreground"
+    },
+    "secondary_region": {
+      "bbox": [
+        120,
+        30,
+        860,
+        710
+      ],
+      "content": "Authentic FliHub inbox interface"
+    },
+    "graphics": [
+      "Recording list",
+      "Video preview",
+      "Transcript status indicators",
+      "Small waveform"
+    ],
+    "labels": [
+      "FliHub",
+      "Transcript"
+    ],
+    "lighting": "Natural portrait lighting with subtle UI highlights",
+    "focal_order": [
+      "Presenter",
+      "Transcript indicators",
+      "Software interface"
+    ],
+    "depth": "Presenter overlaps contained interface slightly"
+  },
+  "rendering": {
+    "config_id": "rendering.thumbnail.v1",
+    "mode": "authentic_interface_composite",
+    "generate_background": true,
+    "composite_presenter": true,
+    "composite_interface": true,
+    "generate_final_text_in_image": false,
+    "force_light_mode": true
+  },
+  "text_layer": {
+    "headline": "MY AI VIDEO SYSTEM",
+    "alternates": [
+      "I BUILT MY OWN TOOLS",
+      "AUTOMATED YOUTUBE"
+    ],
+    "render_mode": "post_composite",
+    "font": "Bebas Neue",
+    "weight": 400,
+    "size_px": 76,
+    "minimum_size_px": 64,
+    "position": "Upper left",
+    "bbox": [
+      20,
+      35,
+      190,
+      490
+    ],
+    "safe_margin_px": 48,
+    "color": "#342d2d",
+    "label_policy": "Preserve authentic interface labels"
+  },
+  "variations": {
+    "count": 3,
+    "strategies": [
+      "Presenter foreground with recording inbox",
+      "Presenter beside transcript-status indicators",
+      "Presenter with recording inbox and enlarged video preview"
+    ]
+  },
+  "quality_checks": [
+    "Presenter identity preserved",
+    "Software interface accurately represented",
+    "Transcript status indicators visible",
+    "No invented recording metadata",
+    "Headline does not cover important UI",
+    "Cream remains dominant background",
+    "Readable at mobile size"
+  ]
+}

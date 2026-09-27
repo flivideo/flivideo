@@ -1,0 +1,163 @@
+{
+  "id": "d02.a1",
+  "version": "1.0",
+  "video": {
+    "id": "D02",
+    "brand_id": "brand.appydave.light.v1",
+    "topic": "Cutty audio cleanup",
+    "working_title": "I Built an AI Agent That Cleans My Audio",
+    "audience": "Creators recording in noisy environments",
+    "promise": "Compare audio cleanup profiles and reduce unwanted noise",
+    "fact_sheet": "/Users/davidcruwys/dev/ad/flivideo/docs/briefs/thumb-research-2026-09-26/d02-factsheet.md"
+  },
+  "creative": {
+    "recipe": "diagnostic_transformation",
+    "story": "Noisy recording becomes cleaner audio",
+    "hero": "Presenter reacting to recording noise",
+    "secondary_hero": "Three waveform profiles",
+    "emotion": "Surprise and discovery",
+    "visual_metaphor": "Visible noise reduction",
+    "style": "Editorial technical demonstration",
+    "reference_tile": "D02 A1"
+  },
+  "presenter": {
+    "library_id": "presenter.appydave.v1",
+    "portrait_role": "surprised",
+    "file_id": null,
+    "preferred_asset": "headshot-appydave-23.png",
+    "expression": "Wide-eyed, reacting to the problem",
+    "pose": "One finger near lips",
+    "gesture_status": "Requires reviewed variation",
+    "framing": "Medium close-up",
+    "position": "Left",
+    "bbox": [
+      180,
+      30,
+      970,
+      510
+    ],
+    "lighting": "Soft natural studio light with warm edge"
+  },
+  "assets": {
+    "required": [
+      {
+        "id": "presenter",
+        "source": "portrait_library",
+        "role": "surprised",
+        "status": "provided"
+      },
+      {
+        "id": "waveforms",
+        "source": "<VIDEO_ASSETS_ROOT>/D02/audio-profile-waveforms/",
+        "status": "required",
+        "preferred": "Authentic comparison profiles"
+      }
+    ],
+    "optional": [
+      "Fan photograph",
+      "Air-conditioner photograph",
+      "DeepFilterNet label"
+    ],
+    "asset_requirements": {
+      "authentic_waveforms_preferred": true,
+      "synthetic_waveforms_must_be_illustrative": true,
+      "do_not_invent_measured_improvement": true
+    }
+  },
+  "composition": {
+    "canvas": [
+      1280,
+      720
+    ],
+    "background": "Cream recording-room illustration with subtle fan and air-conditioner",
+    "layout": "Presenter left, waveform comparison right",
+    "primary_region": {
+      "bbox": [
+        170,
+        20,
+        970,
+        520
+      ],
+      "content": "Large presenter reacting to noisy recording"
+    },
+    "secondary_region": {
+      "bbox": [
+        160,
+        530,
+        900,
+        960
+      ],
+      "content": "Three vertically stacked waveform panels"
+    },
+    "graphics": [
+      "Contained fan",
+      "Air-conditioner",
+      "Raw red waveform",
+      "Levelled amber waveform",
+      "Denoised teal waveform"
+    ],
+    "labels": [
+      "RAW",
+      "LEVELLED",
+      "DENOISED"
+    ],
+    "lighting": "Soft warm room lighting",
+    "focal_order": [
+      "Presenter",
+      "Waveform comparison",
+      "Noise sources"
+    ]
+  },
+  "rendering": {
+    "config_id": "rendering.thumbnail.v1",
+    "mode": "portrait_and_waveform_composite",
+    "generate_background": true,
+    "composite_presenter": true,
+    "render_waveforms_deterministically": true,
+    "generate_final_text_in_image": false,
+    "force_light_mode": true
+  },
+  "text_layer": {
+    "headline": "FANS ON. STILL CLEAN.",
+    "alternates": [
+      "CLEAN AUDIO. NO STUDIO.",
+      "I FIXED MY AUDIO"
+    ],
+    "render_mode": "post_composite",
+    "font": "Bebas Neue",
+    "weight": 400,
+    "size_px": 72,
+    "minimum_size_px": 64,
+    "position": "Upper left",
+    "bbox": [
+      20,
+      35,
+      170,
+      920
+    ],
+    "safe_margin_px": 48,
+    "color": "#342d2d",
+    "labels": [
+      "RAW",
+      "LEVELLED",
+      "DENOISED"
+    ]
+  },
+  "variations": {
+    "count": 3,
+    "strategies": [
+      "Presenter with three waveform profiles",
+      "Noisy room with prominent cleaned waveform",
+      "Raw versus denoised waveform comparison"
+    ]
+  },
+  "quality_checks": [
+    "Presenter identity preserved",
+    "Three profiles distinguishable",
+    "Red indicates the problem",
+    "Teal indicates the cleaned result",
+    "Waveforms not represented as measured data unless authentic",
+    "Dark panels occupy limited canvas area",
+    "Headline readable at 320x180"
+  ]
+}

@@ -1,0 +1,167 @@
+{
+  "id": "d02.a3",
+  "version": "1.0",
+  "video": {
+    "id": "D02",
+    "brand_id": "brand.appydave.light.v1",
+    "topic": "Detecting potentially clipped words",
+    "working_title": "I Built an AI Agent That Cleans My Audio",
+    "audience": "Creators frustrated by automatic editing errors",
+    "promise": "Show how Cutty identifies words that may have been clipped",
+    "fact_sheet": "/Users/davidcruwys/dev/ad/flivideo/docs/briefs/thumb-research-2026-09-26/d02-factsheet.md"
+  },
+  "creative": {
+    "recipe": "diagnostic_warning",
+    "story": "The agent catches an audio problem before it is missed",
+    "hero": "Presenter listening",
+    "secondary_hero": "Waveform with red warning marker",
+    "emotion": "Concern and focused attention",
+    "visual_metaphor": "An interrupted waveform",
+    "style": "Clean technical editorial photography",
+    "reference_tile": "D02 A3"
+  },
+  "presenter": {
+    "library_id": "presenter.appydave.v1",
+    "portrait_role": "listening",
+    "file_id": null,
+    "fallback_portrait_role": "thinking",
+    "preferred_fallback_asset": "headshot-appydave-103.png",
+    "expression": "Concerned and attentive",
+    "pose": "One hand cupped around ear",
+    "gesture_status": "Requires new photograph or reviewed variation",
+    "framing": "Medium close-up",
+    "position": "Left",
+    "bbox": [
+      130,
+      30,
+      960,
+      520
+    ],
+    "lighting": "Neutral editorial portrait lighting"
+  },
+  "assets": {
+    "required": [
+      {
+        "id": "presenter",
+        "source": "portrait_library",
+        "role": "listening",
+        "status": "missing"
+      },
+      {
+        "id": "waveform",
+        "source": "<VIDEO_ASSETS_ROOT>/D02/clipped-word-example.png",
+        "status": "required"
+      }
+    ],
+    "optional": [
+      "Authentic audio-profile screenshot",
+      "Approved Cutty icon"
+    ],
+    "asset_requirements": {
+      "red_marker_must_represent_potential_clipping": true,
+      "do_not_claim_confirmed_clipping_without_evidence": true
+    }
+  },
+  "composition": {
+    "canvas": [
+      1280,
+      720
+    ],
+    "background": "Cream editorial background",
+    "layout": "Listening presenter left, diagnostic comparison right",
+    "primary_region": {
+      "bbox": [
+        130,
+        20,
+        960,
+        530
+      ],
+      "content": "Presenter listening intently"
+    },
+    "secondary_region": {
+      "bbox": [
+        170,
+        550,
+        510,
+        970
+      ],
+      "content": "Upper waveform with red clipping marker"
+    },
+    "supporting_region": {
+      "bbox": [
+        550,
+        550,
+        880,
+        970
+      ],
+      "content": "Lower comparison waveform with teal confirmation icon"
+    },
+    "graphics": [
+      "Red vertical warning marker",
+      "Warning icon",
+      "Two waveform panels",
+      "Teal confirmation symbol"
+    ],
+    "labels": [
+      "WORD MAY BE CLIPPED"
+    ],
+    "lighting": "Soft neutral studio lighting",
+    "focal_order": [
+      "Listening presenter",
+      "Red warning marker",
+      "Waveform comparison"
+    ]
+  },
+  "rendering": {
+    "config_id": "rendering.thumbnail.v1",
+    "mode": "portrait_plus_diagnostic_composite",
+    "generate_background": true,
+    "composite_presenter": true,
+    "render_waveforms_deterministically": true,
+    "generate_final_text_in_image": false,
+    "force_light_mode": true
+  },
+  "text_layer": {
+    "headline": "IT ATE YOUR WORDS",
+    "alternates": [
+      "AI CUT MY WORDS",
+      "CATCH CLIPPED WORDS"
+    ],
+    "render_mode": "post_composite",
+    "font": "Bebas Neue",
+    "weight": 400,
+    "size_px": 76,
+    "minimum_size_px": 64,
+    "position": "Upper left",
+    "bbox": [
+      20,
+      35,
+      165,
+      920
+    ],
+    "safe_margin_px": 48,
+    "color": "#342d2d",
+    "callout": {
+      "text": "WORD MAY BE CLIPPED",
+      "position": "Above warning marker",
+      "minimum_size_px": 28
+    }
+  },
+  "variations": {
+    "count": 3,
+    "strategies": [
+      "Listening presenter and warning marker",
+      "Large interrupted waveform with small presenter",
+      "Problem waveform versus corrected waveform"
+    ]
+  },
+  "quality_checks": [
+    "Presenter identity preserved",
+    "Red marker clearly visible",
+    "Warning described as potential clipping",
+    "Waveforms authentic or explicitly illustrative",
+    "No unsupported claims about third-party editors",
+    "Light background dominant",
+    "Readable at mobile size"
+  ]
+}

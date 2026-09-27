@@ -1,0 +1,145 @@
+{
+  "schema_version": "1.0",
+  "description": "Portable specification for one reproducible YouTube thumbnail",
+  "id": "Unique thumbnail specification identifier",
+  "version": "Version of this individual thumbnail specification",
+  "video": {
+    "id": "Unique video or project identifier",
+    "brand_id": "Reference to external brand configuration",
+    "topic": "Actual subject of the video",
+    "working_title": "Current video title, which may be unapproved",
+    "audience": "Intended viewers",
+    "promise": "What the video genuinely delivers"
+  },
+  "creative": {
+    "recipe": "Identifier from the reusable recipe catalogue",
+    "story": "One-sentence visual story",
+    "hero": "Primary visual subject",
+    "secondary_hero": "Supporting visual subject, if needed",
+    "emotion": "Intended emotional tone",
+    "visual_metaphor": "Concrete visual representation of the story",
+    "style": "Photographic or illustrative treatment",
+    "reference_tile": "Optional identifier of the approved visual reference"
+  },
+  "presenter": {
+    "library_id": "External presenter-library identifier",
+    "portrait_role": "Desired expression or portrait category",
+    "file_id": "Optional exact external asset identifier or null",
+    "preferred_asset": "Preferred filename from the library",
+    "visible": "Boolean indicating whether the presenter appears",
+    "expression": "Desired facial expression",
+    "pose": "Desired body position or gesture",
+    "gesture_status": "Available, missing or requires reviewed variation",
+    "framing": "Close-up, medium close-up or another camera framing",
+    "position": "Position within the thumbnail",
+    "bbox": "Normalized presenter bounding box [top,left,bottom,right]",
+    "lighting": "Lighting treatment",
+    "identity_policy": "Identity-preservation instructions"
+  },
+  "assets": {
+    "required": [
+      {
+        "id": "Logical asset identifier",
+        "source": "External asset path or library reference",
+        "role": "Purpose of the asset",
+        "status": "provided, required, missing or illustrative",
+        "file_id": "Optional external file identifier"
+      }
+    ],
+    "optional": [
+      "Additional useful asset identifiers or descriptions"
+    ],
+    "asset_requirements": {
+      "use_authentic_assets": "Whether authentic source assets are mandatory",
+      "allow_illustrative_assets": "Whether conceptual graphics may be generated",
+      "missing_asset_policy": "What to do when an asset cannot be resolved",
+      "accuracy_constraints": "Requirements preventing misleading imagery"
+    }
+  },
+  "composition": {
+    "canvas": [
+      1280,
+      720
+    ],
+    "background": "Description of the background and its visual treatment",
+    "layout": "Overall composition strategy",
+    "primary_region": {
+      "bbox": "Normalized bounding box",
+      "content": "Description of primary content"
+    },
+    "secondary_region": {
+      "bbox": "Normalized bounding box",
+      "content": "Description of secondary content"
+    },
+    "supporting_region": {
+      "bbox": "Optional normalized bounding box",
+      "content": "Optional supporting content"
+    },
+    "graphics": [
+      "List of visual graphics and annotations"
+    ],
+    "labels": [
+      "Exact supporting text labels"
+    ],
+    "lighting": "Scene-wide lighting treatment",
+    "focal_order": [
+      "First visual priority",
+      "Second visual priority",
+      "Third visual priority"
+    ],
+    "depth": "Optional layering and overlap instructions"
+  },
+  "rendering": {
+    "config_id": "Reference to external rendering configuration",
+    "mode": "Generation, compositing or hybrid rendering strategy",
+    "generate_background": "Boolean",
+    "composite_presenter": "Boolean",
+    "composite_authentic_assets": "Boolean",
+    "render_diagram_deterministically": "Boolean",
+    "generate_final_text_in_image": "Boolean",
+    "force_light_mode": "Boolean",
+    "maximum_major_elements": "Optional integer complexity limit"
+  },
+  "text_layer": {
+    "headline": "Exact proposed thumbnail headline",
+    "alternates": [
+      "Alternative headline one",
+      "Alternative headline two"
+    ],
+    "render_mode": "post_composite",
+    "font": "Bebas Neue",
+    "weight": 400,
+    "size_px": 88,
+    "minimum_size_px": 64,
+    "position": "Human-readable headline position",
+    "bbox": "Normalized headline bounding box",
+    "safe_margin_px": 48,
+    "color": "#342d2d",
+    "labels": [
+      "Optional supporting labels"
+    ],
+    "callout": {
+      "text": "Optional callout wording",
+      "position": "Optional callout placement",
+      "minimum_size_px": 28
+    }
+  },
+  "variations": {
+    "count": 3,
+    "strategies": [
+      "First controlled creative variation",
+      "Second controlled creative variation",
+      "Third controlled creative variation"
+    ]
+  },
+  "quality_checks": [
+    "Presenter identity preserved",
+    "Visual story matches the video",
+    "Required assets resolved",
+    "Technical claims supported",
+    "Brand rules followed",
+    "Text spelling verified",
+    "Mobile-size readability confirmed",
+    "Output reviewed before publication"
+  ]
+}

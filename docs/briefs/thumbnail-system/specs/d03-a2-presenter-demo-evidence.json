@@ -1,0 +1,170 @@
+{
+  "id": "d03.a2",
+  "version": "1.0",
+  "video": {
+    "id": "D03",
+    "brand_id": "brand.appydave.light.v1",
+    "topic": "Presenter tracking demonstrated on Thai-language footage",
+    "working_title": "AI That Frames the Presenter",
+    "audience": "Creators interested in automated visual editing",
+    "promise": "Show tracking and graphic placement on footage of a Thai-speaking presenter",
+    "fact_sheet": "/Users/davidcruwys/dev/ad/flivideo/docs/briefs/thumb-research-2026-09-26/d03-factsheet.md"
+  },
+  "creative": {
+    "recipe": "presenter_demo_evidence",
+    "story": "The creator introduces a real example of the technology working",
+    "hero": "Tracked demo presenter",
+    "secondary_hero": "AppyDave introducing the demonstration",
+    "emotion": "Confidence and discovery",
+    "visual_metaphor": "A presenter surrounded by correctly positioned graphics",
+    "style": "Clean editorial technology demonstration",
+    "reference_tile": "D03 A2"
+  },
+  "presenter": {
+    "library_id": "presenter.appydave.v1",
+    "portrait_role": "confident",
+    "file_id": null,
+    "preferred_asset": "headshot-appydave-15.png",
+    "expression": "Friendly smile",
+    "pose": "Looking toward or pointing at demonstration",
+    "gesture_status": "Pointing requires reviewed variation",
+    "framing": "Medium close-up",
+    "position": "Left",
+    "bbox": [
+      180,
+      20,
+      960,
+      400
+    ],
+    "lighting": "Soft natural editorial lighting"
+  },
+  "assets": {
+    "required": [
+      {
+        "id": "presenter",
+        "source": "portrait_library",
+        "role": "confident",
+        "status": "provided"
+      },
+      {
+        "id": "demo_presenter",
+        "source": "<VIDEO_ASSETS_ROOT>/D03/thai-presenter-frame.png",
+        "status": "required",
+        "identity": "Unknown",
+        "must_use_authentic_footage": true
+      }
+    ],
+    "optional": [
+      "Approved graphic overlays from demonstration",
+      "Authentic detection coordinates",
+      "Thai-language audio transcript"
+    ],
+    "asset_requirements": {
+      "do_not_invent_demo_presenter_identity": true,
+      "do_not_replace_demo_presenter_with_appydave": true,
+      "use_authentic_demo_frame": true
+    }
+  },
+  "composition": {
+    "canvas": [
+      1280,
+      720
+    ],
+    "background": "Cream editorial canvas",
+    "layout": "AppyDave left, tracked presenter right",
+    "primary_region": {
+      "bbox": [
+        180,
+        20,
+        960,
+        400
+      ],
+      "content": "AppyDave introducing the demonstration"
+    },
+    "secondary_region": {
+      "bbox": [
+        150,
+        470,
+        930,
+        930
+      ],
+      "content": "Authentic Thai-speaking presenter with tracking box"
+    },
+    "supporting_region": {
+      "bbox": [
+        250,
+        400,
+        800,
+        980
+      ],
+      "content": "Small graphic overlays positioned around tracked presenter"
+    },
+    "graphics": [
+      "Yellow face-detection rectangle",
+      "N/S/E/W indicators",
+      "Small graphic overlay examples",
+      "Small Thai flag icon if appropriate"
+    ],
+    "labels": [
+      "N",
+      "S",
+      "E",
+      "W"
+    ],
+    "lighting": "Consistent neutral editorial treatment",
+    "focal_order": [
+      "Tracked demo presenter",
+      "Tracking geometry",
+      "AppyDave"
+    ]
+  },
+  "rendering": {
+    "config_id": "rendering.thumbnail.v1",
+    "mode": "authentic_demo_frame_composite",
+    "generate_background": true,
+    "composite_presenter": true,
+    "composite_authentic_demo_frame": true,
+    "render_tracking_geometry_deterministically": true,
+    "generate_final_text_in_image": false,
+    "force_light_mode": true
+  },
+  "text_layer": {
+    "headline": "AI TRACKS THIS PRESENTER",
+    "alternates": [
+      "WATCH THE GRAPHICS MOVE",
+      "TRACKING IN ACTION"
+    ],
+    "render_mode": "post_composite",
+    "font": "Bebas Neue",
+    "weight": 400,
+    "size_px": 72,
+    "minimum_size_px": 64,
+    "position": "Upper left",
+    "bbox": [
+      20,
+      35,
+      165,
+      900
+    ],
+    "safe_margin_px": 48,
+    "color": "#342d2d",
+    "label_policy": "Render directional labels with compositor"
+  },
+  "variations": {
+    "count": 3,
+    "strategies": [
+      "Creator introducing tracked presenter",
+      "Tracked presenter with creator inset",
+      "Tracked presenter with emphasized graphic safe zones"
+    ]
+  },
+  "quality_checks": [
+    "Authentic demo footage used",
+    "Demo presenter identity not invented",
+    "No unsupported universal-language claim",
+    "Tracking geometry correctly positioned",
+    "Graphic overlays avoid presenter",
+    "Light-mode compliance",
+    "Mobile readability"
+  ]
+}

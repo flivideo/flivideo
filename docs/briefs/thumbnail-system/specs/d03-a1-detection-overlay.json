@@ -1,0 +1,164 @@
+{
+  "id": "d03.a1",
+  "version": "1.0",
+  "video": {
+    "id": "D03",
+    "brand_id": "brand.appydave.light.v1",
+    "topic": "Cutty presenter tracking",
+    "working_title": "I Taught AI Where My Face Is",
+    "audience": "Creators using video overlays",
+    "promise": "Explain how an agent finds safe positions for graphics around a presenter",
+    "fact_sheet": "/Users/davidcruwys/dev/ad/flivideo/docs/briefs/thumb-research-2026-09-26/d03-factsheet.md"
+  },
+  "creative": {
+    "recipe": "detection_overlay",
+    "story": "AI identifies the presenter and understands surrounding space",
+    "hero": "Presenter inside detection box",
+    "secondary_hero": "Four directional quadrants",
+    "emotion": "Discovery and enthusiasm",
+    "visual_metaphor": "Computer vision made visible",
+    "style": "Editorial photography with technical annotation",
+    "reference_tile": "D03 A1"
+  },
+  "presenter": {
+    "library_id": "presenter.appydave.v1",
+    "portrait_role": "surprised",
+    "file_id": null,
+    "preferred_asset": "headshot-appydave-23.png",
+    "expression": "Wide eyes and open mouth",
+    "pose": "Facing camera, optionally pointing toward face-detection box",
+    "gesture_status": "Pointing requires reviewed variation",
+    "framing": "Large medium close-up",
+    "position": "Center",
+    "bbox": [
+      150,
+      260,
+      980,
+      740
+    ],
+    "lighting": "Soft frontal light with subtle warm rim"
+  },
+  "assets": {
+    "required": [
+      {
+        "id": "presenter",
+        "source": "portrait_library",
+        "role": "surprised",
+        "status": "provided"
+      }
+    ],
+    "optional": [
+      "Authentic face-detection output",
+      "Approved Cutty icon"
+    ],
+    "asset_requirements": {
+      "tracking_overlay_can_be_illustrative": true,
+      "do_not_present_static_mockup_as_actual_tracking_output": true
+    }
+  },
+  "composition": {
+    "canvas": [
+      1280,
+      720
+    ],
+    "background": "Cream studio background with restrained geometric annotations",
+    "layout": "Centered presenter with tracking overlay",
+    "primary_region": {
+      "bbox": [
+        150,
+        260,
+        980,
+        740
+      ],
+      "content": "Large presenter portrait"
+    },
+    "secondary_region": {
+      "bbox": [
+        190,
+        290,
+        720,
+        710
+      ],
+      "content": "Yellow rectangular detection box around head"
+    },
+    "supporting_region": {
+      "bbox": [
+        150,
+        170,
+        860,
+        830
+      ],
+      "content": "Four directional quadrant labels surrounding presenter"
+    },
+    "graphics": [
+      "Yellow detection rectangle",
+      "Subtle dashed outer tracking boundary",
+      "Four directional labels",
+      "Thin measurement lines"
+    ],
+    "labels": [
+      "N",
+      "S",
+      "E",
+      "W"
+    ],
+    "lighting": "Warm editorial portrait lighting",
+    "focal_order": [
+      "Presenter face",
+      "Detection box",
+      "Directional labels"
+    ]
+  },
+  "rendering": {
+    "config_id": "rendering.thumbnail.v1",
+    "mode": "portrait_plus_vector_overlay",
+    "generate_background": true,
+    "composite_presenter": true,
+    "render_tracking_geometry_deterministically": true,
+    "generate_final_text_in_image": false,
+    "force_light_mode": true
+  },
+  "text_layer": {
+    "headline": "AI KNOWS MY FACE",
+    "alternates": [
+      "GRAPHICS NEVER COVER ME",
+      "MY AI TRACKS ME"
+    ],
+    "render_mode": "post_composite",
+    "font": "Bebas Neue",
+    "weight": 400,
+    "size_px": 76,
+    "minimum_size_px": 64,
+    "position": "Upper left",
+    "bbox": [
+      20,
+      35,
+      175,
+      470
+    ],
+    "safe_margin_px": 48,
+    "color": "#342d2d",
+    "directional_labels": {
+      "font_weight": 900,
+      "size_px": 44,
+      "color": "#c8841a"
+    }
+  },
+  "variations": {
+    "count": 3,
+    "strategies": [
+      "Centered presenter with tracking quadrants",
+      "Offset presenter with emphasized detection box",
+      "Presenter with tracking boundary and one highlighted safe zone"
+    ]
+  },
+  "quality_checks": [
+    "Presenter identity preserved",
+    "Detection box follows face position",
+    "N/S/E/W labels correctly positioned",
+    "Headline does not obstruct face",
+    "Tracking geometry visually understandable",
+    "Light-mode compliance",
+    "Mobile readability"
+  ]
+}

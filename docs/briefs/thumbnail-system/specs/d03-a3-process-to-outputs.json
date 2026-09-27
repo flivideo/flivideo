@@ -1,0 +1,168 @@
+{
+  "id": "d03.a3",
+  "version": "1.0",
+  "video": {
+    "id": "D03",
+    "brand_id": "brand.appydave.light.v1",
+    "topic": "Automated graphic placement around presenters",
+    "working_title": "Cutty Presenter Tracking",
+    "audience": "Creators and developers building automated video workflows",
+    "promise": "Show how tracking data can identify positions for future automated overlays",
+    "fact_sheet": "/Users/davidcruwys/dev/ad/flivideo/docs/briefs/thumb-research-2026-09-26/d03-factsheet.md"
+  },
+  "creative": {
+    "recipe": "process_to_outputs",
+    "story": "Frame-by-frame tracking produces candidate graphic positions",
+    "hero": "Sequence of tracked presenter frames",
+    "secondary_hero": "Graphic placement outputs",
+    "emotion": "Technical clarity",
+    "visual_metaphor": "Tracked frames feeding a placement system",
+    "style": "Clean technical editorial diagram",
+    "reference_tile": "D03 A3"
+  },
+  "presenter": {
+    "library_id": "presenter.appydave.v1",
+    "portrait_role": "confident",
+    "file_id": null,
+    "preferred_asset": "headshot-appydave-15.png",
+    "visible": true,
+    "expression": "Natural conversational expression",
+    "pose": "Several successive frames showing movement",
+    "framing": "Small repeated video-frame portraits",
+    "position": "Upper center",
+    "bbox": [
+      200,
+      80,
+      650,
+      720
+    ],
+    "note": "Prefer authentic consecutive video frames over repeating one photograph"
+  },
+  "assets": {
+    "required": [
+      {
+        "id": "tracking_frames",
+        "source": "<VIDEO_ASSETS_ROOT>/D03/tracking-frame-sequence/",
+        "status": "required",
+        "preferred": "Authentic consecutive video frames"
+      }
+    ],
+    "optional": [
+      "Authentic tracking coordinates",
+      "Graphic placement examples",
+      "Approved Cutty icon",
+      "Editing timeline"
+    ],
+    "asset_requirements": {
+      "frame_sequence_must_be_temporally_consistent": true,
+      "illustrative_frames_must_not_be_presented_as_real_output": true,
+      "do_not_claim_finished_automated_overlay_capability": true
+    }
+  },
+  "composition": {
+    "canvas": [
+      1280,
+      720
+    ],
+    "background": "Cream technical editorial canvas",
+    "layout": "Tracked frame sequence flowing toward graphic outputs",
+    "primary_region": {
+      "bbox": [
+        210,
+        50,
+        640,
+        730
+      ],
+      "content": "Four successive presenter frames with tracking boxes"
+    },
+    "secondary_region": {
+      "bbox": [
+        240,
+        750,
+        680,
+        960
+      ],
+      "content": "Three candidate graphic output icons"
+    },
+    "supporting_region": {
+      "bbox": [
+        700,
+        60,
+        920,
+        940
+      ],
+      "content": "Simplified editing timeline"
+    },
+    "graphics": [
+      "Four presenter frames",
+      "Yellow detection rectangles",
+      "Directional labels",
+      "Amber arrows",
+      "Image icon",
+      "Text icon",
+      "Video icon",
+      "Editing timeline"
+    ],
+    "labels": [
+      "N",
+      "S",
+      "E",
+      "W"
+    ],
+    "lighting": "Neutral and consistent across all video frames",
+    "focal_order": [
+      "Tracked frame sequence",
+      "Output arrows",
+      "Graphic icons",
+      "Timeline"
+    ]
+  },
+  "rendering": {
+    "config_id": "rendering.thumbnail.v1",
+    "mode": "deterministic_workflow_composite",
+    "generate_background": false,
+    "composite_authentic_frames": true,
+    "render_diagram_deterministically": true,
+    "generate_final_text_in_image": false,
+    "force_light_mode": true
+  },
+  "text_layer": {
+    "headline": "GRAPHICS FIND THEIR PLACE",
+    "alternates": [
+      "AI FINDS THE SPACE",
+      "OVERLAYS ON AUTOPILOT"
+    ],
+    "render_mode": "post_composite",
+    "font": "Bebas Neue",
+    "weight": 400,
+    "size_px": 72,
+    "minimum_size_px": 64,
+    "position": "Upper left",
+    "bbox": [
+      20,
+      35,
+      170,
+      900
+    ],
+    "safe_margin_px": 48,
+    "color": "#342d2d",
+    "label_policy": "Render all tracking labels and output icons separately"
+  },
+  "variations": {
+    "count": 3,
+    "strategies": [
+      "Four tracked frames feeding three graphic outputs",
+      "Large tracking sequence with small timeline",
+      "One highlighted safe zone feeding a graphic placement example"
+    ]
+  },
+  "quality_checks": [
+    "Tracking sequence temporally consistent",
+    "Directional labels correctly positioned",
+    "Candidate positions not misrepresented as completed automation",
+    "Graphic outputs visually distinct",
+    "Arrows indicate correct flow",
+    "Cream canvas dominant",
+    "Mobile readability"
+  ]
+}

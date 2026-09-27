@@ -1,0 +1,179 @@
+{
+  "id": "d01.a1",
+  "version": "1.0",
+  "video": {
+    "id": "D01",
+    "brand_id": "brand.appydave.light.v1",
+    "topic": "FliVideo creator automation tour",
+    "working_title": "The Apps and Agents I Use to Automate My YouTube",
+    "audience": "Human YouTubers and solo creators",
+    "promise": "A suite of custom apps and agents automates the production work around a human presenter",
+    "fact_sheet": "/Users/davidcruwys/dev/ad/flivideo/docs/briefs/thumb-research-2026-09-26/d01-factsheet.md"
+  },
+  "creative": {
+    "recipe": "creator_ecosystem",
+    "story": "One human creator built an interconnected production system",
+    "hero": "Presenter",
+    "secondary_hero": "FliVideo application ecosystem",
+    "emotion": "Surprise, curiosity and ownership",
+    "visual_metaphor": "Creator revealing his collection of tools",
+    "style": "Warm cinematic editorial technology",
+    "reference_tile": "D01 A1"
+  },
+  "presenter": {
+    "library_id": "presenter.appydave.v1",
+    "portrait_role": "surprised",
+    "file_id": null,
+    "preferred_asset": "headshot-appydave-23.png",
+    "expression": "Wide eyes and open mouth",
+    "pose": "Upper body facing camera, optionally pointing toward the application wall",
+    "gesture_status": "Pointing requires a new asset or reviewed variation",
+    "framing": "Medium close-up",
+    "position": "Right",
+    "bbox": [
+      60,
+      570,
+      970,
+      990
+    ],
+    "lighting": "Soft frontal portrait light with restrained warm rim",
+    "identity_policy": "Preserve original face and glasses"
+  },
+  "assets": {
+    "required": [
+      {
+        "id": "presenter",
+        "source": "portrait_library",
+        "role": "surprised",
+        "status": "provided"
+      },
+      {
+        "id": "app_tiles",
+        "source": "<VIDEO_ASSETS_ROOT>/D01/app-logos/",
+        "status": "required",
+        "items": [
+          "FliStudio",
+          "FliHub",
+          "FliCast",
+          "FliCut",
+          "Teletubby",
+          "Kyber Studio"
+        ]
+      }
+    ],
+    "optional": [
+      "Approved FliVideo logo",
+      "Authentic recording-timeline screenshot",
+      "Approved agent icon"
+    ],
+    "asset_requirements": {
+      "use_authentic_logos_when_available": true,
+      "invent_product_logos": false,
+      "mockup_policy": "Clearly mark conceptual UI as illustrative"
+    }
+  },
+  "composition": {
+    "canvas": [
+      1280,
+      720
+    ],
+    "background": "Cream editorial studio with subtle warm paper texture",
+    "layout": "Two-column hero and ecosystem",
+    "primary_region": {
+      "bbox": [
+        60,
+        570,
+        970,
+        990
+      ],
+      "content": "Large presenter cutout"
+    },
+    "secondary_region": {
+      "bbox": [
+        100,
+        40,
+        740,
+        550
+      ],
+      "content": "Six prominent application tiles in a structured grid"
+    },
+    "supporting_region": {
+      "bbox": [
+        760,
+        50,
+        920,
+        530
+      ],
+      "content": "Small sequence of video frames connected by an amber arrow"
+    },
+    "graphics": [
+      "Six application tiles",
+      "Simple recording timeline",
+      "One yellow directional arrow",
+      "Subtle contact shadows"
+    ],
+    "labels": [
+      "FliStudio",
+      "FliHub",
+      "FliCast",
+      "FliCut",
+      "Teletubby",
+      "Kyber Studio"
+    ],
+    "lighting": "Warm editorial studio lighting",
+    "focal_order": [
+      "Presenter",
+      "Application ecosystem",
+      "Headline"
+    ]
+  },
+  "rendering": {
+    "config_id": "rendering.thumbnail.v1",
+    "mode": "image_generation_plus_compositing",
+    "generate_background": true,
+    "composite_presenter": true,
+    "composite_authentic_logos": true,
+    "generate_final_text_in_image": false,
+    "force_light_mode": true,
+    "maximum_major_elements": 3
+  },
+  "text_layer": {
+    "headline": "I BUILT ALL THIS",
+    "alternates": [
+      "MY AI VIDEO SYSTEM",
+      "AUTOMATING MY YOUTUBE"
+    ],
+    "render_mode": "post_composite",
+    "font": "Bebas Neue",
+    "weight": 400,
+    "size_px": 80,
+    "minimum_size_px": 64,
+    "position": "Upper left",
+    "bbox": [
+      20,
+      35,
+      170,
+      550
+    ],
+    "safe_margin_px": 48,
+    "color": "#342d2d",
+    "label_policy": "Use authentic product names; render all labels with compositor"
+  },
+  "variations": {
+    "count": 3,
+    "strategies": [
+      "Surprised portrait with application wall",
+      "Confident portrait with simplified application wall",
+      "Presenter with application tiles and production timeline"
+    ]
+  },
+  "quality_checks": [
+    "Presenter identity preserved",
+    "Correct FliVideo application spelling",
+    "Authentic logos or clearly illustrative tiles",
+    "Light background",
+    "Readable application hierarchy",
+    "No unsupported claims about product capabilities",
+    "Mobile-size readability"
+  ]
+}

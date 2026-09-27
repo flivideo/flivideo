@@ -1,0 +1,160 @@
+{
+  "id": "d02.a2",
+  "version": "1.0",
+  "video": {
+    "id": "D02",
+    "brand_id": "brand.appydave.light.v1",
+    "topic": "Cutty audio-processing agent",
+    "working_title": "I Built an AI Agent That Cleans My Audio",
+    "audience": "Creators interested in automated editing",
+    "promise": "Show how an agent coordinates several audio-processing operations",
+    "fact_sheet": "/Users/davidcruwys/dev/ad/flivideo/docs/briefs/thumb-research-2026-09-26/d02-factsheet.md"
+  },
+  "creative": {
+    "recipe": "agent_pipeline_hero",
+    "story": "One agent coordinates multiple audio-processing steps",
+    "hero": "Illustrative Cutty robot",
+    "secondary_hero": "Audio-processing pipeline",
+    "emotion": "Friendly technical competence",
+    "visual_metaphor": "An assistant managing an audio production line",
+    "style": "Premium editorial product illustration",
+    "reference_tile": "D02 A2"
+  },
+  "presenter": {
+    "library_id": "presenter.appydave.v1",
+    "portrait_role": null,
+    "file_id": null,
+    "visible": false,
+    "reason": "Agent is the visual hero"
+  },
+  "assets": {
+    "required": [
+      {
+        "id": "cutty_character",
+        "source": "<BRAND_ASSETS_ROOT>/agents/cutty-approved.png",
+        "status": "missing",
+        "fallback": "Generate illustrative robot concept for approval"
+      }
+    ],
+    "optional": [
+      "FliCut logo",
+      "Approved audio-processing icons",
+      "Authentic processing diagram"
+    ],
+    "asset_requirements": {
+      "agent_character_requires_approval": true,
+      "do_not_claim_character_is_official_until_approved": true,
+      "processing_steps_must_match_fact_sheet": true
+    }
+  },
+  "composition": {
+    "canvas": [
+      1280,
+      720
+    ],
+    "background": "Warm cream with subtle yellow circular accent",
+    "layout": "Central robot with a horizontal processing flow",
+    "primary_region": {
+      "bbox": [
+        160,
+        350,
+        800,
+        650
+      ],
+      "content": "Friendly Cutty robot with small headphones"
+    },
+    "secondary_region": {
+      "bbox": [
+        300,
+        40,
+        650,
+        340
+      ],
+      "content": "Input audio and processing stages"
+    },
+    "output_region": {
+      "bbox": [
+        300,
+        680,
+        650,
+        960
+      ],
+      "content": "Clean output waveform"
+    },
+    "graphics": [
+      "Input audio icon",
+      "Separate audio",
+      "Denoise",
+      "Level",
+      "Check clipped words",
+      "Reattach",
+      "Amber directional arrows",
+      "Teal clean waveform"
+    ],
+    "labels": [
+      "CUTTY",
+      "DENOISE",
+      "LEVEL",
+      "CHECK WORDS"
+    ],
+    "lighting": "Soft studio product lighting",
+    "focal_order": [
+      "Cutty",
+      "Audio input and output",
+      "Processing steps"
+    ]
+  },
+  "rendering": {
+    "config_id": "rendering.thumbnail.v1",
+    "mode": "illustration_plus_deterministic_diagram",
+    "generate_background": true,
+    "generate_agent_concept_if_missing": true,
+    "render_diagram_separately": true,
+    "generate_final_text_in_image": false,
+    "force_light_mode": true
+  },
+  "text_layer": {
+    "headline": "ONE AGENT. FOUR FIXES.",
+    "alternates": [
+      "MEET CUTTY",
+      "MY AI AUDIO EDITOR"
+    ],
+    "render_mode": "post_composite",
+    "font": "Bebas Neue",
+    "weight": 400,
+    "size_px": 76,
+    "minimum_size_px": 64,
+    "position": "Upper center",
+    "bbox": [
+      20,
+      100,
+      160,
+      900
+    ],
+    "safe_margin_px": 48,
+    "color": "#342d2d",
+    "labels": [
+      "CUTTY",
+      "DENOISE",
+      "LEVEL",
+      "CHECK WORDS"
+    ]
+  },
+  "variations": {
+    "count": 3,
+    "strategies": [
+      "Robot centered between input and output",
+      "Robot beside simplified processing flow",
+      "Large clean waveform with smaller robot"
+    ]
+  },
+  "quality_checks": [
+    "Cutty character approved or clearly illustrative",
+    "Processing operations factually supported",
+    "Flow direction unambiguous",
+    "No invented performance measurements",
+    "Labels legible",
+    "Cream background dominant",
+    "Mobile readability"
+  ]
+}

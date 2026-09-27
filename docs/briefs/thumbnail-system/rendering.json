@@ -1,0 +1,57 @@
+{
+  "id": "rendering.thumbnail.v1",
+  "canvas": {
+    "width": 1280,
+    "height": 720,
+    "aspect_ratio": "16:9",
+    "coordinate_system": "normalized_1000",
+    "bbox_order": [
+      "top",
+      "left",
+      "bottom",
+      "right"
+    ]
+  },
+  "generation": {
+    "generate_one_thumbnail_per_job": true,
+    "contact_sheet_is_preview_only": true,
+    "generate_background_separately_when_useful": true,
+    "prefer_compositing_authentic_assets": true,
+    "allow_generated_supporting_graphics": true
+  },
+  "text_layer_defaults": {
+    "render_mode": "post_composite",
+    "font_family": "Bebas Neue",
+    "font_fallback": "Oswald",
+    "font_weight": 400,
+    "text_color": "#342d2d",
+    "preferred_font_size_px": 88,
+    "minimum_font_size_px": 64,
+    "minimum_label_size_px": 28,
+    "maximum_lines": 3,
+    "maximum_words": 6,
+    "safe_margin_px": 48,
+    "mobile_preview": {
+      "width": 320,
+      "height": 180,
+      "headline_must_remain_legible": true,
+      "reduce_word_count_before_font_size": true
+    }
+  },
+  "quality_checks": {
+    "required": [
+      "identity_preservation",
+      "factual_accuracy",
+      "light_mode_compliance",
+      "composition",
+      "text_accuracy",
+      "mobile_readability",
+      "asset_provenance"
+    ],
+    "manual_review": [
+      "Final creative approval",
+      "Generated facial variations",
+      "Unverified product representations"
+    ]
+  }
+}

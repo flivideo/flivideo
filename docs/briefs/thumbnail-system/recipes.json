@@ -1,0 +1,255 @@
+{
+  "catalogue_id": "thumbnail.recipes.v1",
+  "version": "1.0",
+  "recipes": [
+    {
+      "id": "creator_ecosystem",
+      "layout_family": "creator_showcase",
+      "story_shape": "One creator introduces a collection of interconnected tools or capabilities",
+      "layout": "Large presenter on one side; organized collection of product tiles on the other",
+      "presenter_role": "Surprised, confident or pointing",
+      "required_assets": [
+        "Approved presenter portrait",
+        "Product logos or screenshots"
+      ],
+      "typical_graphics": [
+        "Application tiles",
+        "Small icons",
+        "Connecting arrows",
+        "Simplified production timeline"
+      ],
+      "lighting": "Warm editorial portrait lighting",
+      "background": "Light brand canvas",
+      "when_not_to_use": [
+        "Single-feature demonstrations",
+        "Videos without a genuine collection of tools",
+        "Topics where application tiles would become illegible"
+      ],
+      "related_recipes": [
+        "creator_interface"
+      ]
+    },
+    {
+      "id": "creator_interface",
+      "layout_family": "creator_showcase",
+      "story_shape": "A human creator demonstrates or explains one specific software product",
+      "layout": "Large authentic interface with overlapping presenter portrait",
+      "presenter_role": "Thinking, confident or pointing",
+      "required_assets": [
+        "Approved presenter portrait",
+        "Authentic product screenshot"
+      ],
+      "typical_graphics": [
+        "Application interface",
+        "One highlighted feature",
+        "Subtle annotation"
+      ],
+      "lighting": "Neutral editorial portrait lighting",
+      "background": "Light brand canvas",
+      "when_not_to_use": [
+        "Products without usable screenshots",
+        "Complex interfaces that cannot be simplified",
+        "Stories where the software itself is not central"
+      ],
+      "related_recipes": [
+        "creator_ecosystem"
+      ]
+    },
+    {
+      "id": "creator_transformation",
+      "layout_family": "transformation",
+      "story_shape": "A human creator moves from a recognizable problem to a better working situation",
+      "layout": "Left-to-right before-and-after comparison with a prominent directional transition",
+      "presenter_role": "Concerned before; confident or enthusiastic after",
+      "required_assets": [
+        "Approved presenter portraits or reviewed variations",
+        "Problem illustration",
+        "Result illustration or authentic product imagery"
+      ],
+      "typical_graphics": [
+        "Before-and-after panels",
+        "Directional arrow",
+        "Contrasting equipment or software"
+      ],
+      "lighting": "Matched lighting between both scenes",
+      "background": "Light brand canvas",
+      "when_not_to_use": [
+        "Stories without a meaningful transformation",
+        "Cases where the result is unverified",
+        "Topics requiring a detailed technical explanation"
+      ],
+      "related_recipes": [
+        "diagnostic_transformation"
+      ]
+    },
+    {
+      "id": "diagnostic_transformation",
+      "layout_family": "transformation",
+      "story_shape": "A measurable or observable technical problem becomes a better technical result",
+      "layout": "Presenter on one side; stacked diagnostic comparisons on the other",
+      "presenter_role": "Surprised, concerned or explanatory",
+      "required_assets": [
+        "Presenter portrait",
+        "Authentic or explicitly illustrative diagnostic data"
+      ],
+      "typical_graphics": [
+        "Stacked comparison panels",
+        "Color-coded diagnostic traces",
+        "Before-and-after indicators"
+      ],
+      "lighting": "Neutral editorial lighting",
+      "background": "Light brand canvas",
+      "when_not_to_use": [
+        "Stories without comparable outputs",
+        "Cases where fabricated measurements might be mistaken for real data",
+        "Topics with no clear visual diagnostic"
+      ],
+      "related_recipes": [
+        "creator_transformation",
+        "diagnostic_warning"
+      ]
+    },
+    {
+      "id": "agent_pipeline_hero",
+      "layout_family": "pipeline",
+      "story_shape": "One agent or tool coordinates multiple processing operations",
+      "layout": "Central product or agent hero with simplified input-to-output flow",
+      "presenter_role": "Not required",
+      "required_assets": [
+        "Approved agent or product character",
+        "Verified process steps"
+      ],
+      "typical_graphics": [
+        "Input icon",
+        "Output icon",
+        "Directional arrows",
+        "Three to five process labels"
+      ],
+      "lighting": "Soft product illustration lighting",
+      "background": "Light brand canvas",
+      "when_not_to_use": [
+        "Agents without an approved visual identity",
+        "Pipelines too complicated to simplify accurately",
+        "Videos primarily about human experiences"
+      ],
+      "related_recipes": [
+        "process_to_outputs"
+      ]
+    },
+    {
+      "id": "diagnostic_warning",
+      "layout_family": "diagnostic_comparison",
+      "story_shape": "A tool detects or highlights a specific problem that the viewer should notice",
+      "layout": "Human reaction beside one dominant diagnostic warning",
+      "presenter_role": "Concerned, listening or surprised",
+      "required_assets": [
+        "Approved presenter portrait",
+        "Authentic or illustrative diagnostic graphic"
+      ],
+      "typical_graphics": [
+        "Warning marker",
+        "Highlighted problem area",
+        "Optional comparison panel"
+      ],
+      "lighting": "Neutral editorial lighting",
+      "background": "Light brand canvas",
+      "when_not_to_use": [
+        "Stories without a genuine detectable problem",
+        "Cases where warning graphics exaggerate the severity",
+        "Topics requiring several equally important explanations"
+      ],
+      "related_recipes": [
+        "diagnostic_transformation"
+      ]
+    },
+    {
+      "id": "detection_overlay",
+      "layout_family": "annotated_demonstration",
+      "story_shape": "A technical system identifies, measures or understands something visually",
+      "layout": "One large subject with a simple technical overlay",
+      "presenter_role": "Surprised, neutral or explanatory",
+      "required_assets": [
+        "Approved subject photograph",
+        "Verified overlay geometry or clearly illustrative annotations"
+      ],
+      "typical_graphics": [
+        "Detection rectangle",
+        "Directional markers",
+        "Measurement lines",
+        "Highlighted region"
+      ],
+      "lighting": "Clear neutral photography",
+      "background": "Light brand canvas",
+      "when_not_to_use": [
+        "Features that cannot be represented with simple annotations",
+        "Cases where the overlay would obscure the subject",
+        "Claims requiring proof that a static illustration cannot provide"
+      ],
+      "related_recipes": [
+        "presenter_demo_evidence"
+      ]
+    },
+    {
+      "id": "presenter_demo_evidence",
+      "layout_family": "annotated_demonstration",
+      "story_shape": "A creator introduces a real demonstration that provides evidence of a technical capability",
+      "layout": "Creator portrait beside an authentic demonstration frame",
+      "presenter_role": "Confident, explanatory or pointing",
+      "required_assets": [
+        "Approved creator portrait",
+        "Authentic demonstration screenshot or frame"
+      ],
+      "typical_graphics": [
+        "Highlighted demonstration region",
+        "One or two explanatory annotations",
+        "Small supporting icons"
+      ],
+      "lighting": "Consistent editorial treatment",
+      "background": "Light brand canvas",
+      "when_not_to_use": [
+        "Stories without authentic demonstration footage",
+        "Examples requiring unverified claims",
+        "Demonstrations too visually complicated for thumbnail scale"
+      ],
+      "related_recipes": [
+        "detection_overlay",
+        "creator_interface"
+      ]
+    },
+    {
+      "id": "process_to_outputs",
+      "layout_family": "process_visualization",
+      "story_shape": "A sequence of processing steps produces one or more visible outputs",
+      "layout": "Left-to-right sequence of simplified process frames feeding output icons",
+      "presenter_role": "Optional; repeated frames may replace a hero portrait",
+      "required_assets": [
+        "Authentic or illustrative process frames",
+        "Verified output types"
+      ],
+      "typical_graphics": [
+        "Repeated frames",
+        "Directional arrows",
+        "Output icons",
+        "Simplified timeline"
+      ],
+      "lighting": "Consistent across all frames",
+      "background": "Light brand canvas",
+      "when_not_to_use": [
+        "Processes that cannot be simplified visually",
+        "Stories without meaningful outputs",
+        "Topics where multiple small frames become illegible"
+      ],
+      "related_recipes": [
+        "agent_pipeline_hero"
+      ]
+    }
+  ],
+  "layout_families": [
+    "creator_showcase",
+    "transformation",
+    "pipeline",
+    "diagnostic_comparison",
+    "annotated_demonstration",
+    "process_visualization"
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "id": "presenter.appydave.v1",
+  "display_name": "AppyDave",
+  "library": {
+    "location": "portrait library: location TBD from portraits-rsch",
+    "root": "<PORTRAIT_LIBRARY_ROOT>",
+    "manifest": "<PORTRAIT_LIBRARY_ROOT>/manifest.json",
+    "interim_fallback_root": "/Volumes/T7/Sync/david-profile/ash-dave-2024-headshots/jpg-transparent/",
+    "interim_fallback_manifest": "/Volumes/T7/Sync/david-profile/ash-dave-2024-headshots/headshots-manifest.json",
+    "fallback_note": "T7 is an external drive; a missing path means unmounted, not deleted",
+    "asset_resolution_required": true
+  },
+  "identity_policy": {
+    "preserve_face": true,
+    "preserve_glasses": true,
+    "preserve_natural_age": true,
+    "preserve_hairstyle": true,
+    "do_not_beautify": true,
+    "do_not_reinvent_facial_structure": true,
+    "prefer_original_cutout": true
+  },
+  "portraits": {
+    "surprised": {
+      "path": "<PORTRAIT_LIBRARY_ROOT>/headshot-appydave-23.png",
+      "file_id": "headshot-appydave-23.png",
+      "status": "provided",
+      "expression": "Wide eyes, open mouth",
+      "clothing": "Light blue shirt",
+      "framing": "Upper body",
+      "suitable_for": [
+        "Unexpected results",
+        "Discovery",
+        "Warnings",
+        "Product demonstrations"
+      ],
+      "interim_path": "/Volumes/T7/Sync/david-profile/ash-dave-2024-headshots/jpg-transparent/headshot-appydave-23.png"
+    },
+    "confident": {
+      "path": "<PORTRAIT_LIBRARY_ROOT>/headshot-appydave-15.png",
+      "file_id": "headshot-appydave-15.png",
+      "status": "provided",
+      "expression": "Friendly smile",
+      "clothing": "Light blue shirt",
+      "framing": "Standing, approximately three-quarter body",
+      "pose": "One hand on hip",
+      "interim_path": "/Volumes/T7/Sync/david-profile/ash-dave-2024-headshots/jpg-transparent/headshot-appydave-15.png"
+    },
+    "thinking": {
+      "path": "<PORTRAIT_LIBRARY_ROOT>/headshot-appydave-103.png",
+      "file_id": "headshot-appydave-103.png",
+      "status": "provided",
+      "expression": "Restrained, conversational smile",
+      "clothing": "Dark shirt",
+      "framing": "Upper body",
+      "note": "Thinking gesture is not present in the original",
+      "interim_path": "/Volumes/T7/Sync/david-profile/ash-dave-2024-headshots/jpg-transparent/headshot-appydave-103.png"
+    },
+    "outdoor": {
+      "path": "<PORTRAIT_LIBRARY_ROOT>/david-3-elephant.jpg",
+      "file_id": "david-3-elephant.jpg",
+      "status": "provided",
+      "expression": "Natural conversational expression",
+      "framing": "Close selfie",
+      "environment": "Elephant sanctuary",
+      "interim_path": "/Users/davidcruwys/dev/ad/flivideo/docs/briefs/thumb-research-2026-09-26/david-3-elephant.jpg"
+    },
+    "pointing_left": {
+      "path": null,
+      "file_id": null,
+      "status": "missing",
+      "required_pose": "Presenter pointing toward the left"
+    },
+    "pointing_right": {
+      "path": null,
+      "file_id": null,
+      "status": "missing",
+      "required_pose": "Presenter pointing toward the right"
+    },
+    "concerned": {
+      "path": null,
+      "file_id": null,
+      "status": "missing"
+    },
+    "listening": {
+      "path": null,
+      "file_id": null,
+      "status": "missing",
+      "required_pose": "Presenter cupping one ear"
+    }
+  },
+  "fallback_policy": {
+    "missing_gesture": "Use an approved portrait and composite without changing the gesture, or generate a proposed variation for identity review",
+    "missing_expression": "Select the closest available natural expression",
+    "missing_file": "Report missing asset; do not substitute another person"
+  }
+}

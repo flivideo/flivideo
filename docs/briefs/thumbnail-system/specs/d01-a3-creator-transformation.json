@@ -1,0 +1,170 @@
+{
+  "id": "d01.a3",
+  "version": "1.0",
+  "video": {
+    "id": "D01",
+    "brand_id": "brand.appydave.light.v1",
+    "topic": "Automating human YouTube production",
+    "working_title": "The Apps and Agents I Use to Automate My YouTube",
+    "audience": "Creators overwhelmed by production work",
+    "promise": "Custom tools can simplify the work surrounding human video creation",
+    "fact_sheet": "/Users/davidcruwys/dev/ad/flivideo/docs/briefs/thumb-research-2026-09-26/d01-factsheet.md"
+  },
+  "creative": {
+    "recipe": "creator_transformation",
+    "story": "Production chaos becomes an organized automated workflow",
+    "hero": "Before-and-after presenter",
+    "secondary_hero": "Production equipment and software",
+    "emotion": "Frustration changing to enthusiasm",
+    "visual_metaphor": "Complexity transformed into simplicity",
+    "style": "Warm editorial before-and-after photography",
+    "reference_tile": "D01 A3"
+  },
+  "presenter": {
+    "library_id": "presenter.appydave.v1",
+    "portrait_role": "surprised",
+    "file_id": null,
+    "preferred_asset": "headshot-appydave-23.png",
+    "expression": "Left: concerned or overwhelmed; right: enthusiastic",
+    "pose": "Left: hand near head; right: pointing toward software",
+    "gesture_status": "Both gestures require reviewed variations",
+    "framing": "Two matched medium close-ups",
+    "position": "Left and right",
+    "bbox": [
+      90,
+      40,
+      950,
+      420
+    ],
+    "lighting": "Soft neutral lighting on both sides"
+  },
+  "assets": {
+    "required": [
+      {
+        "id": "presenter",
+        "source": "portrait_library",
+        "role": "surprised",
+        "status": "provided"
+      },
+      {
+        "id": "software",
+        "source": "<VIDEO_ASSETS_ROOT>/D01/approved-software-screenshot.png",
+        "status": "required"
+      }
+    ],
+    "optional": [
+      "Camera",
+      "Microphone",
+      "Recording checklist",
+      "Editing timeline"
+    ],
+    "asset_requirements": {
+      "before_scene_may_be_illustrative": true,
+      "after_scene_uses_authentic_software": true,
+      "avoid_unverified_performance_claims": true
+    }
+  },
+  "composition": {
+    "canvas": [
+      1280,
+      720
+    ],
+    "background": "Cream editorial background",
+    "layout": "Left-to-right transformation",
+    "primary_region": {
+      "bbox": [
+        130,
+        30,
+        930,
+        430
+      ],
+      "content": "Before: presenter with recording equipment and paperwork"
+    },
+    "secondary_region": {
+      "bbox": [
+        130,
+        590,
+        930,
+        970
+      ],
+      "content": "After: presenter with simplified software workflow"
+    },
+    "transition_region": {
+      "bbox": [
+        400,
+        420,
+        620,
+        590
+      ],
+      "content": "Large yellow directional arrow"
+    },
+    "graphics": [
+      "Camera",
+      "Microphone",
+      "Production checklist",
+      "Contained software interface",
+      "Yellow transformation arrow"
+    ],
+    "labels": [
+      "BEFORE",
+      "AFTER"
+    ],
+    "lighting": "Warm consistent lighting across both scenes",
+    "focal_order": [
+      "Two presenter expressions",
+      "Transformation arrow",
+      "Production equipment and software"
+    ]
+  },
+  "rendering": {
+    "config_id": "rendering.thumbnail.v1",
+    "mode": "two_scene_composite",
+    "generate_background": true,
+    "composite_presenter": true,
+    "composite_authentic_software": true,
+    "generate_final_text_in_image": false,
+    "force_light_mode": true
+  },
+  "text_layer": {
+    "headline": "FROM CHAOS TO CONTROL",
+    "alternates": [
+      "I AUTOMATED MYSELF",
+      "LESS EDITING. MORE VIDEOS."
+    ],
+    "render_mode": "post_composite",
+    "font": "Bebas Neue",
+    "weight": 400,
+    "size_px": 72,
+    "minimum_size_px": 64,
+    "position": "Upper center",
+    "bbox": [
+      20,
+      70,
+      160,
+      930
+    ],
+    "safe_margin_px": 48,
+    "color": "#342d2d",
+    "labels": [
+      "BEFORE",
+      "AFTER"
+    ]
+  },
+  "variations": {
+    "count": 3,
+    "strategies": [
+      "Two contrasting presenter expressions",
+      "Equipment chaos versus clean workflow",
+      "Production checklist versus automated software"
+    ]
+  },
+  "quality_checks": [
+    "Both presenter images remain recognizable",
+    "Before-and-after relationship immediately understandable",
+    "Transformation is presented as conceptual",
+    "Software imagery accurately represented",
+    "Light-mode background",
+    "Directional arrow visible",
+    "Mobile readability"
+  ]
+}
