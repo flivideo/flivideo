@@ -1,0 +1,396 @@
+<title>Thumbnail Machine</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600&family=Roboto:ital,wght@0,400;0,500;0,700;1,400&family=Roboto+Mono:wght@400;500&display=swap">
+<style>
+:root{color-scheme:light;--brown:#342d2d;--gold:#ccba9d;--yellow:#ffde59;--amber:#c8841a;--muted:#6e6353;--cream:#faf5ec;--surface:#f0ebe4;--linen:#e8e0d4;--border:#d4cdc4;--dark:#25201e;--blue:#1f6fd1;--teal:#1f7a70;--red:#a8432f;
+--display:"Bebas Neue",Oswald,Impact,sans-serif;--head:Oswald,"Arial Narrow",sans-serif;--body:Roboto,system-ui,sans-serif;--mono:"Roboto Mono",ui-monospace,Menlo,monospace}
+*{box-sizing:border-box}
+body{background:var(--cream);color:var(--brown);font:16px/1.6 var(--body);margin:0}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:16px;padding-block:24px 96px}
+a{color:var(--blue)}
+h1,h2,h3{font-family:var(--head);text-transform:uppercase;letter-spacing:.03em;text-wrap:balance;margin:0}
+h2{font-size:clamp(24px,4vw,32px);margin-bottom:6px} h3{font-size:19px;margin-bottom:6px}
+p{max-width:68ch;margin:0}
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.logo{display:inline-block;background:var(--brown);border-radius:6px;padding:4px 10px 2px;font-family:var(--display);font-size:22px;letter-spacing:.04em;line-height:1.1}
+.logo .a{color:var(--gold)}.logo .d{color:var(--yellow)}
+.top h1{font-family:var(--display);font-weight:400;font-size:clamp(40px,7vw,64px);line-height:1;letter-spacing:.02em}
+.lede{font-size:18px;color:var(--brown);margin-top:14px;max-width:70ch}
+nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 8px}
+nav.toc a{font-family:var(--head);text-transform:uppercase;letter-spacing:.04em;font-size:14px;text-decoration:none;color:var(--brown);border:1px solid var(--border);background:var(--surface);border-radius:999px;padding:4px 12px}
+section{margin-top:48px;display:grid;gap:14px}
+.kicker{font-family:var(--head);text-transform:uppercase;letter-spacing:.08em;font-size:13px;color:var(--amber)}
+/* pipeline */
+.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;align-items:stretch}
+.step{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px;display:grid;gap:6px;align-content:start;position:relative}
+.step .n{font-family:var(--display);font-size:30px;color:var(--amber);line-height:1}
+.step .t{font-family:var(--head);text-transform:uppercase;font-size:16px;letter-spacing:.03em}
+.step .who{font-size:12px;font-family:var(--mono);background:var(--cream);border:1px solid var(--border);border-radius:4px;padding:1px 6px;justify-self:start}
+.who.you{background:var(--yellow);border-color:var(--brown)}
+.who.cl{background:var(--linen)}
+.who.gpt{background:#e3efe9;border-color:#b8d3c6}
+.who.py{background:#e7eaf4;border-color:#c3cbe2}
+.step p{font-size:14px;color:var(--muted)}
+.step code{font-size:12px}
+/* tables */
+.tw{overflow-x:auto;border:1px solid var(--border);border-radius:8px;background:#fffdf8}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--linen);vertical-align:top}
+th{font-family:var(--head);text-transform:uppercase;letter-spacing:.05em;font-size:12px;color:var(--muted);background:var(--surface)}
+tr:last-child td{border-bottom:0}
+code,.mono{font-family:var(--mono);font-size:.88em}
+td code{white-space:nowrap}
+/* code */
+details{border:1px solid var(--border);border-radius:8px;background:#fffdf8}
+details>summary{cursor:pointer;padding:10px 12px;font-family:var(--head);text-transform:uppercase;letter-spacing:.04em;font-size:15px}
+details[open]>summary{border-bottom:1px solid var(--linen)}
+pre{margin:0;padding:12px 14px;overflow-x:auto;font:13px/1.5 var(--mono);color:var(--brown);background:#fffdf8;border-radius:0 0 8px 8px}
+.dark pre{background:var(--dark);color:#f0e9dc}
+.note{border-left:3px solid var(--amber);padding:6px 12px;background:var(--surface);max-width:78ch;font-size:15px}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+figure{margin:0;display:grid;gap:6px}
+figure img{width:100%;height:auto;border-radius:6px;border:1px solid var(--border);display:block}
+figcaption{font-size:13px;color:var(--muted)}
+.ver{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:16px;align-items:start;padding:14px;border:1px solid var(--border);border-radius:8px;background:#fffdf8}
+.ver .tag{font-family:var(--display);font-size:26px;color:var(--amber);line-height:1}
+.ver ul{margin:6px 0 0;padding-left:18px;font-size:15px}
+.verdict{display:inline-block;font-size:12px;font-weight:700;border-radius:4px;padding:1px 7px;margin-top:6px}
+.verdict.bad{background:#f3dcd5;color:var(--red)}.verdict.mid{background:#f5e8c8;color:#7a5200}.verdict.good{background:#d8ece6;color:var(--teal)}
+@media (max-width:720px){.ver{grid-template-columns:1fr}}
+.refs{display:flex;gap:10px;flex-wrap:wrap}.refs img{width:120px;height:auto;border-radius:6px;border:1px solid var(--border);background:var(--linen)}
+.path{font-family:var(--mono);font-size:13px;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:8px 10px;overflow-x:auto;white-space:nowrap}
+</style>
+<div class="wrap">
+<header class="top"><span class="logo"><span class="a">Appy</span><span class="d">Dave</span></span><h1>Thumbnail Machine</h1></header>
+<p class="lede">What happens behind the scenes when a d06 thumbnail gets made: who does each step, which files are involved, what the code and JSON actually look like, and how we got here.</p>
+<nav class="toc"><a href="#pipeline">The pipeline</a><a href="#files">The files</a><a href="#json">The JSON</a><a href="#code">The code</a><a href="#headline">Headline step</a><a href="#history">How we got here</a><a href="#chats">ChatGPT chats</a><a href="#open">Open decisions</a></nav>
+
+<section id="pipeline">
+<div class="kicker">One thumbnail, start to finish</div>
+<h2>The pipeline</h2>
+<p>Your idea: <em>prose → JSON → chat window with reference images</em>. That is exactly what runs now. Each box says who does it.</p>
+<div class="flow">
+<div class="step"><span class="n">1</span><span class="t">Idea</span><span class="who cl">Claude (you approve)</span><p>One line of prose from the video. <em>"An AI casting director auditions five of my faces."</em></p></div>
+<div class="step"><span class="n">2</span><span class="t">Scene JSON</span><span class="who cl">Claude writes</span><p>A small file, <code>scenes/&lt;id&gt;.json</code>: setting, event, people, props, labels, headline zone.</p></div>
+<div class="step"><span class="n">3</span><span class="t">Build prompt</span><span class="who py">Python script</span><p><code>build_prompt.py</code> merges the scene with the shared brand + style blocks into ONE JSON, about 2,300 characters.</p></div>
+<div class="step"><span class="n">4</span><span class="t">Generate</span><span class="who gpt">ChatGPT (fresh chat)</span><p>Paste the JSON. Attach your board as the style reference plus 2–4 of your favourite headshots. It returns an image with no headline.</p></div>
+<div class="step"><span class="n">5</span><span class="t">Headline</span><span class="who py">Python script</span><p><code>composite_headline.py</code> draws the headline in Bebas Neue on this Mac: placement, wrap, brown panel.</p></div>
+<div class="step"><span class="n">6</span><span class="t">Pick</span><span class="who you">You</span><p>A selection board of the finished thumbnails. You choose, or ask for changes.</p></div>
+</div>
+<div class="note"><strong>You do two things:</strong> keep your favourites up to date in the Headshot Picker (once, not per thumbnail), and pick the winner. You never choose expressions. ChatGPT invents those from your neutral photos.</div>
+</section>
+
+<section id="files">
+<div class="kicker">Everything lives in one git folder</div>
+<h2>The files</h2>
+<div class="path">/Users/davidcruwys/dev/ad/flivideo/docs/briefs/thumbnail-system/</div>
+<div class="tw"><table>
+<tr><th>File</th><th>What it is</th><th>Changes</th></tr>
+<tr><td><code>scenes/&lt;id&gt;.json</code></td><td>The one file per thumbnail. The scene, which headshots to use, and where the headline goes.</td><td>Every thumbnail</td></tr>
+<tr><td><code>scenes/&lt;id&gt;.prompt.json</code></td><td>What actually gets pasted into ChatGPT. Built by the script, never hand-written.</td><td>Every thumbnail</td></tr>
+<tr><td><code>shared/brand-appydave.json</code></td><td>Palette, font note, and a one-line description of you.</td><td>Once</td></tr>
+<tr><td><code>shared/style-board.json</code></td><td>The look: natural rooms, flat graphics, and the banned list (particles, crowns, golden haze…).</td><td>Once</td></tr>
+<tr><td><code>style/style-reference-board.png</code></td><td>Your nine-tile board, attached to every run as the style reference.</td><td>Once</td></tr>
+<tr><td><code>tools/build_prompt.py</code></td><td>Scene + shared blocks → one compact JSON.</td><td>Rarely</td></tr>
+<tr><td><code>tools/composite_headline.py</code></td><td>Draws the headline onto ChatGPT's image.</td><td>Rarely</td></tr>
+<tr><td><code>tools/fonts/BebasNeue-Regular.ttf</code></td><td>The headline font (open licence, from Google Fonts).</td><td>Never</td></tr>
+<tr><td><code>presenter/appydave.json</code></td><td>Points at the Headshot Picker. Rule: photos are identity references, chosen from your favourites by shirt and angle.</td><td>When favourites change</td></tr>
+<tr><td><code>videos/d06/</code></td><td>The d06 fact sheet, every run's raw image, final image, and the ChatGPT transcripts.</td><td>Per video</td></tr>
+<tr><td><code>schema.json</code>, <code>specs/</code>, <code>execution-instructions.md</code></td><td><strong>History.</strong> The v1/v2 long-brief approach. Kept for reference, not used for new runs.</td><td>Frozen</td></tr>
+</table></div>
+<p>Your photos stay where they are: the Headshot Picker (<a href="https://claude.ai/artifact/EZbkmPK3zb8Vfi7u5soeQF" target="_blank" rel="noopener">artefact</a>) and the T7 drive. Scene files refer to them by name, for example <code>headshot-appydave-3.png</code>.</p>
+<div class="refs"><img src="img/ref-3.jpg" alt="Favourite headshot c3, neutral, grey shirt"><img src="img/ref-9.jpg" alt="Favourite headshot c9, neutral, hands on hips"></div>
+<p style="font-size:14px;color:var(--muted)">Two of your favourites (c3, c9). Neutral on purpose. Every expression in the thumbnails was invented from photos like these.</p>
+</section>
+
+<section id="json">
+<div class="kicker">Keys are meaning, values are what you want</div>
+<h2>The JSON</h2>
+<p>A real example: the casting-call thumbnail. The scene file is the only part written for this thumbnail. The script adds the two shared blocks.</p>
+<details open><summary>1 · scenes/d06-b5-casting-call.json (written per thumbnail)</summary><pre>{
+  &quot;id&quot;: &quot;d06.b5&quot;,
+  &quot;video&quot;: &quot;d06: I turned my 106 headshots into an AI picker&quot;,
+  &quot;prose&quot;: &quot;An AI casting director auditions five of my faces and picks one for the thumbnail.&quot;,
+  &quot;scene&quot;: {
+    &quot;setting&quot;: &quot;casting-audition room, plain back wall, soft daylight&quot;,
+    &quot;event&quot;: &quot;a friendly white robot casting director at a desk points at the winning Dave&quot;,
+    &quot;subjects&quot;: [
+      &quot;five Daves on chairs in a row, each holding a numbered card 1-5, each a different face: hopeful, sceptical, over-acted shock, bored, smug&quot;,
+      &quot;the winner (right end) half-stands with a big delighted grin and a yellow CAST sticker on his chest&quot;
+    ],
+    &quot;props&quot;: [&quot;robot with headphones and clipboard, cute app-mascot design&quot;, &quot;desk with coffee cup&quot;],
+    &quot;labels&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;CAST&quot;],
+    &quot;mood&quot;: &quot;bright, playful, funny&quot;
+  },
+  &quot;presenter&quot;: {
+    &quot;identity_references&quot;: [&quot;headshot-appydave-3.png&quot;, &quot;headshot-appydave-11.png&quot;, &quot;headshot-appydave-9.png&quot;],
+    &quot;outfit&quot;: &quot;light blue-grey shirt&quot;,
+    &quot;rule&quot;: &quot;references show who Dave is; invent every expression and pose&quot;
+  },
+  &quot;headline_zone&quot;: &quot;top-right of the back wall&quot;,
+  &quot;headline&quot;: &quot;AI CAST MY FACE&quot;
+}</pre></details>
+<div class="two">
+<details><summary>2a · shared/brand-appydave.json</summary><pre>{
+  &quot;brand&quot;: &quot;AppyDave&quot;,
+  &quot;palette&quot;: {
+    &quot;yellow&quot;: &quot;#ffde59 (one accent)&quot;,
+    &quot;brown&quot;: &quot;#342d2d&quot;,
+    &quot;cream&quot;: &quot;#faf5ec&quot;,
+    &quot;amber&quot;: &quot;#c8841a&quot;
+  },
+  &quot;headline_font&quot;: &quot;Bebas Neue (added later, not by you)&quot;,
+  &quot;presenter&quot;: &quot;Dave: middle-aged man, short grey curly hair, black rectangular glasses; match the attached headshots&quot;
+}</pre></details>
+<details><summary>2b · shared/style-board.json</summary><pre>{
+  &quot;look&quot;: &quot;bright natural editorial YouTube-creator photo, real rooms, soft daylight key on face, a few warm practical lamps, background darker than face but readable&quot;,
+  &quot;graphics&quot;: &quot;crisp flat modern UI and icons, clean saturated colours for meaning, yellow only as an accent&quot;,
+  &quot;glow&quot;: &quot;only where a real screen or lamp emits light&quot;,
+  &quot;never&quot;: [
+    &quot;particles&quot;,
+    &quot;light trails&quot;,
+    &quot;lens flares&quot;,
+    &quot;crowns&quot;,
+    &quot;neon rims&quot;,
+    &quot;golden haze&quot;,
+    &quot;all-amber HDR grade&quot;,
+    &quot;sci-fi holograms&quot;,
+    &quot;text other than what scene.labels lists&quot;
+  ],
+  &quot;style_reference&quot;: &quot;style-reference-board.png (match its rendering, not its content)&quot;
+}</pre></details>
+</div>
+<details><summary>3 · The compact prompt pasted into ChatGPT (built by the script)</summary><pre>{
+ &quot;task&quot;: &quot;Generate ONE finished 16:9 YouTube thumbnail image from this JSON. Keys are semantic; values are what I want.&quot;,
+ &quot;scene&quot;: {
+  &quot;setting&quot;: &quot;casting-audition room, plain back wall, soft daylight&quot;,
+  &quot;event&quot;: &quot;a friendly white robot casting director at a desk points at the winning Dave&quot;,
+  &quot;subjects&quot;: [
+   &quot;five Daves on chairs in a row, each holding a numbered card 1-5, each a different face: hopeful, sceptical, over-acted shock, bored, smug&quot;,
+   &quot;the winner (right end) half-stands with a big delighted grin and a yellow CAST sticker on his chest&quot;
+  ],
+  &quot;props&quot;: [
+   &quot;robot with headphones and clipboard, cute app-mascot design&quot;,
+   &quot;desk with coffee cup&quot;
+  ],
+  &quot;labels&quot;: [
+   &quot;1&quot;,
+   &quot;2&quot;,
+   &quot;3&quot;,
+   &quot;4&quot;,
+   &quot;5&quot;,
+   &quot;CAST&quot;
+  ],
+  &quot;mood&quot;: &quot;bright, playful, funny&quot;
+ },
+ &quot;presenter&quot;: {
+  &quot;identity_references&quot;: [
+   &quot;headshot-appydave-3.png&quot;,
+   &quot;headshot-appydave-11.png&quot;,
+   &quot;headshot-appydave-9.png&quot;
+  ],
+  &quot;outfit&quot;: &quot;light blue-grey shirt&quot;,
+  &quot;rule&quot;: &quot;references show who Dave is; invent every expression and pose&quot;
+ },
+ &quot;headline_zone&quot;: &quot;top-right of the back wall (leave clear; the headline is added afterwards)&quot;,
+ &quot;brand&quot;: {
+  &quot;brand&quot;: &quot;AppyDave&quot;,
+  &quot;palette&quot;: {
+   &quot;yellow&quot;: &quot;#ffde59 (one accent)&quot;,
+   &quot;brown&quot;: &quot;#342d2d&quot;,
+   &quot;cream&quot;: &quot;#faf5ec&quot;,
+   &quot;amber&quot;: &quot;#c8841a&quot;
+  },
+  &quot;headline_font&quot;: &quot;Bebas Neue (added later, not by you)&quot;,
+  &quot;presenter&quot;: &quot;Dave: middle-aged man, short grey curly hair, black rectangular glasses; match the attached headshots&quot;
+ },
+ &quot;style&quot;: {
+  &quot;look&quot;: &quot;bright natural editorial YouTube-creator photo, real rooms, soft daylight key on face, a few warm practical lamps, background darker than face but readable&quot;,
+  &quot;graphics&quot;: &quot;crisp flat modern UI and icons, clean saturated colours for meaning, yellow only as an accent&quot;,
+  &quot;glow&quot;: &quot;only where a real screen or lamp emits light&quot;,
+  &quot;never&quot;: [
+   &quot;particles&quot;,
+   &quot;light trails&quot;,
+   &quot;lens flares&quot;,
+   &quot;crowns&quot;,
+   &quot;neon rims&quot;,
+   &quot;golden haze&quot;,
+   &quot;all-amber HDR grade&quot;,
+   &quot;sci-fi holograms&quot;,
+   &quot;text other than what scene.labels lists&quot;
+  ],
+  &quot;style_reference&quot;: &quot;style-reference-board.png (match its rendering, not its content)&quot;
+ },
+ &quot;attach&quot;: [
+  &quot;style-reference-board.png&quot;,
+  &quot;headshot-appydave-3.png&quot;,
+  &quot;headshot-appydave-11.png&quot;,
+  &quot;headshot-appydave-9.png&quot;
+ ],
+ &quot;output&quot;: &quot;the image only, then one line: what you would change&quot;
+}</pre></details>
+<figure><img src="img/v3-b5.jpg" alt="Casting call thumbnail made from the compact JSON"><figcaption>What that JSON produced in a brand-new chat, plus the headline step.</figcaption></figure>
+</section>
+
+<section id="code">
+<div class="kicker">Two small Python scripts</div>
+<h2>The code</h2>
+<p>Both scripts are in the repo and can be re-run on any video. Nothing is done by hand in the chat.</p>
+<details open><summary>tools/build_prompt.py · 23 lines</summary><pre>#!/usr/bin/env python3
+&quot;&quot;&quot;scene JSON + shared brand/style -&gt; ONE compact JSON prompt for a chat image model.
+
+Usage: build_prompt.py scenes/&lt;id&gt;.json [--out file]
+The scene file is the only per-thumbnail input. Shared blocks live in shared/.
+Prints the JSON to paste; its `attach` list is the reference images to upload with it.
+&quot;&quot;&quot;
+import json, sys, os
+root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+scene = json.load(open(sys.argv[1]))
+prompt = {
+    &quot;task&quot;: &quot;Generate ONE finished 16:9 YouTube thumbnail image from this JSON. Keys are semantic; values are what I want.&quot;,
+    &quot;scene&quot;: scene[&quot;scene&quot;],
+    &quot;presenter&quot;: scene[&quot;presenter&quot;],
+    &quot;headline_zone&quot;: scene[&quot;headline_zone&quot;] + &quot; (leave clear; the headline is added afterwards)&quot;,
+    &quot;brand&quot;: json.load(open(os.path.join(root, &quot;shared/brand-appydave.json&quot;))),
+    &quot;style&quot;: json.load(open(os.path.join(root, &quot;shared/style-board.json&quot;))),
+    &quot;attach&quot;: [&quot;style-reference-board.png&quot;] + [r for r in scene[&quot;presenter&quot;][&quot;identity_references&quot;]],
+    &quot;output&quot;: &quot;the image only, then one line: what you would change&quot;,
+}
+text = json.dumps(prompt, indent=1, ensure_ascii=False)
+if &quot;--out&quot; in sys.argv: open(sys.argv[sys.argv.index(&quot;--out&quot;) + 1], &quot;w&quot;).write(text)
+print(text)</pre></details>
+<details><summary>tools/composite_headline.py · 88 lines</summary><pre>#!/usr/bin/env python3
+&quot;&quot;&quot;Text-layer compositor: overlay a spec&#x27;s headline onto a generated image (post_composite).
+
+Usage: composite_headline.py &lt;spec.json&gt; &lt;generated.png&gt; &lt;out.png&gt; [--highlight WORD] [--zone auto|spec]
+- Reads text_layer.headline / color / accent from the spec.
+- --zone auto (default): scores candidate zones by visual busyness (edge density) and places the
+  headline in the calmest one, because the image model doesn&#x27;t always leave the zone the spec named.
+  --zone spec: use text_layer.bbox ([top,left,bottom,right], 0-1000).
+- Font is fitted to the zone width (never below text_layer.minimum_size_px, default 64); a soft
+  shadow keeps it legible on busy ground. Also writes &lt;out&gt;-320.png, the mobile check.
+Font: Bebas Neue (OFL, tools/fonts/).
+&quot;&quot;&quot;
+import json, sys, os
+from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageStat
+
+spec, src, out = sys.argv[1:4]
+arg = lambda k, d=None: sys.argv[sys.argv.index(k) + 1] if k in sys.argv else d
+t = json.load(open(spec))[&#x27;text_layer&#x27;]
+hl = (arg(&#x27;--highlight&#x27;) or &#x27;&#x27;).upper() or None
+accent = t[&#x27;accent&#x27;] if isinstance(t.get(&#x27;accent&#x27;), dict) else {}
+accent_words = [w.upper() for w in accent.get(&#x27;words&#x27;, [])]
+color = t.get(&#x27;color&#x27;, &#x27;#342d2d&#x27;)
+min_px = t.get(&#x27;minimum_size_px&#x27;, 64)
+FONT = os.path.join(os.path.dirname(__file__), &#x27;fonts&#x27;, &#x27;BebasNeue-Regular.ttf&#x27;)
+
+img = Image.open(src).convert(&#x27;RGB&#x27;).resize((1280, 720), Image.LANCZOS)
+W, H, M = 1280, 720, 40
+
+# candidate zones (x0, y0, x1, y1): top/bottom bands, left/right/centre
+Z = {&#x27;top-left&#x27;: (M, M, 700, 210), &#x27;top-right&#x27;: (580, M, W - M, 210), &#x27;top-centre&#x27;: (240, M, 1040, 210),
+     &#x27;bottom-left&#x27;: (M, 520, 700, H - M), &#x27;bottom-right&#x27;: (580, 520, W - M, H - M)}
+if arg(&#x27;--zone&#x27;, &#x27;auto&#x27;) == &#x27;spec&#x27;:
+    b = t[&#x27;bbox&#x27;]; zone = (b[1] * W // 1000, b[0] * H // 1000, b[3] * W // 1000, b[2] * H // 1000); name = &#x27;spec&#x27;
+else:
+    edges = img.convert(&#x27;L&#x27;).filter(ImageFilter.FIND_EDGES)
+    score = {k: ImageStat.Stat(edges.crop(z)).mean[0] for k, z in Z.items()}
+    name = min(score, key=score.get); zone = Z[name]
+
+d = ImageDraw.Draw(img)
+words = t[&#x27;headline&#x27;].split()
+x0, y0, x1, y1 = zone
+zw, zh = x1 - x0, y1 - y0
+def fit(lines):
+    s = 170
+    while s &gt; 20:
+        f = ImageFont.truetype(FONT, s)
+        if max(d.textlength(&#x27; &#x27;.join(l), font=f) for l in lines) &lt;= zw and s * len(lines) * 0.95 &lt;= zh + (s * 0.9 if len(lines) &gt; 1 else 0): return s
+        s -= 4
+    return s
+one = [words]
+splits = [[words[:i], words[i:]] for i in range(1, len(words))]
+best2 = max(splits, key=fit) if splits else one
+size, lines = (fit(one), one)
+if splits and fit(best2) &gt; size * 1.25: size, lines = fit(best2), best2   # wrap only when it buys real size
+if size &lt; min_px: print(&#x27;WARNING: headline below minimum&#x27;, size, file=sys.stderr)
+f = ImageFont.truetype(FONT, size)
+lh = int(size * 0.92)
+block_h = lh * len(lines)
+yb = y0 if &#x27;top&#x27; in name or name == &#x27;spec&#x27; else y1 - block_h
+shadow = Image.new(&#x27;RGBA&#x27;, img.size, (0, 0, 0, 0)); sd = ImageDraw.Draw(shadow)
+for i, l in enumerate(lines):
+    tw = d.textlength(&#x27; &#x27;.join(l), font=f)
+    lx = x0 if &#x27;left&#x27; in name or name == &#x27;spec&#x27; else (x1 - tw if &#x27;right&#x27; in name else x0 + (zw - tw) / 2)
+    sd.text((lx + 3, yb + i * lh + 4), &#x27; &#x27;.join(l), font=f, fill=(0, 0, 0, 170))
+img.paste(Image.new(&#x27;RGB&#x27;, img.size, &#x27;black&#x27;), (0, 0), shadow.filter(ImageFilter.GaussianBlur(6)))
+if &#x27;--pill&#x27; in sys.argv:   # AppyDave brown panel behind the text: works on busy ground
+    ov = Image.new(&#x27;RGBA&#x27;, img.size, (0, 0, 0, 0)); od = ImageDraw.Draw(ov)
+    widths = [d.textlength(&#x27; &#x27;.join(l), font=f) for l in lines]
+    bx0 = min((x0 if &#x27;left&#x27; in name or name == &#x27;spec&#x27; else (x1 - w if &#x27;right&#x27; in name else x0 + (zw - w) / 2)) for w in widths)
+    od.rounded_rectangle([bx0 - 22, yb - 4, bx0 + max(widths) + 22, yb + block_h + size * 0.12], radius=16, fill=(52, 45, 45, 225))
+    img.paste(ov, (0, 0), ov)
+d = ImageDraw.Draw(img)
+for i, l in enumerate(lines):
+    tw = d.textlength(&#x27; &#x27;.join(l), font=f)
+    x = x0 if &#x27;left&#x27; in name or name == &#x27;spec&#x27; else (x1 - tw if &#x27;right&#x27; in name else x0 + (zw - tw) / 2)
+    y = yb + i * lh
+    for word in l:
+        w = d.textlength(word, font=f); fill = color
+        key = word.strip(&#x27;?!.&#x27;).upper()
+        if hl and key == hl.strip(&#x27;?!.&#x27;):
+            d.rounded_rectangle([x - 10, y + size * .14, x + w + 10, y + size], radius=10, fill=&#x27;#ffde59&#x27;); fill = &#x27;#342d2d&#x27;
+        elif key in accent_words:
+            fill = accent.get(&#x27;color&#x27;, &#x27;#ffde59&#x27;)
+        d.text((x, y), word, font=f, fill=fill)
+        x += w + d.textlength(&#x27; &#x27;, font=f)
+img.save(out)
+img.resize((320, 180), Image.LANCZOS).save(out.replace(&#x27;.png&#x27;, &#x27;-320.png&#x27;))
+print(out, name, size, len(lines), &#x27;line(s)&#x27;)</pre></details>
+</section>
+
+<section id="headline">
+<div class="kicker">Why the text isn't in ChatGPT's image</div>
+<h2>The headline step</h2>
+<p>Image models misspell words and put text wherever they like, so ChatGPT is told to leave the headline out. The script adds it afterwards. That's why you saw it in the PNG but not in ChatGPT.</p>
+<div class="two">
+<figure><img src="img/raw-a3.jpg" alt="Raw ChatGPT image, no headline"><figcaption>Straight from ChatGPT: no headline.</figcaption></figure>
+<figure><img src="img/final-a3.jpg" alt="Same image with headline and brown panel"><figcaption>After <code>composite_headline.py --zone spec --pill</code>.</figcaption></figure>
+</div>
+<div class="tw"><table>
+<tr><th>Option</th><th>What it does</th></tr>
+<tr><td><code>--zone spec</code></td><td>Puts the text in the area the scene file named. The reliable mode.</td></tr>
+<tr><td><code>--zone auto</code></td><td>Guesses the calmest area. Unreliable: a plain shirt looks "calm", so text lands on you.</td></tr>
+<tr><td><code>--pill</code></td><td>Adds a brown AppyDave panel behind the text so it reads on any background.</td></tr>
+<tr><td>(automatic)</td><td>Sizes the text to fit, and wraps onto two lines when that makes it much bigger. Warns if it drops below 64px.</td></tr>
+</table></div>
+</section>
+
+<section id="history">
+<div class="kicker">Four rounds, each fixing the last one's failure</div>
+<h2>How we got here</h2>
+<div class="ver"><figure><img src="img/board.jpg" alt="Original nine-tile board"></figure><div><span class="tag">v0 · the board</span><ul><li>One short prose prompt in a long chat.</li><li>Great images. Impossible to repeat: the quality came from the chat's history.</li></ul><span class="verdict good">The quality bar</span></div></div>
+<div class="ver"><figure><img src="img/test1.jpg" alt="Test 1 collage"></figure><div><span class="tag">v1 · long JSON spec</span><ul><li>ChatGPT wrote nine detailed specs; I ran one in a fresh chat.</li><li>The spec said "paste the original cutouts, don't redraw", so it copied your photos.</li><li>Forced cream background, checkerboards.</li></ul><span class="verdict bad">"Half done", Canva-like</span></div></div>
+<div class="ver"><figure><img src="img/test2.jpg" alt="Test 2 gold glow"></figure><div><span class="tag">v2 · art direction + references</span><ul><li>Photos became identity references: ChatGPT invents the pose (pointing).</li><li>Story changed from "which one?" to "AI picked this".</li><li>But the wording ("cinematic", "golden glow") produced a light show.</li></ul><span class="verdict mid">Right idea, wrong style</span></div></div>
+<div class="ver"><figure><img src="img/v3-a1.jpg" alt="v3 AI picked this"></figure><div><span class="tag">v3 · your pipeline</span><ul><li>Scene JSON → script → one 2,300-character JSON.</li><li>Your board attached as the style reference, plus a banned-effects list.</li><li>References only from your neutral favourites.</li></ul><span class="verdict good">Board style, repeatable</span></div></div>
+<figure><img src="img/all6.jpg" alt="All six d06 thumbnails"><figcaption>All six d06 ideas today. Number 3 is still in the v2 style.</figcaption></figure>
+</section>
+
+<section id="chats">
+<div class="kicker">Every ChatGPT conversation used</div>
+<h2>ChatGPT chats</h2>
+<div class="tw"><table><tr><th>Chat</th><th>Link</th><th>Notes</th></tr><tr><td>Research thumbnail prompts (the original board chat)</td><td><a href="https://chatgpt.com/c/6ab76474-f070-83ec-ba92-902ae2179e79" target="_blank" rel="noopener">open</a></td><td>Made the 9-tile board, explained why it worked, extracted the method, diagnosed test 1. Finished. Nothing pending.</td></tr><tr><td>Test 1: spec copied your photos</td><td><a href="https://chatgpt.com/c/6ab895fb-3c70-83ec-8a46-e4612c6ebeb9" target="_blank" rel="noopener">open</a></td><td>You said: half done, Canva-like.</td></tr><tr><td>Test 2: AI picked this (v2)</td><td><a href="https://chatgpt.com/c/6ab8993a-8210-83ec-9e8d-356c4ecd2f63" target="_blank" rel="noopener">open</a></td><td>First invented pose. Too much gold glow.</td></tr><tr><td>Face tagging (v2)</td><td><a href="https://chatgpt.com/c/6ab89c4c-915c-83ec-8d43-9944a8a3839f" target="_blank" rel="noopener">open</a></td><td>Clean, less story.</td></tr><tr><td>Thumbnail machine (v2)</td><td><a href="https://chatgpt.com/c/6ab89c9b-64f0-83ec-8758-5960ab50065f" target="_blank" rel="noopener">open</a></td><td>Good idea, light-show style.</td></tr><tr><td>106 of me (v3)</td><td><a href="https://chatgpt.com/c/6ab8b589-fb6c-83ec-8b37-80af447c9939" target="_blank" rel="noopener">open</a></td><td>Board style reference attached for the first time.</td></tr><tr><td>Casting call (v3, long brief)</td><td><a href="https://chatgpt.com/c/6ab8b58d-b7cc-83ec-8c8c-2ce8b05dfd18" target="_blank" rel="noopener">open</a></td><td>12,000-character brief.</td></tr><tr><td>Face filing cabinet (v3)</td><td><a href="https://chatgpt.com/c/6ab8b591-112c-83ec-8345-f5f27c0ed51f" target="_blank" rel="noopener">open</a></td><td></td></tr><tr><td>Casting call (compact JSON)</td><td><a href="https://chatgpt.com/c/6ab8b719-8088-83ec-ab63-89d247153612" target="_blank" rel="noopener">open</a></td><td>Your pipeline: 2,300 characters. As good or better.</td></tr><tr><td>AI picked this (compact JSON)</td><td><a href="https://chatgpt.com/c/6ab8b888-e8a0-83ec-acac-4e5985c230a2" target="_blank" rel="noopener">open</a></td><td></td></tr><tr><td>Thumbnail machine (compact JSON)</td><td><a href="https://chatgpt.com/c/6ab8b88c-1148-83ec-a8ee-9d44920dad8c" target="_blank" rel="noopener">open</a></td><td></td></tr></table></div>
+<p style="font-size:14px;color:var(--muted)">Most runs happened in a brand-new chat with nothing but the JSON and images. That's the repeatability test. Some have since been moved into your "thumbnails" project in ChatGPT. The original chat's last section (the creative checklist) is its advice after seeing test 1, and it's now part of the instructions.</p>
+</section>
+
+<section id="open">
+<div class="kicker">Only you can answer these</div>
+<h2>Open decisions</h2>
+<div class="tw"><table>
+<tr><th>Question</th><th>Why it matters</th></tr>
+<tr><td>Which d06 thumbnail would you use?</td><td>It's the real test of the system.</td></tr>
+<tr><td>Do the invented faces look like you?</td><td>The whole approach depends on ChatGPT drawing a recognisable you.</td></tr>
+<tr><td>Are dark or moody thumbnails allowed?</td><td>Your artefacts are light-only; your favourite board tiles are mostly dark. Right now it's allowed as an experiment.</td></tr>
+<tr><td>Next: a skill?</td><td>Once you're happy, the pipeline becomes a skill: "make thumbnails for d07".</td></tr>
+</table></div>
+</section>
+</div>
