@@ -1,0 +1,63 @@
+{
+ "task": "Generate ONE finished 16:9 YouTube thumbnail image from this JSON. Keys are semantic; values are what I want.",
+ "scene": {
+  "setting": "Dave's home studio: desk, soft daylight from a window, a warm desk lamp, shelves softly out of focus",
+  "event": "on a large wall-mounted screen behind him, a grid of his own headshot photos, and ONE photo is selected: a clean yellow outline and a small 'AI PICK' tag, the others slightly dimmed",
+  "subjects": [
+   "Dave in the foreground right, turned toward the screen, pointing at the selected photo, mouth open in delighted surprise"
+  ],
+  "props": [
+   "large screen showing a simple photo-grid app",
+   "desk with a mic arm"
+  ],
+  "labels": [
+   "AI PICK"
+  ],
+  "mood": "bright, surprised, fun"
+ },
+ "presenter": {
+  "identity_references": [
+   "headshot-appydave-3.png",
+   "headshot-appydave-9.png",
+   "headshot-appydave-11.png"
+  ],
+  "outfit": "light blue-grey shirt",
+  "rule": "references show who Dave is; invent every expression and pose"
+ },
+ "headline_zone": "top-left, over plain wall (leave clear; the headline is added afterwards)",
+ "brand": {
+  "brand": "AppyDave",
+  "palette": {
+   "yellow": "#ffde59 (one accent)",
+   "brown": "#342d2d",
+   "cream": "#faf5ec",
+   "amber": "#c8841a"
+  },
+  "headline_font": "Bebas Neue (added later, not by you)",
+  "presenter": "Dave: middle-aged man, short grey curly hair, black rectangular glasses; match the attached headshots"
+ },
+ "style": {
+  "look": "bright natural editorial YouTube-creator photo, real rooms, soft daylight key on face, a few warm practical lamps, background darker than face but readable",
+  "graphics": "crisp flat modern UI and icons, clean saturated colours for meaning, yellow only as an accent",
+  "glow": "only where a real screen or lamp emits light",
+  "never": [
+   "particles",
+   "light trails",
+   "lens flares",
+   "crowns",
+   "neon rims",
+   "golden haze",
+   "all-amber HDR grade",
+   "sci-fi holograms",
+   "text other than what scene.labels lists"
+  ],
+  "style_reference": "style-reference-board.png (match its rendering, not its content)"
+ },
+ "attach": [
+  "style-reference-board.png",
+  "headshot-appydave-3.png",
+  "headshot-appydave-9.png",
+  "headshot-appydave-11.png"
+ ],
+ "output": "the image only, then one line: what you would change"
+}

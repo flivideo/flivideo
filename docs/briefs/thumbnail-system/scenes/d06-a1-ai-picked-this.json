@@ -1,0 +1,20 @@
+{
+  "id": "d06.a1",
+  "video": "d06: I turned my 106 headshots into an AI picker",
+  "prose": "AI picks one headshot out of many, and I react.",
+  "scene": {
+    "setting": "Dave's home studio: desk, soft daylight from a window, a warm desk lamp, shelves softly out of focus",
+    "event": "on a large wall-mounted screen behind him, a grid of his own headshot photos, and ONE photo is selected: a clean yellow outline and a small 'AI PICK' tag, the others slightly dimmed",
+    "subjects": ["Dave in the foreground right, turned toward the screen, pointing at the selected photo, mouth open in delighted surprise"],
+    "props": ["large screen showing a simple photo-grid app", "desk with a mic arm"],
+    "labels": ["AI PICK"],
+    "mood": "bright, surprised, fun"
+  },
+  "presenter": {
+    "identity_references": ["headshot-appydave-3.png", "headshot-appydave-9.png", "headshot-appydave-11.png"],
+    "outfit": "light blue-grey shirt",
+    "rule": "references show who Dave is; invent every expression and pose"
+  },
+  "headline_zone": "top-left, over plain wall",
+  "headline": "AI PICKED THIS"
+}

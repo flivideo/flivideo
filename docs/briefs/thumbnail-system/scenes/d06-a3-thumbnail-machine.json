@@ -1,0 +1,20 @@
+{
+  "id": "d06.a3",
+  "video": "d06: I turned my 106 headshots into an AI picker",
+  "prose": "My photo library now makes thumbnails for me.",
+  "scene": {
+    "setting": "Dave's home studio desk, soft daylight, one warm lamp, camera and mic nearby",
+    "event": "on his monitor, a web app showing a wall of his own headshots; next to the monitor, a finished YouTube thumbnail of him (printed card) pops up out of the screen edge like paper from a printer",
+    "subjects": ["Dave seated, leaning back with a satisfied grin, pointing at the thumbnail card"],
+    "props": ["monitor with photo-grid web app", "camera on tripod", "coffee mug"],
+    "labels": [],
+    "mood": "satisfied, clever, warm"
+  },
+  "presenter": {
+    "identity_references": ["headshot-appydave-3.png", "headshot-appydave-9.png", "headshot-appydave-12.png"],
+    "outfit": "light blue-grey shirt",
+    "rule": "references show who Dave is; invent every expression and pose"
+  },
+  "headline_zone": "top band, over wall above the monitor",
+  "headline": "AI PICKS MY FACE"
+}

@@ -1,0 +1,62 @@
+{
+ "task": "Generate ONE finished 16:9 YouTube thumbnail image from this JSON. Keys are semantic; values are what I want.",
+ "scene": {
+  "setting": "Dave's home studio desk, soft daylight, one warm lamp, camera and mic nearby",
+  "event": "on his monitor, a web app showing a wall of his own headshots; next to the monitor, a finished YouTube thumbnail of him (printed card) pops up out of the screen edge like paper from a printer",
+  "subjects": [
+   "Dave seated, leaning back with a satisfied grin, pointing at the thumbnail card"
+  ],
+  "props": [
+   "monitor with photo-grid web app",
+   "camera on tripod",
+   "coffee mug"
+  ],
+  "labels": [],
+  "mood": "satisfied, clever, warm"
+ },
+ "presenter": {
+  "identity_references": [
+   "headshot-appydave-3.png",
+   "headshot-appydave-9.png",
+   "headshot-appydave-12.png"
+  ],
+  "outfit": "light blue-grey shirt",
+  "rule": "references show who Dave is; invent every expression and pose"
+ },
+ "headline_zone": "top band, over wall above the monitor (leave clear; the headline is added afterwards)",
+ "brand": {
+  "brand": "AppyDave",
+  "palette": {
+   "yellow": "#ffde59 (one accent)",
+   "brown": "#342d2d",
+   "cream": "#faf5ec",
+   "amber": "#c8841a"
+  },
+  "headline_font": "Bebas Neue (added later, not by you)",
+  "presenter": "Dave: middle-aged man, short grey curly hair, black rectangular glasses; match the attached headshots"
+ },
+ "style": {
+  "look": "bright natural editorial YouTube-creator photo, real rooms, soft daylight key on face, a few warm practical lamps, background darker than face but readable",
+  "graphics": "crisp flat modern UI and icons, clean saturated colours for meaning, yellow only as an accent",
+  "glow": "only where a real screen or lamp emits light",
+  "never": [
+   "particles",
+   "light trails",
+   "lens flares",
+   "crowns",
+   "neon rims",
+   "golden haze",
+   "all-amber HDR grade",
+   "sci-fi holograms",
+   "text other than what scene.labels lists"
+  ],
+  "style_reference": "style-reference-board.png (match its rendering, not its content)"
+ },
+ "attach": [
+  "style-reference-board.png",
+  "headshot-appydave-3.png",
+  "headshot-appydave-9.png",
+  "headshot-appydave-12.png"
+ ],
+ "output": "the image only, then one line: what you would change"
+}

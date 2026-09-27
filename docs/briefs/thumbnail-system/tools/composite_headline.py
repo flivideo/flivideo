@@ -39,29 +39,50 @@ else:
 d = ImageDraw.Draw(img)
 words = t['headline'].split()
 x0, y0, x1, y1 = zone
-size = 150
-while size > min_px:
-    f = ImageFont.truetype(FONT, size)
-    if d.textlength(' '.join(words), font=f) <= (x1 - x0) and size <= (y1 - y0): break
-    size -= 4
+zw, zh = x1 - x0, y1 - y0
+def fit(lines):
+    s = 170
+    while s > 20:
+        f = ImageFont.truetype(FONT, s)
+        if max(d.textlength(' '.join(l), font=f) for l in lines) <= zw and s * len(lines) * 0.95 <= zh + (s * 0.9 if len(lines) > 1 else 0): return s
+        s -= 4
+    return s
+one = [words]
+splits = [[words[:i], words[i:]] for i in range(1, len(words))]
+best2 = max(splits, key=fit) if splits else one
+size, lines = (fit(one), one)
+if splits and fit(best2) > size * 1.25: size, lines = fit(best2), best2   # wrap only when it buys real size
+if size < min_px: print('WARNING: headline below minimum', size, file=sys.stderr)
 f = ImageFont.truetype(FONT, size)
-total = d.textlength(' '.join(words), font=f)
-x = x0 if 'left' in name or name == 'spec' else (x1 - total if 'right' in name else x0 + ((x1 - x0) - total) / 2)
-y = y0 if 'top' in name or name == 'spec' else y1 - size
-
+lh = int(size * 0.92)
+block_h = lh * len(lines)
+yb = y0 if 'top' in name or name == 'spec' else y1 - block_h
 shadow = Image.new('RGBA', img.size, (0, 0, 0, 0)); sd = ImageDraw.Draw(shadow)
-sd.text((x + 3, y + 4), ' '.join(words), font=f, fill=(0, 0, 0, 170))
+for i, l in enumerate(lines):
+    tw = d.textlength(' '.join(l), font=f)
+    lx = x0 if 'left' in name or name == 'spec' else (x1 - tw if 'right' in name else x0 + (zw - tw) / 2)
+    sd.text((lx + 3, yb + i * lh + 4), ' '.join(l), font=f, fill=(0, 0, 0, 170))
 img.paste(Image.new('RGB', img.size, 'black'), (0, 0), shadow.filter(ImageFilter.GaussianBlur(6)))
+if '--pill' in sys.argv:   # AppyDave brown panel behind the text: works on busy ground
+    ov = Image.new('RGBA', img.size, (0, 0, 0, 0)); od = ImageDraw.Draw(ov)
+    widths = [d.textlength(' '.join(l), font=f) for l in lines]
+    bx0 = min((x0 if 'left' in name or name == 'spec' else (x1 - w if 'right' in name else x0 + (zw - w) / 2)) for w in widths)
+    od.rounded_rectangle([bx0 - 22, yb - 4, bx0 + max(widths) + 22, yb + block_h + size * 0.12], radius=16, fill=(52, 45, 45, 225))
+    img.paste(ov, (0, 0), ov)
 d = ImageDraw.Draw(img)
-for word in words:
-    w = d.textlength(word, font=f); fill = color
-    key = word.strip('?!.').upper()
-    if hl and key == hl.strip('?!.'):
-        d.rounded_rectangle([x - 10, y + size * .14, x + w + 10, y + size], radius=10, fill='#ffde59'); fill = '#342d2d'
-    elif key in accent_words:
-        fill = accent.get('color', '#ffde59')
-    d.text((x, y), word, font=f, fill=fill)
-    x += w + d.textlength(' ', font=f)
+for i, l in enumerate(lines):
+    tw = d.textlength(' '.join(l), font=f)
+    x = x0 if 'left' in name or name == 'spec' else (x1 - tw if 'right' in name else x0 + (zw - tw) / 2)
+    y = yb + i * lh
+    for word in l:
+        w = d.textlength(word, font=f); fill = color
+        key = word.strip('?!.').upper()
+        if hl and key == hl.strip('?!.'):
+            d.rounded_rectangle([x - 10, y + size * .14, x + w + 10, y + size], radius=10, fill='#ffde59'); fill = '#342d2d'
+        elif key in accent_words:
+            fill = accent.get('color', '#ffde59')
+        d.text((x, y), word, font=f, fill=fill)
+        x += w + d.textlength(' ', font=f)
 img.save(out)
 img.resize((320, 180), Image.LANCZOS).save(out.replace('.png', '-320.png'))
-print(out, name, size)
+print(out, name, size, len(lines), 'line(s)')

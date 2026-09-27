@@ -251,10 +251,10 @@
     "minimum_size_px": 64,
     "position": "Upper left",
     "bbox": [
-      20,
-      35,
-      185,
-      580
+      760,
+      30,
+      960,
+      560
     ],
     "safe_margin_px": 48,
     "color": "#faf5ec",

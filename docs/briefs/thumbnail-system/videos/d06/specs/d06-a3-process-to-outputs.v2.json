@@ -122,10 +122,10 @@
     "minimum_size_px": 64,
     "position": "Top band",
     "bbox": [
-      25,
       40,
-      190,
-      700
+      40,
+      330,
+      520
     ],
     "color": "#faf5ec",
     "accent": {
