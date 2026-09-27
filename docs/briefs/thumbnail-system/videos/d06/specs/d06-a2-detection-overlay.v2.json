@@ -1,0 +1,148 @@
+{
+  "id": "d06.a2",
+  "version": "2.0",
+  "schema_version": "1.1",
+  "art_direction": "Create a premium cinematic YouTube thumbnail: a tight, dramatic portrait of the creator while an AI vision system reads his face live. Thin yellow corner brackets frame his face; fine amber measurement lines run from his eyes and mouth to three floating label chips that read EXPRESSION: SURPRISED, GAZE: CAMERA and HEAD: FRONTAL, crisp and legible, as if the machine is tagging him in real time. He is mid-reaction, eyebrows raised and a half-smile, eyes flicking toward the labels as if catching the AI in the act. Dark warm studio background with soft bokeh; his face lit by a soft key light with a warm amber rim. Photographic realism, shallow depth of field, finished professional-thumbnail quality, not a software mockup.",
+  "video": {
+    "id": "D06",
+    "brand_id": "brand.appydave.thumbnail.v2",
+    "topic": "AI-powered headshot selection",
+    "working_title": "I Turned My Headshots Into an AI Picker",
+    "audience": [
+      "YouTube creators",
+      "AI automation enthusiasts",
+      "Creators automating content production"
+    ],
+    "promise": "Demonstrate a system that uses 106 tagged headshots and AI to select an appropriate thumbnail portrait",
+    "verified_facts": {
+      "headshot_count": 106,
+      "headshots_tagged": true,
+      "ai_selects_headshot": true
+    },
+    "unverified_details": [
+      "Specific scoring algorithm",
+      "Selection accuracy",
+      "Processing speed"
+    ],
+    "fact_sheet": "/Users/davidcruwys/dev/ad/flivideo/docs/briefs/thumbnail-system/videos/d06/d06-factsheet.md"
+  },
+  "creative": {
+    "recipe": "detection_overlay",
+    "story": "AI reads and tags the creator's face",
+    "visual_hook": "Live face-tagging labels on a real, reacting face",
+    "hero": "Presenter face",
+    "emotion": "Amused surprise",
+    "style": "Cinematic photographic technology editorial",
+    "avoid": [
+      "UI mockup look",
+      "Sci-fi hologram clutter",
+      "More than three labels",
+      "Checkerboard backgrounds"
+    ]
+  },
+  "presenter": {
+    "library_id": "presenter.appydave.v1",
+    "usage": "identity_reference",
+    "references": [
+      {
+        "file_id": "headshot-appydave-30.png",
+        "cid": "c30",
+        "why": "frontal surprised, clear face"
+      },
+      {
+        "file_id": "headshot-appydave-1.png",
+        "cid": "c1",
+        "why": "frontal neutral, clear face"
+      },
+      {
+        "file_id": "headshot-appydave-44.png",
+        "cid": "c44",
+        "why": "three-quarter surprised"
+      }
+    ],
+    "performance_to_create": {
+      "expression": "Eyebrows up, half-smile, amused surprise",
+      "gaze": "Eyes flick toward the label chips",
+      "pose": "Head and shoulders, slight lean in",
+      "framing": "Tight close-up, face fills about 45% of frame, right of centre"
+    }
+  },
+  "assets": {
+    "required": [
+      {
+        "id": "identity_references",
+        "source": "attached",
+        "files": [
+          "headshot-appydave-30.png",
+          "headshot-appydave-1.png",
+          "headshot-appydave-44.png"
+        ]
+      }
+    ]
+  },
+  "composition": {
+    "canvas": [
+      1280,
+      720
+    ],
+    "environment": "cinematic_dark",
+    "layout": "Face right of centre; labels float left of the face; headline zone upper left",
+    "labels": [
+      "EXPRESSION: SURPRISED",
+      "GAZE: CAMERA",
+      "HEAD: FRONTAL"
+    ],
+    "label_style": "Dark brown #342d2d rounded chips, cream monospace text, thin amber #c8841a leader lines, yellow #ffde59 corner brackets",
+    "focal_order": [
+      "Face",
+      "Labels",
+      "Headline"
+    ]
+  },
+  "rendering": {
+    "mode": "cinematic_image_generation",
+    "generate_unified_scene": true,
+    "allow_dark_cinematic_background": true,
+    "use_reference_photographs": true,
+    "generate_final_text_in_image": false,
+    "labels_may_render_in_image": true
+  },
+  "text_layer": {
+    "headline": "AI TAGGED MY FACE",
+    "alternates": [
+      "MY FACE IS DATA",
+      "AI READS MY FACE"
+    ],
+    "render_mode": "post_composite",
+    "font": "Bebas Neue",
+    "weight": 400,
+    "size_px": 88,
+    "minimum_size_px": 64,
+    "position": "Lower left",
+    "bbox": [
+      790,
+      35,
+      960,
+      560
+    ],
+    "color": "#faf5ec",
+    "accent": {
+      "words": [
+        "FACE"
+      ],
+      "color": "#ffde59"
+    },
+    "note": "Moved after run: the model placed label chips in the upper-left headline zone"
+  },
+  "variations": {
+    "count": 1
+  },
+  "quality_checks": [
+    "Presenter recognisable as David (face, glasses, hair, age)",
+    "One clear visual event, readable in 1 second",
+    "Cinematic cohesion: lighting, shadow and depth unified",
+    "No checkerboards, no slide or mockup look",
+    "Headline region left calm; headline legible at 320x180 after compositing",
+    "Label text spelled exactly as given"
+  ]
+}
