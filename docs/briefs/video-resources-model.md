@@ -11,7 +11,7 @@ status: proposal — waiting on David (nothing built)
 **Purpose**: David wants one place per video for its "resources" — what launches it on YouTube, what goes to Skool,
 where affiliate links plug in, and the artefacts made for it — visible in a UI and, above all, driven by agents through
 verbs. This doc is detailed enough to build the whole thing in one pass. Nothing is built until David approves it and
-the mock (mock v2: https://claude.ai/artifact/GovQGoVjJ7McNEzGsXv1wL).
+the mock (v2: https://claude.ai/artifact/GovQGoVjJ7McNEzGsXv1wL).
 
 **Ask of David**: the decisions in §9 (each has a recommendation). The rest is design.
 
