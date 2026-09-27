@@ -2,13 +2,17 @@
   "id": "presenter.appydave.v1",
   "display_name": "AppyDave",
   "library": {
-    "location": "portrait library: location TBD from portraits-rsch",
+    "location": "Headshot Picker artefact (from portraits-rsch): https://claude.ai/artifact/EZbkmPK3zb8Vfi7u5soeQF",
     "root": "<PORTRAIT_LIBRARY_ROOT>",
     "manifest": "<PORTRAIT_LIBRARY_ROOT>/manifest.json",
     "interim_fallback_root": "/Volumes/T7/Sync/david-profile/ash-dave-2024-headshots/jpg-transparent/",
     "interim_fallback_manifest": "/Volumes/T7/Sync/david-profile/ash-dave-2024-headshots/headshots-manifest.json",
     "fallback_note": "T7 is an external drive; a missing path means unmounted, not deleted",
-    "asset_resolution_required": true
+    "asset_resolution_required": true,
+    "manifest_url": "https://claude.ai/artifact/EZbkmPK3zb8Vfi7u5soeQF (manifest.json, agents.md; favourites in db collection 'prefs')",
+    "manifest_local": "/Volumes/T7/Sync/david-profile/ash-dave-2024-headshots/headshots-manifest.json",
+    "id_scheme": "cid cN == file headshot-appydave-N.png (stable)",
+    "private": "The artefact is private: only Claude sessions can read it. Chat image tools (ChatGPT) need the PNGs attached plus the 'Copy for AI' block pasted."
   },
   "identity_policy": {
     "preserve_face": true,

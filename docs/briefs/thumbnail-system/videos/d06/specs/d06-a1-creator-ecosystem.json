@@ -1,0 +1,206 @@
+{
+  "id": "d06.a1",
+  "version": "1.0",
+  "video": {
+    "id": "D06",
+    "brand_id": "brand.appydave.light.v1",
+    "topic": "Tagging my headshots into an AI-readable picker",
+    "working_title": "I Turned My Headshots Into an AI Picker",
+    "audience": "Creators who use their own face in thumbnails",
+    "promise": "Your headshots become a library you and your AI can pick from by expression, gaze and framing",
+    "fact_sheet": "/Users/davidcruwys/dev/ad/flivideo/docs/briefs/thumbnail-system/videos/d06/d06-factsheet.md"
+  },
+  "creative": {
+    "recipe": "creator_ecosystem",
+    "story": "One creator, dozens of his own faces, all tagged and ready for AI",
+    "hero": "Presenter, shocked",
+    "secondary_hero": "Wall of his own tagged headshot cutouts",
+    "emotion": "Surprise and amusement",
+    "visual_metaphor": "Creator confronting a wall of himself",
+    "style": "Warm editorial photography on a cream canvas"
+  },
+  "presenter": {
+    "library_id": "presenter.appydave.v1",
+    "portrait_role": "shocked",
+    "file_id": "headshot-appydave-58.png",
+    "cid": "c58",
+    "interim_path": "/Volumes/T7/Sync/david-profile/ash-dave-2024-headshots/jpg-transparent/headshot-appydave-58.png",
+    "expression": "Shocked, mouth open",
+    "pose": "Hands on cheeks",
+    "gesture_status": "Exists in the library as-is; composite the original cutout, do not regenerate the face",
+    "framing": "Head and shoulders, large",
+    "position": "Right",
+    "bbox": [
+      80,
+      600,
+      1000,
+      990
+    ],
+    "lighting": "Soft frontal portrait light with restrained warm rim",
+    "identity_policy": "Preserve original face and glasses"
+  },
+  "assets": {
+    "required": [
+      {
+        "id": "presenter",
+        "source": "portrait_library",
+        "cid": "c58",
+        "status": "provided"
+      },
+      {
+        "id": "face_wall",
+        "source": "portrait_library",
+        "status": "provided",
+        "items": [
+          {
+            "cid": "c29",
+            "file_id": "headshot-appydave-29.png",
+            "interim_path": "/Volumes/T7/Sync/david-profile/ash-dave-2024-headshots/jpg-transparent/headshot-appydave-29.png",
+            "tag": "GRIN"
+          },
+          {
+            "cid": "c86",
+            "file_id": "headshot-appydave-86.png",
+            "interim_path": "/Volumes/T7/Sync/david-profile/ash-dave-2024-headshots/jpg-transparent/headshot-appydave-86.png",
+            "tag": "THINKING"
+          },
+          {
+            "cid": "c20",
+            "file_id": "headshot-appydave-20.png",
+            "interim_path": "/Volumes/T7/Sync/david-profile/ash-dave-2024-headshots/jpg-transparent/headshot-appydave-20.png",
+            "tag": "SKEPTICAL"
+          },
+          {
+            "cid": "c30",
+            "file_id": "headshot-appydave-30.png",
+            "interim_path": "/Volumes/T7/Sync/david-profile/ash-dave-2024-headshots/jpg-transparent/headshot-appydave-30.png",
+            "tag": "SURPRISED"
+          },
+          {
+            "cid": "c33",
+            "file_id": "headshot-appydave-33.png",
+            "interim_path": "/Volumes/T7/Sync/david-profile/ash-dave-2024-headshots/jpg-transparent/headshot-appydave-33.png",
+            "tag": "CONCERNED"
+          },
+          {
+            "cid": "c13",
+            "file_id": "headshot-appydave-13.png",
+            "interim_path": "/Volumes/T7/Sync/david-profile/ash-dave-2024-headshots/jpg-transparent/headshot-appydave-13.png",
+            "tag": "CONFIDENT"
+          }
+        ]
+      }
+    ],
+    "optional": [],
+    "asset_requirements": {
+      "invent_extra_faces": false,
+      "wall_uses_only_supplied_cutouts": true
+    }
+  },
+  "composition": {
+    "canvas": [
+      1280,
+      720
+    ],
+    "background": "Cream #faf5ec editorial canvas, subtle paper texture",
+    "layout": "Two-column: face wall left, hero presenter right",
+    "primary_region": {
+      "bbox": [
+        80,
+        600,
+        1000,
+        990
+      ],
+      "content": "Large shocked presenter cutout"
+    },
+    "secondary_region": {
+      "bbox": [
+        220,
+        40,
+        960,
+        570
+      ],
+      "content": "3x2 grid of small cutouts on light checkerboard cards, each with a brown tag chip"
+    },
+    "supporting_region": {
+      "bbox": [
+        40,
+        40,
+        200,
+        570
+      ],
+      "content": "Headline area"
+    },
+    "graphics": [
+      "Six rounded cards with light checkerboard behind each cutout",
+      "Brown #342d2d tag chips with cream text (Oswald 700)",
+      "One yellow highlight on the SURPRISED card"
+    ],
+    "labels": [
+      "GRIN",
+      "THINKING",
+      "SKEPTICAL",
+      "SURPRISED",
+      "CONCERNED",
+      "CONFIDENT"
+    ],
+    "lighting": "Even warm studio light",
+    "focal_order": [
+      "Presenter face",
+      "Face wall",
+      "Headline"
+    ]
+  },
+  "rendering": {
+    "config_id": "rendering.thumbnail.v1",
+    "generate_background": true,
+    "composite_presenter": true,
+    "generate_final_text_in_image": false,
+    "force_light_mode": true,
+    "mode": "compositing_first",
+    "composite_authentic_assets": true,
+    "maximum_major_elements": 3
+  },
+  "text_layer": {
+    "headline": "WHICH ME?",
+    "alternates": [
+      "106 FACES",
+      "AI PICKS MY FACE"
+    ],
+    "render_mode": "post_composite",
+    "font": "Bebas Neue",
+    "weight": 400,
+    "size_px": 88,
+    "minimum_size_px": 64,
+    "position": "Top left, above the face wall",
+    "bbox": [
+      40,
+      40,
+      200,
+      570
+    ],
+    "safe_margin_px": 48,
+    "color": "#342d2d",
+    "highlight": {
+      "word_background": "#ffde59",
+      "applies_to": "one key word"
+    }
+  },
+  "variations": {
+    "count": 3,
+    "strategies": [
+      "3x2 wall left, presenter right",
+      "Presenter centre, cards fanned around him",
+      "Wall fills background at low contrast, presenter foreground"
+    ]
+  },
+  "quality_checks": [
+    "Presenter identity preserved (original cutout, not a regenerated face)",
+    "Light-mode compliance: cream canvas, dark areas contained and under 25%",
+    "Headline composited afterwards, spelled correctly, legible at 320x180",
+    "Headline does not cover the hero face",
+    "No invented UI: any picker imagery is the supplied screenshot or clearly illustrative",
+    "Tag chips match each cutout's manifest expression",
+    "Wall faces all come from the supplied cutouts"
+  ]
+}

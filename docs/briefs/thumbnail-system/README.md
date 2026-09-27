@@ -21,6 +21,7 @@
 | `execution-instructions.md` | the kickoff prompt to paste into a fresh chat ahead of the configs and a spec |
 | `specs/d0N-aN-<recipe>.json` | the 9 filled specs, one per board tile (also regression examples: re-run them whenever the system changes) |
 | `brief-format.md` | per-video input: fact sheet + `thumbnail_assets` |
+| `videos/<dNN>/` | per-video run folder: `dNN-factsheet.md`, `specs/`, `assets/`. **d06 is the first live test** (3 specs) |
 | `source/board-2026-09-26.png` | the quality bar (the ChatGPT board) |
 | `source/chatgpt-reply-2026-09-27.md` | ChatGPT's "why it worked" reply |
 | `source/extraction-request-2026-09-27.md` | the message that asked ChatGPT for the method |
@@ -50,7 +51,7 @@ fact sheet ─► recipe pick ─► JSON spec ─► image ─► text layer �
 | Input | Frequency | Location |
 |---|---|---|
 | Brand rules | once | `brands/appydave.json` (derived from the `brand-dave:brand` skill) |
-| Presenter portraits | once, refreshed | **portrait library: location TBD from portraits-rsch.** Interim fallback: `/Volumes/T7/Sync/david-profile/ash-dave-2024-headshots/jpg-transparent/` (106 cutouts; search `…/headshots-manifest.json`). The T7 is external: a missing path means it's unmounted, not deleted. |
+| Presenter portraits | once, refreshed | **Headshot Picker artefact** (from portraits-rsch): https://claude.ai/artifact/EZbkmPK3zb8Vfi7u5soeQF, with `manifest.json`, `agents.md` and favourites in db `prefs`. It's private, so only Claude can read it, and ChatGPT gets the attached PNGs. Local files: `/Volumes/T7/Sync/david-profile/ash-dave-2024-headshots/jpg-transparent/` (106 cutouts; search `…/headshots-manifest.json`). The T7 is external: a missing path means it's unmounted, not deleted. |
 | Recipes | once, grows | `recipes.md` |
 | Fact sheet + `thumbnail_assets` | every video | `…/docs/briefs/<batch>/dNN-factsheet.md` |
 | Real screenshots / frames | when the recipe needs them | listed in `thumbnail_assets` |

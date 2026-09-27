@@ -1,0 +1,180 @@
+{
+  "id": "d06.a3",
+  "version": "1.0",
+  "video": {
+    "id": "D06",
+    "brand_id": "brand.appydave.light.v1",
+    "topic": "Tagging my headshots into an AI-readable picker",
+    "working_title": "I Turned My Headshots Into an AI Picker",
+    "audience": "Creators who use their own face in thumbnails",
+    "promise": "Your headshots become a library you and your AI can pick from by expression, gaze and framing",
+    "fact_sheet": "/Users/davidcruwys/dev/ad/flivideo/docs/briefs/thumbnail-system/videos/d06/d06-factsheet.md"
+  },
+  "creative": {
+    "recipe": "process_to_outputs",
+    "story": "Pile of photos in, tagged picker in the middle, a thumbnail out",
+    "hero": "The transformation flow",
+    "secondary_hero": "Presenter, thinking, small",
+    "emotion": "Satisfaction, a system that works",
+    "visual_metaphor": "Input → machine → output",
+    "style": "Clean editorial process diagram"
+  },
+  "presenter": {
+    "library_id": "presenter.appydave.v1",
+    "portrait_role": "thinking",
+    "file_id": "headshot-appydave-16.png",
+    "cid": "c16",
+    "interim_path": "/Volumes/T7/Sync/david-profile/ash-dave-2024-headshots/jpg-transparent/headshot-appydave-16.png",
+    "expression": "Thinking, slight smile",
+    "pose": "Hand on chin",
+    "gesture_status": "Exists in the library as-is; composite the original cutout, do not regenerate the face",
+    "framing": "Waist-up, small",
+    "position": "Bottom right",
+    "bbox": [
+      520,
+      1000,
+      1000,
+      1260
+    ],
+    "lighting": "Soft frontal portrait light with restrained warm rim",
+    "identity_policy": "Preserve original face and glasses"
+  },
+  "assets": {
+    "required": [
+      {
+        "id": "presenter",
+        "source": "portrait_library",
+        "cid": "c16",
+        "status": "provided"
+      },
+      {
+        "id": "picker_ui",
+        "source": "/Users/davidcruwys/dev/ad/flivideo/docs/briefs/thumbnail-system/videos/d06/assets/headshot-picker-ui.jpg",
+        "status": "provided",
+        "use": "Composite as the middle panel, cropped to header + one row of cards"
+      },
+      {
+        "id": "photo_pile",
+        "source": "portrait_library",
+        "status": "provided",
+        "items": [
+          "c29",
+          "c86",
+          "c20",
+          "c58"
+        ],
+        "use": "Fanned stack of 4 cutouts as loose prints"
+      }
+    ],
+    "optional": [
+      "The finished d06 thumbnail once one exists (right panel); until then an illustrative 16:9 thumbnail card"
+    ],
+    "asset_requirements": {
+      "do_not_redraw_the_picker_ui": true
+    }
+  },
+  "composition": {
+    "canvas": [
+      1280,
+      720
+    ],
+    "background": "Cream canvas",
+    "layout": "Three panels left to right joined by two yellow arrows",
+    "primary_region": {
+      "bbox": [
+        260,
+        380,
+        760,
+        900
+      ],
+      "content": "Headshot Picker screenshot in a light card with soft shadow"
+    },
+    "secondary_region": {
+      "bbox": [
+        300,
+        30,
+        720,
+        330
+      ],
+      "content": "Fanned pile of 4 headshot prints"
+    },
+    "supporting_region": {
+      "bbox": [
+        300,
+        930,
+        640,
+        1250
+      ],
+      "content": "Small 16:9 thumbnail card as the output"
+    },
+    "graphics": [
+      "Two thick yellow #ffde59 arrows",
+      "Card shadows",
+      "Presenter small at bottom right"
+    ],
+    "labels": [
+      "PHOTOS",
+      "PICKER",
+      "THUMBNAIL"
+    ],
+    "lighting": "Flat editorial",
+    "focal_order": [
+      "Picker panel",
+      "Arrows",
+      "Output card",
+      "Headline"
+    ]
+  },
+  "rendering": {
+    "config_id": "rendering.thumbnail.v1",
+    "generate_background": true,
+    "composite_presenter": true,
+    "generate_final_text_in_image": false,
+    "force_light_mode": true,
+    "mode": "compositing_first",
+    "composite_authentic_assets": true,
+    "maximum_major_elements": 4
+  },
+  "text_layer": {
+    "headline": "AI PICKS MY FACE",
+    "alternates": [
+      "PHOTOS TO THUMBNAILS",
+      "WHICH ME?"
+    ],
+    "render_mode": "post_composite",
+    "font": "Bebas Neue",
+    "weight": 400,
+    "size_px": 88,
+    "minimum_size_px": 64,
+    "position": "Top band, centred",
+    "bbox": [
+      30,
+      280,
+      200,
+      1000
+    ],
+    "safe_margin_px": 48,
+    "color": "#342d2d",
+    "highlight": {
+      "word_background": "#ffde59",
+      "applies_to": "one key word"
+    }
+  },
+  "variations": {
+    "count": 3,
+    "strategies": [
+      "Left-to-right flow",
+      "Top-to-bottom flow with presenter left",
+      "Picker panel huge, pile and output as insets"
+    ]
+  },
+  "quality_checks": [
+    "Presenter identity preserved (original cutout, not a regenerated face)",
+    "Light-mode compliance: cream canvas, dark areas contained and under 25%",
+    "Headline composited afterwards, spelled correctly, legible at 320x180",
+    "Headline does not cover the hero face",
+    "No invented UI: any picker imagery is the supplied screenshot or clearly illustrative",
+    "Picker panel is the supplied screenshot, not a redraw",
+    "Panel labels legible at 320x180 or dropped"
+  ]
+}

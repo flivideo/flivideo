@@ -1,0 +1,158 @@
+{
+  "id": "d06.a2",
+  "version": "1.0",
+  "video": {
+    "id": "D06",
+    "brand_id": "brand.appydave.light.v1",
+    "topic": "Tagging my headshots into an AI-readable picker",
+    "working_title": "I Turned My Headshots Into an AI Picker",
+    "audience": "Creators who use their own face in thumbnails",
+    "promise": "Your headshots become a library you and your AI can pick from by expression, gaze and framing",
+    "fact_sheet": "/Users/davidcruwys/dev/ad/flivideo/docs/briefs/thumbnail-system/videos/d06/d06-factsheet.md"
+  },
+  "creative": {
+    "recipe": "detection_overlay",
+    "story": "AI reads one face and labels it",
+    "hero": "Presenter, surprised",
+    "secondary_hero": "Annotation callouts with tag values",
+    "emotion": "Curiosity",
+    "visual_metaphor": "Computer vision made visible, a face as data",
+    "style": "Editorial photography with clean technical annotation"
+  },
+  "presenter": {
+    "library_id": "presenter.appydave.v1",
+    "portrait_role": "surprised",
+    "file_id": "headshot-appydave-30.png",
+    "cid": "c30",
+    "interim_path": "/Volumes/T7/Sync/david-profile/ash-dave-2024-headshots/jpg-transparent/headshot-appydave-30.png",
+    "expression": "Surprised, eyebrows up",
+    "pose": "Facing camera, no gesture",
+    "gesture_status": "Exists in the library as-is; composite the original cutout, do not regenerate the face",
+    "framing": "Head and shoulders",
+    "position": "Centre-right",
+    "bbox": [
+      120,
+      420,
+      1000,
+      900
+    ],
+    "lighting": "Soft frontal portrait light with restrained warm rim",
+    "identity_policy": "Preserve original face and glasses"
+  },
+  "assets": {
+    "required": [
+      {
+        "id": "presenter",
+        "source": "portrait_library",
+        "cid": "c30",
+        "status": "provided"
+      }
+    ],
+    "optional": [],
+    "asset_requirements": {
+      "annotations_render_deterministically": true
+    }
+  },
+  "composition": {
+    "canvas": [
+      1280,
+      720
+    ],
+    "background": "Cream canvas with a faint light checkerboard patch behind the presenter",
+    "layout": "Presenter centre-right with three callouts",
+    "primary_region": {
+      "bbox": [
+        120,
+        420,
+        1000,
+        900
+      ],
+      "content": "Presenter cutout"
+    },
+    "secondary_region": {
+      "bbox": [
+        150,
+        470,
+        560,
+        850
+      ],
+      "content": "Thin yellow corner-bracket box around the face"
+    },
+    "supporting_region": {
+      "bbox": [
+        200,
+        880,
+        700,
+        1250
+      ],
+      "content": "Three stacked callout chips joined to the face by thin amber leader lines"
+    },
+    "graphics": [
+      "Yellow face bracket",
+      "Amber #c8841a leader lines",
+      "Brown chips with cream monospace text (Roboto Mono)"
+    ],
+    "labels": [
+      "EXPRESSION: SURPRISED",
+      "GAZE: CAMERA",
+      "FRAMING: HEAD-AND-SHOULDERS"
+    ],
+    "lighting": "Soft frontal",
+    "focal_order": [
+      "Face",
+      "Callouts",
+      "Headline"
+    ]
+  },
+  "rendering": {
+    "config_id": "rendering.thumbnail.v1",
+    "generate_background": true,
+    "composite_presenter": true,
+    "generate_final_text_in_image": false,
+    "force_light_mode": true,
+    "mode": "portrait_plus_vector_overlay",
+    "render_annotations_deterministically": true,
+    "maximum_major_elements": 3
+  },
+  "text_layer": {
+    "headline": "AI TAGGED MY FACE",
+    "alternates": [
+      "MY FACE IS DATA",
+      "AI KNOWS MY FACE"
+    ],
+    "render_mode": "post_composite",
+    "font": "Bebas Neue",
+    "weight": 400,
+    "size_px": 88,
+    "minimum_size_px": 64,
+    "position": "Left, vertically centred",
+    "bbox": [
+      180,
+      40,
+      620,
+      420
+    ],
+    "safe_margin_px": 48,
+    "color": "#342d2d",
+    "highlight": {
+      "word_background": "#ffde59",
+      "applies_to": "one key word"
+    }
+  },
+  "variations": {
+    "count": 3,
+    "strategies": [
+      "Three callouts right",
+      "Callouts on both sides",
+      "Single big EXPRESSION: SURPRISED chip"
+    ]
+  },
+  "quality_checks": [
+    "Presenter identity preserved (original cutout, not a regenerated face)",
+    "Light-mode compliance: cream canvas, dark areas contained and under 25%",
+    "Headline composited afterwards, spelled correctly, legible at 320x180",
+    "Headline does not cover the hero face",
+    "No invented UI: any picker imagery is the supplied screenshot or clearly illustrative",
+    "Callout values are real manifest values for c30"
+  ]
+}
