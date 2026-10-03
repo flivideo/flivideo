@@ -27,9 +27,30 @@ brief: /Users/davidcruwys/dev/ad/brains/.appynet-briefs/brief-transcription-as-a
 
 ## How a pass-2 job reaches the server, and how the result gets back
 - **Rule: the machine that holds the recording writes its transcript files. The server only computes.** This one rule covers the M4 now and the M2 later.
-- **Recording on the server's own disk** (today: FliHub records on the M4, which is the server). Pass 1 finishes, and the job is queued locally by path. The server writes the files beside the recording, and normal sync carries them to Roamy. This is how it already works.
-- **Recording elsewhere** (made on Roamy, or anything once the M2 is the server). After pass 1, the local FliTools **pushes** the job: 16 kHz mono FLAC (about 1 MB a minute) plus the sha256, through the existing upload door with `tier: edit`. The server keeps the audio in its own job store, transcribes it, and holds the result. The submitting machine **pulls** the result by polling the job, then writes `X.json/srt/txt` beside its recording, replacing pass 1 in place. The server only ever answers calls; it never has to call a client back.
+- **Recording on the server's own disk** (today: FliHub records on the M4, which is the server). Pass 1 finishes, and the job is queued locally by path. The server writes the files beside the recording, and normal sync carries them to Roamy.
+- **Recording elsewhere** (made on Roamy, or anything once the M2 is the server). After pass 1, the local FliTools **pushes** the job: 16 kHz mono FLAC (about 1 MB a minute) plus the sha256, through the existing upload door with `tier: edit`. The server keeps the audio in its own job store, transcribes it, and holds the result. The submitting machine **pulls** the result by polling the job, then writes the files beside its recording under the naming rule below. Nothing is ever lost. The server only ever answers calls; it never has to call a client back.
 - **Identity is the sha256.** A second submit of the same content gets the existing job or the finished result. Nothing is transcribed twice.
+
+## File names: the best in the plain name, every engine kept (David's ruling 2026-10-03)
+For one recording, `hub/recordings/01-1-intro-HOOK.mov`:
+```
+hub/transcripts/01-1-intro-HOOK.json .srt .txt                  ← the BEST available; apps read only this
+hub/transcripts/engines/01-1-intro-HOOK.groq.json .srt .txt     ← pass 1, as Groq wrote it
+hub/transcripts/engines/01-1-intro-HOOK.crisper.json .srt .txt  ← pass 2, as CrisperWhisper wrote it
+                 (later engines/01-1-intro-HOOK.elevenlabs.*; an mlx fallback run is engines/…mlx.*)
+```
+- **Best available** = the pass-2 transcript when its health is no worse than pass 1's (fewer or equal suspect reasons; a tie goes to the verbatim one), else pass 1. While pass 2 has not run, the best is pass 1. The plain `.json` records which pass and engine it is (`pass`, `engine.name`, `verbatim`) and lists the engine copies beside it.
+- **Why a subfolder and not `01-1-intro-HOOK.groq.json` beside it** (checked 2026-10-03; the evidence is in the next bullet). A dotted name is misread. A subfolder is skipped by every reader checked, because each scan filters files by a `.txt` name or a filename regex, and a folder named `engines` matches none of them:
+  - FliStudio `assets.list` skips folders (`files()` drops directories, flistudio/server/src/assets/assets.ts `files`), and so does `video.text` (lists only `*.txt`, flistudio/server/src/capabilities/video-text.ts:100).
+  - fli-core still classifies the subfolder as the `transcripts` zone (fli-core/src/classify.ts:71-78).
+  - FliCut never reads the folder; it calls FliTools.
+- **The dotted form fails because** fli-core `parseRecording` allows periods in a slug (fli-core/src/recording.ts:12). So `01-1-intro.groq.txt` reads as a recording "intro.groq", and with a tag (`-HOOK.groq`) it does not parse at all. In FliTools' own folder scans, FliHub would:
+  - triple every take in chapter combine, /combined and export (routes/transcriptions.ts:496, :531, :712; query/export.ts:159);
+  - list engine copies as orphans that "Delete all orphaned" would remove (utils/scanning.ts:62-78, routes/projects.ts:264);
+  - add phantom chapter entries (utils/chapterExtraction.ts:143).
+  FliStudio `video.text` would add phantom takes.
+- **One FliHub change either way:** Undo (`trashTranscriptsFor`, utils/transcriptFiles.ts:36), rename (`renameDerivableFiles`, utils/renameRecording.ts:92) and trash-recording (utils/recordingArtifacts.ts:28) move exact `<base>.{json,srt,txt,vtt,tsv}` only. They must also carry `engines/<base>.*`, or the copies stay behind under a freed name.
+- **Existing transcripts are not touched or swept.** Each one is the plain name already. The first time FliTools writes for that recording (a re-run or a pass-2 upgrade), it first copies the current plain files to `engines/<base>.<its engine>.*`, using the `engine.name` inside it. FliHub's old whisper output, which has no engine field, becomes `engines/<base>.mlx-flihub.*`. Then it writes the new best. Nothing is deleted.
 
 ## How a client on Roamy sees the queue
 - Each machine knows one local thing: **the server's address** (e.g. `mac-mini-m4` / `100.82.235.39:7161`), in `~/.config/appydave/flitools.json`.
@@ -45,7 +66,7 @@ brief: /Users/davidcruwys/dev/ad/brains/.appynet-briefs/brief-transcription-as-a
 | Stays (built, live in FliTools main 41310c3) | Changes |
 |---|---|
 | Providers: groq-whisper, mlx-whisper, crisperwhisper, elevenlabs (off) | Settings: three levels → **one global**, stored on the server; the brand/project reads go |
-| Two passes; `flitools.transcript/2`; energy-refined ends; health rules | Pass 2 goes to **the named server**, not to whichever FliTools took the call |
+| Two passes; `flitools.transcript/2`; energy-refined ends; health rules | Pass 2 goes to **the named server**, not to whichever FliTools took the call. Pass 2 no longer *replaces* pass 1: the best goes in the plain name, each engine's output in `engines/` |
 | On-disk pass-2 queue with claim/lease/complete | The same format doubles as each client's **outbox** |
 | Memory rules: one CrisperWhisper per machine, memory check before each job, unload when empty | A machine role: `server` (runs pass 2) or `client` (pass 1 only; Roamy) |
 | `config.get/set`, `queue.status` | Called **across the tailnet** by the FliStudio gear screen, not only locally |
