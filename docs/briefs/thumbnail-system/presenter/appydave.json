@@ -2,17 +2,16 @@
   "id": "presenter.appydave.v1",
   "display_name": "AppyDave",
   "library": {
-    "location": "Headshot Picker artefact (from portraits-rsch): https://claude.ai/artifact/EZbkmPK3zb8Vfi7u5soeQF",
-    "root": "<PORTRAIT_LIBRARY_ROOT>",
-    "manifest": "<PORTRAIT_LIBRARY_ROOT>/manifest.json",
-    "interim_fallback_root": "/Volumes/T7/Sync/david-profile/ash-dave-2024-headshots/jpg-transparent/",
-    "interim_fallback_manifest": "/Volumes/T7/Sync/david-profile/ash-dave-2024-headshots/headshots-manifest.json",
-    "fallback_note": "T7 is an external drive; a missing path means unmounted, not deleted",
+    "location": "i-appydave presenter library (git: appydave-image-projects/i-appydave) + Headshot Picker artefact for browsing/labels",
+    "root": "/Users/davidcruwys/dev/image-projects/i-appydave/presenter",
+    "manifest": "/Users/davidcruwys/dev/image-projects/i-appydave/presenter/headshots-manifest.json",
     "asset_resolution_required": true,
     "manifest_url": "https://claude.ai/artifact/EZbkmPK3zb8Vfi7u5soeQF (manifest.json, agents.md; favourites in db collection 'prefs')",
     "manifest_local": "/Volumes/T7/Sync/david-profile/ash-dave-2024-headshots/headshots-manifest.json",
     "id_scheme": "cid cN == file headshot-appydave-N.png (stable)",
-    "private": "Shared 'anyone with the link' (view only). A plain script fetch gets Cloudflare's bot check (HTTP 403, 2026-09-27); whether ChatGPT's browsing can read it is untested. Image generation needs the PNGs attached regardless, so attach them from cutout.path."
+    "private": "Shared 'anyone with the link' (view only). A plain script fetch gets Cloudflare's bot check (HTTP 403, 2026-09-27); whether ChatGPT's browsing can read it is untested. Image generation needs the PNGs attached regardless, so attach them from cutout.path.",
+    "storage_provider": "git",
+    "archive": "/Volumes/T7/Sync/david-profile/ash-dave-2024-headshots/ (raws + full JPGs, read-only)"
   },
   "identity_policy": {
     "preserve_face": true,
@@ -25,7 +24,7 @@
   },
   "portraits": {
     "surprised": {
-      "path": "<PORTRAIT_LIBRARY_ROOT>/headshot-appydave-23.png",
+      "path": "/Users/davidcruwys/dev/image-projects/i-appydave/presenter/cutouts/headshot-appydave-23.png",
       "file_id": "headshot-appydave-23.png",
       "status": "provided",
       "expression": "Wide eyes, open mouth",
@@ -36,31 +35,28 @@
         "Discovery",
         "Warnings",
         "Product demonstrations"
-      ],
-      "interim_path": "/Volumes/T7/Sync/david-profile/ash-dave-2024-headshots/jpg-transparent/headshot-appydave-23.png"
+      ]
     },
     "confident": {
-      "path": "<PORTRAIT_LIBRARY_ROOT>/headshot-appydave-15.png",
+      "path": "/Users/davidcruwys/dev/image-projects/i-appydave/presenter/cutouts/headshot-appydave-15.png",
       "file_id": "headshot-appydave-15.png",
       "status": "provided",
       "expression": "Friendly smile",
       "clothing": "Light blue shirt",
       "framing": "Standing, approximately three-quarter body",
-      "pose": "One hand on hip",
-      "interim_path": "/Volumes/T7/Sync/david-profile/ash-dave-2024-headshots/jpg-transparent/headshot-appydave-15.png"
+      "pose": "One hand on hip"
     },
     "thinking": {
-      "path": "<PORTRAIT_LIBRARY_ROOT>/headshot-appydave-103.png",
+      "path": "/Users/davidcruwys/dev/image-projects/i-appydave/presenter/cutouts/headshot-appydave-103.png",
       "file_id": "headshot-appydave-103.png",
       "status": "provided",
       "expression": "Restrained, conversational smile",
       "clothing": "Dark shirt",
       "framing": "Upper body",
-      "note": "Thinking gesture is not present in the original",
-      "interim_path": "/Volumes/T7/Sync/david-profile/ash-dave-2024-headshots/jpg-transparent/headshot-appydave-103.png"
+      "note": "Thinking gesture is not present in the original"
     },
     "outdoor": {
-      "path": "<PORTRAIT_LIBRARY_ROOT>/david-3-elephant.jpg",
+      "path": "/Users/davidcruwys/dev/ad/flivideo/docs/briefs/thumb-research-2026-09-26/david-3-elephant.jpg",
       "file_id": "david-3-elephant.jpg",
       "status": "provided",
       "expression": "Natural conversational expression",
