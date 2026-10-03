@@ -112,8 +112,8 @@
     ],
     "why": "David 2026-09-27: the board was made from 3 neutral/standing shots + 1 expression and invented 8 brilliant expressions; test 1 copied cutouts and looked like Canva. Test 2 (reference mode) invented a pointing pose that exists nowhere in the library and reached board quality.",
     "reference_pool": {
-      "source": "Headshot Picker db collection 'prefs' where fav=true (David's approved likeness set, mostly neutrals)",
-      "read_with": "ArtifactData list prefs, url https://claude.ai/artifact/EZbkmPK3zb8Vfi7u5soeQF",
+      "source": "Headshot Picker db collection 'labels' (David's labels; 'favourites' is now just one label). Prefer label 'neutrals-mujfs8ui' (David's 'Neutrals': baseline images, expression added by the model); while it is empty, use 'neutral-no-expression' then 'favourites'.",
+      "read_with": "ArtifactData list labels, url https://claude.ai/artifact/EZbkmPK3zb8Vfi7u5soeQF",
       "as_of_2026-09-27": {
         "grey_shirt": [
           "c3",
@@ -132,7 +132,8 @@
       },
       "pick_by": "outfit + angle for the scene, NEVER expression",
       "david_does": "curate favourites once; never picks per thumbnail",
-      "gap": "no grey-shirt three-quarter-head reference yet"
+      "gap": "no grey-shirt three-quarter-head reference yet",
+      "changed": "2026-10-03: picker moved from prefs.fav stars to named labels (portraits-rsch v7)"
     }
   }
 }
