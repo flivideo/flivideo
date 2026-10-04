@@ -119,6 +119,13 @@ is tracked in `docs/briefs/doc-skills-blind-review.md`; to see the real state, l
 - Each app's own `scripts/app.sh` sits under both. FliTools is launchd only.
 - **Identity:** every desktop app has an AppyDave icon and its real Dock name. Picks and recipe: `/Users/davidcruwys/dev/ad/brains/brand-dave/app-icons/icon-system.md`. FliCast and FliEdit launchers are signed with a stable per-Mac certificate, so macOS permission grants survive launcher rebuilds. AppyCtrl's dev Dock label stays "Electron", by design upstream.
 
+## Shared data — global / brand / project
+
+Words (`fli.words.json`), video resources (`fli.resources.json`) and brand settings (`fli.brand.json`) follow one
+pattern: the same file at global / brand / project, read through fli-core, lower level wins. Where each lives, who
+reads and writes it, the merge rules, and the one locked write path for words:
+`/Users/davidcruwys/dev/ad/flivideo/docs/shared-data-levels.md`.
+
 ## Temporary folders in a project
 
 - **`-trash/`** — the one temporary area. A leading `-` marks a folder as "not content"; fli-core
