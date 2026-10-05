@@ -68,3 +68,37 @@ David (2026-10-05): "Skool needs to be in the word list, even though it is a rea
 - Tests green, pushed to main. Deploy to the M2 with `deploy-worker.sh`. Ask flivideo-orch for the M4 restart (or do it at a safe point between jobs and say so).
 - Commit v-appydave transcript changes per project, and report them. Roamy sync is orch's.
 - Report to flivideo-orch after each numbered step: commits, scorecard deltas, anything that went the wrong way.
+
+## Phase 2 — David's rulings on the step-7 design (2026-10-05)
+
+**GO, with flivideo-orch's recommendations:**
+1. David alone confirms review decisions for now. Per-brand editors come later (if Jan or Mary edit AITLDR).
+2. Context words are written by hand per rule first. Learning from confirmed decisions comes later, once there's a history.
+3. Format rules live in this stage, not FliCut styling. David: **"16:9 is real."**
+
+Build order (from `/Users/davidcruwys/dev/ad/flivideo/docs/post-transcription-rules.md`):
+- format (16:9) and context (Skool) as `review` rules;
+- then the review list in FliStudio's Words screen (route that UI part to flivideo-orch if it's FliStudio code);
+- then promote rules to `auto` as David confirms them.
+
+Scorecard before and after, as for steps 4–5.
+
+### 8. WRITE UP (design doc, alongside the build): one audit trail for every transcription decision
+David: "I don't know that there's a consistent audit trail of all decisions... it's very scratchy... when transcription is happening across different transcription systems and different rules engines, there's no unified decision on how we got to that final output... a transient audit log for this tied to the transcriptions allows us to learn. When problems happen, we can talk to Claude Code and say, 'This problem happened. This is the reason why. How do you suggest we fix it? Where do you think we should fix it?'"
+- Today the decisions are scattered: health.levelled, health.wordsFromWhisper, splice, chosenBy, prompt-echo, the spelling stage, the codes, the rules, the scorecard history.
+- Design ONE per-take decision log, tied to the transcript:
+  - every stage in order: each engine run (worker, commit, vocabulary), the best-engine choice, splice, levelling, spelling, codes, rules;
+  - for each decision: what changed, why, the evidence, and which code made it.
+- **Transient by design:** it can be deleted at any time and rebuilt by re-running. Say where it lives and how big it gets.
+- Shape it so a person or Claude can answer "why does the SRT say X at 01:23?" in one read. Include a worked example from d01/d02.
+- Say which existing fields fold into it, and whether the scorecard reads from it.
+
+### 9. WRITE UP: an upgrade path to fast classifier models inside the same post-transcription stage
+David: "we've gone from deterministic to non-deterministic... because of the research we've been doing in other areas around Jev/Clef and other categorization-based models, there's a whole new class of ways of solving this problem that might be free or near-free and fast. That's what we might want to use in the future. I'm not saying we use it now... we have the ability to upgrade to these options through the same little post-review package... none of that makes sense until such time as you've got a bit of an audit trail to say whether that would be a good way to go."
+- NOT built now. Design the rule stage so a decision provider is pluggable:
+  - today's deterministic rules are one provider;
+  - a classifier (e.g. a small categorisation model, as in the Jev/Clef research) could be another, behind the same interface;
+  - its decisions go into the same audit log with their confidence;
+  - it's measured against the deterministic baseline and the confirmed review decisions before it's ever allowed to act.
+- Find the Jev/Clef research first. Search /Users/davidcruwys/dev/ad/brains (e.g. llm-economics/, the Captain's Log classification comparison) and cite what you found. If it isn't found, say so; don't invent it.
+- Say what the audit trail (step 8) must record for that comparison to be possible.
