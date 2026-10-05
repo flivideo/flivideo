@@ -13,7 +13,7 @@ David: "when we get to new videos in the future, like D7 or whatever, I don't ha
 - "CrisperWhisper does some really good stuff, but sometimes it fails, and it may need the Groq or the mlx-whisper fallback mechanisms, mostly at a word level, not at a full structure level."
 - "We got time... I don't care if we had to rerun everything again, as long as we can keep track of whether we've improved or not."
 - Project codes (D01, A01…Z99) are "a never-changing code"; handle them "by a programmatic mechanism rather than a word list".
-- Word lists "can have sources that are not just here". "Cardi is the name of one of my agents, and we're going to have agents as a first-class citizen in the future."
+- Word lists "can have sources that are not just here"; agents will be first-class citizens in the future. (Correction, David 2026-10-05: the agent is **Cutty**. "Cardi" is a mishearing of Cutty and is now Cutty's heardAs.)
 
 ## Work, in order
 
@@ -55,7 +55,13 @@ David: "when we get to new videos in the future, like D7 or whatever, I don't ha
 - Keep the ElevenLabs Scribe slot in the design (off; David: "another day").
 
 ### 6. Word-list sources (design note only, no build)
-- Write a short note in `/Users/davidcruwys/dev/ad/flivideo/docs/shared-data-levels.md`: word lists may gain sources beyond the three files, e.g. an agent registry (agent names such as Cardi, Cutty) once agents are first-class. Who would own it, and how it merges.
+- Write a short note in `/Users/davidcruwys/dev/ad/flivideo/docs/shared-data-levels.md`: word lists may gain sources beyond the three files, e.g. an agent registry (agent names such as Cutty) once agents are first-class. Who would own it, and how it merges.
+
+### 7. Real-word corrections: ARCHITECT FIRST, do not build yet
+David (2026-10-05): "Skool needs to be in the word list, even though it is a real word... this fits in with the same problem as the code: should it be a post-review rather than letting the model fix these words that are real? Maybe this is a specific filter that you run post-transcription, and maybe we're going to have a custom rules system around this... This is not just a simple go-and-do-it matter. This is something we need to think through, architect, and build properly."
+- Cases: "school"→Skool, "I"→AI, "skill"/"school", "69"→16:9; the project codes (step 4) are the same family.
+- Write a design (no code): a post-transcription rules stage. Cover where it sits (after the merge, before SRT/TXT); the rule kinds (pattern codes, context rules, engine-vote, word-list names); per-occurrence decisions with evidence; how a rule is authored and reviewed (David's review vs automatic); a record of every change made, so it can be undone and scored; and how it relates to step 5's levelling and the word store levels.
+- Deliver it as a short doc in `/Users/davidcruwys/dev/ad/flivideo/docs/` and report to flivideo-orch for David's review. Step 4 can still ship as the first, narrow rule (codes), but name it as an instance of this stage.
 
 ## Rules
 - Deterministic code only. Build in the `flitools-build` worktree; never edit the live tree that launchd runs.
