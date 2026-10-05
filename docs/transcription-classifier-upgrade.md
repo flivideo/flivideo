@@ -29,10 +29,20 @@ measured before it may act.
 - **The one measured classification comparison** is Captain's Log's, and it was LLM against LLM (Haiku vs Sonnet on 329
   captures). Jev was never run: "the only measured one".
   (`/Users/davidcruwys/dev/ad/apps/captains-log/docs/reports/haiku-enricher-shadow-2026-09-25.md`)
-- **"Clef": not found.** I searched clef, cleff, klef, kleff and jev-clef, case-insensitive, across
-  `/Users/davidcruwys/dev/ad/brains`, `…/apps`, `…/appydave-plugins` and `/Users/davidcruwys/dev/agents`. The only
-  hits were music-notation files in Python packages. As a check, the same search finds "captain" hundreds of times.
-  It may be a mishearing (of Kev? of "classifier"?), but nothing confirms that. **David: what is Clef?**
+- **Clef** (David: "Jev now has competitors from Cloudflare, and it's called Clef"). It isn't written up in the brains
+  on the M4 or on Roamy yet, so these facts come from the public sources, checked 2026-10-05:
+  - Cloudflare launched it 2026-10-01. There are two sizes, **Clef** and **Clef-flash**, both open-weights decision
+    models and **API-compatible with Jev** (state plus typed questions in, a probability per option out).
+    (https://blog.cloudflare.com/clef-decision-models/ ; https://developers.cloudflare.com/workers-ai/models/clef/)
+  - Clef is 27B, fine-tuned from Qwen3.8-27B, and it also reads images. It's **on Ollama**, so it can run locally.
+    (https://ollama.com/library/clef)
+  - Hosted on Workers AI: Clef-flash 9¢ and Clef 24¢ per million tokens, against Jev's 4.2¢ (community comparison,
+    r/LocalLLaMA). OpenAI announced a Decisions API in limited preview on 2026-09-29, so there are now three in two
+    weeks (https://flaviocopes.com/clef/).
+  - **What this means here:** the provider interface below is Jev-shaped, so Jev, Clef and Clef-flash all plug into it
+    with the same request. A 27B model is too heavy for the memory-squeezed M4. It might fit on the M2 (32 GB), but the
+    M2 runs CrisperWhisper and has one-job memory rules. Clef-flash's size and Von (CPU) are the local candidates to
+    measure.
 
 ## The shape: candidates, providers, an arbiter
 
@@ -103,10 +113,9 @@ interface DecisionProvider {
 
 ## Recommendation (when the trail exists, not now)
 Build Layer 1 of the trail, then the candidate records in Layer 2. Then run **Von in shadow on the "I"/AI candidates**
-for D01–D07, scored against David's verdicts on a sample. Hosted Jev is tried only if Von falls short and David agrees
-to send text out.
+for D01–D07, scored against David's verdicts on a sample. Clef-flash, local through Ollama, is the next candidate. Hosted Jev or Clef is tried only if the local ones fall
+short and David agrees to send text out.
 
 ## Not decided (David)
-1. What "Clef" is (not found in the research).
-2. Whether a hosted provider (Jev) is acceptable at all, or local only.
-3. The promotion gate numbers.
+1. Whether a hosted provider (Jev) is acceptable at all, or local only.
+2. The promotion gate numbers.
