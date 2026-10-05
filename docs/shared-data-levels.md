@@ -77,10 +77,33 @@ themselves.
   includes these names.
 - **Direct (no FliStudio):** `rememberWord('project', { projectDir }, entry, 'agent:<app>')`.
 
+## Word-list sources beyond the three files (design note, not built — 2026-10-05)
+
+David: word lists "can have sources that are not just here", and agents will be first-class citizens. The first such
+source is an **agent registry**: the names of David's agents (Cutty, and those to come), each with how a transcriber
+mishears it (Cutty ← "Cardi", "cutting").
+
+- **Owner.** The registry belongs to whatever comes to own agents, not to any Fli app. Fli apps only read it. No app
+  copies agent names into `fli.words.json` by hand, because two copies drift (Cardi was briefly a separate name before
+  David's correction).
+- **Shape it would need.** The same as a `fli.words.json` name: `term`, optional `heardAs`, and a stamp. fli-core reads
+  it with the same zod `WordName` schema, so every reader handles it unchanged.
+- **Where it merges.** As an extra level *above* global: registry → global → brand → project, nearest wins.
+  - A project can still turn an agent name off with `off`, or spell it differently.
+  - fli-core's `readWords` gains the source as an option (e.g. `extraSources: [{ level: 'agents', file }]`), and the
+    merged result reports which source each name came from (`from: 'agents'`).
+- **Who reads it.** Every reader of the merged words, through `readWords`:
+  - FliTools: the Groq prompt, the spelling stage on SRT/TXT, word-level levelling, and the scorecard.
+  - FliCut, and FliStudio's words screen, which shows the source as read-only.
+- **Not decided.** Where the registry lives (a file in appydave-config, or a service), and whether an agent's name is
+  global or per brand. Nothing is built until agents have an owner.
+
 ## Not in this pattern
 
 - `.flihub-state.json` `glingDictionary` and FliHub's own `config.json` `glingDictionary` are FliHub's legacy lists.
   FliStudio `words.import-flihub` copies them into `fli.words.json`.
-- Corrections made inside an edit stay in that edit's cut file. Nothing here rewrites a transcript.
+- Corrections made inside an edit stay in that edit's cut file. The merged words never rewrite a transcript's JSON
+  words. FliTools applies names and rules to the SRT/TXT it writes, and levels words across engines; its record
+  is `health.levelled` (see flitools `docs/architecture.md`).
 
 Source: fli-core `src/words.ts`, `src/resources.ts`, `src/brand-settings.ts`, and the fli-core README.
