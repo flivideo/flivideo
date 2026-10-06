@@ -1,7 +1,7 @@
 # YouTube channel sync, brand publishing settings and playlists — architecture
 
 **Purpose**: Decide where YouTube channel data, per-brand publishing settings and credentials live in the Fli suite, and the shape of the local mirror, before the read side is built.
-**For Agents**: Read before touching YouTube sync, brand publishing settings (CTAs, affiliates, playlists) or the Launch Playlists step. Status: **proposal, awaiting David's go** (2026-10-06). Brief: `/Users/davidcruwys/dev/ad/flivideo/docs/briefs/youtube-channel-sync-brief-2026-10-06.md`.
+**For Agents**: Read before touching YouTube sync, brand publishing settings (CTAs, affiliates, playlists) or the Launch Playlists step. Status: **approved by David 2026-10-06; read side built and live** (see *As built* at the end). Brief: `/Users/davidcruwys/dev/ad/flivideo/docs/briefs/youtube-channel-sync-brief-2026-10-06.md`.
 
 Already approved by David (not re-argued here): **mirror, not live**; a brand **YouTube** page in FliStudio; Launch's Playlists step offers the brand's real playlists; **writing back to YouTube is later**.
 
@@ -192,3 +192,26 @@ Out of scope: OAuth, any write to YouTube, Studio fill, deleting old files.
 - appydavelabs handle: brands.json says `claudinglab`, channels.json says `@appydavelabs`. Sync resolves by **channel id** (`UCLyscJVSp1l_V6gZg5F5wZg`), which settles it, and corrects brands.json's handle.
 - Whether the API key sees private/unlisted playlists (see §3).
 - Local fli-core clone is one tag behind origin (v0.18.0 vs v0.19.0); pull before building.
+
+## As built (2026-10-06)
+
+| Piece | Where |
+|---|---|
+| Mirror library | fli-core v0.20.0 `src/youtube.ts` (`syncYouTubeChannel`, `readYouTube*`, `YouTubeReader`); `brand-settings.ts` gains `publish`, `youtube`, `studioDefaults` |
+| Front door | FliStudio `server/src/capabilities/youtube.ts`: `youtube.channel`, `youtube.playlists`, `youtube.videos`, `youtube.sync`, `brand.publish`, `brand.playlists.set` (★ human-only); refusal `not-set-up` (-32027); `GET /api/youtube-thumb` |
+| Screens | `/b/<brand>?view=youtube` (`client/src/screens/BrandYouTube.tsx`); Launch's Playlists slot (`PlaylistPick` in `UploadWizard.tsx` `BrandDefault`) |
+| Brand settings | `v-appydave/fli.brand.json` `publish` (FliHub brand-config verbatim, `_meta.source` kept) + `studioDefaults`; `v-aitldr` `studioDefaults` |
+| Repointed | FliHub `utils/managedBrandConfig.ts` (read + POST write the `publish` block; bundled file is the fallback); YLO `brand-input-contract.md`; POEM `brand-config.MOVED.md`; `channels.json` `meta.superseded_by` |
+
+Changes from the plan above:
+
+- **Transcripts are not part of the sync.** fli-core may import only `zod` and `node:*`, so the `youtube-transcript`
+  scraper did not move. Existing `transcript.txt` files from yt-mirror are kept and shown (`hasTranscript`).
+- **No empty `publish` block** was written for aitldr / appydavelabs; `brand.publish` returns `publish: null`.
+- **FliHub's editor keeps working**: its POST writes the `publish` block of `fli.brand.json` (other fields kept), rather
+  than becoming read-only.
+- **Missing key / channel** refuse as `not-set-up`, not `missing` (which means a left-out input field).
+- Mirrored thumbnails get Copy image and copy path; **no Finder icon**, because `path.reveal` only reaches inside a
+  brand root and the mirror lives outside every brand root.
+- yt-mirror (`/Users/davidcruwys/dev/ad/apps/yt-mirror/`) is untouched and unused; delete only on David's word.
+
