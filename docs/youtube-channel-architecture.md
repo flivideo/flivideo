@@ -11,7 +11,7 @@ Already approved by David (not re-argued here): **mirror, not live**; a brand **
 |---|---|---|
 | 1 | Where does sync live? | A `youtube` module in **fli-core** (API client + mirror reader/writer + schemas), driven by **FliStudio capabilities** `youtube.*`. yt-mirror is retired after its logic is ported. |
 | 2 | Brand publishing settings' home | A `publish` block in each brand's **`fli.brand.json`** (git-tracked brand root), copied verbatim from FliHub's brand-config, plus a `youtube` block for playlist choices. Mirrored YouTube facts never go in it. |
-| 3 | Keys and auth | One suite-wide read **API key** in `~/.secrets` (env name only in code). Later, OAuth: one Google "Desktop app" client, a **refresh token per channel** outside git. Nothing secret in brands.json or fli.brand.json. |
+| 3 | Keys and auth | One suite-wide read **API key** in `~/.secrets` (env name only in code). Later, OAuth: one Google "Desktop app" client, a **refresh token per channel** in a mode-600 file or `~/.secrets` (NordPass backup), never in git or the Keychain. Nothing secret in brands.json or fli.brand.json. |
 | 4 | Mirror shape | Per brand: `channel.json`, `playlists.json` (with members), `videos/<id>/…`, `sync.json`. Full re-list each sync; ~25–45 quota units per channel. |
 | 5 | Freshness | "Sync now" (capability) + optional daily launchd job calling the FliStudio CLI. Age shown on the page; amber after 7 days. |
 | 6 | Joins | `youtubeId` from `publish.published` ↔ mirrored video id. Playlist membership read from the mirror on both sides. |
@@ -117,7 +117,7 @@ The docs **do not say** whether `playlists.list?channelId=` with an API key incl
 **Plan (write phase, later, not built):**
 
 - One OAuth client (type "Desktop app") in the same Cloud project; client id/secret in `~/.secrets`.
-- **One refresh token per channel**, gained by the channel owner signing in once through a `youtube.connect` human-only capability (loopback + PKCE, scope `youtube.force-ssl`). Stored outside git in the macOS Keychain (service `flivideo.youtube`, account = brand key); fallback `~/.config/flivideo/youtube-tokens/<brand>.json` at mode 600, git-ignored and outside any repo.
+- **One refresh token per channel**, gained by the channel owner signing in once through a `youtube.connect` human-only capability (loopback + PKCE, scope `youtube.force-ssl`). Stored at `~/.config/flivideo/youtube-tokens/<brand>.json`, mode 600, outside any repo (or as entries in `~/.secrets`), with NordPass as the human backup. **Not the macOS Keychain**: David's rule is NordPass for people and `~/.secrets` for machines, and the Keychain doesn't travel between his machines (M4, Roamy).
 - brands.json only ever holds the **non-secret** channel id. `fli.brand.json` never holds credentials.
 - Writes are human-only capabilities (`youtube.playlist.add`, …); agents propose, a person approves.
 - With a token, sync can switch to `mine=true` and see private/unlisted items.
