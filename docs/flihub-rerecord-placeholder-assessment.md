@@ -211,3 +211,22 @@ recommended).
   (`manage.ts:191-197` vs `renameRecording.ts:286-322`).
 - Trash takes `.json/.srt/.txt` but rename carries `.vtt/.tsv` too (`recordingArtifacts.ts:29` vs
   `renameRecording.ts:93`).
+
+## David's model — RULED 2026-10-07 (supersedes the §2 held question)
+
+In David's words, condensed (flivideo-orch session, 2026-10-07):
+
+- **Takes live in the inbox, not in recordings.** He commonly does 5–10 bad takes before accepting one. Bad takes rarely reach recordings.
+- **Two normal inbox exits:** (a) ~60% of the time: pick the good take → everything else in the inbox is deleted. (b) He forgot to send a good take and has moved on to the next segment(s) → he must send *several* inbox takes in, as consecutive segments, and delete only the remaining bad ones.
+- **A segment is a PIECE of the chapter.** A chapter = one or more sequential segments, each recorded clean (record, breathe, set up the next scene, record). All segments play, in order, with no editing. "Retake" is the wrong word in recordings.
+- **The case this work is for:** a recorded segment that *becomes* bad — either deliberately (a placeholder, to be re-recorded when he knows more) or retroactively ("that recording is wrong") — so he comes back later and re-records that segment, **and possibly the segments after it**.
+
+### What follows (flivideo-orch's ruling on the design)
+
+1. **Inbox, multi-send:** select one or more takes → "send as segments N, N+1…" in the order picked → delete the rest. Covers exit (b).
+2. **Inbox, target a segment:** the send defaults to "next segment"; it can instead target "replace chapter 6, segment 1". The old file goes to `-trash/` (never lost) and the new take takes its number. **Same number in, same number out — no renumber**, so FliCut paths and transcripts stay keyed.
+3. **Re-record from here:** replacing segment N *and those after it* is the same action for a run (N..M). If the new run is shorter, the leftover old segments go to trash; a renumber happens only through the one guarded, logged action this assessment already recommends.
+4. **Placeholder is a flag on a segment** (metadata, not a filename): shown in FliHub recordings and FliStudio as "to re-record", so the list of what's left is visible.
+5. **FliStudio wording fix (small):** `video.text` marks the highest segment as `latest` (`flistudio/server/src/capabilities/video-text.ts:114-118`, contract `shared/src/contracts.ts:1424`) and the ladder's `why` text says "retakes included" (`best-transcript.ts:227-228`). The stitching itself is already right — it uses every segment in order. Drop `latest` and say "segments", not "takes/retakes".
+
+**First build step stays "Replace this segment"** (items 2 + 4; ≈1 day, FliHub), then multi-send (1), then re-record-from-here (3).
