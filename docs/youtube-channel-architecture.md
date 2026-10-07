@@ -215,3 +215,14 @@ Changes from the plan above:
   brand root and the mirror lives outside every brand root.
 - yt-mirror (`/Users/davidcruwys/dev/ad/apps/yt-mirror/`) is untouched and unused; delete only on David's word.
 
+
+### First live sync (2026-10-07, read-only key from `~/.secrets`)
+
+| Channel | Videos | Playlists | Memberships | Quota units |
+|---|---|---|---|---|
+| aitldr | 406 | 9 | 87 | 29 |
+| appydave | 185 | 36 | 269 | 46 |
+| appydavelabs (`@appydavelabs`) | 49 | 20 | 56 | 24 |
+
+99 units for all three (estimate was ~70). Every playlist the key sees is public, and each one's visible members match
+its `itemCount`. Private playlists, if any, are invisible to an API key and still unmeasured.
