@@ -229,4 +229,6 @@ In David's words, condensed (flivideo-orch session, 2026-10-07):
 4. **Placeholder is a flag on a segment** (metadata, not a filename): shown in FliHub recordings and FliStudio as "to re-record", so the list of what's left is visible.
 5. **FliStudio wording fix (small):** `video.text` marks the highest segment as `latest` (`flistudio/server/src/capabilities/video-text.ts:114-118`, contract `shared/src/contracts.ts:1424`) and the ladder's `why` text says "retakes included" (`best-transcript.ts:227-228`). The stitching itself is already right — it uses every segment in order. Drop `latest` and say "segments", not "takes/retakes".
 
-**First build step stays "Replace this segment"** (items 2 + 4; ≈1 day, FliHub), then multi-send (1), then re-record-from-here (3).
+**Correction (David, same day):** replacement is ~90% of cases, not all. **Insert** (segments 1 and 2 are fine but something belongs between them) and **reorder** (move a segment up/down) are part of the same feature, not a separate one. So item 2's "no renumber" holds for Replace only; Insert, Reorder and close-up go through the one guarded, journalled renumber (§5, Phase 3).
+
+**Validated requirement for the build:** `/Users/davidcruwys/dev/ad/flivideo/docs/briefs/flihub-segment-editing-requirement-2026-10-07.md` (handed to the Buzz coding team, D07 job 2).
