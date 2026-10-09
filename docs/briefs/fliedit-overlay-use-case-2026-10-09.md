@@ -31,3 +31,12 @@ Wipe/slide transitions (ffmpeg xfade) · Ken Burns pan/zoom keyframes · burned-
 
 ## Not verified
 Any live call; d06 cut fps vs 25 fps canvas; image render quality; full-length render time; d07 (no cut yet).
+
+## Live verification (2026-10-09, later the same morning)
+Started with `scripts/app.sh start`, stopped with `scripts/app.sh stop` (was not running before). Throwaway project in a scratchpad, test media made with ffmpeg.
+- **RPC: yes.** `POST /v1/rpc` (JSON-RPC 2.0) + `POST /v1/call`, Bearer token from control.json, door on 127.0.0.1:7171 (7170 is dev-server only). 62 verbs, matches api/openrpc.json. `/v1/openrpc.json` needs the token (FliCast's is open).
+- **Docs page: yes, reference only.** `GET /v1/docs`, no login, generated from OpenRPC (`referencePage()` in `src/main/control/openrpc.ts`): filter, families, params, principal, idempotent, confirm, refusals. Gaps vs FliCast (ADR-0005/0008): page served `mode:"reference"`, `rpcPath:null` so the Fire form is off; no dry-run; no capability-console window (`agent:console`, dry-run default, undo per result); only reachable via Help menu; no "which copy" banner; no published snapshot.
+- **Driveable: yes for every edit, not the viewer.** No verb for play/pause, J/K/L, step, prev/next edit, Home/End, seek/playhead, zoom/zoom-to-fit, snapping, select/select-all, inspector tabs, go-to-marker/chapter/caption. Human-only: `edit.pickPath`, `edit.reveal`, `export.start` overwrite, `system.quit/restart` force.
+- **Live run: all pass.** context.select → edit.create → source.add (mp4 + png) → clip.place V1 (linked audio created) → track.add overlay O1 → clip.place png on O1 → transition.set fade → preview.frame (real PNGs, 86 ms; overlay visible) → history.undo → dry-runs via RPC, CLI and /v1/call (patch + inverse, version unchanged). edit.reveal as agent refused (-32001).
+- **Oddities:** `context.get` returned null after edit.create with an edit open; CLI dry-run went out as `cli` without `--as`.
+- **Not verified:** UI repaint after agent edits; export.start; preview.chunk; events stream; pages side by side in a browser.
