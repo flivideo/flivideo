@@ -159,5 +159,5 @@ That is a design-sized bundle, not a fix. It belongs with the other openrig work
 | Repo | Commit | What |
 |---|---|---|
 | `flivideo/fli-core` | `fc55518` (v0.23.0) | `renderApiPage` `dryRunDefault`, `undoBy`, `surface`; `answerJsonRpc` `refuseNotifications` |
-| `flivideo/fliedit` | see the report to flivideo-orch | console window + preload + IPC, door hardening, open spec, snapshot, `context.get`, CLI principal, version |
-| `flivideo/flicast` | see the report to flivideo-orch | door principal + dryRun, page text, uat story 49 |
+| `flivideo/fliedit` | `277e475` | console window + preload + IPC, door hardening, open spec, snapshot, `context.get`, CLI principal, version |
+| `flivideo/flicast` | `4c85817` (full uat: 51 pass, 1 human-only, 0 fail) | door principal + dryRun, page text, uat story 49 |
