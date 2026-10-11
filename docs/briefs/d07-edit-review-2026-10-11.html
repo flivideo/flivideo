@@ -1,0 +1,267 @@
+<title>D07 Edit Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Roboto:ital,wght@0,400;0,500;0,700;1,400&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout: one reading column; numbers strip, then the story (timeline → where time went → the names), then problems → solutions as a ranked list, then questions for the talk. */
+:root {
+  color-scheme: light;
+  --brand-brown: #342d2d;
+  --brand-gold: #ccba9d;
+  --brand-yellow: #ffde59;
+  --brand-amber: #c8841a;
+  --brand-muted: #7a6e5e;
+  --brand-near-white: #faf5ec;
+  --brand-surface: #f0ebe4;
+  --brand-linen: #e8e0d4;
+  --brand-border: #d4cdc4;
+  --brand-chrome: #1a1515;
+  --brand-dark-surface: #25201e;
+  --brand-blue: #2E91FC;
+  --ok: #4f7a4a;
+  --warn: #b5524a;
+  --f-display: "Bebas Neue", "Oswald", Impact, sans-serif;
+  --f-head: "Oswald", "Arial Narrow", sans-serif;
+  --f-body: "Roboto", system-ui, -apple-system, sans-serif;
+  --f-mono: "Roboto Mono", ui-monospace, Menlo, monospace;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--brand-near-white); color: var(--brand-brown); font-family: var(--f-body); font-size: 16px; line-height: 1.6; }
+.wrap { max-width: 980px; margin: 0 auto; padding-inline: 20px; padding-block: 28px 64px; }
+header { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin-bottom: 8px; }
+.logo-badge { display:inline-block; background:#342d2d; border-radius:6px; padding:4px 10px 2px; font-family:"Bebas Neue",Oswald,sans-serif; letter-spacing:.04em; line-height:1.1; font-size: 22px; }
+.logo-badge .a { color:#ccba9d; } .logo-badge .d { color:#ffde59; }
+.eyebrow { font-family: var(--f-head); text-transform: uppercase; letter-spacing: .12em; font-size: 13px; color: var(--brand-muted); }
+h1 { font-family: var(--f-display); font-weight: 400; font-size: clamp(44px, 8vw, 76px); line-height: .95; margin: 14px 0 10px; letter-spacing: .01em; text-wrap: balance; }
+h2 { font-family: var(--f-head); text-transform: uppercase; letter-spacing: .06em; font-weight: 600; font-size: 22px; margin: 48px 0 6px; text-wrap: balance; }
+h3 { font-family: var(--f-head); font-weight: 600; font-size: 18px; margin: 0 0 4px; text-wrap: balance; }
+p { margin: 0 0 12px; max-width: 68ch; }
+.lede { font-size: 19px; max-width: 64ch; }
+.lede mark { background: linear-gradient(transparent 62%, var(--brand-yellow) 62%); color: inherit; padding: 0 2px; }
+.sub { color: var(--brand-muted); font-size: 14px; margin-bottom: 14px; }
+.num { font-variant-numeric: tabular-nums; }
+code, .mono { font-family: var(--f-mono); font-size: .88em; }
+
+/* numbers strip */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1px; background: var(--brand-border); border: 1px solid var(--brand-border); border-radius: 8px; overflow: hidden; margin-top: 24px; }
+.stat { background: var(--brand-surface); padding: 14px 16px; min-width: 0; }
+.stat b { display: block; font-family: var(--f-display); font-weight: 400; font-size: 40px; line-height: 1; font-variant-numeric: tabular-nums; }
+.stat span { font-size: 13px; color: var(--brand-muted); line-height: 1.35; display: block; margin-top: 6px; }
+.stat.hot b { color: var(--brand-amber); }
+
+/* charts */
+.chart { background: #fffdf8; border: 1px solid var(--brand-border); border-radius: 8px; padding: 16px; overflow-x: auto; }
+.chart svg { display: block; width: 100%; min-width: 620px; height: auto; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; color: var(--brand-muted); margin-top: 10px; }
+.legend i { display: inline-block; width: 12px; height: 12px; border-radius: 2px; vertical-align: -1px; margin-right: 6px; }
+
+/* bars */
+.bars { display: grid; gap: 8px; }
+.bar { display: grid; grid-template-columns: minmax(110px, 180px) 1fr 70px; gap: 12px; align-items: center; font-size: 14px; }
+.bar .track { background: var(--brand-linen); height: 18px; border-radius: 3px; overflow: hidden; }
+.bar .fill { height: 100%; background: var(--brand-brown); }
+.bar .fill.am { background: var(--brand-amber); }
+.bar .fill.gd { background: var(--brand-gold); }
+.bar .v { text-align: right; font-variant-numeric: tabular-nums; color: var(--brand-muted); }
+
+/* tables */
+.tbl { overflow-x: auto; border: 1px solid var(--brand-border); border-radius: 8px; background: #fffdf8; }
+table { border-collapse: collapse; width: 100%; font-size: 14.5px; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--brand-linen); vertical-align: top; }
+th { font-family: var(--f-head); font-weight: 500; text-transform: uppercase; letter-spacing: .06em; font-size: 12px; color: var(--brand-muted); background: var(--brand-surface); }
+tr:last-child td { border-bottom: 0; }
+td.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.missed { color: var(--warn); font-weight: 700; }
+
+/* problems */
+.probs { display: grid; gap: 14px; margin-top: 14px; }
+.prob { display: grid; grid-template-columns: 44px 1fr; gap: 4px 14px; padding: 16px 18px; background: #fffdf8; border: 1px solid var(--brand-border); border-radius: 8px; }
+.prob .rank { font-family: var(--f-display); font-size: 36px; line-height: 1; color: var(--brand-amber); }
+.prob .body { min-width: 0; }
+.prob .ev { font-size: 14px; color: var(--brand-muted); margin: 2px 0 8px; }
+.prob .fix { border-left: 3px solid var(--brand-yellow); padding-left: 12px; margin: 0; }
+.prob .fix b { font-family: var(--f-head); font-weight: 500; text-transform: uppercase; letter-spacing: .06em; font-size: 12px; color: var(--brand-muted); display: block; }
+.tag { display: inline-block; font-family: var(--f-head); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--brand-border); color: var(--brand-brown); margin-left: 8px; vertical-align: 2px; white-space: nowrap; }
+.tag.exist { background: var(--brand-yellow); border-color: var(--brand-yellow); }
+.tag.small { background: var(--brand-linen); }
+.tag.big { background: transparent; border-color: var(--brand-amber); color: var(--brand-amber); }
+
+.split { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.panel { background: var(--brand-surface); border-radius: 8px; padding: 16px 18px; min-width: 0; }
+.panel ul { margin: 6px 0 0; padding-left: 18px; }
+.panel li { margin-bottom: 6px; }
+.asks { counter-reset: q; list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 10px; }
+.asks li { counter-increment: q; display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: baseline; }
+.asks li::before { content: counter(q, decimal-leading-zero); font-family: var(--f-head); font-weight: 600; color: var(--brand-amber); }
+footer { margin-top: 48px; font-size: 13px; color: var(--brand-muted); border-top: 1px solid var(--brand-border); padding-top: 14px; }
+@media (max-width: 560px) {
+  .bar { grid-template-columns: 1fr 60px; }
+  .bar .lab { grid-column: 1 / -1; }
+  .prob { grid-template-columns: 1fr; }
+}
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="logo-badge"><span class="a">Appy</span><span class="d">Dave</span></span>
+    <span class="eyebrow">FliCut · D07 Buzz coding team · edited 11 Oct 2026</span>
+  </header>
+
+  <h1>D07 Edit Review</h1>
+  <p class="lede">You spent about 23 minutes of hands-on editing, and <mark>four-fifths of it was fixing words</mark>: mostly the same seven names, typed again one occurrence at a time. FliCut already has a button that fixes known names in one click. It went unused, and it would have missed some of these anyway. The rest was cutting out sentences you restarted. You trusted every automatic cut and every default setting.</p>
+
+  <div class="stats">
+    <div class="stat"><b class="num">23</b><span>minutes of active editing (72-minute span, one 49-minute pause)</span></div>
+    <div class="stat"><b class="num">59</b><span>saved edits in total</span></div>
+    <div class="stat hot"><b class="num">47</b><span>of them word fixes (80%)</span></div>
+    <div class="stat hot"><b class="num">33</b><span>fixes for the same 7 names</span></div>
+    <div class="stat"><b class="num">11</b><span>hand cuts, all restarted sentences (34.8 s removed)</span></div>
+    <div class="stat"><b class="num">0</b><span>setting changes, head/tail trims or overridden auto-cuts</span></div>
+  </div>
+
+  <h2>How the session ran</h2>
+  <p class="sub">Bangkok time. Built from FliCut's own undo history: one saved snapshot per edit.</p>
+  <div class="chart">
+    <svg viewBox="0 0 900 170" role="img" aria-label="Session timeline from 09:29 to 10:41: a short first look, a 49-minute pause, then a 21-minute main pass through chapters 02 to 10 in order">
+      <!-- scale: 09:29:18 = x 40, 10:41:23 = x 880 ; 72.08 min over 840px → 11.65 px/min -->
+      <rect x="40" y="56" width="840" height="34" fill="#e8e0d4"/>
+      <rect x="40" y="56" width="5" height="34" fill="#ccba9d"/>
+      <rect x="48" y="56" width="21" height="34" fill="#c8841a"/>
+      <rect x="638" y="56" width="242" height="34" fill="#342d2d"/>
+      <rect x="653" y="56" width="50" height="34" fill="#b5524a"/>
+      <rect x="785" y="56" width="71" height="34" fill="#c8841a"/>
+      <text x="345" y="78" text-anchor="middle" font-family="Roboto, sans-serif" font-size="14" fill="#7a6e5e">49 min, nothing saved</text>
+      <g font-family="Roboto Mono, monospace" font-size="12" fill="#7a6e5e">
+        <line x1="40" y1="92" x2="40" y2="102" stroke="#7a6e5e"/><text x="40" y="118" text-anchor="middle">09:29</text>
+        <line x1="215" y1="92" x2="215" y2="102" stroke="#7a6e5e"/><text x="215" y="118" text-anchor="middle">09:44</text>
+        <line x1="390" y1="92" x2="390" y2="102" stroke="#7a6e5e"/><text x="390" y="118" text-anchor="middle">09:59</text>
+        <line x1="564" y1="92" x2="564" y2="102" stroke="#7a6e5e"/><text x="564" y="118" text-anchor="middle">10:14</text>
+        <line x1="880" y1="92" x2="880" y2="102" stroke="#7a6e5e"/><text x="880" y="118" text-anchor="end">10:41</text>
+      </g>
+      <g font-family="Roboto, sans-serif" font-size="12.5" fill="#342d2d">
+        <text x="48" y="44">first look · 7 fixes</text>
+        <text x="638" y="44">main pass · ch 02→10 · 52 edits</text>
+        <text x="653" y="150" fill="#b5524a">one cut in 02-2: 4 min 15 s, 3 undos</text>
+        <line x1="678" y1="92" x2="678" y2="136" stroke="#b5524a"/>
+        <text x="880" y="150" text-anchor="end" fill="#c8841a">ch 07: 6 min</text>
+        <line x1="820" y1="92" x2="820" y2="136" stroke="#c8841a"/>
+      </g>
+    </svg>
+    <div class="legend">
+      <span><i style="background:#ccba9d"></i>project created, transcripts loaded from cache (4 s)</span>
+      <span><i style="background:#342d2d"></i>editing</span>
+      <span><i style="background:#c8841a"></i>busiest stretches</span>
+      <span><i style="background:#b5524a"></i>fighting one cut</span>
+    </div>
+  </div>
+
+  <h2>Where the hands-on time went</h2>
+  <p class="sub">The pause before each edit, added up. It includes watching and listening, so read these as upper bounds.</p>
+  <div class="bars">
+    <div class="bar"><span class="lab">Fixing words (47)</span><div class="track"><div class="fill am" style="width:73%"></div></div><span class="v">16.4 min</span></div>
+    <div class="bar"><span class="lab">Cutting restarts (11)</span><div class="track"><div class="fill" style="width:20.5%"></div></div><span class="v">4.6 min</span></div>
+    <div class="bar"><span class="lab">Nudging one cut edge</span><div class="track"><div class="fill gd" style="width:6.8%"></div></div><span class="v">1.5 min</span></div>
+  </div>
+
+  <h2>The names you kept retyping</h2>
+  <p class="sub">Each fix was one occurrence. The last column is what is still wrong in the finished edit.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Fixed to</th><th>Heard as</th><th class="n">Fixes</th><th class="n">Still wrong</th><th>In earlier videos?</th></tr></thead>
+      <tbody>
+        <tr><td><b>Buzz</b></td><td>buzz (lower case)</td><td class="n">10</td><td class="n missed">7</td><td>New name</td></tr>
+        <tr><td><b>AppyTron</b></td><td>Apitron, Abitron, "API tron"</td><td class="n">9</td><td class="n">0</td><td>New name; remembered after the 8th fix</td></tr>
+        <tr><td><b>AppyStack</b></td><td>"Appy Stack"</td><td class="n">5</td><td class="n missed">1</td><td>Remembered mid-session</td></tr>
+        <tr><td><b>AppyDave</b></td><td>"happy Dave", "Appy Dave"</td><td class="n">3</td><td class="n">0</td><td><b>Every video</b>: d01 ×6, d02 ×2, d03, d06 ×2. Already in both lists</td></tr>
+        <tr><td><b>OpenRig</b></td><td>"open rig"</td><td class="n">2</td><td class="n missed">4</td><td>New name; never remembered</td></tr>
+        <tr><td><b>Claude Code</b></td><td>"cloud code"</td><td class="n">2</td><td class="n">0</td><td>d06 too. In the word list since 27 Sep</td></tr>
+        <tr><td><b>FliEdit</b></td><td>"fly edit", "fly it"</td><td class="n">2</td><td class="n missed">1</td><td>"fly X" ×16 in d01, ×2 in d02</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="sub" style="margin-top:10px">Plus 14 one-off fixes (Codex, YLO, ChatGPT, socket-io, NPX…). Kybernesis and Nick came out right every time: Kybernesis is one of the 3 names FliCut tells the transcriber about.</p>
+
+  <h2>Problems and fixes, ranked</h2>
+  <p class="sub">Ranked by how much of your time each would give back. The tag says whether it exists already, is small, or is a real build.</p>
+  <div class="probs">
+    <div class="prob"><div class="rank">01</div><div class="body">
+      <h3>Same name, fixed one at a time <span class="tag small">small</span></h3>
+      <p class="ev">33 of 47 fixes were 7 names. Buzz: 10 fixes, 7 still missed. OpenRig: 2 fixes, 4 missed.</p>
+      <p class="fix"><b>Fix</b>After any fix, offer "Apply to all 9 other occurrences in this edit".</p>
+    </div></div>
+    <div class="prob"><div class="rank">02</div><div class="body">
+      <h3>The one-click "apply word fixes" goes unused <span class="tag exist">exists, unused</span></h3>
+      <p class="ev">It sits behind one header button. Used once ever (d01). Today's list would make 21 fixes on D07 in one click.</p>
+      <p class="fix"><b>Fix</b>Apply known names automatically when an edit opens, or underline each suggested word right in the transcript.</p>
+    </div></div>
+    <div class="prob"><div class="rank">03</div><div class="body">
+      <h3>The transcriber is never told your names <span class="tag">medium</span></h3>
+      <p class="ev">FliCut's transcriber hint list holds 3 names (AppyDave, Arcana, Kybernesis). Your word list has about 40. Kybernesis, which is on the hint list, was heard right 3 out of 3.</p>
+      <p class="fix"><b>Fix</b>Feed the word list's names to the transcriber in FliHub and FliTools, so names come out right before you ever open FliCut.</p>
+    </div></div>
+    <div class="prob"><div class="rank">04</div><div class="body">
+      <h3>Restarted sentences are cut by hand <span class="tag big">big</span></h3>
+      <p class="ev">All 11 of your cuts removed a restart ("it would have a little… it would have a Venn diagram"). The "cut bad takes" setting exists but has no code behind it.</p>
+      <p class="fix"><b>Fix</b>Detect a repeated phrase and propose "keep the last attempt" as an automatic cut you approve.</p>
+    </div></div>
+    <div class="prob"><div class="rank">05</div><div class="body">
+      <h3>Getting a cut edge exactly right is slow <span class="tag">medium</span></h3>
+      <p class="ev">One cut in 02-2 took 4 min 15 s and 3 undos. D06 had 26 edge nudges.</p>
+      <p class="fix"><b>Fix</b>Snap cut edges to the nearest word or silence, and show the snap before saving.</p>
+    </div></div>
+    <div class="prob"><div class="rank">06</div><div class="body">
+      <h3>Lower-case fixes can't be remembered <span class="tag small">small</span></h3>
+      <p class="ev">buzz → Buzz is refused by "Remember" because only the case changed. That's why Buzz never got learnt.</p>
+      <p class="fix"><b>Fix</b>For a case-only fix, offer "Add Buzz as a name".</p>
+    </div></div>
+    <div class="prob"><div class="rank">07</div><div class="body">
+      <h3>Two-word names split by a pause aren't matched <span class="tag small">small</span></h3>
+      <p class="ev">"Appy / Dave", "API / tron", "Appy / stack" fell either side of a pause, so the word list couldn't catch them.</p>
+      <p class="fix"><b>Fix</b>Match name pairs across a pause within the same recording.</p>
+    </div></div>
+    <div class="prob"><div class="rank">08</div><div class="body">
+      <h3>No single agreed spelling <span class="tag small">small</span></h3>
+      <p class="ev">Teletubby → TeleTubby → Teletubby within 9 seconds in D07. D01 went the other way.</p>
+      <p class="fix"><b>Fix</b>One spelling per name in the word list, and a warning when a fix goes against it.</p>
+    </div></div>
+    <div class="prob"><div class="rank">09</div><div class="body">
+      <h3>Undo throws away the evidence <span class="tag small">small</span></h3>
+      <p class="ev">4 edits were undone and overwritten. What they were is gone, so this review can't see what you fought with.</p>
+      <p class="fix"><b>Fix</b>Keep a side log of undone edits (what and when).</p>
+    </div></div>
+  </div>
+
+  <h2>What's not a problem, and what I couldn't see</h2>
+  <div class="split">
+    <div class="panel">
+      <h3>Working fine</h3>
+      <ul>
+        <li>Automatic silence and filler cuts: 55 removed, you overrode none.</li>
+        <li>Default settings: unchanged in D07 and in every video since D01.</li>
+        <li>Heads and tails: no trims needed (D04 had 16).</li>
+        <li>Retakes: already thrown away in FliHub while recording (27 in trash). All 25 kept parts went into the cut.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>Not in the files</h3>
+      <ul>
+        <li>The 49-minute pause: reviewing without changes, or away?</li>
+        <li>Watching versus typing time. Playback ended at 2.5× speed.</li>
+        <li>What the 4 undone edits were.</li>
+        <li>An export: none in the project yet.</li>
+        <li>Anything you did outside FliCut.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Questions for our talk</h2>
+  <ol class="asks">
+    <li>What were you doing in the 49-minute pause?</li>
+    <li>Did you know about the "apply word fixes" button, and would you rather names just be fixed when the edit opens?</li>
+    <li>Which felt worse: the name fixing, or cutting the restarts?</li>
+    <li>What happened on that 02-2 cut that took four minutes?</li>
+    <li>What is the "same thing over and over" you mean? Is it inside one edit, or across videos?</li>
+  </ol>
+
+  <footer>Source: D07's FliCut edit file and its undo history (85 journal entries, 87 snapshots), compared against D01–D06. Times are upper bounds where they include watching. Built 11 Oct 2026.</footer>
+</div>
