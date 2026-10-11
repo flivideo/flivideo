@@ -99,6 +99,18 @@ footer { margin-top: 48px; font-size: 13px; color: var(--brand-muted); border-to
   .bar .lab { grid-column: 1 / -1; }
   .prob { grid-template-columns: 1fr; }
 }
+
+/* round 2 */
+.r2 { display: grid; gap: 14px; margin-top: 14px; }
+.r2 .card { padding: 16px 18px; background: #fffdf8; border: 1px solid var(--brand-border); border-radius: 8px; }
+.r2 .card h3 .ab { font-family: var(--f-display); font-weight: 400; color: var(--brand-amber); font-size: 26px; margin-right: 10px; vertical-align: -2px; }
+.r2 dl { display: grid; grid-template-columns: 120px 1fr; gap: 6px 14px; margin: 8px 0 0; font-size: 15px; }
+.r2 dt { font-family: var(--f-head); text-transform: uppercase; letter-spacing: .06em; font-size: 12px; color: var(--brand-muted); padding-top: 3px; }
+.r2 dd { margin: 0; max-width: 68ch; }
+.r2 dd.fix { border-left: 3px solid var(--brand-yellow); padding-left: 12px; }
+.r2 q { font-style: italic; }
+.note { border-left: 3px solid var(--brand-amber); padding: 4px 0 4px 14px; margin: 18px 0 0; max-width: 70ch; }
+@media (max-width: 560px) { .r2 dl { grid-template-columns: 1fr; } }
 </style>
 
 <div class="wrap">
@@ -117,7 +129,8 @@ footer { margin-top: 48px; font-size: 13px; color: var(--brand-muted); border-to
     <div class="stat hot"><b class="num">33</b><span>fixes for the same 7 names</span></div>
     <div class="stat"><b class="num">11</b><span>hand cuts, all restarted sentences (34.8 s removed)</span></div>
     <div class="stat"><b class="num">0</b><span>setting changes, head/tail trims or overridden auto-cuts</span></div>
-  </div>
+    </div>
+  <p class="note"><b>Updated after round 2.</b> You walked the edit yourself from 11:50 to 12:21 and called out what hurt. That adds four problems this first pass couldn't see in the files: cut words leave sound behind, some dead air can't be removed, grammar gets mixed up with spelling, and technical terms have nowhere to live. <a href="#round2" style="color:var(--brand-blue)">Jump to round 2</a>.</p>
 
   <h2>How the session ran</h2>
   <p class="sub">Bangkok time. Built from FliCut's own undo history: one saved snapshot per edit.</p>
@@ -231,6 +244,64 @@ footer { margin-top: 48px; font-size: 13px; color: var(--brand-muted); border-to
     </div></div>
   </div>
 
+  <h2 id="round2">Round 2: your walkthrough, 11:50–12:21</h2>
+  <p class="sub">What you said, checked against the edit file where it can be. In 31 minutes: 26 saved edits, 16 of them word fixes, 3 cuts, 1 edge nudge, and 6 undone. Buzz, OpenRig and "plugin" came up 3 times each. You were testing, not asking for builds, so each fix below is a suggestion for when we pick what to build.</p>
+  <div class="r2">
+
+    <div class="card">
+      <h3><span class="ab">A</span>Cutting a word leaves part of it behind <span class="tag big">biggest new problem</span></h3>
+      <dl>
+        <dt>You saw</dt><dd>Eight times: you could still hear <q>we</q>, <q>and</q> (three times), <q>after</q>, <q>in</q>, and <q>so</q>, plus a click where <q>and</q> had been. Cutting <q>so</q> left <q>oh</q>, so you undid it. Words like "And", "But" and "So" at the start of a sentence, the ones you most want gone, are the ones that won't go cleanly. The fine-tune panel has never once fixed one for you.</dd>
+        <dt>The file shows</dt><dd>Your 11:58 cut of "And" in 03-1. The transcriber says "And" lasts <b>0.10 s</b> (25.18–25.28), and your cut removed exactly that. The 0.22 s just before it has no silence in it and stays in. That's where the rest of the "and" is. Short words get word boxes that are too tight, so cutting the box leaves the edges of the sound. 19 of your cuts in this edit are 0.35 s or shorter, so each one is a suspect.</dd>
+        <dt>Fix</dt><dd class="fix">When you cut a word, widen the cut out to the silence on either side (the same "snap to silence" pauses already get), and play the join straight away so you hear it at once. Later: a one-click sweep that drops a leading "And / But / So".</dd>
+      </dl>
+    </div>
+
+    <div class="card">
+      <h3><span class="ab">B</span>Dead air you can't get rid of <span class="tag">medium</span></h3>
+      <dl>
+        <dt>You saw</dt><dd>About 4 s of blank between the 4.7 s and 0.8 s pauses (end of 02-2 into 04). The edges wouldn't widen, and splitting didn't help. <q>It's almost like I've got to use a totally different video editor.</q></dd>
+        <dt>The file shows</dt><dd>The pause cut starts where "without" ends (45.65 s), but the kept piece before it runs on to 48.03 s. When kept and cut overlap, kept wins, so about <b>2.4 s</b> of near-silence plays. Then 0.5 s more at the start of 03-1, where the kept piece starts inside the 0.8 s cut. That's about <b>2.9 s</b> of dead air in all. This is the worst spot in the whole edit; the next worst is 0.8 s in 06-4. The likely cause is two tiny sounds (0.10 s and 0.02 s) inside the silence, each counted as speech, so the kept piece stretches out to cover them. I haven't confirmed why the edges wouldn't move.</dd>
+        <dt>Fix</dt><dd class="fix">Treat a sound under about 0.1 s inside a silence as silence. Let the fine-tune drag a pause's edge into kept material when you mean it.</dd>
+      </dl>
+    </div>
+
+    <div class="card">
+      <h3><span class="ab">C</span>Grammar is a different job from spelling <span class="tag">medium</span></h3>
+      <dl>
+        <dt>You saw</dt><dd>
+          <ul style="margin:0;padding-left:18px">
+            <li>A capital and full stop left behind after a cut.</li>
+            <li>"A .I." instead of "AI".</li>
+            <li>Is "we can do different versions" the end of a sentence?</li>
+            <li>Should there be a comma before "but"? Between "Claude.md" and "JSON"?</li>
+            <li>"parsers" → "passes" is a mishearing, not a spelling mistake, but the fix treats it like one.</li>
+            <li>plugin, plug-in or plugins: you weren't sure.</li>
+          </ul>
+          <q>A lot of the time I'm editing for things that are really just grammar being written incorrectly.</q></dd>
+        <dt>The file shows</dt><dd>You chose three different spellings in 75 seconds: "plug-ins" (12:16:42), "plugin" (12:17:50), "plugins" (12:17:57). That's the missing agreed spelling showing up in your own hands. If "Remember" were pressed on parsers → passes, it would change "parsers" everywhere, which is wrong.</dd>
+        <dt>Fix</dt><dd class="fix">Split "Fix words" three ways. <b>Spelling</b> can be remembered. <b>Misheard</b> applies to this spot only and is never remembered. <b>Punctuation</b> changes text only, never audio. Tidying grammar can be a pass after the cut, because it only matters where text is shown: captions and descriptions.</dd>
+      </dl>
+    </div>
+
+    <div class="card">
+      <h3><span class="ab">D</span>Technical terms have nowhere to live <span class="tag small">small</span></h3>
+      <dl>
+        <dt>You saw</dt><dd>npx, Claude, Claude Code, claude.md, JSON, CI/CD, and "Appy Stack" split in two. "Kybernesis Kybernesis" came out doubled, and you saved the pair under AppyDave. <q>These are actual technical terms that come up all the time.</q></dd>
+        <dt>The file shows</dt><dd>npx was saved as "NPX" (10:38). The word lists today are global and per-brand names only. There's no list for terms that are the same in every brand.</dd>
+        <dt>Fix</dt><dd class="fix">A third list, <b>tech terms</b>, shared by all brands, with one spelling each (npx, JSON, CLAUDE.md, CI/CD, plugin) and fed to the transcriber like names. Handle a doubled word with a "remove repeated word" rule rather than storing the pair.</dd>
+      </dl>
+    </div>
+
+    <div class="card">
+      <h3><span class="ab">E</span>Keywords that pop on screen <span class="tag">idea, parked</span></h3>
+      <dl>
+        <dt>You said</dt><dd>Buzz, Kybernesis, FliCut and FliEdit are keywords you'd like to pop up over the video. There are three kinds of captions: <b>full</b> (the whole transcript), <b>phrase</b> (only what's important) and <b>word</b> (single keywords). You weren't sure FliCut is the place for this. Not a request.</dd>
+        <dt>Note</dt><dd>FliCut is where these words are found. The overlay itself would be FliEdit's job (it already has overlay tracks). The cheap link between the two is a "keyword" flag on a word-list entry, so FliEdit can later find every place it's spoken.</dd>
+      </dl>
+    </div>
+  </div>
+
   <h2>What's not a problem, and what I couldn't see</h2>
   <div class="split">
     <div class="panel">
@@ -261,7 +332,10 @@ footer { margin-top: 48px; font-size: 13px; color: var(--brand-muted); border-to
     <li>Which felt worse: the name fixing, or cutting the restarts?</li>
     <li>What happened on that 02-2 cut that took four minutes?</li>
     <li>What is the "same thing over and over" you mean? Is it inside one edit, or across videos?</li>
+    <li>Round 2: does the transcript's punctuation matter to you anywhere except captions and the description?</li>
+    <li>Round 2: should tech terms (npx, JSON, plugin) be one list shared by every brand?</li>
+    <li>Round 2: which hurts most: words that won't cut cleanly (A), dead air (B), or grammar (C)?</li>
   </ol>
 
-  <footer>Source: D07's FliCut edit file and its undo history (85 journal entries, 87 snapshots), compared against D01–D06. Times are upper bounds where they include watching. Built 11 Oct 2026.</footer>
+  <footer>Source: D07's FliCut edit file and its undo history (first pass: entries to 10:41; round 2: entries 11:50–12:21, 115 snapshots), compared against D01–D06, plus your round-2 walkthrough notes. Times are upper bounds where they include watching. Built 11 Oct 2026.</footer>
 </div>
