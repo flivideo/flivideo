@@ -35,3 +35,14 @@ Five tickets + nice-to-haves, with live verification: `/Users/davidcruwys/dev/ad
 3. A keyword sentence near the bottom (keyword spine).
 4. Related same-topic videos (series path).
 Evidence: `/Users/davidcruwys/dev/ad/brains/youtube-craft/practice/descriptions-sources-2026-10-09/peer-teardown-jev-cohort.md`.
+
+## FS-ANGLES-GATE (2026-10-11, from the D07 ylo-thumbs run) — an angles gate can't be approved
+**Bug.** ylo's angles gate is `launch.propose --piece packaging` with `thumbnail: null`, then `gate.open`. On the Launch page the
+packaging approve button comes from `approvePairsLabel` (`flistudio/client/src/components/LaunchPieces.tsx` ~620), which returns
+null unless a suggestion has a thumbnail or the shortlist has pairs, and `launch.approve` (`server/src/capabilities/launch.ts` ~1294)
+refuses "No pairs to approve" for the same reason. So before any render there is no human:ui action that closes the gate.
+D06 never hit it: its pool already held the 27 Sept test thumbnails. D07 hit it twice (g_214e413a33, g_75a1ce2cd0).
+**Also:** no verb closes/supersedes a stale gate (g_214e413a33 is still open after David rejected it).
+**Done when:** an open gate on packaging with thumbnail-less suggestions shows "Approve these 3 angles" (and per-slot keep/dismiss);
+clicking it closes the gate `{by: human:ui, outcome: approved|changed}` without shortlisting anything; a `gate.close` (agent, with reason)
+retires a superseded gate; tests cover both.
