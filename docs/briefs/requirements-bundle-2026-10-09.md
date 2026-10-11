@@ -49,3 +49,17 @@ retires a superseded gate; tests cover both.
 **Also (same run):** the `--as agent:<name>` principal from ylo's `rpc.py` doesn't reach the server: gates show `opened.by agent:claude-code`
 (ylo-thumbs lead, 2026-10-11). And `launch.propose` packaging refused pairs without `angle` *after* `gate.open` had already run, so a
 failed propose leaves a gate pointing at the old proposal. Debrief: `/Users/davidcruwys/dev/ad/brains/openrig/rigs/ylo-thumbs/DEBRIEF.md`.
+
+## BANKED (David, 2026-10-11 evening) — talk through later, not dispatched
+
+### FS-UPLOAD-STAGING — one upload folder for YouTube
+When David is ready to upload, he needs the **MP4, the SRT and the thumbnails in one folder**, and that folder's path **on his clipboard**,
+so YouTube's file pickers all go to one place instead of hunting through Finder. It is **not part of the video project**: a single
+transient/cache folder that is **cleared and refilled for each upload** (e.g. a "Stage for upload" action on Launch step 1 that copies the
+final export + captions + chosen/in-test thumbnails, then copies the path). Open: where it lives, and whether it holds copies or links.
+
+### FS-SHOWDOWN-CARD — Video Ranking Academy thumbnail showdown
+VRA runs a **Tuesday and Thursday thumbnail showdown** on Facebook where people post thumbnails. David always has **three** (Test &
+Compare), which is awkward to post. Wanted: a composed **square** image (Facebook) showing all three 16:9 thumbnails, **each with its
+title**, plus a short description of the video and its **YouTube URL**. Plan: once today's video (D07) is done, design **2–3 options as an
+artifact** to play with; then make it a **first-class FliStudio feature** (generated from the video's pairs + description + published link).
