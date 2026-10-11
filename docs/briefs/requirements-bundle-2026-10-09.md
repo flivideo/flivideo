@@ -46,3 +46,6 @@ D06 never hit it: its pool already held the 27 Sept test thumbnails. D07 hit it 
 **Done when:** an open gate on packaging with thumbnail-less suggestions shows "Approve these 3 angles" (and per-slot keep/dismiss);
 clicking it closes the gate `{by: human:ui, outcome: approved|changed}` without shortlisting anything; a `gate.close` (agent, with reason)
 retires a superseded gate; tests cover both.
+**Also (same run):** the `--as agent:<name>` principal from ylo's `rpc.py` doesn't reach the server: gates show `opened.by agent:claude-code`
+(ylo-thumbs lead, 2026-10-11). And `launch.propose` packaging refused pairs without `angle` *after* `gate.open` had already run, so a
+failed propose leaves a gate pointing at the old proposal. Debrief: `/Users/davidcruwys/dev/ad/brains/openrig/rigs/ylo-thumbs/DEBRIEF.md`.
