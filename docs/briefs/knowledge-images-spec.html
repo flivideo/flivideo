@@ -1,0 +1,184 @@
+<title>Knowledge Images Spec</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600&family=Roboto:ital,wght@0,400;0,500;0,700;1,400&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout: a light AppyDave spec page. Before/after mock of FliStudio's Knowledge panel, then the spec in plain tables. */
+:root {
+  color-scheme: light;
+  --brown: #342d2d; --gold: #ccba9d; --yellow: #ffde59; --amber: #c8841a;
+  --muted: #7a6e5e; --cream: #faf5ec; --surface: #f0ebe4; --linen: #e8e0d4;
+  --border: #d4cdc4; --chrome: #1a1515; --dark: #25201e; --blue: #2E91FC;
+  --display: "Bebas Neue", Oswald, Impact, sans-serif;
+  --head: Oswald, "Arial Narrow", sans-serif;
+  --body: Roboto, system-ui, sans-serif;
+  --mono: "Roboto Mono", ui-monospace, monospace;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body { background: var(--cream); color: var(--brown); font-family: var(--body); font-size: 16px; line-height: 1.55; }
+.wrap { max-width: 1080px; margin: 0 auto; padding-inline: 20px; padding-block: 36px 64px; display: grid; gap: 44px; }
+header.page { display: grid; gap: 12px; max-width: 72ch; }
+.logo-badge { display:inline-block; background: var(--brown); border-radius:6px; padding:4px 10px 2px; font-family: var(--display); letter-spacing:.04em; line-height:1.1; font-size: 22px; width: fit-content; }
+.logo-badge .a { color: var(--gold); } .logo-badge .d { color: var(--yellow); }
+.eyebrow { font-family: var(--head); text-transform: uppercase; letter-spacing: .12em; font-size: 13px; color: var(--amber); font-weight: 600; }
+h1 { font-family: var(--head); font-weight: 600; font-size: clamp(30px, 5vw, 44px); line-height: 1.1; margin: 0; text-transform: uppercase; text-wrap: balance; }
+h2 { font-family: var(--head); font-weight: 600; text-transform: uppercase; font-size: 26px; margin: 0; letter-spacing: .02em; text-wrap: balance; }
+h3 { font-family: var(--head); text-transform: uppercase; letter-spacing: .08em; font-size: 14px; color: var(--amber); margin: 0; font-weight: 600; }
+p { margin: 0; max-width: 68ch; }
+header.page p { color: var(--muted); }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 14px; color: var(--muted); }
+.facts b { color: var(--brown); font-weight: 500; }
+section { display: grid; gap: 16px; min-width: 0; }
+.lead { border-left: 3px solid var(--amber); padding: 2px 0 2px 12px; }
+code { font-family: var(--mono); font-size: 13px; background: var(--surface); padding: 1px 5px; border-radius: 3px; }
+
+/* before / after */
+.ba { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr)); gap: 24px; }
+.ba > div { display: grid; gap: 10px; align-content: start; min-width: 0; }
+.tag { font-family: var(--head); text-transform: uppercase; letter-spacing: .1em; font-size: 12px; font-weight: 600; color: var(--muted); }
+.tag.after { color: var(--amber); }
+
+/* a mock of FliStudio's Knowledge panel */
+.panel { background: #fff; border: 1px solid var(--border); border-radius: 6px; padding: 16px; display: grid; gap: 14px; font-size: 14px; }
+.panel h4 { margin: 0; font-family: var(--head); font-weight: 500; font-size: 15px; display: flex; gap: 8px; align-items: baseline; }
+.panel h4 small { color: var(--muted); font-family: var(--body); font-weight: 400; font-size: 12px; }
+.kind { display: grid; gap: 6px; }
+.row { border-top: 1px solid var(--linen); padding-top: 6px; display: grid; gap: 2px; min-width: 0; }
+.row .t { overflow-wrap: anywhere; }
+.row .mono { font-family: var(--mono); font-size: 12px; }
+.why { color: var(--muted); font-style: italic; font-size: 13px; }
+.kind.new { background: #fffbe6; outline: 2px solid var(--yellow); outline-offset: 4px; border-radius: 4px; }
+.imgs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.tile { display: grid; gap: 4px; min-width: 0; }
+.shot { aspect-ratio: 16 / 9; border-radius: 4px; border: 1px solid var(--border); position: relative; overflow: hidden; }
+.shot.ch { background: linear-gradient(180deg, #e9e9e9 0 22%, #fff 22%); }
+.shot.ch::before { content: ""; position: absolute; left: 8%; top: 30%; width: 18%; aspect-ratio: 1; border-radius: 50%; background: #c9c2b8; }
+.shot.ch::after { content: ""; position: absolute; left: 32%; top: 36%; width: 50%; height: 9%; background: #d9d3cb; box-shadow: 0 14px 0 -2px #e6e1da; }
+.shot.th { background: linear-gradient(135deg, #2b4c7e, #c8841a); }
+.shot.th::after { content: "BUZZ"; position: absolute; left: 8%; bottom: 10%; font-family: var(--display); color: #fff; font-size: 22px; letter-spacing: .04em; }
+.shot.sl { background: var(--surface); }
+.shot.sl::before { content: ""; position: absolute; inset: 14% 10% auto 10%; height: 12%; background: var(--brown); opacity: .75; }
+.shot.sl::after { content: ""; position: absolute; inset: 38% 10% auto 10%; height: 40%; background: repeating-linear-gradient(180deg, #cfc6ba 0 6px, transparent 6px 14px); }
+.tile .cap { font-size: 12px; overflow-wrap: anywhere; }
+.drop { border: 1.5px dashed var(--amber); border-radius: 4px; padding: 8px 10px; color: var(--muted); font-size: 12px; text-align: center; }
+.caption { font-size: 14px; color: var(--muted); }
+
+/* spec tables */
+.specgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 24px 32px; }
+.specgrid > div { display: grid; gap: 8px; min-width: 0; align-content: start; }
+table { border-collapse: collapse; width: 100%; font-size: 15px; }
+th { text-align: left; vertical-align: top; font-weight: 500; color: var(--muted); padding: 7px 14px 7px 0; border-top: 1px solid var(--linen); width: 34%; }
+td { padding: 7px 0; border-top: 1px solid var(--linen); vertical-align: top; }
+ol, ul { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; }
+.q { display: grid; gap: 4px; border-top: 1px solid var(--border); padding-top: 12px; }
+.q b { font-family: var(--head); font-weight: 500; font-size: 17px; }
+.rec { color: var(--brown); }
+.rec::before { content: "My take: "; font-weight: 700; }
+.src { font-size: 13px; color: var(--muted); overflow-wrap: anywhere; }
+</style>
+
+<div class="wrap">
+  <header class="page">
+    <span class="logo-badge"><span class="a">Appy</span><span class="d">Dave</span></span>
+    <span class="eyebrow">Spec · FliStudio · D08 candidate · 11 Oct 2026</span>
+    <h1>Reference images in a video's Knowledge</h1>
+    <p>Each video in FliStudio has a Knowledge group: the things an AI reads before it writes anything for that video. Today it holds dossiers, Captain's Log captures, links and notes. This adds a fifth kind, <b>Images</b>: screenshots, thumbnails and slides you collected while researching, each with one line saying why it helps.</p>
+    <div class="facts"><span>Sample: <b>D07, Buzz coding team</b></span><span>Size: <b>~45–60 min for one coder</b></span><span>Status: <b>spec only, not built</b></span></div>
+  </header>
+
+  <section>
+    <h2>What you'd see</h2>
+    <p class="lead">The Knowledge panel gets an Images row, shown as thumbnails, each with its "why" line underneath. You add one by dropping or pasting an image onto the row.</p>
+    <div class="ba">
+      <div>
+        <span class="tag">Before (today)</span>
+        <div class="panel" aria-label="Knowledge panel today, four kinds">
+          <div class="kind"><h4>Dossiers <small>1</small></h4>
+            <div class="row"><span class="t mono">dossiers/nick-frith.md</span><span class="why">Who Nick is and what he teaches, so the promo sounds right.</span></div></div>
+          <div class="kind"><h4>Captures <small>1</small></h4>
+            <div class="row"><span class="t mono">B605</span><span class="why">David's voice note on why Buzz matters.</span></div></div>
+          <div class="kind"><h4>Links <small>1</small></h4>
+            <div class="row"><span class="t">Nick's YouTube channel</span><span class="why">His audience and tone.</span></div></div>
+          <div class="kind"><h4>Notes <small>1</small></h4>
+            <div class="row"><span class="t">Keep the promo under 30 seconds.</span><span class="why">David's rule for the segment.</span></div></div>
+        </div>
+        <p class="caption">Nick's screenshots have nowhere to go. They sit in a folder the AI never reads.</p>
+      </div>
+      <div>
+        <span class="tag after">After</span>
+        <div class="panel" aria-label="Knowledge panel with a new Images kind">
+          <div class="kind"><h4>Dossiers <small>1</small></h4>
+            <div class="row"><span class="t mono">dossiers/nick-frith.md</span></div></div>
+          <div class="kind"><h4>Captures <small>1</small></h4>
+            <div class="row"><span class="t mono">B605</span></div></div>
+          <div class="kind"><h4>Links <small>1</small></h4>
+            <div class="row"><span class="t">Nick's YouTube channel</span></div></div>
+          <div class="kind"><h4>Notes <small>1</small></h4>
+            <div class="row"><span class="t">Keep the promo under 30 seconds.</span></div></div>
+          <div class="kind new"><h4>Images <small>3</small></h4>
+            <div class="imgs">
+              <div class="tile"><div class="shot ch" role="img" aria-label="Screenshot of Nick's channel page"></div><span class="cap">Nick's channel page</span><span class="why">His banner and colours.</span></div>
+              <div class="tile"><div class="shot th" role="img" aria-label="A Buzz video thumbnail"></div><span class="cap">Buzz thumbnail</span><span class="why">Match its look.</span></div>
+              <div class="tile"><div class="shot sl" role="img" aria-label="A course slide"></div><span class="cap">Course slide 4</span><span class="why">The 3 claims to quote.</span></div>
+            </div>
+            <div class="drop">Drop or paste an image here</div>
+          </div>
+        </div>
+        <p class="caption">The screenshot pair for the video: this panel before and after, on the same D07 project.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>The spec</h2>
+    <div class="specgrid">
+      <div>
+        <h3>What the job is</h3>
+        <table>
+          <tr><th>New kind</th><td><code>image</code> in the <code>knowledge</code> group, label "Images", many per video, never "chosen"</td></tr>
+          <tr><th>Value</th><td>A path to the file, plus the same one-line <code>meta.why</code> (200 characters max) every knowledge item has</td></tr>
+          <tr><th>Display</th><td>Thumbnails in a grid, why line under each. FliStudio already draws image kinds this way for thumbnails, so this reuses it</td></tr>
+          <tr><th>Add (you)</th><td>Drop or paste onto the Images row. FliStudio copies the file into the video's folder and asks for the why line</td></tr>
+          <tr><th>Add (an agent)</th><td>Same verb agents use for the other kinds, given a file path and a why line</td></tr>
+          <tr><th>Who reads it</th><td>Any skill that reads Knowledge, e.g. <code>flivideo:segment-writer</code>. It gets the path and can look at the image</td></tr>
+        </table>
+      </div>
+      <div>
+        <h3>Done-check (D08 form)</h3>
+        <table>
+          <tr><th>proof</th><td><code>knowledge.test.ts</code> sees 5 kinds, not 4; a test adds an image and reads it back with its why line</td></tr>
+          <tr><th>test_audit</th><td><code>dev-team:audit-test-quality</code> on the new tests</td></tr>
+          <tr><th>before_after</th><td>The two panels above, as real screenshots of the D07 project</td></tr>
+          <tr><th>duration</th><td>From the queue timestamps</td></tr>
+        </table>
+        <h3>Out of scope</h3>
+        <ul>
+          <li>A shared library of images used across many videos (brand level). That comes later, when B-roll becomes its own app.</li>
+          <li>Editing or cropping images.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>What I checked, and what I didn't</h2>
+    <ul>
+      <li>The four kinds today: <code>flistudio/server/src/capabilities/knowledge.ts</code> (dossier, capture, link, note).</li>
+      <li>Image display already exists: <code>flistudio/client/src/components/Resources.tsx</code> has an <code>image</code> case that draws thumbnails.</li>
+      <li>The requirement: <code>flivideo/docs/briefs/requirements-bundle-2026-10-09.md</code> §2, which also says "probably brand-level storage".</li>
+      <li>Not checked: whether the Resources panel has any way to add an item by hand today. I found no drop or paste on it. If one already exists, the job gets smaller.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Two choices for David</h2>
+    <div class="q"><b>Where the files live</b>
+      <p>In the video's own folder, or a brand-wide folder you can reuse across videos.</p>
+      <p class="rec">The video's folder for D08. Brand-wide belongs with the B-roll app later, and moving files then is easy.</p></div>
+    <div class="q"><b>Drop and paste in the job, or not</b>
+      <p>Without it the kind exists, but only agents can add images.</p>
+      <p class="rec">In. Otherwise there is no visible "after" for you to film.</p></div>
+  </section>
+
+  <p class="src">Source file: /Users/davidcruwys/dev/ad/flivideo/docs/briefs/knowledge-images-spec.html · Related: FS-SHOWDOWN-CARD spec https://claude.ai/artifact/PRwRdqifgsCeX487onRk4B</p>
+</div>

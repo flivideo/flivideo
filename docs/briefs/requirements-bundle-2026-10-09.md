@@ -19,6 +19,7 @@ timestamp: 2026-10-09
 ## 2. Lightweight B-roll in FliStudio
 - Presenter is a B-roll type per brand (AppyDave: 106 cutouts at `/Users/davidcruwys/dev/image-projects/i-appydave/presenter/`; AITLDR: Alex).
 - FliStudio LINKS/QUERIES B-roll by code, never owns it; B-roll becomes a first-class app later, so migration is a move, not a rewrite.
+- **SPEC WRITTEN (2026-10-11), D08 job 3b:** https://claude.ai/artifact/4z67nJq6Qk87DnU8n47Aai, source `/Users/davidcruwys/dev/ad/flivideo/docs/briefs/knowledge-images-spec.html`.
 - Reference material for a video (e.g. Nick's channel screenshots, thumbnails, notes) needs an **image kind** in the `knowledge` group (CT-0106 has dossier/capture/link/note only) and probably brand-level storage for material reused across videos.
 
 ## 3. FliEdit overlays on a FliCut export
