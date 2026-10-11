@@ -63,3 +63,4 @@ VRA runs a **Tuesday and Thursday thumbnail showdown** on Facebook where people 
 Compare), which is awkward to post. Wanted: a composed **square** image (Facebook) showing all three 16:9 thumbnails, **each with its
 title**, plus a short description of the video and its **YouTube URL**. Plan: once today's video (D07) is done, design **2–3 options as an
 artifact** to play with; then make it a **first-class FliStudio feature** (generated from the video's pairs + description + published link).
+**SPEC WRITTEN (2026-10-11):** David chose option 5 (dark, big A with a small info panel beside it, B and C below, letters on the title line). The artifact IS the spec: https://claude.ai/artifact/PRwRdqifgsCeX487onRk4B, source `/Users/davidcruwys/dev/ad/flivideo/docs/briefs/showdown-card-options.html` (canvas, type, content sources, FliStudio behaviour; the five options not selected kept with reasons). Not built yet.
