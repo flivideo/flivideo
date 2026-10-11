@@ -1,0 +1,200 @@
+<title>FliCut Export Length</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600&family=Roboto:ital,wght@0,400;0,500;0,700;1,400&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout: a light AppyDave spec page. Before/after mock of FliCut's Cuts list row and the export line, then the spec. */
+:root {
+  color-scheme: light;
+  --brown: #342d2d; --gold: #ccba9d; --yellow: #ffde59; --amber: #c8841a;
+  --muted: #7a6e5e; --cream: #faf5ec; --surface: #f0ebe4; --linen: #e8e0d4;
+  --border: #d4cdc4; --chrome: #1a1515; --dark: #25201e; --blue: #2E91FC;
+  --red: #b5524a; --green: #4f7a3f;
+  --display: "Bebas Neue", Oswald, Impact, sans-serif;
+  --head: Oswald, "Arial Narrow", sans-serif;
+  --body: Roboto, system-ui, sans-serif;
+  --mono: "Roboto Mono", ui-monospace, monospace;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: var(--cream); color: var(--brown); font-family: var(--body); font-size: 16px; line-height: 1.55; }
+.wrap { max-width: 1080px; margin: 0 auto; padding-inline: 16px; padding-block: 36px 64px; display: grid; gap: 44px; }
+header.page { display: grid; gap: 12px; max-width: 72ch; }
+.logo-badge { display:inline-block; background: var(--brown); border-radius:6px; padding:4px 10px 2px; font-family: var(--display); letter-spacing:.04em; line-height:1.1; font-size: 22px; width: fit-content; }
+.logo-badge .a { color: var(--gold); } .logo-badge .d { color: var(--yellow); }
+.eyebrow { font-family: var(--head); text-transform: uppercase; letter-spacing: .12em; font-size: 13px; color: var(--amber); font-weight: 600; }
+h1 { font-family: var(--head); font-weight: 600; font-size: clamp(30px, 5vw, 44px); line-height: 1.1; margin: 0; text-transform: uppercase; text-wrap: balance; }
+h2 { font-family: var(--head); font-weight: 600; text-transform: uppercase; font-size: 26px; margin: 0; letter-spacing: .02em; text-wrap: balance; }
+h3 { font-family: var(--head); text-transform: uppercase; letter-spacing: .08em; font-size: 14px; color: var(--amber); margin: 0; font-weight: 600; }
+p { margin: 0; max-width: 68ch; }
+header.page p { color: var(--muted); }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 14px; color: var(--muted); }
+.facts b { color: var(--brown); font-weight: 500; }
+section { display: grid; gap: 16px; min-width: 0; }
+.lead { border-left: 3px solid var(--amber); padding: 2px 0 2px 12px; }
+code { font-family: var(--mono); font-size: 13px; background: var(--surface); padding: 1px 5px; border-radius: 3px; overflow-wrap: anywhere; }
+
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 16px; }
+.step { display: grid; gap: 6px; border-top: 2px solid var(--amber); padding-top: 10px; align-content: start; }
+.step .n { font-family: var(--display); font-size: 34px; line-height: 1; color: var(--amber); }
+.step b { font-family: var(--head); font-weight: 500; font-size: 18px; }
+.step .now { color: var(--muted); font-size: 14px; }
+
+.ba { display: grid; gap: 28px; }
+.ba > div { display: grid; gap: 10px; min-width: 0; }
+.tag { font-family: var(--head); text-transform: uppercase; letter-spacing: .1em; font-size: 12px; font-weight: 600; color: var(--muted); }
+.tag.after { color: var(--amber); }
+.app { background: #fff; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; font-size: 13px; }
+.bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; padding: 8px 12px; border-bottom: 1px solid var(--linen); background: #fcfaf6; }
+.bar .proj { font-weight: 600; }
+.bar .spacer { flex: 1; }
+.newcut { background: var(--yellow); border-radius: 4px; padding: 3px 10px; font-weight: 600; font-size: 12px; }
+.scroll { overflow-x: auto; }
+.rows { list-style: none; margin: 12px; padding: 0; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); min-width: 520px; }
+.rows li { display: flex; gap: 16px; align-items: center; padding: 10px 14px; font-variant-numeric: tabular-nums; }
+.rows li + li { border-top: 1px solid var(--border); }
+.rows .nm { flex: 1; font-weight: 500; }
+.rows .m { font-family: var(--mono); font-size: 12px; color: var(--muted); white-space: nowrap; }
+.rows .len { font-family: var(--mono); font-size: 12px; color: var(--brown); white-space: nowrap; }
+.rows .len.hit { outline: 2px solid var(--yellow); outline-offset: 3px; border-radius: 2px; }
+.rows .len.bad { color: var(--red); }
+.exportline { margin: 0 12px 12px; padding: 8px 10px; border: 1px solid var(--linen); border-radius: 4px; font-family: var(--mono); font-size: 12px; color: var(--muted); overflow-wrap: anywhere; }
+.exportline.hit { outline: 2px solid var(--yellow); outline-offset: 2px; }
+.msg { border-radius: 4px; padding: 8px 10px; font-size: 13px; margin: 0 12px 12px; }
+.msg.ok { background: #eef4ea; color: var(--green); }
+.msg.no { background: #f7ebe9; color: var(--red); }
+.caption { font-size: 14px; color: var(--muted); }
+
+table.nums { border-collapse: collapse; width: 100%; min-width: 560px; font-variant-numeric: tabular-nums; font-size: 14px; }
+table.nums th { text-align: left; font-weight: 500; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; padding: 6px 8px; border-bottom: 1px solid var(--linen); }
+table.nums td { padding: 6px 8px; border-bottom: 1px solid var(--linen); font-family: var(--mono); font-size: 13px; }
+table.nums td:first-child { font-family: var(--body); }
+
+.specgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 24px 32px; }
+.specgrid > div { display: grid; gap: 8px; min-width: 0; align-content: start; }
+table.spec { border-collapse: collapse; width: 100%; font-size: 15px; }
+table.spec th { text-align: left; vertical-align: top; font-weight: 500; color: var(--muted); padding: 7px 14px 7px 0; border-top: 1px solid var(--linen); width: 32%; }
+table.spec td { padding: 7px 0; border-top: 1px solid var(--linen); vertical-align: top; }
+ul { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; }
+.q { display: grid; gap: 4px; border-top: 1px solid var(--border); padding-top: 12px; }
+.q b { font-family: var(--head); font-weight: 500; font-size: 17px; }
+.rec::before { content: "My take: "; font-weight: 700; }
+.src { font-size: 13px; color: var(--muted); overflow-wrap: anywhere; }
+</style>
+
+<div class="wrap">
+  <header class="page">
+    <span class="logo-badge"><span class="a">Appy</span><span class="d">Dave</span></span>
+    <span class="eyebrow">Spec · FliCut · UI note #22 · D08 job 7 · 2026-10-11</span>
+    <h1>The Cuts list and the export agree on one length</h1>
+    <p>For D02 the Cuts list said 5:36 and the export ran 5:44. Measured against the real D02 edit, the list was nearly right: the export is 8 seconds too long because it repeats about one frame at almost every join between kept clips.</p>
+    <div class="facts"><span>Sample: <b>D02 cutty-audio-cleanup (edit + a100 export)</b></span><span>Size: <b>~2 h for one coder</b></span><span>Status: <b>spec only, not built</b></span></div>
+  </header>
+
+  <section>
+    <h2>Where it hurts</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><b>The list said 5:36</b><span class="now">Today: the Cuts list adds up the kept clips exactly, with no rounding.</span></div>
+      <div class="step"><span class="n">2</span><b>The export ran 5:44</b><span class="now">Today: the export cuts the edit into 363 pieces and rounds each one outward to whole frames.</span></div>
+      <div class="step"><span class="n">3</span><b>He took the right file for the wrong video</b><span class="now">Today: nothing tells him the two numbers are different things.</span></div>
+    </div>
+    <p class="lead">Note #22 blames the 0.15 s padding. The numbers say otherwise. Padding is already inside the 5:36 (the saved edit and the edit as FliCut lays it out today sum to the same 335.53 s). The gap is frame rounding on 363 pieces, and 8.08 s of it is frames that play twice.</p>
+  </section>
+
+  <section>
+    <h2>What you'd see</h2>
+    <div class="ba">
+      <div>
+        <span class="tag">Before (today)</span>
+        <div class="app">
+          <div class="bar"><span class="proj">FliCut · Cuts</span><span class="spacer"></span><span class="newcut">+ New cut</span></div>
+          <div class="scroll"><ul class="rows">
+            <li><span class="nm">cutty-audio-cleanup</span><span class="m">d02-cutty-audio-cleanup</span><span class="m">13 media</span><span class="len">5:36</span><span class="m">6 Oct 2026, 07:40</span></li>
+          </ul></div>
+          <div class="exportline">Last export · h264+aac · 344.48s (planned 344.48s) · -15.2 LUFS</div>
+          <div class="msg no">List 5:36 · file 5:44. The file holds 202 frames that play twice (8.08 s).</div>
+        </div>
+      </div>
+      <div>
+        <span class="tag after">After</span>
+        <div class="app">
+          <div class="bar"><span class="proj">FliCut · Cuts</span><span class="spacer"></span><span class="newcut">+ New cut</span></div>
+          <div class="scroll"><ul class="rows">
+            <li><span class="nm">cutty-audio-cleanup</span><span class="m">d02-cutty-audio-cleanup</span><span class="m">13 media</span><span class="len hit">5:36</span><span class="m">6 Oct 2026, 07:40</span></li>
+          </ul></div>
+          <div class="exportline hit">Re-export · 26 pieces · planned 336.44s · file must probe within one frame of it</div>
+          <div class="msg ok">List, Kept stat and export all read 5:36. No frame plays twice.</div>
+          <div class="msg no">If the export probe and the plan differ by more than one frame, the export says so and names both numbers.</div>
+        </div>
+        <p class="caption">Numbers are from D02's edit run through FliCut's own code (<code>relayout</code> + <code>buildPlan</code>) and ffprobe on the a100 export. 336.44 s is what the plan gives once joined clips are merged; no D02 re-export was made, so the file length after the fix is not measured. The video column is the folder name per <code>edit-location.ts:122</code>, and the date is the edit's stored save time (2026-10-06 00:40 UTC) shown in Chiang Mai time; the exact on-screen date format was not seen.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>How far it reaches</h2>
+    <p>Same measurement on every v-appydave edit that has an export. These are today's edit files, which may have changed since their exports.</p>
+    <div class="scroll"><table class="nums">
+      <tr><th>Edit</th><th>Kept pieces</th><th>List (exact sum)</th><th>Export plan</th><th>Frames played twice</th></tr>
+      <tr><td>D02 cutty-audio-cleanup</td><td>363</td><td>335.53 s</td><td>344.48 s</td><td>202 (8.08 s)</td></tr>
+      <tr><td>D03 cutty-presenter-tracking</td><td>153</td><td>170.43 s</td><td>174.92 s</td><td>104 (4.16 s)</td></tr>
+      <tr><td>D04 d04-autopilot-cut</td><td>46</td><td>171.33 s</td><td>172.36 s</td><td>13 (0.52 s)</td></tr>
+      <tr><td>D06 presenter-headshot-artefact</td><td>104</td><td>329.44 s</td><td>332.04 s</td><td>55 (2.20 s)</td></tr>
+      <tr><td>D07 buzz-coding-team</td><td>870</td><td>863.29 s</td><td>881.64 s</td><td>418 (16.72 s)</td></tr>
+    </table></div>
+  </section>
+
+  <section>
+    <h2>The spec</h2>
+    <div class="specgrid">
+      <div>
+        <h3>What the job is</h3>
+        <table class="spec">
+          <tr><th>One length, one function</th><td>The Cuts list, the editor's "Kept" stat and the export all take their length from the export plan, so they cannot disagree again.</td></tr>
+          <tr><th>Join before rounding</th><td>Kept clips that run straight on from each other in the same recording become one piece before the plan rounds to frames. D02 goes from 363 pieces to 26.</td></tr>
+          <tr><th>No frame twice</th><td>No source frame appears in two pieces of the plan.</td></tr>
+          <tr><th>Mismatch is shown</th><td>If the exported file probes more than one frame away from the plan, the export line says so, with both numbers.</td></tr>
+          <tr><th>Display</th><td>The list keeps m:ss. The "Kept" tooltip stays "what the export will run", and now it is true.</td></tr>
+        </table>
+      </div>
+      <div>
+        <h3>Done-check</h3>
+        <table class="spec">
+          <tr><th>proof</th><td>A test on D02's edit file: plan duration = list duration = 336.44 s, and no two plan pieces overlap. A re-export of a copy of D02 probes within one frame of the plan.</td></tr>
+          <tr><th>test_audit</th><td><code>dev-team:audit-test-quality</code> on the new tests</td></tr>
+          <tr><th>before_after</th><td>Two screenshots of the Cuts list row and the export line for D02</td></tr>
+          <tr><th>duration</th><td>From the queue timestamps</td></tr>
+        </table>
+        <h3>Out of scope</h3>
+        <ul>
+          <li>Re-exporting or re-uploading D02 to D07. That is David's call (below), not this job.</li>
+          <li>Chapters made from pre-edit lengths: note #21, a Tuber / Launch job.</li>
+          <li>Padding and silence-snap rules (ADR-0002, ADR-0007): unchanged.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>What I checked, and what I didn't</h2>
+    <ul>
+      <li>The Cuts list row prints <code>fmtDuration(p.duration)</code> at <code>src/renderer/src/Home.tsx:110</code>; the number comes from <code>outputDuration(p.timeline.clipsWithCuts)</code> at <code>src/main/project-store.ts:529</code>, an exact sum (<code>src/shared/clock.ts:41</code>). The editor's Kept stat uses the same sum (<code>src/renderer/src/Editor.tsx:651</code>, shown at <code>:959</code>).</li>
+      <li>The list reads the edit through <code>readProject</code> → <code>#fromDisk</code> → <code>relayout</code> (<code>project-store.ts:245-253</code>, in place since 2026-09-27), so padding is applied before the list sums. Note #22's "no padding" is wrong for today's code.</li>
+      <li>The export's length is <code>buildPlan</code> (<code>src/shared/export-plan.ts:50-62</code>): each kept clip is its own piece, start rounded down and end rounded up to the 25 fps grid. Two clips that touch both claim the frame at their join. <code>exportArms</code> renders that plan (<code>src/main/pipeline.ts:427</code>, recorded at <code>:516</code>); ffmpeg trims video and audio per piece (<code>export-plan.ts:150-164</code>).</li>
+      <li>D02 measured: 391 clips, 363 kept, 337 kept clips that touch the one before. Exact sum 335.53 s; plan 344.48 s, matching <code>last-arms.json</code> and ffprobe on <code>cutty-audio-cleanup-audio-a100.mp4</code> (344.48 s). The edit was last saved 00:40 UTC, before the 04:58 export, so it is the exported edit. Measured with a scratch script calling FliCut's own <code>src/shared</code> code; no app was started.</li>
+      <li>A side note: the non-contract export path reports <code>plannedDuration</code> as the exact sum, not the plan (<code>src/main/index.ts:439</code>). Same fix covers it.</li>
+      <li>Not checked: whether the repeated frames can be heard or seen in the D02 file. Each is 40 ms of audio and video played twice at a join inside continuous speech. If it is audible, this stops being a display job and the D02 to D07 exports carry a defect; it does not change the size of the code fix.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Choices for David</h2>
+    <div class="q"><b>Fix the number, or fix the export?</b>
+      <p>A: make the list show the export length (5:44), as note #22 asks. Small, but it makes the list agree with a file that repeats 8 s of frames. B: join touching clips before rounding, so the export comes out 5:36 and the list already says so.</p>
+      <p class="rec">B. The list was telling the truth; the export was not. B is the same size as A plus one merge step, and the three numbers then come from one function.</p></div>
+    <div class="q"><b>What to do about the published videos</b>
+      <p>D02 is published; D03, D04, D06 and D07 have exports with repeats of 0.5 s to 16.7 s in total. Options: leave them, listen to one join in D02 first, or re-export each after the fix.</p>
+      <p class="rec">Listen to one join in D02 before deciding. If you can't hear it, leave the published ones and re-export only the ones not yet uploaded after the fix (D07 has the most repeats: 418 frames).</p></div>
+  </section>
+
+  <p class="src">Ticket: /Users/davidcruwys/dev/ad/flivideo/docs/briefs/ui-notes-2026-10-06.md (note #22) · Source file: /Users/davidcruwys/dev/ad/flivideo/docs/briefs/flicut-export-length-spec.html</p>
+</div>

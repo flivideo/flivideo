@@ -1,0 +1,260 @@
+<title>FliEdit Wipe and Slide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600&family=Roboto:ital,wght@0,400;0,500;0,700;1,400&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout: a light AppyDave spec page. Live demo of an overlay card fading (today) vs wiping and sliding (new), frame strips, then the spec. */
+:root {
+  color-scheme: light;
+  --brown: #342d2d; --gold: #ccba9d; --yellow: #ffde59; --amber: #c8841a;
+  --muted: #7a6e5e; --cream: #faf5ec; --surface: #f0ebe4; --linen: #e8e0d4;
+  --border: #d4cdc4; --chrome: #1a1515; --dark: #25201e; --blue: #2E91FC;
+  --red: #b5524a; --green: #4f7a3f;
+  --display: "Bebas Neue", Oswald, Impact, sans-serif;
+  --head: Oswald, "Arial Narrow", sans-serif;
+  --body: Roboto, system-ui, sans-serif;
+  --mono: "Roboto Mono", ui-monospace, monospace;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: var(--cream); color: var(--brown); font-family: var(--body); font-size: 16px; line-height: 1.55; }
+.wrap { max-width: 1080px; margin: 0 auto; padding-inline: 16px; padding-block: 36px 64px; display: grid; gap: 44px; }
+header.page { display: grid; gap: 12px; max-width: 72ch; }
+.logo-badge { display:inline-block; background: var(--brown); border-radius:6px; padding:4px 10px 2px; font-family: var(--display); letter-spacing:.04em; line-height:1.1; font-size: 22px; width: fit-content; }
+.logo-badge .a { color: var(--gold); } .logo-badge .d { color: var(--yellow); }
+.eyebrow { font-family: var(--head); text-transform: uppercase; letter-spacing: .12em; font-size: 13px; color: var(--amber); font-weight: 600; }
+h1 { font-family: var(--head); font-weight: 600; font-size: clamp(30px, 5vw, 44px); line-height: 1.1; margin: 0; text-transform: uppercase; text-wrap: balance; }
+h2 { font-family: var(--head); font-weight: 600; text-transform: uppercase; font-size: 26px; margin: 0; letter-spacing: .02em; text-wrap: balance; }
+h3 { font-family: var(--head); text-transform: uppercase; letter-spacing: .08em; font-size: 14px; color: var(--amber); margin: 0; font-weight: 600; }
+p { margin: 0; max-width: 68ch; }
+header.page p { color: var(--muted); }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 14px; color: var(--muted); }
+.facts b { color: var(--brown); font-weight: 500; }
+section { display: grid; gap: 16px; min-width: 0; }
+code { font-family: var(--mono); font-size: 13px; background: var(--surface); padding: 1px 5px; border-radius: 3px; overflow-wrap: anywhere; }
+
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 16px; }
+.step { display: grid; gap: 6px; border-top: 2px solid var(--amber); padding-top: 10px; align-content: start; }
+.step .n { font-family: var(--display); font-size: 34px; line-height: 1; color: var(--amber); }
+.step b { font-family: var(--head); font-weight: 500; font-size: 18px; }
+.step .now { color: var(--muted); font-size: 14px; }
+
+.tag { font-family: var(--head); text-transform: uppercase; letter-spacing: .1em; font-size: 12px; font-weight: 600; color: var(--muted); }
+.tag.after { color: var(--amber); }
+.caption { font-size: 14px; color: var(--muted); }
+
+/* ── the demo: three viewers ── */
+.demo { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 20px; }
+.cell { display: grid; gap: 8px; min-width: 0; align-content: start; }
+.cell.new .viewer { outline: 2px solid var(--yellow); outline-offset: 3px; }
+.viewer { position: relative; aspect-ratio: 16 / 9; background: var(--dark); border-radius: 4px; overflow: hidden; }
+/* the base video: a dim presenter frame */
+.viewer .base { position: absolute; inset: 0; background:
+  radial-gradient(circle at 30% 62%, #6b5a4c 0 13%, transparent 13.5%),
+  radial-gradient(ellipse at 30% 100%, #54463b 0 26%, transparent 26.5%),
+  linear-gradient(160deg, #3a302b, #1f1a18); }
+.viewer .tc { position: absolute; left: 8px; bottom: 6px; font-family: var(--mono); font-size: 10px; color: var(--gold); }
+/* the overlay card: d06-b4-v3-final.png (1280×720) at scale 0.45, top-right */
+.card { position: absolute; right: 6%; top: 9%; width: 45%; aspect-ratio: 16 / 9; border-radius: 3px;
+  background: var(--cream); border: 2px solid var(--yellow); display: grid; place-content: center; text-align: center; gap: 2px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.35); }
+.card b { font-family: var(--display); font-size: clamp(16px, 3.4vw, 26px); line-height: 1; color: var(--brown); letter-spacing: .03em; }
+.card span { font-family: var(--mono); font-size: 9px; color: var(--muted); }
+
+/* one 4 s loop: 0–20% in, 20–80% held, 80–100% out — the in edge is at 1 s at 25 fps scaled to the demo */
+.play .fade  { animation: fade 4s linear infinite; }
+.play .wipe  { animation: wipe 4s infinite; }
+.play .slide { animation: slide 4s infinite; }
+@keyframes fade { 0% { opacity: 0; } 20% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes wipe {
+  0%  { clip-path: inset(0 100% 0 0); animation-timing-function: cubic-bezier(.2,.7,.3,1); }
+  20% { clip-path: inset(0 0 0 0); }
+  80% { clip-path: inset(0 0 0 0); animation-timing-function: cubic-bezier(.7,0,.8,.3); }
+  100%{ clip-path: inset(0 100% 0 0); } }
+@keyframes slide {
+  0%  { transform: translateX(160%); animation-timing-function: cubic-bezier(.2,.7,.3,1); }
+  20% { transform: translateX(0); }
+  80% { transform: translateX(0); animation-timing-function: cubic-bezier(.7,0,.8,.3); }
+  100%{ transform: translateX(160%); } }
+.controls { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.btn { font-family: var(--head); text-transform: uppercase; letter-spacing: .06em; font-size: 13px; border: 1px solid var(--brown); background: var(--yellow); color: var(--brown); border-radius: 4px; padding: 4px 12px; cursor: pointer; }
+.note { font-size: 13px; color: var(--muted); }
+@media (prefers-reduced-motion: reduce) {
+  .play .fade, .play .wipe, .play .slide { animation: none; }
+}
+
+/* ── frame strips ── */
+.strips { display: grid; gap: 14px; }
+.strip { display: grid; grid-template-columns: 74px repeat(4, minmax(0, 1fr)); gap: 8px; align-items: center; }
+.strip .lab { font-family: var(--head); text-transform: uppercase; font-size: 13px; letter-spacing: .06em; }
+.strip .lab small { display: block; font-family: var(--body); text-transform: none; letter-spacing: 0; color: var(--muted); font-size: 11px; }
+.strip.new .lab { color: var(--amber); }
+.fr { display: grid; gap: 3px; }
+.fr .viewer .card b { font-size: clamp(9px, 1.4vw, 14px); }
+.fr .viewer .card span { display: none; }
+.fr .pct { font-family: var(--mono); font-size: 11px; color: var(--muted); text-align: center; }
+.strip.head .pct { font-weight: 500; color: var(--brown); }
+@media (max-width: 520px) { .strip { grid-template-columns: repeat(4, minmax(0, 1fr)); } .strip .lab { grid-column: 1 / -1; } }
+
+.specgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 24px 32px; }
+.specgrid > div { display: grid; gap: 8px; min-width: 0; align-content: start; }
+table.spec { border-collapse: collapse; width: 100%; font-size: 15px; }
+table.spec th { text-align: left; vertical-align: top; font-weight: 500; color: var(--muted); padding: 7px 14px 7px 0; border-top: 1px solid var(--linen); width: 32%; }
+table.spec td { padding: 7px 0; border-top: 1px solid var(--linen); vertical-align: top; }
+ul { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; }
+.q { display: grid; gap: 4px; border-top: 1px solid var(--border); padding-top: 12px; }
+.q b { font-family: var(--head); font-weight: 500; font-size: 17px; }
+.rec::before { content: "My take: "; font-weight: 700; }
+.src { font-size: 13px; color: var(--muted); overflow-wrap: anywhere; }
+</style>
+
+<div class="wrap">
+  <header class="page">
+    <span class="logo-badge"><span class="a">Appy</span><span class="d">Dave</span></span>
+    <span class="eyebrow">Spec · FliEdit · D08 job 6 · 2026-10-11</span>
+    <h1>Overlays can wipe or slide in, not only fade</h1>
+    <p>Today an image or B-roll on the overlay track can only fade in and out. You've never seen a wipe or a slide in FliEdit, because there isn't one: this page shows what they would look like, and asks the five calls that decide how they feel.</p>
+    <div class="facts"><span>Sample: <b>d06 <code>resources/project/d06-b4-v3-final.png</code>, 1280×720, on O1</b></span><span>Size: <b>~3 h for one coder</b></span><span>Status: <b>spec only, not built</b></span></div>
+  </header>
+
+  <section>
+    <h2>Where it hurts</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><b>Cut in FliCut, open in FliEdit</b><span class="now">Today: works. The cut goes on V1, the image on O1.</span></div>
+      <div class="step"><span class="n">2</span><b>Bring the image on with some energy</b><span class="now">Today: fade in / fade out only. The brief's own words: "NO wipes/slides/keyframed moves".</span></div>
+      <div class="step"><span class="n">3</span><b>Export and trust it</b><span class="now">Today: the fade is proven, preview = export, by a golden test. Anything new must pass the same test.</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>What you'd see</h2>
+    <p>The same card, the same 1 second in and 1 second out, three ways. The loop is 4 s: in, hold, out. Wipe and slide below use the takes in "Choices" (left-to-right wipe, slide from the right, ease-out in, mirrored out).</p>
+    <div class="demo play" id="demo">
+      <div class="cell">
+        <span class="tag">Before (today) · fade</span>
+        <div class="viewer"><div class="base"></div><div class="card fade"><b>Headshot B4</b><span>d06-b4-v3-final.png</span></div><span class="tc">O1 · fade 25f</span></div>
+      </div>
+      <div class="cell new">
+        <span class="tag after">After · wipe</span>
+        <div class="viewer"><div class="base"></div><div class="card wipe"><b>Headshot B4</b><span>d06-b4-v3-final.png</span></div><span class="tc">O1 · wipe → 25f</span></div>
+      </div>
+      <div class="cell new">
+        <span class="tag after">After · slide</span>
+        <div class="viewer"><div class="base"></div><div class="card slide"><b>Headshot B4</b><span>d06-b4-v3-final.png</span></div><span class="tc">O1 · slide ← 25f</span></div>
+      </div>
+    </div>
+    <div class="controls"><button class="btn" id="toggle" type="button">Pause</button><span class="note" id="rm">If your system asks for reduced motion, the loop stays still; the frame strip below shows the same thing.</span></div>
+
+    <div class="strips" aria-label="Frame strip: the in-transition at 0, 25, 50 and 100 percent">
+      <div class="strip head"><span></span><span class="pct">0%</span><span class="pct">25%</span><span class="pct">50%</span><span class="pct">100%</span></div>
+      <div class="strip">
+        <span class="lab">Fade<small>today, linear</small></span>
+        <div class="fr"><div class="viewer"><div class="base"></div><div class="card" style="opacity:0"><b>B4</b></div></div></div>
+        <div class="fr"><div class="viewer"><div class="base"></div><div class="card" style="opacity:.25"><b>B4</b></div></div></div>
+        <div class="fr"><div class="viewer"><div class="base"></div><div class="card" style="opacity:.5"><b>B4</b></div></div></div>
+        <div class="fr"><div class="viewer"><div class="base"></div><div class="card"><b>B4</b></div></div></div>
+      </div>
+      <div class="strip new">
+        <span class="lab">Wipe<small>new, ease-out</small></span>
+        <div class="fr"><div class="viewer"><div class="base"></div><div class="card" style="clip-path:inset(0 100% 0 0)"><b>B4</b></div></div></div>
+        <div class="fr"><div class="viewer"><div class="base"></div><div class="card" style="clip-path:inset(0 52% 0 0)"><b>B4</b></div></div></div>
+        <div class="fr"><div class="viewer"><div class="base"></div><div class="card" style="clip-path:inset(0 22% 0 0)"><b>B4</b></div></div></div>
+        <div class="fr"><div class="viewer"><div class="base"></div><div class="card"><b>B4</b></div></div></div>
+      </div>
+      <div class="strip new">
+        <span class="lab">Slide<small>new, ease-out</small></span>
+        <div class="fr"><div class="viewer"><div class="base"></div><div class="card" style="transform:translateX(160%)"><b>B4</b></div></div></div>
+        <div class="fr"><div class="viewer"><div class="base"></div><div class="card" style="transform:translateX(83%)"><b>B4</b></div></div></div>
+        <div class="fr"><div class="viewer"><div class="base"></div><div class="card" style="transform:translateX(35%)"><b>B4</b></div></div></div>
+        <div class="fr"><div class="viewer"><div class="base"></div><div class="card"><b>B4</b></div></div></div>
+      </div>
+    </div>
+    <p class="caption">The card stands in for <code>d06-b4-v3-final.png</code> (measured 1280×720) placed at scale 0.45, top right. The presenter behind it is a drawn stand-in for the FliCut cut, not a real frame. Percentages are of the transition's time; wipe and slide positions follow an ease-out curve, so 25% of the time already covers about half the move. 25 frames = 1 s at FliEdit's 25 fps canvas, the same length the Inspector's fade button uses today.</p>
+  </section>
+
+  <section>
+    <h2>The spec</h2>
+    <div class="specgrid">
+      <div>
+        <h3>What the job is</h3>
+        <table class="spec">
+          <tr><th>Two new kinds</th><td>An overlay clip's in-edge and out-edge can be <b>fade</b> (today), <b>wipe</b> or <b>slide</b>. Each edge is chosen separately.</td></tr>
+          <tr><th>Wipe</th><td>The card is revealed by a straight edge moving across it. It never moves; only how much of it shows changes.</td></tr>
+          <tr><th>Slide</th><td>The card travels in from outside the frame to where you placed it, fully opaque the whole way.</td></tr>
+          <tr><th>Direction</th><td>Wipe: left→right, right→left, top→bottom, bottom→top. Slide: from left, right, top or bottom edge. Defaults per Choices below.</td></tr>
+          <tr><th>Length</th><td>In frames, like the fade. Can't be longer than the clip (same refusal the fade gives).</td></tr>
+          <tr><th>Where you set it</th><td>Inspector, next to the fade in / fade out buttons: a small kind picker per edge. Agents: <code>transition.set</code> with <code>kind: "wipe" | "slide"</code> and <code>direction</code>.</td></tr>
+          <tr><th>Between two clips</th><td>Refused: wipe and slide are edge-only. Joins stay dissolve or cut.</td></tr>
+          <tr><th>Old edits</th><td>Open unchanged. A fade stays a fade, pixel for pixel.</td></tr>
+        </table>
+      </div>
+      <div>
+        <h3>Done-check</h3>
+        <table class="spec">
+          <tr><th>proof</th><td>New golden <code>test/golden/overlay-wipe-slide.test.ts</code>, built like <code>overlay-image.test.ts</code>: solid-colour image on O1, wipe in + slide out. Preview frame = export frame (&lt;0.5% pixels) at before / mid-in / full / mid-out / after; a probe that at mid-wipe the left of the card is overlay and the right is base; at mid-slide the card's centre is offset toward its edge; negative control 5 frames off fails. <code>npm run test:golden</code> green, and the existing fade goldens unchanged.</td></tr>
+          <tr><th>test_audit</th><td><code>dev-team:audit-test-quality</code> on the new tests</td></tr>
+          <tr><th>before_after</th><td>Two exported mp4 stills mid-transition (fade vs wipe vs slide) from the golden's temp project</td></tr>
+          <tr><th>duration</th><td>From the queue timestamps</td></tr>
+        </table>
+        <h3>Out of scope</h3>
+        <ul>
+          <li>Wipe/slide between two touching clips on one track (ffmpeg <code>xfade</code>). A separate job if wanted.</li>
+          <li>Ken Burns pan/zoom and keyframed moves — the brief's next "nice to have".</li>
+          <li>The cutaway plan's <code>fade</code> field (<code>edit-ops.ts:425-455</code>) stays fade-only for now.</li>
+          <li>Soft-edged wipes, push, zoom, spin.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>What I checked, and what I didn't</h2>
+    <ul>
+      <li><b>One renderer for preview and export.</b> <code>src/core/render/plan.ts</code> <code>plan()</code> builds the ffmpeg graph; <code>stillArgs</code> (:189, preview frame), <code>chunkArgs</code> (:235, playback), <code>proxyArgs</code> (:224) and <code>exportArgs</code> (:203) all call it. So the new kinds are written once and preview can't drift from export.</li>
+      <li><b>How fade works today.</b> <code>plan.ts:68-69</code> turns a one-sided <code>fade</code> transition into a fade-in/out time; <code>plan.ts:126-127</code> adds ffmpeg <code>fade=…:alpha=1</code> to the overlay's chain (linear). The overlay is drawn at a fixed spot: <code>plan.ts:131</code> <code>overlay=x=…:y=…</code> from <code>geometry.ts:15-33</code>. Slide makes that x/y a per-frame expression; wipe adds a per-frame mask on the chain.</li>
+      <li><b>Model and verb.</b> <code>schema.ts:130</code> <code>TransitionKind = ['dissolve','fade']</code>; <code>schema.ts:132-141</code> has no direction or easing field. <code>edit-ops.ts:390-418</code> <code>setTransition</code> validates; <code>capabilities/timeline.ts:122-126</code> exposes <code>transition.set</code>. Inspector fade buttons: <code>Inspector.tsx:58-59, 115-118</code>.</li>
+      <li><b>Golden parity tests exist and are the template.</b> <code>test/golden/overlay-image.test.ts</code> (image on O1, fade in/out, preview = export at 5 frames, colour probe, negative control) and <code>test/golden/parity.test.ts</code> (d04, dissolve + PiP). Run by <code>vitest.golden.config.ts</code>.</li>
+      <li><b>Real data.</b> d06 has <code>d06-b4-v3-final.png</code>, <code>d06-b5-compact-final.png</code>, <code>d06-b6-v3-final.png</code> in <code>resources/project/</code>; B4 measured 1280×720 with <code>sips</code>.</li>
+      <li>Not checked: that a per-frame expression gives the same pixel in a one-frame preview window as in the full export. <code>plan()</code> shifts time per window (<code>setpts=PTS-…</code>, <code>plan.ts:128</code>), so the slide/wipe must be written in timeline frames, not window time. If the bundled ffmpeg evaluates <code>overlay</code> x/y or the mask differently per window, the job grows by a spike. No code was run.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Choices for David</h2>
+    <div class="q"><b>1 · Wipe direction (default)</b>
+      <p>Left→right, right→left, top→bottom, bottom→top. All four will exist; this picks what you get without choosing.</p>
+      <p class="rec">Left→right. It reads like text and like a reveal; the other three stay one click away.</p></div>
+    <div class="q"><b>2 · Slide edge (default)</b>
+      <p>From the nearest frame edge to where the card sits (automatic), or a fixed edge: right, left, top, bottom.</p>
+      <p class="rec">Nearest edge. Your cards sit top-right in a corner more often than not, so that's "from the right" here, and a card placed bottom-left slides up from the bottom without you thinking about it.</p></div>
+    <div class="q"><b>3 · Duration (default)</b>
+      <p>1 s (25 frames, same as the fade button today), 0.5 s (snappier), or 0.75 s.</p>
+      <p class="rec">Keep 1 s for wipe, 0.5 s for slide. A slide is a move, and moves feel slow sooner than fades do; a 1 s slide drags.</p></div>
+    <div class="q"><b>4 · Easing</b>
+      <p>Linear (like the fade today), or ease-out in / ease-in out (fast start, soft landing), as in the demo.</p>
+      <p class="rec">Ease-out in, ease-in out, for wipe and slide only. Linear motion looks robotic. Fade stays linear so its existing goldens don't move.</p></div>
+    <div class="q"><b>5 · Does the out mirror the in?</b>
+      <p>Mirror: the card leaves the way it came (slides back out right; wipe retracts right→left). Or continue: it carries on (exits left; wipe sweeps off to the right).</p>
+      <p class="rec">Mirror. It reads as "tucked away", which suits a cutaway that returns you to the presenter. In and out are separate edges anyway, so you can still set any other pairing.</p></div>
+  </section>
+
+  <p class="src">Ticket (source brief, "Nice to have"): /Users/davidcruwys/dev/ad/flivideo/docs/briefs/fliedit-overlay-use-case-2026-10-09.md · Repo: /Users/davidcruwys/dev/ad/flivideo/fliedit · Source file: /Users/davidcruwys/dev/ad/flivideo/docs/briefs/fliedit-wipe-slide-spec.html</p>
+</div>
+<script>
+(function () {
+  var demo = document.getElementById('demo'), btn = document.getElementById('toggle');
+  var still = false;
+  try { still = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+  if (still) { btn.textContent = 'Play'; btn.dataset.off = '1'; }
+  btn.addEventListener('click', function () {
+    var cards = demo.querySelectorAll('.card');
+    if (btn.textContent === 'Pause') {
+      cards.forEach(function (c) { c.style.animationPlayState = 'paused'; });
+      btn.textContent = 'Play';
+    } else {
+      if (btn.dataset.off) { cards.forEach(function (c) { c.style.animation = (c.classList.contains('fade') ? 'fade 4s linear' : c.classList.contains('wipe') ? 'wipe 4s' : 'slide 4s') + ' infinite'; }); delete btn.dataset.off; }
+      cards.forEach(function (c) { c.style.animationPlayState = 'running'; });
+      btn.textContent = 'Pause';
+    }
+  });
+})();
+</script>
