@@ -9,8 +9,8 @@ timestamp: 2026-10-12
 **Purpose**: Where the FliVideo orchestrator (tmux `flivideo-orch`, M4) is up to, for the post-compact session.
 
 **For Agents**: Read first after `/compact`. Role: route David's FliVideo feedback to builders (background agents in
-worktrees), merge + restart + verify, relay with `d08-plan` and `lead@ylo-thumbs` (they tmux-send into `flivideo-orch`;
-reply with `tmux send-keys -t d08-plan -l '…'` then `Enter`). Standing rules: CLAUDE prefs + memory index.
+worktrees), merge + restart + verify, relay with `d10-ai-powered-video-cuts` (was d08-plan; same session, now on D10) and `lead@ylo-thumbs` (they tmux-send into `flivideo-orch`;
+reply with `tmux send-keys -t d10-ai-powered-video-cuts -l '…'` then `Enter`). Standing rules: CLAUDE prefs + memory index.
 
 ## Current step
 **Idle, all shipped.** Every FliVideo repo is clean and pushed; M4, Roamy and M2 are in step (2026-10-12 ~15:40).
