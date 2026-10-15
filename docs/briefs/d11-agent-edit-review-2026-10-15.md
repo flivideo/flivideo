@@ -91,6 +91,68 @@ Play each at 2.5×. Undo any you don't like.
 2. Play each row above at 2.5× and undo any you disagree with. Decide flag 1.
 3. Export. That writes `videos/openrig-youtube-automation/` and unblocks the D11 launch team.
 
+## Rogue-sound pass (second pass, same day)
+
+David heard word fragments ("so", "at") in the gap after "tested." in 05-4.
+
+**Cause.** Word timings are often 40–100 ms off. Cut edges placed on word timings therefore leak fragments.
+
+**How I checked.** I measured loudness (RMS, 20 ms windows) on the 16 kHz audio either side of every join: 49 kept runs. A
+join was flagged when it had sound louder than −36 dB that was not inside a kept word. I judged each flag from its
+loudness pattern.
+
+**The 05-4 join (your spot).** Three leaks:
+- "S…" (the start of "So", 10.70 s)
+- "…th" from "with" (14.74–14.82 s)
+- the onset of the "uh" (14.95–15.04 s)
+
+The "uh" leaked because of a **FliCut bug**: the filler cut overlaps a kept pause, and the pause wins, so `cut.list`
+reports the filler as `removed: 0`. Cutting that pause makes the next kept pause stretch back over the "uh"
+(14.97 s). Both pauses had to be cut.
+
+**10 more joins fixed** (each one `cut.set` = one undo step):
+
+| Clip | Edge | From → to (source s) | What was leaking |
+|---|---|---|---|
+| 01-2 | in | 0.40 → 0.62 | lip click before "And" |
+| 03-1 | in | 0.78 → 0.96 | lip smack before "So" |
+| 03-1 | in | 19.53 → 19.74 | tail of the "uh" before "created" |
+| 05-1 | out | 6.11 → 5.70 | click after "work" |
+| 05-4 | out | 25.88 → 25.55 | breath/onset after "drawn" |
+| 05-4 | in | 72.23 → 72.33 | tail of "key" (the false start) |
+| 05-5 | in | 39.11 → 39.30 | click before "And so this will be" |
+| 06-1 | in | 47.44 → 47.58 | "…s" of "it's" (the false start) |
+| 06-3 | out | 15.32 → 15.24 | onset of "and" (the false start) |
+| 07-1 | out | 16.64 → 16.50 | onset of "And" (the false start) |
+
+Four of the leaks sat next to my own false-start cuts. **Lesson: every word cut needs this join check.**
+
+**Not changed (15 still flagged):**
+- **False alarms:** the kept word itself starts or ends a little outside its transcript timing.
+  - 04-2 "And" at 35.91 s
+  - 04-2 "ChatGPT" tail
+  - 05-1 "this" at 33.24 s
+- **Quiet breaths at −31 to −36 dB:**
+  - 01-1 opening
+  - "Now" at the heads of 03-2 and 06-1
+  - 05-2, 05-4 "kids" and "category", 05-7
+
+**Kept length:** 10:48 before this pass, 10:36 after (636.1 s).
+
+**Not verified:** I have not *heard* any of this. It needs your ears on the export.
+
+### Proposed FliCut ticket (only if your ears agree with the above)
+
+1. **Bug:** a filler cut must never shrink to 0 s because a kept pause overlaps it. Cutting the pause must not make
+   the next pause grow back over the filler.
+2. **Join check before export:** at every join, measure the kept audio outside kept words. Snap the edge into
+   silence where it can; list the rest for a listen.
+   - `cut.list` has `clippedEdges` already, but it caught only some of these.
+   - The −36 dB / outside-words rule above is the starting threshold.
+3. **Visual:** loudness marks on the pause pills, so rogue sound is visible in the transcript.
+
 ## What David changed (fill in after review)
+
+- 04-2: you also cut "stuff like that, and we've got drip." (after my pass).
 
 - …
