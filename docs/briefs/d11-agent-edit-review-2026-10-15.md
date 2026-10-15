@@ -141,6 +141,15 @@ Four of the leaks sat next to my own false-start cuts. **Lesson: every word cut 
 
 **Not verified:** I have not *heard* any of this. It needs your ears on the export.
 
+
+**Third fix: a cough (David spotted it).** In 05-4 at 72.35–72.90 s there is a cough at nearly full scale (−1 dB).
+Whisper folded it into the word "And", which it timed 72.38–74.38 s (2 s long), so neither FliCut nor my join check
+saw it as non-word sound. My edge fix (72.23 → 72.33) had in fact kept it. Fixed: the cut now runs to 74.22 s, and the
+real "And it's already" starts at 74.30 s.
+
+- **Lesson for the join check:** treat a folded word (the "transcript health: folded-word" warning, any word over ~1 s)
+  as suspect. Measure inside it as well; never trust its start time.
+
 ### Proposed FliCut ticket (only if your ears agree with the above)
 
 1. **Bug:** a filler cut must never shrink to 0 s because a kept pause overlaps it. Cutting the pause must not make
