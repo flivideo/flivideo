@@ -137,7 +137,7 @@ Four of the leaks sat next to my own false-start cuts. **Lesson: every word cut 
   - "Now" at the heads of 03-2 and 06-1
   - 05-2, 05-4 "kids" and "category", 05-7
 
-**Kept length:** 10:48 before this pass, 10:36 after (636.1 s).
+**Kept length:** now 10:36 (636.1 s). That includes your own edits made since my first pass (10:48).
 
 **Not verified:** I have not *heard* any of this. It needs your ears on the export.
 
