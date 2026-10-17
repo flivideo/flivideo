@@ -1,0 +1,518 @@
+<meta charset="utf-8">
+<title>FliStudio Prep Room</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600&family=Roboto:ital,wght@0,400;0,500;0,700;1,400&family=Roboto+Mono&display=swap" rel="stylesheet">
+<style>
+/* Layout: an AppyDave light page holding one framed FliStudio window (top bar, left menu, Prep zone),
+   then a slots-by-video matrix and David's questions. Tokens copied from flistudio/client/src/styles/tokens.css. */
+:root {
+  color-scheme: light;
+  --ad-brown: #342d2d; --ad-gold: #ccba9d; --ad-yellow: #ffde59; --ad-amber: #c8841a;
+  --ad-muted: #7a6e5e; --ad-cream: #faf5ec; --ad-surface: #f0ebe4; --ad-linen: #e8e0d4;
+  --ad-border: #d4cdc4; --ad-chrome: #1a1515; --ad-dark-surface: #25201e; --ad-blue: #2e91fc;
+  --ad-white: #ffffff; --ad-amber-ink: #885911; --ad-muted-ink: #6d6354; --ad-critical-ink: #9f4841;
+  --ok-ink: #3f7a4a; --ok-bg: #e3efe5; --ok-line: #bcd6c1;
+  --part-bg: #fbeed6; --part-line: #eed3a3;
+  --font-display: 'Bebas Neue', Impact, sans-serif;
+  --font-heading: 'Oswald', 'Arial Narrow', sans-serif;
+  --font-body: 'Roboto', Helvetica, Arial, sans-serif;
+  --font-mono: 'Roboto Mono', ui-monospace, Menlo, monospace;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  margin: 0; background: var(--ad-cream); color: var(--ad-brown);
+  font-family: var(--font-body); font-size: 15px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--ad-blue); text-underline-offset: 2px; }
+a:hover { color: var(--ad-brown); text-decoration-color: var(--ad-yellow); }
+:focus-visible { outline: 2px solid var(--ad-blue); outline-offset: 2px; }
+h1, h2, h3, h4 { font-family: var(--font-heading); text-transform: uppercase; letter-spacing: .04em; line-height: 1.1; margin: 0; text-wrap: balance; }
+.wrap {
+  max-width: 1240px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 56px;
+  display: grid; gap: 36px;
+}
+.label { font-family: var(--font-heading); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--ad-muted-ink); }
+.mono { font-family: var(--font-mono); font-size: 13px; color: var(--ad-muted-ink); overflow-wrap: anywhere; }
+
+/* ── page header ── */
+.hero { display: grid; gap: 12px; }
+.hero__top { display: flex; flex-wrap: wrap; gap: 12px 16px; align-items: center; }
+.logo-badge { display: inline-block; background: var(--ad-brown); border-radius: 6px; padding: 4px 10px 2px; font-family: var(--font-display); font-size: 22px; letter-spacing: .04em; line-height: 1.1; }
+.logo-badge .a { color: var(--ad-gold); } .logo-badge .d { color: var(--ad-yellow); }
+.mock-stamp { font: 600 11px var(--font-heading); letter-spacing: .14em; text-transform: uppercase; border: 1px solid var(--ad-amber); color: var(--ad-amber-ink); border-radius: 2px; padding: 2px 8px; }
+.hero h1 { font-size: clamp(34px, 6vw, 52px); font-weight: 600; }
+.hero h1 span { box-shadow: inset 0 -.18em 0 var(--ad-yellow); }
+.hero p { margin: 0; max-width: 66ch; font-size: 17px; }
+.hero .quote { font-style: italic; color: var(--ad-muted-ink); font-size: 15px; }
+
+/* ── figures ── */
+figure { margin: 0; display: grid; gap: 10px; min-width: 0; }
+figcaption { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.fignum { font: 600 12px var(--font-heading); letter-spacing: .14em; text-transform: uppercase; color: var(--ad-amber-ink); }
+figcaption h2 { font-size: 22px; font-weight: 600; }
+figcaption small { color: var(--ad-muted-ink); font-size: 13px; flex-basis: 100%; }
+
+/* ── phase strip ── */
+.phases { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border: 1px solid var(--ad-border); border-radius: 4px; background: var(--ad-white); overflow: hidden; }
+.phase { padding: 12px 14px 14px; border-right: 1px solid var(--ad-border); display: grid; gap: 6px; align-content: start; position: relative; min-width: 0; }
+.phase:last-child { border-right: 0; }
+.phase__name { font: 600 16px var(--font-heading); letter-spacing: .06em; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+.phase__nn { font: 500 12px var(--font-heading); color: var(--ad-amber-ink); }
+.phase__what { font-size: 13px; color: var(--ad-muted-ink); }
+.phase__home { font: 500 11px var(--font-heading); letter-spacing: .1em; text-transform: uppercase; color: var(--ad-brown); }
+.phase__chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.phase.is-here { background: var(--ad-cream); box-shadow: inset 0 3px 0 var(--ad-yellow); }
+.phase.is-sibling { box-shadow: inset 0 3px 0 var(--ad-gold); }
+.phase:not(:last-child)::after { content: '›'; position: absolute; right: -7px; top: 10px; width: 14px; height: 22px; display: grid; place-items: center; background: var(--ad-white); color: var(--ad-muted); font: 600 18px var(--font-heading); z-index: 1; }
+.tagnew { font: 600 9.5px var(--font-heading); letter-spacing: .12em; padding: 1px 6px; border-radius: 999px; background: var(--ad-yellow); color: var(--ad-brown); }
+.tagexists { font: 600 9.5px var(--font-heading); letter-spacing: .12em; padding: 1px 6px; border-radius: 999px; border: 1px solid var(--ok-line); background: var(--ok-bg); color: var(--ok-ink); }
+
+/* ── FliStudio window ── */
+.win { border: 1px solid var(--ad-border); border-radius: 6px; overflow: hidden; background: var(--ad-cream); box-shadow: 3px 3px 0 var(--ad-linen); min-width: 0; }
+.fs-topbar { height: 52px; background: var(--ad-dark-surface); display: flex; align-items: center; gap: 16px; padding: 0 16px; min-width: 0; }
+.fs-burger { width: 22px; height: 22px; color: var(--ad-white); flex: none; }
+.fs-wordmark { font-family: var(--font-display); font-size: 26px; line-height: 1; flex: none; }
+.fs-wordmark .f { color: var(--ad-gold); } .fs-wordmark .s { color: var(--ad-yellow); }
+.fs-topbar__rule { width: 1px; height: 22px; background: #4a423e; flex: none; }
+.fs-crumbs { font-family: var(--font-mono); font-size: 12.5px; color: var(--ad-white); display: flex; gap: 8px; min-width: 0; white-space: nowrap; overflow: hidden; }
+.fs-crumbs span:last-child { overflow: hidden; text-overflow: ellipsis; }
+.fs-crumbs .sep { color: #8a7f76; }
+.fs-body { display: flex; min-width: 0; }
+.fs-rail { width: 236px; flex: none; background: var(--ad-surface); border-right: 1px solid var(--ad-border); padding: 0 0 18px; }
+.fs-nav-id { display: grid; justify-items: center; padding: 16px 0 12px; border-bottom: 1px solid var(--ad-border); margin-bottom: 8px; text-align: center; }
+.fs-nav-id__mark { width: 64px; height: 64px; border-radius: 50%; background: var(--ad-yellow); color: var(--ad-brown); display: grid; place-items: center; font: 400 38px/1 var(--font-display); box-shadow: 0 0 0 3px var(--ad-white), 0 0 0 4px var(--ad-border); }
+.fs-nav-id__brand { margin-top: 10px; font: 500 14px var(--font-heading); letter-spacing: .04em; text-transform: uppercase; }
+.fs-nav-id__project { font-size: 12px; color: var(--ad-muted-ink); padding: 0 12px; overflow-wrap: anywhere; }
+.fs-rail__group { padding: 8px 22px 4px; font-family: var(--font-heading); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--ad-muted-ink); }
+.fs-rail__row { display: flex; align-items: center; gap: 12px; width: calc(100% - 16px); margin: 1px 8px; padding: 7px 14px; border: 0; border-radius: 10px; background: transparent; color: var(--ad-brown); font: 400 14px var(--font-body); text-align: left; }
+.fs-rail__row svg { width: 18px; height: 18px; flex: none; color: var(--ad-muted-ink); }
+.fs-rail__row .n { margin-left: auto; font: 12px var(--font-mono); color: var(--ad-muted-ink); }
+.fs-rail__row[aria-current="true"] { background: var(--ad-linen); font-weight: 600; }
+.fs-rail__row[aria-current="true"] svg { color: var(--ad-amber); }
+.fs-rail__row.is-dim { opacity: .62; }
+.fs-phase-label { display: block; padding: 6px 22px 0; font: 500 10px var(--font-heading); letter-spacing: .12em; text-transform: uppercase; color: var(--ad-muted); }
+
+.fs-center { flex: 1; min-width: 0; padding: 22px 26px 30px; display: grid; gap: 16px; align-content: start; }
+.fs-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px; padding-bottom: 14px; border-bottom: 1px solid var(--ad-border); }
+.fs-head h3 { font-size: 26px; font-weight: 600; }
+.fs-head p { margin: 4px 0 0; font-size: 14px; color: var(--ad-muted-ink); max-width: 60ch; }
+.fs-videos { display: flex; flex-wrap: wrap; gap: 6px; }
+.fs-videos button { font: 500 13px var(--font-heading); letter-spacing: .06em; text-transform: uppercase; border: 1px solid var(--ad-border); background: var(--ad-white); border-radius: 3px; padding: 5px 11px; color: var(--ad-brown); cursor: pointer; }
+.fs-videos button[aria-pressed="true"] { background: var(--ad-yellow); border-color: var(--ad-yellow); }
+.fs-summary { display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: baseline; background: var(--ad-white); border: 1px solid var(--ad-border); border-radius: 4px; padding: 9px 14px; font-size: 13px; color: var(--ad-muted-ink); }
+.fs-summary b { font: 600 13px var(--font-heading); letter-spacing: .1em; text-transform: uppercase; color: var(--ad-brown); }
+
+.zone { border-top: 3px solid var(--ad-amber); padding-top: 12px; display: grid; gap: 10px; }
+.zone__head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.zone__head h4 { font-size: 15px; font-weight: 600; letter-spacing: .08em; }
+.zone__head small { font-size: 12.5px; color: var(--ad-muted-ink); }
+
+.slot { background: var(--ad-white); border: 1px solid var(--ad-border); border-radius: 4px; display: grid; grid-template-columns: 44px minmax(0, 1fr); min-width: 0; }
+.slot.is-empty { background: transparent; border-style: dashed; }
+.slot__nn { font: 500 20px var(--font-heading); color: var(--ad-amber-ink); padding: 12px 0 0 14px; }
+.slot__main { padding: 12px 14px 12px 4px; display: grid; gap: 6px; min-width: 0; }
+.slot__top { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; }
+.slot__name { font: 600 15px var(--font-heading); letter-spacing: .06em; text-transform: uppercase; }
+.pill { font: 600 10px var(--font-heading); letter-spacing: .1em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--ad-border); background: var(--ad-white); white-space: nowrap; }
+.pill.filled { background: var(--ok-bg); border-color: var(--ok-line); color: var(--ok-ink); }
+.pill.partial { background: var(--part-bg); border-color: var(--part-line); color: var(--ad-amber-ink); }
+.pill.later { background: var(--ad-surface); color: var(--ad-muted-ink); }
+.pill.empty { background: transparent; border-style: dashed; color: var(--ad-muted-ink); }
+.chip { font: 500 10.5px var(--font-heading); letter-spacing: .1em; text-transform: uppercase; border: 1px solid var(--ad-border); border-radius: 3px; padding: 1px 6px; color: var(--ad-muted-ink); background: var(--ad-white); white-space: nowrap; }
+.chip.ph-prep { border-color: var(--ad-yellow); background: #fff8d6; color: var(--ad-brown); }
+.chip.ph-record { border-color: var(--ad-gold); }
+.chip.ph-run { border-color: var(--ad-amber); color: var(--ad-amber-ink); }
+.chip.ph-post { border-style: dashed; }
+.slot__facts { font-size: 13px; color: var(--ad-muted-ink); display: flex; flex-wrap: wrap; gap: 2px 14px; }
+.slot__facts b { font-weight: 500; color: var(--ad-brown); }
+.slot__items { display: grid; gap: 6px; margin-top: 2px; }
+.item { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 10px; padding: 7px 0 0; border-top: 1px solid var(--ad-surface); align-items: start; }
+.item__t { font-weight: 500; overflow-wrap: anywhere; }
+.item__why { grid-column: 1 / -1; font-size: 12.5px; color: var(--ad-muted-ink); }
+.item__acts { display: flex; gap: 6px; flex-wrap: wrap; justify-content: end; }
+.btn { display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 11px; font: 600 11.5px var(--font-heading); letter-spacing: .05em; text-transform: uppercase; border: 1px solid var(--ad-brown); border-radius: 3px; background: transparent; color: var(--ad-brown); text-decoration: none; cursor: pointer; white-space: nowrap; }
+.btn:hover { background: var(--ad-surface); color: var(--ad-brown); }
+.btn--primary { background: var(--ad-yellow); border-color: var(--ad-yellow); }
+.btn--primary:hover { background: #f7d240; }
+.borrow { font: 500 10px var(--font-heading); letter-spacing: .1em; text-transform: uppercase; border: 1px dashed var(--ad-amber); color: var(--ad-amber-ink); border-radius: 3px; padding: 0 5px; margin-left: 6px; }
+.slot__empty { font-size: 13.5px; display: grid; gap: 2px; }
+.slot__empty span { color: var(--ad-muted-ink); }
+
+.preview { grid-column: 1 / -1; display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 14px; background: var(--ad-cream); border: 1px solid var(--ad-border); border-radius: 4px; padding: 12px; margin-top: 4px; }
+.preview p { margin: 0; font-size: 13.5px; max-width: 62ch; }
+.preview .note { font-size: 11.5px; color: var(--ad-muted-ink); margin-top: 6px; }
+.sketch { aspect-ratio: 16 / 10; max-width: 100%; background: var(--ad-white); border: 1px solid var(--ad-border); border-radius: 3px; padding: 8px; display: grid; gap: 5px; align-content: start; overflow: hidden; }
+.sk-bar { height: 6px; border-radius: 2px; background: var(--ad-linen); }
+.sk-bar.y { background: var(--ad-yellow); width: 45%; height: 8px; }
+.sk-bar.d { background: var(--ad-brown); width: 60%; }
+.sk-row { display: grid; gap: 4px; grid-template-columns: repeat(var(--c, 2), 1fr); }
+.sk-box { height: 22px; border-radius: 2px; background: var(--ad-surface); border: 1px solid var(--ad-border); }
+.sk-box.a { border-top: 2px solid var(--ad-amber); }
+.sk-box.g { background: var(--ok-bg); border-color: var(--ok-line); }
+.sk-box.dk { background: var(--ad-dark-surface); border-color: var(--ad-dark-surface); }
+.sk-box.tall { height: 46px; }
+
+.extras summary { cursor: pointer; list-style: none; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.extras summary::-webkit-details-marker { display: none; }
+.extras summary h4 { font-size: 15px; font-weight: 600; letter-spacing: .08em; }
+.extras summary h4::before { content: '▸ '; color: var(--ad-amber); }
+.extras[open] summary h4::before { content: '▾ '; }
+.extras summary small { font-size: 12.5px; color: var(--ad-muted-ink); }
+.extras__body { display: grid; gap: 10px; margin-top: 10px; }
+
+.sibling { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 12px; align-items: center; background: var(--ad-white); border: 1px solid var(--ad-border); border-left: 3px solid var(--ad-gold); border-radius: 4px; padding: 10px 14px; font-size: 13.5px; }
+.sibling b { font: 600 13px var(--font-heading); letter-spacing: .08em; text-transform: uppercase; }
+
+/* ── matrix ── */
+.scroll { overflow-x: auto; border: 1px solid var(--ad-border); border-radius: 4px; background: var(--ad-white); }
+table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 13.5px; }
+th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--ad-surface); vertical-align: top; }
+thead th { font: 600 12px var(--font-heading); letter-spacing: .1em; text-transform: uppercase; color: var(--ad-muted-ink); background: var(--ad-surface); }
+tbody th { font-weight: 500; white-space: nowrap; }
+tbody th .nn { font-family: var(--font-heading); color: var(--ad-amber-ink); margin-right: 6px; }
+tr.core-end td, tr.core-end th { border-bottom: 2px solid var(--ad-amber); }
+.cell { display: inline-flex; gap: 6px; align-items: baseline; }
+.g { font-family: var(--font-mono); font-weight: 700; }
+.g.filled { color: var(--ok-ink); } .g.partial { color: var(--ad-amber-ink); } .g.later, .g.empty { color: var(--ad-muted); }
+.cell small { color: var(--ad-muted-ink); font-size: 12px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12.5px; color: var(--ad-muted-ink); }
+
+/* ── questions ── */
+.questions { background: var(--ad-surface); border-left: 3px solid var(--ad-brown); border-radius: 0 4px 4px 0; padding-block: 16px 18px; padding-inline: 18px; display: grid; gap: 10px; }
+.questions h2 { font-size: 20px; font-weight: 600; }
+.questions h2 span { box-shadow: inset 0 -.2em 0 var(--ad-yellow); }
+.questions ol { margin: 0; padding-left: 22px; display: grid; gap: 8px; max-width: 72ch; }
+.questions li::marker { font-family: var(--font-heading); color: var(--ad-amber-ink); }
+.questions li em { color: var(--ad-muted-ink); }
+.foot { font-size: 12.5px; color: var(--ad-muted-ink); display: grid; gap: 4px; }
+.foot p { margin: 0; max-width: 90ch; }
+
+/* ── narrow ── */
+@media (max-width: 860px) {
+  .fs-body { flex-direction: column; }
+  .fs-rail { width: auto; border-right: 0; border-bottom: 1px solid var(--ad-border); padding: 8px 8px 10px; display: flex; flex-wrap: wrap; gap: 4px; }
+  .fs-nav-id, .fs-rail__group, .fs-phase-label, .fs-rail__row.is-app { display: none; }
+  .fs-rail__row { width: auto; margin: 0; padding: 5px 10px; font-size: 13px; gap: 6px; }
+  .fs-rail__row .n { display: none; }
+  .fs-rail__row svg { width: 15px; height: 15px; }
+  .fs-center { padding: 16px 14px 22px; }
+  .phases { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .phase:nth-child(2) { border-right: 0; }
+  .phase:nth-child(-n+2) { border-bottom: 1px solid var(--ad-border); }
+  .phase::after { display: none; }
+  .preview { grid-template-columns: minmax(0, 1fr); }
+  .sketch { max-width: 240px; }
+}
+@media (max-width: 480px) {
+  .fs-crumbs span:not(:last-child) { display: none; }
+  .slot { grid-template-columns: 34px minmax(0, 1fr); }
+  .slot__nn { padding-left: 10px; font-size: 17px; }
+  .item { grid-template-columns: minmax(0, 1fr); }
+  .item__acts { justify-content: start; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+
+<header class="hero">
+  <div class="hero__top">
+    <span class="logo-badge"><span class="a">Appy</span><span class="d">Dave</span></span>
+    <span class="label">FliStudio idea · 17 Oct 2026</span>
+    <span class="mock-stamp">Mockup only</span>
+  </div>
+  <h1>The <span>Prep Room</span></h1>
+  <p>Every video project gets the same prep pages, in the same order, in one place in FliStudio. Tap a filled slot to preview it. Switch between D07, D09 and D11 to see which slots each video actually filled.</p>
+  <p class="quote">"Having them in a cohesive order, knowing when to use them, and consistency across 10 videos would be useful."</p>
+</header>
+
+<section>
+<figure>
+  <figcaption><span class="fignum">Figure 1</span><h2>Where Prep sits</h2><small>Prep is the new area at the start of a video. Social Posts already does this job at the end.</small></figcaption>
+  <div class="phases" role="list">
+    <div class="phase is-here" role="listitem">
+      <div class="phase__name"><span class="phase__nn">1</span>Prep <span class="tagnew">New</span></div>
+      <div class="phase__what">Kit, outline and script, outcomes, presenter. Opened before you hit record.</div>
+      <div class="phase__home">FliStudio · Prep</div>
+    </div>
+    <div class="phase" role="listitem">
+      <div class="phase__name"><span class="phase__nn">2</span>Record</div>
+      <div class="phase__what">Presenter on camera, kit on the second screen.</div>
+      <div class="phase__home">Teletubby · FliHub · FliCast</div>
+    </div>
+    <div class="phase" role="listitem">
+      <div class="phase__name"><span class="phase__nn">3</span>Run</div>
+      <div class="phase__what">The agent team works. Outcomes get their actuals.</div>
+      <div class="phase__home">AppyRig · OpenRig</div>
+    </div>
+    <div class="phase is-sibling" role="listitem">
+      <div class="phase__name"><span class="phase__nn">4</span>Post-production <span class="tagexists">Exists</span></div>
+      <div class="phase__what">Titles, thumbnails, description, Social Posts for the Facebook groups.</div>
+      <div class="phase__home">FliStudio · Launch · Publish</div>
+    </div>
+  </div>
+</figure>
+</section>
+
+<section>
+<figure>
+  <figcaption><span class="fignum">Figure 2</span><h2>Prep, inside FliStudio</h2><small>Drawn from FliStudio's real menu and Resources styles. The new Prep item sits between Videos and Resources. Live data: titles and links from ARTIFACTS.md and each project's fli.resources.json.</small></figcaption>
+  <div class="win">
+    <div class="fs-topbar">
+      <svg class="fs-burger" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+      <span class="fs-wordmark"><span class="f">Fli</span><span class="s">Studio</span></span>
+      <span class="fs-topbar__rule"></span>
+      <nav class="fs-crumbs" aria-label="Breadcrumb"><span>Brands</span><span class="sep">/</span><span>AppyDave</span><span class="sep">/</span><span id="crumb-project">d09-openrig-coding-team</span></nav>
+    </div>
+    <div class="fs-body">
+      <nav class="fs-rail" aria-label="Project">
+        <div class="fs-nav-id"><div class="fs-nav-id__mark">A</div><div class="fs-nav-id__brand">AppyDave</div><div class="fs-nav-id__project" id="rail-project">d09-openrig-coding-team</div></div>
+        <div class="fs-rail__group">In this project</div>
+        <div class="fs-rail__row is-dim"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 5h6l2 2h8v12H4z"/></svg>Footage<span class="n">—</span></div>
+        <div class="fs-rail__row is-dim"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg>Recordings<span class="n">—</span></div>
+        <div class="fs-rail__row is-dim"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 6h12v12H4zm13 4 4-2v8l-4-2z"/></svg>Videos<span class="n">1</span></div>
+        <div class="fs-rail__row" aria-current="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 3h8v3h3v15H5V6h3zm2 2v2h4V5zM8 11h8v2H8zm0 4h6v2H8z"/></svg>Prep<span class="n" id="rail-count">5/5</span></div>
+        <div class="fs-rail__row is-dim"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 4h7v7H4zm9 0h7v7h-7zM4 13h7v7H4zm9 0h7v7h-7z"/></svg>Resources<span class="n">—</span></div>
+        <div class="fs-rail__row is-dim"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2c3 2 5 6 5 10l-2 4H9l-2-4c0-4 2-8 5-10zm-3 16h6l-3 4z"/></svg>Launch<span class="n">—</span></div>
+        <div class="fs-rail__row is-dim"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5 19h14v2H5zM12 3l6 6h-4v6h-4V9H6z"/></svg>Publish<span class="n">—</span></div>
+        <div class="fs-rail__row is-dim"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6 2h8l4 4v16H6zm7 1v4h4"/></svg>All files</div>
+        <div class="fs-rail__group">Apps</div>
+        <span class="fs-phase-label">Scripting</span>
+        <div class="fs-rail__row is-dim is-app"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4" fill="currentColor"/></svg>Teletubby</div>
+        <span class="fs-phase-label">Recording</span>
+        <div class="fs-rail__row is-dim is-app"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4" fill="currentColor"/></svg>FliHub</div>
+        <div class="fs-rail__row is-dim is-app"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4" fill="currentColor"/></svg>FliCast</div>
+        <span class="fs-phase-label">Editing</span>
+        <div class="fs-rail__row is-dim is-app"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4" fill="currentColor"/></svg>FliCut</div>
+      </nav>
+
+      <div class="fs-center">
+        <div class="fs-head">
+          <div>
+            <h3>Prep</h3>
+            <p>The pages you open before and while you record. Same five slots for every video, extras below.</p>
+          </div>
+          <div class="fs-videos" role="group" aria-label="Video project">
+            <button type="button" id="v-d07" data-v="d07" aria-pressed="false">D07</button>
+            <button type="button" id="v-d09" data-v="d09" aria-pressed="true">D09</button>
+            <button type="button" id="v-d11" data-v="d11" aria-pressed="false">D11</button>
+          </div>
+        </div>
+        <div class="fs-summary" id="summary"></div>
+        <div class="zone">
+          <div class="zone__head"><h4>Core · every video</h4><small>In order. Numbers are the order you use them in.</small></div>
+          <div id="core" class="slots" style="display:grid;gap:10px"></div>
+        </div>
+        <details class="extras" id="extras-box">
+          <summary><h4>Extras · only when a chapter needs one</h4><small id="extras-count"></small></summary>
+          <div class="extras__body" id="extras"></div>
+        </details>
+        <div class="sibling">
+          <b>Sibling</b>
+          <span>Social Posts stays where it is, under Launch and Publish. Prep is the same idea at the start of the video: a fixed set you open every time.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</figure>
+</section>
+
+<section>
+<figure>
+  <figcaption><span class="fignum">Figure 3</span><h2>Same slots, three videos</h2><small>What each video actually made. D07 overdid it, D09 is close to the standard, D11 had almost nothing. The amber line separates the core from the extras.</small></figcaption>
+  <div class="legend"><span><b class="g filled">●</b> filled</span><span><b class="g partial">◐</b> partly (not a page, or not published)</span><span><b class="g later">○</b> after the run</span><span><b class="g empty">–</b> nothing</span></div>
+  <div class="scroll"><table id="matrix"><thead><tr><th>Slot</th><th>When</th><th>D07 · Buzz coding team</th><th>D09 · OpenRig coding team</th><th>D11 · OpenRig YouTube automation</th></tr></thead><tbody></tbody></table></div>
+</figure>
+</section>
+
+<section class="questions" aria-labelledby="q-h">
+  <h2 id="q-h"><span>Open questions for David</span></h2>
+  <ol>
+    <li><b>Own menu item or inside Resources?</b> The mock gives Prep its own row, like Launch. <em>My take: own row, so it is one tap away on recording day.</em></li>
+    <li><b>Are these the right five?</b> Recording Kit, Outline + Script, Outcomes, Presenter, What Got Built. D11 had no job list, so Outcomes and Presenter would be lighter there.</li>
+    <li><b>Is a preview card enough?</b> FliStudio can show a summary and an Open button. Showing the whole page inside FliStudio is harder, because claude.ai pages do not load inside other apps.</li>
+    <li><b>Borrowed pages:</b> D09 reuses D07's What Got Built for its recap. Show a borrowed page in the slot (as here, marked "from D07") or only under extras?</li>
+    <li><b>Empty slots on day one?</b> Should every new project open with the five slots already showing, empty, with who fills each?</li>
+  </ol>
+</section>
+
+<footer class="foot">
+  <p><b>What is real:</b> page titles, links and dates come from ARTIFACTS.md and the D07 and D09 fli.resources.json files. The menu and styles copy FliStudio's client code (tokens.css, nav.css, the Resources panel).</p>
+  <p><b>What is illustrative:</b> the small sketches in each preview (drawn, not screenshots), the Prep menu item and its counts, the slot names, and the "who fills it" lines. Nothing in FliStudio has changed.</p>
+  <p class="mono">Standard: /Users/davidcruwys/dev/ad/brains/youtube-craft/prep-set-standard.md · Source: /Users/davidcruwys/dev/ad/flivideo/docs/briefs/prep-room-mockup-2026-10-17/index.html</p>
+</footer>
+
+</div>
+
+<script>
+const A = id => 'https://claude.ai/artifact/' + id;
+const SLOTS = [
+  { id: 'kit', n: 1, core: true, name: 'Recording Kit', phase: 'prep', when: 'Before recording · 2nd screen', chapter: 'All chapters', who: 'Prep session (writers-room)', what: 'Start here: every asset, each chapter mapped to its script and the page shown on screen.', sketch: 'kit' },
+  { id: 'script', n: 2, core: true, name: 'Outline + Script', phase: 'prep', when: 'Before recording', chapter: 'All chapters', who: 'writers-room (showrunner, scribe) → Teletubby', what: 'Two dossiers, not pages: the chapter outline and the teleprompter script, loaded into Teletubby.', sketch: 'doc' },
+  { id: 'outcomes', n: 3, core: true, name: 'Outcomes', phase: 'prep', when: 'Before, then after the run', chapter: '"What we\'ll do" + results', who: 'Prep session; the run\'s lead fills actuals', what: 'The before picture: what each job should change. Actuals get filled in after the run.', sketch: 'outcomes' },
+  { id: 'presenter', n: 4, core: true, name: 'Presenter', phase: 'record', when: 'On camera', chapter: 'Overview / jobs', who: 'Prep session, from Outcomes', what: 'Click-stepped full-screen beats you walk through while talking.', sketch: 'slide' },
+  { id: 'built', n: 5, core: true, name: 'What Got Built', phase: 'run', when: 'After the run', chapter: 'Results + next video\'s recap', who: 'After-run agent, from git', what: 'What the run changed in each app: totals, per-job bars, a screenshot or key diff each.', sketch: 'bars' },
+  { id: 'specs', n: 6, core: false, name: 'Job Specs', phase: 'prep', when: 'Before the run', chapter: 'Each job\'s detail beat', who: 'dev-team:spec-page, one per job', what: 'One spec page per job. The coding team needs these anyway; the video only borrows them.', sketch: 'grid' },
+  { id: 'board', n: 7, core: false, name: 'Run Board', phase: 'run', when: 'During the run', chapter: 'Run chapter (B-roll)', who: 'The rig. AppyRig on screen can replace it', what: 'Live lanes per job: status, time against the box, rounds.', sketch: 'lanes' },
+  { id: 'explainer', n: 8, core: false, name: 'Explainer', phase: 'prep', when: 'Before recording', chapter: '"How it works"', who: 'On request, at most one per video', what: 'One concept page as a stand-in picture for a chapter.', sketch: 'nodes' },
+  { id: 'story', n: 9, core: false, name: 'Run Story', phase: 'run', when: 'After the run', chapter: 'Optional "what happened"', who: 'After-run agent, from the channel log', what: 'The run told as a timeline of who said what.', sketch: 'lanes' },
+  { id: 'edit', n: 10, core: false, name: 'Edit Review', phase: 'post', when: 'Post-production', chapter: 'None (about the edit)', who: 'Post agent, from the FliCut session', what: 'How the edit went and what to fix. Belongs next to Launch more than Prep.', sketch: 'bars' },
+];
+const PH = { prep: 'Prep', record: 'Record', run: 'Run', post: 'Post' };
+const V = {
+  d07: { project: 'd07-buzz-coding-team', title: 'Buzz coding team', fills: {
+    kit: { s: 'filled', items: [{ t: 'D07 Recording Kit', u: A('EFux1Vbj9VvWtf67ubEuSc'), d: '9 Oct', why: 'Start-here, asset table, nine per-repo diff cards, checklist, video spine. The page the pattern started from.' }] },
+    script: { s: 'partial', note: 'B606 video dossier (a Captain\'s Log capture). No outline + script pair.', items: [] },
+    outcomes: { s: 'filled', items: [
+      { t: 'D07 Eight Outcomes', u: A('Ge5KVPxZkfT3ocmcZNLR3Q'), d: '7 Oct', why: 'Before picture; actuals filled after: 8/8 PASS, 148 of 705 minutes.' },
+      { t: 'Buzz Factory Run 2 (public before page)', u: A('6ri4chPmDbRydzPjmZHzxm'), d: '6 Oct', why: 'Viewer-facing version of the before picture. A second Outcomes page, so one too many.' }] },
+    presenter: { s: 'partial', note: 'Four presenter pages (V1, V2, V3, V5) in the project\'s animation/ folder. Local files, not published.', items: [] },
+    built: { s: 'filled', items: [{ t: 'D07 What Got Built', u: A('5c4QRy9n2Jgyj6fXHwyRur'), d: '10 Oct', why: '2,078 code / 3,300 test lines across 8 apps, with a screenshot or diff per job.' }] },
+    specs: { s: 'empty', note: 'No spec pages. The jobs were described inside the Run 2 page.', items: [] },
+    board: { s: 'filled', items: [{ t: 'D07 Run Board', u: A('PzQfQyHVENhYYzC2J2HeYa'), d: '8 Oct', why: '8 lanes, needs-David banner, log. Final: 8/8 PASS, 148 min.' }] },
+    explainer: { s: 'filled', over: true, items: [
+      { t: 'D07 Crew Wiring', u: A('C7AG4fKn6HwQvxqRVVGEKx'), d: '10 Oct', why: 'How skills were wired to each agent. Ch 6 on screen.' },
+      { t: 'Buzz Factory Test Map', u: A('Ct3262783PhbKnA9g8FuCg'), d: '4 Oct', why: '12 assumptions with before/after toggle.' },
+      { t: 'Agent Factory Field Guide', u: A('LExrV3RYi9ZJDKynnbS4dw'), d: '4 Oct', why: 'Cast, run stack, where knowledge lives.' },
+      { t: 'Two Ways to Make a Buzz Agent', u: A('DGP3fGmqNPeSmbmaaVoqQy'), d: '5 Oct', why: 'App-made vs Foundry-made agents.' },
+      { t: 'Claude Agent Workbench', u: A('XFmuJgY5cv7VrHhPVjr46W'), d: '5 Oct', why: 'Ten layers of a Buzz agent.' }] },
+    story: { s: 'filled', items: [{ t: 'D07 Conversation Story', u: A('JoH99S73xDByB6HDUEyoaA'), d: '8 Oct', why: 'All 117 channel messages as a swimlane timeline.' }] },
+    edit: { s: 'filled', items: [{ t: 'D07 Edit Review', u: A('CVrGAvoG2SJ6gG3rGceZZL'), d: '11 Oct', why: 'FliCut edit session: time, repetition, 9 ranked fixes.' }] },
+  } },
+  d09: { project: 'd09-openrig-coding-team', title: 'OpenRig coding team', fills: {
+    kit: { s: 'filled', items: [{ t: 'D09 Recording Kit', u: A('Ke6g1xP6bZtbv8TKUaYfG3'), d: '16 Oct (v5 17 Oct)', why: 'Recording day: 12 chapters + 7b, each mapped to its Teletubby script and on-screen asset.' }] },
+    script: { s: 'filled', note: 'Teletubby set openrig-coding-team loaded from the script.', items: [
+      { t: 'resources/project/d09-outline.md', why: 'Each chapter\'s job, screen, length and source.' },
+      { t: 'resources/project/d09-script.md', why: 'Teleprompter script ch 1–7 (cold open to GO).' }] },
+    outcomes: { s: 'filled', items: [{ t: 'D09 Eight Outcomes', u: A('KxgYRzKvtY8hc27Gu5PsFx'), d: '16 Oct', why: 'Predicted outcomes now; the done-check strip fills during the run (ch 3 and ch 9).' }] },
+    presenter: { s: 'filled', items: [{ t: 'D09 Jobs Presenter', u: A('EyTmbKHV28Q1zW7LBXJCjh'), d: '16 Oct', why: '11 click-stepped beats: real before shot, then the idea. Ch 3 overview.' }] },
+    built: { s: 'later', note: 'Made after the run. For now the ch 2 recap borrows D07\'s.', items: [{ t: 'D07 What Got Built', u: A('5c4QRy9n2Jgyj6fXHwyRur'), from: 'D07', why: 'Ch 2 on screen: D07\'s results in one breath.' }] },
+    specs: { s: 'filled', items: [
+      { t: 'Spec 1 · AppyStack light theme', u: A('5avQ271cJG8XaQ3V8h2Z9k'), why: 'New AppyStack apps open cream instead of dark.' },
+      { t: 'Spec 2 · AppyTron light theme', u: A('ScjVn6CPvocCZbuyppnVk1'), why: 'AppyTron template apps open light.' },
+      { t: 'Spec 3a · FliStudio showdown card', u: A('PRwRdqifgsCeX487onRk4B'), why: 'One button makes the square Facebook card.' },
+      { t: 'Spec 3b · FliStudio Knowledge images', u: A('4z67nJq6Qk87DnU8n47Aai'), why: 'Reference images in Knowledge with a why line.' },
+      { t: 'Spec 4 · FliHub trash restore', u: A('9KXTro86zAhzes7hs9hkZm'), why: 'See trashed takes and restore one to Incoming.' },
+      { t: 'Spec 5 · Script on demand', u: A('DhRNnM6BwwS2HgAmfwYpWG'), why: 'Stumbled takes become a clean prompter script.' },
+      { t: 'Spec 6 · FliEdit wipe / slide', u: A('GY9296sw8BLvVAxoY9TLSa'), why: 'Overlays wipe or slide in, not only fade.' },
+      { t: 'Spec 7 · FliCut export length', u: A('F7cLS2i9JCsw4ZEaFPNmLk'), why: 'The export length matches the list.' },
+      { t: 'Spec 8 · FliCast tooltips', u: A('MXYiDjDcJPERS3kpJtxajy'), why: 'Hovering a control says what it does.' }] },
+    board: { s: 'later', note: 'During the run. AppyRig on screen may be enough.', items: [] },
+    explainer: { s: 'filled', over: true, items: [
+      { t: 'OpenRig Field Guide', u: A('SRhNk8ztNXkNLvoFGuHfj8'), d: '7 Oct', why: 'Rig, seat and queue in diagrams; ch 4 stand-in picture.' },
+      { t: 'OpenRig Concept Atlas', u: A('LynaDYmcT8jCmD2BBeeUpC'), d: '10 Oct', why: '75 OpenRig terms as a map; B-roll.' },
+      { t: 'M2 Team Topologies', u: A('NMbEFg9Dx1cQTHMNby4hto'), d: '9 Oct', why: 'Where the 3-seat shape came from.' },
+      { t: 'D07 Crew Wiring', u: A('C7AG4fKn6HwQvxqRVVGEKx'), from: 'D07', why: 'Ch 6: how skills were wired by hand in D07.' }] },
+    story: { s: 'later', note: 'Only if a chapter uses it.', items: [] },
+    edit: { s: 'later', note: 'After the edit.', items: [] },
+  } },
+  d11: { project: 'd11-openrig-youtube-automation', title: 'OpenRig YouTube automation', fills: {
+    kit: { s: 'empty', items: [] },
+    script: { s: 'partial', note: 'A Teletubby set exists (fli.tubby.json). No outline or script dossier registered.', items: [] },
+    outcomes: { s: 'partial', note: 'A plan page, not a before/after.', items: [{ t: 'D10 Launch Plan', u: A('ToXpYhytZSN5HSTH8sjkzE'), d: '13 Oct', why: 'The thumbnail team\'s mission as swim-lanes: two lanes, four seats, David\'s three moments.' }] },
+    presenter: { s: 'empty', items: [] },
+    built: { s: 'partial', note: 'The result lives in FliStudio Launch (title + thumbnail pairs, social). No page.', items: [] },
+    specs: { s: 'empty', note: 'No job list: one launch, four seats.', items: [] },
+    board: { s: 'empty', note: 'AppyRig showed the run live.', items: [] },
+    explainer: { s: 'empty', items: [] },
+    story: { s: 'empty', items: [] },
+    edit: { s: 'partial', note: 'd11-agent-edit-review-2026-10-15.md in flivideo/docs/briefs. Markdown, not published.', items: [] },
+  } },
+};
+const STATE = { filled: 'Filled', partial: 'Partly', later: 'After the run', empty: 'Empty' };
+const GLYPH = { filled: '●', partial: '◐', later: '○', empty: '–' };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+function sketch(kind) {
+  const b = (cls = '') => `<div class="sk-bar ${cls}"></div>`;
+  const row = (c, boxes) => `<div class="sk-row" style="--c:${c}">${boxes}</div>`;
+  const box = (cls = '') => `<div class="sk-box ${cls}"></div>`;
+  switch (kind) {
+    case 'kit': return b('y') + b('d') + row(3, box('a') + box('a') + box('a')) + b() + b() + b() + b();
+    case 'doc': return b('d') + b() + b() + b() + b('d') + b() + b();
+    case 'outcomes': return b('y') + row(2, box('tall') + box('g tall')) + row(2, box('tall') + box('tall'));
+    case 'slide': return `<div class="sk-box dk" style="height:100%;min-height:70px;display:grid;place-items:center"><div class="sk-bar y" style="width:50%"></div></div>`;
+    case 'bars': return b('y') + `<div style="display:grid;gap:4px">${[80, 55, 92, 40, 66].map(w => `<div class="sk-bar" style="width:${w}%;background:var(--ad-gold)"></div>`).join('')}</div>`;
+    case 'grid': return b('d') + row(3, box() + box() + box()) + row(3, box() + box() + box()) + row(3, box() + box() + box());
+    case 'lanes': return [70, 45, 88, 30].map(w => `<div style="display:flex;gap:4px;align-items:center"><div class="sk-bar" style="width:18%;background:var(--ad-brown)"></div><div class="sk-bar" style="width:${w}%;background:var(--ok-line)"></div></div>`).join('');
+    case 'nodes': return row(3, box('a') + box() + box('a')) + b() + row(2, box() + box('a'));
+  }
+  return '';
+}
+
+function slotHTML(slot, fill) {
+  const s = fill.s;
+  const top = `<div class="slot__top"><span class="slot__name">${esc(slot.name)}</span><span class="pill ${s}">${STATE[s]}</span><span class="chip ph-${slot.phase}">${PH[slot.phase]} · ${esc(slot.when)}</span>${fill.over ? '<span class="chip" style="border-color:var(--ad-critical-ink);color:var(--ad-critical-ink)">Overdoing it</span>' : ''}</div>`;
+  const facts = `<div class="slot__facts"><span>Chapter: <b>${esc(slot.chapter)}</b></span><span>Fills it: <b>${esc(slot.who)}</b></span></div>`;
+  let body = '';
+  if (fill.items.length) {
+    body = `<div class="slot__items">${fill.items.map((it, i) => {
+      const pid = `pv-${slot.id}-${i}`;
+      const acts = it.u
+        ? `<div class="item__acts"><button type="button" class="btn" aria-expanded="false" aria-controls="${pid}" data-pv="${pid}">Preview</button><a class="btn btn--primary" href="${it.u}" target="_blank" rel="noopener">Open ↗</a></div>`
+        : `<div class="item__acts"><span class="chip">Dossier</span></div>`;
+      const pv = it.u ? `<div class="preview" id="${pid}" hidden><div class="sketch" aria-hidden="true">${sketch(slot.sketch)}</div><div><p><b>${esc(it.t)}</b>${it.d ? ` · published ${esc(it.d)}` : ''}</p><p>${esc(it.why)}</p><p class="note">Sketch, not a screenshot. Open shows the real page.</p><p class="mono">${esc(it.u)}</p></div></div>` : '';
+      return `<div class="item"><span class="item__t">${esc(it.t)}${it.from ? `<span class="borrow">from ${esc(it.from)}</span>` : ''}</span>${acts}<span class="item__why">${esc(it.why)}</span>${pv}</div>`;
+    }).join('')}</div>`;
+  }
+  const note = fill.note ? `<div class="slot__facts">${esc(fill.note)}</div>` : '';
+  const empty = (!fill.items.length) ? `<div class="slot__empty"><b>What goes here:</b><span>${esc(slot.what)}</span></div>` : '';
+  return `<article class="slot ${fill.items.length ? '' : 'is-empty'}"><div class="slot__nn">${String(slot.n).padStart(2, '0')}</div><div class="slot__main">${top}${empty}${note}${body}${facts}</div></article>`;
+}
+
+function render(v) {
+  const data = V[v];
+  document.querySelectorAll('.fs-videos button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === v)));
+  document.getElementById('crumb-project').textContent = data.project;
+  document.getElementById('rail-project').textContent = data.project;
+  const core = SLOTS.filter(s => s.core), extra = SLOTS.filter(s => !s.core);
+  const coreFilled = core.filter(s => data.fills[s.id].s === 'filled').length;
+  const corePart = core.filter(s => data.fills[s.id].s === 'partial').length;
+  const extraPages = extra.reduce((a, s) => a + data.fills[s.id].items.filter(i => i.u).length, 0);
+  document.getElementById('rail-count').textContent = `${coreFilled}/5`;
+  document.getElementById('summary').innerHTML = `<b>${v.toUpperCase()} · ${esc(data.title)}</b><span>${coreFilled} of 5 core filled</span>${corePart ? `<span>${corePart} partly</span>` : ''}<span>${extraPages} extra page${extraPages === 1 ? '' : 's'}</span>`;
+  document.getElementById('core').innerHTML = core.map(s => slotHTML(s, data.fills[s.id])).join('');
+  document.getElementById('extras').innerHTML = extra.map(s => slotHTML(s, data.fills[s.id])).join('');
+  document.getElementById('extras-count').textContent = `${extraPages} page${extraPages === 1 ? '' : 's'} in ${extra.length} slots`;
+  try { localStorage.setItem('prep-room-video', v); } catch (e) {}
+}
+
+function matrix() {
+  const tb = document.querySelector('#matrix tbody');
+  tb.innerHTML = SLOTS.map(s => {
+    const cells = ['d07', 'd09', 'd11'].map(v => {
+      const f = V[v].fills[s.id];
+      const n = f.items.filter(i => i.u).length;
+      const extra = n > 1 ? `${n} pages` : n === 1 && f.items[0].from ? `from ${f.items[0].from}` : '';
+      return `<td><span class="cell"><b class="g ${f.s}">${GLYPH[f.s]}</b>${STATE[f.s]}${extra ? ` <small>${extra}</small>` : ''}${f.over ? ' <small>(too many)</small>' : ''}</span></td>`;
+    }).join('');
+    return `<tr class="${s.n === 5 ? 'core-end' : ''}"><th><span class="nn">${String(s.n).padStart(2, '0')}</span>${esc(s.name)}${s.core ? '' : ' <small style="color:var(--ad-muted-ink)">extra</small>'}</th><td>${PH[s.phase]}</td>${cells}</tr>`;
+  }).join('');
+}
+
+document.addEventListener('click', e => {
+  const vb = e.target.closest('.fs-videos button');
+  if (vb) { render(vb.dataset.v); return; }
+  const pb = e.target.closest('[data-pv]');
+  if (pb) {
+    const el = document.getElementById(pb.dataset.pv);
+    const open = el.hidden;
+    el.hidden = !open;
+    pb.setAttribute('aria-expanded', String(open));
+    pb.textContent = open ? 'Hide' : 'Preview';
+  }
+});
+
+let start = 'd09';
+try { const saved = localStorage.getItem('prep-room-video'); if (saved && V[saved]) start = saved; } catch (e) {}
+if (/^#(d07|d09|d11)$/.test(location.hash)) start = location.hash.slice(1);
+render(start);
+matrix();
+</script>
