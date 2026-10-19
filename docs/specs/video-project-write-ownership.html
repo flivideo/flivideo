@@ -1,0 +1,340 @@
+<title>Video Project Write-Ownership</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600&family=Roboto:ital,wght@0,400;0,500;0,700;1,400&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout: a light AppyDave spec page for discussion. Incident steps, measured disk state, then six rules each carried by a flow or side-by-side diagram, then checks and open questions. */
+:root {
+  color-scheme: light;
+  --brown: #342d2d; --gold: #ccba9d; --yellow: #ffde59; --amber: #c8841a;
+  --muted: #7a6e5e; --cream: #faf5ec; --surface: #f0ebe4; --linen: #e8e0d4;
+  --border: #d4cdc4; --chrome: #1a1515; --dark: #25201e; --blue: #2E91FC;
+  --red: #b5524a; --green: #4f7a3f;
+  --display: "Bebas Neue", Oswald, Impact, sans-serif;
+  --head: Oswald, "Arial Narrow", sans-serif;
+  --body: Roboto, system-ui, sans-serif;
+  --mono: "Roboto Mono", ui-monospace, monospace;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--cream); color: var(--brown); font-family: var(--body); font-size: 16px; line-height: 1.55; }
+a { color: var(--blue); }
+.wrap { max-width: 1080px; margin: 0 auto; padding-inline: 16px; padding-block: 36px 64px; display: grid; gap: 48px; }
+header.page { display: grid; gap: 12px; max-width: 74ch; }
+.logo-badge { display:inline-block; background: var(--brown); border-radius:6px; padding:4px 10px 2px; font-family: var(--display); letter-spacing:.04em; line-height:1.1; font-size: 22px; width: fit-content; }
+.logo-badge .a { color: var(--gold); } .logo-badge .d { color: var(--yellow); }
+.eyebrow { font-family: var(--head); text-transform: uppercase; letter-spacing: .12em; font-size: 13px; color: var(--amber); font-weight: 600; }
+h1 { font-family: var(--head); font-weight: 600; font-size: clamp(28px, 5vw, 42px); line-height: 1.1; margin: 0; text-transform: uppercase; text-wrap: balance; }
+h2 { font-family: var(--head); font-weight: 600; text-transform: uppercase; font-size: 24px; margin: 0; letter-spacing: .02em; text-wrap: balance; }
+h2 .num { font-family: var(--display); color: var(--amber); font-size: 30px; margin-right: 8px; font-weight: 400; }
+h3 { font-family: var(--head); text-transform: uppercase; letter-spacing: .08em; font-size: 14px; color: var(--amber); margin: 0; font-weight: 600; }
+p { margin: 0; max-width: 70ch; }
+header.page p { color: var(--muted); }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 14px; color: var(--muted); }
+.facts b { color: var(--brown); font-weight: 500; }
+section { display: grid; gap: 16px; min-width: 0; }
+.rule { font-size: 18px; border-left: 3px solid var(--amber); padding: 2px 0 2px 12px; max-width: 70ch; }
+.rule b { box-shadow: inset 0 -0.4em 0 var(--yellow); }
+code { font-family: var(--mono); font-size: 13px; background: var(--surface); padding: 1px 5px; border-radius: 3px; overflow-wrap: anywhere; }
+.muted { color: var(--muted); font-size: 14px; }
+
+/* incident steps */
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: 16px; }
+.step { display: grid; gap: 6px; align-content: start; border-top: 2px solid var(--amber); padding-top: 10px; }
+.step .n { font-family: var(--display); font-size: 34px; line-height: 1; color: var(--amber); }
+.step b { font-family: var(--head); font-weight: 500; font-size: 17px; }
+.step span.now { color: var(--muted); font-size: 14px; }
+
+/* flow diagrams */
+.flow { display: flex; flex-wrap: wrap; align-items: stretch; gap: 8px; }
+.node { background: #fff; border: 1px solid var(--border); border-radius: 6px; padding: 8px 12px; font-size: 14px; display: grid; gap: 2px; min-width: 0; flex: 1 1 150px; }
+.node b { font-family: var(--head); font-weight: 500; font-size: 15px; }
+.node small { color: var(--muted); font-size: 12px; }
+.node.hub { border: 2px solid var(--brown); background: var(--surface); }
+.node.new { outline: 2px solid var(--yellow); outline-offset: 2px; }
+.node.bad { border-color: var(--red); background: #f7ebe9; }
+.node.ok { border-color: var(--green); background: #eef4ea; }
+.arrow { display: grid; place-items: center; color: var(--amber); font-family: var(--head); font-size: 22px; flex: 0 0 auto; }
+.lane { display: grid; gap: 8px; }
+.lane .label { font-family: var(--head); text-transform: uppercase; letter-spacing: .1em; font-size: 12px; font-weight: 600; color: var(--muted); }
+.lane .label.after { color: var(--amber); }
+.callers { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 120px), 1fr)); gap: 6px; }
+.fan { display: grid; grid-template-columns: minmax(0, 1.2fr) auto minmax(0, 1fr) auto minmax(0, 1fr); gap: 10px; align-items: center; }
+@media (max-width: 760px) { .fan { grid-template-columns: 1fr; } .fan .arrow { transform: rotate(90deg); } }
+
+/* side by side */
+.sbs { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 20px; }
+.card { border: 1px solid var(--border); border-radius: 8px; padding: 16px; display: grid; gap: 10px; align-content: start; background: #fff; min-width: 0; }
+.card.pick { outline: 2px solid var(--yellow); outline-offset: 3px; }
+.card h3 { font-size: 15px; }
+.tree { font-family: var(--mono); font-size: 12.5px; background: var(--surface); border-radius: 4px; padding: 10px 12px; white-space: pre; overflow-x: auto; line-height: 1.6; }
+.tree .hl { background: var(--yellow); }
+.tree .x { color: var(--red); text-decoration: line-through; }
+.pc { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 14px; }
+@media (max-width: 520px) { .pc { grid-template-columns: 1fr; } }
+.pc ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; }
+.pc .plus h3 { color: var(--green); } .pc .minus h3 { color: var(--red); }
+
+/* tables */
+.scroll { overflow-x: auto; }
+table.data { border-collapse: collapse; width: 100%; min-width: 540px; font-size: 14px; font-variant-numeric: tabular-nums; }
+table.data th { text-align: left; font-weight: 500; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; padding: 6px 8px; border-bottom: 1px solid var(--border); }
+table.data td { padding: 6px 8px; border-bottom: 1px solid var(--linen); vertical-align: top; }
+td.y { color: var(--green); font-weight: 500; } td.n { color: var(--red); font-weight: 500; }
+tr.hit td { background: #fffbe6; }
+
+.specgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 24px 32px; }
+.specgrid > div { display: grid; gap: 8px; min-width: 0; align-content: start; }
+table.spec { border-collapse: collapse; width: 100%; font-size: 15px; }
+table.spec th { text-align: left; vertical-align: top; font-weight: 500; color: var(--muted); padding: 7px 14px 7px 0; border-top: 1px solid var(--linen); width: 32%; }
+table.spec td { padding: 7px 0; border-top: 1px solid var(--linen); vertical-align: top; }
+ul { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; }
+.q { display: grid; gap: 6px; border-top: 1px solid var(--border); padding-top: 12px; }
+.q b { font-family: var(--head); font-weight: 500; font-size: 17px; }
+.q .n { font-family: var(--display); color: var(--amber); font-size: 24px; margin-right: 6px; }
+.rec::before { content: "My take: "; font-weight: 700; }
+.src { font-size: 13px; color: var(--muted); overflow-wrap: anywhere; }
+</style>
+
+<div class="wrap">
+  <header class="page">
+    <span class="logo-badge"><span class="a">Appy</span><span class="d">Dave</span></span>
+    <span class="eyebrow">Spec for discussion · FliTools + FliStudio + /prod · 2026-10-19</span>
+    <h1>Video project write-ownership: one queue, one writer per file</h1>
+    <p>FliTools already queues transcription one job at a time and knows each file by its content. Today an agent can skip it, and three tools write SRTs into the same folders. This page sets the rules: everything goes through the queue, and each file has one writer.</p>
+    <div class="facts"><span>Sample: <b>v-aitldr on the M4, 33 <code>*-final.mp4</code></b></span><span>Status: <b>spec only, not built, no ticket yet</b></span><span>Size: <b>left open until the choices are made</b></span></div>
+  </header>
+
+  <section>
+    <h2>Where it hurts</h2>
+    <p class="muted">On 2026-10-19, during the call with Jan and Mary. Steps 1–3 are as the session reported them, not checked again. Steps 4–5 are measured on disk below.</p>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><b>An agent skipped FliTools</b><span class="now">It ran <code>~/bin/transcribe</code> 8 at a time over 37 AITLDR finals.</span></div>
+      <div class="step"><span class="n">2</span><b>Groq said no</b><span class="now">It hit Groq's 20-requests-a-minute limit. The agent made up its own mlx fallback.</span></div>
+      <div class="step"><span class="n">3</span><b>Output to a scratch folder</b><span class="now">Nothing landed where any app looks.</span></div>
+      <div class="step"><span class="n">4</span><b>Re-run through FliTools</b><span class="now">It wrote <code>videos/&lt;skill&gt;/transcripts/&lt;stem&gt;.srt</code> (+ .json, .txt, engines/). FliStudio doesn't show that folder, and Publish doesn't read it.</span></div>
+      <div class="step"><span class="n">5</span><b>Copied beside each mp4</b><span class="now">A workaround so Publish finds <code>&lt;stem&gt;.srt</code>. The copy for b01 was already out of date within a minute (below).</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>What's on disk right now</h2>
+    <p>Measured on the M4 (<code>/Users/davidcruwys/dev/video-projects/v-aitldr</code>), 2026-10-19 13:15. Each final has up to two SRTs, and they don't always match.</p>
+    <div class="scroll"><table class="data">
+      <tr><th>Final</th><th>beside mp4</th><th>transcripts/</th><th>Same file?</th><th>Who wrote the one beside</th></tr>
+      <tr class="hit"><td>b01 yt-performance</td><td class="y">yes</td><td class="y">yes</td><td class="n">differs</td><td>today's copy = the Groq pass-1 file; <code>transcripts/</code> now holds the CrisperWhisper pass-2 file (run on <code>mac-mini-m2</code>)</td></tr>
+      <tr><td>b02 script · b03 ×2 · b04 short · b05 ×2 · b06 short</td><td class="y">yes</td><td class="y">yes</td><td class="y">same</td><td>today's copy (13:06)</td></tr>
+      <tr><td>b01 short · b02 short</td><td class="y">yes</td><td class="y">yes</td><td class="n">differs</td><td>today's copy, not the current best</td></tr>
+      <tr class="hit"><td>b18 overlay-pack · b19 sfx-cues · b20 ×2</td><td class="y">yes</td><td class="y">yes</td><td class="n">differs</td><td>Jan's <code>/captions</code> (Oct 15–16), aligned to the script; FliTools' file has different timings (b19 cue 1 ends 3.59 s vs 2.96 s)</td></tr>
+      <tr><td>b06 main → b16, b07–b10 shorts, b18 short (16 finals)</td><td class="n">no</td><td class="y">yes</td><td>—</td><td>copying stopped partway; Publish sees no captions</td></tr>
+      <tr><td>b11, b12, b13 shorts</td><td class="n">no</td><td class="n">no</td><td>—</td><td>never transcribed</td></tr>
+      <tr><td>b17 captions</td><td class="y">yes</td><td>—</td><td>—</td><td>SRT is here, but there's no <code>captions-final.mp4</code> on the M4</td></tr>
+    </table></div>
+    <p class="muted">Engine copies in <code>transcripts/engines/</code>: 26 Groq, 4 mlx, 3 CrisperWhisper. SRTs are in git (<code>.gitignore:74 !**/*.srt</code>) and mp4s are not (<code>.gitignore:12</code>), so SRTs reach Jan through git and the videos reach him some other way. The brief said 37 finals. The M4 has 33. Jan's Mac was not checked.</p>
+  </section>
+
+  <!-- 1 -->
+  <section>
+    <h2><span class="num">1</span>Every transcription request goes through FliTools</h2>
+    <p class="rule"><b>No app, skill or agent runs Whisper, mlx or Groq itself.</b> FliStudio, FliCut, FliEdit, /prod, ad-hoc agents, on every machine: all of them ask FliTools.</p>
+    <div class="lane">
+      <span class="label">Today</span>
+      <div class="flow">
+        <div class="node bad"><b>agent</b><small>~/bin/transcribe ×8 in parallel</small></div><div class="arrow">→</div>
+        <div class="node bad"><b>Groq</b><small>20 RPM, so it refused</small></div><div class="arrow">→</div>
+        <div class="node bad"><b>made-up mlx fallback</b><small>heat, no lock</small></div><div class="arrow">→</div>
+        <div class="node bad"><b>scratch folder</b><small>no app reads it</small></div>
+      </div>
+    </div>
+    <div class="lane">
+      <span class="label after">After</span>
+      <div class="fan">
+        <div class="callers">
+          <div class="node"><b>FliStudio</b></div><div class="node"><b>FliCut</b></div><div class="node"><b>FliEdit</b></div>
+          <div class="node"><b>/prod</b></div><div class="node"><b>agents</b></div><div class="node"><b>skills</b></div>
+        </div>
+        <div class="arrow">→</div>
+        <div class="node hub new"><b>FliTools queue :7161</b><small>one job at a time · picks the engine · Groq first, mlx fallback · one local-model lock</small></div>
+        <div class="arrow">→</div>
+        <div class="node ok"><b>files in the one agreed place</b><small>see rule 3</small></div>
+      </div>
+    </div>
+    <p><b>Why:</b> Whisper, mlx and CrisperWhisper must never run side by side. They heat the machine and fight over memory, and Groq has a per-minute limit. FliTools already does one job at a time (<code>flitools/docs/architecture.md:81</code>). mlx and CrisperWhisper share one lock (<code>:169</code>). The queue chooses the engine (<code>:128</code>). The queue only protects the machine if every request goes through it.</p>
+    <p><b>Already built:</b> FliStudio's footage import queues with FliTools (<code>flistudio/server/src/capabilities/footage.ts:147</code>). /prod Stage 6 step 4 uses the <code>/captions</code> skill, which does not go through FliTools.</p>
+  </section>
+
+  <!-- 2 -->
+  <section>
+    <h2><span class="num">2</span>Identity is the content sha256</h2>
+    <p class="rule"><b>The same bytes mean the same job.</b> If two callers ask for the same file at once, they get the same job. If one asks again later, it gets the finished result. Nothing is transcribed twice.</p>
+    <div class="flow">
+      <div class="node"><b>FliStudio asks</b><small>title-lab-final.mp4</small></div>
+      <div class="node"><b>/prod asks</b><small>same file, 2 s later</small></div>
+      <div class="arrow">→</div>
+      <div class="node hub"><b>sha256 601353f8…</b><small>one open job per content</small></div>
+      <div class="arrow">→</div>
+      <div class="node ok"><b>one run</b><small>both get the result; a later ask = <code>reused: "cache"</code></small></div>
+    </div>
+    <p>This exists today: there's a cache keyed by sha256 (<code>architecture.md:131</code>), one open pass-2 job per content (<code>:164</code>), and byte-identical copies in other projects join it through <code>alsoFor</code> (<code>:189</code>). Every transcript json records its <code>source.sha256</code>. b01's json says <code>601353f864e0…</code>, which lets any machine check that an SRT belongs to its mp4 without transcribing again (rule 5).</p>
+  </section>
+
+  <!-- 3 -->
+  <section>
+    <h2><span class="num">3</span>One owner per output path</h2>
+    <p class="rule"><b>Decide where a final's SRT lives. Wherever that is, only FliTools writes it, and everyone else reads it.</b> Copying it somewhere else makes a second file that goes stale. b01 proves it: it was copied at 13:06 and was already the older pass-1 version.</p>
+    <div class="sbs">
+      <div class="card pick">
+        <h3>A · FliTools' <code>transcripts/</code> is the place</h3>
+        <div class="tree">videos/title-lab/
+  title-lab-final.mp4
+  <span class="x">title-lab-final.srt</span>        ← no one writes here
+  transcripts/
+    <span class="hl">title-lab-final.srt</span>      ← Publish reads this
+    title-lab-final.json .txt
+    engines/…groq.* …crisper.*</div>
+        <div class="pc">
+          <div class="plus"><h3>For</h3><ul>
+            <li>No FliTools change. It already writes here (<code>flitools/src/transcribe/location.ts:23</code>).</li>
+            <li>A pass-2 upgrade replaces the best file where it is, so Publish gets CrisperWhisper without anyone doing anything.</li>
+            <li>The same layout as <code>footage/transcripts/</code> everywhere else.</li>
+            <li>Engine copies stay out of sight, as the brief ruled.</li>
+          </ul></div>
+          <div class="minus"><h3>Against</h3><ul>
+            <li>FliStudio change: <code>captionsFor</code> (<code>publish.ts:85</code>) and <code>video-text.ts:162</code> also look in <code>transcripts/</code>.</li>
+            <li>The asset list doesn't show folders (<code>assets.ts:109</code>), so the SRT needs a line on the video's card.</li>
+            <li>In Finder the SRT isn't next to the video for a manual YouTube upload.</li>
+            <li>/prod step 4 changes, and so does Jan's habit.</li>
+          </ul></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>B · <code>&lt;stem&gt;.srt</code> beside the mp4</h3>
+        <div class="tree">videos/title-lab/
+  title-lab-final.mp4
+  <span class="hl">title-lab-final.srt</span>        ← FliTools (save_to) only
+  title-lab-final.json .txt  ← comes too
+  <span class="x">transcripts/</span>               ← not used for finals</div>
+        <div class="pc">
+          <div class="plus"><h3>For</h3><ul>
+            <li>No FliStudio change. <code>captionsFor</code> already looks here.</li>
+            <li>Jan's /prod and <code>/captions</code> already put it here (b17–b20).</li>
+            <li>You can see it in Finder next to the video.</li>
+            <li>FliTools can already do this: <code>save_to</code> (<code>flitools/src/capabilities.ts:30</code>), and it's carried through pass 2 (<code>editQueue.ts:32</code>).</li>
+          </ul></div>
+          <div class="minus"><h3>Against</h3><ul>
+            <li>Every caller has to pass <code>save_to</code> for finals. One that forgets writes to <code>transcripts/</code> and you're back to two places.</li>
+            <li>A <code>.json</code> and <code>.txt</code> land beside the mp4 too. Where <code>engines/</code> goes is not checked.</li>
+            <li>A path <code>/captions</code> already writes. It would have to stop, or its script-aligned version is overwritten (or overwrites FliTools').</li>
+            <li>Finals become the one place FliTools' layout doesn't apply.</li>
+          </ul></div>
+        </div>
+      </div>
+    </div>
+    <p class="rec">A. <code>transcripts/</code> is where FliTools already writes. Pass 2 upgrades it in place. Making it the only place means one FliStudio reader changes and no writer changes. B leaves the old risk in place, because any caller that forgets <code>save_to</code> starts a second copy. With A, the 14 copies beside the mp4s go to <code>-trash/</code> once Publish reads the new path. FliCut's <code>&lt;name&gt;-cut.srt</code> is a different file that FliCut alone owns, so it stays.</p>
+  </section>
+
+  <!-- 4 -->
+  <section>
+    <h2><span class="num">4</span>Auto-transcribe: a new final starts a job</h2>
+    <p class="rule"><b>When a <code>*-final.mp4</code> lands in <code>videos/&lt;name&gt;/</code>, a FliTools job is queued.</b> Nobody has to remember to do it, and an agent never has to improvise.</p>
+    <div class="flow">
+      <div class="node"><b>render finishes</b><small>HyperFrames / FliEdit / FliCut / placed file</small></div><div class="arrow">→</div>
+      <div class="node new"><b>enqueue</b><small>by whoever made it, and FliStudio as the safety net</small></div><div class="arrow">→</div>
+      <div class="node hub"><b>FliTools</b><small>sha256 → existing job or a new one</small></div><div class="arrow">→</div>
+      <div class="node ok"><b>SRT in the rule-3 place</b><small>pass 1 now, pass 2 later</small></div>
+    </div>
+    <ul>
+      <li><b>Who triggers it.</b> FliTools has no file watcher (none found in <code>flitools/src</code>). FliStudio already queues on footage import. For finals, two triggers are proposed. The producer queues the job when its render exits (/prod Stage 6 through <code>fli.py</code>). FliStudio also queues one when it sees a final with no transcript (the Publish view). Rule 2 means a double request costs nothing.</li>
+      <li><b>Only finished files.</b> A sha taken halfway through a render names the wrong content. Queue the job when the render exits, or when the file size has stopped changing.</li>
+      <li><b>Backfill.</b> This would catch up b11–b13 shorts (never transcribed) by itself.</li>
+    </ul>
+  </section>
+
+  <!-- 5 -->
+  <section>
+    <h2><span class="num">5</span>Distributed machines: who may create a missing SRT</h2>
+    <p class="rule">Building on the brief's rule: <b>the machine that holds the recording writes its transcript files. The server only computes.</b></p>
+    <div class="flow">
+      <div class="node"><b>Jan's Mac</b><small>renders the AITLDR final, so it holds it</small></div><div class="arrow">→</div>
+      <div class="node new"><b>check first</b><small>after a pull: is there a transcript whose <code>source.sha256</code> = my mp4?</small></div><div class="arrow">→</div>
+      <div class="node ok"><b>yes: read it</b><small>done, nothing runs</small></div>
+    </div>
+    <div class="flow">
+      <div class="node"><b>no match</b></div><div class="arrow">→</div>
+      <div class="node hub"><b>local FliTools pass 1</b><small>or, with no FliTools, push to the server</small></div><div class="arrow">→</div>
+      <div class="node"><b>pass-2 server (M2)</b><small>FLAC + sha · computes · caller polls</small></div><div class="arrow">→</div>
+      <div class="node ok"><b>holder writes + commits</b><small>SRT travels by git</small></div>
+    </div>
+    <ul>
+      <li><b>Who may create it.</b> Only the machine that holds the mp4, and only through FliTools. A machine that only has the git checkout (no mp4) never creates an SRT. It waits for the pull.</li>
+      <li><b>How others avoid repeating the work.</b> The pass-2 server already dedupes by sha (rule 2). That covers compute. It doesn't cover two machines both <i>writing</i> and then hitting a git conflict. The sha check before running covers that: if the SRT's json matches your mp4, you're done.</li>
+      <li><b>Real case.</b> b01's pass 2 ran on <code>mac-mini-m2</code> (<code>engine.worker</code> in its json), so the M2 is already doing pass 2 for this project.</li>
+      <li><b>Gap.</b> The brief leaves two holders writing the same transcript as "last writer wins" (<code>transcription-as-a-service.md</code>, Not covered). In git that becomes a merge conflict on the SRT.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>The spec</h2>
+    <div class="specgrid">
+      <div>
+        <h3>What the job is (once the choices are made)</h3>
+        <table class="spec">
+          <tr><th>Single door</th><td>/prod Stage 6 step 4 and any agent skill call FliTools, never <code>~/bin/transcribe</code> or <code>/captions</code> for the final's SRT.</td></tr>
+          <tr><th>Single place</th><td>The rule-3 path is the only SRT for a final. Publish and video.text read it.</td></tr>
+          <tr><th>Auto-enqueue</th><td>A finished <code>*-final.mp4</code> gets a FliTools job without anyone asking.</td></tr>
+          <tr><th>Holder writes</th><td>Only the machine with the mp4 writes. Others check <code>source.sha256</code> before running anything.</td></tr>
+          <tr><th>Clean-up</th><td>The 14 copies beside the mp4s go to <code>-trash/</code> (if A wins).</td></tr>
+        </table>
+      </div>
+      <div>
+        <h3>Done-check</h3>
+        <table class="spec">
+          <tr><th>proof</th><td>Publish on v-aitldr shows captions for all 33 finals, each from one file. Two requests for the same final at the same moment show one job in <code>queue.status</code>.</td></tr>
+          <tr><th>test_audit</th><td><code>dev-team:audit-test-quality</code> on the new tests</td></tr>
+          <tr><th>before_after</th><td>Publish screen for b07 (no captions today), before and after</td></tr>
+          <tr><th>duration</th><td>From the queue timestamps</td></tr>
+        </table>
+        <h3>Out of scope</h3>
+        <ul>
+          <li>How DAMit sync moves mp4s between machines (its own design).</li>
+          <li>Changing FliTools' storage layout, <code>engines/</code> or naming.</li>
+          <li>FliCut and FliEdit code (they keep their own export files).</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>What I checked, and what I didn't</h2>
+    <ul>
+      <li><code>flivideo/docs/briefs/transcription-as-a-service.md</code>: the holder-writes rule, sha identity, <code>engines/</code> naming, and the "last writer wins" gap.</li>
+      <li><code>flitools/README.md</code> and <code>docs/architecture.md</code> :81, :128–131, :164–169, :189, :255. <code>src/transcribe/location.ts:13–24</code> (where it saves). <code>src/capabilities.ts:30</code> (<code>save_to</code>).</li>
+      <li><code>flistudio/server/src/capabilities/publish.ts:85</code> <code>captionsFor</code>: only <code>&lt;stem&gt;.srt</code> beside, else FliCut's <code>&lt;name&gt;-cut.srt</code>. <code>video-text.ts:162</code> works the same way. <code>assets/assets.ts:109</code> skips folders. <code>footage.ts:147</code> already queues.</li>
+      <li><code>aitldr-brain/plugins/aitldr-team/skills/prod/SKILL.md:176</code>: <code>/captions</code> makes it, then copies <code>&lt;skill&gt;-final.srt</code> beside the mp4.</li>
+      <li>Disk: every <code>*-final.mp4</code> in v-aitldr on the M4 compared with its two SRTs (<code>cmp</code>). b01's json: <code>pass 2</code>, CrisperWhisper on <code>mac-mini-m2</code>.</li>
+      <li><b>Not checked:</b> whether Jan's Mac runs FliTools at all. If it doesn't, rule 5's "holder writes" means it must push to the M2 for both passes, and that changes the size of the job more than anything else here. Also not checked: the incident's scratch folder, the "37 finals" count, and where <code>save_to</code> puts <code>engines/</code>.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Open questions for David</h2>
+    <div class="q"><b><span class="n">1</span>Where does a final's SRT live?</b>
+      <p>In FliTools' <code>transcripts/</code> folder, where Publish would be changed to look, or beside the mp4, written by FliTools through <code>save_to</code>.</p>
+      <p class="rec">The <code>transcripts/</code> folder. FliTools already writes there and pass 2 upgrades it in place. b01 shows a copy beside the mp4 was already out of date.</p></div>
+    <div class="q"><b><span class="n">2</span>What happens to Jan's script-aligned captions?</b>
+      <p><code>/captions</code> uses <code>script.md</code>, so its SRT has the right spellings and different timings from FliTools' (b18–b20). If only FliTools writes the final's SRT, either the script becomes something FliTools takes in (as a vocabulary or alignment hint), or <code>/captions</code> writes its own differently named file, or it's retired for finals.</p>
+      <p class="rec">Give the script to FliTools as a hint and retire the copy step. Ask Jan whether the script-aligned spellings matter on YouTube.</p></div>
+    <div class="q"><b><span class="n">3</span>Who queues the job for a new final?</b>
+      <p>The tool that rendered it (/prod through <code>fli.py</code>, FliEdit, FliCut on export), FliStudio when it sees a final with no transcript, or a FliTools folder watcher.</p>
+      <p class="rec">The renderer, with FliStudio as the safety net. FliTools stays a service and doesn't watch folders.</p></div>
+    <div class="q"><b><span class="n">4</span>Does Jan's Mac get FliTools?</b>
+      <p>If it does, his machine runs pass 1 and writes. If it doesn't, it pushes the job to the M2 and writes what comes back, or it never writes and waits for the M4 to do it through git.</p>
+      <p class="rec">Install it. Holder-writes only works if the holder has the door, and the brief already assumes every machine runs FliTools locally.</p></div>
+    <div class="q"><b><span class="n">5</span>Should running Whisper outside FliTools be blocked, or just written down as a rule?</b>
+      <p>A rule in the skills and CLAUDE.md, or a hook that refuses <code>~/bin/transcribe</code> / <code>mlx_whisper</code> calls from agents and points them to FliTools.</p>
+      <p class="rec">A hook. Today an agent under time pressure made up its own pipeline. A hook stops it at the moment it decides; a written rule only works if the agent reads it first.</p></div>
+  </section>
+
+  <p class="src">Ticket: none yet; nearest record is /Users/davidcruwys/dev/ad/flivideo/docs/briefs/transcription-as-a-service.md · Source file: /Users/davidcruwys/dev/ad/flivideo/docs/specs/video-project-write-ownership.html</p>
+</div>
