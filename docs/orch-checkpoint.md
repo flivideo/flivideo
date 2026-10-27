@@ -7,31 +7,22 @@
 - The current step tells you the next action; the standing rules are not optional
 
 ## Current step
-**Merge `fc50-waits` into FliCut main** — built and pushed. Hold for David's "go", because it restarts his FliCut window.
+**Idle — waiting on David's next ask.** `fc50-waits` merged 2026-10-27 (FliCut main `7bc5a4a`).
 
 ## Progress
 ### Done
-- [x] FR-174 FliHub card buttons (flihub `9e6917e`: Rename · Discard blue primary on the right, Rename · Keep amber)
+- [x] FR-174 FliHub card buttons (flihub `9e6917e`)
 - [x] D12 brief B1–B6 + `edit.render` (flivideo `307422a`; FliStudio `9ae0ee8`; FliCut `ebae9bb`, `06f1422`, `1771ab4`)
-- [x] FC-49 open-a-cut (FliStudio `a5b87f7`, FliCut `fc590a0`), merged and restarted
-- [x] FC-50 investigation (FliCut backlog `b0be94b`): stall = D12 is all-HEVC + densest-bitrate stretch 7:30–8:23.7, not B1 and not player code
-- [x] Restart safety in app-registry `75e5e37` (my-app stop/restart refuse while busy unless `--force`), merged
-- [x] flicut skill updated in appydave-plugins `df8f17e`
-- [x] D12 disk question: only ONE export exists, `/Users/davidcruwys/dev/video-projects/v-appydave/d12-openrig-agent-teams/videos/openrig-agent-teams/openrig-agent-teams-audio-a100.mp4` (169 MB, 08:26). The second export overwrote the first in place; nothing went to the Trash
-- [x] Disk-drop diagnosis: swap. VM volume was 20.4 GB, 17.9 GB of swap used on 24 GB RAM, 17 Claude processes. Not temp files (`/private/tmp` was 2.1 GB), no APFS snapshots
+- [x] FC-49 open-a-cut (FliStudio `a5b87f7`, FliCut `fc590a0`)
+- [x] FC-50 investigation (FliCut `b0be94b`): HEVC density at 7:30–8:23.7
+- [x] Restart safety in app-registry `75e5e37`
+- [x] **Merged `fc50-waits` → FliCut main `7bc5a4a`** (restart safety R1–R4, R6, length fix, FC-50 parts 1+4). FliCut was NOT running at merge time, so no restart was done. Worktrees + branches `restart-safety`, `fc50-waits` removed local and remote
+- [x] flicut skill: new verbs added (appydave-plugins `5c8b1ea`)
+- [x] Roamy session ("M4 Mini session audit and Kokoro voiceover") told to re-render D12 (msg sent, not confirmed read)
+- [x] D12 disk question + disk-drop diagnosis (swap) — see brains `mac-os/`
 
-### In progress
-- [ ] Merge `fc50-waits` ← YOU ARE HERE
-  - Branch: worktree `/Users/davidcruwys/dev/ad/flivideo/flicut-worktrees/fc50-waits`, pushed. Commits `99ad95f` (restart safety R1–R6 + length fix) and `7bc5a4a` (FC-50 parts 1+4 + dev-shot), on top of main `b0be94b`
-  - Gates: typecheck clean, 608 tests pass, api:check current
-  - Steps on David's go:
-    1. `bin/flicut status --json` must show `busy: []`
-    2. `cd /Users/davidcruwys/dev/ad/flivideo/flicut && git merge --ff-only fc50-waits && git push`
-    3. `bin/flicut restart` (never `my-app restart flicut`), then confirm one listener on 7121 with `lsof -nP -iTCP:7121 -sTCP:LISTEN`
-    4. Confirm R2 reopens the D12 cut
-    5. Remove the worktrees `restart-safety` and `fc50-waits`, and delete those branches local and remote
-    6. Add the restart-safety verbs to the flicut skill (`/Users/davidcruwys/dev/ad/appydave-plugins/flivideo/skills/flicut/SKILL.md`): `busy`, `job.rerun`, `cut.dismiss`, `cuts.engine`/`accept-engine`, `player.stats`, `edit.get length`
-    7. Tell the Roamy session ("M4 Mini session audit and Kokoro voiceover") it is live and to re-render: old renders run ~24 s long and the SRT drifts
+### Still to verify (David, in the window)
+- [ ] On next FliCut start: it reopens the D12 cut on its own (R2); the "Proposals changed" bar looks right; one listener on 7121 (`lsof -nP -iTCP:7121 -sTCP:LISTEN`)
 
 ### Pending — awaiting David's decision
 - R5: run live FliCut from a promoted release worktree (`flicut-live`) with an `app:promote` step that refuses while busy
