@@ -33,3 +33,9 @@ Other facts:
 5. **Optional:** a one-page "which login is which" table in FliStudio's README, so this never has to be rediscovered.
 
 **Deadlines:** pull the AppyDave Labs backfill (and, once they exist, the AppyDave reports) within 30 days of their first availability, which for Labs means before about 2026-11-22. Every day `appydave` stays unsigned loses a day of its 30-day backfill.
+
+## Update 2026-10-27 (flivideo-orch, with David)
+
+- **Which Brand Account holds which channel (checked in YouTube settings):** the main AppyDave channel (`UC3fDZp6BryiFmBzVChBTlNg`, @AppyDave) is held by the Brand Account named **"AppyCast"** (blue "A", limited to YouTube). YouTube → Settings → "Add or remove manager(s)" for that channel opens brandaccounts/101645196904177662095 = AppyCast. Neither "AppyDave" Brand Account holds it. The photo "AppyDave" one is believed to be Labs (10-21 sign-in reached Labs; inferred). The purple "A" AppyDave: unknown.
+- **`appydave` re-signed by David** 2026-10-27 15:10Z, picking AppyCast, with `--publish` (yt-publish branch): scopes `yt-analytics.readonly`, `youtube.readonly`, `youtube.force-ssl`. The Google screen showed "Google hasn't verified this app" (expected: own Desktop client, sensitive scope).
+- **Checked:** `youtube.reporting.jobs --brand appydave` → `ok`, `jobs: []`. The channel guard passed, so the token now reaches the main AppyDave channel. Work list item 2 is done, except creating the two reach jobs (not done; David's call).
