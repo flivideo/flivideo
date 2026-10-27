@@ -21,8 +21,10 @@
 - [x] Roamy session ("M4 Mini session audit and Kokoro voiceover") told to re-render D12 (msg sent, not confirmed read)
 - [x] D12 disk question + disk-drop diagnosis (swap) — see brains `mac-os/`
 
-### Still to verify (David, in the window)
-- [ ] On next FliCut start: it reopens the D12 cut on its own (R2); the "Proposals changed" bar looks right; one listener on 7121 (`lsof -nP -iTCP:7121 -sTCP:LISTEN`)
+### Verified 2026-10-27 (David's screenshot + API)
+- [x] FliCut reopened on the D12 cut by itself (R2); one listener on 7121 (PID 11618); `busy` idle
+- [x] `cuts.engine`: from 2 → to 2, pending false, so no "Proposals changed" bar is expected. The bar itself is still unseen (it only shows when the engine moves)
+- [x] `edit.get` length: kept 1146.75 s (19:07, matches the window), renders 1148.76 s (19:09), 25 fps. Summary says 134 cuts; the window says 128 (not investigated)
 
 ### Pending — awaiting David's decision
 - R5: run live FliCut from a promoted release worktree (`flicut-live`) with an `app:promote` step that refuses while busy
