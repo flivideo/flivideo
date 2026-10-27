@@ -7,7 +7,7 @@
 - The current step tells you the next action; the standing rules are not optional
 
 ## Current step
-**Builder running: FliStudio YouTube publish** (worktree `/Users/davidcruwys/dev/ad/flivideo/flistudio-worktrees/yt-publish`, branch `yt-publish`, spec `flistudio/docs/briefs/youtube-publish-api-spec-2026-10-27.md` @ `1207f91`). Fake-Google tests only; no real Google calls. On return: check gates, report to David, merge only on his go. Live test (private throwaway on AppyDave) waits on David mapping the AppyDave Brand Accounts + `npm run research:auth -- --brand appydave --publish`.
+**Builder running: FliStudio YouTube publish** (worktree `/Users/davidcruwys/dev/ad/flivideo/flistudio-worktrees/yt-publish`, branch `yt-publish`, spec `flistudio/docs/briefs/youtube-publish-api-spec-2026-10-27.md` @ `1207f91`). Fake-Google tests only; no real Google calls. **David's ruling 2026-10-27: broad sign-in (`youtube.force-ssl` + readonly + analytics), code create-only: one private `videos.insert` + `thumbnails.set` + `captions.insert` on the just-created id only; endpoint allowlist; real run human-only; no update/delete/playlist/comment code. Editing later as its own job (FliStudio-uploaded only, snapshot-before-change). Delete never.** On return: check gates, report to David, merge only on his go. Live test (private throwaway on AppyDave) waits on David mapping the AppyDave Brand Accounts + `npm run research:auth -- --brand appydave --publish`.
 
 Previous: `fc50-waits` merged 2026-10-27 (FliCut main `7bc5a4a`).
 
