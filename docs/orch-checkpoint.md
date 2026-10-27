@@ -7,6 +7,8 @@
 - The current step tells you the next action; the standing rules are not optional
 
 ## Current step
+**2026-10-27 late:** yt-publish `67c573c` built (create-only, allowlist, 36 tests verified by me). Now running: (a) same builder adds the Upload panel in UploadWizard step 1 (human route; dry-run preview → confirm → private upload → Studio-only list → Mark published); (b) schema-mirror extractor fix in `/Users/davidcruwys/dev/ad/appydave-plugins-worktrees/schema-mirror-ts-fix` (mirror stale since FliStudio `3ea915d`, 10-13). Then: merge both on David's go, restart FliStudio, set up a throwaway test project with decided Launch, David maps Brand Accounts + re-signs `appydave --publish`, dry run, David uploads.
+
 **Builder running: FliStudio YouTube publish** (worktree `/Users/davidcruwys/dev/ad/flivideo/flistudio-worktrees/yt-publish`, branch `yt-publish`, spec `flistudio/docs/briefs/youtube-publish-api-spec-2026-10-27.md` @ `1207f91`). Fake-Google tests only; no real Google calls. **David's ruling 2026-10-27: broad sign-in (`youtube.force-ssl` + readonly + analytics), code create-only: one private `videos.insert` + `thumbnails.set` + `captions.insert` on the just-created id only; endpoint allowlist; real run human-only; no update/delete/playlist/comment code. Editing later as its own job (FliStudio-uploaded only, snapshot-before-change). Delete never.** On return: check gates, report to David, merge only on his go. Live test (private throwaway on AppyDave) waits on David mapping the AppyDave Brand Accounts + `npm run research:auth -- --brand appydave --publish`.
 
 Previous: `fc50-waits` merged 2026-10-27 (FliCut main `7bc5a4a`).
