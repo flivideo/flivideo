@@ -145,8 +145,49 @@ Order: W1 and W2 can run in parallel, W3 must finish before W4–W6, and W7 is i
   - each `appytron.json` value equals the app's package.json `@appydave/core` spec;
   - fli-core tests pass with `window-state.ts` importing `atomicWrite` from `./fs-utils.js`.
 
-### W8 · (reserved)
-- `flivideo-arch-rsch` may send an amendment adding a `fli.brand.json` lock fix (FliHub + FliStudio), depending on the verification still running. Without an amendment, there is no W8.
+### W8 · `fli.brand.json`: no lost updates between FliHub and FliStudio (CONFIRMED 2026-10-29)
+- **Evidence:** in `scratchpad/race/race.mts` (session flivideo-arch-rsch; summarised in review §1.3), scenario S1 loses the update with no simultaneous clicks:
+  1. FliHub's Brand Config panel is loaded;
+  2. a publish change is applied in FliStudio;
+  3. Save is clicked in FliHub;
+  4. FliStudio's change and its `_meta.history` stamp are lost.
+  The cause: FliHub posts its whole cached `publish` block, and neither app locks.
+- **Do:**
+  - **fli-core, on the W3 branch, before tagging rc.1:**
+    - export `takeLock` (it exists in `src/fs-utils.ts:110`, but is not exported);
+    - add `updateBrandSettings(brandRoot, mutate)`, which takes `fli.brand.json.lock`, re-reads inside the lock, applies `mutate`, writes atomically and releases;
+    - export `brandSettingsVersion(file)`, a sha256 of the file bytes.
+  - **FliStudio (W4/W5 worktree):** `brand-publish.ts` `applyPublish` (around line 226) and `youtube.ts` `setBrandPlaylists` (around line 238) write only through `updateBrandSettings`.
+  - **FliHub (W4 worktree):**
+    - `managedBrandConfig.ts` `writeManagedPublish` writes through `updateBrandSettings`;
+    - GET `/api/poem-wui/brand-config` returns `version`;
+    - the POST (`routes/poem-wui.ts` around line 290) must send back the `version` it loaded, and the server refuses `409 changed-elsewhere` if the file changed since;
+    - `ConfigPanel.tsx` shows "Changed in another app — reload" on 409.
+    - This is optimistic concurrency: it fixes S1, and the lock fixes S2/S3.
+- **Done when:**
+  - the §3 gate holds in fli-core, FliStudio and FliHub;
+  - there are new tests:
+    - fli-core: two concurrent `updateBrandSettings` both survive;
+    - FliHub: a stale `version` → 409, and the file is untouched;
+    - FliStudio: `applyPublish` runs under the lock;
+  - the race script's S1–S3 scenarios, rerun against the branch code, lose nothing. The script is at `/private/tmp/claude-501/-Users-davidcruwys-dev-ad-flivideo/09d843f5-cf54-4fb5-815a-4aff1a2c0dcc/scratchpad/race/race.mts`; copy it into the fli-core worktree first, because the scratchpad is temporary.
+- **Out of scope:** fli-core stripping unknown keys on write. It is noted in the review; today's file has only known keys.
+
+**W4 trap (measured):** after changing the pin, a plain `npm install` keeps the OLD commit from the lockfile. Install explicitly:
+- `npm install "@flivideo/core@github:flivideo/fli-core#v0.26.0-rc.1"` (FliHub: add `-w server -w shared`; FliStudio: the four workspaces);
+- then confirm `node_modules/@flivideo/core/package.json` says `0.26.0-rc.1`.
+
+**W4 baselines (measured against v0.25, 2026-10-29):**
+- **Breaks:** only FliCast and FliEdit (the `final` kind).
+  - FliCast: 7 test failures (6 in `open-contract.test.ts`, caused by the cast export path silently becoming `null`, plus the pin assertion).
+  - FliEdit: `exportPath` throws at runtime with no test covering it. **Add one.**
+- **Clean:** FliCut, FliHub, FliTools and Teletubby are clean.
+- **Known flakes under parallel load:**
+  - FliCut: `hear-it`, `restart-safety-app-sh`, `start-an-edit`;
+  - Teletubby: `process-supervisor`;
+  - FliHub client: `recordingDelete` Undo;
+  - FliTools: exits 1 from EPIPE while every test passes.
+- **FliHub:** the root `npm test` chains with `&&`, so run the server tests separately.
 
 ## 5 · Watching
 
@@ -159,7 +200,7 @@ Order: W1 and W2 can run in parallel, W3 must finish before W4–W6, and W7 is i
 Write `/Users/davidcruwys/dev/ad/flivideo/docs/briefs/overnight-2026-10-29-report.md`, then commit and push it on flivideo `main`. That is the only `main` push allowed; it is a docs-only repo push.
 
 **Contents:**
-1. **A table for W1–W7:** status, branch, head commit, baseline vs after numbers, and the gate commands you reproduced.
+1. **A table for W1–W8:** status, branch, head commit, baseline vs after numbers, and the gate commands you reproduced.
 2. **Decisions made** under the delegation.
 3. **Parked items**, with reasons.
 4. **A merge order for David**, with exact commands:

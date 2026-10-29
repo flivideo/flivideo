@@ -84,7 +84,13 @@
 | FliTools | v0.11.0 | safe to leave |
 | Teletubby | v0.7.3 | safe to leave |
 
-*The type-check against v0.25 in worktrees is still running at commit time. Results go in an addendum at the end of this file.*
+**Measured 2026-10-29** (each app in a worktree, pin forced to v0.25.0):
+
+- **FliCast and FliEdit break, on `final` only** (one TS2322 each).
+  - FliCast's cast-export path silently becomes `null` (7 test failures).
+  - FliEdit's `exportPath` would throw at runtime, and no test covers it.
+- **FliCut, FliHub, FliTools and Teletubby:** 0 new type errors, and no real new test failures (only load flakes).
+- **Trap:** a plain `npm install` after changing the pin keeps the old commit from the lockfile. Install the tag explicitly.
 
 **Cross-app agreement on disk:**
 
@@ -126,7 +132,17 @@
 
 ### 1.3 `fli.brand.json` lost update
 
-FliHub writes it by plain read-modify-write (`managedBrandConfig.ts`: no lock, not atomic); FliStudio writes it through fli-core. *Verification (code trace plus a race reproduced on a temp copy) is still running at commit time. The verdict goes in the addendum.*
+FliHub writes it by plain read-modify-write (`managedBrandConfig.ts`: no lock, not atomic); FliStudio writes it through fli-core. **CONFIRMED (reproduced with the real write functions on temp copies):**
+
+- **The confirmed sequence:**
+  1. FliHub's Brand Config panel is loaded;
+  2. a publish change is applied in FliStudio;
+  3. Save is clicked in FliHub;
+  4. FliStudio's change is lost.
+- No simultaneous clicks are needed: FliHub posts its whole cached `publish` block.
+- Two millisecond-window races also exist: FliStudio's `brand.publish.set` and `brand.playlists.set` (which agents can call).
+- **Fix:** overnight W8 adds a lock-and-re-read `updateBrandSettings` in fli-core, and FliHub gets a version check (409 when the file changed since the panel loaded).
+- **Noted, not fixed:** fli-core's brand schemas strip unknown keys on write.
 
 ### 1.4 Templates
 
