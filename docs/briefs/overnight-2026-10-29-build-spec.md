@@ -170,7 +170,10 @@ Order: W1 and W2 can run in parallel, W3 must finish before W4–W6, and W7 is i
     - fli-core: two concurrent `updateBrandSettings` both survive;
     - FliHub: a stale `version` → 409, and the file is untouched;
     - FliStudio: `applyPublish` runs under the lock;
-  - the race script's S1–S3 scenarios, rerun against the branch code, lose nothing. The script is at `/private/tmp/claude-501/-Users-davidcruwys-dev-ad-flivideo/09d843f5-cf54-4fb5-815a-4aff1a2c0dcc/scratchpad/race/race.mts`; copy it into the fli-core worktree first, because the scratchpad is temporary.
+  - the race script's S1–S3 scenarios, rerun against the branch code, lose nothing.
+  - The script is `/Users/davidcruwys/dev/ad/flivideo/docs/runbooks/brand-race/race.mts`.
+  - Its imports point at the live checkouts (read-only). Copy it into a worktree and repoint lines 7–10 at the W4/W8 worktrees.
+  - It only ever writes temp copies of the brand file (`REAL` is read, never written). Keep it that way.
 - **Out of scope:** fli-core stripping unknown keys on write. It is noted in the review; today's file has only known keys.
 
 **W4 trap (measured):** after changing the pin, a plain `npm install` keeps the OLD commit from the lockfile. Install explicitly:
