@@ -1,5 +1,7 @@
 # FliVideo Architecture Alignment Report
 
+> ⚠️ **Stale — historical (flagged 2026-10-29).** Written Feb 2026 for FliDeck, FliGen, FliHub and Storyline only. It predates FliStudio (AppyStack), the AppyTron Electron apps (FliCast, FliCut, FliEdit, Teletubby) and fli-core as the shared library. Do not treat it as current architecture; current state: `docs/orch-checkpoint.md`.
+
 **Date**: 2026-02-10
 **Analyzed Projects**: FliDeck, FliGen, FliHub, Storyline App
 **System**: Node v22.16.0, npm 10.9.2

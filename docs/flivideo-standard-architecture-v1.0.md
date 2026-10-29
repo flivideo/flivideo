@@ -1,5 +1,7 @@
 # FliVideo Standard Architecture v1.0
 
+> ⚠️ **Stale — historical (flagged 2026-10-29).** Written Feb 2026 for FliDeck, FliGen, FliHub and Storyline only. It predates FliStudio (AppyStack), the AppyTron Electron apps (FliCast, FliCut, FliEdit, Teletubby) and fli-core as the shared library. Do not treat it as current architecture; current state: `docs/orch-checkpoint.md`.
+
 **Status**: Implemented across all projects
 **Date**: 2026-02-11
 **Last Updated**: 2026-02-14
