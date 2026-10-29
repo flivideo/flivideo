@@ -71,3 +71,44 @@ Send flivideo-orch the branch, head, gate numbers, the consumer table and your d
 - Never use ports 7150, 7151, 7121, 7161, 5173 or 5101; tests use random ports.
 - Never touch `/Users/davidcruwys/dev/video-projects/`, `~/.config/appydave/` or `~/.claude/`.
 - Park, with a reason, anything that fails its gate after 3 attempts.
+
+## Job C · core-rollout-dev (Opus): roll @appydave/core 0.2.0 out to its consumers
+
+Added 2026-10-29 by flivideo-orch. Job B is done: branch `core-0.2.0-zod4` @ `1cd0e79` in `/Users/davidcruwys/dev/ad/apps/appydave-foundation-worktrees/core-0.2.0-zod4`.
+- zod is a **peer dependency** (`^4.0.0`).
+- The packed tgz is at `/Users/davidcruwys/dev/ad/apps/appydave-foundation-worktrees/appydave-core-0.2.0-1cd0e79.tgz`. It is not published.
+- Probe worktrees `<repo>-worktrees/core020-probe` (flicast, fliedit, flicut, teletubby) already sit on 0.2.0. Reuse them or remove them.
+
+**Branching rule:**
+- Each FliVideo app gets a new branch, `core-020-zod4`.
+- Base it on `origin/overnight/2026-10-29-fli-core-026` **once that branch pins `#v0.26.0`**. ovn-merge-dev is doing the repin; poll `git show origin/overnight/2026-10-29-fli-core-026:package.json`.
+- Templates branch off current main: appystack `8a79987`, appytron `92da408`.
+
+### The items
+
+- **C1 · FliCast + FliEdit**
+  - Vendor `vendor/appydave-core-0.2.0-1cd0e79.tgz`.
+  - Point the package.json `@appydave/core` spec **and** the `appytron.json` `core` marker at it; they must be equal.
+  - Run the gate (overnight report §1 commands).
+  - Measured as drop-in.
+- **C2 · FliCut:** the same as C1, plus fix its zod 3 idioms:
+  - `z.record` with one argument, in `src/shared/project.ts:78,187,190`. Add the key schema.
+  - `z.ZodTypeDef` in `src/main/ipc-router.ts:9`.
+  - `process-supervisor` "captures stdout" is a known flake.
+- **C3 · Teletubby**
+  - Vendored 0.2.0. Record that npm `^0.2.0` replaces it after the publish.
+  - Retire `src/core/zod3-json-schema.ts`, which reads zod 3's `_def.typeName`. Project through zod 4 instead: fli-core's path or `z.toJSONSchema`.
+  - Fix `handlers.ts` (68 TS errors) and `input-shapes.ts` (5).
+  - Regenerate the API: `npm run api:openrpc`.
+  - Gate: no newly failing test.
+- **C4 · Templates**
+  - **AppyStack** `template/` + `create-appystack/template`: zod `^3` → `^4`, and core → 0.2.0. Use the tgz or a `file:` link for now, and record the npm swap. Fix what breaks, run `npm run sync`, and gate as in W1.
+  - **AppyTron** template: vendored 0.2.0 + marker. Gate as in W2.
+- **C5 · Probe only (read-only)**
+  - ImageDrip and Samantha (a live `file:` link to foundation `packages/core`), plus AppySentinel core and its template.
+  - Point a throwaway worktree at the `core-0.2.0-zod4` worktree, and run typecheck and tests.
+  - Report a verdict per consumer.
+
+**Done when:** every C item is gate-passed with its branch pushed, or parked with a reason. Report a table to flivideo-orch.
+
+**Limits:** the same as Jobs A and B. No merges to main, no `npm publish`, no app starts.
