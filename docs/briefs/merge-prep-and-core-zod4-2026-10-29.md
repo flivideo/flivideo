@@ -112,3 +112,35 @@ Added 2026-10-29 by flivideo-orch. Job B is done: branch `core-0.2.0-zod4` @ `1c
 **Done when:** every C item is gate-passed with its branch pushed, or parked with a reason. Report a table to flivideo-orch.
 
 **Limits:** the same as Jobs A and B. No merges to main, no `npm publish`, no app starts.
+
+## Job D · core-consumers-dev (Opus): fix ImageDrip and Samantha for @appydave/core 0.2.0
+
+Added 2026-10-29 by flivideo-orch, from Job C's C5 probes.
+
+**Why this blocks the merge:** both apps link **live** to `/Users/davidcruwys/dev/ad/apps/appydave-foundation/packages/core` (`file:`). The moment foundation `main` moves to 0.2.0, they get zod 4, so they must be fixed first.
+
+**The items:**
+- **D1 · ImageDrip** (`/Users/davidcruwys/dev/ad/apps/imagedrip`)
+  - The problem: `src/main/zod-to-json-schema.ts` reads zod 3 `_def`. Under zod 4, every MCP tool's `inputSchema` silently becomes `{}`, and 9 tests newly fail.
+  - The fix: project with zod's own `z.toJSONSchema(schema, { io: 'input' })`. This is the same approach Teletubby took on branch `core-020-zod4` @ `31d199d`; read its `agent-layer` change.
+  - Add zod `^4` as a direct dependency if the code imports zod.
+  - Prove the MCP inputSchemas are unchanged: diff them against a 0.1.0 baseline.
+- **D2 · Samantha** (`/Users/davidcruwys/dev/ad/apps/samantha`)
+  - The problem: a one-argument `z.record` at `src/shared/ipc.ts:374` and `:501`.
+  - The fix: add the key schema, and add zod `^4` as a direct dependency.
+  - One CONTEXT.md-freshness test failure is baseline.
+
+**How to test:**
+- Branch `core-020-zod4` in each repo, off `origin/main`, in a worktree under `<repo>-worktrees/`.
+- Test against 0.2.0 by pointing the worktree's `@appydave/core` at `/Users/davidcruwys/dev/ad/apps/appydave-foundation-worktrees/core-0.2.0-zod4/packages/core`, the way Job C's probes did.
+- **Do not commit that path.** The committed spec stays `file:../appydave-foundation/packages/core`; it becomes correct once foundation main moves.
+
+**Note:** both live checkouts have an uncommitted `package-lock.json` change. Don't touch the live checkouts.
+
+**Gate:**
+- typecheck, build and tests: after ≥ baseline, with no newly failing test;
+- for ImageDrip, also the MCP inputSchema diff.
+
+**Done when:** D1 and D2 are gate-passed with branches pushed, or parked with a reason. Report to flivideo-orch.
+
+**Limits:** the same as Jobs A–C. Also do not run `git worktree remove`; leave cleanup to flivideo-orch.
