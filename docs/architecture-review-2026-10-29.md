@@ -397,6 +397,9 @@ This is KBDE's C1–C16 idea at in-process size. It **fails at the author's desk
 ## 7 · Not verified
 
 - I did not run FliStudio or the extension. The design is from reading code.
-- I did not check whether every `HostKit` member is used by Overlay Pilot. Anything unused should be dropped during the move, not carried over.
-- `busy` wiring assumes `system.status` is where FliStudio's restart safety reads busy state. Confirm during the build.
+- **Checked after commit:** all nine `HostKit` members are used by Overlay Pilot:
+  - `call`, `mediaUrl`, `toast` and `onChange` in its code;
+  - `Here`, `CopyImage`, `Button`, `Info` and `Player`, destructured in `OverlayPilot.tsx:181` and `PlanBoard.tsx:35`.
+  Move all of them; there is nothing to drop.
+- **Checked after commit:** FliStudio's `system.status` hard-codes `busy: []` (`server/src/capabilities/control.ts:72`). So C5 is confirmed: a FliStudio restart cannot see an Overlay Pilot run in progress. §5.4 rule 9 is where this gets fixed.
 - KBDE findings come from its docs and KDD files; nobody re-ran KBDE.
