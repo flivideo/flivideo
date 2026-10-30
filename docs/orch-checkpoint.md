@@ -8,6 +8,14 @@
 
 ## Current step
 
+**2026-10-30 ~19:46 — Teletubby-lands LIVE + verified.** FliStudio main `ce8fd25` (tubby-lands: app.stage door,
+here-dot reads stage, Overlay Pilot posters, named request log; gates reproduced 46/65/38/707+2/307, e2e 31). Teletubby
+main `847773e` (panel scoped to open project, cold start → empty shell, 10-17 ticket closed). Both restarted after busy
+checks. David's scenario verified on screen (screenshots): Kybernesis on stage → story.script.send d13 → "STORY PILOT –
+OVERLAY PILOT" on stage, position d13-overlay-pilot-scripts/storypilot-project, apps.status ofOpenProject true.
+Worktrees + local branches removed; remote branches tubby-lands/tubby-panel left (merged). Sessions tubby-land-dev,
+tubby-panel-dev idle (not closed).
+
 **2026-10-30 ~19:40 — FliHub rebuild PARKED by David** (via flivideo-arch-rsch). Spec:
 `/Users/davidcruwys/dev/ad/flivideo/docs/flihub-rebuild-spec-parked-2026-10-30.md` (flivideo 2dd162a), filed on
 AppyDave d17-flihub-rebuild (resource r_2667e860b6). Do NOT write a v2 build brief until David resumes. FliHub v1 untouched.
