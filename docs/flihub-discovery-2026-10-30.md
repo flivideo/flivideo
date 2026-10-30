@@ -99,7 +99,7 @@ What must not break when v2 replaces v1. Owners and evidence are in Appendix D.
 | Transcripts | two JSON shapes (old whisper, FliTools `flitools.transcript/<n>`); `engines/<base>.<engine>.*` copies; `.txt` written last = done | carry the engine copies on every move; check `schema` before reading | AGENT-NOTES; FliTools `service.ts:340-374` |
 | `fli.words.json` | project, brand and global word stores | write through fli-core only | `routes/state.ts:268-304` |
 | `-trash/` | including FliTools' `-trash/<date>-pre-flitools/`; T7 rsync excludes it | same folder name; trash pill counts what empty removes | David ruling 2026-09-23 |
-| Global config | `server/config.json`: 36 stage overrides and 2 priorities keyed by bare folder name, plus `glingDictionary` | don't migrate stage/priority (FliStudio owns stages); drop `glingDictionary` (Q9). FliStudio's `words.import-flihub` loses its source, so flivideo-orch should decide whether to run that import once before cut-over | Appendix C §4 |
+| Global config | `server/config.json`: 36 stage overrides and 2 priorities keyed by bare folder name, plus `glingDictionary` | don't migrate stage/priority (FliStudio owns stages); drop `glingDictionary` (Q9). **Cut-over step (flivideo-orch ruling 2026-10-30): run FliStudio's `words.import-flihub` once before `glingDictionary` goes** | Appendix C §4 |
 | Legacy leftovers | `recording-shadows/` (56 T7), `-safe/` (2 T7), `-chapters/` (3 T7), `edit-*` (33 T7) | ignore; never write | Appendix C §4 |
 
 ### 2. Live dependents (FliStudio, FliTools, FliCut, FliEdit)
@@ -109,7 +109,7 @@ What must not break when v2 replaces v1. Owners and evidence are in Appendix D.
 | FliStudio launch door | `POST/GET /api/context` on fixed `127.0.0.1:5101` (`flistudio/server/src/launch/doors.ts:148-168`) | moves port 5101 or changes the context contract. **Either keep `/api/context` as a REST shim, or change FliStudio to call the new door in the same release** |
 | FliStudio reveal / open | runs `flihub/scripts/app.sh open` (`reveal.ts:25`) | removes or renames that script |
 | FliStudio migrate-layout, project-rename | ask FliHub's door whether a project is open, and refuse if it is | stops answering "what's open" |
-| FliStudio words import | `words.import-flihub` reads `glingDictionary` from FliHub's `server/config.json` (`capabilities/words.ts:278`) | drops the field before the one-time import |
+| FliStudio words import | `words.import-flihub` reads `glingDictionary` from FliHub's `server/config.json` (`capabilities/words.ts:278`) | drops the field before the one-time import. **Ruled (flivideo-orch): run `words.import-flihub` once as a cut-over step, then drop the field** |
 | FliStudio best-transcript | reads take transcripts and `engines/` copies as owner `flihub` | renames files or drops the engine copies |
 | FliTools | only principal `agent:flihub` with `force_save` may replace FliHub-made transcripts (`service.ts:717-738`) | sends a different principal name |
 | FliCut | reads `hub/transcripts/<stem>.json` and `engines/<take>.mlx-flihub.json`; tells the user "redo it in FliHub ↻" | drops the redo action or changes the engine id `mlx-flihub` |
@@ -157,15 +157,17 @@ No external listener. FliStudio, FliDeck, FliGen, FliVoice, Storyline and AngelE
 | Q6 | B-roll | **Out of scope entirely.** Not a FliHub extension either. B-roll capture may live in FliHub one day as a normal feature, but not in this rebuild. FliStudio's third extension will probably be a "B-roll pilot" |
 | Q7 | Renumber / swap chapters | **Keep and design cleanly into v2's segment ops.** Don't preserve the old tools; don't conform to older videos' naming conventions |
 | Q8 | Assets, Inbox, Thumbs, Transcripts tab, POEM/AWB/YLO send | **Drop all** |
-| Q9 | Gling | **Gone.** That's FliCut's job. Drop it (and the one-time word import is no longer a requirement unless FliStudio still wants it) |
+| Q9 | Gling | **Gone.** That's FliCut's job. Drop it. Cut-over step (flivideo-orch): run `words.import-flihub` once before `glingDictionary` goes |
 | Q10 | Shadows | **Gone.** Drop |
-| S1 | Recording source | **Design for a configurable recording source:** Ecamm today, possibly OBS later, each with its own watch folder and file-naming rules (a small rules set per source). **Open:** David thinks the folder config is probably global (not FliHub-only, not per brand). No OBS on the machine and no testing planned: design for it, don't build OBS support |
+| S1 | Recording source | **Design for a configurable recording source:** Ecamm today, possibly OBS later, each with its own watch folder and file-naming rules (a small rules set per source). **Where it lives (ruled by flivideo-orch): per-machine, in `~/.fli/machine.json` via fli-core**, as a fli-core change inside the v2 build; this fits David's "probably global". No OBS on the machine and no testing planned: design for it, don't build OBS support |
 
 ### What the rulings mean for the build
 
 - **The behaviour spec is today's app.** For every kept item, the acceptance test is "does the same thing as v1 did", screen by screen. The exceptions are Q7 (renumber/swap redesigned into segment ops) and the recording-source config (S1).
-- **Recording source (S1)** replaces today's hard-wired Ecamm watcher (`server/src/watcher.ts:18` hard-codes `*.{mov,mp4}`; `watchDirectory` in `server/config.json`). Suggested shape, for David to confirm: a list of sources, each with `{ id, label, watchFolder, filePattern, nameRules }`, Ecamm being the only one filled in. If the config is global, it belongs with the suite's machine settings (`~/.fli/machine.json` via fli-core, already read by FliHub), not in `server/config.json`. That is a fli-core question for flivideo-orch.
-- **Open for David:** the remaining unsure items (see the item list) and Q3.
+- **Recording source (S1)** replaces today's hard-wired Ecamm watcher (`server/src/watcher.ts:18` hard-codes `*.{mov,mp4}`; `watchDirectory` in `server/config.json`). Suggested shape, for David to confirm: a list of sources, each with `{ id, label, watchFolder, filePattern, nameRules }`, Ecamm being the only one filled in. **Ruled (flivideo-orch, 2026-10-30): the recording-source config is per-machine.** It lives in `~/.fli/machine.json`, read through fli-core (FliHub already reads that file through fli-core). That fli-core change is part of the FliHub v2 build. This matches David's "probably global, not FliHub-only or per brand": global to the machine.
+- **Cut-over steps so far:** (1) run FliStudio's `words.import-flihub` once, then drop `glingDictionary`; (2) swap ports 5100/5101 and the apps.json entry; (3) re-point the skills.
+- **Open for David:** Q1, Q3 and the remaining unsure items (see the item list). flivideo-orch writes the v2 build brief once those are settled.
+- **Context:** flivideo-orch has rescoped its extension-core work to G1 only (an app-door call by name, plus Story Pilot's Send-to-Teletubby). Host-neutral extension-core is dropped.
 
 ## Live defects found (not fixed: discovery only)
 
