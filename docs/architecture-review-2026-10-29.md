@@ -388,6 +388,44 @@ This is KBDE's C1–C16 idea at in-process size. It **fails at the author's desk
    - Overlay Pilot runs conformance;
    - the project page looks unchanged (David looks).
 
+
+### 5.7 Cross-app calls from extensions (G1) — design, 2026-10-30, not built
+
+**Problem.** `ExtensionHost` can call FliStudio's own capabilities, log, and reach FliTools. The FliTools URL is hard-wired for Overlay Pilot. It cannot reach any other app. Most planned extensions need one: StoryPilot needs Teletubby's `write_script`, Shorts needs FliCut, B-roll needs FliHub.
+
+**Facts the design rests on (read 2026-10-30):**
+- The door-finding knowledge already lives in **FliStudio**, not fli-core. `server/src/launch/doors.ts` holds `DOORS` per app, plus `discover` (control file), `probe`, `readSystemBusy` and per-app calls (`callFlicut`, used by `edit.add` as `agent:flistudio`).
+- fli-core supplies the parts underneath: `controlFilePath` / `readControlFile`, `PRINCIPAL_HEADER`, and the principal grammar.
+- **The principal grammar is `agent:[\w.-]+`**, so `agent:flistudio/ext:storypilot` would be *refused* by every target app. Use **`agent:flistudio.storypilot`** instead.
+
+| Criterion | (A) Extension uses fli-core directly | (B) Extension asks FliStudio | **Hybrid: one host call + a declared allowlist** |
+|---|---|---|---|
+| Dependency direction | The extension learns addresses and tokens; fli-core grows door-calling code | Clean: the extension sees only the host | Clean: the extension sees only `host.apps.call` |
+| Who holds policy | No one; each extension decides | FliStudio, but only implicitly, inside bespoke verbs | **FliStudio, from data**: the descriptor's `apps` list, checked at bind time and in conformance |
+| What the target sees | `agent:<ext>`, which hides that FliStudio is involved | `agent:flistudio`, which hides the extension | `agent:flistudio.<key>`, which names both |
+| ★ human-only verbs | Reachable unless every app guards them | Safe | Safe: the call always carries an `agent:` principal, so targets refuse ★ verbs as they already do; the allowlist is a second fence |
+| Target busy / restart | Each extension re-implements it | Central | Central: the host never starts or restarts a target. Not running → typed refusal `app-unavailable` |
+| Testability | Real ports in tests | One fake per bespoke verb | `fakeHost({ apps: { teletubby: fake } })`; conformance checks every call is declared |
+| Code per new extension | Most (door code each time) | A new FliStudio verb per need, so host edits come back | **One descriptor line**: `apps: { teletubby: ['write_script'] }` |
+| Target not running | Each decides | Central | Typed refusal; the extension shows it. **No auto-start** in v1 |
+
+**Recommendation: the hybrid.**
+- **extension-core:**
+  - `defineExtension({ …, apps?: Record<AppKey, string[]> })`;
+  - `ExtensionHost.apps.call(app, verb, input)`, returning `CallAnswer`;
+  - `fakeHost({ apps })`;
+  - conformance fails an undeclared call;
+  - a minor version bump.
+- **FliStudio:**
+  - implements `apps.call` over `launch/doors.ts`: discover → probe → POST with `agent:flistudio.<key>` and the target's token;
+  - refuses undeclared app/verb pairs and unknown apps at bind time;
+  - logs every call through `host.log`;
+  - `readSystemBusy` is not needed, because nothing restarts.
+- **fli-core:** nothing for v1. Move `doors.ts`'s generic door client (discover, probe, call) into fli-core **only when a second host needs it**. That is the "centralised knowledge" of (A), moved down when it's earned.
+- **Effort:** about 1.5–2 h, including tests and an extension-core release. There are no target-app changes, because their doors already exist.
+- **First consumer:** StoryPilot's "Send to Teletubby" button, after V1 ships. V1 stays as-is: Claude Code hands the script over.
+- **Blocker:** **FliHub has no door**, so any FliHub-dependent extension (B-roll) waits for it. See `docs/briefs/flihub-rebuild-discovery-2026-10-30.md`.
+
 ---
 
 ## 6 · Packages: the call
