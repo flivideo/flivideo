@@ -1,4 +1,12 @@
-# Brief — make @flivideo/extension-core host-neutral, and let an extension call another app (G1) (2026-10-30)
+# Brief — let a FliStudio extension call another app's door (G1) (2026-10-30)
+
+> **RESCOPED 2026-10-30 ~11:05 by flivideo-orch — David overrode Q0.** FliHub v2 hosts NO extensions;
+> extensions belong to FliStudio only. So: **DROP work items 1 (host-neutral ExtensionHost), 3 (host-supplied
+> stages) and 5 (extraction plan).** **KEEP 2 (G1 — call another app's door by name) and 4 (Story Pilot
+> Send-to-Teletubby, proves G1), plus 6 (version 0.2.0, CHANGELOG, README, spec/AGENT-NOTES rows).** G1 matters
+> more now: FliStudio extensions will call FliHub v2's door. Leave Overlay Pilot's host fields where they are.
+> Gate and limits unchanged. Done = branch pushed, every gate passing, report to flivideo-orch.
+
 
 **Purpose**: The one change that has to land before the FliHub v2 build: FliStudio and FliHub must share
 one extension contract, and an extension must be able to call another FliVideo app's door.
