@@ -25,12 +25,23 @@
 - **Dossier B670**, the StoryPilot ChatGPT conversation, filed beside voice log B667.
 - **StoryPilot launched** as `storypilot-dev`. Brief: `docs/briefs/storypilot-launch-2026-10-30.md`, including the §2a addendum. It writes the spec, stops for David, then builds. flivideo-orch manages it.
 
-## Open — waiting on David
+## Open — waiting on David (updated 2026-10-30 evening)
 
-- **Finance decision.** The synthesis §6 hand-off block is ready to send to the `appy-invoice-rsch` session. It has **not** been sent; David must approve it first. The headline: AppyInvoice is its own AppyStack app, under the "AppyFinance" line. Step one is getting the Roamy-only spec into git.
+- **FliHub rebuild: PARKED by David 2026-10-30.** Nothing has been built; FliHub v1 is live and unchanged.
+  - Start here when it resumes: `/Users/davidcruwys/dev/ad/flivideo/docs/flihub-rebuild-spec-parked-2026-10-30.md` (flivideo `2dd162a`). It holds the rulings, the Section 1 walkthrough, the estimate, the cut-over steps and the open questions (S1–S5 sign-off, Q1 with the 10 unsure items, Q3 hold/archive).
+  - The spec is filed in FliStudio on AppyDave **D17** (`d17-flihub-rebuild`), along with the discovery doc, the brief, the looks artifact and both sessions.
+  - flivideo-orch has been told not to write a v2 build brief until David resumes the rebuild.
+- **D13 Story Pilot settings:** what the viewer should feel, what they should do, the AppyDave bookends, and "girlfriend Joy" vs "partner".
+- **AppyInvoice:** David reviews the vOz October draft INV-000042 (US$2,945). Nothing has been sent; every send and payment needs his go.
+- **Delete the merged remote branch.** The classifier blocks this for agents, so David runs it himself: `git -C ~/dev/ad/flivideo/flistudio push origin --delete extension-core`.
 - **Human checks:**
   - FliHub's "reload and save again" refusal: change brand settings in FliStudio while FliHub's ConfigPanel is open, then click Save in FliHub.
   - AppyTron on Electron 44 has never been launched.
+- **Registry drift** (synthesis §1 #4 and #7):
+  - apps.json has no `boilerplate` for flistudio;
+  - locations.json's AppyTron consumers are missing FliCast and FliEdit;
+  - `~/dev/ad/CLAUDE.md` points at `/apps/appyradar/`, but the live app is `apps/appyradar-sentinal`.
+- **AppySentinel** is very out of date, and David rates the idea highly. Refresh it as its own job (consumers: appyradar-sentinal, switchboard, supportsignal-sentinal).
 - **Overnight follow-up spec**, not yet written. The batch:
   - FliTools has no build script;
   - FliCut has a stale pnpm-lock and `pnpm-workspace.yaml`;
@@ -39,16 +50,13 @@
   - add a FliCast rung to best-transcript;
   - fli-core brand schemas strip unknown keys on write;
   - regenerate the schema mirrors in FliCast and FliEdit;
-  - report YouTube uploads in FliStudio `system.status` busy (then `busy.sh` can drop its :443 check);
   - C6 (dist vs source resolution);
   - split Overlay Pilot's settings out of `ExtensionHost`.
-- **Registry drift** (synthesis §1 #4 and #7):
-  - apps.json has no `boilerplate` for flistudio;
-  - locations.json lists only flicut, imagedrip, samantha and teletubby as AppyTron consumers (FliCast and FliEdit are missing);
-  - `~/dev/ad/CLAUDE.md` points at `/apps/appyradar/`, but the live app is `apps/appyradar-sentinal`.
-- **AppySentinel** is very out of date; David rates the idea highly. Refresh it as its own job (consumers: appyradar-sentinal, switchboard, supportsignal-sentinal).
-- **Sent / launched at close:** the AppyInvoice decisions went to `appy-invoice-rsch`. FliHub rebuild discovery is running as `flihub-rebuild-rsch` (brief `docs/briefs/flihub-rebuild-discovery-2026-10-30.md`).
-- **`origin/extension-core`** on FliStudio is merged and safe to delete. The classifier blocks remote deletes from an agent, so David has to run it.
+- **The synthesis doc is out of date on extensions.** Its shared-extensions idea (§2 and §5.4 of `/Users/davidcruwys/dev/ad/brains/brand-dave/studio-pattern-synthesis-2026-10-30.md`) no longer holds. David has ruled that extensions live only in the root app, FliStudio; microapps get doors, not extensions.
+- **Done since this list was first written:**
+  - the finance decision went to `appy-invoice-rsch`, which built AppyInvoice v1;
+  - Story Pilot was merged and went live;
+  - extension-core 0.2.0 (G1, app-door calls) is live, and Send-to-Teletubby has been proven (see the orch checkpoint).
 
 ## Gotchas learned here
 
