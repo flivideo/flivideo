@@ -15,13 +15,15 @@ David, relayed by flivideo-arch-rsch: **"Rebuild FliHub. It's fine."** This doc 
 - the look-and-feel artifact is for David to pick from;
 - the migration-risk list below covers what must not break at cut-over.
 
-**Hard requirement: the rebuilt FliHub has a JSON-RPC door.** Extensions, starting with B-roll capture, depend on it.
+**Hard requirement: the rebuilt FliHub has a JSON-RPC door**, so FliStudio and FliStudio's extensions can reach it. **FliHub hosts no extensions.** David: microapps don't have extensions; extensions belong to the root app, FliStudio, only.
+
+**The rebuild rule (David): "we can drop shit, but we're not changing shit."** Today's app works very well for him. Every kept feature keeps its behaviour exactly: the same actions, the same buttons, the same flow. No kept action is redesigned or renamed. A rebuild is not new features.
 
 **Recommended shape:**
 - A slim FliHub on AppyStack, with the door from day one.
-- It carries the 18 "keep" items and today's on-disk formats.
-- It does not port the 16 "drop" items.
-- The 21 "unsure" items wait for David's rulings.
+- It carries the 19 "keep" items, behaviour unchanged, and today's on-disk formats.
+- It does not port the 26 "drop" items.
+- The 10 "unsure" items wait for David's rulings, which flivideo-arch-rsch is collecting section by section.
 - It is built beside the live app and cut over after one real recording day.
 
 ### The evidence for that scope
@@ -40,12 +42,12 @@ David, relayed by flivideo-arch-rsch: **"Rebuild FliHub. It's fine."** This doc 
 
 | | Count |
 |---|---|
-| **Keep** | **18** |
-| **Drop** | **16** |
-| **Unsure** | **21** |
+| **Keep** | **19** |
+| **Drop** | **26** |
+| **Unsure** | **10** |
 | Total review items | 55 (features, grouped from 165 routes, 14 screens, ~40 panels, 9 watchers, 4 background jobs, ~30 on-disk writers) |
 
-"Keep" needs evidence of use: a commit since August from live use, David's own words, or a live dependent. "Drop" needs evidence that it is dead, deprecated by David, or now owned by another app. Everything else is **unsure**, even when it looks obvious.
+Counts are as of David's 2026-10-30 rulings (Q2, Q5–Q10, S1); they were 18 / 16 / 21 before them. "Keep" needs evidence of use: a commit since August from live use, David's own words, or a live dependent. "Drop" needs evidence that it is dead, deprecated by David, or now owned by another app. Everything else is **unsure**, even when it looks obvious.
 
 ## How much of FliHub there is
 
@@ -78,8 +80,7 @@ David, relayed by flivideo-arch-rsch: **"Rebuild FliHub. It's fine."** This doc 
 |---|---|---|---|
 | **JSON-RPC door + OpenRPC** | No door. 165 REST routes, a hand registry listing 34, ad-hoc errors (353 `success:false` sites) | One capability core with named verbs (`takes.promote`, `segments.op`, `transcription.redo`…), a generated `api/openrpc.json` with `--check`, refusals as data | **The template does not ship the door.** `appystack/template/server/src/routes` has only `health` and `info`. The door is FliStudio's (`server/src/capabilities/`, 127 methods). A rebuild ports FliStudio's pattern, or the pattern is first extracted into a shared package. That extraction is a finding for the suite, not FliHub's job |
 | **Template tooling** | No husky, no lint-staged, no `@appydave/appystack-config`, no depcruise, no Playwright e2e; CI red on every push (git+ssh fli-core); lint baseline has known errors | husky + lint-staged, shared eslint/ts/prettier presets, depcruise fences, Playwright e2e, helmet, rate limiter, request logger, tested shutdown and listen-error | FliHub has no log file: output goes only to the Overmind pane. Template pino + a `.logs/` file fixes the "silent failures leave no trail" rule in CLAUDE.md |
-| **Extension seam (required: B-roll depends on it)** | No way to add a capability without editing the spine; B-roll was a branch inside `POST /api/rename` | The spine is the core, and extensions add namespaced verbs on the door (e.g. `broll.capture`, `broll.tag`) through a declared entry, fenced by depcruise | **`@flivideo/extension-core` is FliStudio-host-specific** (`ExtensionHost`, `HostKit`, FliStudio's stage keys). FliHub v2 needs either a host-neutral extension-core (a suite change: a finding for flivideo-orch, not FliHub's job) or its own thin host that follows the same rules (namespaced verbs, entry-only imports, conformance test). Decide this before the build starts, because the door's shape follows from it |
-| **Fenced tabs (extension-core pattern)** | Tabs share state through `App.tsx` props; North Star measured 4 `groupByChapter` copies and 15 hand-rolled modals | The spine as the core; each surviving tab (e.g. MicCheck, if kept) as a fenced module that depcruise forbids from reaching into the spine | `@flivideo/extension-core` itself is FliStudio-host-specific (`ExtensionHost`). FliHub would borrow the **rules** (namespaced verbs, entry-only imports, conformance test), not the package. Alternatively, a kept tab becomes a FliStudio extension instead |
+| **Fenced modules (inside FliHub, not extensions)** | Tabs share state through `App.tsx` props; North Star measured 4 `groupByChapter` copies and 15 hand-rolled modals | The spine (capture, takes, transcription, watch) as separate modules that depcruise forbids from reaching into each other's internals | Plain module boundaries, not an extension system: David ruled that microapps have no extensions |
 | **Marker + upgradability** | No `appystack.json`; drifts silently from the template | `appystack.json` marker, `lastUpgrade`, template-sync | The orch checkpoint banks "the AppyStack and AppyTron upgrade tools are unsafe" as a follow-up. Upgradability is real only after that is fixed |
 | **Agent-drivable** | The one FliVideo satellite an agent can't drive | Door + CLI + skill generated from OpenRPC, in line with FliCut, FliCast and FliStudio | Lets the D04-style autopilot run promote, segment and redo-transcript without a browser |
 
@@ -98,7 +99,7 @@ What must not break when v2 replaces v1. Owners and evidence are in Appendix D.
 | Transcripts | two JSON shapes (old whisper, FliTools `flitools.transcript/<n>`); `engines/<base>.<engine>.*` copies; `.txt` written last = done | carry the engine copies on every move; check `schema` before reading | AGENT-NOTES; FliTools `service.ts:340-374` |
 | `fli.words.json` | project, brand and global word stores | write through fli-core only | `routes/state.ts:268-304` |
 | `-trash/` | including FliTools' `-trash/<date>-pre-flitools/`; T7 rsync excludes it | same folder name; trash pill counts what empty removes | David ruling 2026-09-23 |
-| Global config | `server/config.json`: 36 stage overrides and 2 priorities keyed by bare folder name, plus `glingDictionary` | don't migrate stage/priority (FliStudio owns stages); import the 24 Gling words once (Q9) | Appendix C §4 |
+| Global config | `server/config.json`: 36 stage overrides and 2 priorities keyed by bare folder name, plus `glingDictionary` | don't migrate stage/priority (FliStudio owns stages); drop `glingDictionary` (Q9). FliStudio's `words.import-flihub` loses its source, so flivideo-orch should decide whether to run that import once before cut-over | Appendix C §4 |
 | Legacy leftovers | `recording-shadows/` (56 T7), `-safe/` (2 T7), `-chapters/` (3 T7), `edit-*` (33 T7) | ignore; never write | Appendix C §4 |
 
 ### 2. Live dependents (FliStudio, FliTools, FliCut, FliEdit)
@@ -141,32 +142,30 @@ No external listener. FliStudio, FliDeck, FliGen, FliVoice, Storyline and AngelE
 - **Scope gravity.** North Star §1 measured a tab going from portable to coupled in four hours (MicCheck). Write the depcruise fence on day one, or v2 regrows v1.
 - **Unanswered unsure items become silent drops.** Hold/archive (H1) has no other home today. Leave it in v1, which stays runnable for storage, until Q3 is ruled.
 
-## Decisions only David can make
+## David's rulings (2026-10-30, relayed by flivideo-arch-rsch)
 
-Each has a recommendation. Q1–Q4 and Q6 shape the build; the others can be answered as the work reaches them. A new one comes first:
+| # | Question | Ruling |
+|---|---|---|
+| — | Rebuild? | **Rebuild.** "Rebuild FliHub. It's fine." |
+| Rule | How much may change? | **"We can drop shit, but we're not changing shit."** Every kept feature keeps its exact behaviour, buttons and flow; no kept action is redesigned or renamed. A rebuild is not new features |
+| Q0 | Extension host for FliHub? | **None.** Extensions belong to FliStudio (the root app) only. FliHub v2 has no extension seam. Reasons: two foundations (AppyStack and AppyTron), scope creep, and no clear owner if a FliStudio extension needed a FliHub extension. FliHub v2 must have its JSON-RPC door so FliStudio and its extensions can reach it. *(This overrides flivideo-orch's earlier Q0 ruling for a host-neutral extension-core. The G1 gap, an extension calling another app's door by name, is still flivideo-orch's to decide on its own merits.)* |
+| Q1 | How big is v2.0? | **Pending.** David is answering item by item (S1–V8) with flivideo-arch-rsch |
+| Q2 | Who opens or changes projects? | **FliStudio only, for now.** A guideline, not a ruling: if it is ever overridden, it has to be overridden holistically across the suite |
+| Q3 | Hold / archive / T7 | **Pending.** David wants a clearer explanation first |
+| Q4 | Look and feel | **Redo the artifact:** first an exact replica of today's FliHub (two main panels: Incoming and Recordings), then three *improved variations* of it, not three new designs. "It looks shit in some respects… but it works really well for me." Done: see Artifacts |
+| Q5 | MicCheck | **Not FliHub's.** MicCheck, the sound-level tools and old mic-check artifacts (some may be on Roamy) are future FliStudio setup extensions. Out of v2 |
+| Q6 | B-roll | **Out of scope entirely.** Not a FliHub extension either. B-roll capture may live in FliHub one day as a normal feature, but not in this rebuild. FliStudio's third extension will probably be a "B-roll pilot" |
+| Q7 | Renumber / swap chapters | **Keep and design cleanly into v2's segment ops.** Don't preserve the old tools; don't conform to older videos' naming conventions |
+| Q8 | Assets, Inbox, Thumbs, Transcripts tab, POEM/AWB/YLO send | **Drop all** |
+| Q9 | Gling | **Gone.** That's FliCut's job. Drop it (and the one-time word import is no longer a requirement unless FliStudio still wants it) |
+| Q10 | Shadows | **Gone.** Drop |
+| S1 | Recording source | **Design for a configurable recording source:** Ecamm today, possibly OBS later, each with its own watch folder and file-naming rules (a small rules set per source). **Open:** David thinks the folder config is probably global (not FliHub-only, not per brand). No OBS on the machine and no testing planned: design for it, don't build OBS support |
 
-| # | Decision | Recommendation | For | Against |
-|---|---|---|---|---|
-| Q0 | **RULED 2026-10-30 by flivideo-orch: host-neutral extension-core, made before the FliHub build starts. The same change fixes G1 (an extension calling another app's door by name). Owner: flivideo-orch, after Story Pilot merges.** Original question, extension host for FliHub v2: make `@flivideo/extension-core` host-neutral, or give FliHub its own thin host following the same rules? | **Host-neutral extension-core**, as a suite change owned by flivideo-orch, decided before the FliHub build starts | One extension contract across FliStudio and FliHub; B-roll could later also show in FliStudio | A change to a package FliStudio and Overlay Pilot already use; it delays the FliHub start |
+### What the rulings mean for the build
 
-Evidence for Q0: `ExtensionHost` (`flistudio/extension-core/src/server.ts:21-36`) carries FliStudio and Overlay Pilot specifics (a `renderScript` that defaults to `modules/overlay-pilot/render/render.py`, FliTools polling), and `STAGES` is FliStudio's pipeline (`descriptor.ts:11`). The orch checkpoint already banks a related gap, G1: "ExtensionHost can't reach another app's door".
-
-
-
-| # | Decision | Recommendation | For | Against |
-|---|---|---|---|---|
-| Q1 | ~~Rebuild, refresh or leave?~~ **Decided 2026-10-30: rebuild.** Open part: **how big is v2.0?** | **The spine only** (18 keep items) plus the door and an extension seam, built beside the live app | Small, well-evidenced scope; v1 keeps running until v2 passes a recording day | A second FliHub exists for a while; the dependents in the migration-risk list must be checked at cut-over |
-| Q2 | **Who opens projects?** FliStudio only, or FliHub too (brand switcher, project dropdown, Projects tab)? | **FliStudio only.** FliHub opens on what FliStudio sends through `/api/context`, with a minimal recent-projects picker at most | Removes C2–C6 and their bugs; one owner for identity | Opening FliHub always needs FliStudio up (or a launch arg) |
-| Q3 | **Hold / archive / T7: where does it live?** | **Out of FliHub, into FliStudio**, as part of the project lifecycle. Park it until then; v1 stays the tool for it meanwhile | FliStudio already owns project identity and the brand roots; H2 shows the FliHub version is confused | FliStudio gains a big, data-moving feature; until it lands, storage stays in v1 |
-| Q4 | **Which look** for v2? | **Direction A, "Recording desk"** (see the look-and-feel artifact) | Built for the foot-pedal loop; everything else is a tab | Least like FliStudio; B or C read more like the suite |
-| Q5 | **MicCheck**: keep in FliHub, or move to Teletubby's setup panel? | **Move to Teletubby** (or leave in v1 until then) | It is a pre-recording check; Teletubby is the pre-recording screen | Teletubby gains a server API and a socket stream |
-| Q6 | **B-roll capture** (B659: b-roll as tagged segments, plus pinned/locked chapters): how does it arrive? | **As the first FliHub extension, on the door, straight after v2.0.** v2.0 ships the door and the extension seam; pinned chapters go in the spine's chapter model | Proves the extension seam on a real need; the old FR-161 lane (a branch inside promote) is dropped either way | Needs the extension-host decision (host-neutral extension-core, or FliHub's own thin host) before the build |
-| Q7 | **Older manage tools** (renumber / swap chapters without guard or journal) | **Fold into guarded segment ops**; don't port the unguarded paths | One safe path; swap-chapters currently strands titles | A swap-chapters verb must be designed into segment ops |
-| Q8 | **Assets, Inbox, Thumbs, POEM/AWB/YLO send, Transcripts tab**: still used? | **Drop all from FliHub.** Inbox writes go to FliStudio resources | Zero commits since March; FliStudio covers each | If one is used weekly, it's missed on cut-over day |
-| Q9 | **Gling**: retired? | **Yes, retire.** Import the 24 `glingDictionary` words into the suite word store once | FliCut does the cutting; removes FliStudio's read of FliHub's config | None known |
-| Q10 | **Shadows strip-out** (56 T7 projects) | **Approve the strip-out** already inventoried in `flihub/docs/deprecation/shadow-recordings-inventory.md`; v2 never reads `recording-shadows/` | Ends the Jan-era cluster | Restores of old projects carry dead folders until cleaned |
-
-Smaller yes/no questions are on the review artifact, one per unsure item.
+- **The behaviour spec is today's app.** For every kept item, the acceptance test is "does the same thing as v1 did", screen by screen. The exceptions are Q7 (renumber/swap redesigned into segment ops) and the recording-source config (S1).
+- **Recording source (S1)** replaces today's hard-wired Ecamm watcher (`server/src/watcher.ts:18` hard-codes `*.{mov,mp4}`; `watchDirectory` in `server/config.json`). Suggested shape, for David to confirm: a list of sources, each with `{ id, label, watchFolder, filePattern, nameRules }`, Ecamm being the only one filled in. If the config is global, it belongs with the suite's machine settings (`~/.fli/machine.json` via fli-core, already read by FliHub), not in `server/config.json`. That is a fli-core question for flivideo-orch.
+- **Open for David:** the remaining unsure items (see the item list) and Q3.
 
 ## Live defects found (not fixed: discovery only)
 
@@ -187,24 +186,23 @@ Smaller yes/no questions are on the review artifact, one per unsure item.
 
 ## Artifacts
 
-- **Keep/drop review** (scan and answer, with Copy my answers): https://claude.ai/artifact/HYvB1rML8Axki1D3LKYvRN. Generated from the item list below.
-- **Look-and-feel directions** for v2 (A Recording desk · B Take timeline · C Suite sibling): https://claude.ai/artifact/C5tDAED5yB5RXSJsE3dba6
+- **Look and feel (redone 2026-10-30):** https://claude.ai/artifact/C5tDAED5yB5RXSJsE3dba6. Today's FliHub exactly (real screenshots plus a faithful replica with takes in it), then three improved variations of the same two panels. Variations: 1 cleaned up (recommended), 2 denser, 3 in FliStudio's colours. All three keep every kept action's name, button and position (the rebuild rule); 2 and 3 can be layered on 1.
+- ~~Keep/drop review~~ (https://claude.ai/artifact/HYvB1rML8Axki1D3LKYvRN): **retired.** David found the short labels unreadable. flivideo-arch-rsch is walking him through the items instead. No new review artifact until he asks.
 
 ## Item list (55)
 
-Columns: id · area · item · where · verdict · evidence · question/note.
+Verdicts as of David's 2026-10-30 rulings: keep 19 · drop 26 · unsure 10. Items marked RULED quote the ruling.
 
-
-| id | area | item | where | verdict | evidence | question / note |
+| id | area | item | where | verdict | evidence | ruling / question / note |
 |---|---|---|---|---|---|---|
-| S1 | Capture spine | Ecamm folder watcher + Incoming queue (file:new / file:deleted, replay on connect) | server/src/watcher.ts:9-75 · server/src/index.ts:130-195,396 | **keep** | David 2026-10-28 (B659): "any recordings coming into Ecamm Live go into FliHub". North Star §1 sentence. FR-174 commits 10-25/26. |  |
+| S1 | Capture spine | Ecamm folder watcher + Incoming queue (file:new / file:deleted, replay on connect) | server/src/watcher.ts:9-75 · server/src/index.ts:130-195,396 | **keep** | David 2026-10-28 (B659): "any recordings coming into Ecamm Live go into FliHub". North Star §1 sentence. FR-174 commits 10-25/26. | RULED (David, S1): design for a configurable recording source: Ecamm today, possibly OBS later, each with its own watch folder and file-naming rules. Whether that config is global or FliHub-only is open. Design for OBS but don't build or test it. |
 | S2 | Capture spine | Naming + promote a take (POST /api/rename, suggested naming, NamingControls) | server/src/routes/index.ts:209-318 · client/src/components/NamingControls.tsx | **keep** | North Star §1 "promotes the one you pick". Incoming area: 7 handler commits since June. |  |
 | S3 | Capture spine | Incoming card actions: Rename·Keep / Rename·Discard / Discard, Send several, DiscardModal | client/src/components/FileCard.tsx · SendSeveralBar.tsx · DiscardModal.tsx · App.tsx:471 | **keep** | FR-174 shipped 2026-10-25/26 (9e6917e, a00c656, 9d58e4a) from David's live use. |  |
 | S4 | Capture spine | Take checks: aspect mismatch + sound-hole (digital-zero dropout) probes | server/src/index.ts:141-170 · utils/aspectCheck.ts · utils/soundHoles.ts:114 | **keep** | Built Sep 23–Oct 4 after real failures; North Star v2 principle "absence and success must never look the same". |  |
 | S5 | Capture spine | Trash-incoming to -trash/ (POST /api/trash) | server/src/routes/index.ts:409-445 | **keep** | Part of the record-dislike-record loop (North Star §1). | The route comment says .trash/ but the code uses paths.trash (-trash/). Comment is stale; behaviour is fine. |
 | T1 | Takes & chapters | Recordings view by chapter: inline rename, renumber, split, + tag | client/src/components/RecordingsView.tsx (1,744 lines) | **keep** | Most active screen: 19 commits since June (latest 10-12). B659: "route them to chapters and segments". |  |
 | T2 | Takes & chapters | Guarded segment ops + undo journal (POST /api/segments/op, preview, undo) | server/src/routes/segments.ts:77-132 · utils/segmentOps.ts:228-244,531,964 | **keep** | CT-0107 (10-08). Refuses while a FliCut cut names the take; the only safe renumber path (AGENT-NOTES). |  |
-| T3 | Takes & chapters | Older bulk rename / renumber / swap-chapter tools (/api/manage/*, 12 routes) | server/src/routes/manage.ts:178-1059 | **unsure** | 6 commits since June, but these paths have no FliCut guard and no journal (AGENT-NOTES), and swap-chapters leaves FR-157 titles behind (archaeology). | Fold renumber/swap into guarded segment ops, or keep as power tools? |
+| T3 | Takes & chapters | Older bulk rename / renumber / swap-chapter tools (/api/manage/*, 12 routes) | server/src/routes/manage.ts:178-1059 | **keep** | 6 commits since June, but these paths have no FliCut guard and no journal (AGENT-NOTES), and swap-chapters leaves FR-157 titles behind (archaeology). | RULED (David, Q7): renumber and swap are useful; design them cleanly into v2 segment ops. Don't preserve the old tools and don't conform to older videos' naming. Earlier note: Fold renumber/swap into guarded segment ops, or keep as power tools? |
 | T4 | Takes & chapters | Safe / park a take | client/src/hooks/useRecordingsApi.ts (useMoveToSafe, useParkRecording) · utils/safeMigration.ts | **unsure** | Park is used by Watch (WatchPage). No commit or voice evidence that David parks takes. | Do you park takes, or is trash + keep enough? |
 | T5 | Takes & chapters | Chapter + project YouTube titles (FR-157, PUT …/title) | server/src/routes/state.ts · client InlineTitle | **keep** | ylo-titles and ylo-description skills write them; FliStudio reads them (assets.ts:233). |  |
 | T6 | Takes & chapters | Ships: one video vs one per chapter (FR-168) | server/src/routes/state.ts · client ShipsSelector | **unsure** | One feature commit (2026-09-08); FliStudio owns video identity now. | Does FliHub still need to know ships, or does FliStudio? |
@@ -216,34 +214,34 @@ Columns: id · area · item · where · verdict · evidence · question/note.
 | W3 | Watch & playback | Dictionary quick-add in the player → fli.words.json | server/src/routes/state.ts:268-304 · DictionaryQuickAdd | **keep** | Project word list 2026-10-04 (editing pass item 16, David). FliCut/FliTools consume the word store. | Data stays in fli-core's word store; FliHub just writes through it. |
 | X1 | Transcription | Queue takes to FliTools + pass-2 upgrade poller + transcript follows renames | server/src/routes/transcriptions.ts:184-483 · utils/flitoolsClient.ts:73 · utils/transcriptFollow.ts | **keep** | B584 (David 2026-09-27): FliTools transcribes, FliHub queues. B659: "transcribe them on the fly as I record". 6 commits since June. |  |
 | X2 | Transcription | Redo transcript ↻ per take, health / suspect flags | RecordingsView.tsx · transcriptions.ts:291 | **keep** | Shipped 10-12. FliCut tells the user "redo it in FliHub ↻" (flicut transcript-warning.ts:59). |  |
-| X3 | Transcription | Transcripts tab (queue + list page) | client/src/components/TranscriptionsPage.tsx | **unsure** | 0 commits since 2026-03-24. FliStudio has a transcription view + queue (capabilities/transcription.ts). | Do you open this tab, or watch progress on the take rows? |
+| X3 | Transcription | Transcripts tab (queue + list page) | client/src/components/TranscriptionsPage.tsx | **drop** | 0 commits since 2026-03-24. FliStudio has a transcription view + queue (capabilities/transcription.ts). | RULED (David, Q8): drop the Transcripts tab. Earlier note: Do you open this tab, or watch progress on the take rows? |
 | X4 | Transcription | Transcript viewers + combine-chapter (writes NN-chapter.txt) | TranscriptModal.tsx · VideoTranscriptModal.tsx · transcriptions.ts:739 | **unsure** | No recent commits; FliStudio's video.text gives the best transcript per video. |  |
 | X5 | Transcription | Transcription telemetry JSONL (local only) | server/src/utils/telemetry.ts:17-70 | **unsure** | Sends nowhere. 1,287 lines, 140 of them test pollution from temp dirs. |  |
 | C1 | Open contract & brand | Open-contract door: POST/GET /api/context, launch args, context:changed, refused banner | server/src/routes/context.ts · utils/openContext.ts · ContextRefusedBanner | **keep** | FliStudio's ONLY live HTTP call into FliHub (flistudio launch/doors.ts:148-168). 4 commits since June. |  |
-| C2 | Open contract & brand | In-app brand switcher (GET /api/brands, POST /switch) | client/src/components/BrandSwitcher.tsx · server/src/routes/brands.ts | **unsure** | FliStudio picks the brand and launches FliHub on it. No evidence whether David also switches inside FliHub. | If FliStudio always opens FliHub on the right project, can the switcher go? |
-| C3 | Open contract & brand | Project dropdown + pinned projects | App.tsx:497-584 · config.projectPriorities | **unsure** | 2 pinned projects in config. Same question as the brand switcher. |  |
-| C4 | Open contract & brand | Projects tab: list, stages, priority, disk scan, new-project form | client/src/components/ProjectsPanel.tsx · NewProjectForm.tsx · routes/projects.ts | **drop** | FliStudio owns project list, create, codes, adopt, rename and the pipeline strip (Projects.tsx, estate/projects.ts). AGENT-NOTES: adoption is FliStudio's job. | Move "open a project" to FliStudio; FliHub keeps a minimal picker at most. |
+| C2 | Open contract & brand | In-app brand switcher (GET /api/brands, POST /switch) | client/src/components/BrandSwitcher.tsx · server/src/routes/brands.ts | **drop** | FliStudio picks the brand and launches FliHub on it. No evidence whether David also switches inside FliHub. | RULED (David, Q2 guideline): FliStudio is the only thing that opens or changes projects. Earlier note: If FliStudio always opens FliHub on the right project, can the switcher go? |
+| C3 | Open contract & brand | Project dropdown + pinned projects | App.tsx:497-584 · config.projectPriorities | **drop** | 2 pinned projects in config. Same question as the brand switcher. | RULED (David, Q2 guideline): FliStudio opens projects. |
+| C4 | Open contract & brand | Projects tab: list, stages, priority, disk scan, new-project form | client/src/components/ProjectsPanel.tsx · NewProjectForm.tsx · routes/projects.ts | **drop** | FliStudio owns project list, create, codes, adopt, rename and the pipeline strip (Projects.tsx, estate/projects.ts). AGENT-NOTES: adoption is FliStudio's job. | RULED (David, Q2 guideline): FliStudio opens and changes projects. Earlier note: Move "open a project" to FliStudio; FliHub keeps a minimal picker at most. |
 | C5 | Open contract & brand | Stage overrides + priorities in global server/config.json | server/src/utils/projectStats.ts:160 · config.projectStageOverrides (36) | **drop** | Live finding L5: 47% dead; keyed by bare folder name so they bleed across brands; David shelves by moving the folder, so shelved/archived chips always show zero. |  |
 | C6 | Open contract & brand | Project codes high-water + GET /api/projects/next-code (a GET that writes config) | server/src/routes/index.ts:463-468 · utils/nextProjectCode.ts | **drop** | FliStudio allocates codes (estate/projects.ts allocateCode). The stored mark already lags (d05 vs d13). |  |
-| C7 | Open contract & brand | Delete a whole project (DELETE /api/projects/:code, type-to-confirm) | server/src/routes/projects.ts:728 · ProjectDeleteModal | **unsure** | Destructive; FliStudio has no delete-project verb. No evidence of use. | Should project delete live in FliStudio, or nowhere? |
+| C7 | Open contract & brand | Delete a whole project (DELETE /api/projects/:code, type-to-confirm) | server/src/routes/projects.ts:728 · ProjectDeleteModal | **drop** | Destructive; FliStudio has no delete-project verb. No evidence of use. | RULED (David, Q2 guideline): changing a project is FliStudio's job. Earlier note: Should project delete live in FliStudio, or nowhere? |
 | C8 | Open contract & brand | Brand config editor (fli.brand.json publish block) | client/src/components/ConfigPanel.tsx:1063 · utils/managedBrandConfig.ts:33-81 | **drop** | FliStudio's BrandPublishPanel writes the same file. Two writers caused the W8 race; the suite rule is "the owning app is the only writer". |  |
 | R1 | Trash | Header trash pill: count + empty -trash/ (shows ? when unreadable) | client TrashIndicator · server/src/routes/projects.ts:665 · utils/safeDelete.ts:83 | **keep** | David ruling 2026-09-23: trash must stay visible and emptiable (AGENT-NOTES). |  |
 | H1 | Storage (T7) | Hold / restore / archive / unarchive / batch-offload (17 routes) + Storage panel + T7 pill | server/src/routes/hold.ts · storage.ts · client StoragePanel · SsdIndicator | **unsure** | 1 commit since June. David: "I don't know where to find anything for doing the archives… there's no unified approach." No FliStudio equivalent exists. | Where should hold/archive live: FliHub, FliStudio, or a separate storage tool? |
 | H2 | Storage (T7) | Storage panel's Hold button (answered by the wrong handler) | hold.ts:86 shadows storage.ts:167 (mount order index.ts:358/362) · client useStorageApi.ts:77 | **drop** | Verified by code: the panel toasts "Held heavy files to T7" but gets the B064 whole-project copy with no local delete. The storage.ts handler is dead code. | Whatever H1 decides, this duplicate must not be carried. |
 | H3 | Storage (T7) | Activity log ~/.flihub/storage-activity.jsonl | server/src/utils/storageActivityLog.ts:23-33 | **unsure** | 1 line on this machine. | Goes with H1. |
-| D1 | Deprecated cluster | B-roll lane (FR-161): b-roll/ folder, B-Roll tab, promote branch | routes/index.ts:211-278,557,580 · video.ts:56 · BRollPage.tsx | **drop** | David deprecated it 2026-09-22 (archaeology). | B659's new idea (b-roll as tagged chapter-1 segments) is a different feature: see question Q6. |
+| D1 | Deprecated cluster | B-roll lane (FR-161): b-roll/ folder, B-Roll tab, promote branch | routes/index.ts:211-278,557,580 · video.ts:56 · BRollPage.tsx | **drop** | David deprecated it 2026-09-22 (archaeology). | RULED (David, Q6): B-roll is out of scope entirely. "Rebuild is not new features." Earlier note: B659's new idea (b-roll as tagged chapter-1 segments) is a different feature: see question Q6. |
 | D2 | Deprecated cluster | Chapter video generation (FR-58/131), 4 routes, 2+2 answer 410 | server/src/routes/chapters.ts:35-53 · manage.ts:317 | **drop** | Already 410 since 2026-09-15. |  |
 | D3 | Deprecated cluster | FR-126 edit-folder manifest | server/src/utils/editManifest.ts:199-243 · developer.ts:57 | **drop** | Zero writers; setEditManifest has zero callers; useManifestStatus has zero callers. |  |
 | D4 | Deprecated cluster | Edit folders create (edit-1st/2nd/final) | server/src/routes/edit.ts:118,147 | **drop** | Never defined in code (docs/architecture/edit-folders.md); FliCut now owns first/second/final edits. |  |
-| D5 | Deprecated cluster | recording-shadows/ residual handling | utils/renameRecording.ts · utils/storageTree.ts:23 | **unsure** | 56 T7 projects still have shadow folders. AGENT-NOTES: don't touch until David rules on the strip-out. | Rule on the shadow strip-out (inventory ready in docs/deprecation/). |
+| D5 | Deprecated cluster | recording-shadows/ residual handling | utils/renameRecording.ts · utils/storageTree.ts:23 | **drop** | 56 T7 projects still have shadow folders. AGENT-NOTES: don't touch until David rules on the strip-out. | RULED (David, Q10): shadows are gone. Earlier note: Rule on the shadow strip-out (inventory ready in docs/deprecation/). |
 | D6 | Deprecated cluster | Startup -safe/ migration (FR-111) | server/src/index.ts:416-433 · utils/safeMigration.ts | **unsure** | No -safe/ left locally; 2 legacy T7 projects still have one and would trip it on restore. |  |
-| A1 | Other tabs | Assets tab: assign images to chapter slots, prompts, clipboard paste (12 routes, 2 watchers) | server/src/routes/assets.ts · client AssetsPage.tsx (1,462 lines) | **unsure** | 0 commits since March. FliStudio has resources/assets. The flihub skill's images-command still reads /api/query/…/images. | Still used? If yes, FliHub or FliStudio? |
-| A2 | Other tabs | Thumbs tab: import thumbnails from a ~/Downloads zip, reorder (8 routes, zip watcher) | server/src/routes/thumbs.ts · ThumbsPage.tsx | **drop** | 0 commits since March. FliStudio owns thumbnails (ThumbPool, launch/publish). |  |
-| A3 | Other tabs | Inbox tab + POST /api/projects/:code/inbox/write | server/src/routes/projects.ts:787-791 · InboxPage.tsx | **unsure** | 0 commits since March, but the flihub skill's write-command still writes here. | Retire the inbox in favour of FliStudio resources? |
+| A1 | Other tabs | Assets tab: assign images to chapter slots, prompts, clipboard paste (12 routes, 2 watchers) | server/src/routes/assets.ts · client AssetsPage.tsx (1,462 lines) | **drop** | 0 commits since March. FliStudio has resources/assets. The flihub skill's images-command still reads /api/query/…/images. | RULED (David, Q8): drop Assets. Earlier note: Still used? If yes, FliHub or FliStudio? |
+| A2 | Other tabs | Thumbs tab: import thumbnails from a ~/Downloads zip, reorder (8 routes, zip watcher) | server/src/routes/thumbs.ts · ThumbsPage.tsx | **drop** | 0 commits since March. FliStudio owns thumbnails (ThumbPool, launch/publish). | RULED (David, Q8): drop Thumbs. |
+| A3 | Other tabs | Inbox tab + POST /api/projects/:code/inbox/write | server/src/routes/projects.ts:787-791 · InboxPage.tsx | **drop** | 0 commits since March, but the flihub skill's write-command still writes here. | RULED (David, Q8): drop Inbox. Earlier note: Retire the inbox in favour of FliStudio resources? |
 | A4 | Other tabs | Final media + YouTube chapter SRT + LLM chapter verify (6 routes) | server/src/routes/projects.ts · utils/finalMedia.ts · llmVerification.ts | **drop** | Only UI was ProjectStatsPopup, which is never mounted. FliStudio publish/launch owns chapters and finals. |  |
-| A5 | Other tabs | POEM WUI / AWB / YLO send (7 routes, PoemWuiPage) | server/src/routes/poem-wui.ts · client PoemWuiPage | **unsure** | 0 UI commits. YLO is now a Claude plugin; the brand-config part moved to FliStudio (C8). | Do you still send to POEM/AWB/YLO from FliHub? |
-| A6 | Other tabs | Gling edit prep + glingDictionary | server/src/routes/edit.ts:72-76 · config.glingDictionary (24 words) | **unsure** | FliCut now cuts (B659). But FliStudio's words.import-flihub reads glingDictionary from FliHub's config. | Is Gling retired? If so, import the 24 words into fli.words once, then drop. |
-| A7 | Other tabs | MicCheck tab + server API + query + skill command | client MicCheckPage.tsx · server/src/routes/miccheck.ts · utils/micCheckStore.ts | **unsure** | Built 2026-08-26..29; 3 saved sessions. North Star: it was portable for 4 hours, then coupled. Could live in Teletubby's setup panel. | Keep MicCheck in FliHub, or move it? |
+| A5 | Other tabs | POEM WUI / AWB / YLO send (7 routes, PoemWuiPage) | server/src/routes/poem-wui.ts · client PoemWuiPage | **drop** | 0 UI commits. YLO is now a Claude plugin; the brand-config part moved to FliStudio (C8). | RULED (David, Q8): drop POEM/AWB/YLO send. Earlier note: Do you still send to POEM/AWB/YLO from FliHub? |
+| A6 | Other tabs | Gling edit prep + glingDictionary | server/src/routes/edit.ts:72-76 · config.glingDictionary (24 words) | **drop** | FliCut now cuts (B659). But FliStudio's words.import-flihub reads glingDictionary from FliHub's config. | RULED (David, Q9): Gling is gone; that is FliCut's job. Earlier note: Is Gling retired? If so, import the 24 words into fli.words once, then drop. |
+| A7 | Other tabs | MicCheck tab + server API + query + skill command | client MicCheckPage.tsx · server/src/routes/miccheck.ts · utils/micCheckStore.ts | **drop** | Built 2026-08-26..29; 3 saved sessions. North Star: it was portable for 4 hours, then coupled. Could live in Teletubby's setup panel. | RULED (David, Q5): MicCheck, the sound-level tools and old mic-check artifacts are not FliHub's; they are future FliStudio setup extensions. Earlier note: Keep MicCheck in FliHub, or move it? |
 | V1 | Dev tools & config | API Explorer + hand-written apiRegistry | client/src/components/ApiExplorer.tsx · shared/apiRegistry.ts | **drop** | Lists 34 of 165 routes. A generated OpenRPC door replaces it by design. |  |
 | V2 | Dev tools & config | Mockups page | client/src/components/MockupsPage.tsx | **drop** | Static links; two cards point at removed features (Sync Hub, Relay). |  |
 | V3 | Dev tools & config | Developer drawer (state / config / telemetry JSON viewer) | client/src/components/DeveloperDrawer.tsx · routes/developer.ts | **unsure** | 0 commits since March. The door's read verbs would cover it. |  |
@@ -252,7 +250,6 @@ Columns: id · area · item · where · verdict · evidence · question/note.
 | V6 | Dev tools & config | Read-only query API /api/query/* (15 routes) | server/src/routes/query/* | **keep** | The flivideo:flihub skill (12 command docs), brand-dave gather/current-deck and the teletubby skill call it. | In v2 these become door verbs; skills are re-pointed. |
 | V7 | Dev tools & config | Dead socket events file:renamed / file:error | shared/types.ts:542-585 · client useSocket.ts:60,95 | **drop** | Declared and subscribed, never emitted. |  |
 | V8 | Dev tools & config | Header ··· actions (copy path, open in Finder) + connection dot | App.tsx:509-539,1026 · routes/system.ts | **keep** | Small, used on every project; FliStudio has path.reveal for the same need. |  |
-
 
 ---
 
