@@ -8,6 +8,11 @@
 
 ## Current step
 
+**2026-10-30 ~19:40 — FliHub rebuild PARKED by David** (via flivideo-arch-rsch). Spec:
+`/Users/davidcruwys/dev/ad/flivideo/docs/flihub-rebuild-spec-parked-2026-10-30.md` (flivideo 2dd162a), filed on
+AppyDave d17-flihub-rebuild (resource r_2667e860b6). Do NOT write a v2 build brief until David resumes. FliHub v1 untouched.
+Teletubby tubby-panel merged to main 1e2e2ec (gates reproduced 440/11); restart waits for FliStudio tubby-lands.
+
 **2026-10-30 ~19:20 — David GO "all three" (via brains-d5).** Builders launched (tmux + iTerm2):
 `tubby-land-dev` (FliStudio worktree `flistudio-worktrees/tubby-lands`, branch `tubby-lands`: stage_select door for
 switchTo + story.script.send, "here" dot reads workspace.position, Overlay Pilot posters/click-to-play, capability
