@@ -8,25 +8,33 @@
 - It builds on, and does not repeat, `flihub/docs/rebuild-2026/` (North Star, requirements archaeology, live-app findings, agent-drivable audit). Where those docs and this one disagree, this one is newer. The North Star's §2c "FliHub is the control plane" was overtaken by FliStudio from September on.
 - The keep/drop/unsure list below is the same list the review artifact shows (one source). The full per-route, per-screen and per-file tables (with file:line) are in the four appendices at the end.
 
-## Verdict: rebuild, but only the spine
+## Decided: rebuild (David, 2026-10-30)
 
-**Rebuild a slim FliHub on AppyStack with a JSON-RPC door. Carry the 18 "keep" items and the formats on disk. Do not port the 16 "drop" items. Leave the 21 "unsure" items out until David rules on them.**
+David, relayed by flivideo-arch-rsch: **"Rebuild FliHub. It's fine."** This doc no longer asks *whether* to rebuild. It is the input for *how*:
+- the 55-item keep/drop/unsure list decides what the rebuild carries over;
+- the look-and-feel artifact is for David to pick from;
+- the migration-risk list below covers what must not break at cut-over.
 
-Why a rebuild and not a refresh:
-- **The part David uses is small, and it is where the tangle is.** David's own description (B659, 2026-10-28): *"any recordings coming into Ecamm Live go into FliHub… I can watch them, transcribe them on the fly… route them to chapters and segments… see them all combined together as one long video. And that's pretty much all it does."* Every commit since August lands in that spine. The rest is 51.5k lines carrying 14 screens, 165 routes and 23 socket event types.
-- **FliStudio has taken over about half of FliHub** since September: brands, projects, codes, stages, transcription view, words, trash, thumbnails, publishing, assets. FliStudio says outright that changing takes "stays FliHub's job" (`flistudio/client/src/screens/ProjectHome.tsx:1786`). FliHub's job is now narrower than its code.
-- **A refresh can't add the door cheaply.** The door needs one capability core with named verbs. Today there are 165 hand-written Express handlers, 51+ of which return errors with HTTP 200, and a 922-line `App.tsx` that threads props to every tab (North Star §1). Adding a door over that means wrapping routes that are about to be dropped.
-- **David has already said it.** B659: *"FliHub really needs to be rebuilt."* B475 (2026-08-26) started a rebuild campaign; this is the first time it has a measured scope.
+**Hard requirement: the rebuilt FliHub has a JSON-RPC door.** Extensions, starting with B-roll capture, depend on it.
 
-Why not "leave":
-- **It is the one FliVideo satellite an agent can't drive** (brief). FliCut and FliStudio can be driven; FliHub cannot.
-- **It has live defects that a rebuild removes rather than patches:**
+**Recommended shape:**
+- A slim FliHub on AppyStack, with the door from day one.
+- It carries the 18 "keep" items and today's on-disk formats.
+- It does not port the 16 "drop" items.
+- The 21 "unsure" items wait for David's rulings.
+- It is built beside the live app and cut over after one real recording day.
+
+### The evidence for that scope
+
+- **The part David uses is small, and it is where the tangle is.** David (B659, 2026-10-28): *"any recordings coming into Ecamm Live go into FliHub… I can watch them, transcribe them on the fly… route them to chapters and segments… see them all combined together as one long video. And that's pretty much all it does."* Every commit since August lands in that spine. The rest is 51.5k lines carrying 14 screens, 165 routes and 23 socket event types.
+- **FliStudio has taken over about half of FliHub** since September: brands, projects, codes, stages, transcription view, words, trash, thumbnails, publishing and assets. FliStudio says outright that changing takes "stays FliHub's job" (`flistudio/client/src/screens/ProjectHome.tsx:1786`).
+- **The door can't be added cheaply to today's code.** Today there are 165 hand-written Express handlers, 51+ of which return errors with HTTP 200, and a 922-line `App.tsx` that threads props to every tab (North Star §1).
+- **Live defects the rebuild removes rather than patches:**
   - the Storage panel's Hold does the wrong thing (H2);
   - a GET writes config (C6);
   - stage overrides bleed across brands (C5);
   - two text-colour classes, used 155 times, produce no CSS.
-
-What the rebuild does **not** change: the stack. FliHub is already on Express 5, React 19, Vite, Tailwind 4, Socket.io 4 and zod 4. The gain is the architecture, the door and the tooling, not the frameworks.
+- **The stack does not change.** FliHub is already on Express 5, React 19, Vite, Tailwind 4, Socket.io 4 and zod 4. The gain is the architecture, the door and the tooling.
 
 ## Counts
 
@@ -64,40 +72,95 @@ What the rebuild does **not** change: the stack. FliHub is already on Express 5,
 | **Socket.io** | No external listener (checked: FliStudio, FliDeck, FliGen, FliVoice, Storyline and AngelEye all connect to their own servers) | **Low.** The rebuild can redesign its events freely |
 | **apps.json / AppyRadar** | Port probe on 5100/5101; `start_script ./start.sh`, `agent_start npm run app` | Low. Update the registry entry |
 
-## What a rebuild on current AppyStack gains
+## What the rebuild gets from current AppyStack
 
 | Gain | Today in FliHub | After | Note |
 |---|---|---|---|
 | **JSON-RPC door + OpenRPC** | No door. 165 REST routes, a hand registry listing 34, ad-hoc errors (353 `success:false` sites) | One capability core with named verbs (`takes.promote`, `segments.op`, `transcription.redo`…), a generated `api/openrpc.json` with `--check`, refusals as data | **The template does not ship the door.** `appystack/template/server/src/routes` has only `health` and `info`. The door is FliStudio's (`server/src/capabilities/`, 127 methods). A rebuild ports FliStudio's pattern, or the pattern is first extracted into a shared package. That extraction is a finding for the suite, not FliHub's job |
 | **Template tooling** | No husky, no lint-staged, no `@appydave/appystack-config`, no depcruise, no Playwright e2e; CI red on every push (git+ssh fli-core); lint baseline has known errors | husky + lint-staged, shared eslint/ts/prettier presets, depcruise fences, Playwright e2e, helmet, rate limiter, request logger, tested shutdown and listen-error | FliHub has no log file: output goes only to the Overmind pane. Template pino + a `.logs/` file fixes the "silent failures leave no trail" rule in CLAUDE.md |
+| **Extension seam (required: B-roll depends on it)** | No way to add a capability without editing the spine; B-roll was a branch inside `POST /api/rename` | The spine is the core, and extensions add namespaced verbs on the door (e.g. `broll.capture`, `broll.tag`) through a declared entry, fenced by depcruise | **`@flivideo/extension-core` is FliStudio-host-specific** (`ExtensionHost`, `HostKit`, FliStudio's stage keys). FliHub v2 needs either a host-neutral extension-core (a suite change: a finding for flivideo-orch, not FliHub's job) or its own thin host that follows the same rules (namespaced verbs, entry-only imports, conformance test). Decide this before the build starts, because the door's shape follows from it |
 | **Fenced tabs (extension-core pattern)** | Tabs share state through `App.tsx` props; North Star measured 4 `groupByChapter` copies and 15 hand-rolled modals | The spine as the core; each surviving tab (e.g. MicCheck, if kept) as a fenced module that depcruise forbids from reaching into the spine | `@flivideo/extension-core` itself is FliStudio-host-specific (`ExtensionHost`). FliHub would borrow the **rules** (namespaced verbs, entry-only imports, conformance test), not the package. Alternatively, a kept tab becomes a FliStudio extension instead |
 | **Marker + upgradability** | No `appystack.json`; drifts silently from the template | `appystack.json` marker, `lastUpgrade`, template-sync | The orch checkpoint banks "the AppyStack and AppyTron upgrade tools are unsafe" as a follow-up. Upgradability is real only after that is fixed |
 | **Agent-drivable** | The one FliVideo satellite an agent can't drive | Door + CLI + skill generated from OpenRPC, in line with FliCut, FliCast and FliStudio | Lets the D04-style autopilot run promote, segment and redo-transcript without a browser |
 
-## What it costs and risks
+## Migration-risk list
 
-1. **On-disk formats are the contract. Keep them exactly.**
-   - Two layouts: hub (`hub/recordings`, `hub/transcripts`) and legacy (`recordings`, `recording-transcripts`). The 13 local projects are all hub. The 62 legacy projects on T7 (`v-appydave-old`) and the 7 in `youtube-PUBLISHED` come back legacy on restore. **Recommendation:** v2 reads hub only, and a restored legacy project goes through FliStudio's `project.migrate-layout` first.
-   - `.flihub-state.json` v1, written through an allowlist that silently drops unknown fields (10 local, 12 on T7). v2 must read v1 and should stop dropping fields.
-   - `.flihub-segment-journal.json` (3 projects; undo depends on it), `fli.words.json`, `<transcripts>/engines/` copies, two transcript JSON shapes, `-trash/` (incl. FliTools' `-trash/<date>-pre-flitools/`).
-2. **FliStudio and FliTools contracts.** Port 5101, `/api/context`, the `agent:flihub` principal, and `.txt`-last-means-done. Breaking any of these breaks a recording day.
-3. **Skills.** Five plugin skills/commands curl FliHub. Re-point them in the same release.
-4. **The shared Overmind and the live-instrument rule.** David uses FliHub *during* recording days, under an Overmind shared with AngelEye and Captain's Log. A big-bang swap is the risk. **Recommendation:** build v2 as its own repo or folder with its own `my-app` lifecycle on spare ports. Run it side by side on a non-recording day against a copy of a project. Cut over (ports 5100/5101 + apps.json) only after one real recording day passes on v2.
-5. **Scope gravity.** North Star §1 measured a tab going from portable to coupled in four hours (MicCheck). Without a depcruise fence written on day one, v2 regrows v1.
-6. **Unsure items left unanswered become silent drops.** Hold/archive (H1) has no other home today. Dropping it without a ruling leaves the T7 workflow with no UI at all.
+What must not break when v2 replaces v1. Owners and evidence are in Appendix D.
+
+### 1. Data on disk (highest risk: the formats are the contract)
+
+| What | Where | v2 must | Evidence |
+|---|---|---|---|
+| Hub layout | `hub/recordings`, `hub/transcripts` (all 13 local projects) | read and write it exactly; layout comes from fli-core `projectLayoutSync` | Appendix C §3 |
+| Legacy layout | `recordings`, `recording-transcripts`: 62 projects on T7 `v-appydave-old`, 7 in `youtube-PUBLISHED` | **recommend: not read it.** A restored legacy project goes through FliStudio's `project.migrate-layout` first | Appendix C §4 |
+| `.flihub-state.json` v1 | 10 local, 12 on T7; written through an allowlist that silently drops unknown fields | read v1 unchanged; stop dropping fields; keep chapter titles where FliStudio reads them (`flistudio/server/src/assets/assets.ts:233`) | `projectState.ts:76-108` |
+| `.flihub-segment-journal.json` | 3 projects (d01, d11, d12) | read it, or undo of past segment ops is lost | `segmentOps.ts:228-244` |
+| Transcripts | two JSON shapes (old whisper, FliTools `flitools.transcript/<n>`); `engines/<base>.<engine>.*` copies; `.txt` written last = done | carry the engine copies on every move; check `schema` before reading | AGENT-NOTES; FliTools `service.ts:340-374` |
+| `fli.words.json` | project, brand and global word stores | write through fli-core only | `routes/state.ts:268-304` |
+| `-trash/` | including FliTools' `-trash/<date>-pre-flitools/`; T7 rsync excludes it | same folder name; trash pill counts what empty removes | David ruling 2026-09-23 |
+| Global config | `server/config.json`: 36 stage overrides and 2 priorities keyed by bare folder name, plus `glingDictionary` | don't migrate stage/priority (FliStudio owns stages); import the 24 Gling words once (Q9) | Appendix C §4 |
+| Legacy leftovers | `recording-shadows/` (56 T7), `-safe/` (2 T7), `-chapters/` (3 T7), `edit-*` (33 T7) | ignore; never write | Appendix C §4 |
+
+### 2. Live dependents (FliStudio, FliTools, FliCut, FliEdit)
+
+| Dependent | Depends on | Break if v2… |
+|---|---|---|
+| FliStudio launch door | `POST/GET /api/context` on fixed `127.0.0.1:5101` (`flistudio/server/src/launch/doors.ts:148-168`) | moves port 5101 or changes the context contract. **Either keep `/api/context` as a REST shim, or change FliStudio to call the new door in the same release** |
+| FliStudio reveal / open | runs `flihub/scripts/app.sh open` (`reveal.ts:25`) | removes or renames that script |
+| FliStudio migrate-layout, project-rename | ask FliHub's door whether a project is open, and refuse if it is | stops answering "what's open" |
+| FliStudio words import | `words.import-flihub` reads `glingDictionary` from FliHub's `server/config.json` (`capabilities/words.ts:278`) | drops the field before the one-time import |
+| FliStudio best-transcript | reads take transcripts and `engines/` copies as owner `flihub` | renames files or drops the engine copies |
+| FliTools | only principal `agent:flihub` with `force_save` may replace FliHub-made transcripts (`service.ts:717-738`) | sends a different principal name |
+| FliCut | reads `hub/transcripts/<stem>.json` and `engines/<take>.mlx-flihub.json`; tells the user "redo it in FliHub ↻" | drops the redo action or changes the engine id `mlx-flihub` |
+| FliEdit | lists `hub/recordings/` (`resolver.ts:97`) | changes the layout (it can't: fli-core owns it) |
+
+### 3. Skills and commands (hand-written curl)
+
+| Skill | Calls | Action at cut-over |
+|---|---|---|
+| `flivideo:flihub` (12 command docs) | `GET /api/query/*`, `POST /api/projects/:code/inbox/write`, health | regenerate from the OpenRPC door; drop inbox write if Q8 drops the inbox |
+| `ylo:ylo-titles`, `ylo:ylo-description` | **write** titles: `PUT /api/projects/:code/title`, `…/chapters/NN/title` | re-point to the door's title verbs |
+| brand-dave `gather`, `current-deck` | `GET /api/query/projects…`; `current-deck` uses a wrong path today | re-point; fix the path |
+| `flivideo:teletubby` | courtesy `GET /api/query/projects/:code` | re-point |
+
+### 4. Socket.IO consumers (low risk)
+
+No external listener. FliStudio, FliDeck, FliGen, FliVoice, Storyline and AngelEye each connect to their own servers. v2 is free to redesign its live events. Two v1 events (`file:renamed`, `file:error`) are subscribed but never sent; don't carry them.
+
+### 5. Process, ports and the shared Overmind
+
+| Risk | Detail | Mitigation |
+|---|---|---|
+| Shared supervisor | v1 runs under an Overmind shared with AngelEye and Captain's Log; never `pkill overmind` | v2 gets its own `my-app` lifecycle (CLAUDE-PREFERENCES "servers go through my-app") and is never added to the shared Procfile during the build |
+| Ports | 5100/5101 are hard-coded in FliStudio and `~/.config/appydave/apps.json`; AppyRadar probes them | build v2 on spare ports; swap ports and the apps.json entry at cut-over only |
+| Live instrument | David uses FliHub during recording days; HMR and nodemon push changes into his tab | build in its own repo/folder; cut over on a non-recording day; v1 stays runnable as the fallback for a week |
+| No log | v1 output goes only to the Overmind pane | v2 writes `.logs/` from day one (template pino) |
+
+### 6. Scope risks
+
+- **Scope gravity.** North Star §1 measured a tab going from portable to coupled in four hours (MicCheck). Write the depcruise fence on day one, or v2 regrows v1.
+- **Unanswered unsure items become silent drops.** Hold/archive (H1) has no other home today. Leave it in v1, which stays runnable for storage, until Q3 is ruled.
 
 ## Decisions only David can make
 
-Each has a recommendation. Q1–Q4 shape the build; Q5–Q10 can be answered as the work reaches them.
+Each has a recommendation. Q1–Q4 and Q6 shape the build; the others can be answered as the work reaches them. A new one comes first:
 
 | # | Decision | Recommendation | For | Against |
 |---|---|---|---|---|
-| Q1 | **Rebuild, refresh or leave?** | **Rebuild the spine only** (18 keep items), strangler-style beside the live app | Small, well-evidenced scope; door + tooling from day one; v1 keeps running until v2 passes a recording day | A second FliHub exists for a while; the five dependents must be checked at cut-over |
+| Q0 | **Extension host for FliHub v2:** make `@flivideo/extension-core` host-neutral, or give FliHub its own thin host following the same rules? | **Host-neutral extension-core**, as a suite change owned by flivideo-orch, decided before the FliHub build starts | One extension contract across FliStudio and FliHub; B-roll could later also show in FliStudio | A change to a package FliStudio and Overlay Pilot already use; it delays the FliHub start |
+
+Evidence for Q0: `ExtensionHost` (`flistudio/extension-core/src/server.ts:21-36`) carries FliStudio and Overlay Pilot specifics (a `renderScript` that defaults to `modules/overlay-pilot/render/render.py`, FliTools polling), and `STAGES` is FliStudio's pipeline (`descriptor.ts:11`). The orch checkpoint already banks a related gap, G1: "ExtensionHost can't reach another app's door".
+
+
+
+| # | Decision | Recommendation | For | Against |
+|---|---|---|---|---|
+| Q1 | ~~Rebuild, refresh or leave?~~ **Decided 2026-10-30: rebuild.** Open part: **how big is v2.0?** | **The spine only** (18 keep items) plus the door and an extension seam, built beside the live app | Small, well-evidenced scope; v1 keeps running until v2 passes a recording day | A second FliHub exists for a while; the dependents in the migration-risk list must be checked at cut-over |
 | Q2 | **Who opens projects?** FliStudio only, or FliHub too (brand switcher, project dropdown, Projects tab)? | **FliStudio only.** FliHub opens on what FliStudio sends through `/api/context`, with a minimal recent-projects picker at most | Removes C2–C6 and their bugs; one owner for identity | Opening FliHub always needs FliStudio up (or a launch arg) |
 | Q3 | **Hold / archive / T7: where does it live?** | **Out of FliHub, into FliStudio**, as part of the project lifecycle. Park it until then; v1 stays the tool for it meanwhile | FliStudio already owns project identity and the brand roots; H2 shows the FliHub version is confused | FliStudio gains a big, data-moving feature; until it lands, storage stays in v1 |
 | Q4 | **Which look** for v2? | **Direction A, "Recording desk"** (see the look-and-feel artifact) | Built for the foot-pedal loop; everything else is a tab | Least like FliStudio; B or C read more like the suite |
 | Q5 | **MicCheck**: keep in FliHub, or move to Teletubby's setup panel? | **Move to Teletubby** (or leave in v1 until then) | It is a pre-recording check; Teletubby is the pre-recording screen | Teletubby gains a server API and a socket stream |
-| Q6 | **B-roll capture** (B659: b-roll as tagged segments in chapter 1, plus pinned/locked chapters): in v2 scope? | **Not in v2.0.** Design chapters so a pinned b-roll chapter fits later | Keeps v2.0 small; the old FR-161 lane is dropped either way | The D09 b-roll workflow waits |
+| Q6 | **B-roll capture** (B659: b-roll as tagged segments, plus pinned/locked chapters): how does it arrive? | **As the first FliHub extension, on the door, straight after v2.0.** v2.0 ships the door and the extension seam; pinned chapters go in the spine's chapter model | Proves the extension seam on a real need; the old FR-161 lane (a branch inside promote) is dropped either way | Needs the extension-host decision (host-neutral extension-core, or FliHub's own thin host) before the build |
 | Q7 | **Older manage tools** (renumber / swap chapters without guard or journal) | **Fold into guarded segment ops**; don't port the unguarded paths | One safe path; swap-chapters currently strands titles | A swap-chapters verb must be designed into segment ops |
 | Q8 | **Assets, Inbox, Thumbs, POEM/AWB/YLO send, Transcripts tab**: still used? | **Drop all from FliHub.** Inbox writes go to FliStudio resources | Zero commits since March; FliStudio covers each | If one is used weekly, it's missed on cut-over day |
 | Q9 | **Gling**: retired? | **Yes, retire.** Import the 24 `glingDictionary` words into the suite word store once | FliCut does the cutting; removes FliStudio's read of FliHub's config | None known |
