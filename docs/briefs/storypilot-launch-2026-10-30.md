@@ -43,6 +43,19 @@ The short version, so you know what you are looking for (do not build from this 
 - **Namespace:** `story.*` is suggested. Check it isn't reserved.
 - **Stage:** `script`. The link appears in the Script box of the pipeline strip.
 
+## 2a · How it fits FliStudio (addendum, 2026-10-30 10:45; settle each one in the spec)
+
+- **Name on screen.** David's working name is "StoryPilot". Propose the `label` (it appears in the rail's Extensions group, as the "StoryPilot ›" link in the Script box, and as the screen title) and confirm it with David. Key `storypilot`, view `ext:storypilot`.
+- **Sources already exist as video resources. Reuse them; don't invent a second list.**
+  - FliStudio's `fli.resources.json` already has a `session` resource kind (audience `internal`).
+  - Claude Code conversations attach to a video with the `flivideo:flistudio` skill's "attach this conversation to the video" recipe (`attach_session.py`).
+  - ChatGPT conversations attach the same way, with `meta.tool: "chatgpt"` and `conversation_id`.
+  - Read `~/dev/ad/appydave-plugins/flivideo/skills/flistudio/SKILL.md` § "Video resources" and `/Users/davidcruwys/dev/ad/flivideo/docs/briefs/video-resources-model.md`.
+  - StoryPilot's job is the **order and labels** over those resources, plus spoken notes. If notes need a new resource kind, propose it as data (`resources.kinds`), not code.
+- **Unit:** a **video** inside a project, as for Launch and resources. Say what happens for a project with several videos.
+- **Script stage.** The Script box already shows Teletubby. Decide how StoryPilot's link and Teletubby's dot sit together, and what the box's fact line says once a script exists (e.g. "script · 1,240 words"). The page reads that from disk; it never calls the extension.
+- **Agent entry.** "We're working on D13" must work. Name the first verb an agent calls (a `query` returning everything needed to write the script), and say whether the `flivideo:flistudio` skill or a new skill documents the flow.
+
 ## 3 · Order of work
 
 1. Read B667 and B670 in full. Read FliStudio's extension contract (§2), and Overlay Pilot at `modules/overlay-pilot/` as the worked example.
