@@ -147,7 +147,7 @@ Each has a recommendation. Q1–Q4 and Q6 shape the build; the others can be ans
 
 | # | Decision | Recommendation | For | Against |
 |---|---|---|---|---|
-| Q0 | **Extension host for FliHub v2:** make `@flivideo/extension-core` host-neutral, or give FliHub its own thin host following the same rules? | **Host-neutral extension-core**, as a suite change owned by flivideo-orch, decided before the FliHub build starts | One extension contract across FliStudio and FliHub; B-roll could later also show in FliStudio | A change to a package FliStudio and Overlay Pilot already use; it delays the FliHub start |
+| Q0 | **RULED 2026-10-30 by flivideo-orch: host-neutral extension-core, made before the FliHub build starts. The same change fixes G1 (an extension calling another app's door by name). Owner: flivideo-orch, after Story Pilot merges.** Original question, extension host for FliHub v2: make `@flivideo/extension-core` host-neutral, or give FliHub its own thin host following the same rules? | **Host-neutral extension-core**, as a suite change owned by flivideo-orch, decided before the FliHub build starts | One extension contract across FliStudio and FliHub; B-roll could later also show in FliStudio | A change to a package FliStudio and Overlay Pilot already use; it delays the FliHub start |
 
 Evidence for Q0: `ExtensionHost` (`flistudio/extension-core/src/server.ts:21-36`) carries FliStudio and Overlay Pilot specifics (a `renderScript` that defaults to `modules/overlay-pilot/render/render.py`, FliTools polling), and `STAGES` is FliStudio's pipeline (`descriptor.ts:11`). The orch checkpoint already banks a related gap, G1: "ExtensionHost can't reach another app's door".
 
