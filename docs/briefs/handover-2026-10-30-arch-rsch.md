@@ -46,6 +46,8 @@
   - apps.json has no `boilerplate` for flistudio;
   - locations.json lists only flicut, imagedrip, samantha and teletubby as AppyTron consumers (FliCast and FliEdit are missing);
   - `~/dev/ad/CLAUDE.md` points at `/apps/appyradar/`, but the live app is `apps/appyradar-sentinal`.
+- **AppySentinel** is very out of date; David rates the idea highly. Refresh it as its own job (consumers: appyradar-sentinal, switchboard, supportsignal-sentinal).
+- **Sent / launched at close:** the AppyInvoice decisions went to `appy-invoice-rsch`. FliHub rebuild discovery is running as `flihub-rebuild-rsch` (brief `docs/briefs/flihub-rebuild-discovery-2026-10-30.md`).
 - **`origin/extension-core`** on FliStudio is merged and safe to delete. The classifier blocks remote deletes from an agent, so David has to run it.
 
 ## Gotchas learned here
