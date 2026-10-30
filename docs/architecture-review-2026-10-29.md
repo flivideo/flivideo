@@ -10,6 +10,14 @@
 
 ---
 
+
+> **Status 2026-10-30 (flivideo-arch-rsch):** §5 is BUILT and live.
+> - `@flivideo/extension-core` is merged into FliStudio `1e89742`, with Overlay Pilot migrated (64 tests, conformance included).
+> - `system.status` busy is now real (C5 closed). `scripts/busy.sh` plus apps.json `busy` make `my-app restart flistudio` refuse while busy (FliStudio `f0dc19a`).
+> - Still open: C6 (the server resolves the extension through dist, the client through source); C7 (Overlay Pilot's private FliTools client); `ExtensionHost` still carries Overlay Pilot's own settings; a YouTube upload is not in `system.status` busy.
+> - Extension #2 is StoryPilot: brief `docs/briefs/storypilot-launch-2026-10-30.md`, session `storypilot-dev`, managed by flivideo-orch.
+> - Cross-umbrella follow-on: `/Users/davidcruwys/dev/ad/brains/brand-dave/studio-pattern-synthesis-2026-10-30.md`.
+
 ## 0 · Recommendations first
 
 1. **Build `@flivideo/extension-core` as a workspace package inside FliStudio**, modelled on how fli-core was made: a contract-first contents table, zod schemas with inferred types, a browser-safe entry, and zero host imports pinned by a test. Move `HostKit`, `OverlayHost`, `OverlayRefusal` and the menu descriptor into it (§5).
