@@ -404,10 +404,10 @@ This is KBDE's C1–C16 idea at in-process size. It **fails at the author's desk
 | Who holds policy | No one; each extension decides | FliStudio, but only implicitly, inside bespoke verbs | **FliStudio, from data**: the descriptor's `apps` list, checked at bind time and in conformance |
 | What the target sees | `agent:<ext>`, which hides that FliStudio is involved | `agent:flistudio`, which hides the extension | `agent:flistudio.<key>`, which names both |
 | ★ human-only verbs | Reachable unless every app guards them | Safe | Safe: the call always carries an `agent:` principal, so targets refuse ★ verbs as they already do; the allowlist is a second fence |
-| Target busy / restart | Each extension re-implements it | Central | Central: the host never starts or restarts a target. Not running → typed refusal `app-unavailable` |
+| Target busy / restart | Each extension re-implements it | Central | Central: the host never **restarts** a target. Not running → it **starts** it at the brand and project (FliStudio's existing launch code) |
 | Testability | Real ports in tests | One fake per bespoke verb | `fakeHost({ apps: { teletubby: fake } })`; conformance checks every call is declared |
 | Code per new extension | Most (door code each time) | A new FliStudio verb per need, so host edits come back | **One descriptor line**: `apps: { teletubby: ['write_script'] }` |
-| Target not running | Each decides | Central | Typed refusal; the extension shows it. **No auto-start** in v1 |
+| Target not running | Each decides | Central | **Auto-start at the brand and project, then call** (David 2026-10-30: "there's nothing wrong with starting these applications automatically"). If it's running on a *different* project and `system.status` busy is non-empty, refuse rather than switch it away from someone's work |
 
 **Recommendation: the hybrid.**
 - **extension-core:**
@@ -420,11 +420,12 @@ This is KBDE's C1–C16 idea at in-process size. It **fails at the author's desk
   - implements `apps.call` over `launch/doors.ts`: discover → probe → POST with `agent:flistudio.<key>` and the target's token;
   - refuses undeclared app/verb pairs and unknown apps at bind time;
   - logs every call through `host.log`;
-  - `readSystemBusy` is not needed, because nothing restarts.
+  - starts a stopped target through the launch code (as `edit.add` already does for FliCut). It switches a running target's project only when `readSystemBusy` is empty, and never restarts one.
 - **fli-core:** nothing for v1. Move `doors.ts`'s generic door client (discover, probe, call) into fli-core **only when a second host needs it**. That is the "centralised knowledge" of (A), moved down when it's earned.
 - **Effort:** about 1.5–2 h, including tests and an extension-core release. There are no target-app changes, because their doors already exist.
 - **First consumer:** StoryPilot's "Send to Teletubby" button, after V1 ships. V1 stays as-is: Claude Code hands the script over.
-- **Blocker:** **FliHub has no door**, so any FliHub-dependent extension (B-roll) waits for it. See `docs/briefs/flihub-rebuild-discovery-2026-10-30.md`.
+- **FliHub:** no door today. David has decided to **rebuild FliHub** (2026-10-30), and the door comes with the rebuild. FliHub-dependent extensions (B-roll) follow it. See `docs/briefs/flihub-rebuild-discovery-2026-10-30.md`.
+- **Why keep the allowlist when extensions are compiled in:** it's a guardrail, not distrust. It makes an extension's reach readable in one line, catches a forgotten declaration at the author's desk (like a stop hook), and keeps destructive verbs off by default.
 
 ---
 
