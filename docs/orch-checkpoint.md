@@ -7,6 +7,16 @@
 - The current step tells you the next action; the standing rules are not optional
 
 ## Current step
+
+**2026-10-30 ~19:20 — David GO "all three" (via brains-d5).** Builders launched (tmux + iTerm2):
+`tubby-land-dev` (FliStudio worktree `flistudio-worktrees/tubby-lands`, branch `tubby-lands`: stage_select door for
+switchTo + story.script.send, "here" dot reads workspace.position, Overlay Pilot posters/click-to-play, capability
+name in /api/call log) and `tubby-panel-dev` (Teletubby `teletubby-worktrees/tubby-panel`, branch `tubby-panel`:
+panel loses cross-project picker, cold start w/o context → empty shell, close 10-17 ticket). Brief:
+`/Users/davidcruwys/dev/ad/flivideo/docs/briefs/teletubby-lands-2026-10-30.md`. NEXT: reproduce gates, merge both,
+busy-check, restart FliStudio + Teletubby, verify live: staged on Kybernesis → Story Pilot Send d13 →
+workspace.position = d13 set. Report to brains-d5. Root cause + perf findings already sent to brains-d5 (swap 18.5/19.5 GB).
+
 **2026-10-30 ~12:10 — extension-core 0.2.0 (G1) MERGED + LIVE; Send-to-Teletubby proven on the real Teletubby.** FliStudio main `c4ac75c` (ff), install+build, pushed, restarted (busy idle), health ok. Orch-reproduced gates: build/tc/api:check/format ok, lint 0 errors; extension-core 46, overlay-pilot 64, storypilot 36, server 698+2, client 306, e2e 31/31. New: `ExtensionHost.app(name).call(method, params)` → POST <app>/api/rpc as agent:<ext>, bearer from the app's control.json; descriptor `apps` allow-list (fenced in bindExtensions); refusals forbidden/unknown-app/app-unavailable/app-refused (-32050). Story Pilot `apps: ['teletubby']`, `story.script.send` + screen "Send to Teletubby" button. **Live check by orch:** `bin/flistudio story.script.send --brand appydave --project d13` → context.select + script.write applied, replaced in place (set d13-overlay-pilot-scripts). extcore worktree + local branch removed; origin/extcore-neutral left (merged). extcore-dev done.
 
 **2026-10-30 ~11:40 — First D13 Story Pilot script written; Teletubby started (orch, my-app) for the handover.** 7 sources attached to D13 via resources.add (B663, sessions 8aa7c642 spec / 62b99237 build / 09d843f5 arch-rsch, overlay-pilot spec dossier, B667, B670); left out: c39fe501, 49052d85, orch session, brains 5718f7c4, B665/B668/B658. Skill: appydave-plugins `f1dad4d` (flivideo 2.6.0, skills/storypilot + scripts/rpc.py, handover.py; INDEX.md needs /plugin-index regenerate — banked). Script `/Users/davidcruwys/dev/video-projects/v-appydave/d13-overlay-pilot/script/storypilot/project/script.md` (1,020 words, 26 paras, build-story). feel/do UNSET pending David (a feel, b do, c AppyDave bookends, d "girlfriend Joy" vs "partner"). Handover to Teletubby (context.select → D13, script.write id storypilot-project) being run by storypilot-dev.
