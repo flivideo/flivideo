@@ -8,6 +8,12 @@
 
 ## Current step
 
+### 2026-10-31 ~04:05Z — UAT guide published for David
+- https://claude.ai/artifact/7hooUPsgUab4UEykVCQm8r (source: my scratchpad uat/index.html + 12 jpgs). Sections: Story Pilot → TeleTubby/Prompter → Overlay → B-roll → FliEdit → not yet.
+- UAT fixes by me: D13 capture meta.channel set (resources.update takes `meta` top-level; unknown `patch` key silently ignored — minor API finding). Removed my chin-compare folder from Joy project (showed in sidebar). Real B-roll drill on D13: dropped a screenshot into resources/project/, auto-registered, described as agent.
+- storypilot-dev fixing: Large reader full width + D13 6 chapters (branch storypilot-uat). Merge + restart when it lands, then update the UAT page (remove "being fixed").
+- Overlay: frame-2 auto-became calculated final on hobby-learners — flagged to David as his call.
+
 ### 2026-10-31 ~03:16Z — StoryPilot phase 2 MERGED flistudio main 34d0a48 (gates reproduced; npm install; restarted; eyeballed D13 Story Pilot in Chrome: spine 01–08 incl. 06 chin bug, lanes, READ tab, B-roll Pilot in sidebar). story.prompter.send is ★ human-only. ALL FIVE SATURDAY ITEMS' BUILDS LANDED except #4 (buttons, last). Open: D13 meta.channel (B663/B667 plaud, B670 chatgpt); tickets: FliTools describe service, fli-core resources/footage zones; /plugin-index.
 
 ### 2026-10-31 ~03:10Z — merges
