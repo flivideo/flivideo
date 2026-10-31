@@ -8,6 +8,18 @@
 
 ## Current step
 
+**2026-10-31 ~08:00 — Desk cleared; waiting on David's B-roll / FliHub input.** On David's say-so I closed
+tmux sessions tubby-land-dev, tubby-panel-dev, flivideo-arch-rsch, flihub-rebuild-rsch (processes confirmed gone).
+arch-rsch's last message (FliHub parked) was acked late; nothing was owed. arch-rsch handover:
+`/Users/davidcruwys/dev/ad/flivideo/docs/briefs/handover-2026-10-30-arch-rsch.md`. NOTHING IN FLIGHT.
+NEXT: David is sending new FliHub changes about B-roll. Read them against (a) live FliHub v1 at
+`/Users/davidcruwys/dev/ad/flivideo/flihub` and (b) the PARKED rebuild spec
+`/Users/davidcruwys/dev/ad/flivideo/docs/flihub-rebuild-spec-parked-2026-10-30.md` (David ruled B-roll OUT of v2
+scope and floated a FliStudio "B-roll pilot" extension — check whether the new input changes that). Say where each item
+lands (v1 fix / parked spec / FliStudio extension) with a recommendation before launching any builder.
+Remaining banked follow-ups: see the 10-30 entries below (remote branch deletes, storypilot worktree, G3/G4,
+/plugin-index, M4 memory pressure, FliHub double-mounted /hold route).
+
 **2026-10-30 ~19:46 — Teletubby-lands LIVE + verified.** FliStudio main `ce8fd25` (tubby-lands: app.stage door,
 here-dot reads stage, Overlay Pilot posters, named request log; gates reproduced 46/65/38/707+2/307, e2e 31). Teletubby
 main `847773e` (panel scoped to open project, cold start → empty shell, 10-17 ticket closed). Both restarted after busy
