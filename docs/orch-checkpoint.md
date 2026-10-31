@@ -8,6 +8,15 @@
 
 ## Current step
 
+### 2026-10-31 — worktrees removed (David's go)
+- Removed (merged, clean, branches kept): flistudio-worktrees/{overlay-chin,broll-pilot,project-status}, flitools-worktrees/{face-track,prompter-load}, teletubby-worktrees/script-chapters. Closed project-status-dev. Kept: fliedit-worktrees/drivable-audit (spike video), flistudio-worktrees/storypilot (uncommitted phase2-variants.html).
+
+
+### 2026-10-31 — D13 note: two different "bugs", don't merge
+- D13 ¶13–16 "The check that lied" = the WORD-SYNC check (skipped for lack of word timings, reported as passed; fixed by snapping graphics to FliTools word timings).
+- The CHIN bug (overlays over Joy's chin, fixed today via FliTools face.track) is a separate story: attached as source r_d48036acd2 (placed 06) but NOT in the script. Adding it to the script is David's call.
+
+
 ### 2026-10-31 20:11 — Project Status LIVE
 - Merged project-status → flistudio main 4b33e53 (ff), pushed; FliStudio restarted, healthy; projects.list carries status for all 17. Gates reproduced by orch: typecheck clean, unit 728+311+220 pass, dry-run compare 17/17.
 - Follow-up brief (fli-core facts + FliHub/FliCut/FliEdit wiring): docs/briefs/project-status-facts-fli-core-2026-10-31.md. Skill phrases: appydave-plugins 49df9bd.
