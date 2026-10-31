@@ -19,6 +19,8 @@
 - Roamy (100.89.32.35) offered to fliedit-drivable-dev + broll-pilot-plan for heavy runs (appynet:remote-claude; session owns its git + env). Asked David which session he meant by "FliHub".
 - CL dossier-strip feedback (no taller panels; colour highlight; match old row size; hold for more attachments) routed to captains-inbox.
 - #5 FliEdit drivable audit + 2-layer spike → `fliedit-drivable-dev` (wt fliedit-worktrees/drivable-audit) · yields to 1–4
+  - **DONE + MERGED 10-31**: fliedit main dc39399 (gates reproduced: typecheck, 223 tests, build). Layered assembly works over JSON-RPC; WebM alpha fixed. Report docs/drivable-audit-2026-10-31.md. Gaps: no speed, captions soft-only, no keyframes. Worker idle; next input = today's A-roll.
+- StoryPilot step (b) research done (storypilot-p2 9f0bc25, docs/planning/storypilot/phase2-research.md). Pending David: A/B/C pick; Elgato mapping (rec: 1 Elgato chapter per SP chapter); OK to quit Camera Hub for file-write path; live addChapters probe when Prompter back on. Teletubby needs script.write `chapters` param (route in step b). Camera Hub listens on *:1834 unauthenticated — told David.
 - Recording today: start TeleTubby (`my-app start teletubby`) when David is ready. I merge + restart FliStudio after gates/busy check.
 - Backlog only: Publishing Pilot, Audio Pilot, Timeline Pilot/Director's Chair, video groups.
 
