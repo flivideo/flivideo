@@ -8,6 +8,13 @@
 
 ## Current step
 
+### 2026-10-31 20:11 — Project Status LIVE
+- Merged project-status → flistudio main 4b33e53 (ff), pushed; FliStudio restarted, healthy; projects.list carries status for all 17. Gates reproduced by orch: typecheck clean, unit 728+311+220 pass, dry-run compare 17/17.
+- Follow-up brief (fli-core facts + FliHub/FliCut/FliEdit wiring): docs/briefs/project-status-facts-fli-core-2026-10-31.md. Skill phrases: appydave-plugins 49df9bd.
+- Known: below ~1300px wide the status word wraps above the boxes and size badges wrap under names.
+- Pending David go: automations spec page ("Recorded → want me to cut it?"), YouTube daily sync job. No holds/tags set on his projects.
+
+
 ### 2026-10-31 19:40 — project-status-dev launched
 - Project Status (FliStudio project list: 8 step boxes, markers column, filters, tags, control plane, fli.status.json log) approved by David from https://claude.ai/artifact/1ik3tTnTU8ssSmEtcCdbgH.
 - Brief: /Users/davidcruwys/dev/ad/flivideo/docs/briefs/project-status-build-2026-10-31.md · worktree flistudio-worktrees/project-status (branch project-status off 38b6a75; mock + dry run committed 1858d91).
