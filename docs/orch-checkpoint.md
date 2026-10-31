@@ -8,6 +8,8 @@
 
 ## Current step
 
+### 2026-10-31 ~04:09Z — storypilot-uat MERGED flistudio main 38b6a75 (Large full width, verified 1517px); D13 has 6 chapters (text byte-identical). UAT page republished with fixes (v 1793419733-1e9e). TeleTubby still holds the no-chapter copy until David presses Send. Open for David: chapter 2 at ¶6 vs ¶8; Overlay final choice; first Prompter send.
+
 ### 2026-10-31 ~04:05Z — UAT guide published for David
 - https://claude.ai/artifact/7hooUPsgUab4UEykVCQm8r (source: my scratchpad uat/index.html + 12 jpgs). Sections: Story Pilot → TeleTubby/Prompter → Overlay → B-roll → FliEdit → not yet.
 - UAT fixes by me: D13 capture meta.channel set (resources.update takes `meta` top-level; unknown `patch` key silently ignored — minor API finding). Removed my chin-compare folder from Joy project (showed in sidebar). Real B-roll drill on D13: dropped a screenshot into resources/project/, auto-registered, described as agent.
