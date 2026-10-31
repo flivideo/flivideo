@@ -8,6 +8,11 @@
 
 ## Current step
 
+### 2026-10-31 20:47 — NOT a go: automations + YouTube sync → backlog only
+- David: "I have no idea about the automation spec page or the YouTube daily sync... they should be put onto a backlog because I'm not there to guide that." Both banked in docs/backlog.md (new suite backlog). Build neither.
+- Do NOT edit the D13 script or its feel/do settings — David is rewriting the opening from Roamy.
+
+
 ### 2026-10-31 — worktrees removed (David's go)
 - Removed (merged, clean, branches kept): flistudio-worktrees/{overlay-chin,broll-pilot,project-status}, flitools-worktrees/{face-track,prompter-load}, teletubby-worktrees/script-chapters. Closed project-status-dev. Kept: fliedit-worktrees/drivable-audit (spike video), flistudio-worktrees/storypilot (uncommitted phase2-variants.html).
 
