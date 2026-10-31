@@ -8,6 +8,12 @@
 
 ## Current step
 
+### 2026-10-31 ~23:10 — OVERNIGHT RUN: fli-notes (notes / asks / changes) — GO from David
+- Go: "go with recomendations" (~23:00, relayed from Roamy `flivideo-field-trial-plan`). Brief `docs/briefs/fli-notes-suite-record-2026-10-31.md` (`cda4daa`); split in `docs/briefs/fli-notes-orch-workplan-2026-10-31.md` (`8f844d5`).
+- Workers RUNNING (tmux + iTerm): `fli-notes-core-dev` (fli-core-worktrees/notes-record, §4A → tag v0.27.0-rc.1), `fli-notes-studio-dev` (flistudio-worktrees/fli-notes, §4B), `fli-notes-cut-dev` (flicut-worktrees/fli-notes, §4C).
+- Orch steps after reports: (1) reproduce fli-core gates → merge main, tag v0.27.0, push; (2) apps repin #v0.27.0, reproduce gates, busy-check, ff-merge, restart FliStudio (my-app) — FliCut restart only at busy:[] and tell David; (3) §4D D13 first line via `story.script.set` (ask record human:chat first, then change linked by `answers`; ONLY line 1; overlap with later paras → open ask in report; feel/do untouched; no TeleTubby/Prompter send); (4) `scanNotes` over v-appydave returns both; (5) morning UAT page (AppyDave light) with batched taste calls; checkpoint.
+- D13 script edit is now ALLOWED for line 1 only (supersedes the earlier hands-off rule for that line).
+
 ### 2026-10-31 20:47 — NOT a go: automations + YouTube sync → backlog only
 - David: "I have no idea about the automation spec page or the YouTube daily sync... they should be put onto a backlog because I'm not there to guide that." Both banked in docs/backlog.md (new suite backlog). Build neither.
 - Do NOT edit the D13 script or its feel/do settings — David is rewriting the opening from Roamy.
