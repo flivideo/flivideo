@@ -8,6 +8,8 @@
 
 ## Current step
 
+### 2026-10-31 ~03:16Z — StoryPilot phase 2 MERGED flistudio main 34d0a48 (gates reproduced; npm install; restarted; eyeballed D13 Story Pilot in Chrome: spine 01–08 incl. 06 chin bug, lanes, READ tab, B-roll Pilot in sidebar). story.prompter.send is ★ human-only. ALL FIVE SATURDAY ITEMS' BUILDS LANDED except #4 (buttons, last). Open: D13 meta.channel (B663/B667 plaud, B670 chatgpt); tickets: FliTools describe service, fli-core resources/footage zones; /plugin-index.
+
 ### 2026-10-31 ~03:10Z — merges
 - **B-roll Pilot v1 MERGED** flistudio main 110fe86 (main merged into branch first; gates reproduced). Global broll kind row added (appydave-config 8b1d87b). FliStudio was DOWN ~5 min: live checkout needed `npm install` for new workspace modules/broll-pilot — **after merging a new workspace, npm install before restart**. Also: `my-app restart` inside a 2-min tool timeout gets killed mid-start — run it backgrounded/with timeout.
 - Tickets to file (from broll-pilot-dev): FliTools describe service brief docs/briefs/flitools-describe-service-2026-10-31.md (pushed 3b40123); fli-core: name `resources` + `footage` as ProjectZones in classify.ts (non-blocking). appydave-plugins INDEX stale (/plugin-index).
