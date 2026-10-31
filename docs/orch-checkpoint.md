@@ -10,7 +10,8 @@
 
 ### 2026-10-31 ~09:25Z+ — while David is out
 - **Overlay chin fix MERGED** flistudio main 65213ca (gates reproduced), FliStudio restarted (idle, health ok). 9 re-renders beside originals in v-beauty-and-joy/a01-…/videos/<video>/ (-2; hobby typeset-3 = tracker version, typeset-2 = interim). Compare PNGs: v-beauty-and-joy/a01-…/chin-compare-2026-10-31/. Joy framing.json changed, uncommitted in Joy repo. Stray scratch op-render-wlltfq4x left for project.clear-renders.
-- overlay-chin-dev now doing tracker → FliTools face-track move.
+- **Tracker → FliTools DONE + MERGED**: flitools main 7703c84 (face.track / face.job, serial; restarted via scripts/app.sh, live :7161 verified) then flistudio main 382d9b7 (Overlay Pilot asks face.track; fallback opencv+chin). joy-video SKILL.md repointed — ⚠️ ~/dev/ad/joy is NOT a git repo, edit unversioned (backup in overlay-chin-dev scratchpad). overlay-chin-dev idle/done.
+- Gotcha: live flistudio is a watch-mode dev server — merging into the live checkout reloads it. Busy-check BEFORE merging, not just before restart.
 - StoryPilot v2 hybrid mock LIVE (same URL 814tyf7…, v 1793413143-e15d) — awaiting David yes/change. D13 chin-bug source r_d48036acd2 placed at 06 (8 sources); D13 script NOT rewritten.
 - **broll-pilot-dev LAUNCHED** (worktree broll-pilot, brief docs/briefs/broll-pilot-build-2026-10-31.md, spec cafe7aa). Storage = existing resources/<video|project>/ zone, place:copy vs in-place. broll-pilot-plan stood down.
 
