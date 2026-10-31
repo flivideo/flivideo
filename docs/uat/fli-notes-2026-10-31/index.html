@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>fli-notes Morning UAT</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600&family=Roboto:ital,wght@0,400;0,500;0,700;1,400&family=Roboto+Mono&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;--brown:#342d2d;--gold:#ccba9d;--yellow:#ffde59;--amber:#c8841a;--muted:#7a6e5e;--cream:#faf5ec;--surface:#f0ebe4;--linen:#e8e0d4;--border:#d4cdc4;--chrome:#1a1515;--dark:#25201e;--blue:#2E91FC;--ok:#3f7a3a;--warn:#b5524a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--brown);font:16px/1.6 Roboto,sans-serif}
+main{max-width:980px;margin:0 auto;padding:28px 16px 80px}
+header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+.logo-badge{display:inline-block;background:#342d2d;border-radius:6px;padding:4px 10px 2px;font-family:"Bebas Neue",Oswald,sans-serif;letter-spacing:.04em;line-height:1.1;font-size:22px}
+.logo-badge .a{color:#ccba9d}.logo-badge .d{color:#ffde59}
+.eyebrow{font:500 13px Oswald,sans-serif;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+h1{font:600 40px/1.1 Oswald,sans-serif;text-transform:uppercase;margin:10px 0 6px}
+h2{font:600 22px Oswald,sans-serif;text-transform:uppercase;letter-spacing:.03em;margin:44px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+h3{font:600 17px Oswald,sans-serif;text-transform:uppercase;margin:22px 0 6px}
+.verdict{background:var(--surface);border-left:5px solid var(--yellow);padding:14px 18px;margin:18px 0;font-size:17px}
+.verdict strong{box-shadow:inset 0 -.4em 0 var(--yellow)}
+ol.steps{counter-reset:s;list-style:none;padding:0;margin:8px 0}
+ol.steps li{counter-increment:s;position:relative;padding:6px 0 6px 40px}
+ol.steps li::before{content:counter(s,decimal-leading-zero);position:absolute;left:0;top:6px;font:600 15px "Roboto Mono",monospace;color:var(--amber)}
+code,kbd{font:14px "Roboto Mono",monospace;background:var(--linen);padding:1px 5px;border-radius:3px}
+.look{color:var(--muted);font-style:italic}
+figure{margin:14px 0}
+figure img{width:100%;border:1px solid var(--border);border-radius:4px;display:block}
+figcaption{font-size:13px;color:var(--muted);margin-top:4px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:700px){.grid2{grid-template-columns:1fr}}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;padding:8px 8px;border-bottom:1px solid var(--border);vertical-align:top}
+th{font:500 13px Oswald,sans-serif;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.q{border:1px solid var(--border);border-radius:4px;padding:12px 16px;margin:10px 0;background:#fff8}
+.q .rec{margin-top:6px}
+.q .rec b{color:var(--amber);font-family:Oswald,sans-serif;text-transform:uppercase;font-weight:500;letter-spacing:.05em;font-size:13px}
+.tag{display:inline-block;font:500 12px Oswald,sans-serif;text-transform:uppercase;letter-spacing:.06em;padding:1px 7px;border-radius:3px;border:1px solid var(--border);color:var(--muted)}
+.pass{color:var(--ok);font-weight:700}.gap{color:var(--warn);font-weight:700}
+blockquote{margin:8px 0;padding:6px 14px;border-left:3px solid var(--gold);font-style:italic;color:var(--brown)}
+a{color:var(--blue)}
+.wrap{overflow-x:auto}
+</style>
+</head>
+<body>
+<main>
+<header><span class="logo-badge"><span class="a">Appy</span><span class="d">Dave</span></span><span class="eyebrow">FliVideo · morning UAT · 1 Nov 2026</span></header>
+<h1>fli-notes: notes, asks &amp; changes</h1>
+
+<div class="verdict"><strong>Built, merged and live.</strong> fli-core v0.27.0 is released. FliStudio is merged and restarted, and FliCut is merged and built (it wasn't running, so start it). Your D13 opening is the first live record. About 10 minutes to try. Then answer the questions at the bottom, or just say "go with recommendations".</div>
+
+<h2>1 · FliStudio <span class="tag">live at :7150</span></h2>
+<ol class="steps">
+<li>Open <a href="http://127.0.0.1:7150/b/appydave/p/d13-overlay-pilot?zone=notes">D13 → Notes</a> in the left rail. <span class="look">Look for three records: your ask (marked Done), the script change with your "because" words and before/after in red and green, and the open→done line.</span></li>
+<li>Press <kbd>⌥⇧N</kbd> (or the speech-bubble icon, top right). <span class="look">Things that can take a note get an outline as you hover: the project name, rail rows, files, resources, launch pieces, Story Pilot paragraphs.</span></li>
+<li>Click a Story Pilot paragraph, type a note, Save. Do it again with <b>This is an ask</b> on. <span class="look">The Notes count in the rail shows open asks only.</span></li>
+<li>In Notes, press <b>Mark done</b> on that ask. Use the filters: Open asks · Notes · Changes.</li>
+<li>Press <kbd>⌥⇧N</kbd> again. <span class="look">Notes mode is off and clicks work normally.</span></li>
+</ol>
+<figure><img src="flistudio/5-d13-live-notes.png" alt="D13 Notes view in live FliStudio"><figcaption>Live FliStudio tonight: D13's Notes view, with the ask, the change (+ your because) and the resolve.</figcaption></figure>
+<div class="grid2">
+<figure><img src="flistudio/1-note-mode-hover.png" alt="note mode hover"><figcaption>Note mode on: hover outlines what you can note.</figcaption></figure>
+<figure><img src="flistudio/2-note-box-ask.png" alt="note box with ask switch"><figcaption>The note box, with the "This is an ask" switch.</figcaption></figure>
+</div>
+
+<h2>2 · FliCut <span class="tag">start it first</span></h2>
+<ol class="steps">
+<li>Start FliCut as usual and open a cut. <span class="look">The header has a <b>✎ Notes</b> button, off.</span></li>
+<li>Press <kbd>⌥⇧N</kbd> (<kbd>⌘⇧N</kbd> works here too). Hover words, cuts, recordings, the player. Click a word, write a note, Save.</li>
+<li>Do another with the ask switch on. Open <b>list</b> (bottom right) and press <b>✓ Done</b>.</li>
+<li>Make a cut, then undo. <span class="look">Each one writes a change record into the project's <code>fli.notes.jsonl</code>. They aren't shown in FliCut's small list, only in FliStudio's Notes view.</span></li>
+</ol>
+<div class="grid2">
+<figure><img src="flicut/3-note-box-on-word.png" alt="FliCut note box on a word"><figcaption>FliCut: a note on the word "girlfriend" (fixture project; ignore the red banner, the test video was empty).</figcaption></figure>
+<figure><img src="flicut/6-list-open-ask.png" alt="FliCut notes list"><figcaption>FliCut's notes list, with an open ask and ✓ Done.</figcaption></figure>
+</div>
+
+<h2>3 · D13: what changed</h2>
+<p>Only line 1 of <code>d13-overlay-pilot/script/storypilot/project/script.md</code>, through <code>story.script.set</code>. I checked that the rest of the script is byte-identical, and title, triggers and chapters were re-sent unchanged. Feel/do settings were untouched, and nothing was sent to TeleTubby or the Prompter.</p>
+<blockquote>My girlfriend is not a content creator. She is a self-employed nail artist. … she has a problem getting videos published, and that problem is me.</blockquote>
+<p>The records are: the <b>ask</b> (<code>human:chat</code>, your words, Roamy session linked), the <b>change</b> (by <code>agent:flivideo-orch</code>, before/after excerpt, your "because" verbatim) and the <b>resolve</b> (ask open → done, linked to the change). <code>scanNotes</code> over v-appydave returns all three. A backup of the old script is kept.</p>
+<p><b>One honest slip:</b> the change line lacks the <code>answers</code> link to the ask, because my script read the ask's id from the wrong field. The ask → change link exists through the resolve line (<code>follows</code>). The file is append-only, so I didn't rewrite it.</p>
+
+<h2>4 · What isn't done</h2>
+<div class="wrap"><table>
+<tr><th>Gap</th><th>Why / next</th></tr>
+<tr><td>FliStudio: generic writes (launch, publish, words…) log only the input as "after", with no "before"</td><td>The detailed before/after is wired for Story Pilot, resources, Overlay beats and Project Status. Each other verb needs one small "watched" entry.</td></tr>
+<tr><td>FliCut: clicking the real Cut button wasn't screen-tested</td><td>It was proven through the same save door the editor uses (save + undo logged live), not by clicking.</td></tr>
+<tr><td>The two apps differ in small ways (see Q1)</td><td>Each built its half in parallel.</td></tr>
+<tr><td>Pre-existing flaky tests</td><td>FliStudio's project-status tooltip e2e (~50%, on the old main too); FliCut's dev-shot test under full-suite load. Neither is from this work.</td></tr>
+</table></div>
+<p>Done: the <code>flivideo:flistudio</code> skill now knows the notes commands and when to pass <code>because</code> (appydave-plugins <code>3f48d69</code>).</p>
+
+<h2>5 · Questions: each has a recommendation</h2>
+
+<div class="q"><b>Q1 · Make FliCut match FliStudio?</b> The refusal codes differ (e.g. note-not-found is -32039 in FliCut and -32051 in FliStudio), and only FliStudio accepts <code>saidBy</code>, <code>answers</code> and <code>region</code>.
+<div class="rec"><b>Recommend</b>: yes. One small follow-up (~1h): set the codes once in fli-core and bring FliCut up to FliStudio's shape.</div></div>
+
+<div class="q"><b>Q2 · D13 paragraph 2 now repeats the opening.</b> It starts "My girlfriend Joy runs a beauty business, and she records these short videos…". Separately, paragraph 1's prompter trigger still reads "stuck on one step".
+<div class="rec"><b>Recommend</b>: you edit paragraph 2 (it's your voice). A start: "So Joy records these short videos…". Change the trigger to "not a content creator". I left both alone, as the brief said.</div></div>
+
+<div class="q"><b>Q3 · Shortcut is <kbd>⌥⇧N</kbd> in both apps</b> (Chrome keeps <kbd>⌘⇧N</kbd> for incognito). FliCut also accepts <kbd>⌘⇧N</kbd>.
+<div class="rec"><b>Recommend</b>: keep it.</div></div>
+
+<div class="q"><b>Q4 · Closing an ask is your act, not automatic.</b> A change that "answers" an ask doesn't close it; Mark done / <code>notes.resolve</code> does.
+<div class="rec"><b>Recommend</b>: keep it, so a half-done change can't silently close your ask.</div></div>
+
+<div class="q"><b>Q5 · Who is logged.</b> FliCut's automatic transcribe writes are logged as <code>agent:flicut</code>. An agent relaying your words logs them as <code>human:chat</code> and records itself as the relayer.
+<div class="rec"><b>Recommend</b>: keep both.</div></div>
+
+<div class="q"><b>Q6 · What the notes count shows.</b> The rail's Notes number counts open asks only. FliCut's small list shows notes and asks but not changes.
+<div class="rec"><b>Recommend</b>: keep it. Changes are for reading later, not nagging.</div></div>
+
+<div class="q"><b>Q7 · Big before/after.</b> Whole up to ~2,000 characters; above that, a ±240-character excerpt of the real words around the edit, with line and offset.
+<div class="rec"><b>Recommend</b>: keep it. Tonight's D13 change shows it working.</div></div>
+
+<div class="q"><b>Q8 · Next "before" coverage in FliStudio:</b> launch.*, publish.*, words.*.
+<div class="rec"><b>Recommend</b>: add them in the same follow-up as Q1.</div></div>
+
+<p class="look">Commits: fli-core <code>00bc4bb</code> (v0.27.0) · FliStudio <code>1eba790</code> · FliCut <code>db599d0</code> · skill <code>3f48d69</code>. Briefs: <code>flivideo/docs/briefs/fli-notes-suite-record-2026-10-31.md</code> + <code>fli-notes-orch-workplan-2026-10-31.md</code>.</p>
+</main>
+</body>
+</html>
