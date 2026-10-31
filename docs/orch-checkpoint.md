@@ -8,6 +8,8 @@
 
 ## Current step
 
+### 2026-10-31 — StoryPilot v2 ACCEPTED by David → storypilot-dev building step (b): FliStudio storypilot-p2 (v2 UI + chapters) · teletubby-worktrees/script-chapters (script.write chapters) · flitools-worktrees/prompter-load (prompter.load, fake Camera Hub home in tests). Merge order: FliTools + Teletubby before FliStudio. First real Prompter push = David's action.
+
 ### 2026-10-31 ~09:25Z+ — while David is out
 - **Overlay chin fix MERGED** flistudio main 65213ca (gates reproduced), FliStudio restarted (idle, health ok). 9 re-renders beside originals in v-beauty-and-joy/a01-…/videos/<video>/ (-2; hobby typeset-3 = tracker version, typeset-2 = interim). Compare PNGs: v-beauty-and-joy/a01-…/chin-compare-2026-10-31/. Joy framing.json changed, uncommitted in Joy repo. Stray scratch op-render-wlltfq4x left for project.clear-renders.
 - **Tracker → FliTools DONE + MERGED**: flitools main 7703c84 (face.track / face.job, serial; restarted via scripts/app.sh, live :7161 verified) then flistudio main 382d9b7 (Overlay Pilot asks face.track; fallback opencv+chin). joy-video SKILL.md repointed — ⚠️ ~/dev/ad/joy is NOT a git repo, edit unversioned (backup in overlay-chin-dev scratchpad). overlay-chin-dev idle/done.
