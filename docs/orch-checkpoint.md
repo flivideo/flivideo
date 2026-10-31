@@ -12,7 +12,12 @@
 - #1 Overlay chin bug → `overlay-chin-dev` (wt flistudio-worktrees/overlay-chin) · brief docs/briefs/overlay-chin-2026-10-31.md
 - #2a StoryPilot 3-variant artifact → existing `storypilot-dev` (new branch from main; no build until David picks; Elgato code → FliTools; Prompter OFF, don't start)
 - #3 B-roll Pilot spec + mock artifact → `broll-pilot-plan` (wt flistudio-worktrees/broll-pilot) · brief docs/briefs/broll-pilot-spec-2026-10-31.md
-- #4 FliHub/FliCast B-roll button → recommended: last step of B-roll Pilot v1 build, after spec fixes the register contract (David to confirm)
+- #4 FliHub/FliCast B-roll button → **David CONFIRMED wait (10-31)**: not today. Order: B-roll Pilot spec → registration contract → v1 build → buttons LAST.
+- David rulings 10-31 ~09:00: mocks plan OK; no captains-log:deliver on B-roll Pilot until mocks approved; storypilot-dev HOLD (no A/B/C pick yet; variants https://claude.ai/artifact/814tyf7VGfciaESVKvCygc; page source kept local, uncommitted).
+- TeleTubby started 10-31 ~08:54 (system_status ok, busy []). Elgato Prompter untouched.
+- Presenter tracking: overlay-chin-dev to report path/lang/deps/callers; David thinks home = FliTools. I owe him move / wrap / leave rec with pros/cons. NO relocation until he rules; chin fix wires in from current location.
+- Roamy (100.89.32.35) offered to fliedit-drivable-dev + broll-pilot-plan for heavy runs (appynet:remote-claude; session owns its git + env). Asked David which session he meant by "FliHub".
+- CL dossier-strip feedback (no taller panels; colour highlight; match old row size; hold for more attachments) routed to captains-inbox.
 - #5 FliEdit drivable audit + 2-layer spike → `fliedit-drivable-dev` (wt fliedit-worktrees/drivable-audit) · yields to 1–4
 - Recording today: start TeleTubby (`my-app start teletubby`) when David is ready. I merge + restart FliStudio after gates/busy check.
 - Backlog only: Publishing Pilot, Audio Pilot, Timeline Pilot/Director's Chair, video groups.
