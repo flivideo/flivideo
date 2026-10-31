@@ -8,6 +8,12 @@
 
 ## Current step
 
+### 2026-10-31 ~09:25Z+ — while David is out
+- **Overlay chin fix MERGED** flistudio main 65213ca (gates reproduced), FliStudio restarted (idle, health ok). 9 re-renders beside originals in v-beauty-and-joy/a01-…/videos/<video>/ (-2; hobby typeset-3 = tracker version, typeset-2 = interim). Compare PNGs: v-beauty-and-joy/a01-…/chin-compare-2026-10-31/. Joy framing.json changed, uncommitted in Joy repo. Stray scratch op-render-wlltfq4x left for project.clear-renders.
+- overlay-chin-dev now doing tracker → FliTools face-track move.
+- StoryPilot v2 hybrid mock LIVE (same URL 814tyf7…, v 1793413143-e15d) — awaiting David yes/change. D13 chin-bug source r_d48036acd2 placed at 06 (8 sources); D13 script NOT rewritten.
+- **broll-pilot-dev LAUNCHED** (worktree broll-pilot, brief docs/briefs/broll-pilot-build-2026-10-31.md, spec cafe7aa). Storage = existing resources/<video|project>/ zone, place:copy vs in-place. broll-pilot-plan stood down.
+
 ### 2026-10-31 ~10:00 — David's rulings batch 2
 - David OUT for a few hours (~10:15); wants a progress report on return. Roamy caffeinated all day — workers may spread dev load there. Keep driving: merge on gates, launch B-roll builder when brief lands.
 - StoryPilot: NO pick yet. storypilot-dev making ONE v2 hybrid mock (A's left→right cards + vertical lanes; right-edge tab → medium/large reader = B; keep C's spine graphic, drop C's timeline; answer "other lanes?" w/o Kanban creep). Then step (b).
