@@ -8,6 +8,15 @@
 
 ## Current step
 
+### 2026-10-31 ~08:45 — Saturday plan dispatched (captains-inbox brief, source B676/B677)
+- #1 Overlay chin bug → `overlay-chin-dev` (wt flistudio-worktrees/overlay-chin) · brief docs/briefs/overlay-chin-2026-10-31.md
+- #2a StoryPilot 3-variant artifact → existing `storypilot-dev` (new branch from main; no build until David picks; Elgato code → FliTools; Prompter OFF, don't start)
+- #3 B-roll Pilot spec + mock artifact → `broll-pilot-plan` (wt flistudio-worktrees/broll-pilot) · brief docs/briefs/broll-pilot-spec-2026-10-31.md
+- #4 FliHub/FliCast B-roll button → recommended: last step of B-roll Pilot v1 build, after spec fixes the register contract (David to confirm)
+- #5 FliEdit drivable audit + 2-layer spike → `fliedit-drivable-dev` (wt fliedit-worktrees/drivable-audit) · yields to 1–4
+- Recording today: start TeleTubby (`my-app start teletubby`) when David is ready. I merge + restart FliStudio after gates/busy check.
+- Backlog only: Publishing Pilot, Audio Pilot, Timeline Pilot/Director's Chair, video groups.
+
 **2026-10-31 ~08:00 — Desk cleared; waiting on David's B-roll / FliHub input.** On David's say-so I closed
 tmux sessions tubby-land-dev, tubby-panel-dev, flivideo-arch-rsch, flihub-rebuild-rsch (processes confirmed gone).
 arch-rsch's last message (FliHub parked) was acked late; nothing was owed. arch-rsch handover:
