@@ -8,6 +8,12 @@
 
 ## Current step
 
+### 2026-10-31 ~03:10Z — merges
+- **B-roll Pilot v1 MERGED** flistudio main 110fe86 (main merged into branch first; gates reproduced). Global broll kind row added (appydave-config 8b1d87b). FliStudio was DOWN ~5 min: live checkout needed `npm install` for new workspace modules/broll-pilot — **after merging a new workspace, npm install before restart**. Also: `my-app restart` inside a 2-min tool timeout gets killed mid-start — run it backgrounded/with timeout.
+- Tickets to file (from broll-pilot-dev): FliTools describe service brief docs/briefs/flitools-describe-service-2026-10-31.md (pushed 3b40123); fli-core: name `resources` + `footage` as ProjectZones in classify.ts (non-blocking). appydave-plugins INDEX stale (/plugin-index).
+- StoryPilot (b): FliTools prompter-load MERGED 71821aa + restarted; Teletubby script-chapters MERGED 44e0011 + restarted. FliStudio storypilot-p2 CONFLICTS with main (counts/openrpc) → storypilot-dev resolving + fencing story.prompter.send human-only. Pending: D13 captures lack meta.channel (B663/B667 plaud, B670 chatgpt) — my call later. Screen not yet eyeballed.
+- Orphan nodemon pid 95664 (9:21) seen — left alone.
+
 ### 2026-10-31 — StoryPilot v2 ACCEPTED by David → storypilot-dev building step (b): FliStudio storypilot-p2 (v2 UI + chapters) · teletubby-worktrees/script-chapters (script.write chapters) · flitools-worktrees/prompter-load (prompter.load, fake Camera Hub home in tests). Merge order: FliTools + Teletubby before FliStudio. First real Prompter push = David's action.
 
 ### 2026-10-31 ~09:25Z+ — while David is out
