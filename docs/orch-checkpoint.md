@@ -8,6 +8,13 @@
 
 ## Current step
 
+### 2026-10-31 19:40 — project-status-dev launched
+- Project Status (FliStudio project list: 8 step boxes, markers column, filters, tags, control plane, fli.status.json log) approved by David from https://claude.ai/artifact/1ik3tTnTU8ssSmEtcCdbgH.
+- Brief: /Users/davidcruwys/dev/ad/flivideo/docs/briefs/project-status-build-2026-10-31.md · worktree flistudio-worktrees/project-status (branch project-status off 38b6a75; mock + dry run committed 1858d91).
+- Session tmux `project-status-dev` (iTerm attached). Orch merges after reproducing gates + busy check.
+- Also today: vOz brand → dormant (appydave-config 4bd896a). B678 (8h Plaud, untranscribed) offered to David for big-file lane — no answer yet.
+
+
 ### 2026-10-31 ~04:09Z — storypilot-uat MERGED flistudio main 38b6a75 (Large full width, verified 1517px); D13 has 6 chapters (text byte-identical). UAT page republished with fixes (v 1793419733-1e9e). TeleTubby still holds the no-chapter copy until David presses Send. Open for David: chapter 2 at ¶6 vs ¶8; Overlay final choice; first Prompter send.
 
 ### 2026-10-31 ~04:05Z — UAT guide published for David
