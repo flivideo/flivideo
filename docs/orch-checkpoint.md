@@ -8,6 +8,15 @@
 
 ## Current step
 
+### 2026-10-31 ~10:00 — David's rulings batch 2
+- StoryPilot: NO pick yet. storypilot-dev making ONE v2 hybrid mock (A's left→right cards + vertical lanes; right-edge tab → medium/large reader = B; keep C's spine graphic, drop C's timeline; answer "other lanes?" w/o Kanban creep). Then step (b).
+- Q3 RULED one model + DIRECTION: unify everything FliStudio holds (StoryPilot sources, B-roll, publishing, thumbnails) into one entity-relationship structure; sections owned by an extension but not exclusively. Backlog/architecture — not designed yet.
+- Q4: image source ≠ B-roll (worker proposal). Teletubby chapters → own JSON-RPC door, step (b). Elgato: yesterday's file-write path works (brains/ecamm/elgato-prompter.md) → FliTools prompter.load (quit Camera Hub via kill -TERM, write, relaunch; back up first); 1 Elgato chapter per SP chapter.
+- D13 = Overlay Studio/Pilot video: chin-bug learning to be appended to D13 StoryPilot sources (storypilot-dev, append-only).
+- Tracker A (joy analyze-source.py + facedetect.swift) → MOVE to FliTools APPROVED, after chin fix; overlay-chin-dev does it in flitools-worktrees/face-track; joy-video skill + Overlay Pilot repointed; tracker B untouched.
+- B-roll mocks APPROVED. Storage RULED: not FliHub — FliStudio-owned project resources zone (Resolve-style), producers drop/keep, B-roll Pilot registers; broll-pilot-plan to survey + rule in spec, then write build brief docs/briefs/broll-pilot-build-2026-10-31.md → I launch fresh builder.
+- Qwen describe RULED (mine, delegated): FliTools "description as a service" on named worker (M2 first, Roamy fallback), like transcription; never on the FliStudio host.
+
 ### 2026-10-31 ~08:45 — Saturday plan dispatched (captains-inbox brief, source B676/B677)
 - #1 Overlay chin bug → `overlay-chin-dev` (wt flistudio-worktrees/overlay-chin) · brief docs/briefs/overlay-chin-2026-10-31.md
 - #2a StoryPilot 3-variant artifact → existing `storypilot-dev` (new branch from main; no build until David picks; Elgato code → FliTools; Prompter OFF, don't start)
