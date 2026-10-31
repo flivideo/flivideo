@@ -12,6 +12,7 @@
 - #1 Overlay chin bug → `overlay-chin-dev` (wt flistudio-worktrees/overlay-chin) · brief docs/briefs/overlay-chin-2026-10-31.md
 - #2a StoryPilot 3-variant artifact → existing `storypilot-dev` (new branch from main; no build until David picks; Elgato code → FliTools; Prompter OFF, don't start)
 - #3 B-roll Pilot spec + mock artifact → `broll-pilot-plan` (wt flistudio-worktrees/broll-pilot) · brief docs/briefs/broll-pilot-spec-2026-10-31.md
+  - **Spec + mocks DELIVERED 10-31** (branch broll-pilot cee5c2c, docs/planning/broll-pilot/spec.md; mocks https://claude.ai/artifact/41bRuUXxKwpL4VadM1ATbp). Awaiting David's mock approval → then v1 builder. Q6 FliHub B-roll folder (rec hub/broll/). Q11 Qwen lead sent (brains/video-as-code/footage-triage.md).
 - #4 FliHub/FliCast B-roll button → **David CONFIRMED wait (10-31)**: not today. Order: B-roll Pilot spec → registration contract → v1 build → buttons LAST.
 - David rulings 10-31 ~09:00: mocks plan OK; no captains-log:deliver on B-roll Pilot until mocks approved; storypilot-dev HOLD (no A/B/C pick yet; variants https://claude.ai/artifact/814tyf7VGfciaESVKvCygc; page source kept local, uncommitted).
 - TeleTubby started 10-31 ~08:54 (system_status ok, busy []). Elgato Prompter untouched.
