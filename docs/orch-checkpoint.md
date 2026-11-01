@@ -8,6 +8,13 @@
 
 ## Current step
 
+### 2026-11-01 ~10:00 — one rail LIVE; D19 created; workers visible
+- Story Pilot one elastic right rail (FliHub look, push, M/L, Reader folded in, section note targets, no Width S/M/L): FliStudio main f5b6caa, restarted, health ok. Built by tmux worker `storypilot-dev` (worktree flistudio-worktrees/rail-v2) — keep it up as the Story Pilot worker.
+- David: orch must delegate to VISIBLE tmux workers, not hidden subagents.
+- D19 `d19-spaghetti-rig` created via project.create (id 88f509cf…). tmux `d19-storypilot-work` gathering sources (brief docs/briefs/d19-spaghetti-rig-story-2026-11-01.md); reports to orch.
+- Open for David: Projects "Show" filter → recommend click=solo, ⌘-click=add, ★ rows always shown (awaiting go). Name: "Field notes" (data) vs Field Trial (process) — recommended.
+- Orch handover/restart recommended (this conversation ~$1,100); pending David's go.
+
 ### 2026-11-01 ~09:20 — Story Pilot + Lab side tabs, white cards LIVE
 - FliStudio main 367f10c (lab-tabs, built by a subagent; gates reproduced; busy idle; restarted, health ok). Right-edge Settings/Sources/Chapters rail (push, never overlay) on Lab + main Story Pilot; Resources white card tokenised (--surface-sheet etc.); --content-max 1000px (Words) for Story Pilot/Lab; Lab variants A/B/C/D with C dark|light toggle, B terminal toggle, S/M/L 720/860/1000.
 - Brand skill: app-surfaces rule (appydave-plugins 1314d2f, 825c578).
