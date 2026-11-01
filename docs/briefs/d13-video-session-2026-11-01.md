@@ -1,4 +1,4 @@
-# D13 Overlay Pilot — the video conversation (`d13-overlaypilot-video`, tmux `d13-overlaypilot-work`)
+# D13 Overlay Pilot — the video conversation (`d13-overlaypilot-video`, tmux `d13-overlaypilot-video`)
 
 **Written 2026-11-01 on the M4 by `d18-storypilot-video`** at David's request: "a terminal created for D13, populated
 with everything it needs to help me work on that project and video. Mostly video… The project should be worked on
