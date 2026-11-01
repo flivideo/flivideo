@@ -8,6 +8,12 @@
 
 ## Current step
 
+### 2026-11-01 ~11:10 — new orch [5d47a4]; rail fix LIVE
+- Old orch [b8d399] shut down (David). Its only post-handover item was the 10:30 D19 standing job (below), which is still mine.
+- Story Pilot rail fix: FliStudio main 62a4524 (ff from rail-v2), gates reproduced (typecheck 0, tests green), busy idle, restarted, health ok. Content now spans the strip width, which supersedes the 1000px content cap (David said go). The script sheet stays capped at 960px (David).
+- storypilot-dev's next unit: collapse D18's 19 NOT PLACED timeline nodes into a "+19" marker (orch's call; David didn't follow the question).
+- Still open for David: the Lab-first + approved-mock process fork; the Projects Show filter; the "Field notes" name; the D19 angle.
+
 ### 2026-11-01 ~10:30 — D19 angle (David)
 - Thesis: "I built an OpenRig that turns spaghetti into clean code" — unproven until the AppyStack run finishes; honest verdict / check-that-lied are supporting beats, not the focus. D19 keeps gathering; no script.md yet. Ruling forwarded verbatim to d19-storypilot-video; it saved it in story settings `notes` (50 sources, v-appydave ab9b1d4).
 - **Standing job for orch:** ping `d19-storypilot-video` at each AppyStack (ladder-appystack) tier end and when the run finishes, so it attaches the hand-back / LEARNED / judge records. It does not watch the seats itself.
