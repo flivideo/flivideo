@@ -8,6 +8,12 @@
 
 ## Current step
 
+### 2026-11-01 ~08:15 — fli-notes v2 DONE (merged + live)
+- fli-core v0.28.0 released (main 7c7ad88, rc.1 promoted). FliStudio main 746643c (busy idle → merged, npm install, my-app restart, health ok; Lab verified live on D13). FliCut main 4a4396b (was DOWN; built, not started). Both repinned #v0.28.0.
+- UAT page: https://claude.ai/artifact/XBK9iekHsY7GhaCM28vqyp (slug f462c874-76c8-4359-8fe7-4eef12f89c77) · source docs/uat/fli-notes-v2-2026-11-01/. Ghost-check 0. 6 questions, each with rec.
+- flistudio skill updated (appydave-plugins c036e26). Workers idle; closing them + worktrees needs David's say-so.
+- Open: David's answers; real-Mac ⌘⇧ check on first try; no live Lab note written on D13 (d13-write owns it).
+
 ### 2026-11-01 ~07:45 — fli-notes v2 RUNNING
 - Go (relayed, David ~07:30): "Go on both… I like option A" + "yes remove notes page". Brief `docs/briefs/fli-notes-v2-quiet-capture-and-lab-2026-11-01.md` (8c092bf); work plan `docs/briefs/fli-notes-v2-orch-workplan-2026-11-01.md` (14848d5).
 - Same three workers re-tasked on branch `notes-v2` in their v1 worktrees: core = life states → v0.28.0-rc.1; studio = remove notes UI + ⌘⇧ gesture + Story Pilot Lab A–D; cut = remove + gesture + v1 Q1.

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>fli-notes v2 UAT</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600&family=Roboto:ital,wght@0,400;0,500;0,700;1,400&family=Roboto+Mono&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;--brown:#342d2d;--gold:#ccba9d;--yellow:#ffde59;--amber:#c8841a;--muted:#7a6e5e;--cream:#faf5ec;--surface:#f0ebe4;--linen:#e8e0d4;--border:#d4cdc4;--chrome:#1a1515;--dark:#25201e;--blue:#2E91FC;--ok:#3f7a3a;--warn:#b5524a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--brown);font:16px/1.6 Roboto,sans-serif}
+main{max-width:980px;margin:0 auto;padding:28px 16px 80px}
+header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+.logo-badge{display:inline-block;background:#342d2d;border-radius:6px;padding:4px 10px 2px;font-family:"Bebas Neue",Oswald,sans-serif;letter-spacing:.04em;line-height:1.1;font-size:22px}
+.logo-badge .a{color:#ccba9d}.logo-badge .d{color:#ffde59}
+.eyebrow{font:500 13px Oswald,sans-serif;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+h1{font:600 40px/1.1 Oswald,sans-serif;text-transform:uppercase;margin:10px 0 6px}
+h2{font:600 22px Oswald,sans-serif;text-transform:uppercase;letter-spacing:.03em;margin:44px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+h3{font:600 17px Oswald,sans-serif;text-transform:uppercase;margin:22px 0 6px}
+.verdict{background:var(--surface);border-left:5px solid var(--yellow);padding:14px 18px;margin:18px 0;font-size:17px}
+.verdict strong{box-shadow:inset 0 -.4em 0 var(--yellow)}
+ol.steps{counter-reset:s;list-style:none;padding:0;margin:8px 0}
+ol.steps li{counter-increment:s;position:relative;padding:6px 0 6px 40px}
+ol.steps li::before{content:counter(s,decimal-leading-zero);position:absolute;left:0;top:6px;font:600 15px "Roboto Mono",monospace;color:var(--amber)}
+code,kbd{font:14px "Roboto Mono",monospace;background:var(--linen);padding:1px 5px;border-radius:3px}
+.look{color:var(--muted);font-style:italic}
+figure{margin:14px 0}
+figure img{width:100%;border:1px solid var(--border);border-radius:4px;display:block}
+figcaption{font-size:13px;color:var(--muted);margin-top:4px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:700px){.grid2{grid-template-columns:1fr}}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;padding:8px 8px;border-bottom:1px solid var(--border);vertical-align:top}
+th{font:500 13px Oswald,sans-serif;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.q{border:1px solid var(--border);border-radius:4px;padding:12px 16px;margin:10px 0;background:#fff8}
+.q .rec{margin-top:6px}
+.q .rec b{color:var(--amber);font-family:Oswald,sans-serif;text-transform:uppercase;font-weight:500;letter-spacing:.05em;font-size:13px}
+.tag{display:inline-block;font:500 12px Oswald,sans-serif;text-transform:uppercase;letter-spacing:.06em;padding:1px 7px;border-radius:3px;border:1px solid var(--border);color:var(--muted)}
+.pass{color:var(--ok);font-weight:700}.gap{color:var(--warn);font-weight:700}
+blockquote{margin:8px 0;padding:6px 14px;border-left:3px solid var(--gold);font-style:italic;color:var(--brown)}
+a{color:var(--blue)}
+.wrap{overflow-x:auto}
+</style>
+</head>
+<body>
+<main>
+<header><span class="logo-badge"><span class="a">Appy</span><span class="d">Dave</span></span><span class="eyebrow">FliVideo · morning UAT · 1 Nov 2026</span></header>
+<h1>fli-notes: notes, asks &amp; changes</h1>
+
+<body>
+<main>
+<header><span class="logo-badge"><span class="a">Appy</span><span class="d">Dave</span></span><span class="eyebrow">FliVideo · UAT · 1 Nov 2026</span></header>
+<h1>fli-notes v2: quiet capture + Story Pilot Lab</h1>
+
+<div class="verdict"><strong>Built, merged and live.</strong> The notes pages are gone. Hold <kbd>⌘</kbd><kbd>⇧</kbd> and click anything to note it, and let go to make everything vanish. Story Pilot Lab shows D13 four ways. FliStudio was idle, so I merged and restarted it. FliCut is merged and built but wasn't running, so start it. fli-core is v0.28.0. About 5 minutes to try.</div>
+
+<h2>1 · The gesture <span class="tag">both apps</span></h2>
+<ol class="steps">
+<li>Hold <kbd>⌘</kbd> + <kbd>⇧</kbd> with your left hand and move the mouse. <span class="look">Whatever can take a note gets a thin outline under the pointer, with no layout shift.</span></li>
+<li>Click while holding. <span class="look">A small note box opens on that thing, and the click does nothing else: a link doesn't open and a button doesn't fire. The "This is an ask" switch is still there.</span></li>
+<li>Type, then press <kbd>⌘↵</kbd> or <b>Keep note</b>. Let go of the keys. <span class="look">The screen is exactly as before; tests compare it byte for byte.</span></li>
+<li>If you'd rather not hold keys, the quiet <b>✎</b> top right arms one pick. <kbd>Esc</kbd> cancels.</li>
+</ol>
+<div class="grid2">
+<figure><img src="flistudio/1-hold-outline.png" alt="FliStudio hold outline"><figcaption>FliStudio: ⌘⇧ held; an outline under the pointer.</figcaption></figure>
+<figure><img src="flistudio/2-note-box.png" alt="FliStudio note box"><figcaption>FliStudio: click while held, and the box opens.</figcaption></figure>
+<figure><img src="flicut/v2-2-held-outline-on-word.png" alt="FliCut hold outline"><figcaption>FliCut: ⌘⇧ held over a word.</figcaption></figure>
+<figure><img src="flicut/v2-3-note-box-on-word.png" alt="FliCut note box"><figcaption>FliCut: the note box on the word "girlfriend" (fixture project; ignore the red banner, the test video was empty).</figcaption></figure>
+</div>
+
+<h2>2 · Story Pilot Lab <span class="tag">FliStudio, live</span></h2>
+<ol class="steps">
+<li>Open <a href="http://127.0.0.1:7150/b/appydave/p/d13-overlay-pilot?zone=ext:storypilot-lab">D13 → Story Pilot Lab</a>. It's in the Extensions rail, and linked under Story Pilot in the Script box. <span class="look">It reads D13's real script (1,049 words, 6 chapters) and never writes it.</span></li>
+<li><b>A · Now</b>: today's look, as the baseline.</li>
+<li><b>B · White focus</b>: a cream page. Click a chapter and it lifts into a white reading surface; <kbd>↑</kbd> <kbd>↓</kbd> move, and <kbd>Esc</kbd> or another click lets go.</li>
+<li><b>C · Terminal feel</b>: the same words in monospace on a dark terminal panel, with numbered paragraphs.</li>
+<li><b>D · Settings</b>: the "For whom and why" block shown behind a tab and inline, side by side.</li>
+<li>Note what you like or hate with ⌘⇧-click. <span class="look">Each note is filed against the variant (e.g. <code>storypilot-lab:B</code>) with the words it was about, so I can read your verdicts later.</span></li>
+</ol>
+<figure><img src="flistudio/live-lab-d13.png" alt="Live Story Pilot Lab on D13"><figcaption>Live FliStudio just now: the Lab on D13, variant B.</figcaption></figure>
+<div class="grid2">
+<figure><img src="flistudio/B-white-focus.png" alt="B white focus"><figcaption>B · White focus: chapter 2 lifted (test copy).</figcaption></figure>
+<figure><img src="flistudio/C-terminal.png" alt="C terminal"><figcaption>C · Terminal feel.</figcaption></figure>
+<figure><img src="flistudio/D-settings.png" alt="D settings"><figcaption>D · Settings: tab vs inline.</figcaption></figure>
+<figure><img src="flistudio/A-now.png" alt="A now"><figcaption>A · Now (baseline).</figcaption></figure>
+</div>
+
+<h2>3 · What's under it</h2>
+<p>Every record now has a life state: <b>live</b> (agents read it) → <b>done</b> · <b>used</b> (say what it fed) · <b>stale</b> (say why) · <b>replaced</b> (point at the newer one). Reads default to live, and history is still kept. Agents settle records with <code>notes.settle</code>; the <code>flivideo:flistudio</code> skill now knows how. Your v1 records still read: the D13 ask is <i>done</i>. Every save still logs a change quietly, and nothing shows in your interface.</p>
+
+<h2>4 · Not done / not proven</h2>
+<table><tr><th>What</th><th>Why</th></tr>
+<tr><td>A real Mac keyboard + mouse</td><td>Tested in the apps' own Chromium with real key events. If macOS grabs ⌘⇧-click for a system shortcut, your first try will show it, and the ✎ fallback still works.</td></tr>
+<tr><td>A live Lab note on D13</td><td>Proven in a test copy of D13. I didn't write into D13 today because the <code>d13-write</code> session owns it.</td></tr>
+<tr><td>Promoting a variant</td><td>Out of scope. The "notes become <i>used</i>, pointing at the final page" path exists and is tested.</td></tr>
+<tr><td>A "before" for launch / publish / words writes</td><td>Still logged without a "before", same as v1.</td></tr>
+</table>
+
+<h2>5 · Questions <span class="tag">each has a recommendation</span></h2>
+<div class="q"><b>Q1 · Should ⌘⇧-click on empty space act as a normal click?</b> Today only clicks on noteable things are swallowed; anything else passes through.<div class="rec"><b>Rec:</b> keep it. Pros: you can't "lose" a click. Cons: you can't note a blank area.</div></div>
+<div class="q"><b>Q2 · Should pressing another key while holding cancel the gesture?</b> It does today, so ⌘⇧Z (redo) and ⌘⇧D never flash outlines.<div class="rec"><b>Rec:</b> keep it.</div></div>
+<div class="q"><b>Q3 · Should the Lab open on B · White focus?</b><div class="rec"><b>Rec:</b> yes for now, since it's the one you asked about first. It's a one-line change once you've picked.</div></div>
+<div class="q"><b>Q4 · Is C's dark terminal panel inside the light page OK?</b> The brand allows a dark accent; C is the one place that's mostly dark.<div class="rec"><b>Rec:</b> keep it for the test. If terminals win, try a light terminal as variant E.</div></div>
+<div class="q"><b>Q5 · Should settling a record count as a <i>change</i> rather than a fourth kind?</b><div class="rec"><b>Rec:</b> keep it. It holds your three-kinds ruling and logs every move.</div></div>
+<div class="q"><b>Q6 · When should the FliVideo-flavoured names go?</b> The new fields are app-neutral, but the file name <code>fli.notes.jsonl</code> and the <code>brand/project/video</code> keys remain.<div class="rec"><b>Rec:</b> rename them when the record moves to a shared core for all your apps, not before. Renaming now breaks v1 files for no gain.</div></div>
+<p>Or just say <b>"go with recommendations"</b>.</p>
+</main>
+</body>
+</html>
