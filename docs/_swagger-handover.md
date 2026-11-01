@@ -56,7 +56,13 @@ Peer session names change: David renames them. Use `ListAgents` and the current 
 ## The queue
 
 **The one live thing:** David's Story Pilot problems conversation (below).
-1. **D19 report** from the D19 session: counts, unreachable sources (Roamy's `spgame-spaghetti-work`), 3–5 beats. Relay it to David. He picks the angle; nobody writes `script.md` before that.
+1. **D19 report: ARRIVED (relayed to David 10:20).** 48 resources were attached with a why each (20 dossier, 11 artifact, 10 session, 5 capture, 1 note, 1 link), with a first-pass order; v-appydave `5fd5bf5`. Roamy replied in full. Feel/do/audience are unset; that's David's call. **The beats he hasn't ruled on:**
+   - Omer's "gates not prompts";
+   - the magic-numbers runaway (33 PRs/6h);
+   - the check that lied (95.7% → 64.7%);
+   - the honest verdict (half a grade, the same 20 bugs, 1.8× bytes);
+   - the AppyStack re-run (about 4h vs 32h, create-appystack 0.5.0).
+   Next: David picks the angle; the D19 session writes.
 2. **Projects "Show" filter.** The recommendation is waiting for David's go:
    - click = solo, ⌘-click = add/remove, an "All" chip;
    - ★ (worked on today) rows always show whatever the filter.
