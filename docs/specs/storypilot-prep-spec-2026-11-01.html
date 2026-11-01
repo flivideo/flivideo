@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Story Pilot Prep — from 19 boxes to a short, ordered story</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600&family=Roboto:ital,wght@0,400;0,500;0,700;1,400&family=Roboto+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light;
+  --brand-brown:#342d2d; --brand-gold:#ccba9d; --brand-yellow:#ffde59; --brand-amber:#c8841a;
+  --brand-muted:#7a6e5e; --brand-near-white:#faf5ec; --brand-surface:#f0ebe4; --brand-linen:#e8e0d4;
+  --brand-border:#d4cdc4; --brand-chrome:#1a1515; --brand-dark-surface:#25201e; --brand-blue:#2E91FC; --brand-card:#ffffff;
+}
+* { box-sizing:border-box; }
+body { margin:0; background:var(--brand-near-white); color:var(--brand-brown); font:17px/1.65 Roboto,sans-serif; }
+.wrap { max-width:1000px; margin:0 auto; padding:32px 24px 80px; }
+header { display:flex; align-items:center; gap:14px; margin-bottom:8px; }
+.logo-badge { display:inline-block; background:#342d2d; border-radius:6px; padding:4px 10px 2px; font-family:"Bebas Neue",Oswald,sans-serif; letter-spacing:.04em; line-height:1.1; font-size:22px; }
+.logo-badge .a { color:#ccba9d; } .logo-badge .d { color:#ffde59; }
+.eyebrow { font-family:Oswald,sans-serif; text-transform:uppercase; letter-spacing:.12em; font-size:13px; color:var(--brand-muted); }
+h1 { font-family:Oswald,sans-serif; font-weight:600; text-transform:uppercase; font-size:40px; line-height:1.1; margin:12px 0 6px; }
+h2 { font-family:Oswald,sans-serif; font-weight:500; text-transform:uppercase; font-size:24px; margin:0 0 12px; letter-spacing:.02em; }
+h2 .n { color:var(--brand-amber); margin-right:10px; }
+h3 { font-family:Oswald,sans-serif; font-weight:500; font-size:18px; text-transform:uppercase; margin:20px 0 6px; }
+.sub { color:var(--brand-muted); margin:0 0 24px; }
+.card { background:var(--brand-card); border:1px solid var(--brand-border); border-radius:6px; padding:24px 28px; margin:20px 0; }
+.verdict { border-left:4px solid var(--brand-yellow); }
+.verdict p { margin:0 0 8px; }
+blockquote { margin:10px 0; padding:2px 0 2px 16px; border-left:2px solid var(--brand-amber); font-style:italic; color:var(--brand-brown); }
+table { width:100%; border-collapse:collapse; font-size:15px; }
+th, td { text-align:left; vertical-align:top; padding:9px 10px; border-bottom:1px solid var(--brand-border); }
+th { font-family:Oswald,sans-serif; font-weight:500; text-transform:uppercase; font-size:13px; letter-spacing:.06em; color:var(--brand-muted); }
+code { font-family:"Roboto Mono",monospace; font-size:14px; background:var(--brand-surface); padding:1px 5px; border-radius:4px; overflow-wrap:anywhere; }
+.flow { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:12px 0; }
+.step { background:var(--brand-card); border:1px solid var(--brand-border); border-radius:4px; padding:8px 12px; font-family:Oswald,sans-serif; font-size:15px; text-transform:uppercase; letter-spacing:.03em; }
+.step.key { border-color:var(--brand-amber); box-shadow:inset 0 -3px 0 var(--brand-yellow); }
+.arrow { color:var(--brand-muted); }
+.mock { border:1px solid var(--brand-border); border-radius:6px; overflow:hidden; font-size:15px; }
+.mock .bar { background:var(--brand-surface); padding:10px 14px; border-bottom:1px solid var(--brand-border); display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+.mock .angle b { font-family:Oswald,sans-serif; text-transform:uppercase; letter-spacing:.04em; font-weight:500; }
+.mock .row { display:grid; grid-template-columns:36px 1fr auto; gap:10px; padding:10px 14px; border-bottom:1px solid var(--brand-border); align-items:start; }
+.mock .row:last-child { border-bottom:0; }
+.mock .num { font-family:"Roboto Mono",monospace; color:var(--brand-amber); }
+.mock .why { color:var(--brand-muted); font-size:14px; }
+.pill { display:inline-block; font-family:Oswald,sans-serif; font-size:12px; text-transform:uppercase; letter-spacing:.06em; padding:1px 8px; border-radius:999px; border:1px solid var(--brand-border); color:var(--brand-muted); white-space:nowrap; }
+.pill.stale { border-color:var(--brand-amber); color:var(--brand-amber); }
+.pill.raw { background:var(--brand-brown); color:#faf5ec; border-color:var(--brand-brown); }
+.pill.flag { border-color:#b5524a; color:#b5524a; }
+.decide td:first-child { font-family:"Roboto Mono",monospace; color:var(--brand-amber); width:32px; }
+.rec { font-weight:700; }
+ul { padding-left:20px; } li { margin:4px 0; }
+a { color:var(--brand-blue); }
+.small { font-size:14px; color:var(--brand-muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><span class="logo-badge"><span class="a">Appy</span><span class="d">Dave</span></span><span class="eyebrow">FliVideo · Story Pilot · spec for approval · 2026-11-01</span></header>
+<h1>Story Pilot Prep</h1>
+<p class="sub">From "19 boxes" to a short, ordered story you can trust without reading every source.</p>
+
+<div class="card verdict">
+<p><b>Recommendation: build one skill, <code>flivideo:storypilot-prep</code>, and add one field, <code>angle</code>, that only you write.</b></p>
+<p>The research says your ask has been the same for a month: sources <i>placed properly, up to date, refreshable</i>, without you reading them. Every failure traced back to the same hole. Nothing records <b>what a summary was built from</b>, <b>who placed it</b>, or <b>whose angle it serves</b>. No existing skill does any of the three.</p>
+<p>Nothing is built until you approve. Five decisions are yours, in section 7; each has my recommendation.</p>
+</div>
+
+<div class="card">
+<h2><span class="n">01</span>The problem, in your words</h2>
+<blockquote>"if you present me with 19 boxes like this, it's not much better when you just show me 6 boxes… I'm overloaded… I don't know what I can use. I don't know what the linear order is."</blockquote>
+<blockquote>"Did they come in automatic, synthesised, or are they often just raw and then they become synthesised later?"</blockquote>
+<blockquote>"if I ask for it to be synthesised, but it's an ongoing conversation, how do I know the synthesis is now stale?"</blockquote>
+<blockquote>"so that I don't actually have to go in and read those things, but know that they're going to be placed properly, know that they're up to date, know that they're refreshable."</blockquote>
+<blockquote>"the spaghetti rig is a great idea. It's just that we haven't got it to work yet, and the video would be more about our getting it to work: an anti-slop AI system. I don't know whether an angle… is needed to do proper curation."</blockquote>
+</div>
+
+<div class="card">
+<h2><span class="n">02</span>What we found</h2>
+<table>
+<tr><th>Finding</th><th>Evidence</th></tr>
+<tr><td><b>Attaching is not placing.</b> Sources pile up; nothing turns them into a story.</td><td>D13: 9 attached, 8 placed. D18: 20 attached, 0 placed (no story file). D19: 50 attached, journey order only.</td></tr>
+<tr><td><b>Summaries go stale silently.</b> A continuing ChatGPT thread gets a <i>new</i> dossier, not an update.</td><td>OpenRig: three dossiers of one thread (B612 → B619 → B625). D19's order froze while the AppyStack run went on.</td></tr>
+<tr><td><b>No existing skill knows its output is out of date.</b></td><td>The only working "out of date" check in the suite is Listen's content hash.</td></tr>
+<tr><td><b>No angle field.</b> Story Pilot has audience / feel / do, nowhere for the angle. An agent fills the gap with its own.</td><td>This morning: three "spaghetti is stupid" angles. Which session wrote them is not established.</td></tr>
+<tr><td><b>The right pattern already happened once.</b> D19 flagged the one source that contradicts your angle and let you choose.</td><td><code>WEIGH-UP.md</code> §0: "struggle beat" vs "conclusion".</td></tr>
+<tr><td><b>Tool talk mixes into story talk.</b></td><td>D18's 20 sources are mostly build briefs about Story Pilot itself. Lab notes landed in D13.</td></tr>
+<tr><td><b>Story Pilot can't run a skill itself yet.</b></td><td>No spawn or LLM call in its server. It is driven from Claude Code over JSON-RPC.</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h2><span class="n">03</span>Angle first, but provisional</h2>
+<p>Your chicken-or-egg question. The evidence says <b>both, in this order</b>:</p>
+<div class="flow">
+<span class="step key">You: one-line angle</span><span class="arrow">→</span>
+<span class="step">Prep places + orders against it</span><span class="arrow">→</span>
+<span class="step">Contradicting sources flagged</span><span class="arrow">→</span>
+<span class="step key">You: keep, sharpen or change</span>
+</div>
+<ul>
+<li>The angle is <b>yours</b>, in your words, dated, and can be marked provisional ("proof pending").</li>
+<li>If there is no angle yet, the skill may <b>propose three</b>, clearly labelled as proposals. It never writes the angle field itself.</li>
+<li>Evidence can <b>challenge</b> the angle ("3 sources cut against it"); it never quietly replaces it. That is exactly what D19 did right.</li>
+<li>Without an angle, the skill still places and orders, but by time, and tells you it had no angle to work from.</li>
+</ul>
+</div>
+
+<div class="card">
+<h2><span class="n">04</span>What the skill does</h2>
+<h3>Placement</h3>
+<p>Every attached source goes into a story section (Why it mattered · What happened · How to tell · …), or into <b>"suggest removing"</b> with a reason, or into <b>"about the tool, not the story"</b> (the D18 build briefs).</p>
+<h3>Order</h3>
+<p>A proposed linear order through the sections, with a <b>one-line reason per source</b> tied to the angle ("struggle beat: the test game was already clean, so AppyStack is the real test").</p>
+<h3>Provenance, shown plainly</h3>
+<p>Each source says <span class="pill raw">raw</span> (as said or logged: a transcript, a capture) or <span class="pill">synth</span> (written by an AI from raw material), <b>when</b> each was made, and what the synth was made <b>from</b>.</p>
+<h3>Staleness</h3>
+<p>Every synthesis stores a <b>source stamp</b>: what the source looked like when the summary was made (last message time + a hash of the conversation or file). When the source has grown since, the card shows <span class="pill stale">out of date — refresh</span>. Refresh re-synthesises from the current source and updates the stamp. It's the same idea as Listen's per-paragraph audio.</p>
+<h3>What it may do on its own</h3>
+<table>
+<tr><th>Action</th><th>On its own?</th></tr>
+<tr><td>Place and order sources, write reasons</td><td><b>Yes</b>: it's a proposal you see, and undoable</td></tr>
+<tr><td>Refresh an out-of-date synthesis</td><td><b>Yes</b>, when you run it</td></tr>
+<tr><td>Remove a source from the project</td><td><b>No</b>: it suggests, and you confirm</td></tr>
+<tr><td>Write or change the angle</td><td><b>Never</b>: proposals only</td></tr>
+<tr><td>Rewrite the script</td><td><b>No</b>: that stays with the video's own session</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h2><span class="n">05</span>What you see in Story Pilot</h2>
+<p>One short ordered list under the angle, not a wall of cards. Cards stay below for when you want to read one.</p>
+<div class="mock">
+<div class="bar"><span class="angle"><b>Angle</b> · getting the anti-slop rig to work <span class="pill">provisional · proof pending</span></span><span class="small">prepped 13:40 · 2 out of date · 1 contradicts</span></div>
+<div class="row"><span class="num">01</span><div>Why spaghetti code is the enemy <span class="pill">synth</span><div class="why">sets the stakes for the whole video</div></div><span></span></div>
+<div class="row"><span class="num">02</span><div>G05: first run of the ladder <span class="pill raw">raw</span><div class="why">struggle beat: the first proof attempt</div></div><span></span></div>
+<div class="row"><span class="num">03</span><div>The weigh-up <span class="pill">synth</span><div class="why">struggle beat: the game was already clean, so it couldn't prove the rig</div></div><span class="pill flag">contradicts angle</span></div>
+<div class="row"><span class="num">04</span><div>OpenRig ChatGPT thread <span class="pill">synth</span><div class="why">how the ladder was designed</div></div><span class="pill stale">out of date — refresh</span></div>
+<div class="row"><span class="num">05</span><div>AppyStack run <span class="pill raw">raw</span><div class="why">getting it to work: the real test</div></div><span></span></div>
+<div class="row"><span class="num">—</span><div class="small">+14 about the tool, not the story · 3 suggested for removal</div><span></span></div>
+</div>
+<p class="small">Illustrative mock built from D19's real beats; the content will come from the skill.</p>
+</div>
+
+<div class="card">
+<h2><span class="n">06</span>How it's built (light)</h2>
+<ul>
+<li><b>Skill:</b> <code>flivideo:storypilot-prep</code> in the FliVideo plugin, never the legacy <code>appydave</code> plugin.</li>
+<li><b>Reuses:</b> the session-archaeology / abridge reader pattern for sessions, <code>steno:fact-sheet</code>'s refresh mode for re-synthesis, Story Pilot's existing <code>story.*</code> verbs to write placement, and Listen's hash approach for staleness.</li>
+<li><b>New data:</b> an <code>angle</code> field (you only), and a source stamp + placement reason on each source in <code>story.json</code>.</li>
+<li><b>Story Pilot UI:</b> the ordered list above, the out-of-date pill, and a "contradicts angle" flag. Built by <code>storypilot-dev</code> after Listen.</li>
+</ul>
+</div>
+
+<div class="card">
+<h2><span class="n">07</span>Your decisions</h2>
+<table class="decide">
+<tr><th>#</th><th>Decision</th><th>My recommendation</th></tr>
+<tr><td>1</td><td>Add an <b>angle</b> field to each video, written only by you (the skill may propose three)</td><td class="rec">Yes. This is the gap the AppyStack angles exposed.</td></tr>
+<tr><td>2</td><td><b>Name</b>: <code>storypilot-prep</code>, or keep "curation"</td><td class="rec">storypilot-prep. It's prep for the story, not tidying a collection.</td></tr>
+<tr><td>3</td><td><b>How it runs</b>: you run it from Claude Code when Story Pilot shows "out of date", or a button in the app</td><td class="rec">Claude Code now, a button later. The button needs new machinery to start Claude from the app.</td></tr>
+<tr><td>4</td><td><b>What it may do alone</b> (table in section 04)</td><td class="rec">As in the table: place, order and refresh freely; removals and angle are yours.</td></tr>
+<tr><td>5</td><td><b>Tool vs story</b>: build briefs about the tool are set aside as "about the tool" by default</td><td class="rec">Yes. D18 is mostly a tool diary today.</td></tr>
+</table>
+<p class="small">Say "approve" to accept all five recommendations, or change any by number.</p>
+</div>
+
+<div class="card">
+<h2><span class="n">08</span>What this does not establish</h2>
+<ul>
+<li>The original turns for three of your quotes (19 boxes, automatic or synthesised, stale) weren't found in the transcripts; they come from a relay.</li>
+<li>Which session wrote the three "spaghetti is stupid" angles is unknown.</li>
+<li>The skill inventory read skill descriptions and searched code, not every skill end to end; ~40 project-local skill folders weren't read.</li>
+<li>AngelEye was down, so the session mining read raw transcripts selectively, from this machine only.</li>
+</ul>
+<p class="small">Sources: <code>docs/specs/curation-inventory-2026-11-01.md</code> · <code>docs/specs/session-curation-asks-2026-11-01.md</code> (local, not yet pushed) · <code>docs/specs/storypilot-listen-2026-11-01.md</code></p>
+</div>
+</div>
+</body>
+</html>
