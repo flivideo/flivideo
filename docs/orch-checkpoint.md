@@ -8,6 +8,11 @@
 
 ## Current step
 
+### 2026-11-01 ~12:50 — rail v3 LIVE; Listen approved and building
+- FliStudio main 63f87a0 (rail v3: margins, top tab row when open, M 55% / L 67% of the area, script focus restored, +19 marker, UX fixes). Restarted, health ok.
+- Workers: storypilot-dev (rail-v2): Reader markdown, +19 scrolls to the cards, styled controls → then the LISTEN build. flistudio-dev (studio-dev): ✎ icon → Show filter → "Attachments" rename → clear-on-publish → shell polish (radii, resources chip). flitools-dev (flitools-worktrees/tts-verb): Kokoro speech verb. resources-rsch closed (specs docs/specs/resources-model + storypilot-listen, artifact R4GPEs2XUkfjUpdkXweGno).
+- David: Listen approved; clear caches on publish (+ the manual clear stays); Lab keep/remove still open.
+
 ### 2026-11-01 ~11:10 — new orch [5d47a4]; rail fix LIVE
 - Old orch [b8d399] shut down (David). Its only post-handover item was the 10:30 D19 standing job (below), which is still mine.
 - Story Pilot rail fix: FliStudio main 62a4524 (ff from rail-v2), gates reproduced (typecheck 0, tests green), busy idle, restarted, health ok. Content now spans the strip width, which supersedes the 1000px content cap (David said go). The script sheet stays capped at 960px (David).
