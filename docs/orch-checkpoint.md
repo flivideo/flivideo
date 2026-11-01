@@ -8,6 +8,14 @@
 
 ## Current step
 
+### 2026-11-01 ~09:00 — David's rulings A2 DONE (brief david-rulings-and-storypilot-handover-2026-11-01.md, b4caa5b)
+- Q1 every ⌘⇧ click swallowed + Lab variant E (light terminal) + full-width B/C/E: FliStudio main 2364edc (restarted, health ok), FliCut main 7f1bcfb (built, restarted, health up). Sticky ✎ mode still only takes target clicks (both apps).
+- All three fli-notes builders closed; their worktrees + branches removed. A3 banked in docs/backlog.md (8bda8eb).
+- David's 3 Lab notes (B, C, D) read cleanly; meta.words loses spaces between blocks (minor).
+- Part B of that brief belongs to session d18-storypilot-work. David now talks to orch directly on the M4.
+- 3 empty iTerm windows ("iTermServer-3.7.5", 0 tabs) on screen — offered to close; awaiting David.
+
+
 ### 2026-11-01 ~08:15 — fli-notes v2 DONE (merged + live)
 - fli-core v0.28.0 released (main 7c7ad88, rc.1 promoted). FliStudio main 746643c (busy idle → merged, npm install, my-app restart, health ok; Lab verified live on D13). FliCut main 4a4396b (was DOWN; built, not started). Both repinned #v0.28.0.
 - UAT page: https://claude.ai/artifact/XBK9iekHsY7GhaCM28vqyp (slug f462c874-76c8-4359-8fe7-4eef12f89c77) · source docs/uat/fli-notes-v2-2026-11-01/. Ghost-check 0. 6 questions, each with rec.
