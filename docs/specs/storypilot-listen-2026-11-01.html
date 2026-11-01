@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Story Pilot Listen — hear the script</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;--brown:#342d2d;--gold:#ccba9d;--yellow:#ffde59;--amber:#c8841a;--muted:#7a6e5e;--cream:#faf5ec;--surface:#f0ebe4;--linen:#e8e0d4;--border:#d4cdc4;--red:#b5524a;--green:#4f7a3f;
+--head:Oswald,"Arial Narrow",sans-serif;--display:"Bebas Neue",Oswald,sans-serif;--body:Roboto,system-ui,sans-serif;--mono:"Roboto Mono",ui-monospace,monospace}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--brown);font:16px/1.55 var(--body)}
+.wrap{max-width:1000px;margin:0 auto;padding:36px 20px 64px;display:grid;gap:40px}
+.logo{display:inline-block;background:var(--brown);border-radius:6px;padding:4px 10px 2px;font:22px/1.1 var(--display);letter-spacing:.04em;width:fit-content}.logo .a{color:var(--gold)}.logo .d{color:var(--yellow)}
+.eyebrow{font:600 13px var(--head);text-transform:uppercase;letter-spacing:.12em;color:var(--amber)}
+h1{font:600 clamp(28px,5vw,42px)/1.1 var(--head);text-transform:uppercase;margin:0}
+h2{font:600 26px var(--head);text-transform:uppercase;margin:0}
+h3{font:600 14px var(--head);text-transform:uppercase;letter-spacing:.08em;color:var(--amber);margin:0}
+p{margin:0;max-width:68ch}header p{color:var(--muted)}
+section,header{display:grid;gap:14px;min-width:0}
+code{font:13px var(--mono);background:var(--surface);padding:1px 5px;border-radius:3px;overflow-wrap:anywhere}
+.app{background:#fff;border:1px solid var(--border);border-radius:6px;overflow:hidden;font-size:14px}
+.tag{font:600 12px var(--head);text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}.tag.new{color:var(--amber)}
+.hd{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;padding:8px 12px;border-bottom:1px solid var(--linen);background:#fcfaf6}
+.hd b{font-family:var(--head);font-weight:500}.sp{flex:1}
+.btn{border:1px solid var(--brown);border-radius:4px;padding:2px 10px;font-size:12px;background:var(--yellow);font-weight:500;white-space:nowrap}
+.btn.g{background:transparent;border-color:var(--border);color:var(--muted)}
+.new-ol{outline:2px solid var(--yellow);outline-offset:2px}
+.row{display:grid;grid-template-columns:40px 1fr auto;gap:10px;padding:9px 12px;border-bottom:1px solid var(--linen);align-items:start}
+.row .n{font:500 12px var(--mono);color:var(--muted)}
+.row.dim{color:var(--muted);opacity:.7}
+.row.now{background:#fffbe6;border-left:4px solid var(--amber);font-weight:500}
+.row.now .t{text-transform:uppercase;letter-spacing:.01em}
+.row.stale{background:#fdf6ee}
+.flag{color:var(--amber);font-size:12px;font-weight:500}
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;padding:9px 12px;background:var(--brown);color:var(--cream);font-size:12px}
+.track{flex:1;min-width:120px;height:4px;background:#6b5f5f;border-radius:2px;position:relative}.track i{position:absolute;left:0;top:0;bottom:0;width:45%;background:var(--yellow);border-radius:2px}
+.foot{padding:7px 12px;color:var(--muted);font-size:12px;background:#fcfaf6}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:24px 32px}.grid>div{display:grid;gap:8px;align-content:start;min-width:0}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th{text-align:left;vertical-align:top;font-weight:500;color:var(--muted);padding:7px 14px 7px 0;border-top:1px solid var(--linen);width:32%}
+td{padding:7px 0;border-top:1px solid var(--linen);vertical-align:top}
+ul{margin:0;padding-left:1.2em;display:grid;gap:6px}
+.q{display:grid;gap:4px;border-top:1px solid var(--border);padding-top:12px}.q b{font:500 17px var(--head)}
+.take::before{content:"My take: ";font-weight:700}
+.files{background:var(--brown);color:var(--cream);font:13px/1.6 var(--mono);padding:12px 14px;border-radius:6px;overflow-x:auto;white-space:pre}
+.cap{font-size:14px;color:var(--muted)}
+</style></head><body><div class="wrap">
+
+<header>
+<span class="logo"><span class="a">Appy</span><span class="d">Dave</span></span>
+<span class="eyebrow">Spec · Story Pilot · Listen · 2026-11-01</span>
+<h1>Hear your script, one paragraph at a time</h1>
+<p>Today you can only read the Story Pilot script. The idea: a small audio file for each paragraph, played in order like FliHub's auto-next, so you can listen to a draft and only redo the paragraph you changed.</p>
+<p class="cap">Sample: D13 Overlay Pilot script (17+ paragraphs) · Status: <b>design only, not built</b> · Full write-up: <code>docs/specs/storypilot-listen-2026-11-01.md</code></p>
+</header>
+
+<section>
+<h2>Where it hurts</h2>
+<p>You write a story script and have to read it yourself to judge it. "If I wanted to change some words somewhere, I wouldn't have to wait a long time." Regenerating the whole thing for one edit would be exactly that wait.</p>
+</section>
+
+<section>
+<h2>What you'd see</h2>
+<div><span class="tag">1 · Closed — script with audio ready</span>
+<div class="app"><div class="hd"><b>Script</b><span class="sp"></span><span class="btn new-ol">▶ Listen</span><span class="btn g new-ol">auto-next ●</span></div>
+<div class="row"><span class="n">01 ◔</span><span class="t">My girlfriend Joy is not a content creator. She's a nail artist…</span><span></span></div>
+<div class="row"><span class="n">02 ◔</span><span class="t">And it turns out she's bloody good at it. She'll do a video in one take…</span><span></span></div>
+<div class="row"><span class="n">03 ◔</span><span class="t">But her videos don't get published. They're recorded, they're done…</span><span></span></div>
+<div class="foot new-ol">17 paragraphs · audio 17/17 ready · voice af_heart · total length shown once generated (…)</div></div></div>
+
+<div><span class="tag new">2 · Playing — paragraph 2 in focus, auto-next on</span>
+<div class="app"><div class="hd"><b>Script</b><span class="sp"></span><span class="btn g">⏸ Pause</span></div>
+<div class="row dim"><span class="n">01 ✓</span><span class="t">My girlfriend Joy is not a content creator…</span><span></span></div>
+<div class="row now"><span class="n">02 ▶</span><span class="t">And it turns out she's bloody good at it. She'll do a video in one take…</span><span class="n">playing</span></div>
+<div class="row dim"><span class="n">03 ◔</span><span class="t">But her videos don't get published…</span><span></span></div>
+<div class="bar new-ol"><span>⏮ &nbsp;⏯ &nbsp;⏭</span><span class="track"><i></i></span><span>para 2 of 17</span><span>1.0×</span><span>auto-next ●</span></div></div></div>
+
+<div><span class="tag new">3 · A paragraph you edited — audio out of date</span>
+<div class="app">
+<div class="row"><span class="n">06 ◔</span><span class="t">what I already had…</span><span></span></div>
+<div class="row stale new-ol"><span class="n">07 ⚠</span><span class="t">one day, autopilot… <span class="flag">edited since the audio was made</span></span><span class="btn">Regenerate</span></div>
+<div class="row"><span class="n">08 ◔</span><span class="t">an hour with Jan…</span><span></span></div>
+<div class="foot">Plays the old audio until you regenerate. "Regenerate all stale" appears when two or more are behind.</div></div>
+<p class="cap">Mock only: paragraph text is from the real D13 script; the numbers shown are placeholders where marked …, nothing has been generated yet.</p></div>
+</section>
+
+<section>
+<h2>Where the files live</h2>
+<div class="files">&lt;project&gt;/-renders/storypilot/project/audio/
+  manifest.json                 what the player reads
+  p01-3fa9c21b7d04.mp3          paragraph 1 · 12-char hash of text+voice+speed+engine
+  p02-81c0d5e2a9b7.mp3          (hashes shown are illustrative)</div>
+<p>This is the project's render cache: git-ignored, already shown with its size, cleared with the existing Clear renders button. It is not a Resource and not a recording.</p>
+</section>
+
+<section>
+<h2>The spec</h2>
+<div class="grid"><div><h3>What the job is</h3>
+<table>
+<tr><th>Unit</th><td>One audio file per paragraph (the script has no chapters yet).</td></tr>
+<tr><th>Stale</th><td>The paragraph's text hash no longer matches the saved one. Whitespace-only edits don't count.</td></tr>
+<tr><th>First time</th><td>Audio is made in the background when the script is first written. Never blocks the save.</td></tr>
+<tr><th>After that</th><td>Edits only mark "out of date". You click to regenerate one, or all stale.</td></tr>
+<tr><th>Inserting a paragraph</th><td>Matched by text first, so the ones after it are not redone.</td></tr>
+<tr><th>Player</th><td>One audio element; when a paragraph ends it starts the next (same as FliHub's auto-next); remembers your auto-next choice.</td></tr>
+<tr><th>Cleanup</th><td>Superseded files are deleted as soon as a new one is made. The whole folder is also cleared by Clear renders.</td></tr>
+<tr><th>Who speaks</th><td>A new FliTools "speak" verb runs Kokoro; Story Pilot never calls Python.</td></tr>
+</table></div>
+<div><h3>Done-check</h3>
+<table>
+<tr><th>proof</th><td>Edit one paragraph in D13 → exactly one file changes, others untouched; play across 3 paragraphs hears the switch without a click.</td></tr>
+<tr><th>test_audit</th><td><code>dev-team:audit-test-quality</code> on hash/stale/GC tests</td></tr>
+<tr><th>before_after</th><td>Screenshots of the three states above, from the running app</td></tr>
+<tr><th>duration</th><td>From the queue timestamps</td></tr>
+</table>
+<h3>Who owns what</h3>
+<ul><li>Player + manifest + stale logic: <b>Story Pilot module</b> (storypilot-dev)</li><li>Speech: <b>FliTools</b> (new verb)</li><li>File serving to the browser: <b>FliStudio core</b> (not checked)</li><li>fli-core contract: <b>no change</b></li></ul>
+<h3>Out of scope</h3>
+<ul><li>Chapters as a unit (layer later)</li><li>Auto-clear when a video is published — a separate decision for all render caches</li><li>Voice cloning, cloud voices</li></ul></div></div>
+</section>
+
+<section>
+<h2>What I checked, and what I didn't</h2>
+<ul>
+<li>Read: FliHub <code>WatchPage.tsx</code> auto-next (L393–410, L588–591); fli-core <code>renders.ts</code>, <code>classify.ts</code>; FliStudio renders/trash capabilities; D13 <code>script.md</code> and <code>story.json</code>; the kokoro-tts skill.</li>
+<li><b>Existing cleanup is manual.</b> I found no timer, schedule or publish hook that clears <code>-renders/</code> or <code>-trash/</code> in FliStudio's server source. Not searched: FliTools launchd jobs, FliHub.</li>
+<li>Not verified: how fast Kokoro is here, whether FliTools already has speech, how the browser will fetch the mp3, and whether <code>story.script.set</code> is the only "first written" path.</li>
+</ul>
+</section>
+
+<section>
+<h2>Choices for David</h2>
+<div class="q"><b>1 · Chapters or paragraphs?</b><p>Story Pilot only has paragraphs. Chapters would need a heading syntax in the script first.</p><p class="take">Paragraphs now; chapters as a play-range later.</p></div>
+<div class="q"><b>2 · Make audio on first write, or on your first Listen click?</b><p>First write feels instant but costs Kokoro time for every new script, even ones you never play.</p><p class="take">First write, in the background, as you asked, once FliTools can do it.</p></div>
+<div class="q"><b>3 · Clear render caches automatically when a video is published?</b><p>Today nothing does; it's a button. Doing it changes behaviour for all tools.</p><p class="take">Yes, but as its own job, not part of Listen.</p></div>
+</section>
+
+</div></body></html>

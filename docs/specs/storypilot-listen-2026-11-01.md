@@ -5,7 +5,7 @@ timestamp: 2026-11-01T14:00+07:00
 # Story Pilot "Listen" — hear the script, one paragraph at a time (design, 2026-11-01)
 
 Design only. No code changed. Builds on `docs/specs/resources-model-2026-11-01.md` (where the audio is *not* a resource).
-Visual page: see the spec-page link at the bottom (published as an artifact, private).
+Visual page: `docs/specs/storypilot-listen-2026-11-01.html` · https://claude.ai/artifact/R4GPEs2XUkfjUpdkXweGno (private).
 
 ## Verdict
 
