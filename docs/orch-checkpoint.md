@@ -8,6 +8,12 @@
 
 ## Current step
 
+### 2026-11-01 ~09:20 — Story Pilot + Lab side tabs, white cards LIVE
+- FliStudio main 367f10c (lab-tabs, built by a subagent; gates reproduced; busy idle; restarted, health ok). Right-edge Settings/Sources/Chapters rail (push, never overlay) on Lab + main Story Pilot; Resources white card tokenised (--surface-sheet etc.); --content-max 1000px (Words) for Story Pilot/Lab; Lab variants A/B/C/D with C dark|light toggle, B terminal toggle, S/M/L 720/860/1000.
+- Brand skill: app-surfaces rule (appydave-plugins 1314d2f, 825c578).
+- Not done: Story Pilot reader "Large" no longer wider than container; no hover-intent delay; AGENT-NOTES not updated.
+- David attached to tmux d18-storypilot-work (opened in iTerm2).
+
 ### 2026-11-01 ~09:00 — David's rulings A2 DONE (brief david-rulings-and-storypilot-handover-2026-11-01.md, b4caa5b)
 - Q1 every ⌘⇧ click swallowed + Lab variant E (light terminal) + full-width B/C/E: FliStudio main 2364edc (restarted, health ok), FliCut main 7f1bcfb (built, restarted, health up). Sticky ✎ mode still only takes target clicks (both apps).
 - All three fli-notes builders closed; their worktrees + branches removed. A3 banked in docs/backlog.md (8bda8eb).
