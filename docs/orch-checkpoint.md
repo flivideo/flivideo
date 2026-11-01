@@ -8,6 +8,11 @@
 
 ## Current step
 
+### 2026-11-01 ~13:00 — AUTOPILOT; Lab removed
+- David: "Don't ask between restarts … working as much on autopilot as possible … We're not actually working with the apps." → orch merges + restarts every green unit without asking (busy.sh still checked).
+- David: "the pilot lab should be removed now" → storypilot-dev queue: remove Story Pilot Lab, before Listen. The Lab-first process fork is closed (moot).
+- FliStudio main 691e455 (✎ icon, Show filter, Attachments) LIVE.
+
 ### 2026-11-01 ~12:50 — rail v3 LIVE; Listen approved and building
 - FliStudio main 63f87a0 (rail v3: margins, top tab row when open, M 55% / L 67% of the area, script focus restored, +19 marker, UX fixes). Restarted, health ok.
 - Workers: storypilot-dev (rail-v2): Reader markdown, +19 scrolls to the cards, styled controls → then the LISTEN build. flistudio-dev (studio-dev): ✎ icon → Show filter → "Attachments" rename → clear-on-publish → shell polish (radii, resources chip). flitools-dev (flitools-worktrees/tts-verb): Kokoro speech verb. resources-rsch closed (specs docs/specs/resources-model + storypilot-listen, artifact R4GPEs2XUkfjUpdkXweGno).
