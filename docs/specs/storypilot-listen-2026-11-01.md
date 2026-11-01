@@ -13,12 +13,17 @@ Orch's take is **right on the big three** (per-piece audio keyed by a text hash;
 on first write, "out of date" after). I **disagree on four details** (section 9). The one real design risk is not the
 player: it is **who runs Kokoro**, and **that nothing today cleans a cache automatically**.
 
-## 1. The unit: paragraph, not chapter
+## 1. Two units: paragraph to cache, chapter to navigate (ruling by orch, 2026-11-01)
 
-Story Pilot has no chapters today. D13's `script.md` is 17+ plain paragraphs separated by blank lines (`grep -c '^## '` = 0), and
-`story.json` already indexes things by paragraph (`script.triggers.items[].paragraph`). So the natural unit is the **paragraph**.
-A "chapter" grouping can be layered later (a run of paragraphs) without changing the cache: audio files stay per paragraph,
-a chapter is just a play-range. FliHub's chapters are recorded takes (each chapter = several segment files), a different thing.
+*Correction:* my first draft said Story Pilot has no chapters. It does. D13 shows "26 paragraphs · 6 chapters"; chapters are
+`script.chapters[]` in `story.json` as `{ name, paragraph }` (the paragraph number each starts at: 1, 6, 10, 13, 18, 23, e.g.
+"Joy's bottleneck", "Going small with Jan"). They are not `##` headings, and `ScriptText.tsx` takes them as `chapters`.
+
+- **Paragraph = cache / regenerate unit.** One audio file each; an edit regenerates one small file, fast.
+- **Chapter = play / navigate unit.** The play bar lists chapters; auto-next runs paragraph → paragraph straight across chapter
+  boundaries; "Replay this chapter" plays that chapter's paragraphs (start paragraph up to the next chapter's start − 1).
+- A chapter's status is derived: fresh only if all its paragraphs are fresh; otherwise "n out of date".
+- This differs from FliHub, where a chapter is several recorded segment files; here a chapter is just a range of paragraphs.
 
 ## 2. Where the files live and how they are named
 
@@ -89,7 +94,7 @@ Closed (script, no playback; each paragraph has a small speaker glyph):
 │ 01 ◔ My girlfriend Joy is not a content creator. She's a nail artist…  │
 │ 02 ◔ And it turns out she's bloody good at it. …                       │
 │ 03 ◔ But her videos don't get published. …                             │
-└──── 17 paragraphs · audio 17/17 ready · 5:48 · voice af_heart ─────────┘
+└──── 26 paragraphs · audio 17/17 ready · 5:48 · voice af_heart ─────────┘
 ```
 Playing (paragraph 02; the focus/contrast treatment storypilot-dev is restoring; others dimmed):
 ```
@@ -121,7 +126,7 @@ Behaviour (copied from FliHub): single `<audio>`; on `ended`, if auto-next is on
 
 ## 9. Where I disagree with orch's take
 
-1. **Unit.** Orch/David said chapters; Story Pilot has none. Use **paragraph**; chapter = optional play-range later.
+1. **Unit.** ~~Story Pilot has no chapters~~ — wrong, corrected by orch: it has 6 in D13 (`story.json`). Paragraph caches; chapter navigates.
 2. **"Generated automatically when first written"** — agree, but as a *background* job with visible progress, never blocking the write RPC; and **only if FliTools reports TTS available**. Otherwise show "Generate audio" with the reason, not a silent failure.
 3. **Who runs it.** Orch's note points at the `kokoro-tts` skill. A skill is an agent convenience (Apple-Silicon venv on whichever machine); the app needs a service. → FliTools verb. Story Pilot must not shell out to Python.
 4. **"Cleaned up like -renders / trash."** That cleanup is **manual today** (section 6). If the design says "it's a cache, it gets cleaned", it's misleading unless we add the orphan GC (cheap, ours) and decide separately on clear-on-publish.

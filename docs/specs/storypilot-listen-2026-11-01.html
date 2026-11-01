@@ -49,8 +49,8 @@ ul{margin:0;padding-left:1.2em;display:grid;gap:6px}
 <span class="logo"><span class="a">Appy</span><span class="d">Dave</span></span>
 <span class="eyebrow">Spec · Story Pilot · Listen · 2026-11-01</span>
 <h1>Hear your script, one paragraph at a time</h1>
-<p>Today you can only read the Story Pilot script. The idea: a small audio file for each paragraph, played in order like FliHub's auto-next, so you can listen to a draft and only redo the paragraph you changed.</p>
-<p class="cap">Sample: D13 Overlay Pilot script (17+ paragraphs) · Status: <b>design only, not built</b> · Full write-up: <code>docs/specs/storypilot-listen-2026-11-01.md</code></p>
+<p>Today you can only read the Story Pilot script. The idea: a small audio file for each paragraph, played in order across your chapters like FliHub's auto-next, so you can listen to a draft and only redo the paragraph you changed.</p>
+<p class="cap">Sample: D13 Overlay Pilot script (26 paragraphs · 6 chapters) · Status: <b>design only, not built</b> · Full write-up: <code>docs/specs/storypilot-listen-2026-11-01.md</code></p>
 </header>
 
 <section>
@@ -62,17 +62,18 @@ ul{margin:0;padding-left:1.2em;display:grid;gap:6px}
 <h2>What you'd see</h2>
 <div><span class="tag">1 · Closed — script with audio ready</span>
 <div class="app"><div class="hd"><b>Script</b><span class="sp"></span><span class="btn new-ol">▶ Listen</span><span class="btn g new-ol">auto-next ●</span></div>
+<div class="row" style="background:var(--surface);font:500 13px var(--head);text-transform:uppercase;letter-spacing:.06em"><span class="n">ch 1</span><span>Joy’s bottleneck · paras 1–5</span><span class="btn g">↻ replay chapter</span></div>
 <div class="row"><span class="n">01 ◔</span><span class="t">My girlfriend Joy is not a content creator. She's a nail artist…</span><span></span></div>
 <div class="row"><span class="n">02 ◔</span><span class="t">And it turns out she's bloody good at it. She'll do a video in one take…</span><span></span></div>
 <div class="row"><span class="n">03 ◔</span><span class="t">But her videos don't get published. They're recorded, they're done…</span><span></span></div>
-<div class="foot new-ol">17 paragraphs · audio 17/17 ready · voice af_heart · total length shown once generated (…)</div></div></div>
+<div class="foot new-ol">26 paragraphs · 6 chapters · audio 26/26 ready · voice af_heart · total length shown once generated (…)</div></div></div>
 
 <div><span class="tag new">2 · Playing — paragraph 2 in focus, auto-next on</span>
 <div class="app"><div class="hd"><b>Script</b><span class="sp"></span><span class="btn g">⏸ Pause</span></div>
 <div class="row dim"><span class="n">01 ✓</span><span class="t">My girlfriend Joy is not a content creator…</span><span></span></div>
 <div class="row now"><span class="n">02 ▶</span><span class="t">And it turns out she's bloody good at it. She'll do a video in one take…</span><span class="n">playing</span></div>
 <div class="row dim"><span class="n">03 ◔</span><span class="t">But her videos don't get published…</span><span></span></div>
-<div class="bar new-ol"><span>⏮ &nbsp;⏯ &nbsp;⏭</span><span class="track"><i></i></span><span>para 2 of 17</span><span>1.0×</span><span>auto-next ●</span></div></div></div>
+<div class="bar new-ol"><span>⏮ &nbsp;⏯ &nbsp;⏭</span><span class="track"><i></i></span><span>para 2 of 26 · ch 1 of 6</span><span>1.0×</span><span>auto-next ●</span></div></div></div>
 
 <div><span class="tag new">3 · A paragraph you edited — audio out of date</span>
 <div class="app">
@@ -96,7 +97,8 @@ ul{margin:0;padding-left:1.2em;display:grid;gap:6px}
 <h2>The spec</h2>
 <div class="grid"><div><h3>What the job is</h3>
 <table>
-<tr><th>Unit</th><td>One audio file per paragraph (the script has no chapters yet).</td></tr>
+<tr><th>Cache unit</th><td>One audio file per paragraph: an edit redoes one small file.</td></tr>
+<tr><th>Play unit</th><td>Chapters (from the script's chapter list). The bar lists them; auto-next runs paragraph to paragraph across chapter boundaries; "replay this chapter" plays just its paragraphs.</td></tr>
 <tr><th>Stale</th><td>The paragraph's text hash no longer matches the saved one. Whitespace-only edits don't count.</td></tr>
 <tr><th>First time</th><td>Audio is made in the background when the script is first written. Never blocks the save.</td></tr>
 <tr><th>After that</th><td>Edits only mark "out of date". You click to regenerate one, or all stale.</td></tr>
@@ -115,7 +117,7 @@ ul{margin:0;padding-left:1.2em;display:grid;gap:6px}
 <h3>Who owns what</h3>
 <ul><li>Player + manifest + stale logic: <b>Story Pilot module</b> (storypilot-dev)</li><li>Speech: <b>FliTools</b> (new verb)</li><li>File serving to the browser: <b>FliStudio core</b> (not checked)</li><li>fli-core contract: <b>no change</b></li></ul>
 <h3>Out of scope</h3>
-<ul><li>Chapters as a unit (layer later)</li><li>Auto-clear when a video is published — a separate decision for all render caches</li><li>Voice cloning, cloud voices</li></ul></div></div>
+<ul><li>Auto-clear when a video is published — a separate decision for all render caches</li><li>Voice cloning, cloud voices</li></ul></div></div>
 </section>
 
 <section>
@@ -129,9 +131,8 @@ ul{margin:0;padding-left:1.2em;display:grid;gap:6px}
 
 <section>
 <h2>Choices for David</h2>
-<div class="q"><b>1 · Chapters or paragraphs?</b><p>Story Pilot only has paragraphs. Chapters would need a heading syntax in the script first.</p><p class="take">Paragraphs now; chapters as a play-range later.</p></div>
-<div class="q"><b>2 · Make audio on first write, or on your first Listen click?</b><p>First write feels instant but costs Kokoro time for every new script, even ones you never play.</p><p class="take">First write, in the background, as you asked, once FliTools can do it.</p></div>
-<div class="q"><b>3 · Clear render caches automatically when a video is published?</b><p>Today nothing does; it's a button. Doing it changes behaviour for all tools.</p><p class="take">Yes, but as its own job, not part of Listen.</p></div>
+<div class="q"><b>1 · Make audio on first write, or on your first Listen click?</b><p>First write feels instant but costs Kokoro time for every new script, even ones you never play.</p><p class="take">First write, in the background, as you asked, once FliTools can do it.</p></div>
+<div class="q"><b>2 · Clear render caches automatically when a video is published?</b><p>Today nothing does; it's a button. Doing it changes behaviour for all tools.</p><p class="take">Yes, but as its own job, not part of Listen.</p></div>
 </section>
 
 </div></body></html>
