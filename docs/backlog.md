@@ -60,3 +60,14 @@ put onto a backlog because I'm not there to guide that."
 - **FliTools describe service:** brief at
   `/Users/davidcruwys/dev/ad/flivideo/docs/briefs/flitools-describe-service-2026-10-31.md`.
 - **fli-core zones:** name `resources` and `footage` as ProjectZones, which fixes the sidebar's "RESOURCES/ 0".
+- **fli-notes capture, banked 2026-11-01 (each needs a design first; do not build).** *Source:* David, relayed in
+  `docs/briefs/david-rulings-and-storypilot-handover-2026-11-01.md` §A3, plus his Lab notes on D13.
+  - Screenshots as part of a note (drag-in, paste-in, or region select): pointing at one element misses the area he means.
+  - Capture inside extensions (Story Pilot isn't noteable yet), and clean capture across every app and extension.
+  - "SuperRig": an OpenRig rig that learns how to add capture to any app and maintains it. Belongs with the OpenRig work.
+  - FliHub side panels (rebuild parked): Chapters / Help / DAM tabs push the content aside instead of popping over it;
+    settings become a contextual right-hand tab that expands to medium or large. Same idea for Story Pilot's settings
+    (Lab note on D).
+  - A hand-edit affordance in the script for a comma or one word at recording time.
+  - Reading looks as a shared library: a global terminal / white-focus switch usable across all apps, both React and
+    Electron (Lab note on C).
