@@ -8,6 +8,12 @@
 
 ## Current step
 
+### 2026-11-01 ~07:45 — fli-notes v2 RUNNING
+- Go (relayed, David ~07:30): "Go on both… I like option A" + "yes remove notes page". Brief `docs/briefs/fli-notes-v2-quiet-capture-and-lab-2026-11-01.md` (8c092bf); work plan `docs/briefs/fli-notes-v2-orch-workplan-2026-11-01.md` (14848d5).
+- Same three workers re-tasked on branch `notes-v2` in their v1 worktrees: core = life states → v0.28.0-rc.1; studio = remove notes UI + ⌘⇧ gesture + Story Pilot Lab A–D; cut = remove + gesture + v1 Q1.
+- DO NOT write D13 (tmux `d13-write` owns it; don't stop it). David uses FliStudio on the M4 later today — busy-check, no restarts of FliStudio/FliCut while he is in them; tell him and wait.
+- Next for orch: on rc message, nothing; on app reports, reproduce gates, merge core → tag v0.28.0, repin, merge apps (busy-check), UAT page (AppyDave light).
+
 ### 2026-10-31 ~23:10 — OVERNIGHT RUN: fli-notes (notes / asks / changes) — GO from David
 - Go: "go with recomendations" (~23:00, relayed from Roamy `flivideo-field-trial-plan`). Brief `docs/briefs/fli-notes-suite-record-2026-10-31.md` (`cda4daa`); split in `docs/briefs/fli-notes-orch-workplan-2026-10-31.md` (`8f844d5`).
 - Workers RUNNING (tmux + iTerm): `fli-notes-core-dev` (fli-core-worktrees/notes-record, §4A → tag v0.27.0-rc.1), `fli-notes-studio-dev` (flistudio-worktrees/fli-notes, §4B), `fli-notes-cut-dev` (flicut-worktrees/fli-notes, §4C).
