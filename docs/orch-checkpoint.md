@@ -8,6 +8,9 @@
 
 ## Current step
 
+### 2026-11-01 ~10:10 — session names (David renamed)
+- D13 video/script asks → `d13-overlaypilot-video` (tmux still `d13-overlaypilot-work`). D18 → `d18-storypilot-video` (tmux `d18-storypilot-work`). D19 → currently calls itself `d19-storypilot-video` (tmux `d19-storypilot-work`); suggested rename `d19-spaghettirig-video`. Story Pilot code → `storypilot-dev`.
+
 ### 2026-11-01 ~10:00 — one rail LIVE; D19 created; workers visible
 - Story Pilot one elastic right rail (FliHub look, push, M/L, Reader folded in, section note targets, no Width S/M/L): FliStudio main f5b6caa, restarted, health ok. Built by tmux worker `storypilot-dev` (worktree flistudio-worktrees/rail-v2) — keep it up as the Story Pilot worker.
 - David: orch must delegate to VISIBLE tmux workers, not hidden subagents.
