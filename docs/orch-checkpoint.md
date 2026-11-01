@@ -9,7 +9,8 @@
 ## Current step
 
 ### 2026-11-01 ~10:30 — D19 angle (David)
-- Thesis: "I built an OpenRig that turns spaghetti into clean code" — unproven until the AppyStack run finishes; honest verdict / check-that-lied are supporting beats, not the focus. D19 keeps gathering; no script.md yet. Ruling forwarded verbatim to d19-storypilot-video.
+- Thesis: "I built an OpenRig that turns spaghetti into clean code" — unproven until the AppyStack run finishes; honest verdict / check-that-lied are supporting beats, not the focus. D19 keeps gathering; no script.md yet. Ruling forwarded verbatim to d19-storypilot-video; it saved it in story settings `notes` (50 sources, v-appydave ab9b1d4).
+- **Standing job for orch:** ping `d19-storypilot-video` at each AppyStack (ladder-appystack) tier end and when the run finishes, so it attaches the hand-back / LEARNED / judge records. It does not watch the seats itself.
 
 ### 2026-11-01 ~10:10 — session names (David renamed)
 - D13 video/script asks → `d13-overlaypilot-video` (tmux still `d13-overlaypilot-work`). D18 → `d18-storypilot-video` (tmux `d18-storypilot-work`). D19 → currently calls itself `d19-storypilot-video` (tmux `d19-storypilot-work`); suggested rename `d19-spaghettirig-video`. Story Pilot code → `storypilot-dev`.
