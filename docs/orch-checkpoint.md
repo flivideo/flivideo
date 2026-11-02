@@ -6,6 +6,13 @@
 - Read this first when resuming as flivideo-orch
 - The current step tells you the next action; the standing rules are not optional
 
+## 2026-11-02 ~08:35 +07 — before David's reboot (Swagger, flivideo-orch [5d47a4])
+- LIVE: FliStudio main 3f6804e (Listen v2, Prep UI); FliTools main 0f2dcdd (speech + word timings, my-app lifecycle); skill flivideo:storypilot-prep (appydave-plugins f9eea8b, reloaded).
+- D19 prepped in live FliStudio by d19-prep-work (16 in story, 44 aside, no angle, undo available). Window closed.
+- Closed: flitools-dev, storypilot-dev, disk-work, d19-prep-work. Worktrees removed: rail-v2, r1, flitools tts-verb + chunk-overlap. Left: storypilot (keep), aitldr-production (2 ahead), pair-remove (untracked repair script).
+- HELD (do not build until David releases): docs/briefs/_held-david-2026-11-02.md — Listen speed keys = video keys; Reader step keys; Prep rethink (3 angles -> 3 intros -> pick -> story); orch owns flaky e2e / 2 worktrees / schema-mirror after reboot.
+- David will hand over "this morning's learnings" soon. Resume: read the held file, wait for learnings.
+
 ## Current step
 
 ### 2026-11-01 ~13:00 — AUTOPILOT; Lab removed
