@@ -34,3 +34,11 @@ evidence differs. Do NOT relaunch or change anything; that is David's call.
 
 Put the tables + bottom line in the artefact (same slug) and in
 `/Users/davidcruwys/dev/appyrigs/runs/ladder/analysis/d19-story-insight-2026-11-02.md`. Commit, push, report to `flivideo-orch`.
+
+## Scope addition (David via roamy-home-orch, 18:25) — all three runs side by side
+- Add **Spaghetti** to the per-gate audit: same table (violations when switched on · resolved by · verdict), same
+  suppression grep on the game repo `/Users/davidcruwys/dev/ad/apps/spaghetti-rig` (read-only).
+- Records: `/Users/davidcruwys/dev/appyrigs/rigs/spaghetti/`, `/Users/davidcruwys/dev/appyrigs/runs/spaghetti/*`. An earlier
+  Spaghetti analysis may already cover some of this: reuse and cite it, fill the gaps so all three runs line up.
+- Give the over-engineering David remembers (Spaghetti's magic keys and magic numbers, when it was really just data) its own rows.
+- Same plain bottom line per run: a working version, or back to the rig.
