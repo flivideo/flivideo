@@ -6,6 +6,12 @@
 - Read this first when resuming as flivideo-orch
 - The current step tells you the next action; the standing rules are not optional
 
+## 2026-11-02 ~20:00 — NOTICE ONLY: Skool-Pilot coming (from skool-david-kaff, on David's ask)
+- New FliVideo-family app, maybe growing into Skool Studio. Nothing built, scope not agreed. **Do not start work.**
+- Loop: Kaff's advice → skill → asset on Skool → Kaff reviews → skill v2 → students get it. Jan applies via agents (as Story Pilot / B-roll Pilot).
+- Read: /Users/davidcruwys/dev/ad/brains/skool/skool-pilot-concept.md · sources /Users/davidcruwys/dev/ad/brains/skool/sources/2026-11-02-kaff-session-2/ · first output https://claude.ai/artifact/FhFgoU1Pg9Dy6iYaLZJqw3
+- Open for David: Pilot or Studio; FliStudio zone or separate app; Kaff direct vs Claude ingests Looms; how Jan syncs.
+
 ## 2026-11-02 ~19:35 — David's D19 rulings applied (v-appydave c75d044, appyrigs 89431662)
 - Angle A NOT set (human-only verb); David must click "Use this" on proposal A in Story Pilot. Beats already in A order, B payoff, beat 24 what's-next (his framing).
 - AppyTron = working version, 3 exemptions accepted. Two sources removed (entries only). Why Our Rigs Failed r_0c9f83be88 filed as tool background.
