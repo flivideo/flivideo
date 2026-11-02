@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "groups": [],
+  "kinds": [],
+  "off": [],
+  "resources": [
+    {
+      "id": "r_fb419d21dc",
+      "kind": "broll",
+      "video": null,
+      "title": "intro",
+      "text": "Subtitles by the Amara.org community",
+      "path": "resources/project/2026-11-02 13-30-00.mov",
+      "tags": [
+        "broll-register-proof",
+        "chin-bug"
+      ],
+      "audience": [
+        "internal"
+      ],
+      "status": "candidate",
+      "meta": {
+        "broll": {
+          "form": "screencast-voice",
+          "formFrom": "inferred",
+          "synthesis": "raw",
+          "scope": "project",
+          "from": {
+            "app": "flihub",
+            "take": "ecamm:2026-11-02 13-30-00",
+            "session": null,
+            "capture": null,
+            "project": null,
+            "recordedAt": "2026-11-02T05:33:52.376Z",
+            "registeredAt": "2026-11-02T05:36:19.769Z",
+            "by": "agent:flihub",
+            "source": "/var/folders/s3/41vpm6y55js0z1c9h89x6qkc0000gn/T/broll-proof/incoming/2026-11-02 13-30-00.mov",
+            "sha256": "ac30439a63eecb449c561fa56b482d69f3ff781fe659125a6bc779805959608b"
+          },
+          "media": {
+            "kind": "video",
+            "durationSec": 2,
+            "width": 640,
+            "height": 360,
+            "hasAudio": true,
+            "bytes": 36379
+          },
+          "transcript": {
+            "file": "/Users/davidcruwys/dev/video-projects/v-appydave/d98-broll-register-test/resources/project/transcripts/2026-11-02 13-30-00.txt",
+            "words": 5,
+            "engine": "groq"
+          },
+          "describe": {
+            "state": "described",
+            "method": "transcript",
+            "route": "transcript",
+            "by": "machine:flitools",
+            "at": "2026-11-02T05:36:23.012Z",
+            "model": null,
+            "reason": null,
+            "frames": [],
+            "jobs": [],
+            "sampling": null
+          },
+          "shows": "Subtitles by the Amara.",
+          "goodFor": "narrated B-roll about “Subtitles by the Amara.”",
+          "facets": {
+            "voice": true,
+            "orientation": "landscape"
+          },
+          "poster": "-renders/broll-pilot/r_fb419d21dc/poster.jpg"
+        }
+      },
+      "added": {
+        "at": "2026-11-02T05:36:19.790Z",
+        "by": "agent:flihub"
+      },
+      "changed": {
+        "at": "2026-11-02T05:36:23.024Z",
+        "by": "agent:broll-pilot"
+      }
+    }
+  ]
+}
