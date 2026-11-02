@@ -185,7 +185,28 @@ Out of v1: multi-region, window-follow, label/annotate, scroll-stitch, video, de
 - **S3 Hotkeys:** register ⌃⌥← → Space under Carbon; test with iTerm, VS Code, Chrome, Electron focused; check clashes with Stream Deck, Rectangle-style tools, Ecamm.
 - **S4 Four-display geometry:** round-trip a region through UUID + relative rect on this Mac's four displays; capture on each, including the negative-x one.
 
-## 9. Decisions for David
+## 9. Decisions — APPROVED by David, 2026-11-02 ("yes to all")
+
+| # | Decision | Approved answer |
+|---|---|---|
+| 1 | Language | **Swift** |
+| 2 | Capture engine | **ScreenCaptureKit** in-process (`screencapture -R` stays the S1 baseline) |
+| 3 | Interface | **Menu-bar agent + CLI** (no TUI) |
+| 4 | Hotkeys | **⌃⌥← / ⌃⌥→ cycle · ⌃⌥Space snap · ⌃⌥C countdown** (configurable) |
+| 5 | Outline | **Drawn outside the region** (3 px margin) |
+| 6 | Region storage | **One config file** `~/.config/appydave/snappy.json`, with a **`scope` field on each region** (global \| brand \| project) |
+| 7 | B-Roll Pilot contract | **Region, group and sequence fields go to B-Roll Pilot**, routed through `flivideo-orch` |
+| 8 | Output | **PNG** at native pixels |
+
+**Future direction (David, 2026-11-02):** FliStudio may later provide brand-level and machine-level configuration.
+Snappy's single file is the v1 answer; design the region `scope` field so a later FliStudio-provided brand/machine
+config can supply or override regions without a format change.
+
+**Not started:** the four spikes (§8) wait until the OpenRig developer-rig plan is approved — David, 2026-11-02.
+
+The original options and recommendations are kept below for the record.
+
+### 9a. The decisions as put to David
 
 1. **Language: Swift or Rust?** *Rec: Swift.* Overlay, menu bar and permission identity are AppKit; Rust's capture and hotkey crates are fine but you'd wrap AppKit anyway. Rust only if you want it for the fleet's other tools.
 2. **Capture engine.** *Rec: ScreenCaptureKit in-process,* with `screencapture -R` as the baseline in spike S1. In-process means Snappy holds the permission and can exclude its own windows.
