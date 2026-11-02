@@ -6,6 +6,14 @@
 - Read this first when resuming as flivideo-orch
 - The current step tells you the next action; the standing rules are not optional
 
+## 2026-11-02 ~19:00 — D19 rig series (A/B/C) done, receipt sent to roamy-home-orch
+- A: FliStudio be723e5 (artefacts as Story Pilot sources); D19 +12 items; proof d19-artefacts-2-live.png.
+- B: appyrigs beccb105, artefact BQK5MXiU1HNigqZg47arB7 (AppyTron/AppyStack working w/ exemptions to confirm; Spaghetti back to rig).
+- C: v-appydave 8bbeed8, thesis provisional, angles A/B/C proposed (rec A), angle NOT locked.
+- Open for David: D19 angle; AppyTron WEIGH-UP 17:55 status vs 18:30 audit; remove 2 suggested sources?
+- Waiting: openrig-orch artefact URL (misconfigured vs rebuilt built-ins) → register on D19 via storypilot-dev.
+- Windows: storypilot-dev idle; d19-storypilot-video idle; rig-compare-rsch closed.
+
 ## 2026-11-02 ~16:55 — David steers from Roamy from now on
 - David works from home on Roamy. He attaches to M4 windows over ssh; `roamy-home-orch` (Roamy tmux) holds his table.
 - Handover: docs/handovers/roamy-home-2026-11-02.md (attach lines, artefacts, held asks). All M4 sessions left running.
