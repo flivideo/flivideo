@@ -83,7 +83,7 @@ footer{margin-top:48px;color:var(--muted);font-size:13px}
 <div class="cards">
   <div class="card"><span class="num">DECISION 1</span><span class="t">Three intros</span><span class="ruling">YES</span><span class="pill p-wait">Waiting on you</span><span class="what">Both done: three angles + three intros each, proposed only. No angle is set. Pick one per video.</span></div>
   <div class="card"><span class="num">DECISION 2</span><span class="t">Snappy's 8 choices</span><span class="ruling">YES to all</span><span class="pill p-ok">Recorded</span><span class="what">Written into the spec as approved. The 4 spikes wait for the OpenRig plan.</span></div>
-  <div class="card"><span class="num">DECISION 3</span><span class="t">FliHub B-roll button</span><span class="ruling">YES</span><span class="pill p-run">Worker running</span><span class="what"><code>flihub-broll-dev</code> is wiring it to <code>broll.register</code> in its own worktree.</span></div>
+  <div class="card"><span class="num">DECISION 3</span><span class="t">FliHub B-roll button</span><span class="ruling">YES</span><span class="pill p-ok">Merged</span><span class="what">FR-177 is on FliHub main (786bfdf) and proven in Chrome. FliHub was already off, and your next start picks it up.</span></div>
   <div class="card"><span class="num">DECISION 4</span><span class="t">Brand voice</span><span class="ruling">Don't draft</span><span class="pill p-open">Talk here</span><span class="what">My report was wrong: it exists. Map in section 04. We discuss it in this window.</span></div>
   <div class="card"><span class="num">DECISION 5</span><span class="t">Jan's AITLDR strip</span><span class="ruling">Keep it</span><span class="pill p-wait">Ready to talk</span><span class="what">Rebuilt from the archive in <code>aitldr-strip-rsch</code>. Rec: rebuild on main as a brand recipe.</span></div>
 </div>
@@ -92,8 +92,8 @@ footer{margin-top:48px;color:var(--muted);font-size:13px}
 <div class="pipe">
   <div class="prow head"><div>Thread</div><div class="note">Idea</div><div class="note">Spec / brief</div><div class="note">Build</div><div class="note">Gate + merge</div><div class="note">You've seen it</div></div>
   <div class="prow"><div class="name">D13 / D18 intros</div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot"></span></div><div class="stage"><span class="dot now"></span></div></div>
-  <div class="prow"><div class="name">Story Pilot key bugs</div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot now"></span></div><div class="stage"><span class="dot"></span></div><div class="stage"><span class="dot"></span></div></div>
-  <div class="prow"><div class="name">FliHub → B-Roll Pilot</div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot now"></span></div><div class="stage"><span class="dot"></span></div><div class="stage"><span class="dot"></span></div></div>
+  <div class="prow"><div class="name">Story Pilot key bugs</div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot now"></span></div></div>
+  <div class="prow"><div class="name">FliHub → B-Roll Pilot</div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot now"></span></div></div>
   <div class="prow"><div class="name">Snappy app</div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot held"></span></div><div class="stage"><span class="dot"></span></div><div class="stage"><span class="dot"></span></div></div>
   <div class="prow"><div class="name">Snappy video (D20)</div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot now"></span></div><div class="stage"><span class="dot"></span></div><div class="stage"><span class="dot"></span></div><div class="stage"><span class="dot"></span></div></div>
   <div class="prow"><div class="name">Swift research</div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot now"></span></div><div class="stage"><span class="dot"></span></div><div class="stage"><span class="dot"></span></div><div class="stage"><span class="dot"></span></div></div>
@@ -106,8 +106,8 @@ footer{margin-top:48px;color:var(--muted);font-size:13px}
 
 <h2><span class="n">03</span> Bugs you found</h2>
 <div class="two">
-  <div class="box"><h3>Listen: J / K / L do nothing</h3><p style="margin:0">Only Space works. Sent to <code>storypilot-dev</code>.</p></div>
-  <div class="box"><h3>Reader: cards don't follow <code>[</code> <code>]</code></h3><p style="margin:0">It steps through documents, but the card list doesn't scroll or highlight. Sent to <code>storypilot-dev</code>.</p></div>
+  <div class="box"><h3>Listen: J / K / L <span class="pill p-ok">fixed · live</span></h3><p style="margin:0">Cause: clicking Play left the button focused, and the key handler ignored keys while a button had focus. Fixed in cecb09d and proven in Chrome on live :7150.</p></div>
+  <div class="box"><h3>Reader: cards follow <code>[</code> <code>]</code> <span class="pill p-ok">fixed · live</span></h3><p style="margin:0">The card being read now gets a yellow edge and scrolls into view. Proven on live :7150. Screenshots: <code>docs/reports/proof-2026-11-02/</code>.</p></div>
 </div>
 <div class="mea"><b>My mistake:</b> I reported both as shipped on passing e2e tests alone, without checking them in a browser. Done now means a screenshot or GIF from a real browser, first on the worker's branch and then on live FliStudio.</div>
 
@@ -139,8 +139,8 @@ footer{margin-top:48px;color:var(--muted);font-size:13px}
 
 <h2><span class="n">06</span> Windows open now</h2>
 <div class="wins">
-  <div class="win"><div class="wn">storypilot-dev</div><div class="wd">Fixing the two key bugs, with browser proof</div></div>
-  <div class="win"><div class="wn">flihub-broll-dev</div><div class="wd">New. Wiring the FliHub button to B-Roll Pilot</div></div>
+  <div class="win"><div class="wn">storypilot-dev</div><div class="wd">Idle. Key bugs fixed and proven on live</div></div>
+  <div class="win closed"><div class="wn">flihub-broll-dev</div><div class="wd">Closed. FR-177 merged</div></div>
   <div class="win"><div class="wn">swift-rsch</div><div class="wd">New. How to build a macOS app in Swift, written up as a brain</div></div>
   <div class="win"><div class="wn">d20-snappy-work</div><div class="wd">New. Creating the D20 Snappy video and loading its sources</div></div>
   <div class="win"><div class="wn">aitldr-strip-rsch</div><div class="wd">New. Jan's strip, reconstructed. Waiting to talk to you</div></div>
