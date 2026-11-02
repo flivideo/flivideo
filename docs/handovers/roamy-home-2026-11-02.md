@@ -60,8 +60,9 @@ Attaching from Roamy shares the window with the M4's iTerm; the pane may resize 
 | d09-rebuild-plan — *not Swagger's: state as observed* | M4 | `d09-rebuild-plan` | Stale since Wed: confirm ChatGPT conversation + one question for openrig-orch | `ssh -t davidcruwys@100.82.235.39 tmux attach -t d09-rebuild-plan` |
 | driver-appytron — *not Swagger's: state as observed* | M4 | `orch-driver@ladder-appytron` | Split `npm test` (0.5 s app tests, gate proofs to `test:gates`)? It recommends yes | `ssh -t davidcruwys@100.82.235.39 tmux attach -t orch-driver@ladder-appytron` |
 | driver-appystack — *not Swagger's: state as observed* | M4 | `driver-appystack` | Held for a reboot since 08:39; then `rig up ladder-appystack --existing` | `ssh -t davidcruwys@100.82.235.39 tmux attach -t driver-appystack` |
+| transcript-mine-work — *not Swagger's: state as observed* | **Roamy** | `transcript-mine-work` | Was mid-run at 16:58 (measuring per-session context load; monthly mine job loaded via launchd, appyrigs `bad283a`). Nothing owed until it reports | `tmux attach -t transcript-mine-work` |
 
-Transcripts (all on the M4, under `/Users/davidcruwys/.claude/projects/`):
+Transcripts (on the M4 unless marked, under `/Users/davidcruwys/.claude/projects/`):
 
 | Session | cwd | `.jsonl` |
 |---|---|---|
@@ -74,6 +75,7 @@ Transcripts (all on the M4, under `/Users/davidcruwys/.claude/projects/`):
 | d09-rebuild-plan | `/Users/davidcruwys/dev/ad/brains` | `-Users-davidcruwys-dev-ad-brains/add2e005-2e7c-49ef-abb0-33fc6ed571b8.jsonl` |
 | driver-appytron | `/Users/davidcruwys/dev/appyrigs` | `-Users-davidcruwys-dev-appyrigs/c78f4c72-9705-4858-9846-6c0503008347.jsonl` |
 | driver-appystack | `/Users/davidcruwys/dev/appyrigs` | `-Users-davidcruwys-dev-appyrigs/ea61a92b-08cb-41ac-93a5-bec7cac4de14.jsonl` |
+| transcript-mine-work (**on Roamy**) | `/Users/davidcruwys/dev/appyrigs` | Roamy: `-Users-davidcruwys-dev-appyrigs/56cb4283-4065-43bc-8c0d-6f4c603f78d2.jsonl` |
 
 `driver-appytron` was not found under that tmux name: it is the Claude session named `driver-appytron` running inside
 tmux `orch-driver@ladder-appytron`. `appyrig-orch` and `driver-appytron` are not in tmux on Roamy or the M2 either.
@@ -110,6 +112,10 @@ tmux `orch-driver@ladder-appytron`. `appyrig-orch` and `driver-appytron` are not
 
 - Steer: `ssh -t davidcruwys@100.82.235.39 tmux attach -t flivideo-orch`
 - FliStudio (M4) over Tailscale: http://100.82.235.39:7150 — answered 200 from Roamy at 16:50. (Roamy also has a tunnel session `m4-flistudio-tunnel` that makes http://localhost:7150 on Roamy reach the same app.) The API port 7151 is not reachable directly over Tailscale; use the 7150 URL.
+
+## Roamy lid
+
+Closing Roamy's lid sleeps Roamy: its tmux sessions (`roamy-home-orch`, `transcript-mine-work`, the `kernel`/`starter` seats) freeze and carry on when the lid opens. A command running at that instant may fail once. The M4 sessions are unaffected.
 
 ## M4 stays awake
 
