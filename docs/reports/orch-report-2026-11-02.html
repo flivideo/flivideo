@@ -50,7 +50,7 @@ a{color:var(--blue)}
 
 <h2><span class="n">03</span> In flight</h2>
 <table><tr><th>Window</th><th>Doing</th><th>Next</th></tr>
-<tr><td><code>storypilot-dev</code></td><td>Fixing the flaky Story Pilot "look" test (D13 at 1440), the real cause and not just a longer wait</td><td>I merge it, then its queue is empty</td></tr>
+<tr><td><code>storypilot-dev</code></td><td>Read-only audit of the loose ends: the <code>aitldr-production</code> and <code>pair-remove</code> worktrees, and the out-of-date schema mirror</td><td>A findings doc with a keep / merge / drop call on each; I act on it</td></tr>
 <tr><td><code>overlaypilot-dev</code></td><td>Idle</td><td>Support for your Overlay Pilot demo once you've recorded it</td></tr>
 </table>
 
@@ -59,7 +59,7 @@ a{color:var(--blue)}
 <li>ChatGPT "Saturday plan for videos" dossier filed as <b>B683</b>, next to your voice log B682 (copy: <code>/Users/davidcruwys/dev/ad/flivideo/docs/specs/b683-dossier-2026-11-02.md</code>).</li>
 <li>B-Roll Pilot was already mostly built, so today was a gap-fill. The <code>flivideo:broll-pilot</code> skill now knows the new paste and FliHub-scan commands.</li>
 <li>The Overlay Pilot test failure earlier wasn't caused by the new code: it also fails without it, 4 times in 6 runs, because it only waited 5 seconds. It now waits up to 30 seconds and passes reliably.</li>
-<li>Windows closed: dossier-work, snappy-rsch, brollpilot-dev. Merged worktrees removed.</li>
+<li>Windows closed: dossier-work, snappy-rsch, brollpilot-dev. Merged worktrees removed.</li><li><b>Flaky Story Pilot test fixed at the root</b> (main 698df5a). It was a real layout bug: on a narrow screen the Listen bar's 10 speed buttons ran past the edge, and the fix makes them wrap. Behind it was a test that waited a fixed time. It now waits for the layout to settle, and passed 12 runs in a row under heavy load.</li>
 <li><span class="warn">Slips:</span> a worker committed into FliStudio's live copy once (fine code, now told off), and I restarted FliStudio during a half-finished merge for about a minute before undoing it.</li>
 </ul></div>
 
