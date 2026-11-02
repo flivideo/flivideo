@@ -134,7 +134,8 @@ footer{margin-top:48px;color:var(--muted);font-size:13px}
   <tr><td>Where Swift lessons go</td><td><code>swift-rsch</code> is writing a new brain now.</td><td><code>brains/swift-macos/</code>, with <code>rig-learnings.md</code> for what the first build teaches.</td></tr>
   <tr><td>Conversations</td><td><code>openrig-orch</code> is about 1.5 days stale (last on 31 Oct, fixing Codex). <code>appyrig-orch</code> is fresh (this morning).</td><td>Restart <code>openrig-orch</code> with this plan. Leave <code>appyrig-orch</code> alone.</td></tr>
 </table>
-<p class="sub" style="margin-top:10px">Nothing has been updated or launched. Not yet checked: whether Xcode is installed on the M2.</p>
+<div class="mea"><b>Before any Snappy build, from the Swift research (checked on the M4):</b> Xcode is not installed, only the command-line tools, and there are no code-signing identities. Without a stable signing identity, macOS forgets Snappy's screen-recording permission on every rebuild. The fix is a self-signed certificate in your keychain, or installing Xcode. That's your call. Tests have to use Swift Testing through a wrapper script. Write-up: <code>brains/swift-macos/</code>.</div>
+<p class="sub" style="margin-top:10px">Nothing has been updated or launched. Not yet checked: Xcode on the M2.</p>
 
 <h2><span class="n">06</span> Windows open now</h2>
 <div class="wins">
