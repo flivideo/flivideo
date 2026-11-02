@@ -38,6 +38,8 @@ a{color:var(--blue)}
 <div class="card dec"><div class="num">3</div><div><b>Wire FliHub's purple B-roll button straight into B-Roll Pilot.</b> Today it moves the file into <code>b-roll/</code>, and B-Roll Pilot only sees it when you press "Add FliHub's B-roll lane".<br><span class="rec">My rec: yes, a small FliHub job. Unless the "new FliHub capability" you mentioned is already being built somewhere, in which case tell me where.</span></div></div>
 <div class="card dec"><div class="num">4</div><div><b>Brand voice document.</b> The Brand row in Story Pilot's templates band is empty. <code>voice-profile.md</code> is referenced in the spec but doesn't exist anywhere.<br><span class="rec">My rec: let a worker draft one from your transcripts and the youtube-craft brain for you to edit. You keep the last word.</span></div></div>
 
+<div class="card dec"><div class="num">5</div><div><b>Jan's AITLDR production strip (his message 009).</b> A branch from 14–15 Oct reads Jan's <code>plan.md</code> and shows six AITLDR steps with a "waiting on team" state. Jan framed it as an idea for you to judge, and it got no reply. It's now 125 commits behind, and the Project status column already covers most of it.<br><span class="rec">My rec: drop it (it's archived as tag <code>archive/aitldr-production</code>, so nothing is lost). If Jan wants the "waiting on team" state, redo it on main as a small brand recipe for Project status, about half a day.</span></div></div>
+
 <h2><span class="n">02</span> Live now: try these</h2>
 <table><tr><th>Where</th><th>What</th><th>Try</th></tr>
 <tr><td>Story Pilot · Listen</td><td>Same keys as the video player</td><td><kbd>J</kbd> slower · <kbd>K</kbd> 1x · <kbd>L</kbd> faster · <kbd>Space</kbd> play/pause</td></tr>
@@ -50,7 +52,7 @@ a{color:var(--blue)}
 
 <h2><span class="n">03</span> In flight</h2>
 <table><tr><th>Window</th><th>Doing</th><th>Next</th></tr>
-<tr><td><code>storypilot-dev</code></td><td>Read-only audit of the loose ends: the <code>aitldr-production</code> and <code>pair-remove</code> worktrees, and the out-of-date schema mirror</td><td>A findings doc with a keep / merge / drop call on each; I act on it</td></tr>
+<tr><td><code>storypilot-dev</code></td><td>Idle. Its whole queue is done.</td><td>Your three-intros rethink of Prep, once you release it</td></tr>
 <tr><td><code>overlaypilot-dev</code></td><td>Idle</td><td>Support for your Overlay Pilot demo once you've recorded it</td></tr>
 </table>
 
@@ -59,7 +61,7 @@ a{color:var(--blue)}
 <li>ChatGPT "Saturday plan for videos" dossier filed as <b>B683</b>, next to your voice log B682 (copy: <code>/Users/davidcruwys/dev/ad/flivideo/docs/specs/b683-dossier-2026-11-02.md</code>).</li>
 <li>B-Roll Pilot was already mostly built, so today was a gap-fill. The <code>flivideo:broll-pilot</code> skill now knows the new paste and FliHub-scan commands.</li>
 <li>The Overlay Pilot test failure earlier wasn't caused by the new code: it also fails without it, 4 times in 6 runs, because it only waited 5 seconds. It now waits up to 30 seconds and passes reliably.</li>
-<li>Windows closed: dossier-work, snappy-rsch, brollpilot-dev. Merged worktrees removed.</li><li><b>Flaky Story Pilot test fixed at the root</b> (main 698df5a). It was a real layout bug: on a narrow screen the Listen bar's 10 speed buttons ran past the edge, and the fix makes them wrap. Behind it was a test that waited a fixed time. It now waits for the layout to settle, and passed 12 runs in a row under heavy load.</li>
+<li>Windows closed: dossier-work, snappy-rsch, brollpilot-dev. Merged worktrees removed.</li><li><b>All three loose ends cleared.</b> The <code>pair-remove</code> worktree is removed (its spent script archived in <code>docs/runbooks/</code>). <code>aitldr-production</code> is archived as a tag and its worktree removed (see decision 5). The schema mirror is regenerated and matches the code exactly, with a new <code>npm run mirror:check</code> to test that it still does (main c2719c4). The only worktree left is <code>storypilot</code>, kept on your ruling.</li><li><b>Flaky Story Pilot test fixed at the root</b> (main 698df5a). It was a real layout bug: on a narrow screen the Listen bar's 10 speed buttons ran past the edge, and the fix makes them wrap. Behind it was a test that waited a fixed time. It now waits for the layout to settle, and passed 12 runs in a row under heavy load.</li>
 <li><span class="warn">Slips:</span> a worker committed into FliStudio's live copy once (fine code, now told off), and I restarted FliStudio during a half-finished merge for about a minute before undoing it.</li>
 </ul></div>
 
