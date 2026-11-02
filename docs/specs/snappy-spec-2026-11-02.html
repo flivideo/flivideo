@@ -1,0 +1,171 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Snappy — spec</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600&family=Roboto:ital,wght@0,400;0,500;0,700;1,400&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout: a light AppyDave spec page. Before/after mock of FliHub's header Trash pill and a new trash list, then the spec. */
+:root {
+  color-scheme: light;
+  --brown: #342d2d; --gold: #ccba9d; --yellow: #ffde59; --amber: #c8841a;
+  --muted: #7a6e5e; --cream: #faf5ec; --surface: #f0ebe4; --linen: #e8e0d4;
+  --border: #d4cdc4; --chrome: #1a1515; --dark: #25201e; --blue: #2E91FC;
+  --red: #b5524a; --green: #4f7a3f;
+  --display: "Bebas Neue", Oswald, Impact, sans-serif;
+  --head: Oswald, "Arial Narrow", sans-serif;
+  --body: Roboto, system-ui, sans-serif;
+  --mono: "Roboto Mono", ui-monospace, monospace;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body { background: var(--cream); color: var(--brown); font-family: var(--body); font-size: 16px; line-height: 1.55; }
+.wrap { max-width: 1080px; margin: 0 auto; padding-inline: 20px; padding-block: 36px 64px; display: grid; gap: 44px; }
+header.page { display: grid; gap: 12px; max-width: 72ch; }
+.logo-badge { display:inline-block; background: var(--brown); border-radius:6px; padding:4px 10px 2px; font-family: var(--display); letter-spacing:.04em; line-height:1.1; font-size: 22px; width: fit-content; }
+.logo-badge .a { color: var(--gold); } .logo-badge .d { color: var(--yellow); }
+.eyebrow { font-family: var(--head); text-transform: uppercase; letter-spacing: .12em; font-size: 13px; color: var(--amber); font-weight: 600; }
+h1 { font-family: var(--head); font-weight: 600; font-size: clamp(30px, 5vw, 44px); line-height: 1.1; margin: 0; text-transform: uppercase; text-wrap: balance; }
+h2 { font-family: var(--head); font-weight: 600; text-transform: uppercase; font-size: 26px; margin: 0; letter-spacing: .02em; text-wrap: balance; }
+h3 { font-family: var(--head); text-transform: uppercase; letter-spacing: .08em; font-size: 14px; color: var(--amber); margin: 0; font-weight: 600; }
+p { margin: 0; max-width: 68ch; }
+header.page p { color: var(--muted); }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 14px; color: var(--muted); }
+.facts b { color: var(--brown); font-weight: 500; }
+section { display: grid; gap: 16px; min-width: 0; }
+.lead { border-left: 3px solid var(--amber); padding: 2px 0 2px 12px; }
+code { font-family: var(--mono); font-size: 13px; background: var(--surface); padding: 1px 5px; border-radius: 3px; overflow-wrap: anywhere; }
+
+/* story: three stuck steps */
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 16px; }
+.step { display: grid; gap: 6px; border-top: 2px solid var(--amber); padding-top: 10px; }
+.step .n { font-family: var(--display); font-size: 34px; line-height: 1; color: var(--amber); }
+.step b { font-family: var(--head); font-weight: 500; font-size: 18px; }
+.step .now { color: var(--muted); font-size: 14px; }
+
+/* app mock */
+.ba { display: grid; gap: 28px; }
+.ba > div { display: grid; gap: 10px; min-width: 0; }
+.tag { font-family: var(--head); text-transform: uppercase; letter-spacing: .1em; font-size: 12px; font-weight: 600; color: var(--muted); }
+.tag.after { color: var(--amber); }
+.app { background: #fff; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; font-size: 13px; }
+.bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; padding: 8px 12px; border-bottom: 1px solid var(--linen); background: #fcfaf6; }
+.bar .proj { font-weight: 600; }
+.bar .tabs { display: flex; gap: 10px; color: var(--muted); }
+.bar .tabs span.on { color: var(--brown); font-weight: 500; }
+.bar .spacer { flex: 1; }
+.pill { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--border); border-radius: 4px; padding: 2px 8px; font-size: 11px; font-variant-numeric: tabular-nums; }
+.pill .btn { border-left: 1px solid var(--border); padding-left: 6px; color: var(--brown); }
+.pill .btn.dim { color: var(--muted); }
+.pill.open { outline: 2px solid var(--yellow); outline-offset: 2px; }
+.body { padding: 12px; color: var(--muted); }
+.callout { font-size: 13px; color: var(--muted); }
+
+.trash { padding: 12px; display: grid; gap: 10px; }
+.trash .head { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: baseline; }
+.trash .head b { font-family: var(--head); font-weight: 500; font-size: 16px; color: var(--brown); }
+.trash .head span { color: var(--muted); }
+.trash .head .finder { margin-left: auto; border: 1px solid var(--border); border-radius: 4px; padding: 2px 8px; color: var(--brown); }
+.scroll { overflow-x: auto; }
+table.list { border-collapse: collapse; width: 100%; min-width: 560px; font-variant-numeric: tabular-nums; }
+table.list th { text-align: left; font-weight: 500; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; padding: 6px 8px; border-bottom: 1px solid var(--linen); }
+table.list td { padding: 6px 8px; border-bottom: 1px solid var(--linen); vertical-align: middle; }
+table.list .day td { background: var(--surface); color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; }
+.play { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--brown); color: var(--cream); font-size: 9px; }
+.restore { border: 1px solid var(--brown); border-radius: 4px; padding: 2px 8px; background: var(--yellow); color: var(--brown); font-weight: 500; white-space: nowrap; }
+.restore.ghost { background: transparent; border-color: var(--border); color: var(--muted); }
+tr.hit td { background: #fffbe6; }
+.sub td { color: var(--muted); font-size: 12px; }
+.sub td:first-child { padding-left: 34px; }
+.msg { border-radius: 4px; padding: 8px 10px; font-size: 13px; }
+.msg.ok { background: #eef4ea; color: var(--green); }
+.msg.no { background: #f7ebe9; color: var(--red); }
+.caption { font-size: 14px; color: var(--muted); }
+
+.specgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 24px 32px; }
+.specgrid > div { display: grid; gap: 8px; min-width: 0; align-content: start; }
+table.spec { border-collapse: collapse; width: 100%; font-size: 15px; }
+table.spec th { text-align: left; vertical-align: top; font-weight: 500; color: var(--muted); padding: 7px 14px 7px 0; border-top: 1px solid var(--linen); width: 32%; }
+table.spec td { padding: 7px 0; border-top: 1px solid var(--linen); vertical-align: top; }
+ul { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; }
+.q { display: grid; gap: 4px; border-top: 1px solid var(--border); padding-top: 12px; }
+.q b { font-family: var(--head); font-weight: 500; font-size: 17px; }
+.rec::before { content: "My take: "; font-weight: 700; }
+.src { font-size: 13px; color: var(--muted); overflow-wrap: anywhere; }
+
+.screen{position:relative;background:#e9e4da;border:1px solid var(--border);border-radius:6px;height:230px;overflow:hidden}
+.disp{position:absolute;background:#fff;border:2px solid var(--brown);border-radius:3px;font-size:11px;color:var(--muted);padding:3px 6px}
+.reg{position:absolute;outline:3px solid var(--yellow);outline-offset:3px;background:rgba(255,222,89,.10)}
+.regtab{position:absolute;background:var(--yellow);color:var(--brown);font-size:11px;font-weight:600;padding:1px 8px;border-radius:3px 3px 0 0}
+.dim{position:absolute;border:1px dashed var(--muted);color:var(--muted);font-size:11px;padding:2px 5px;background:#f6f2ea}
+pre{background:var(--chrome);color:var(--cream);padding:12px;border-radius:6px;overflow-x:auto;font-family:var(--mono);font-size:12.5px;margin:0}
+table.spec th{width:26%}
+.q .opts{color:var(--muted)}
+</style>
+<div class="wrap">
+<header class="page">
+<span class="logo-badge"><span class="a">Appy</span><span class="d">Dave</span></span>
+<span class="eyebrow">Spec · Snappy · B682/B683 · 2026-11-02</span>
+<h1>Snappy: a tripod for your screen, with a send button</h1>
+<p>You already have the idea: ScreenTour locks a region and snaps it again and again. What is missing is a native shell: keyboard cycling across regions, a visible outline, and a hand-off to B-Roll Pilot. No library of its own.</p>
+<div class="facts"><span>Machine: <b>mac-mini-m4, 4 displays, macOS 26.6.2</b></span><span>Status: <b>research + spec only, no repo, no code</b></span><span>Record: <b>snappy-spec-2026-11-02.md</b></span></div>
+</header>
+
+<section><h2>Where it hurts</h2><div class="steps">
+<div class="step"><span class="n">1</span><b>Regions live in your head</b><span class="now">Today: <code>sc_1080</code> in zsh hard-codes <code>-R -3590,275,2820,930</code>; a dozen more are commented out.</span></div>
+<div class="step"><span class="n">2</span><b>ScreenTour is a TUI</b><span class="now">Today: you press Space inside a terminal window that sits beside the thing you capture. No outline, no global keys.</span></div>
+<div class="step"><span class="n">3</span><b>Shots stay in a folder</b><span class="now">Today: files land in <code>.screentour/</code>; nothing carries region or group name to the video system.</span></div>
+</div></section>
+
+<section><h2>What you'd see</h2>
+<div class="ba"><div><span class="tag after">After: the outline sits just outside the region, so it never lands in the shot</span>
+<div class="screen">
+<div class="disp" style="left:6px;top:6px;width:48%;height:215px">SAMSUNG 2560×1440</div>
+<div class="reg" style="left:34px;top:48px;width:36%;height:120px"></div>
+<div class="regtab" style="left:30px;top:26px">2 / 5 · Code editor · recording-setup</div>
+<div class="disp" style="left:52%;top:6px;width:20%;height:215px">LS27D80xU</div>
+<div class="dim" style="left:75%;top:20px">menu bar: Snappy · target d13 · 0 queued</div>
+<div class="dim" style="left:75%;top:60px">⌃⌥← → cycle · ⌃⌥Space snap</div>
+</div>
+<p class="caption">Mock, not a screenshot. The four displays are real (measured with NSScreen); region and names are examples.</p></div></div>
+<h3>CLI, same agent</h3>
+<pre>snappy next            # outline jumps to the next region
+snappy capture         # snap, spool, send to B-Roll Pilot
+snappy series --count 10 --every 1
+snappy target d13      # which project receives the shots</pre></section>
+
+<section><h2>The spec</h2><div class="specgrid"><div><h3>What the job is</h3><table class="spec">
+<tr><th>Region</th><td>Named, grouped, scoped (global / brand / project), stored relative to a display's UUID, in points, top-left origin. ≤ 15 active.</td></tr>
+<tr><th>Interface</th><td>Menu-bar agent plus a CLI over a socket. No TUI.</td></tr>
+<tr><th>Capture</th><td>ScreenCaptureKit in-process (baseline: <code>screencapture -R</code>, measured 0.18 s). Native pixels, PNG.</td></tr>
+<tr><th>Modes</th><td>Single, countdown 3/5 s, timed series, repeated same-region shots (tabs, scrolling). Multi-region is later.</td></tr>
+<tr><th>Send</th><td>Spool, then <code>broll.register</code> on FliStudio's loopback door (<code>place: copy</code>). Queue and retry when it is down; delete only on confirmed receipt.</td></tr>
+<tr><th>Display change</th><td>Match by UUID, then name+size, else flag the region unresolved. Never capture the wrong area.</td></tr>
+<tr><th>Does not</th><td>Describe, tag, store, annotate, record video.</td></tr></table></div>
+<div><h3>Done-check (for the later build)</h3><table class="spec">
+<tr><th>proof</th><td>Capture a region on each of the four displays, including the negative-x one; the pixel size equals the region × scale; a register call returns <code>created: true</code>.</td></tr>
+<tr><th>outline</th><td>A shot taken with the outline on contains no yellow frame (pixel check).</td></tr>
+<tr><th>offline</th><td>FliStudio stopped: shots queue, none lost; restart: all arrive once.</td></tr>
+<tr><th>test_audit</th><td><code>dev-team:audit-test-quality</code> on the new tests</td></tr></table>
+<h3>Out of scope</h3><ul><li>Video recording, annotation, scroll-stitching</li><li>Multi-region coordinated capture (dossier §15.5)</li><li>Following an app window</li><li>Windows/Linux</li></ul></div></div></section>
+
+<section><h2>What I found by measuring</h2><ul>
+<li><b>Prior art exists.</b> ScreenTour at <code>/Users/davidcruwys/dev/ad/apps/screentour</code> (Python, 1,125 lines) plus the zsh <code>sc_*</code> functions. The Ruby screenshot gem was only a ChatGPT thread; not on disk.</li>
+<li><b>y=0 trap.</b> AppKit puts the origin bottom-left, <code>screencapture -R</code> top-left. On this Mac <code>-R -1500,100,400,300</code> gave a <b>400×40</b> image, not 400×300. Regions must be stored display-relative and converted at capture time.</li>
+<li><b>Outline can't be hidden by window flags.</b> Reports say <code>sharingType = .none</code> stopped working against ScreenCaptureKit on macOS 15+. So draw it outside the rect.</li>
+<li><b>Hotkeys:</b> Carbon <code>RegisterEventHotKey</code> reportedly needs no extra permission; only Screen Recording is needed.</li></ul></section>
+
+<section><h2>What I checked, and what I didn't</h2><ul>
+<li>Read: dossier §13–17, 24–28; ScreenTour CONTEXT.md and code; zsh aliases; four ChatGPT threads; B-Roll Pilot spec §6; crates.io; Apple data for SCScreenshotManager availability (14.0 / 15.2 / 26.0).</li>
+<li>Not checked: macOS 26 behaviour of the monthly permission re-prompt; whether a child <code>screencapture</code> inherits the parent app's permission; any live <code>broll.register</code> call; hotkey clashes; whether the outline leaks under ScreenCaptureKit on this OS. Four one-hour spikes (S1–S4) are listed in the Markdown record.</li></ul></section>
+
+<section><h2>Choices for David</h2>
+<div class="q"><b>1. Language: Swift or Rust?</b><p class="opts">Rust crates (screencapturekit, global-hotkey) are current; Swift is native for the overlay and menu bar.</p><p class="rec">Swift. Three of the four hard parts are AppKit.</p></div>
+<div class="q"><b>2. Capture engine</b><p class="opts">ScreenCaptureKit in-process, or shell out to screencapture -R.</p><p class="rec">ScreenCaptureKit, with screencapture as the baseline in spike S1.</p></div>
+<div class="q"><b>3. Interface</b><p class="opts">Menu-bar agent + CLI, TUI, or window app.</p><p class="rec">Menu-bar agent + CLI. The TUI hid behind what it captured.</p></div>
+<div class="q"><b>4. Hotkeys</b><p class="opts">Defaults proposed: ⌃⌥← / ⌃⌥→ cycle, ⌃⌥Space snap, ⌃⌥C countdown.</p><p class="rec">Accept as defaults, configurable, after spike S3 checks clashes.</p></div>
+<div class="q"><b>5. Keeping the outline out of the shot</b><p class="opts">Frame outside the region, or hide it for ~50 ms while capturing.</p><p class="rec">Outside the region. No flicker, no reliance on OS flags.</p></div>
+<div class="q"><b>6. Where regions live</b><p class="opts">One file in ~/.config/appydave, or a file per project.</p><p class="rec">One file, scope field on each region.</p></div>
+<div class="q"><b>7. Ask B-Roll Pilot for region, group and sequence fields</b><p class="opts">Works today via tags, but that is a change to another lane's spec.</p><p class="rec">Yes, via flivideo-orch; I did not edit it.</p></div>
+<div class="q"><b>8. File format</b><p class="opts">PNG or JPG.</p><p class="rec">PNG, native pixels.</p></div>
+</section>
+<p class="src">Record: /Users/davidcruwys/dev/ad/flivideo/docs/specs/snappy-spec-2026-11-02.md · Page: /Users/davidcruwys/dev/ad/flivideo/docs/specs/snappy-spec-2026-11-02.html</p>
+</div>
+</html>
