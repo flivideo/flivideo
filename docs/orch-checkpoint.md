@@ -6,6 +6,10 @@
 - Read this first when resuming as flivideo-orch
 - The current step tells you the next action; the standing rules are not optional
 
+## 2026-11-02 ~19:35 — David's D19 rulings applied (v-appydave c75d044, appyrigs 89431662)
+- Angle A NOT set (human-only verb); David must click "Use this" on proposal A in Story Pilot. Beats already in A order, B payoff, beat 24 what's-next (his framing).
+- AppyTron = working version, 3 exemptions accepted. Two sources removed (entries only). Why Our Rigs Failed r_0c9f83be88 filed as tool background.
+
 ## 2026-11-02 ~19:00 — D19 rig series (A/B/C) done, receipt sent to roamy-home-orch
 - A: FliStudio be723e5 (artefacts as Story Pilot sources); D19 +12 items; proof d19-artefacts-2-live.png.
 - B: appyrigs beccb105, artefact BQK5MXiU1HNigqZg47arB7 (AppyTron/AppyStack working w/ exemptions to confirm; Spaghetti back to rig).
