@@ -6,6 +6,16 @@
 - Read this first when resuming as flivideo-orch
 - The current step tells you the next action; the standing rules are not optional
 
+## 2026-11-02 ~12:35 — acted on David's answers to the 11-02 report
+- D1 yes: three intros done — D13 `d13-overlay-pilot/script/three-intros-2026-11-02.md` (e78ef2d), D18 `d18-story-pilot/resources/three-intros-2026-11-02.md` (b4d3377). Proposed only; David picks.
+- D2 yes: Snappy spec §9 records 8 approvals (78d4b56). Spikes HELD until OpenRig rig plan is approved.
+- D3 yes: `flihub-broll-dev` launched (worktree flihub-worktrees/broll-register, brief flihub-broll-register-2026-11-02.md).
+- D4 don't draft: VERBAL-STYLE.md exists (brand-dave/skills/brand/references/appydave/). Discuss in orch window, no worker.
+- D5 keep: `aitldr-strip-rsch` done → specs/aitldr-strip-reconstruction-2026-11-02.md (2a61ec0); waits for David.
+- Bugs → storypilot-dev (brief storypilot-keys-bugs-2026-11-02.md); real-browser proof required.
+- New windows: swift-rsch (brains/swift-macos), d20-snappy-work (D20 project + living sources). overlaypilot-dev CLOSED (handover in its brief).
+- OpenRig plan awaiting David's go (report §05). Report republished visual (441f6e7).
+
 ## 2026-11-02 ~08:35 +07 — before David's reboot (Swagger, flivideo-orch [5d47a4])
 - LIVE: FliStudio main 3f6804e (Listen v2, Prep UI); FliTools main 0f2dcdd (speech + word timings, my-app lifecycle); skill flivideo:storypilot-prep (appydave-plugins f9eea8b, reloaded).
 - D19 prepped in live FliStudio by d19-prep-work (16 in story, 44 aside, no angle, undo available). Window closed.
