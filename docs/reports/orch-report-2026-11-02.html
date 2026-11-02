@@ -1,74 +1,153 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FliVideo — while you were out (2 Nov)</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;600&family=Roboto:ital,wght@0,400;0,500;1,400&family=Roboto+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Roboto:ital,wght@0,400;0,500;0,700;1,400&family=Roboto+Mono&display=swap" rel="stylesheet">
 <style>
-:root{color-scheme:light;--brown:#342d2d;--gold:#ccba9d;--yellow:#ffde59;--amber:#c8841a;--muted:#7a6e5e;--cream:#faf5ec;--surface:#f0ebe4;--linen:#e8e0d4;--border:#d4cdc4;--chrome:#1a1515;--dark:#25201e;--blue:#2E91FC;--card:#fff}
-*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--brown);font:16px/1.6 Roboto,sans-serif}
-.wrap{max-width:1000px;margin:0 auto;padding:32px 24px 64px}
-header{display:flex;align-items:center;gap:16px;margin-bottom:8px}
-.logo{background:var(--brown);border-radius:6px;padding:4px 10px 2px;font:28px/1.1 "Bebas Neue",Oswald,sans-serif;letter-spacing:.04em}.logo .a{color:var(--gold)}.logo .d{color:var(--yellow)}
-.eyebrow{font:600 13px Oswald,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-h1{font:600 34px/1.15 Oswald,sans-serif;text-transform:uppercase;margin:6px 0 4px}
-.lede{color:var(--muted);margin:0 0 28px}
-h2{font:600 20px Oswald,sans-serif;text-transform:uppercase;letter-spacing:.04em;margin:36px 0 12px;display:flex;gap:10px;align-items:baseline}
-h2 .n{color:var(--amber);font-size:15px}
-.card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:16px 20px;margin-bottom:12px}
-.dec{display:grid;grid-template-columns:40px 1fr;gap:4px 14px;align-items:start}
-.dec .num{font:600 22px Oswald,sans-serif;color:var(--amber)}
-.dec b{font-weight:500}.rec{display:inline-block;margin-top:6px;border-left:3px solid var(--yellow);padding:2px 10px;background:var(--surface);font-size:14px}
-table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--border);border-radius:6px;overflow:hidden}
-th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:top;font-size:15px}
-th{font:600 13px Oswald,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--surface)}
-tr:last-child td{border-bottom:0}
-kbd{font:13px "Roboto Mono",monospace;background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:1px 6px}
-.tag{font:12px "Roboto Mono",monospace;color:var(--muted)}
-.warn{color:var(--amber);font-weight:500}
-ul{margin:6px 0 0;padding-left:20px}li{margin:3px 0}
-code{font:13px "Roboto Mono",monospace;background:var(--surface);padding:1px 5px;border-radius:4px;word-break:break-all}
+:root{
+  color-scheme: light;
+  --brown:#342d2d; --gold:#ccba9d; --yellow:#ffde59; --amber:#c8841a; --muted:#7a6e5e;
+  --page:#faf5ec; --surface:#f0ebe4; --linen:#e8e0d4; --border:#d4cdc4; --chrome:#1a1515;
+  --dark:#25201e; --blue:#2E91FC; --card:#ffffff;
+  --ok:#3f7d4e; --wait:#c8841a; --open:#b5524a; --run:#2E91FC;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--brown);font:16px/1.55 Roboto,system-ui,sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 24px 64px}
+header{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:6px}
+.logo-badge{display:inline-block;background:#342d2d;border-radius:6px;padding:4px 10px 2px;font-family:"Bebas Neue",Oswald,sans-serif;font-size:26px;letter-spacing:.04em;line-height:1.1}
+.logo-badge .a{color:#ccba9d}.logo-badge .d{color:#ffde59}
+h1{font-family:Oswald,sans-serif;font-weight:600;text-transform:uppercase;font-size:30px;margin:0;letter-spacing:.02em}
+.sub{color:var(--muted);margin:2px 0 26px}
+h2{font-family:Oswald,sans-serif;text-transform:uppercase;font-weight:600;font-size:21px;letter-spacing:.03em;margin:40px 0 14px;display:flex;align-items:center;gap:10px}
+h2 .n{font-family:Oswald;color:var(--amber);font-size:21px}
 a{color:var(--blue)}
-</style></head><body><div class="wrap">
-<header><span class="logo"><span class="a">Appy</span><span class="d">Dave</span></span><span class="eyebrow">FliVideo · orchestrator report · Mon 2 Nov 2026</span></header>
-<h1>While you were out</h1>
-<p class="lede">Five features from B682 / B683 are live in FliStudio (main <span class="tag">f541946</span>). I re-ran the checks myself before every merge. Snappy is a spec waiting for you.</p>
+code{font-family:"Roboto Mono",monospace;font-size:.85em;background:var(--surface);padding:1px 5px;border-radius:4px}
+.next{background:var(--card);border:1px solid var(--border);border-left:6px solid var(--yellow);border-radius:10px;padding:14px 18px;font-size:17px}
+.next b{font-family:Oswald;text-transform:uppercase;letter-spacing:.03em}
+/* decision cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 14px 12px;display:flex;flex-direction:column;gap:6px}
+.card .num{font-family:Oswald;color:var(--amber);font-size:14px;letter-spacing:.05em}
+.card .t{font-family:Oswald;font-weight:600;font-size:17px;text-transform:uppercase;line-height:1.2}
+.card .ruling{font-weight:700}
+.card .what{font-size:14px;color:var(--muted)}
+.pill{display:inline-block;font-family:Oswald;font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:2px 9px;border-radius:999px;border:1.5px solid;width:max-content}
+.p-ok{color:var(--ok);border-color:var(--ok)} .p-run{color:var(--run);border-color:var(--run)}
+.p-wait{color:var(--wait);border-color:var(--wait)} .p-open{color:var(--open);border-color:var(--open)}
+/* pipeline */
+.pipe{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:8px 0;overflow-x:auto}
+.prow{display:grid;grid-template-columns:200px repeat(5,1fr);align-items:center;min-width:820px;padding:9px 16px;border-bottom:1px solid var(--linen)}
+.prow:last-child{border-bottom:0}
+.prow.head{font-family:Oswald;text-transform:uppercase;font-size:13px;letter-spacing:.05em;color:var(--muted)}
+.prow .name{font-family:Oswald;font-weight:500;font-size:15px}
+.stage{position:relative;height:26px;display:flex;align-items:center;justify-content:center}
+.stage::before{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:var(--linen)}
+.dot{position:relative;width:14px;height:14px;border-radius:50%;background:var(--linen);border:2px solid var(--border)}
+.dot.done{background:var(--ok);border-color:var(--ok)}
+.dot.now{background:var(--yellow);border-color:var(--brown);width:20px;height:20px}
+.dot.held{background:var(--card);border-color:var(--open);border-style:dashed;width:18px;height:18px}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:10px}
+.legend span{display:flex;align-items:center;gap:6px}
+.note{font-size:13px;color:var(--muted);text-align:center;line-height:1.2}
+/* two col */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:860px){.two{grid-template-columns:1fr}}
+.box{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 18px}
+.box h3{font-family:Oswald;text-transform:uppercase;font-size:16px;margin:0 0 8px;letter-spacing:.03em}
+.box ul{margin:0;padding-left:18px}.box li{margin:4px 0}
+.mea{border-left:4px solid var(--open);background:var(--card);border:1px solid var(--border);border-left:4px solid var(--open);border-radius:8px;padding:10px 14px;margin-top:12px;font-size:15px}
+/* windows */
+.wins{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.win{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 14px}
+.win .wn{font-family:"Roboto Mono",monospace;font-size:14px;font-weight:500}
+.win .wd{font-size:14px;color:var(--muted)}
+.win.closed{background:var(--surface);opacity:.75}
+table.plan{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+table.plan th,table.plan td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--linen);vertical-align:top;font-size:15px}
+table.plan th{font-family:Oswald;text-transform:uppercase;font-size:13px;letter-spacing:.05em;color:var(--muted);font-weight:500}
+blockquote{margin:10px 0;padding:8px 14px;border-left:3px solid var(--amber);font-style:italic;background:var(--card);border-radius:0 8px 8px 0}
+footer{margin-top:48px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><span class="logo-badge"><span class="a">Appy</span><span class="d">Dave</span></span><h1>FliVideo — while you were out</h1></header>
+<p class="sub">Monday 2 November 2026 · orchestrator: Swagger (flivideo-orch) · updated after your answers</p>
 
-<h2><span class="n">01</span> Needs you: decisions</h2>
-<div class="card dec"><div class="num">1</div><div><b>Send the "three intros" ask to your D13 and D18 windows.</b> Each window runs Prep, proposes three angles, and writes an intro for each; you pick one, then the story gets built.<br><span class="rec">My rec: yes. This is the route to Tuesday's narration. Say "send the intros ask".</span></div></div>
-<div class="card dec"><div class="num">2</div><div><b>Approve Snappy's 8 decisions</b>: Swift not Rust · ScreenCaptureKit · menu-bar app + CLI, no TUI · <kbd>ctrl</kbd><kbd>opt</kbd>+arrows / Space hotkeys · outline drawn outside the region · one config file · send region + group name with each capture · PNG at native pixels.<br>Spec: <code>/Users/davidcruwys/dev/ad/flivideo/docs/specs/snappy-spec-2026-11-02.html</code><br><span class="rec">My rec: approve all 8, then run the four 1-hour spikes first (permissions, hotkeys, outline, send).</span></div></div>
-<div class="card dec"><div class="num">3</div><div><b>Wire FliHub's purple B-roll button straight into B-Roll Pilot.</b> Today it moves the file into <code>b-roll/</code>, and B-Roll Pilot only sees it when you press "Add FliHub's B-roll lane".<br><span class="rec">My rec: yes, a small FliHub job. Unless the "new FliHub capability" you mentioned is already being built somewhere, in which case tell me where.</span></div></div>
-<div class="card dec"><div class="num">4</div><div><b>Brand voice document.</b> The Brand row in Story Pilot's templates band is empty. <code>voice-profile.md</code> is referenced in the spec but doesn't exist anywhere.<br><span class="rec">My rec: let a worker draft one from your transcripts and the youtube-craft brain for you to edit. You keep the last word.</span></div></div>
+<div class="next"><b>Your move:</b> pick an intro for D13 and D18 · say "go" (or change it) on the OpenRig plan in section 05 · talk to the AITLDR window when you're ready.</div>
 
-<div class="card dec"><div class="num">5</div><div><b>Jan's AITLDR production strip (his message 009).</b> A branch from 14–15 Oct reads Jan's <code>plan.md</code> and shows six AITLDR steps with a "waiting on team" state. Jan framed it as an idea for you to judge, and it got no reply. It's now 125 commits behind, and the Project status column already covers most of it.<br><span class="rec">My rec: drop it (it's archived as tag <code>archive/aitldr-production</code>, so nothing is lost). If Jan wants the "waiting on team" state, redo it on main as a small brand recipe for Project status, about half a day.</span></div></div>
+<h2><span class="n">01</span> Your five decisions</h2>
+<div class="cards">
+  <div class="card"><span class="num">DECISION 1</span><span class="t">Three intros</span><span class="ruling">YES</span><span class="pill p-wait">Waiting on you</span><span class="what">Both done: three angles + three intros each, proposed only. No angle is set. Pick one per video.</span></div>
+  <div class="card"><span class="num">DECISION 2</span><span class="t">Snappy's 8 choices</span><span class="ruling">YES to all</span><span class="pill p-ok">Recorded</span><span class="what">Written into the spec as approved. The 4 spikes wait for the OpenRig plan.</span></div>
+  <div class="card"><span class="num">DECISION 3</span><span class="t">FliHub B-roll button</span><span class="ruling">YES</span><span class="pill p-run">Worker running</span><span class="what"><code>flihub-broll-dev</code> is wiring it to <code>broll.register</code> in its own worktree.</span></div>
+  <div class="card"><span class="num">DECISION 4</span><span class="t">Brand voice</span><span class="ruling">Don't draft</span><span class="pill p-open">Talk here</span><span class="what">My report was wrong: it exists. Map in section 04. We discuss it in this window.</span></div>
+  <div class="card"><span class="num">DECISION 5</span><span class="t">Jan's AITLDR strip</span><span class="ruling">Keep it</span><span class="pill p-wait">Ready to talk</span><span class="what">Rebuilt from the archive in <code>aitldr-strip-rsch</code>. Rec: rebuild on main as a brand recipe.</span></div>
+</div>
 
-<h2><span class="n">02</span> Live now: try these</h2>
-<table><tr><th>Where</th><th>What</th><th>Try</th></tr>
-<tr><td>Story Pilot · Listen</td><td>Same keys as the video player</td><td><kbd>J</kbd> slower · <kbd>K</kbd> 1x · <kbd>L</kbd> faster · <kbd>Space</kbd> play/pause</td></tr>
-<tr><td>Story Pilot · Reader</td><td>Step through paragraphs</td><td><kbd>[</kbd> previous · <kbd>]</kbd> next (J/L were taken by Listen) <span class="warn">· not yet seen in a browser</span></td></tr>
-<tr><td>Story Pilot · Sources</td><td>"Story instructions" band: Global / Brand templates, amber dashed border. Only you can edit them; agents only read them.</td><td>Double-click "Storytelling: build story"; <b>+ Brand</b> to add brand voice</td></tr>
-<tr><td>Story Pilot · Script</td><td>Recorded segments: a FliHub recording's transcript goes into the script word for word. Listen plays the real recording, and the teleprompter shows "▶ RECORDED … plays here, not read".</td><td>"+ Recording" in the Recorded segments band <span class="warn">· not yet tried with a real recording or in a browser</span></td></tr>
-<tr><td>Overlay Pilot · Results</td><td>Compare 2–4 renders side by side: one play bar, one voice, Mute all, Keep this one (makes that render the video's final)</td><td>Tick renders, then <b>Compare N</b>. Ready for your demo.</td></tr>
-<tr><td>B-Roll Pilot</td><td>Paste image / <kbd>⌘V</kbd>, drag and drop, "Add FliHub's B-roll lane", frames taken at scene changes, Group by</td><td>Paste a screenshot into D13. Note: Chrome re-saves a copied picture, so it counts as new.</td></tr>
+<h2><span class="n">02</span> Where each thread stands</h2>
+<div class="pipe">
+  <div class="prow head"><div>Thread</div><div class="note">Idea</div><div class="note">Spec / brief</div><div class="note">Build</div><div class="note">Gate + merge</div><div class="note">You've seen it</div></div>
+  <div class="prow"><div class="name">D13 / D18 intros</div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot"></span></div><div class="stage"><span class="dot now"></span></div></div>
+  <div class="prow"><div class="name">Story Pilot key bugs</div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot now"></span></div><div class="stage"><span class="dot"></span></div><div class="stage"><span class="dot"></span></div></div>
+  <div class="prow"><div class="name">FliHub → B-Roll Pilot</div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot now"></span></div><div class="stage"><span class="dot"></span></div><div class="stage"><span class="dot"></span></div></div>
+  <div class="prow"><div class="name">Snappy app</div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot held"></span></div><div class="stage"><span class="dot"></span></div><div class="stage"><span class="dot"></span></div></div>
+  <div class="prow"><div class="name">Snappy video (D20)</div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot now"></span></div><div class="stage"><span class="dot"></span></div><div class="stage"><span class="dot"></span></div><div class="stage"><span class="dot"></span></div></div>
+  <div class="prow"><div class="name">Swift research</div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot now"></span></div><div class="stage"><span class="dot"></span></div><div class="stage"><span class="dot"></span></div><div class="stage"><span class="dot"></span></div></div>
+  <div class="prow"><div class="name">OpenRig dev rig</div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot now"></span></div><div class="stage"><span class="dot held"></span></div><div class="stage"><span class="dot"></span></div><div class="stage"><span class="dot"></span></div></div>
+  <div class="prow"><div class="name">AITLDR strip</div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot now"></span></div><div class="stage"><span class="dot"></span></div><div class="stage"><span class="dot"></span></div><div class="stage"><span class="dot"></span></div></div>
+  <div class="prow"><div class="name">Overlay Compare</div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot now"></span></div></div>
+  <div class="prow"><div class="name">Prep rethink (full)</div><div class="stage"><span class="dot done"></span></div><div class="stage"><span class="dot held"></span></div><div class="stage"><span class="dot"></span></div><div class="stage"><span class="dot"></span></div><div class="stage"><span class="dot"></span></div></div>
+</div>
+<div class="legend"><span><span class="dot done"></span>done</span><span><span class="dot now"></span>here now</span><span><span class="dot held"></span>held for your go</span></div>
+
+<h2><span class="n">03</span> Bugs you found</h2>
+<div class="two">
+  <div class="box"><h3>Listen: J / K / L do nothing</h3><p style="margin:0">Only Space works. Sent to <code>storypilot-dev</code>.</p></div>
+  <div class="box"><h3>Reader: cards don't follow <code>[</code> <code>]</code></h3><p style="margin:0">It steps through documents, but the card list doesn't scroll or highlight. Sent to <code>storypilot-dev</code>.</p></div>
+</div>
+<div class="mea"><b>My mistake:</b> I reported both as shipped on passing e2e tests alone, without checking them in a browser. Done now means a screenshot or GIF from a real browser, first on the worker's branch and then on live FliStudio.</div>
+
+<h2><span class="n">04</span> Brand voice: it already exists</h2>
+<table class="plan">
+  <tr><th>File</th><th>What it is</th><th>Status</th></tr>
+  <tr><td><code>brand-dave/skills/brand/references/appydave/VERBAL-STYLE.md</code></td><td>The AppyDave voice rules: tone, vocabulary, never-say list, examples, and a §8 checklist to test drafts against</td><td>v1.0.0, generated 14 Jun from 14 hand-picked transcripts. Never refreshed.</td></tr>
+  <tr><td><code>v-appydave/voice-profile.md</code></td><td>A profile of your voice, built from 182 transcripts</td><td>The earlier version. Overlaps the file above.</td></tr>
+  <tr><td><code>v-appydave/voice-corpus.md</code></td><td>The 182 transcripts themselves (391k words)</td><td>On the M4 only</td></tr>
+  <tr><td><code>brand/references/_formats/educational/VIDEO-STRUCTURE.md</code></td><td>How your educational videos are structured</td><td>v1.1.0. Covers this one format only.</td></tr>
+  <tr><td><code>brand-dave:verbal-style-forge</code> · <code>structure-forge</code></td><td>The skills that write and refresh the two files above</td><td>Live</td></tr>
+  <tr><td><code>writers-room:voice-coach</code></td><td>Checks a script against VERBAL-STYLE §8</td><td>Uses it today</td></tr>
 </table>
+<div class="mea"><b>Correction:</b> my report said no brand-voice document existed. That was wrong. I passed on a worker's "no voice-profile.md anywhere" without checking it. The gaps are that it is 5 months old, covers only your spoken voice (not your writing), and nothing in Story Pilot uses it yet.</div>
 
-<h2><span class="n">03</span> In flight</h2>
-<table><tr><th>Window</th><th>Doing</th><th>Next</th></tr>
-<tr><td><code>storypilot-dev</code></td><td>Idle. Its whole queue is done.</td><td>Your three-intros rethink of Prep, once you release it</td></tr>
-<tr><td><code>overlaypilot-dev</code></td><td>Idle</td><td>Support for your Overlay Pilot demo once you've recorded it</td></tr>
+<h2><span class="n">05</span> Snappy + OpenRig: the plan I want your go on</h2>
+<blockquote>"I'm thinking of doing a started team which is just a coder and reviewer." D12, closing section (<code>d12-openrig-agent-teams/hub/transcripts/09-3-other-resources.txt</code>)</blockquote>
+<table class="plan">
+  <tr><th>Question</th><th>What I found</th><th>My recommendation</th></tr>
+  <tr><td>Which machine</td><td>The OpenRig brain says the M2 is the "OpenRig trial machine", and the watcher plus d09-crew run there. <code>machines.json</code> doesn't say so. Recent rigs also ran on the M4 and Roamy.</td><td><b>Build on the M2</b>, which keeps load off the M4. Run the screen and permission spikes (S1, S2, S4) on the <b>M4</b>, because they need your displays.</td></tr>
+  <tr><td>Which template</td><td><code>launch/starter</code>: one Claude Code builder and one Codex reviewer, the smallest dev shape there is. The bigger ones (code-review, factory) have 5+ seats.</td><td><b>Starter</b>, with the reviewer as a Claude tester (dev-team <code>tester-audit</code>), saved as our own <code>brains/openrig/rigs/swift-dev/</code> so the next Swift app can reuse it.</td></tr>
+  <tr><td>Versions</td><td>M4 0.7.5 · M2 0.7.4 · Roamy 0.7.4 · latest release v0.7.6 (30 Oct). The M4's source clone is 138 commits behind.</td><td>Update all three to 0.7.6, M2 first. Refresh the clone with <code>sync.sh --only openrig</code>.</td></tr>
+  <tr><td>New commits</td><td>Notable ones: isolated seat homes, Claude seats on API keys, per-seat subscription tokens, <code>rig host edit</code>, native restore.</td><td>The <code>openrig-orch</code> window (quiet since 31 Oct) writes <code>upstream-changes-2026-11-02.md</code> and updates the brain.</td></tr>
+  <tr><td>Where Swift lessons go</td><td><code>swift-rsch</code> is writing a new brain now.</td><td><code>brains/swift-macos/</code>, with <code>rig-learnings.md</code> for what the first build teaches.</td></tr>
+  <tr><td>Conversations</td><td><code>openrig-orch</code> is about 1.5 days stale (last on 31 Oct, fixing Codex). <code>appyrig-orch</code> is fresh (this morning).</td><td>Restart <code>openrig-orch</code> with this plan. Leave <code>appyrig-orch</code> alone.</td></tr>
 </table>
+<p class="sub" style="margin-top:10px">Nothing has been updated or launched. Not yet checked: whether Xcode is installed on the M2.</p>
 
-<h2><span class="n">04</span> Done today, behind the scenes</h2>
-<div class="card"><ul>
-<li>ChatGPT "Saturday plan for videos" dossier filed as <b>B683</b>, next to your voice log B682 (copy: <code>/Users/davidcruwys/dev/ad/flivideo/docs/specs/b683-dossier-2026-11-02.md</code>).</li>
-<li>B-Roll Pilot was already mostly built, so today was a gap-fill. The <code>flivideo:broll-pilot</code> skill now knows the new paste and FliHub-scan commands.</li>
-<li>The Overlay Pilot test failure earlier wasn't caused by the new code: it also fails without it, 4 times in 6 runs, because it only waited 5 seconds. It now waits up to 30 seconds and passes reliably.</li>
-<li>Windows closed: dossier-work, snappy-rsch, brollpilot-dev. Merged worktrees removed.</li><li><b>All three loose ends cleared.</b> The <code>pair-remove</code> worktree is removed (its spent script archived in <code>docs/runbooks/</code>). <code>aitldr-production</code> is archived as a tag and its worktree removed (see decision 5). The schema mirror is regenerated and matches the code exactly, with a new <code>npm run mirror:check</code> to test that it still does (main c2719c4). The only worktree left is <code>storypilot</code>, kept on your ruling.</li><li><b>Flaky Story Pilot test fixed at the root</b> (main 698df5a). It was a real layout bug: on a narrow screen the Listen bar's 10 speed buttons ran past the edge, and the fix makes them wrap. Behind it was a test that waited a fixed time. It now waits for the layout to settle, and passed 12 runs in a row under heavy load.</li>
-<li><span class="warn">Slips:</span> a worker committed into FliStudio's live copy once (fine code, now told off), and I restarted FliStudio during a half-finished merge for about a minute before undoing it.</li>
-</ul></div>
+<h2><span class="n">06</span> Windows open now</h2>
+<div class="wins">
+  <div class="win"><div class="wn">storypilot-dev</div><div class="wd">Fixing the two key bugs, with browser proof</div></div>
+  <div class="win"><div class="wn">flihub-broll-dev</div><div class="wd">New. Wiring the FliHub button to B-Roll Pilot</div></div>
+  <div class="win"><div class="wn">swift-rsch</div><div class="wd">New. How to build a macOS app in Swift, written up as a brain</div></div>
+  <div class="win"><div class="wn">d20-snappy-work</div><div class="wd">New. Creating the D20 Snappy video and loading its sources</div></div>
+  <div class="win"><div class="wn">aitldr-strip-rsch</div><div class="wd">New. Jan's strip, reconstructed. Waiting to talk to you</div></div>
+  <div class="win"><div class="wn">d13 / d18 video windows</div><div class="wd">Yours. Three intros are waiting for your pick</div></div>
+  <div class="win closed"><div class="wn">overlaypilot-dev</div><div class="wd">Closed. Its handover is in the brief. Comes back after your demo recording</div></div>
+</div>
 
-<h2><span class="n">05</span> Not established</h2>
-<div class="card"><ul>
-<li>Nobody has looked at the Reader buttons, segment cards or recorded paragraphs in a real browser. Tests passed, but in a simulated browser and on the server, not on screen.</li>
-<li>Whether Overlay Compare stays in sync on a long real render.</li>
-<li>Whether FliHub's take list returns transcript paths the way the recorded-segment code expects.</li>
-</ul></div>
-</div></body></html>
+<footer>Source: /Users/davidcruwys/dev/ad/flivideo/docs/reports/orch-report-2026-11-02.html · light-only AppyDave</footer>
+</div>
+</body>
+</html>
