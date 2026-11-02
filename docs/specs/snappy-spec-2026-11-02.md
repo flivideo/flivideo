@@ -135,7 +135,7 @@ that display in top-left space (display 1 starts at y=360 there, since main is 1
 No library. Each capture is written to a **spool** then sent:
 - Spool: `~/Library/Application Support/Snappy/spool/<id>.png` + `<id>.json`. Deleted **only after** the receiver confirms. If FliStudio is down, files stay, the menu bar shows "N queued", retry on next launch / every 30 s. Unsent shots are never swept.
 - First receiver: B-Roll Pilot's existing contract `broll.register` (`/Users/davidcruwys/dev/ad/flivideo/flistudio/docs/planning/broll-pilot/spec.md` §6):
-  `POST http://127.0.0.1:<port>/api/rpc` (port + bearer token from `~/Library/Application Support/flistudio/control.json`; today port 7151), header `x-fli-principal: agent:snappy`,
+  `POST http://127.0.0.1:<port>/api/rpc` (port + bearer token from `~/Library/Application Support/flistudio/control.json`; today port 7151), header `x-fli-principal: agent:snappy` (a new principal; the spec lists only flihub and flicast),
   `place: "copy"` (the spool file is a temp, so FliStudio keeps a copy and Snappy deletes its own), `from.app: "snappy"`.
 - Mapping:
   | Snappy knows | `broll.register` field |
@@ -182,7 +182,7 @@ Out of v1: multi-region, window-follow, label/annotate, scroll-stitch, video, de
 ## 8. Spikes to run before locking (each ≤ 1 hour, no repo needed)
 - **S1 Permission + capture:** a signed 40-line Swift tool captures a rect via `SCScreenshotManager` and via `screencapture` as a child; confirm which process the Screen Recording grant attaches to and whether a rebuild keeps it; see the macOS 26 re-prompt.
 - **S2 Outline leak:** draw the outside-the-rect frame and a window with `sharingType = .none`; capture with SCK and with `screencapture`; look at the pixels.
-- **S3 Hotkeys:** register ⌃⌥← → Space under Carbon; test with Ghostty/iTerm, VS Code, Chrome, Electron focused; check clashes with Stream Deck, Rectangle-style tools, Ecamm.
+- **S3 Hotkeys:** register ⌃⌥← → Space under Carbon; test with iTerm, VS Code, Chrome, Electron focused; check clashes with Stream Deck, Rectangle-style tools, Ecamm.
 - **S4 Four-display geometry:** round-trip a region through UUID + relative rect on this Mac's four displays; capture on each, including the negative-x one.
 
 ## 9. Decisions for David
