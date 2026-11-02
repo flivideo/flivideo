@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FliVideo — while you were out (2 Nov)</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;600&family=Roboto:ital,wght@0,400;0,500;1,400&family=Roboto+Mono&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;--brown:#342d2d;--gold:#ccba9d;--yellow:#ffde59;--amber:#c8841a;--muted:#7a6e5e;--cream:#faf5ec;--surface:#f0ebe4;--linen:#e8e0d4;--border:#d4cdc4;--chrome:#1a1515;--dark:#25201e;--blue:#2E91FC;--card:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--brown);font:16px/1.6 Roboto,sans-serif}
+.wrap{max-width:1000px;margin:0 auto;padding:32px 24px 64px}
+header{display:flex;align-items:center;gap:16px;margin-bottom:8px}
+.logo{background:var(--brown);border-radius:6px;padding:4px 10px 2px;font:28px/1.1 "Bebas Neue",Oswald,sans-serif;letter-spacing:.04em}.logo .a{color:var(--gold)}.logo .d{color:var(--yellow)}
+.eyebrow{font:600 13px Oswald,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+h1{font:600 34px/1.15 Oswald,sans-serif;text-transform:uppercase;margin:6px 0 4px}
+.lede{color:var(--muted);margin:0 0 28px}
+h2{font:600 20px Oswald,sans-serif;text-transform:uppercase;letter-spacing:.04em;margin:36px 0 12px;display:flex;gap:10px;align-items:baseline}
+h2 .n{color:var(--amber);font-size:15px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:16px 20px;margin-bottom:12px}
+.dec{display:grid;grid-template-columns:40px 1fr;gap:4px 14px;align-items:start}
+.dec .num{font:600 22px Oswald,sans-serif;color:var(--amber)}
+.dec b{font-weight:500}.rec{display:inline-block;margin-top:6px;border-left:3px solid var(--yellow);padding:2px 10px;background:var(--surface);font-size:14px}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--border);border-radius:6px;overflow:hidden}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:top;font-size:15px}
+th{font:600 13px Oswald,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--surface)}
+tr:last-child td{border-bottom:0}
+kbd{font:13px "Roboto Mono",monospace;background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:1px 6px}
+.tag{font:12px "Roboto Mono",monospace;color:var(--muted)}
+.warn{color:var(--amber);font-weight:500}
+ul{margin:6px 0 0;padding-left:20px}li{margin:3px 0}
+code{font:13px "Roboto Mono",monospace;background:var(--surface);padding:1px 5px;border-radius:4px;word-break:break-all}
+a{color:var(--blue)}
+</style></head><body><div class="wrap">
+<header><span class="logo"><span class="a">Appy</span><span class="d">Dave</span></span><span class="eyebrow">FliVideo · orchestrator report · Mon 2 Nov 2026</span></header>
+<h1>While you were out</h1>
+<p class="lede">Five features from B682 / B683 are live in FliStudio (main <span class="tag">f541946</span>). I re-ran the checks myself before every merge. Snappy is a spec waiting for you.</p>
+
+<h2><span class="n">01</span> Needs you: decisions</h2>
+<div class="card dec"><div class="num">1</div><div><b>Send the "three intros" ask to your D13 and D18 windows.</b> Each window runs Prep, proposes three angles, and writes an intro for each; you pick one, then the story gets built.<br><span class="rec">My rec: yes. This is the route to Tuesday's narration. Say "send the intros ask".</span></div></div>
+<div class="card dec"><div class="num">2</div><div><b>Approve Snappy's 8 decisions</b>: Swift not Rust · ScreenCaptureKit · menu-bar app + CLI, no TUI · <kbd>ctrl</kbd><kbd>opt</kbd>+arrows / Space hotkeys · outline drawn outside the region · one config file · send region + group name with each capture · PNG at native pixels.<br>Spec: <code>/Users/davidcruwys/dev/ad/flivideo/docs/specs/snappy-spec-2026-11-02.html</code><br><span class="rec">My rec: approve all 8, then run the four 1-hour spikes first (permissions, hotkeys, outline, send).</span></div></div>
+<div class="card dec"><div class="num">3</div><div><b>Wire FliHub's purple B-roll button straight into B-Roll Pilot.</b> Today it moves the file into <code>b-roll/</code>, and B-Roll Pilot only sees it when you press "Add FliHub's B-roll lane".<br><span class="rec">My rec: yes, a small FliHub job. Unless the "new FliHub capability" you mentioned is already being built somewhere, in which case tell me where.</span></div></div>
+<div class="card dec"><div class="num">4</div><div><b>Brand voice document.</b> The Brand row in Story Pilot's templates band is empty. <code>voice-profile.md</code> is referenced in the spec but doesn't exist anywhere.<br><span class="rec">My rec: let a worker draft one from your transcripts and the youtube-craft brain for you to edit. You keep the last word.</span></div></div>
+
+<h2><span class="n">02</span> Live now: try these</h2>
+<table><tr><th>Where</th><th>What</th><th>Try</th></tr>
+<tr><td>Story Pilot · Listen</td><td>Same keys as the video player</td><td><kbd>J</kbd> slower · <kbd>K</kbd> 1x · <kbd>L</kbd> faster · <kbd>Space</kbd> play/pause</td></tr>
+<tr><td>Story Pilot · Reader</td><td>Step through paragraphs</td><td><kbd>[</kbd> previous · <kbd>]</kbd> next (J/L were taken by Listen) <span class="warn">· not yet seen in a browser</span></td></tr>
+<tr><td>Story Pilot · Sources</td><td>"Story instructions" band: Global / Brand templates, amber dashed border. Only you can edit them; agents only read them.</td><td>Double-click "Storytelling: build story"; <b>+ Brand</b> to add brand voice</td></tr>
+<tr><td>Story Pilot · Script</td><td>Recorded segments: a FliHub recording's transcript goes into the script word for word. Listen plays the real recording, and the teleprompter shows "▶ RECORDED … plays here, not read".</td><td>"+ Recording" in the Recorded segments band <span class="warn">· not yet tried with a real recording or in a browser</span></td></tr>
+<tr><td>Overlay Pilot · Results</td><td>Compare 2–4 renders side by side: one play bar, one voice, Mute all, Keep this one (makes that render the video's final)</td><td>Tick renders, then <b>Compare N</b>. Ready for your demo.</td></tr>
+<tr><td>B-Roll Pilot</td><td>Paste image / <kbd>⌘V</kbd>, drag and drop, "Add FliHub's B-roll lane", frames taken at scene changes, Group by</td><td>Paste a screenshot into D13. Note: Chrome re-saves a copied picture, so it counts as new.</td></tr>
+</table>
+
+<h2><span class="n">03</span> In flight</h2>
+<table><tr><th>Window</th><th>Doing</th><th>Next</th></tr>
+<tr><td><code>storypilot-dev</code></td><td>Fixing the flaky Story Pilot "look" test (D13 at 1440), the real cause and not just a longer wait</td><td>I merge it, then its queue is empty</td></tr>
+<tr><td><code>overlaypilot-dev</code></td><td>Idle</td><td>Support for your Overlay Pilot demo once you've recorded it</td></tr>
+</table>
+
+<h2><span class="n">04</span> Done today, behind the scenes</h2>
+<div class="card"><ul>
+<li>ChatGPT "Saturday plan for videos" dossier filed as <b>B683</b>, next to your voice log B682 (copy: <code>/Users/davidcruwys/dev/ad/flivideo/docs/specs/b683-dossier-2026-11-02.md</code>).</li>
+<li>B-Roll Pilot was already mostly built, so today was a gap-fill. The <code>flivideo:broll-pilot</code> skill now knows the new paste and FliHub-scan commands.</li>
+<li>The Overlay Pilot test failure earlier wasn't caused by the new code: it also fails without it, 4 times in 6 runs, because it only waited 5 seconds. It now waits up to 30 seconds and passes reliably.</li>
+<li>Windows closed: dossier-work, snappy-rsch, brollpilot-dev. Merged worktrees removed.</li>
+<li><span class="warn">Slips:</span> a worker committed into FliStudio's live copy once (fine code, now told off), and I restarted FliStudio during a half-finished merge for about a minute before undoing it.</li>
+</ul></div>
+
+<h2><span class="n">05</span> Not established</h2>
+<div class="card"><ul>
+<li>Nobody has looked at the Reader buttons, segment cards or recorded paragraphs in a real browser. Tests passed, but in a simulated browser and on the server, not on screen.</li>
+<li>Whether Overlay Compare stays in sync on a long real render.</li>
+<li>Whether FliHub's take list returns transcript paths the way the recorded-segment code expects.</li>
+</ul></div>
+</div></body></html>
