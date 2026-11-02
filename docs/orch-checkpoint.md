@@ -6,6 +6,14 @@
 - Read this first when resuming as flivideo-orch
 - The current step tells you the next action; the standing rules are not optional
 
+## 2026-11-02 ~16:55 — David steers from Roamy from now on
+- David works from home on Roamy. He attaches to M4 windows over ssh; `roamy-home-orch` (Roamy tmux) holds his table.
+- Handover: docs/handovers/roamy-home-2026-11-02.md (attach lines, artefacts, held asks). All M4 sessions left running.
+- Report §05 updated to current state (artifact version 1793612881-0816).
+- Xcode 27.2 installed on M4; licence + first launch still need `sudo` (David). Rig launch waits on that + his go in openrig-orch.
+- M4 power: sleep 0 / standby 0 / autorestart 1; nothing changed.
+- Ghost text in openrig-orch / d18 / aitldr-strip-rsch / storypilot-dev prompt boxes is a suggestion, not David's input.
+
 ## 2026-11-02 ~12:35 — acted on David's answers to the 11-02 report
 - D1 yes: three intros done — D13 `d13-overlay-pilot/script/three-intros-2026-11-02.md` (e78ef2d), D18 `d18-story-pilot/resources/three-intros-2026-11-02.md` (b4d3377). Proposed only; David picks.
 - D2 yes: Snappy spec §9 records 8 approvals (78d4b56). Spikes HELD until OpenRig rig plan is approved.

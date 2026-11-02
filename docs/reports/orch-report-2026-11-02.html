@@ -77,7 +77,7 @@ footer{margin-top:48px;color:var(--muted);font-size:13px}
 <header><span class="logo-badge"><span class="a">Appy</span><span class="d">Dave</span></span><h1>FliVideo — while you were out</h1></header>
 <p class="sub">Monday 2 November 2026 · orchestrator: Swagger (flivideo-orch) · updated after your answers</p>
 
-<div class="next"><b>Your move:</b> pick an intro for D13 and D18 · say "go" (or change it) on the OpenRig plan in section 05 · talk to the AITLDR window when you're ready.</div>
+<div class="next"><b>Your move (16:50, steering from Roamy):</b> pick an intro for D13 and D18 · in <code>openrig-orch</code>, type the M2 upgrade go (0.7.7) · accept the Xcode licence on the M4 · talk to the AITLDR window when you're ready.</div>
 
 <h2><span class="n">01</span> Your five decisions</h2>
 <div class="cards">
@@ -123,19 +123,19 @@ footer{margin-top:48px;color:var(--muted);font-size:13px}
 </table>
 <div class="mea"><b>Correction:</b> my report said no brand-voice document existed. That was wrong. I passed on a worker's "no voice-profile.md anywhere" without checking it. The gaps are that it is 5 months old, covers only your spoken voice (not your writing), and nothing in Story Pilot uses it yet.</div>
 
-<h2><span class="n">05</span> Snappy + OpenRig: the plan I want your go on</h2>
+<h2><span class="n">05</span> Snappy + OpenRig: where it stands (16:50)</h2>
 <blockquote>"I'm thinking of doing a started team which is just a coder and reviewer." D12, closing section (<code>d12-openrig-agent-teams/hub/transcripts/09-3-other-resources.txt</code>)</blockquote>
 <table class="plan">
   <tr><th>Question</th><th>What I found</th><th>My recommendation</th></tr>
-  <tr><td>Which machine</td><td>The OpenRig brain says the M2 is the "OpenRig trial machine", and the watcher plus d09-crew run there. <code>machines.json</code> doesn't say so. Recent rigs also ran on the M4 and Roamy.</td><td><b>Build on the M2</b>, which keeps load off the M4. Run the screen and permission spikes (S1, S2, S4) on the <b>M4</b>, because they need your displays.</td></tr>
+  <tr><td>Which machine</td><td>The OpenRig brain says the M2 is the "OpenRig trial machine", and the watcher plus d09-crew run there. <code>machines.json</code> doesn't say so. Recent rigs also ran on the M4 and Roamy.</td><td><b>Now: the M4.</b> You ruled the M2 is for builds you don't watch and must keep its memory free for CrisperWhisper. Snappy needs your displays and permission prompts, so the rig targets the M4.</td></tr>
   <tr><td>Which template</td><td><code>launch/starter</code>: one Claude Code builder and one Codex reviewer, the smallest dev shape there is. The bigger ones (code-review, factory) have 5+ seats.</td><td><b>Starter</b>, with the reviewer as a Claude tester (dev-team <code>tester-audit</code>), saved as our own <code>brains/openrig/rigs/swift-dev/</code> so the next Swift app can reuse it.</td></tr>
-  <tr><td>Versions</td><td>M4 0.7.5 · M2 0.7.4 · Roamy 0.7.4 · latest release v0.7.6 (30 Oct). The M4's source clone is 138 commits behind.</td><td>Update all three to 0.7.6, M2 first. Refresh the clone with <code>sync.sh --only openrig</code>.</td></tr>
+  <tr><td>Versions</td><td>M4 0.7.5 · M2 0.7.4 · Roamy 0.7.4. <b>0.7.7 released today</b>; some features are only in the unreleased 0.7.8. Clone refreshed to <code>cca17f54</code>.</td><td>Upgrade to <b>0.7.7, M2 first</b> (nothing running there). M4 and Roamy only when their rigs are idle. <b>Held:</b> needs your go typed in <code>openrig-orch</code>.</td></tr>
   <tr><td>New commits</td><td>Notable ones: isolated seat homes, Claude seats on API keys, per-seat subscription tokens, <code>rig host edit</code>, native restore.</td><td>The <code>openrig-orch</code> window (quiet since 31 Oct) writes <code>upstream-changes-2026-11-02.md</code> and updates the brain.</td></tr>
   <tr><td>Where Swift lessons go</td><td><code>swift-rsch</code> is writing a new brain now.</td><td><code>brains/swift-macos/</code>, with <code>rig-learnings.md</code> for what the first build teaches.</td></tr>
-  <tr><td>Conversations</td><td><code>openrig-orch</code> is about 1.5 days stale (last on 31 Oct, fixing Codex). <code>appyrig-orch</code> is fresh (this morning).</td><td>Restart <code>openrig-orch</code> with this plan. Leave <code>appyrig-orch</code> alone.</td></tr>
+  <tr><td>Conversations</td><td><code>openrig-orch</code> wrote <code>brains/openrig/upstream-changes-2026-11-02.md</code> and drafted the rig <code>brains/openrig/rigs/swift-dev/</code> (Sonnet builder, Opus tester; validates; cwd <code>apps/snappy</code>).</td><td><code>rig up</code> waits for your go in <code>openrig-orch</code>. Leave <code>appyrig-orch</code> alone.</td></tr>
 </table>
 <div class="mea"><b>Before any Snappy build, from the Swift research (checked on the M4):</b> Xcode is not installed, only the command-line tools, and there are no code-signing identities. Without a stable signing identity, macOS forgets Snappy's screen-recording permission on every rebuild. The fix is a self-signed certificate in your keychain, or installing Xcode. That's your call. Tests have to use Swift Testing through a wrapper script. Write-up: <code>brains/swift-macos/</code>.</div>
-<p class="sub" style="margin-top:10px">Nothing has been updated or launched. Not yet checked: Xcode on the M2.</p>
+<p class="sub" style="margin-top:10px"><b>Done since:</b> self-signed identity "AppyDave Local Code Signing" is in the M4 keychain (not yet proven to keep the screen permission across a real rebuild). <b>Xcode 27.2 is installed on the M4</b>, but its licence is not accepted yet (<code>sudo xcodebuild -license accept</code>, then <code>sudo xcodebuild -runFirstLaunch</code>). Snappy repo is local only at <code>apps/snappy</code>; the private GitHub repo still needs your <code>gh repo create</code>. Nothing upgraded or launched.</p>
 
 <h2><span class="n">06</span> Windows open now</h2>
 <div class="wins">
