@@ -22,3 +22,21 @@ Lane: `modules/overlay-pilot/**` only. Do not touch storypilot or broll-pilot.
 
 ## Gates
 typecheck, lint, `npm test`, targeted overlay-pilot e2e only. UX pass. Screenshots at 2000 and 1440. Commit, push. Do not merge or restart.
+
+---
+
+## Handover — window closed 2026-11-02 (flivideo-orch)
+
+**State:** Compare shipped. Branch `op-compare` (b245736) merged to FliStudio main at 466be52; restarted and healthy.
+The e2e flake was pre-existing (a clean 3f6804e failed the v2 test 4/6): the screen lags the disk by seconds; the expect at
+`e2e` line ~365 now waits 30 s (test-only change). v2 test 8/8 alone, both overlay-pilot tests 2/2 together.
+Temporary worktree `flistudio-worktrees/op-base` removed. Window `overlaypilot-dev` closed by orch on David's ruling (idle).
+
+**Next unit (not started — waits on David):** demo support for the Overlay Pilot video. David records the demo in FliHub
+(pick 2–3 looks → generate → Compare side by side → Keep this one); that recording becomes a B-roll asset and the demo is
+woven into D13's script (B682/B683 §8.2–8.3). Open questions to re-check when it restarts:
+- Compare sync on a long render has not been checked (only short test renders).
+- Compare has not been viewed by David in a real browser.
+
+**To resume:** launch a fresh `overlaypilot-dev` from a worktree off current main (never the live checkout), read this brief
+and the D13 project (`/Users/davidcruwys/dev/video-projects/v-appydave/d13-overlay-pilot/`), then ask orch for the unit.
