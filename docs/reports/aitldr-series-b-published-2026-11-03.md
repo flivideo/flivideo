@@ -117,3 +117,19 @@ All 34 ids rechecked against the channel mirror's title and duration for that id
 | b23 | short (rights-check-short) | [pwi9Oqlkfps](https://youtu.be/pwi9Oqlkfps) | How to Check Your Videos for Copyright Issues Using Claude | 30s vs 29.2s (+0.8) | clear |
 | b24 | main (end-screen) | [9m8ztxRKLRo](https://youtu.be/9m8ztxRKLRo) | Stop Losing Views! Fix Your YouTube End Screens With Claude | 151s vs 145.5s (+5.5) | clear |
 | b25 | main (community-post) | [jWuBSWSCp1M](https://youtu.be/jWuBSWSCp1M) | How I Automate YouTube Community Posts With Claude Code | 157s vs 152.1s (+4.9) | clear |
+
+
+## Pass 2 — fresh public `youtube.sync`, then re-match (worker `aitldr-sync-rsch`, 2026-11-03)
+**Sync:** `flistudio youtube.sync --brand aitldr` (public, read-only, 30 quota units): **426 → 429 videos**; newest publish **2026-10-31 00:37Z** (`iWGZOYoGU-w`, Vox-style Short, not Series B). The mirror had not been synced since before 29 Oct, so everything from 29 Oct on was new. Three new uploads: `iWGZOYoGU-w` (60 s), `fm1WrkZ9Bvk` (11 s), `P4c-XkAeJxI` (3:27).
+
+| bNN | video | id | YouTube title | YT vs local final | verdict |
+|---|---|---|---|---|---|
+| b26 | main (repurpose) | [P4c-XkAeJxI](https://youtu.be/P4c-XkAeJxI) | How to Repurpose YouTube Videos With Claude Code | 207 s vs 201.5 s (+5.5) | **clear, NOT written** (Jan's uncommitted edit is still in `b26-repurpose/fli.resources.json`; brief says report instead). Title = project topic, duration fits, only long upload after b25. Caveat: YouTube's description is the Title Lab text pasted in (YouTube-side error, like b17), and the mirror has no transcript for it |
+| b26 | short (repurpose-short, 27.7 s) | — | — | — | unmatched: no Short ≈ 28 s exists after 27 Oct (new Shorts are 11 s, 11 s, 60 s Vox) |
+| b21 | short (angle-lab-short) | [GaExvmBUa0I](https://youtu.be/GaExvmBUa0I) | How to fix your messy script in 30 seconds | 30 s vs 29.6 s (+0.4) | **clear, written** (`1ad9515` in v-aitldr). Description names the Angle Lab skill and "keeps one promise"; local SRT opens with the same line |
+| b05 | short (title-lab-short) | [5r8dGfwSbjI](https://youtu.be/5r8dGfwSbjI) | Find Your Best YouTube Title Before You Publish | 38 s vs 33.1 s (+4.9) | **still ambiguous, not written**: topic fits, but +4.9 s is the main-video pattern, not the Short's +0…1.1 |
+| b24, b25 | shorts | — | — | — | unmatched: no ~27 s / ~29 s Short in the mirror after 27 Oct |
+| b11–b15, b17–b20, b22 | shorts | — | — | — | unmatched: no unclaimed Short in the window; the only unclaimed ones are `Pi2Ggb2hWM4` (20 s, "Claude edited this whole video"), `6zAtQHHg6Io` (11 s), `fm1WrkZ9Bvk` (11 s), none matching these lengths or topics |
+| b01 | main | a2EGJnOCpoA | — | 251 s vs 216 s | stays reverted: no new evidence |
+
+**Chips (AITLDR landing, after):** Needs attention 0 · Working 4 · Not started 1 · **Published 25** · Parked 0 · Abandoned 0. Unchanged because b21 was already Published through its main. Screenshot: `docs/reports/proof-2026-11-03/series-b-published-5-pass2.png`.
