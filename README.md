@@ -89,6 +89,19 @@ for folder-based HTML artefacts. Kept, but it is not a video-pipeline app.
 
 ---
 
+## Research & direction
+
+- **Ecosystem research (2026-11-03, B686/B687)**: where FliVideo sits among the four umbrellas, what each app and
+  pilot does today, 19 outside tools rated absorb / add / replace / none, a *possible* target architecture, 9 planned
+  experiments, and **21 decisions waiting for David**. Nothing in it is decided until its row in the approval register
+  changes.
+  - Start here: `/Users/davidcruwys/dev/ad/flivideo/docs/ecosystem-research/00-index.md`
+  - Decisions: `/Users/davidcruwys/dev/ad/flivideo/docs/ecosystem-research/06-approval-register.md`
+  - Map (published copy; the `.md` files are the source): https://claude.ai/artifact/FikDp9d9cn3MzQmo3zpqq6
+  - Tracked in `docs/backlog.md` → *Ecosystem research: 21 decisions*.
+
+---
+
 ## Per-app docs
 
 Every active app is documented by one method, in three steps:

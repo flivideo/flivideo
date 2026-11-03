@@ -6,6 +6,14 @@
 - Read this first when resuming as flivideo-orch
 - The current step tells you the next action; the standing rules are not optional
 
+## 2026-11-03 ~15:30 — B686 ecosystem research DONE and filed
+- Map https://claude.ai/artifact/FikDp9d9cn3MzQmo3zpqq6 · docs `docs/ecosystem-research/` (00–07, candidates) ·
+  flivideo 6969341, brains 5c7b4502. 15/15 ACs.
+- David: "research that should exist and easy to find in flivideo and backlogs" → linked from `README.md`
+  (*Research & direction*), `docs/backlog.md` (*Ecosystem research: 21 decisions*), and notes on B686/B687.
+- HELD for David: 21 rows in `06-approval-register.md`; R1 → R3 → R4 after pilot testing. Easy: R13 ruling, X2 check.
+- Open asks: close the 4 b686 windows (2 on M2, 2 on M4); park B686/B687.
+
 ## 2026-11-03 ~11:40 — day so far (flistudio main 136bb92)
 - Dossier B687 (chain B683, voice B686). Deliver B686 plan gate: brains north-star/deliver-2026-11-03-B686-…md; B1 b686-arch-write (M2 Opus) + B2 b686-rsch (M2 Sonnet) running, watchers b0q8p50mc/btqy0d6ao; B3 b686-synth-write (M4 Opus) after both.
 - Merged today: d65a16d angle fold/clear/undo, 5b9324e reader key hints, e7dea41 play intro only, 136bb92 send-to-session (flag in .env ON by David's own command; M2 probe 403 on :7150 and ts.net:8443).

@@ -42,6 +42,20 @@ put onto a backlog because I'm not there to guide that."
 - **Open question:** seeing private, unlisted or scheduled videos would need the YouTube sign-in that uploads already
   use. Read-only public access is the safe default.
 
+### Ecosystem research: 21 decisions (2026-11-03, B686/B687)
+- **What it is:** the finished research on where FliVideo is going: apps vs pilots, the 80-20 rule, which outside
+  tools to absorb, add or replace. Index: `/Users/davidcruwys/dev/ad/flivideo/docs/ecosystem-research/00-index.md`.
+  Map: https://claude.ai/artifact/FikDp9d9cn3MzQmo3zpqq6
+- **The decisions:** `/Users/davidcruwys/dev/ad/flivideo/docs/ecosystem-research/06-approval-register.md`, rows
+  R1–R21, all open. Only David changes a row.
+- **When to pick it up:** the main chain is **R1 → R3 → R4** (what 80-20 means → is Overlay Pilot's renderer an app →
+  FliMotion). It waits until David has finished testing the pilots.
+- **Can be done any time:** R13 (licence posture: run AGPL tools unmodified, never copy their code) is one ruling;
+  X2 (is HyperFrames' studio server safe to embed?) is a ~1 h read-only check on the M2.
+- **Experiments:** X1–X9 in `/Users/davidcruwys/dev/ad/flivideo/docs/ecosystem-research/05-research-experiments.md`,
+  each needs its own go (R21).
+- **Repos it studied:** 8 clones registered in `~/dev/upstream/repos.jsonl`, downloaded on the M2 only.
+
 ## Banked (backlog only)
 
 - **Pilots:**
