@@ -34,3 +34,22 @@ timestamp: 2026-11-03T12:30+07:00
 - FliEdit = assembly of footage into a multi-track timeline. HyperFrames timeline = clips of HTML/media on tracks, `data-start/duration/track-index`, rendered from the browser.
 - Overlap: placing and timing media and overlays. Gap: no footage-centric cut/ripple/audio-mix evidence found. **UNVERIFIED** beyond reading the code.
 - Prior brain study: `brains/video-as-code/hyperframes-fundamentals.md`, `api-surfaces.md`, `creating-with-hyperframes.md`.
+
+## Experiment X2 — 2026-11-03
+
+**Verdict: PASS on code-read only — runtime measurement NOT DONE (UNVERIFIED).** 05's pass test is "binds localhost by default, or takes a token".
+
+**Observed in code** (clone `188475aaf`, read-only):
+- **Default bind is loopback.** `packages/cli/src/server/portUtils.ts:447`: `host = bindHost ?? (process.env.HYPERFRAMES_PREVIEW_HOST?.trim() || "127.0.0.1")`, listen at `:472`. The comment at `:439-446` (finding "F-001") says the API is unauthenticated and LAN exposure is opt-in via `HYPERFRAMES_PREVIEW_HOST=0.0.0.0`.
+- **`packages/studio-server` never listens.** It is a Hono app (`createStudioApi.ts`); the CLI (`packages/cli/src/server/studioServer.ts`) mounts and binds it.
+- **No token auth, no CORS middleware.** No `hono/cors` and no Access-Control headers in `studio-server/src` or `cli/src/server`. The only `*token*` is `X-Hyperframes-Write-Token` (`routes/history.ts:28`), a write-attribution label, not auth.
+- **Only guard is a Host check against DNS rebinding.** `server/telemetryIdentity.ts:77` (`isLoopbackHost`), `:251`, `identityAllowed`. Its own comment says it is "not access control". `/api/open-in-desktop` POST adds Origin/Sec-Fetch-Site checks (`server/desktopRoutes.ts:11`).
+- **Mutating routes, all unauthenticated** (bind address is the only protection):
+  - File write/create/delete: `routes/files.ts:2597` (PUT), `:2704` (POST), `:2724` (DELETE), `:3403` (PATCH); `file-mutations/*` from `:2743`; `gsap-mutations*` from `:3536`; `duplicate-file` `:3432`; upload `:3467`.
+  - History undo/restore: `routes/history.ts:96,102`.
+  - Process / compute spawn: `routes/render.ts:66` (render, headless Chrome), `routes/loudness.ts:84`, `routes/media.ts:166`, `routes/freezeFrame.ts:185` (ffmpeg), `routes/registry.ts:16` (installs catalog blocks).
+- Upstream's own docs in the code say that with `HYPERFRAMES_PREVIEW_HOST=0.0.0.0` anyone on the LAN can read/write/delete project files and spawn renders.
+
+**NOT checked (UNVERIFIED)**: actual `lsof` bind line, `curl` read and mutation, M4-over-Tailscale read, live CORS headers. Cause: starting the server in the scratch copy was refused by the harness auto-mode classifier (two attempts, no reason given), and `npx bun` was refused earlier. Scratch state: `~/dev/upstream/scratch/x2/` (hyperframes copy + `pnpm install --ignore-scripts` for `@hyperframes/cli...`, plus `project/`); nothing is running. Run recipe: `cd ~/dev/upstream/scratch/x2/hyperframes/packages/cli && ../../node_modules/.bin/tsx src/cli.ts preview ../../../project --port 4791 --no-open`.
+
+**What FliStudio would need to embed it safely** (Inference): keep the default loopback bind and never set `HYPERFRAMES_PREVIEW_HOST`; if FliStudio's UI must reach it from another machine, put it behind a FliStudio-owned token proxy (or Tailscale-only bind to the single tailnet IP) because the upstream API has no auth; treat all `file-mutations`/`render` routes as full-trust; only open compositions you trust (they run code in headless Chrome).
