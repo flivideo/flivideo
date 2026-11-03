@@ -54,10 +54,33 @@ timestamp: 2026-11-03T12:30+07:00
 
 **What FliStudio would need to embed it safely** (Inference): keep the default loopback bind and never set `HYPERFRAMES_PREVIEW_HOST`; if FliStudio's UI must reach it from another machine, put it behind a FliStudio-owned token proxy (or Tailscale-only bind to the single tailnet IP) because the upstream API has no auth; treat all `file-mutations`/`render` routes as full-trust; only open compositions you trust (they run code in headless Chrome).
 
-## Experiment X2 runtime + X1 — 2026-11-03 (M4) — BLOCKED, NOT RUN
+## Experiment X2 runtime + X1 — 2026-11-03 (M4)
 
-**Verdict: no new evidence. Stopped at the permission checker, as the brief instructs.** The X2 code-read PASS above still stands; the runtime half (lsof bind line, curl read + mutation, CORS header, M2-over-Tailscale read that must fail) and all of X1 are **UNVERIFIED**.
+**Verdict: X2 PASS at runtime (loopback, unauthenticated, no CORS). X1 PARTIAL-PASS: four of five edit operations and the music bed are scriptable by CLI `--json`; ducking and ripple are not single CLI verbs; render matches.** 05's X1 pass is "all five operations via CLI `--json`, render matches, Studio stays responsive on 20 min" — strictly **not met** (see gaps; the 20-minute responsiveness test was not run, the project is 65 s).
 
-**Done**: `./sync.sh --only hyperframes` (clone updated, 496 MB); copied to `~/dev/upstream/scratch/X1/hyperframes` (no `.git`); `pnpm install --ignore-scripts --filter "@hyperframes/cli..."` OK in 25 s (node 24.13, pnpm 11.20). Scratch is 3.0 GB with that install.
+*Earlier today the first attempt was blocked by the permission checker; David then approved running the CLI inside `~/dev/upstream/scratch/X1` only, and this is the retry.*
 
-**Blocked command** (denied by the auto-mode classifier, no reason given — the same refusal the earlier M2 attempt hit): `cd ~/dev/upstream/scratch/X1/hyperframes/packages/cli && ../../node_modules/.bin/tsx src/cli.ts --help` (the `tsx` runner for the CLI source; even `--help`). Nothing was started; no workaround tried.
+**Setup** (M4, scratch `~/dev/upstream/scratch/X1/`, ~35 min of wall time incl. builds): clone `./sync.sh --only hyperframes` (updated, `6feb4bec7`), copied without `.git`. The repo is a **bun** workspace: `pnpm install` fails on workspace packages, so `bun install --ignore-scripts` (12 s) and `bun run --filter @hyperframes/<pkg> build`, **one at a time in order** parsers, core, lint, engine, player, producer, inspector, sdk, studio-server, studio (parallel build fails on missing parsers dist). Then `tsx src/cli.ts <cmd>` works. Telemetry off (`DO_NOT_TRACK=1`, `HYPERFRAMES_NO_TELEMETRY=1`). Scratch grew to 4.6 GB (node_modules + builds + Chromium cache + media).
+
+**X2 runtime (observed)** — `hyperframes preview <dir> --port 7210 --no-open --foreground` (default bind; without `--foreground` it forks a background child that fails here on `hideChildConsoles.js` in a source checkout):
+- `lsof`: `bun … TCP 127.0.0.1:7210 (LISTEN)` — loopback only.
+- Read: `GET /api/projects`, `/api/projects/proj`, `/files/index.html` → 200, no auth.
+- Mutation: `POST /api/projects/proj/files/x2-probe.txt` `{"content":…}` → **201**, file created on disk (deleted afterwards). A PUT from `Origin: http://evil.example` returned 428 only because the file needs an `If-Match` precondition version, not because of any origin/auth check. `POST /file-mutations/patch-element/index.html` with no credentials rewrote `index.html` (used below).
+- CORS: no `Access-Control-*` headers on a request with a foreign Origin; preflight OPTIONS → 404 (so browsers block cross-origin reads/writes with preflight; simple requests still reach the server).
+- M2 over Tailscale: `ssh davidcruwys@100.126.70.25 curl http://100.82.235.39:7210/api/projects` → connection refused (curl rc 7), same for `mac-mini-m4.local:7210`. **Fails as required.**
+
+**X1 on a d01 copy** (project `proj`: `03-1`+`03-2` takes re-encoded to 25 fps CFR = 65.2 s, 2 DJI clips cut to 12 s 1080p25 as b-roll, a generated sine tone as the "music"; `hyperframes check` passes lint/layout once gsap is served locally from `assets/` — the blank template's jsdelivr `<script>` timed the check out at 60 s even though the CDN answers curl):
+| Operation | Via CLI `--json`? | Result |
+|---|---|---|
+| cut | `timeline split '#take2' 45` | yes, `take2` + `take2-2`, receipt + backup path |
+| ripple-delete | `timeline delete '#take1' --start 12 --end 14`, then 4× `timeline move` to close the gap | **delete leaves a gap**; no ripple verb, the agent must compute and issue the moves (or one `timeline apply` plan, not tried) |
+| move | `timeline move '#take2-2' 43` | yes |
+| trim | `timeline trim '#broll1' --duration 5` | yes |
+| music bed | `<audio>` track 2 + `timeline set '#music' --volume 0.5` | yes |
+| duck | `timeline set` accepts only `volume=`, `rate=`, `track=`; **`data-automation` lane refused** | done via **REST** `patch-element` (`html-attribute data-automation`, lane 1→0.35→1), not CLI |
+| render | `render … -q draft -f 25 -o render-x1.mp4` | **65.2 s, 1920×1080 h264/aac, 16.6 MB, 42 s to render** (hardware GPU, 3 workers); frame at 9 s shows the DJI b-roll over the take |
+Evidence files: `~/dev/upstream/scratch/X1/{proj,render-x1.mp4,t.py,preview.log}`. NOT verified: the audio ducking is audible (only that the attribute is in the file and the render completed); Studio responsiveness on 20 minutes; whether the render and the preview agree frame for frame.
+
+**What FliStudio would need** (Inference): keep loopback bind and a FliStudio-owned token proxy if the UI must be reached off-box (no auth, writes + render spawn unauthenticated); an adapter that turns "ripple delete" into delete + moves; use REST `patch-element` for duck/automation; serve gsap locally; run it as a bun-built workspace (not `npx`) when from source. FliEdit stays the footage assembler (E-A) until ripple and ducking have first-class verbs.
+
+**Left running for David**: Studio at http://127.0.0.1:7210/#project/proj (stop: `kill 57524` on the M4, or `pkill -f "cli.ts preview"`).
