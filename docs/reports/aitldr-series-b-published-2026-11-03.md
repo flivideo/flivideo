@@ -71,3 +71,49 @@ Channel uploads in the window with no Series B home: `GaExvmBUa0I` (30 s Short, 
 - b01 long: channel 251 s vs local final 216 s — the title matches exactly, so written, but the shipped cut may differ from the local final.
 - The mirror is as of 29 Oct; anything published after that is unseen. A fresh `youtube.sync` (public only) would settle b26 and the b24/b25 Shorts.
 - All 34 resources are agent-stamped (`agent:aitldr-published-rsch`); David can `publish.relink`/clear any he disagrees with.
+
+
+## Verification pass (after c4ea5e1 was pushed) — requested by flivideo-orch
+All 34 ids rechecked against the channel mirror's title and duration for that id. Rule used for "clear": duration fits the pattern (mains +4.5…+5.5 s, Shorts +0…+1.1 s) AND the YouTube title/description matches that project's own content (local title candidates and upload.md for mains; the Short's own transcript for Shorts, since Shorts have no local title). Every row also ranks first against all other same-format uploads by transcript similarity, except where noted.
+- **Reverted: b01 main only** — title exact, but 251 s vs the local final's 216 s (35 s, not the +5 s pattern); the shipped cut is not the local final. The id is probably right, but unproven. Reverted in new commit `17fd8ad` (no amend, no force-push). b01 stays Published through its Short.
+- Looked weak but kept after reading the content: b02 Short (YouTube description empty; transcript is "blank page… script" = title), b01 Short, b17 (transcript = the captions/channel-name story = title; **note: YouTube's description on `yh-ko-CwXyg` is the Cut List text pasted from b16 — a YouTube-side error to tell Jan**).
+- Thinnest margins, kept: b13 (title ↔ CTA, +4.8 s), b15, b16 (YouTube description names "Cut List").
+- **Was a wrong id pushed in c4ea5e1?** No wrong id that I can find: 33 of 34 pass title/content and duration. One (b01 main, `a2EGJnOCpoA`) was unproven rather than shown wrong; it was in the pushed commit for a few minutes and is now removed. Strictly: c4ea5e1 contained 1 unproven id, 0 known-wrong.
+- Chip: before 0 (`series-b-published-1-before.png`) → 25 after c4ea5e1 (`-3-after.png`) → **25 after the revert** (`series-b-published-4-after-verify.png`).
+
+| bNN | video | YouTube id | YouTube title | YT dur vs local final | verdict |
+|---|---|---|---|---|---|
+| b01 | main (yt-performance) | [a2EGJnOCpoA](https://youtu.be/a2EGJnOCpoA) | Want to Know Which Videos Are Killing Your Channel? Watch This Now! | 251s vs 216.1s (+34.9) | **reverted** (title exact, but 251 vs 216 s: not a clear match; 17fd8ad) |
+| b01 | short (yt-performance-short) | [Jr1lwtcNBFU](https://youtu.be/Jr1lwtcNBFU) | Low Views? This Claude Skill Helps You Find Out Why | 34s vs 33.0s (+1.0) | clear |
+| b02 | main (script) | [j1Hpvsu79Xg](https://youtu.be/j1Hpvsu79Xg) | This Claude AI Skill Writes Your YouTube Scripts for You | 268s vs 263.0s (+5.0) | clear |
+| b02 | short (script-short) | [iKGBS_7OtJw](https://youtu.be/iKGBS_7OtJw) | Struggling to Write YouTube Scripts? Use This AI Skill Now! | 32s vs 31.7s (+0.3) | clear |
+| b03 | main (thumbnail-prompt) | [0B8UzTL-h6E](https://youtu.be/0B8UzTL-h6E) | How to Make Thumbnails That Get Views Using AI (Full Tutorial) | 262s vs 256.7s (+5.3) | clear |
+| b03 | short (thumbnail-prompt-short) | [IYlHBYI8Fxs](https://youtu.be/IYlHBYI8Fxs) | This AI Skill Creates Clickable Thumbnails | 38s vs 37.4s (+0.6) | clear |
+| b04 | short (shot-list-short) | [I2xF9A0Rg6s](https://youtu.be/I2xF9A0Rg6s) | Turn Any Script Into a Shot List With Claude | 35s vs 34.2s (+0.8) | clear |
+| b05 | main (title-lab) | [D3srragTwPQ](https://youtu.be/D3srragTwPQ) | I Stopped Guessing YouTube Titles—This Claude Skill Scores Them for Me | 127s vs 122.3s (+4.7) | clear |
+| b06 | main (hook-doctor) | [Nrd5PnLkMk4](https://youtu.be/Nrd5PnLkMk4) | This Claude Skill Found What Was Wrong With My YouTube Hooks | 205s vs 199.7s (+5.3) | clear |
+| b06 | short (hook-doctor-short) | [1BVB9cnxL10](https://youtu.be/1BVB9cnxL10) | This Claude Skill Caught My Weak Hooks | 32s vs 31.8s (+0.2) | clear |
+| b07 | main (idea-bank) | [idUuJkfh61k](https://youtu.be/idUuJkfh61k) | Running Out of Video Ideas? Try This Claude Skill | 175s vs 170.3s (+4.7) | clear |
+| b07 | short (idea-bank-short) | [Mw6HU-0b7lE](https://youtu.be/Mw6HU-0b7lE) | How I never run out of video ideas | 27s vs 26.2s (+0.8) | clear |
+| b08 | main (cue-cards) | [TdBL1A7kMd4](https://youtu.be/TdBL1A7kMd4) | How to sound natural on camera | Claude Cue Cards | 165s vs 160.2s (+4.8) | clear |
+| b08 | short (cue-cards-short) | [g00d9RY7GXo](https://youtu.be/g00d9RY7GXo) | Stop Sounding Like You’re Reading Your Script | Claude Cue Cards | 32s vs 31.2s (+0.8) | clear |
+| b09 | main (vo-prep) | [OQTr8bB7GdE](https://youtu.be/OQTr8bB7GdE) | I Stopped Trusting My AI Voiceover Until Claude Checked Every Line | 179s vs 174.1s (+4.9) | clear |
+| b09 | short (vo-prep-short) | [wmnMpetixCM](https://youtu.be/wmnMpetixCM) | My AI Voice Added a Sentence I Never Wrote — Claude Caught It | 34s vs 33.0s (+1.0) | clear |
+| b10 | main (demo-sandbox) | [6KEJxgUO0G0](https://youtu.be/6KEJxgUO0G0) | Protect Your Privacy: The Claude Code Demo Sandbox | 132s vs 126.6s (+5.4) | clear |
+| b10 | short (demo-sandbox-short) | [0ixwtrYd6mI](https://youtu.be/0ixwtrYd6mI) | I Accidentally Showed Private Data on YouTube—Here’s the Claude Skill I Use Now | 29s vs 28.9s (+0.1) | clear |
+| b11 | main (broll-prompts) | [c_9TqD0GlXk](https://youtu.be/c_9TqD0GlXk) | I Had No B-Roll. This Claude Skill Wrote the Prompts | 134s vs 129.1s (+4.9) | clear |
+| b12 | main (gap-check) | [moRWKeCxOAI](https://youtu.be/moRWKeCxOAI) | I Thought I'd Recorded Everything. Claude Checked My Footage and Found 9 Missing Shots | 143s vs 138.4s (+4.6) | clear |
+| b13 | main (cta-lines) | [jWfwJqH3gY4](https://youtu.be/jWfwJqH3gY4) | Stop Reusing the Same YouTube CTA — Use This Claude Skill | 152s vs 147.2s (+4.8) | clear |
+| b14 | main (timing-sheet) | [8KhyDQLB0Po](https://youtu.be/8KhyDQLB0Po) | This Claude Skill Fixed My Animation Timing | 165s vs 159.5s (+5.5) | clear |
+| b15 | main (upload-pack) | [kHmv8l_VkGM](https://youtu.be/kHmv8l_VkGM) | This Claude Skill Writes My YouTube Descriptions for Me | 165s vs 159.8s (+5.2) | clear |
+| b16 | main (cut-list) | [w4LpBamBkCs](https://youtu.be/w4LpBamBkCs) | This Claude Skill Finds Dead Time in Your Videos Automatically | 169s vs 163.7s (+5.3) | clear |
+| b17 | main (captions) | [yh-ko-CwXyg](https://youtu.be/yh-ko-CwXyg) | I Let Claude Fix My YouTube Captions — Here's What Happened | 163s vs 158.0s (+5.0) | clear |
+| b18 | main (overlay-pack) | [Ew8a157XEYg](https://youtu.be/Ew8a157XEYg) | This Claude Skill Turns Your Script Into Ready-to-Use Video Overlays | 157s vs 151.7s (+5.3) | clear |
+| b19 | main (sfx-cues) | [Gtn1ThkuylU](https://youtu.be/Gtn1ThkuylU) | Stop Adding Sound Effects Manually! Let Claude Do It | 148s vs 142.8s (+5.2) | clear |
+| b20 | main (quick-short) | [VtFZNkGYnaU](https://youtu.be/VtFZNkGYnaU) | Turn Long Videos Into YouTube Shorts Automatically With Claude! | 174s vs 169.0s (+5.0) | clear |
+| b21 | main (angle-lab) | [5VB3b4f__uE](https://youtu.be/5VB3b4f__uE) | How I Use Claude Code to Simplify My Video Scripts | 163s vs 157.5s (+5.5) | clear |
+| b22 | main (avatar-blocks) | [oddec0MA4p8](https://youtu.be/oddec0MA4p8) | This Claude Skill Can Save You Money on AI Avatar Videos | 142s vs 137.3s (+4.7) | clear |
+| b23 | main (rights-check) | [XJXg98uMAVY](https://youtu.be/XJXg98uMAVY) | Avoid YouTube Copyright Claims With This Claude Skill! | 178s vs 173.0s (+5.0) | clear |
+| b23 | short (rights-check-short) | [pwi9Oqlkfps](https://youtu.be/pwi9Oqlkfps) | How to Check Your Videos for Copyright Issues Using Claude | 30s vs 29.2s (+0.8) | clear |
+| b24 | main (end-screen) | [9m8ztxRKLRo](https://youtu.be/9m8ztxRKLRo) | Stop Losing Views! Fix Your YouTube End Screens With Claude | 151s vs 145.5s (+5.5) | clear |
+| b25 | main (community-post) | [jWuBSWSCp1M](https://youtu.be/jWuBSWSCp1M) | How I Automate YouTube Community Posts With Claude Code | 157s vs 152.1s (+4.9) | clear |
