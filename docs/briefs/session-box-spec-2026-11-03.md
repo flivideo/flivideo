@@ -43,3 +43,8 @@ timestamp: 2026-11-03T12:00+07:00
   the token same-origin, so the box should work from Roamy's browser with **no guard change**.
 - Trust check: the tunnel needs ssh to the M4, which already gives full control of the machine, so this widens nothing.
 - Not yet proven: a real send from Roamy's browser (David to try). Guard stays as is; no tailnet loosening.
+- **PROVEN 2026-11-03 19:07 +07:** David's send from Roamy's browser (Chrome history: `localhost:7150/b/appydave/p/d13-overlay-pilot?zone=ext:storypilot`
+  at 12:04:32Z) arrived in `flivideo-orch`; note `n_9cf428300b4c` (12:07:31Z) in d13's `fli.notes.jsonl`. Guard unchanged.
+- **Banked, low priority:** record where a send came from in the session-send note. Caveat: through the tunnel the server
+  sees 127.0.0.1 either way, so origin/host headers can't tell Roamy from the M4; it would need a client-side hint (e.g.
+  the browser's user agent or a per-device label the page sends), stored as provenance, not trusted for access.
