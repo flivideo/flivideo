@@ -47,6 +47,16 @@ Owner: `flivideo-orch`. Each item: David's words, the screenshot, what he does a
   intro/angle writing rule (storypilot / storypilot-prep skills + the server prompt that writes `intro`), not the screen.
   Do not rewrite existing intros until the batch is worked.
 
+## 5. Oswald set on sentences is hard to read (12:15)
+- Screenshot: `/Users/davidcruwys/dev/ad/flivideo/docs/reports/proof-2026-11-03/david-batch-05-oswald-sentences.png`
+- David: "I don't find Oswald, when it's heavily loaded like this, readable… It feels okay for the pills."
+- Diagnosis (orch, UX): the brand already says "Oswald labels the world. Roboto carries the meaning"
+  (`brand-dave/skills/brand/references/appydave/DESIGN.md` principle 2). The angle proposals A/B/C break it: 25–35-word
+  sentences set in bold condensed Oswald, mixed case, two lines each, stacked three deep. Pills, tabs, nav, section titles,
+  beat numbers are short labels → Oswald is fine there.
+- Direction: angle text (and any sentence-length content) in Roboto, medium weight for the chosen/lead line; Oswald stays
+  for the letter "A", labels and buttons. Brand-level rule proposed separately (needs David's go: it touches every app).
+
 ## Related, already shipped today (context for the batch)
 - d65a16d proposals stay after a pick / clear / undo angle / intro readable / "undo AI arrangement".
 - 5b9324e Reader key hints moved onto the buttons.
