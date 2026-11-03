@@ -12,6 +12,7 @@
   (flistudio b1bdf3e, fli-core v0.29.0). Held: b26 main id P4c-XkAeJxI until Jan commits his b26 edit; b28–b30 Skool URLs from David.
 - Held for David: trial plan steps 1,2,4 on M4 (doc 08).
 - STANDING RULING (David via flivideo-roamy, ~18:15, replaces the ~18:00 one): code changes run on the M2 by default and sync to the others; M4 only when work is already in progress there; never code on Roamy; briefs route through flivideo-orch; every job states its machine + why.
+- HOLD (David designing, no build until his go): Story Pilot ↔ Captain's Log mapping, running note docs/briefs/storypilot-captains-log-mapping-2026-11-03.md (c2b0f14).
 - Roamy asked about the Send-to-session box (flistudio 136bb92): facts sent; blocked from Roamy by design (loopback + no tailscale-* + door token). No change yet.
 
 ## 2026-11-03 ~15:30 — B686 ecosystem research DONE and filed
