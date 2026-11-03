@@ -27,8 +27,27 @@ Owner: `flivideo-orch`. Each item: David's words, the screenshot, what he does a
 - Problem: jargon ("prepped", agent id), sits in the ANGLE band though it is about the sources list, and the consequence of
   the click isn't stated. Direction (to mock): move it to the sources/beats list header, say it in a sentence
   ("AI put these in order on 2 Nov · put back how they were"), or hide it behind a history control.
+- David (11:40) on orch's plain explanation: put THAT on screen as the info tip. Use this text, near verbatim:
+  "Prepped: an AI sorted this video's sources on <date> — their order (beats 01, 02, 03…), each one's role, and which to set
+  aside. Undo AI arrangement swaps that sorting with the one from before it ran; press again to swap back. It doesn't touch
+  your angle, your script or your files."
+
+## 3. Settings tab is not understood (11:40)
+- Screenshot: `/Users/davidcruwys/dev/ad/flivideo/docs/reports/proof-2026-11-03/david-batch-03-settings-unclear.png`
+- David: "I think this is an important thing that we do, but I don't understand it, and … there's not enough information to
+  help me understand it on the screen somewhere. Maybe information [tips] help."
+- Fields: profile, audience, feel, do, notes, voice (+ "set on this video" / "from the creator" origin lines).
+- Want: an ⓘ per field saying what it is, what it changes downstream (which agent/step reads it), and an example.
+  The notes row currently holds an agent's message ("feel and do are UNSET… Ask David") — that's a question to David
+  living in a settings field; consider surfacing it as a prompt instead.
+
+## 4. Intros: drop the "I'm AppyDave, let's get into it" sign-off in story style (11:40) — CONTENT RULE, not UI
+- David: "I'm hating the 'I'm AppyDave. Let's get into it.' … it doesn't make sense in this storytelling style."
+- Applies to all three D13 intros (and any intro written for a Build-story / long-form profile). Owner when worked: the
+  intro/angle writing rule (storypilot / storypilot-prep skills + the server prompt that writes `intro`), not the screen.
+  Do not rewrite existing intros until the batch is worked.
 
 ## Related, already shipped today (context for the batch)
 - d65a16d proposals stay after a pick / clear / undo angle / intro readable / "undo AI arrangement".
 - 5b9324e Reader key hints moved onto the buttons.
-- (in progress) Play speaks only the intro, not the bold angle line.
+- e7dea41 Play speaks only the intro, not the bold angle line.
