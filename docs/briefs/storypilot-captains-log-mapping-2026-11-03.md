@@ -97,3 +97,15 @@ Claude spec session on 28 Oct (commits f24fa5f, b4c9164). The Reader renders its
   idea in a sentence). "Naming" below the rule is the first body section (name candidates in David's words, collisions).
 - For a story, only the one-line take and the 👤 quotes matter. Proposal (not approved): for document sources, show the
   one-line take plus David's 👤 quotes first, and fold the header card and full body behind "Open the document".
+
+## Session RAW: the 60k cut and a filter leak (d13 source 04 "the build, the check that lied, and v2")
+
+- **"(the first part shown)"**: `modules/storypilot/server/story.ts:358` `READ_LIMIT = 60_000`. A session's David-only text
+  over 60,000 characters is cut at 60k, and the Reader has no way to see the rest. Source 04 is 79,931, so ~20k is
+  never shown. A cut like this should at least offer "show the rest" or open the transcript.
+- **Leak**: the David-only filter (`story.ts` ~:361, "never tool results, pasted blocks, images or messages from other
+  sessions") lets **loaded skill text** through as if David typed it. Source 04 shows "David: Base directory for this
+  skill: …appytron-conventions … # AppyTron conventions…". Claude Code injects skill bodies as user-role messages (to
+  check: `isMeta` / the "Base directory for this skill" prefix); those should be dropped like tool results.
+- **Send to session box** (the chat box, commit 136bb92) renders **below the whole Story Pilot screen**
+  (`ProjectHome.tsx`, after `client.Screen`), so it sits at the very bottom of the page, folded. David didn't find it.
