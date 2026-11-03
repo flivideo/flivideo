@@ -124,6 +124,7 @@ Recommend: **Lab-first + an approved mock per change**, promoted to the main pag
 
 ## Gotchas
 
+- **Gate rule (flivideo-roamy for David, 2026-11-03):** gate every FliStudio change on the **full e2e spec file for the screen it touches** (e.g. `npx playwright test e2e/project-status.spec.ts`, after `npm run build` in the worktree), not unit tests only. Why: the LAST WORK change (33cc998) passed unit tests and broke `project-status.spec` DoD 2; found only while gating the next change.
 - Before merging into watch-mode FliStudio, run `bash /Users/davidcruwys/dev/ad/flivideo/flistudio/scripts/busy.sh`. Then `npm install`, then `timeout 100 /Users/davidcruwys/dev/ad/apps/app-registry/bin/my-app restart flistudio`, then `curl :7151/health`.
 - FliStudio typecheck needs the workspaces built first (`npm run build -w shared` alone fails on broll-pilot contracts).
 - Repinning a git-pinned `@flivideo/core` needs its lock entry deleted plus `node_modules/@flivideo/core` removed; `npm install` alone keeps the old sha.
