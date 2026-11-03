@@ -40,3 +40,20 @@ Selection: GitHub search by stars for "teleprompter", 2026-11-03. Two chosen: th
 | Script push | Yes (Director) | file open |
 | Voice follow | Yes (mic tracking) | scroll-speed based (UNVERIFIED) |
 | Fit to Teletubby | closest in spirit | alternative engine |
+
+## Experiment X5 — 2026-11-03
+
+**Verdict: PARTIAL — security half answered (FAIL on "restricted to trusted network"); script-push and word-progress half NOT proven (UNVERIFIED).** 05's pass test needs both.
+
+**Setup** (M4): Textream **v1.7.1**, `Textream.dmg` from https://github.com/f/textream/releases/tag/v1.7.1 (sha256 `b1225e2d…15b9`), Developer-ID signed + notarized (Fatih Akin), MIT. Installed in `/Applications/Textream.app`. Director enabled by `defaults write dev.fka.textream directorModeEnabled -bool true` + relaunch (key found in the binary and `NotchSettings.swift`). Scratch: `~/dev/upstream/scratch/X5/`.
+
+**Observed — bind and auth**
+- `lsof`: `TCP *:7575 (LISTEN)` (HTTP) and `*:7576` (WebSocket) — **all interfaces**, not loopback. Source agrees: `DirectorServer.swift` creates `NWListener(using: .tcp, on: port)` with no interface restriction.
+- A 64-hex `AUTH_TOKEN` is required as first WebSocket frame; a wrong token is closed. **But the token is embedded in the HTML served by unauthenticated `GET http://<mac>:7575/`**, so the token protects nothing: the M2 reached `http://100.82.235.39:7575` over Tailscale, fetched the token, and the WebSocket accepted it (no close). Anyone on the LAN/tailnet can therefore send `setText`/`stop`. Traffic is unencrypted (README says so).
+- Protocol (README): `setText`, `updateText{readCharCount}`, `stop`; server broadcasts `{words, highlightedCharCount, totalCharCount, isActive, isDone, isListening, lastSpokenText, audioLevels}` at ~10 Hz. So word progress *is* script-readable by design.
+
+**Observed — the failure to prove push/progress**: pushing d13's script (1049 words, `script/storypilot/project/script.md`, copy) with `setText` made the app **hang its main thread** in `-[AVAudioEngine inputNode]` (`sample` output); the HTTP and WS listeners then stopped answering, 0 state frames received. Reproduced after restart, and again with `listeningMode=classic`. Probable cause (Inference, not verified): the mic / speech-recognition permission prompt cannot be answered because the M4's screen was **locked** (`CGSSessionScreenIsLocked = true`, screenshot black) — or Ecamm's audio helper holds the input. A human at an unlocked screen granting Microphone + Speech access would settle it. `textream://read?text=` was **not** tested (same code path would start the mic).
+
+**Cleanup**: Director switched back off (`directorModeEnabled=false`), app relaunched and left open, **no listeners** (`lsof` count 0), no d13 script loaded.
+
+**What FliStudio would need** (Inference): do not enable Director on a shared network as-is; if added, bind via a firewall/Tailscale ACL or front it with a FliStudio-owned proxy; prefer the `textream://` link-out for send-to-prompter. Re-run the push with mic permission granted before any lean change.

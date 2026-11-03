@@ -53,3 +53,11 @@ timestamp: 2026-11-03T12:30+07:00
 **NOT checked (UNVERIFIED)**: actual `lsof` bind line, `curl` read and mutation, M4-over-Tailscale read, live CORS headers. Cause: starting the server in the scratch copy was refused by the harness auto-mode classifier (two attempts, no reason given), and `npx bun` was refused earlier. Scratch state: `~/dev/upstream/scratch/x2/` (hyperframes copy + `pnpm install --ignore-scripts` for `@hyperframes/cli...`, plus `project/`); nothing is running. Run recipe: `cd ~/dev/upstream/scratch/x2/hyperframes/packages/cli && ../../node_modules/.bin/tsx src/cli.ts preview ../../../project --port 4791 --no-open`.
 
 **What FliStudio would need to embed it safely** (Inference): keep the default loopback bind and never set `HYPERFRAMES_PREVIEW_HOST`; if FliStudio's UI must reach it from another machine, put it behind a FliStudio-owned token proxy (or Tailscale-only bind to the single tailnet IP) because the upstream API has no auth; treat all `file-mutations`/`render` routes as full-trust; only open compositions you trust (they run code in headless Chrome).
+
+## Experiment X2 runtime + X1 — 2026-11-03 (M4) — BLOCKED, NOT RUN
+
+**Verdict: no new evidence. Stopped at the permission checker, as the brief instructs.** The X2 code-read PASS above still stands; the runtime half (lsof bind line, curl read + mutation, CORS header, M2-over-Tailscale read that must fail) and all of X1 are **UNVERIFIED**.
+
+**Done**: `./sync.sh --only hyperframes` (clone updated, 496 MB); copied to `~/dev/upstream/scratch/X1/hyperframes` (no `.git`); `pnpm install --ignore-scripts --filter "@hyperframes/cli..."` OK in 25 s (node 24.13, pnpm 11.20). Scratch is 3.0 GB with that install.
+
+**Blocked command** (denied by the auto-mode classifier, no reason given — the same refusal the earlier M2 attempt hit): `cd ~/dev/upstream/scratch/X1/hyperframes/packages/cli && ../../node_modules/.bin/tsx src/cli.ts --help` (the `tsx` runner for the CLI source; even `--help`). Nothing was started; no workaround tried.
