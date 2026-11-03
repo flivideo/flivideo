@@ -6,6 +6,11 @@
 - Read this first when resuming as flivideo-orch
 - The current step tells you the next action; the standing rules are not optional
 
+## 2026-11-03 ~21:10 — ORDER (David via flivideo-roamy)
+- Story Pilot order: W1 islands (running) → W2 Reader UI → W4 rerun machinery (versions, build record, undo, update/recreate).
+  The d13 redo (step 5) is ON HOLD until David + flivideo-roamy settle the Global/Brand instructions; it then becomes the
+  first real "update" run through W4. story.templates agent-drivable still builds (API gap); no instructions injected.
+
 ## 2026-11-03 ~21:00 — RULING: intro stamp (David, option A, via flivideo-roamy)
 - "I'm AppyDave, let's get into it" is DROPPED from story/build videos and KEPT for tutorials. In a story the hook closes on a
   sentence stating what the video will show. Sign-off "I'm AppyDave, I'll see you in the next video" stays everywhere.
