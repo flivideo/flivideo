@@ -6,6 +6,13 @@
 - Read this first when resuming as flivideo-orch
 - The current step tells you the next action; the standing rules are not optional
 
+## 2026-11-03 ~11:40 — day so far (flistudio main 136bb92)
+- Dossier B687 (chain B683, voice B686). Deliver B686 plan gate: brains north-star/deliver-2026-11-03-B686-…md; B1 b686-arch-write (M2 Opus) + B2 b686-rsch (M2 Sonnet) running, watchers b0q8p50mc/btqy0d6ao; B3 b686-synth-write (M4 Opus) after both.
+- Merged today: d65a16d angle fold/clear/undo, 5b9324e reader key hints, e7dea41 play intro only, 136bb92 send-to-session (flag in .env ON by David's own command; M2 probe 403 on :7150 and ts.net:8443).
+- Banked (not built): docs/briefs/storypilot-screen-batch-2026-11-03.md (items 1–5), docs/briefs/session-box-spec-2026-11-03.md.
+- BUG to bank: `my-app restart flistudio` orphans the previous nodemon (ppid 1) every restart — killed 81065 and 79641 by hand.
+- deliver skill §6a (plan gate) added, appydave-plugins abae233.
+
 ## 2026-11-02 ~20:00 — NOTICE ONLY: Skool-Pilot coming (from skool-david-kaff, on David's ask)
 - New FliVideo-family app, maybe growing into Skool Studio. Nothing built, scope not agreed. **Do not start work.**
 - Loop: Kaff's advice → skill → asset on Skool → Kaff reviews → skill v2 → students get it. Jan applies via agents (as Story Pilot / B-roll Pilot).
