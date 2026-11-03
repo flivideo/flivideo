@@ -61,3 +61,6 @@ Owner: `flivideo-orch`. Each item: David's words, the screenshot, what he does a
 - d65a16d proposals stay after a pick / clear / undo angle / intro readable / "undo AI arrangement".
 - 5b9324e Reader key hints moved onto the buttons.
 - e7dea41 Play speaks only the intro, not the bold angle line.
+
+
+**Ruled 2026-11-03 ~21:00 (item 4):** option A — drop "I'm AppyDave, let's get into it" from story/build videos, keep it for tutorials; story hooks close on a sentence stating what the video will show; the sign-off stays everywhere. d13's launch-stamp element goes OFF in the d13 redo (step 5).

@@ -6,6 +6,13 @@
 - Read this first when resuming as flivideo-orch
 - The current step tells you the next action; the standing rules are not optional
 
+## 2026-11-03 ~21:00 — RULING: intro stamp (David, option A, via flivideo-roamy)
+- "I'm AppyDave, let's get into it" is DROPPED from story/build videos and KEPT for tutorials. In a story the hook closes on a
+  sentence stating what the video will show. Sign-off "I'm AppyDave, I'll see you in the next video" stays everywhere.
+  flivideo-roamy updates VERBAL-STYLE.md. **d13: turn the video-level launch-stamp element OFF in step 5 (the d13 redo), not now.**
+- Merged tonight: flistudio 2509f5e (LAST WORK fallback), a4f4cb7 (W0 tests), 1d5ef8b (Show chips redesign); teletubby d748f8a
+  (voice-follow slice 1, inert). Held: ↓-press log (David's ask via flivideo-roamy).
+
 ## 2026-11-03 ~19:50 — reporting line: flivideo-roamy
 - Standing instruction (David via flivideo-roamy): every report and question goes to `flivideo-roamy`, not David. It decides
   anything that isn't David's taste or a ruling; orch keeps going between steps; David-only items (his wording, rulings, M4
