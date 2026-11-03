@@ -54,3 +54,20 @@ Observed on the M2 at ~13:00 +07: tmux sessions `b686-arch-write` and `b686-rsch
 
 - The read-only recipe: `git -C <repo> fetch -q && git -C <repo> archive origin/main | tar -x -C <scratch>/<repo>`.
 - The status-stamp + §7–§10 "skip what landed" convention made re-entry safe; keep it.
+
+---
+
+## B2 and B3 halves (appended by B3, `b686-synth-write`, M4, 2026-11-03 ~14:00 +07)
+
+- **B2** (`b686-rsch`, M2, **Sonnet** — orch's call, not the plan's Opus) ran in parallel with B1 on disjoint paths
+  (03b + `candidates/`), cloned 8 of the 10-clone cap via `upstream-add` with a *scoped* scan, and pushed flivideo
+  `6353e14` + brains `9bbba6fa`. Its deviations are in the plan §8.
+- **B3** started on the M4 after both reported; pulled both repos (already current), read 01–03b, 07 and all 11
+  candidate files, wrote 04 · 05 · 06 · 00, then built and published the closing artifact.
+- **What worked**: B2's per-file field discipline (AC7) made the per-candidate outcome table in 04 a mechanical
+  read; the plan's §7 spike records answered B3's two hardest questions (HyperFrames editor surface; three
+  extensions in code) without re-reading code.
+- **Watch next time**: grouped candidate files (several repos per file) make "every candidate row" ambiguous — 04
+  numbers candidates C1–C19 itself. Ask B2 for one ID per repo up front. Several "cited, not re-verified" entries
+  (Cap, Remotion, FilmCraft) carry brain claims; they are labelled, but a Sonnet researcher leaned on brains more
+  than an Opus one might.
