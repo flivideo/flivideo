@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Skool Three-Video Pattern</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Roboto:ital,wght@0,400;0,500;1,400&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;
+--bg:#faf5ec;--ink:#342d2d;--muted:#7a6e5e;--card:#fff;--line:#d4cdc4;--surface:#f0ebe4;--yellow:#ffde59;--amber:#c8841a;--chrome:#25201e;--blue:#2E91FC;
+--ok:#2f6b3a;--okbg:#e6f0e3;--warn:#8a5a0a;--warnbg:#fbeccd;--bad:#8f2a22;--badbg:#f6dcd8;
+--display:"Oswald","Arial Narrow",sans-serif;--body:"Roboto",system-ui,sans-serif;--mono:"Roboto Mono",ui-monospace,monospace;--bebas:"Bebas Neue","Oswald",sans-serif}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--body);-webkit-text-size-adjust:100%}
+.wrap{max-width:1080px;margin:0 auto;padding:32px 20px 96px}
+h1,h2,h3{font-family:var(--display);text-transform:uppercase;letter-spacing:.02em;text-wrap:balance;margin:0}
+h1{font-size:clamp(34px,6vw,56px);line-height:1.05;font-weight:700}
+h2{font-size:28px;font-weight:600;margin:0 0 8px}
+h3{font-size:18px;font-weight:600;margin:0 0 6px}
+.eyebrow{font:500 13px var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.sec{margin-top:56px}
+.sec>.head{display:flex;gap:14px;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:20px}
+.num{font:700 30px var(--bebas);color:var(--amber);letter-spacing:.04em}
+.lead{max-width:68ch;color:var(--ink)}
+.muted{color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:20px}
+.grid{display:grid;gap:16px}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:820px){.g3,.g2{grid-template-columns:1fr}}
+.verdict{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:8px;padding:22px 24px;margin-top:20px}
+.verdict p{margin:0;font:600 clamp(19px,2.6vw,25px)/1.35 var(--display);text-transform:none}
+.verdict mark{background:linear-gradient(transparent 62%,var(--yellow) 62%);color:inherit}
+.slot{position:relative}
+.slot .tag{font:700 13px var(--display);letter-spacing:.12em;text-transform:uppercase;color:var(--amber)}
+.slot .job{font:600 22px/1.15 var(--display);text-transform:uppercase;margin:4px 0 8px}
+.slot ul{margin:8px 0 0;padding-left:18px}
+.slot li{margin:3px 0}
+.arrow{font:700 13px var(--mono);color:var(--muted);text-align:center;padding:6px 0}
+.hand{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+@media(max-width:820px){.hand{grid-template-columns:1fr}}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:2px 10px;font:500 13px var(--body)}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--card)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:14.5px}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{font:600 13px var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--card);position:sticky;top:0}
+tr:last-child td{border-bottom:0}
+td.ts,th.ts{font:500 13px var(--mono);color:var(--amber);white-space:nowrap}
+td.beat{font-weight:500;min-width:190px}
+td.note{color:var(--muted);font-size:13.5px}
+.num-cell{font-variant-numeric:tabular-nums;white-space:nowrap}
+.pill{display:inline-block;font:600 12px var(--display);letter-spacing:.08em;text-transform:uppercase;padding:2px 9px;border-radius:999px;white-space:nowrap}
+.pill.p{background:var(--okbg);color:var(--ok)}
+.pill.w{background:var(--warnbg);color:var(--warn)}
+.pill.m{background:var(--badbg);color:var(--bad)}
+.pill.n{background:var(--surface);color:var(--muted)}
+details.tx{background:var(--card);border:1px solid var(--line);border-radius:8px;margin:10px 0}
+details.tx summary{cursor:pointer;padding:12px 16px;display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;list-style:none}
+details.tx summary::-webkit-details-marker{display:none}
+details.tx summary::before{content:"+";font:700 18px var(--mono);color:var(--amber);width:16px}
+details.tx[open] summary::before{content:"-"}
+details.tx .t{font:600 17px var(--display);text-transform:uppercase}
+details.tx .m{font:400 13px var(--mono);color:var(--muted)}
+details.tx pre{margin:0;padding:4px 16px 16px;white-space:pre-wrap;word-wrap:break-word;font:400 13px/1.65 var(--mono);color:var(--ink);max-height:520px;overflow:auto;border-top:1px solid var(--line)}
+summary:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.hook{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:20px}
+.hook .q{font:italic 400 18px/1.55 var(--body);border-left:3px solid var(--amber);padding-left:14px;margin:10px 0 10px}
+.prio{counter-reset:p;list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.prio li{counter-increment:p;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px 14px 12px 52px;position:relative}
+.prio li::before{content:counter(p);position:absolute;left:14px;top:8px;font:700 28px var(--bebas);color:var(--amber)}
+.prio b{font-family:var(--display);text-transform:uppercase;letter-spacing:.03em;font-weight:600}
+.note-box{border:1px solid var(--line);background:var(--card);border-radius:8px;padding:14px 16px;font-size:14px;color:var(--muted)}
+.bar{height:10px;background:var(--surface);border-radius:5px;overflow:hidden;margin-top:4px}
+.bar i{display:block;height:100%;background:var(--amber)}
+.logo{display:inline-block;background:#342d2d;border-radius:6px;padding:4px 10px 2px;font-family:var(--bebas);letter-spacing:.04em;line-height:1.1;font-size:20px}
+.logo .a{color:#ccba9d}.logo .d{color:#ffde59}
+a{color:var(--blue)}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style></head><body><div class="wrap">
+
+<header>
+<div class="eyebrow">Research &middot; 3 Nov 2026 &middot; skool.com/ai-exit-strategy/about vs AITLDR b28-b30</div>
+<h1 style="margin-top:6px">Skool Three-Video Pattern</h1>
+<div class="verdict"><p><mark>Mark's about page works because each of its three slots has one job, the second one proves the first, and one named idea runs through all of them.</mark> Jan's scripts are tidy and fast but have no name, no villain, no proof and no story. That is the whole gap.</p></div>
+<div class="note-box" style="margin-top:14px"><b>Correction to the brief:</b> the page has two videos and one diagram image, not three videos. That matters for the pattern, below. Mark's captions are Vimeo auto-generated (they misspell his name); timings are cue starts. I read Mark's page through David's logged-in view and have not seen the diagram image beyond its thumbnail and the text under the player.</div>
+</header>
+
+<section class="sec" id="s1"><div class="head"><span class="num">01</span><h2>The three-slot pattern</h2></div>
+<p class="lead">Slot 3 is an image, so the page runs <b>persuade, then reassure, then glance</b>. Each slot has one job and hands the viewer to the next with the same three parts of the same system.</p>
+<div class="grid g3" style="margin-top:16px">
+ <div class="card slot"><div class="tag">Slot 1 &middot; video &middot; 8:58</div><div class="job">Persuade</div><div class="muted">"The Paycheck Replacement Engine"</div>
+  <ul><li>Call-out, fear, promise, proof x5, villain, story, mechanism, offer, two-path close.</li><li>One job: get a stranger to click Join.</li><li>Price, guarantee and urgency live here only.</li></ul></div>
+ <div class="card slot"><div class="tag">Slot 2 &middot; video &middot; 17:27</div><div class="job">Reassure</div><div class="muted">Walkthrough of community, calendar, classroom</div>
+  <ul><li>Screen tour in app order. Shows what happens after paying: answers within a day, two live calls, stages 1-3.</li><li>One job: remove "what will I actually get?" doubt.</li><li>No price. No story. The tone is a host showing his house.</li></ul></div>
+ <div class="card slot"><div class="tag">Slot 3 &middot; image</div><div class="job">Glance</div><div class="muted">Engine diagram (three parts in order)</div>
+  <ul><li>The mechanism as one picture for people who won't press play.</li><li>One job: be the thing someone remembers or screenshots.</li><li>Copy under the player repeats it as three numbered lines.</li></ul></div>
+</div>
+<div class="hand">
+ <div class="card"><h3>How they hand off</h3><ol style="margin:6px 0 0;padding-left:20px"><li>Slot 1 names the Engine and says its three parts, in order.</li><li>Slot 2 walks the same three parts as Stage 1, 2, 3, and tells new members "watch the Start Here video" first.</li><li>Slot 3 shows the three parts as one picture, and the text beneath lists "One membership opens everything".</li></ol></div>
+ <div class="card"><h3>In all three vs once only</h3>
+  <div class="eyebrow">In every slot</div><div class="chips"><span class="chip">the 3 parts in order</span><span class="chip">"paycheck no boss can take away"</span><span class="chip">the Engine name</span><span class="chip">Tuesday and Thursday live calls (slots 1 and 2)</span></div>
+  <div class="eyebrow" style="margin-top:12px">Once only</div><div class="chips"><span class="chip">origin story (slot 1)</span><span class="chip">price + refund (slot 1)</span><span class="chip">testimonials (slot 1)</span><span class="chip">classroom order and email-list argument (slot 2)</span></div></div>
+</div>
+<div class="card" style="margin-top:16px"><h3>Consequence for AITLDR</h3><p style="margin:0">Mark keeps his Start Here video in the classroom, not on the about page. Jan's b30 is a Start Here, so it belongs in the classroom too. For the about page, Jan has b28 (persuade), b29 (reassure) and needs a <b>glance image</b> of the three steps, for example Make faster, Get watched, Get paid as one diagram.</p></div>
+</section>
+
+<section class="sec" id="s2"><div class="head"><span class="num">02</span><h2>The script template</h2></div>
+<p class="lead">This is the beat map of Mark's sell video (slot 1), with timestamps, written so a writer can fill it in. Tour videos follow the second table.</p>
+<h3 style="margin-top:20px">Slot 1 beats (sell)</h3>
+<div class="tablewrap"><table><thead><tr><th class="ts">Time</th><th>Beat</th><th>What to write</th><th>Mark's example</th></tr></thead><tbody><tr><td class="ts">0:00</td><td class="beat">Call-out hook</td><td>Name the viewer by situation, not demographic. "If you [situation] and [pain], don't skip this." One line.</td><td class="note">0:00-0:04: "If you're over 40 and have a corporate job, don't skip this video."</td></tr><tr><td class="ts">0:04</td><td class="beat">Promise + number + time</td><td>State the system, the time you will take, and the first result with a deadline.</td><td class="note">0:04-0:15: "the simple three-step system... first sales coming in within 60 days."</td></tr><tr><td class="ts">0:15</td><td class="beat">Fear line</td><td>One sentence naming what the viewer is afraid of. No solution yet.</td><td class="note">0:15-0:22: "what happens if they decide they don't need you anymore."</td></tr><tr><td class="ts">0:22</td><td class="beat">Qualifier / first objection</td><td>Kill the first reason to leave. Usually "you don't need to be technical".</td><td class="note">0:22-0:28: "And no, you don't need to be technical."</td></tr><tr><td class="ts">0:28</td><td class="beat">Name the mechanism</td><td>Say the proper noun once, early, so it can be repeated later.</td><td class="note">0:28: "It's called the Paycheck Replacement Engine."</td></tr><tr><td class="ts">0:39</td><td class="beat">Proof #1 + honesty line</td><td>A short real clip or named result, with a disclaimer so the claims are believed.</td><td class="note">0:39-1:15: "I can't promise you results..." then Hugh.</td></tr><tr><td class="ts">1:20</td><td class="beat">Problem + open loop</td><td>List what they already tried. Promise to reveal the missing piece "in a minute".</td><td class="note">1:20-1:45: "It comes down to one thing almost nobody tells corporate people..."</td></tr><tr><td class="ts">1:45</td><td class="beat">Origin story (villain in a scene)</td><td>One scene, one place, one feeling. The villain is a situation, not a person.</td><td class="note">1:45-2:47: new CRO, re-interview, "staring at the ceiling".</td></tr><tr><td class="ts">2:47</td><td class="beat">Proof #2</td><td>Someone close to the viewer. Result stated in a number.</td><td class="note">2:51-3:26: Joel, "millions of dollars in sales".</td></tr><tr><td class="ts">3:26</td><td class="beat">Diagnosis + payoff of the loop</td><td>"It is not X. It is not Y. What you don't have is Z." Then close the open loop.</td><td class="note">3:43-3:54: "You don't have a tech problem. You don't have a discipline problem. What you don't have is a system."</td></tr><tr><td class="ts">4:05</td><td class="beat">Metaphor, then the build</td><td>One everyday image of the wrong way, then "so I built the whole ___".</td><td class="note">4:05-4:17: box of car parts, "so I built the whole car."</td></tr><tr><td class="ts">4:52</td><td class="beat">Mechanism in three parts</td><td>Three nouns, in order, one sentence each, and what each one gives.</td><td class="note">4:52-5:14: affiliate, email list, own product.</td></tr><tr><td class="ts">5:14</td><td class="beat">Proof #3 (surprise person)</td><td>The least likely success. "If a farmer can do it..." turns it to the viewer.</td><td class="note">5:14-5:45: Andrej, a farmer from Slovenia.</td></tr><tr><td class="ts">5:45</td><td class="beat">Future-pacing</td><td>"Imagine week two... imagine month two... a year from now." Specific small scenes.</td><td class="note">5:48-6:30: first sale notification "in the middle of a staff meeting".</td></tr><tr><td class="ts">6:30</td><td class="beat">Proof #4 (authority)</td><td>The most credentialed member says why guidance matters.</td><td class="note">6:30-7:02: Tyrone, a CTO.</td></tr><tr><td class="ts">7:02</td><td class="beat">Offer stack + price anchor + guarantee</td><td>List what is included, set the market price, then your price, then the refund.</td><td class="note">7:04-7:50: "sell anywhere from $900 to $5,000... $49 a month... 30 days."</td></tr><tr><td class="ts">7:52</td><td class="beat">Proof #5 (relief)</td><td>A last short quote just before the close.</td><td class="note">7:52-8:12: Richard.</td></tr><tr><td class="ts">8:12</td><td class="beat">Two-path close + CTA</td><td>"Path one: keep going as you are. Path two: this." Then the single action and a reason to do it today.</td><td class="note">8:12-8:55: "click the join button on this page right now... my very next call."</td></tr></tbody></table></div>
+<div class="grid g3" style="margin-top:16px">
+ <div class="card"><h3>Hook mechanics</h3><ul style="margin:0;padding-left:18px"><li><b>5 s:</b> who it is for and "don't skip".</li><li><b>15 s:</b> system, deadline, fear.</li><li><b>30 s:</b> qualifier and the name. The viewer knows what, for whom, how long.</li></ul></div>
+ <div class="card"><h3>Villain</h3><p style="margin:0">Never a person. A situation (the re-interview, the ceiling at night) and a false belief ("it's a tech problem") that the script knocks over: "You don't have a tech problem... a discipline problem. What you don't have is a system."</p></div>
+ <div class="card"><h3>Metaphor and name</h3><p style="margin:0">One image (a box of car parts, no instructions) shows the wrong way. "So I built the whole car" turns it into the product, and the product gets the one proper noun that returns six times.</p></div>
+</div>
+<div class="grid g3" style="margin-top:16px">
+ <div class="card"><h3>Proof rhythm</h3><p style="margin:0">Five voices at 0:42, 2:51, 5:14, 6:30 and 7:52, so about every 90 seconds. Each is named, has a role, and has one number or one surprise (a farmer, a CTO).</p></div>
+ <div class="card"><h3>Objections</h3><p style="margin:0">Raised early and in passing: "no, you don't need to be technical", "I can't promise you results", "it's month to month, so you can cancel anytime". Handled by saying them, not by a Q&A.</p></div>
+ <div class="card"><h3>Sentence rhythm</h3><p style="margin:0">Roughly 12 words a sentence. About one in four is six words or fewer, used as punch lines ("That's it, three parts in order."). Pace is about 190 words a minute, spoken and conversational.</p></div>
+</div>
+<h3 style="margin-top:28px">Slot 2 beats (tour)</h3>
+<div class="tablewrap"><table><thead><tr><th class="ts">Time</th><th>Beat</th><th>What happens</th></tr></thead><tbody><tr><td class="ts">0:00</td><td class="beat">Casual open + purpose</td><td class="note">"Hey, everybody. Mark here. So let's take a quick tour." One line, then straight to the screen.</td></tr><tr><td class="ts">0:10</td><td class="beat">Community: what it does for you</td><td class="note">"get them answered within a day... you're never going to be stuck." Safety first.</td></tr><tr><td class="ts">1:43</td><td class="beat">Calendar: the two live calls</td><td class="note">Tuesday = some training, Thursday = questions only. Names the week rhythm.</td></tr><tr><td class="ts">3:43</td><td class="beat">Classroom rule</td><td class="note">"watch the Start Here video, and then you want to work your way left to right."</td></tr><tr><td class="ts">3:57</td><td class="beat">Stage 1: foundation (about ten courses)</td><td class="note">Each course gets a reason ("this is very important"), an objection ("I don't have anything to sell") and a payoff.</td></tr><tr><td class="ts">9:20</td><td class="beat">Reframe</td><td class="note">"it's not really about all the courses... It's about what's going to happen to you." Point A to point B.</td></tr><tr><td class="ts">11:13</td><td class="beat">Stage 2: own your list</td><td class="note">"an email list is your own traffic source." Argues why, with the "you don't have a business" line.</td></tr><tr><td class="ts">13:25</td><td class="beat">Stage 3: own your offer</td><td class="note">B2B offer, consulting, digital course, or "finding problems people pay to solve" for people who won't be on camera.</td></tr><tr><td class="ts">16:22</td><td class="beat">Extras + replays</td><td class="note">Pro toolkit (not launched yet, said plainly), replays.</td></tr><tr><td class="ts">16:54</td><td class="beat">One-line recap</td><td class="note">"It is a three-stage system... affiliate marketing is the first stage." Then sign off.</td></tr></tbody></table></div>
+<p class="muted" style="margin-top:10px">The tour is not a list. Each item gets a reason, a likely objection and a payoff, and a stage structure gives the viewer a map. It is weakest where it runs long: heavy "Okay? All right?" filler and a lot of repeated points.</p>
+</section>
+
+<section class="sec" id="s3"><div class="head"><span class="num">03</span><h2>Mark's three transcripts</h2></div>
+<p class="lead">Full text, timestamped. Slot 3 is an image, so there is no third transcript. Open any one to read.</p>
+<details class="tx"><summary><span class="t">Slot 1 &middot; The Paycheck Replacement Engine</span><span class="m">8:58 &middot; ~1,760 words &middot; Vimeo captions</span></summary><pre>[00:00] If you&#x27;re over 40 and have a corporate job, don&#x27;t skip this video.
+[00:04] In the next few minutes, I&#x27;m going to show you the simple three-step system
+[00:07] corporate pros over 40 are using to build their own businesses on nights and
+[00:12] weekends, with first sales coming in within 60 days.
+[00:15] This is for you if you&#x27;ve given a company your best years, and lately, you&#x27;ve
+[00:19] started to wonder what happens if they decide they don&#x27;t need you anymore.
+[00:22] And no, you don&#x27;t need to be technical.
+[00:24] Most of my students have never run a single ad before they started.
+[00:28] It&#x27;s called the Paycheck Replacement Engine.
+[00:30] It&#x27;s how my students build an online business that they own on nights and weekends
+[00:35] without quitting their jobs first, with first sales within 60 days.
+[00:39] Now, I can&#x27;t promise you results because that depends on the work that you put in,
+[00:42] but I can show you exactly how this works. Take Hugh.
+[00:46] He came to me for one-on-one help. He could already build funnels and pages.
+[00:50] What he couldn&#x27;t crack was reading the ads and reading the numbers. Here&#x27;s Hugh.
+[00:54] So putting the funnels together, building the pages, I could do all that.
+[00:58] It was just how to run the ads and how to read the data properly, and that was it.
+[01:04] That&#x27;s all I needed, really, but yeah, it&#x27;s fantastic, mate. It&#x27;s fantastic.
+[01:08] Dude, and you&#x27;ve already had your first $1,000 day, and you&#x27;ve only been with us in
+[01:12] the program, what, three weeks, right?
+[01:14] Something like that, yeah.
+[01:15] A $1,000 day about three weeks in, once he had the one piece he was missing.
+[01:20] So if it can happen that fast, why are so many corporate pros over 40 still
+[01:24] depending on one paycheck, one boss, and one company?
+[01:28] Why does it feel that you&#x27;ve tried everything?
+[01:30] The expensive course that got you nowhere, the ads that never made a sale, tutorial
+[01:35] after tutorial, tool after tool, and still nothing live. What&#x27;s missing?
+[01:39] It comes down to one thing almost nobody tells corporate people, and I&#x27;m going to
+[01:43] show you exactly what that is in a minute.
+[01:45] But first, let me tell you how I found it, because I almost didn&#x27;t.
+[01:48] In my last corporate job, I worked in corporate sales and marketing, running a
+[01:51] satellite office in North Andover, Massachusetts.
+[01:55] Then a new CRO came in, and even though I was hitting my numbers, I had to
+[01:59] re-interview for my own job. I didn&#x27;t tell my wife. I didn&#x27;t tell anybody.
+[02:03] I&#x27;d lie in bed at night, staring at the ceiling, waiting for the hammer to drop.
+[02:07] Because I was in my mid-50s, and I knew exactly what that meant if I was let go.
+[02:11] So I went looking for a way out. A dropshipping course went nowhere.
+[02:16] An affiliate course got me further, and a mentor taught me Facebook Ads.
+[02:20] But all I was really doing was paying for ads to send people to somebody else&#x27;s
+[02:24] product. When somebody bought, I got a small cut, but when they didn&#x27;t, those
+[02:28] people were gone for good, and I was back to zero.
+[02:31] Then I noticed the one thing every course I&#x27;d bought had skipped.
+[02:34] I&#x27;m Mark Vodrey, by the way. Once I fixed that one thing, everything changed.
+[02:38] Since then, I&#x27;ve earned five ClickBank Platinum awards and a ClickFunnels Two Comma
+[02:43] Club award, and I&#x27;ve coached thousands of students through this same system.
+[02:47] But the real test was whether it would work for someone just like you.
+[02:51] Joel was in his mid-40s when he left corporate to sell online, and he was
+[02:55] struggling. Here&#x27;s Joel.
+[02:56] My biggest thing was understanding Facebook. Nobody really understood.
+[03:01] Nobody really teaches you about Facebook, like how to set up the ads and how to do
+[03:07] the test of the ads. That was my biggest downfall.
+[03:10] And to include, I was just getting burnt on these ClickBank offers.
+[03:14] They will convert, and then it just completely stops.
+[03:17] We worked one-on-one, and today the campaigns he runs have done millions of dollars
+[03:21] in sales. He didn&#x27;t need another course. He needed the piece every course left out.
+[03:26] Here&#x27;s what nobody told Joel, or me for that matter.
+[03:29] Another course is not going to fix it. Another tool is not going to fix it.
+[03:33] Working harder won&#x27;t fix it. The truth is that most courses hand you one piece and
+[03:37] leave you to figure out the rest on your own.
+[03:39] And remember that one thing I said almost nobody tells corporate people?
+[03:43] Well, here it is. If you paid for a course and had been left to figure it out on
+[03:47] your own, that&#x27;s not on you. You don&#x27;t have a tech problem.
+[03:50] You don&#x27;t have a discipline problem. What you don&#x27;t have is a system.
+[03:54] And until that changes, your whole future keeps riding on one paycheck.
+[03:58] Every layoff rumor, every reorganization email, every new boss puts you right back
+[04:04] at staring at the ceiling at night.
+[04:05] Think of it like buying a car as a box of parts with no instructions.
+[04:09] An engine from one course, wheels from another, a steering wheel from a YouTube
+[04:13] video. No wonder it won&#x27;t start, so I built the whole car.
+[04:17] I call it the Paycheck Replacement Engine.
+[04:19] Remember that one thing every course skipped?
+[04:21] They all had me sending people straight to somebody else&#x27;s product.
+[04:24] So when people left, I had nothing. So I flipped it.
+[04:28] Every person lands on my own email list first before they see any offer, and that
+[04:32] list belongs to me, not to a company. Build the paycheck no boss can take away.
+[04:37] Everything you&#x27;ve tried asked you to piece it together yourself.
+[04:40] A course here, a tutorial there, a tool you never opened again.
+[04:43] The Paycheck Replacement Engine gives you the whole path in order in one place.
+[04:49] Every stage feeds the next one, so nothing you build gets wasted.
+[04:52] It has three parts. First, affiliate marketing.
+[04:55] You promote products that already sell, and that&#x27;s where your first sale comes
+[04:59] from. Second, your email list. Every buyer lands on a list you own, so one sale
+[05:04] turns into repeat sales. Third, your own product built from what you already know.
+[05:09] This is where the paycheck gets replaced. That&#x27;s it, three parts in order.
+[05:14] Andrej is a farmer from Slovenia. He came into my group mentorship knowing nothing
+[05:18] about any of this. Here&#x27;s Andrej.
+[05:21] I didn&#x27;t know nothing about that. You taught all that you know, and if you
+[05:27] implemented what you taught us,
+[05:30] you can get a success.
+[05:32] You came in knowing nothing, and in the second month, then you started putting up
+[05:37] $1,000 days, right?
+[05:39] Yeah.
+[05:39] $1,000 days in his second month. If a farmer who started from zero can do that,
+[05:45] imagine what your corporate experience gives you. So picture this.
+[05:48] Imagine weeks two and three, checking your first ad numbers on your lunch break.
+[05:52] Imagine that first sale notification popping up on your phone in the middle of a
+[05:56] staff meeting. And imagine month two, waking up to new subscribers on a list that
+[06:00] belongs to you. Then, watching a sale come in from an email you sent.
+[06:04] Now picture a year from now. Your own product is selling while you sleep, and a
+[06:09] second paycheck is starting to rival the first.
+[06:11] When the next restructure gets announced and everybody around you is lying awake
+[06:16] staring at the ceiling, you&#x27;re going to be sleeping like a baby.
+[06:19] This was never about finding one more course.
+[06:22] It&#x27;s about having the whole system in order with a list and products that belong to
+[06:27] you. Build a paycheck no boss can take away.
+[06:30] Tyrone is a CTO at a major corporation, and he&#x27;s over 40.
+[06:34] In my group coaching, he built an email list and his own digital product, and today
+[06:38] that business brings in income that rivals his corporate salary.
+[06:41] Here&#x27;s what he says about doing it with a guide.
+[06:43] If you&#x27;re going into this blindly without any kind of
+[06:48] hand-holding or mentorship, you&#x27;re going to be lost. You&#x27;re going to be lost.
+[06:53] It&#x27;s totally worth
+[06:56] every penny, every cent that I paid and invested, and I don&#x27;t know where I would be
+[07:01] without it.
+[07:02] Okay, so what does it take to get started?
+[07:04] Here&#x27;s everything that you get inside the AI Exit Strategy.
+[07:07] The Paycheck Replacement Engine, starting with the AI exit map so you always know
+[07:11] your next step. Every course in all three stages.
+[07:14] Seven done-for-you funnels, so you&#x27;re not building from scratch.
+[07:17] Over 200 AI prompts, so you&#x27;re never left staring at a blank page.
+[07:22] 100 days of ad campaigns, and two live calls with me every week where you bring
+[07:26] your questions and get real answers.
+[07:28] Courses that teach this sell anywhere from $900 to $5,000.
+[07:33] You&#x27;re getting all of this for $49 a month or just $149 for the whole year, and
+[07:39] you&#x27;re fully protected. Try it for 30 days.
+[07:41] If it&#x27;s not right for you, I&#x27;ll refund you, and it&#x27;s month to month, so you can
+[07:45] cancel anytime. The only real risk here is waiting another year and hoping the next
+[07:50] layoff skips you. I&#x27;ll leave you with Richard.
+[07:52] He came to me one-on-one after taking a break from affiliate marketing.
+[07:56] About a year later, here&#x27;s what he told me.
+[07:58] Thanks to you, I&#x27;m a platinum affiliate again.
+[08:02] You definitely made me push me outside of my comfort zone and try different
+[08:08] offers, different niches that I would never try if it wasn&#x27;t for you.
+[08:12] Yep. Now it&#x27;s your turn to choose. So here&#x27;s your choice.
+[08:15] Path one: keep piecing it together.
+[08:17] Buy one more course and hope the next layoff skips you.
+[08:20] Every month you wait is another month your whole future depends on one paycheck and
+[08:24] one boss. Or path two: start building something that you own on weekends, on
+[08:29] nights, with a whole system in order, with me live with you twice a week.
+[08:33] Build the paycheck that no boss can take away.
+[08:35] If you&#x27;re ready to stop betting on your future on one paycheck and one boss, click
+[08:39] the join button on this page right now.
+[08:42] I go live twice a week, Tuesdays and Thursdays, so if you join today, you&#x27;ll be on
+[08:46] my very next call, never more than a few days away.
+[08:49] It&#x27;s $49 a month, and you&#x27;ve got 30 days to make sure it&#x27;s right for you.
+[08:53] Click join now, and I&#x27;ll see you on the call.
+[08:55] Let&#x27;s build that paycheck that no boss can take away</pre></details>
+<details class="tx"><summary><span class="t">Slot 2 &middot; Community walkthrough</span><span class="m">17:27 &middot; ~3,325 words &middot; Vimeo captions</span></summary><pre>[0:00] Hey, everybody. Mark here. So let&#x27;s take a quick tour of what&#x27;s inside of AI Exit Strategy. First things first, we are in the community. Let&#x27;s scroll down.
+[0:10] What you would get inside of the community is the ability to ask questions and get them answered within a day from me. Okay?
+[0:18] So that means you&#x27;re never going to be stuck. All right? There are two ways to get your questions answered from me.
+[0:24] One is by dropping them in here, and another is going to our live calls. I&#x27;m going to talk about our live calls here in a second.
+[0:33] But not only can you post your questions in here, I&#x27;m also using this to post updates and relevant opportunities that will be designed to get you where you
+[0:43] want to be faster. And in that case, what I believe that is, is to make some money that&#x27;s going to rival your current paycheck. Right?
+[0:50] That&#x27;s what this is all about, right? We want you guys to build your own business, and I&#x27;m going to do everything possible to make that happen for you. So, we do have classes.
+[1:01] I&#x27;m going to show you the curriculum inside here in a minute. But this is an ever-changing and very fluid environment, and things are always moving forward. What I mean by that is that there are opportunities that
+[1:16] come out probably every week that I want to introduce to you guys. And when they do come out, I&#x27;m going to be dropping them inside the community here.
+[1:25] Okay? Okay, so that&#x27;s what the community is all about. We&#x27;re going to take a look at relevant opportunities that come out and also to post your questions, comments, and get some answers from me.
+[1:35] We usually answer it the same day with any questions that you have. Okay?
+[1:40] All right. Let&#x27;s take a look at the calendar because this is important, right?
+[1:43] I do a live call every Tuesday and every Thursday. Okay? For instance, if we go in and let&#x27;s see, where are we here? Let&#x27;s go in and take a look at what&#x27;s going on in November.
+[1:56] So if we look, I have a live call coming right up on... What am I looking at? I&#x27;m looking at the wrong date. I&#x27;m sorry, guys.
+[2:06] Let&#x27;s look at this one. I have a live call coming up on November 3rd. All right?
+[2:13] And they&#x27;re every Tuesday. Right? That&#x27;s the point I&#x27;m trying to make. All right?
+[2:16] Every Tuesday at 12:00 PM Eastern Standard Time, we do a live call. Right?
+[2:22] And all you need to do is come in here and just grab, click here, and you can join the call right through a Zoom meeting. Right? It&#x27;s that simple. All right?
+[2:28] So that&#x27;s what we want you to do. We want you to come into these live calls.
+[2:32] We&#x27;re going to do some high-level training on these calls, but also it&#x27;s designed for you to drop in any pages that you&#x27;re working on, any offers that you&#x27;re working on, any questions that you have or any of the affiliate offers that you&#x27;re working on, your email list that you may be working on.
+[2:46] &quot;Hey, is my idea good enough?&quot; type of question. Right? That&#x27;s what we want you to do. Come in and get your questions answered here, and it&#x27;s not going to be a replacement of me, right?
+[2:56] It is going to be me on that call, live me, Mark Baudrais, on that call. Okay?
+[3:01] So I want to help you, and I want to answer your questions here. Okay? Also, on Thursday, I&#x27;m doing another one. So we do it twice a week.
+[3:09] The AI Exit Workshop, this is really more question-heavy, right? To get you guys unstuck on where you&#x27;re at.
+[3:16] Okay? So this is really just taking your questions and making sure that you&#x27;re on the right track. There&#x27;ll be no training on this call.
+[3:25] This is just pretty much to get you unstuck on potentially what&#x27;s going on in your business. Okay?
+[3:34] But there&#x27;ll be a little bit of training on Tuesdays. All right? Okay. So that being said, let&#x27;s take a look at the classroom. Okay? All right.
+[3:43] So you can see that these are in order. Maybe you can&#x27;t see them when I explain this to you. Okay?
+[3:49] First things first, you want to watch the Start Here video, and then you want to work your way left to right. Okay? So you&#x27;ll see I have this broken down
+[3:57] into stages, which is very important. Stage one is the foundation of your business.
+[4:02] It&#x27;s designed to get you to make money the fastest way possible, okay? And that&#x27;s the foundation. So I want you to work your way from left to right, stage
+[4:13] one, then you get to the second column, and then again, left to right. All right?
+[4:18] There is an order to this. All right? So we have the AI Exit Map is going to give you an overview of what you&#x27;re going to learn here and how we can start making you money quick.
+[4:27] The AI Exit Strategy, that&#x27;s my book. I would recommend that you download and read that book definitely, so you can get an overview of the whole plan. The AI Niche Clarity Blueprint, this is very
+[4:37] important, this one here. Okay? So this is going to enable you to drop your skills into our software, and our software is going to pump out a 20-page report
+[4:48] based on how we can monetize your current skill set. Okay? Because believe it or not, you guys are sitting on skills that can be monetized in
+[4:57] the marketplace. Okay? For instance, if you have a job and someone&#x27;s paying you for that job, we can potentially turn that into an offer in the marketplace to where you can get
+[5:11] paid probably five to 10 times more than you&#x27;re getting paid. Okay? So I want you to go through this, this is very important, and take a look at this
+[5:18] report. Okay? Also, then we have a 90-day AI income roadmap for you guys.
+[5:23] We want you to get a clear vision of where you can go here and what it&#x27;s going to take to get to where you want to be, whatever that goal is. Hopefully, it&#x27;s to leave corporate or bail out of your job
+[5:36] and strike out on your own. That&#x27;s why you&#x27;re here. Potentially, maybe you don&#x27;t have a job yet.
+[5:40] Maybe you&#x27;ve been laid off and you&#x27;re looking for a solution. This is going to help you as well. Okay?
+[5:44] A lot of people come inside this course and ask me, &quot;Hey, Mark, this sounds great, but I don&#x27;t have anything to sell.&quot; Guys, we have everything to sell. Okay?
+[5:53] We want to make sure that you dive into this course choosing offers that actually pay, because this is how I got started, and this is what made me a ton of money.
+[6:03] I&#x27;m talking millions of dollars in revenue selling other people&#x27;s products.
+[6:07] And guess what? I still do. So I have all of the offers in here that I&#x27;m currently running, plus other offers, right?
+[6:15] There are literally tens of thousands of offers in here that you can run, and we&#x27;re going to help you pick the ones that match not just what you&#x27;re interested in, but
+[6:26] what are actually converting right now. And that&#x27;s the purpose of those live calls, too, right?
+[6:30] You want to jump on those calls and talk about the offers that you&#x27;re thinking about running initially. These pay well, too.
+[6:36] They pay big commissions, guys, right? You don&#x27;t need an offer of your own yet.
+[6:40] All right? Even though you&#x27;re moving in that direction, you just don&#x27;t need it yet.
+[6:44] If you&#x27;re just starting, this is where I want you to start. It&#x27;s because this is how I started, and believe it or not, I&#x27;m still making money
+[6:50] with this, right? It&#x27;s an income generator for me. It&#x27;s one of my income sources.
+[6:56] So I want you to get started on this, okay? Then the AI Income Accelerator Workshop, you&#x27;re going to watch me build a campaign out live, okay? In real time, right? It&#x27;s not like some polished video.
+[7:08] You&#x27;re watching me do this stuff live, right? So I want you to watch that, get a clear understanding of what it takes to build out a campaign, and then we&#x27;re furnishing you with all the online
+[7:21] assets that you&#x27;re going to need to be successful. What do I mean by that?
+[7:25] Web pages, funnels, email opt-in forms, all of these things, right? You&#x27;re going to get that in the AI Funnel Builder kit, okay?
+[7:36] So if you don&#x27;t know what a funnel is, I want you to think of a website, but really not a website. A funnel is designed to do one thing and one thing only.
+[7:45] It&#x27;s designed to pre-sell them into a sale, okay? It is not a standard web page.
+[7:51] It is designed to pre-sell them into a sale, and we have this for you, okay?
+[7:56] The AI Launch Protocol, this is the one that&#x27;s going to start really triggering some ideas for you and start getting you to think about your own offer.
+[8:08] I want you to watch this. It&#x27;s very important. We want to start building out the mindset of you building out your own assets, and this is imperative that you watch this one here, okay?
+[8:19] So watch this. Idea to live in 48 hours, okay? And then we&#x27;re starting to move into running traffic to our pages, okay? All right? To our pages.
+[8:32] It could be an affiliate landing page. All right? This is pretty much what we&#x27;re looking at right now, okay?
+[8:39] So the AI Targeting Blueprint is going to teach you how to properly target and get your ads in front of the right people that are going to buy the
+[8:49] offers that you&#x27;re promoting. Plain and simple, okay? It&#x27;s going to teach you how to do this.
+[8:54] It&#x27;s very important that you go through this, too. Then you&#x27;re going to go through Elite Traffic Mastery.
+[9:01] We&#x27;re going to teach you how to get buyers on demand to your offers, eyeballs on your landing pages, the whole thing.
+[9:08] Guys, these courses, by the way, are pretty intense, right? You have a lot of information in here, but really- What I&#x27;m trying to say to you is that it&#x27;s not really about
+[9:20] all the courses in here, right? It&#x27;s about what&#x27;s going to happen to you when you go through all these courses, the transformation that&#x27;s going to happen to you and
+[9:29] in your life. That&#x27;s what this is about. We want to take you from point A to point B, okay?
+[9:36] And that point B is you leaving your corporate job after you build a paycheck that no boss can take away from you. This is what it&#x27;s all about, okay?
+[9:46] So you&#x27;re going to learn all of these things, but you have to go through it systematically, okay? You need to go through it from left to right. All right?
+[9:54] Now we&#x27;re still on Elite Traffic Mastery, AI Campaign Engine. We&#x27;re going to talk about all the types of campaigns that you can run. All right?
+[10:01] Campaigns are different than running traffic. We have different campaign strategies in here.
+[10:06] I want you to take a look at this and get familiar with this as well. By the way, you go through this stuff and you have any questions, what are you
+[10:12] going to do? You&#x27;re either going to go drop a question inside the community, or you&#x27;re going to go to one of our live calls and ask me live, and I&#x27;m going to give
+[10:20] you an answer, and you&#x27;re just going to execute on it. If you guys can follow directions and execute and get things done, that&#x27;s all you need to do. If that&#x27;s you, you want to join this group, okay?
+[10:33] All right? AI Profit Partner. There is no need for you to stare at a blank screen and try to figure out what my ad copy&#x27;s going to look like, what the copy on my
+[10:43] landing page is going to be. Is this copy good enough? Is what I wrote in my ad going to make people buy? No.
+[10:48] We have these prompts for you. These prompts are all pre-built, designed to help you write copy that sells, okay? Amongst other things. All right?
+[10:59] You have all of that here. Okay? And then you can see now we&#x27;re still in stage one down here. You see how robust stage one is?
+[11:07] This is the foundation of your business. We want to build a strong foundation for you.
+[11:13] After that, we&#x27;re going to build the second stage of your business. Okay?
+[11:17] And what is that second stage? That&#x27;s starting to build assets of your own.
+[11:21] Instead of promoting other people&#x27;s products 100% of the time, you&#x27;re going to start building a list, an email list that belongs to you.
+[11:30] In essence, an email list is your own traffic source. Okay? Once that list gets big enough, you don&#x27;t primarily have to run paid traffic.
+[11:40] You have your own list that you can send offers to over and over and over again.
+[11:45] And if you build it right, like the way I&#x27;m going to show you how to build it, these people will buy over and over and over again. Okay?
+[11:52] But we want to start building that list first, okay? And we&#x27;re going to teach you how to do that. Okay? That&#x27;s stage number two. Okay?
+[12:00] Moving over to the next course is still, we&#x27;re still in email, right? But now I&#x27;m going to teach you how to turn that list into income, money that comes
+[12:08] in all the time, right? Okay? That&#x27;s what it&#x27;s all about. That&#x27;s what an email list is all about.
+[12:14] By the way, you build a decent email list and you build it up to maybe 10, 20, 30, 40, 50,000 people of buyers. You&#x27;ve built not just an asset that&#x27;s going to keep pumping money into
+[12:29] your business, but that&#x27;s something that you can sell. You can sell an email list out to people. It&#x27;s almost like selling a business.
+[12:37] Because think about it, what viable business in the world doesn&#x27;t have an email list?
+[12:45] By the way, if you guys don&#x27;t have an email list, you don&#x27;t have a business.
+[12:48] If you&#x27;re running paid traffic to a landing page and then to an offer, that&#x27;s okay when you&#x27;re first getting started, but if you haven&#x27;t graduated to
+[13:01] building your own list, you do not have a business. You just don&#x27;t have one.
+[13:04] We need to bring you over here because this is what&#x27;s going to give you staying power, and it&#x27;s going to continue to print money for you regardless of how
+[13:13] expensive paid ads cost, right? We want you to own your own traffic source, okay?
+[13:19] And we want you to have your own customer database. All right? All right, does that make sense? Then we&#x27;re going to move into stage three.
+[13:25] Stage three is the AI business launch system. Now we&#x27;re talking about taking the corporate skills that you have or potentially any other skills that you have, any hobbies or anything else that you have,
+[13:38] analyzing what you have through this, right? You went through the AI niche clarity blueprint. You have that report.
+[13:44] Now we&#x27;re coming in and we&#x27;re going to start talking about how we can launch an offer based on what that report is telling you, right?
+[13:52] Whether it&#x27;s a B2B offer, maybe you&#x27;re in corporate and maybe you&#x27;re in marketing and you have some ideas that you want to sell to businesses, right?
+[14:02] We&#x27;re going to teach you how to launch that offer, okay? Or maybe you want to do consulting work B2B, and you want to put your own consulting business together. Or maybe instead of just doing direct consulting,
+[14:13] maybe you want to create a digital on-demand course based on your skills and sell it at a premium price. We&#x27;re going to teach you how to do that in here. Okay?
+[14:23] Now, guys, everybody&#x27;s sitting on skills that can be monetized. Everybody.
+[14:30] I don&#x27;t care who you are, you have skills that we can monetize. All right?
+[14:33] So I want you to go through this and look at this. Okay? Now, maybe some of you are saying, &quot;You know what?
+[14:37] I don&#x27;t want to use the corporate skills that I have. I don&#x27;t want to use my life skills that I have to make money with that.
+[14:43] I don&#x27;t want to put my face out there. I don&#x27;t want to be that person.&quot; Well, I&#x27;m going to strongly try to convince you out of that.
+[14:51] But if you don&#x27;t want to do that, right, we have a solution for that. That&#x27;s finding problems people pay to solve. And what is this course? Right?
+[15:01] This course is going to show you how we can find problems in virtually any given vertical, in any given market that people will gladly pay money to solve, right?
+[15:13] We find the problems first. Hopefully, we&#x27;re looking in markets where people have money, which is very important, okay?
+[15:20] And then we create a digital product to solve those problems, and we serve it up to those people. Okay? That&#x27;s what we&#x27;re going to do, right?
+[15:28] So you don&#x27;t need to have your face on it, right? You can do both if you want, but finding problems people pay to solve can be in virtually any market, and we&#x27;re going to show you how to find those markets, and
+[15:39] we&#x27;re going to show you how to find those problems using AI. Okay? Never in the history of marketing has there ever been a better time to get involved
+[15:48] with this type of stuff, because we can find problems in the marketplace, and we can come up with digital products to help these people and solve their problems for
+[15:57] them, right? We want to solve their problems, but we also want to get paid in the process, right? The more people we help, the more money you&#x27;re going to make,
+[16:05] right? By the way, you can get anything that you want if you help enough people get what they want, okay?
+[16:14] You can get anything that you want if you help enough people get what they want, right? This is what this is all about, finding problems people pay to solve.
+[16:22] The Pro Toolkit, we haven&#x27;t launched this yet, but this is going to be a good one, right? This is coming out and we have software to help you accelerate
+[16:31] the entire build. We have three software programs we&#x27;re going to release to you guys soon. Okay? And then the AI Builder Q&amp;A replays and the AI Exit Workshop
+[16:39] replays. This is simply where you&#x27;re going to go if you miss a live call, one of those two live calls I showed you. You just go in, click here, and watch the
+[16:48] recorded version of each one of those calls, and hopefully, we can get you on some of these live calls as well. Guys, that&#x27;s it.
+[16:54] That&#x27;s what you get inside of the AI Exit Strategy. We have a whole system for you to get you started from point A to point B.
+[17:03] It is a three-stage system. It&#x27;s not just affiliate marketing, even though affiliate marketing is the first stage.
+[17:11] Yes, affiliate marketing is your first stage, but we definitely want to get you building your email list, and we definitely want you to build your digital
+[17:18] products. This is what this is all about. Guys, I hope to see you inside, and I&#x27;m looking forward to working with each and every one of you. Thank you.</pre></details>
+<details class="tx"><summary><span class="t">Slot 3 &middot; Engine diagram (image)</span><span class="m">no audio</span></summary><pre>Image slide titled "Paycheck Replacement Engine". Text below the player on the about page:
+(1) AFFILIATE MARKETING: Promote products that already sell. Your first sale starts here.
+(2) YOUR EMAIL LIST: Every buyer lands on a list you own. One sale becomes repeat sales.
+(3) YOUR OWN PRODUCT: Built from what you know. This is where the paycheck gets replaced.
+One membership opens everything: The AI Exit Map + 90-Day AI Income Road Map; The AI Niche Clarity Blueprint; 7 done-for-you funnels; 200+ AI prompts; 100 days of ad campaigns; My ad, traffic and email systems; The 73-page AI Exit Strategy book.</pre></details>
+</section>
+
+<section class="sec" id="s4"><div class="head"><span class="num">04</span><h2>Jan's three transcripts</h2></div>
+<p class="lead">From the final caption files for b28, b29 and b30 (AITLDR school community storefront set). Scripts are in the same folder.</p>
+<details class="tx"><summary><span class="t">b28 &middot; Intro</span><span class="m">2:40 &middot; 430 words</span></summary><pre>[00:00:00] If you make YouTube videos with AI, and your views aren&#x27;t turning into money, don&#x27;t
+[00:00:04] skip this.
+[00:00:05] In the next three minutes, I&#x27;ll show you the three-step system we&#x27;re using to turn
+[00:00:10] an AI channel into income, with Claude doing the busywork.
+[00:00:14] This is for you if you post, you get views, and nothing pays. Or the work around
+[00:00:19] each video eats your whole week.
+[00:00:21] And no, you don&#x27;t need to be technical, or show your face.
+[00:00:25] I&#x27;m Alex, the host of AI-TLDR. And yes, I&#x27;m an AI. That&#x27;s kind of the point.
+[00:00:30] This channel has over four hundred videos, and nearly four hundred thousand views.
+[00:00:35] And right now, we&#x27;re making forty-five videos in forty-five days. Every one of them
+[00:00:40] builds a Claude skill, and every skill lands in the community.
+[00:00:44] Here&#x27;s the system. Three steps.
+[00:00:46] Step one: make faster.
+[00:00:49] A skill is a set of instructions that Claude Code follows to do one job, the same
+[00:00:54] way, every time.
+[00:00:55] Idea Bank finds the idea. Script writes the draft. Hook Doctor fixes your first
+[00:01:00] thirty seconds.
+[00:01:02] Captions, Cut List and Upload Pack finish the job. That&#x27;s the week you get back.
+[00:01:07] Step two: get watched.
+[00:01:09] Title Lab scores your titles against your own channel. Angle Lab picks the one angle
+[00:01:14] worth making.
+[00:01:16] And YT Performance tells you which videos worked, and why.
+[00:01:20] Step three: get paid.
+[00:01:22] Here&#x27;s the part most people miss. The work these skills do is work other channels
+[00:01:27] pay for.
+[00:01:28] Hook rewrites. Title reviews. Idea banks. Social posts from one script.
+[00:01:33] Nine of our skill lessons end with a section called &quot;Sell it&quot;: how to sell what the
+[00:01:38] skill makes to other channels.
+[00:01:41] And our e-book shows how faceless videos turn viewers into customers.
+[00:01:45] That&#x27;s the system. Make faster. Get watched. Get paid.
+[00:01:49] Now, the questions people always ask.
+[00:01:52] &quot;I&#x27;m not technical.&quot; You don&#x27;t need to be. Every lesson has a video, written steps,
+[00:01:57] and the skill files to download.
+[00:01:59] &quot;Do I need API keys?&quot; No. The skills run inside Claude Code, on your own files. You
+[00:02:04] need a Claude plan, and that&#x27;s it.
+[00:02:06] &quot;Isn&#x27;t this just the YouTube videos again?&quot; No. The videos show what a skill does.
+[00:02:11] The classroom gives you the skill itself, the steps, and how to sell the result.
+[00:02:17] Inside the AI-TLDR Skool community: thirty-one Claude skill lessons, over thirty
+[00:02:22] prompt packs, the e-book, and the recipe library.
+[00:02:25] It&#x27;s five dollars a month.
+[00:02:28] Join, open the classroom, and run your first skill today.
+[00:02:32] Then post what you made in the community. I&#x27;ll be there. Well, as much as an AI can
+[00:02:37] be.</pre></details>
+<details class="tx"><summary><span class="t">b29 &middot; Inside</span><span class="m">2:05 &middot; 314 words</span></summary><pre>[00:00:00] Here&#x27;s everything inside the AI-TLDR Skool community, in thirty seconds. Then I&#x27;ll
+[00:00:05] show you around.
+[00:00:06] One membership. Five dollars a month. It opens all of it.
+[00:00:10] Thirty-one Claude skill lessons. Each one with a video, written steps, and the skill
+[00:00:15] files.
+[00:00:16] Over thirty prompt packs, ready to copy and paste.
+[00:00:20] An e-book on systematizing faceless YouTube videos.
+[00:00:23] A recipe library. A website from one prompt, your channel as a searchable catalog,
+[00:00:29] and more.
+[00:00:30] And a community of creators doing the same work as you.
+[00:00:34] That&#x27;s the list. Now, the tour.
+[00:00:36] This is the classroom. Five courses.
+[00:00:39] Start with Claude Code Skills.
+[00:00:42] Every lesson looks like this. The video, what you need, the steps, and the skill
+[00:00:46] files at the bottom.
+[00:00:48] Hook Doctor checks your hook, tells you exactly what breaks it, and writes five
+[00:00:53] better ones.
+[00:00:54] Then the skills keep going. Title Lab. Shot List. Captions. Cut List. Upload Pack.
+[00:00:59] Angle Lab. End Screen. Repurpose.
+[00:01:01] Each one does one job, the same way, every time.
+[00:01:05] And nine of them end with a section called &quot;Sell it&quot;: how to sell what the skill
+[00:01:09] makes to other channels.
+[00:01:11] Hook rewrites. Title reviews. Idea banks. Watch-next plans. Social posts from one
+[00:01:16] script.
+[00:01:17] None of them need API keys. You run them in Claude Code, on your own files.
+[00:01:23] Next, the prompt pack library. Over thirty packs.
+[00:01:26] Vox-style animation. Consistent characters. Movie posters. The full AI fruit drama
+[00:01:31] workflow. Even one on making money with AI podcasting.
+[00:01:35] Then the e-book. How faceless videos work, and how they turn viewers into customers.
+[00:01:41] And the recipe library. Build a website with one Claude prompt, or turn your channel
+[00:01:46] into a searchable catalog.
+[00:01:48] New skills land as the series goes. And when a skill gets better, you get the
+[00:01:53] update.
+[00:01:54] So that&#x27;s what&#x27;s inside.
+[00:01:56] Skills. Prompt packs. The e-book. Recipes. And the people.
+[00:02:00] Five dollars a month. The link is below.</pre></details>
+<details class="tx"><summary><span class="t">b30 &middot; Start here</span><span class="m">1:58 &middot; 309 words</span></summary><pre>[00:00:00] You joined. Now what?
+[00:00:02] This is the Start Here path, and it&#x27;s built for one thing: your first real result,
+[00:00:07] in your first week.
+[00:00:08] Most communities hand you a library and wish you luck. We hand you an order.
+[00:00:13] Part one: say hello.
+[00:00:16] Post in the community. Who you are, your channel, and the one job that eats your
+[00:00:20] week.
+[00:00:21] We read every one, and they tell us which skill to build next.
+[00:00:26] Part two: the quick win. Eight short lessons, and one skill: Hook Doctor.
+[00:00:31] Lesson one: install Claude Code, and Hook Doctor. You do this once.
+[00:00:35] Lesson two: run it on your own script.
+[00:00:38] Lesson three: read what breaks your hook.
+[00:00:41] Lesson four: pick the best of the five new hooks, and use it.
+[00:00:45] Lesson five: find a channel whose hooks run long.
+[00:00:49] Lesson six: run Hook Doctor on their script.
+[00:00:52] Lesson seven: send them the new hooks.
+[00:00:55] Lesson eight: post the result in the community.
+[00:00:58] At the end, your own hook is fixed, and you&#x27;ve done the kind of work other channels
+[00:01:03] pay for. That&#x27;s your win.
+[00:01:05] Part three: the skill library.
+[00:01:08] Thirty-one lessons, for the jobs your channel actually has. Nine of them show you
+[00:01:13] how to sell what they make.
+[00:01:15] Plus over thirty prompt packs, and the recipe library.
+[00:01:19] Part four: the deep end.
+[00:01:21] The e-book, on systematizing faceless YouTube videos. Read it once your first result
+[00:01:27] is in, not before.
+[00:01:28] Part five, last on purpose: the slow stuff.
+[00:01:31] Your own community. An email list. Your own product.
+[00:01:35] Those pay off over months. We&#x27;re building ours right now, so you can watch how it
+[00:01:40] goes.
+[00:01:41] Why this order? Because one skill you actually used beats ten you downloaded.
+[00:01:46] Win first. Library second. Slow things last.
+[00:01:49] Start Here is the first course in the classroom. Open it, post your hello, and do
+[00:01:54] lesson one today.</pre></details>
+</section>
+
+<section class="sec" id="s5"><div class="head"><span class="num">05</span><h2>Side by side</h2></div>
+<div class="tablewrap"><table><thead><tr><th>Measure</th><th>Mark slot 1</th><th>Mark slot 2</th><th>Jan b28</th><th>Jan b29</th><th>Jan b30</th></tr></thead><tbody>
+<tr><td class="beat">Job</td><td>Persuade</td><td>Reassure</td><td>Persuade</td><td>List then tour</td><td>Order of operations</td></tr>
+<tr><td class="beat">Length</td><td class="num-cell">8:58</td><td class="num-cell">17:27</td><td class="num-cell">2:40</td><td class="num-cell">2:05</td><td class="num-cell">1:58</td></tr>
+<tr><td class="beat">Words</td><td class="num-cell">~1,760</td><td class="num-cell">~3,325</td><td class="num-cell">430</td><td class="num-cell">314</td><td class="num-cell">309</td></tr>
+<tr><td class="beat">Words per minute</td><td class="num-cell">~196</td><td class="num-cell">~190</td><td class="num-cell">~162</td><td class="num-cell">~151</td><td class="num-cell">~157</td></tr>
+<tr><td class="beat">Avg words per sentence</td><td class="num-cell">12.2</td><td class="num-cell">11.5</td><td class="num-cell">8.3</td><td class="num-cell">5.3</td><td class="num-cell">7.4</td></tr>
+<tr><td class="beat">Sentences of 6 words or fewer</td><td class="num-cell">27%</td><td class="num-cell">36%</td><td class="num-cell">46%</td><td class="num-cell">73%</td><td class="num-cell">43%</td></tr>
+<tr><td class="beat">Person</td><td>I / you; personal</td><td>I / you / "guys"</td><td>you / we; AI host</td><td>you / we</td><td>you / we</td></tr>
+<tr><td class="beat">Jargon</td><td>Low, defined</td><td>Medium, defined</td><td>Medium (Claude Code, API keys)</td><td>Higher (skill names)</td><td>Medium</td></tr>
+<tr><td class="beat">Story / metaphor</td><td>Origin story + car parts</td><td>"funnel is not a website"</td><td>None</td><td>None</td><td>"hand you an order"</td></tr>
+<tr><td class="beat">Proof</td><td>5 named people</td><td>Mark's own earnings claim</td><td>Channel counts</td><td>Course counts</td><td>None</td></tr>
+<tr><td class="beat">CTA</td><td>Join now, 30 days, next call</td><td>"I hope to see you inside"</td><td>$5/month, run first skill</td><td>"link is below"</td><td>"do lesson one today"</td></tr>
+</tbody></table></div>
+<div class="grid g2" style="margin-top:18px">
+ <div class="card"><h3>Pace (words per minute)</h3><div class="tablewrap" style="border:0"><table style="min-width:0"><tbody>
+ <tr><td class="beat">Mark slot 1</td><td class="num-cell">196</td><td style="min-width:160px"><div class="bar"><i style="width:89%"></i></div></td><td class="num-cell">1,760</td></tr><tr><td class="beat">Mark slot 2</td><td class="num-cell">190</td><td style="min-width:160px"><div class="bar"><i style="width:86%"></i></div></td><td class="num-cell">3,325</td></tr><tr><td class="beat">Jan b28</td><td class="num-cell">162</td><td style="min-width:160px"><div class="bar"><i style="width:74%"></i></div></td><td class="num-cell">430</td></tr><tr><td class="beat">Jan b29</td><td class="num-cell">151</td><td style="min-width:160px"><div class="bar"><i style="width:69%"></i></div></td><td class="num-cell">314</td></tr><tr><td class="beat">Jan b30</td><td class="num-cell">157</td><td style="min-width:160px"><div class="bar"><i style="width:71%"></i></div></td><td class="num-cell">309</td></tr></tbody></table></div><p class="muted" style="margin:6px 0 0;font-size:13px">Bar scale 0 to 220 wpm. Jan's voice is synthesized, so the slower, steadier pace is a voice setting, not a writing flaw. Sentence length is a writing choice.</p></div>
+ <div class="card"><h3>What each does that the other doesn't</h3>
+  <div class="eyebrow">Mark only</div><ul style="margin:4px 0 10px;padding-left:18px"><li>Story scene, metaphor, named mechanism</li><li>Named proof every 90 seconds</li><li>Open loop paid off later</li><li>Price anchor, guarantee, two-path close</li></ul>
+  <div class="eyebrow">Jan only</div><ul style="margin:4px 0 0;padding-left:18px"><li>Brevity (2 to 3 minutes)</li><li>Time-boxed list up front</li><li>Objections as quoted questions</li><li>Reason given for the order ("Win first. Library second. Slow things last.")</li></ul></div>
+</div>
+</section>
+
+<section class="sec" id="s6"><div class="head"><span class="num">06</span><h2>Gap analysis per video</h2></div>
+<p class="lead">Each beat from the template, rated for Jan's three videos. n/a means the beat does not belong in that kind of video. Quotes are from the final captions.</p>
+<div class="tablewrap"><table><thead><tr><th>Beat</th><th>b28</th><th>b29</th><th>b30</th><th>Evidence</th></tr></thead><tbody><tr><td class="beat">Call-out hook (who + pain + "don't skip")</td><td><span class="pill p">Present</span></td><td><span class="pill p">Present</span></td><td><span class="pill p">Present</span></td><td class="note">b28: "If you make YouTube videos with A I, and your views aren't turning into money, don't skip this." b29: "everything inside... in thirty seconds." b30: "You joined. Now what?"</td></tr><tr><td class="beat">Promise with a number and a time</td><td><span class="pill p">Present</span></td><td><span class="pill p">Present</span></td><td><span class="pill w">Weak</span></td><td class="note">b28 "next three minutes... three-step system". b29 "thirty seconds". b30 says "first real result, in your first week" but names no number.</td></tr><tr><td class="beat">Qualifier / objection killer, early</td><td><span class="pill p">Present</span></td><td><span class="pill n">n/a</span></td><td><span class="pill n">n/a</span></td><td class="note">b28: "you don't need to be technical, or show your face."</td></tr><tr><td class="beat">Named mechanism (a proper noun)</td><td><span class="pill w">Weak</span></td><td><span class="pill w">Weak</span></td><td><span class="pill w">Weak</span></td><td class="note">b28 has "Make faster. Get watched. Get paid." (a slogan, no name). Nothing like "the ___ Engine" that a viewer can repeat.</td></tr><tr><td class="beat">Villain / diagnosis</td><td><span class="pill w">Weak</span></td><td><span class="pill m">Missing</span></td><td><span class="pill w">Weak</span></td><td class="note">b28 only says views "aren't turning into money." b30: "Most communities hand you a library and wish you luck." is the one real villain line.</td></tr><tr><td class="beat">Metaphor system</td><td><span class="pill m">Missing</span></td><td><span class="pill m">Missing</span></td><td><span class="pill w">Weak</span></td><td class="note">b28 explains a skill as "a set of instructions" (a definition). b30 "We hand you an order." is a seed, not a system.</td></tr><tr><td class="beat">Story / credibility moment</td><td><span class="pill m">Missing</span></td><td><span class="pill m">Missing</span></td><td><span class="pill m">Missing</span></td><td class="note">Alex is an AI host, which is a good hook, but no scene is told. "I'm an A I. That's kind of the point." stops after one line.</td></tr><tr><td class="beat">Named proof, repeated through the video</td><td><span class="pill w">Weak</span></td><td><span class="pill m">Missing</span></td><td><span class="pill m">Missing</span></td><td class="note">b28 has counts only: "over four hundred videos, and nearly four hundred thousand views." No member, no result, no real voice.</td></tr><tr><td class="beat">Open loop, then payoff</td><td><span class="pill m">Missing</span></td><td><span class="pill m">Missing</span></td><td><span class="pill m">Missing</span></td><td class="note">No "I'll show you X in a minute". Each video states everything in order and never holds anything back.</td></tr><tr><td class="beat">Mechanism broken into 3 parts</td><td><span class="pill p">Present</span></td><td><span class="pill p">Present</span></td><td><span class="pill p">Present</span></td><td class="note">b28 three steps; b29 five courses; b30 five parts. Jan is already good at this.</td></tr><tr><td class="beat">Future-pacing ("picture week two")</td><td><span class="pill m">Missing</span></td><td><span class="pill m">Missing</span></td><td><span class="pill w">Weak</span></td><td class="note">b30 ends "your own hook is fixed, and you've done the kind of work other channels pay for." That is the only moment of it.</td></tr><tr><td class="beat">Offer stack and price anchor</td><td><span class="pill w">Weak</span></td><td><span class="pill w">Weak</span></td><td><span class="pill n">n/a</span></td><td class="note">Stack is clear ("thirty-one Claude skill lessons, over thirty prompt packs, the e-book"). "It's five dollars a month." has no anchor against what the work is worth.</td></tr><tr><td class="beat">Risk reversal / guarantee</td><td><span class="pill m">Missing</span></td><td><span class="pill m">Missing</span></td><td><span class="pill n">n/a</span></td><td class="note">Nothing said. Add only if Skool's terms or David allow one; do not invent it.</td></tr><tr><td class="beat">Objections answered out loud</td><td><span class="pill p">Present</span></td><td><span class="pill m">Missing</span></td><td><span class="pill w">Weak</span></td><td class="note">b28 quotes three: "I'm not technical." "Do I need A P I keys?" "Isn't this just the YouTube videos again?" Best thing in the set.</td></tr><tr><td class="beat">Why-it-matters for each item in a tour</td><td><span class="pill n">n/a</span></td><td><span class="pill w">Weak</span></td><td><span class="pill p">Present</span></td><td class="note">b29 lists skills ("Title Lab. Shot List. Captions.") with one line for Hook Doctor and nothing for the rest. b30 gives a job for each lesson.</td></tr><tr><td class="beat">Reason for the order / recap line</td><td><span class="pill w">Weak</span></td><td><span class="pill p">Present</span></td><td><span class="pill p">Present</span></td><td class="note">b29 "Skills. Prompt packs. The e-book. Recipes. And the people." b30 "Win first. Library second. Slow things last." (the best line in the set).</td></tr><tr><td class="beat">CTA with a next step and a reason now</td><td><span class="pill w">Weak</span></td><td><span class="pill w">Weak</span></td><td><span class="pill p">Present</span></td><td class="note">b28: "Join, open the classroom, and run your first skill today." b29: "The link is below." b30: "open it, post your hello, and do lesson one today."</td></tr></tbody></table></div>
+<p class="muted" style="margin-top:10px">What this table cannot show: whether the on-screen visuals add proof the words do not. b29 uses real classroom screen captures, which may do some of Mark's proof work. I rated words only.</p>
+</section>
+
+<section class="sec" id="s7"><div class="head"><span class="num">07</span><h2>What Jan needs to do</h2></div>
+<p class="lead">In priority order. The first three change the most.</p>
+<ol class="prio">
+ <li><b>Give the system a name (all three videos).</b> "Make faster. Get watched. Get paid." is a slogan; a name makes it a thing to repeat and to draw. This is the single move that lets one diagram, one set of titles and all three videos refer to the same idea. David or Jan to choose the name; I have not invented one.</li>
+ <li><b>Add one named proof beat to b28 and one to b29.</b> A member post, a result shown on screen, or Jan's first finished "Sell it" job. Use results, not dollar figures, to keep the no-revenue rule.</li>
+ <li><b>Name the villain in b28.</b> "You don't have a views problem. You don't have a tools problem. You have no system around the video." Jan has the cure but never states the diagnosis.</li>
+ <li><b>Write one scene for b28 before the three steps.</b> A 15-second scene of the viewer's own week, then "so I built..." Jan's honest AI host line is a good opening for it.</li>
+ <li><b>Hold one loop open in b28.</b> Promise a thing for later ("the one step most channels skip") and pay it off at step three. All three of Jan's videos currently reveal everything in order.</li>
+ <li><b>b29: say why each item matters.</b> One sentence per item, as b30 already does for lessons. Right now only Hook Doctor gets one.</li>
+ <li><b>b30: move it to the classroom.</b> Mark keeps Start Here in the classroom; the about page runs sell, tour, diagram. Also add the safety line Mark uses in his tour: how fast a question gets answered.</li>
+ <li><b>Make the glance image.</b> A single diagram of the named system with its three parts. It is the third slot Mark uses and Jan lacks.</li>
+ <li><b>Close with a choice and a reason now.</b> Two short paths and one real reason to join this week, only if one is true. Add risk reversal only if Skool and David allow it.</li>
+</ol>
+<h3 style="margin-top:28px">Rewritten hooks</h3>
+<p class="muted" style="margin:0 0 12px">In Jan's voice and on his topic. These are drafts; the numbers come from Jan's own scripts (400+ videos, 5 courses, 8 lessons).</p>
+<div class="grid g3"><div class="hook"><div class="eyebrow">b28 &middot; Intro and sell (about page, slot 1)</div><div class="q">You post a video, you get the views, and the page where people could pay you stays empty. I&#x27;m Alex, I&#x27;m an A I, and I run a channel with over four hundred videos. In the next three minutes I&#x27;ll show you the three jobs I give Claude so the work gets faster, gets watched, and gets paid for.</div><p class="muted" style="margin:0"><b>Why it works:</b> Opens on the viewer&#x27;s exact situation as a scene, keeps Jan&#x27;s honest AI-host line, and puts the promise and the time box inside 15 seconds. It deliberately holds one loop open (&quot;the three jobs&quot;) to pay off at the end.</p></div><div class="hook"><div class="eyebrow">b29 &middot; What's inside (about page, slot 2)</div><div class="q">Five things sit behind one five-dollar membership. I&#x27;ll name all five in thirty seconds, then open every door so you can see which one is yours.</div><p class="muted" style="margin:0"><b>Why it works:</b> Keeps Jan&#x27;s list-first structure, adds &quot;which one is yours&quot; so the tour becomes a choice, and a count the viewer can track.</p></div><div class="hook"><div class="eyebrow">b30 &middot; Start Here (classroom lesson, not the about page)</div><div class="q">Your first week has one job: fix one hook. Everything else in this classroom can wait. Eight short lessons, in this order, and by the end you&#x27;ll have fixed your own and helped someone else fix theirs.</div><p class="muted" style="margin:0"><b>Why it works:</b> Replaces &quot;You joined. Now what?&quot; with a rule that removes choice. It states the win, the lesson count and the order in 15 seconds.</p></div></div>
+</section>
+
+<footer style="margin-top:64px;padding-top:16px;border-top:1px solid var(--line)" class="muted">
+<div style="font-size:13px">Source files in the flivideo repo: docs/research/skool-ai-exit-strategy-2026-11-03/ (01 and 02 transcripts, jan-b28/b29/b30, compare.md, README.md).</div>
+</footer>
+</div></body></html>
