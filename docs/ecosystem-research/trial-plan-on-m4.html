@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FliVideo Trial Plan on the M4</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Roboto:ital,wght@0,400;0,500;0,700;1,400&family=Roboto+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light;
+  --brand-brown:#342d2d; --brand-gold:#ccba9d; --brand-yellow:#ffde59; --brand-amber:#c8841a;
+  --brand-muted:#7a6e5e; --brand-near-white:#faf5ec; --brand-surface:#f0ebe4; --brand-linen:#e8e0d4;
+  --brand-border:#d4cdc4; --brand-chrome:#1a1515; --brand-dark-surface:#25201e; --brand-blue:#2E91FC;
+  --brand-card:#ffffff;
+  --go:#2f7d4a; --later:#a8670f; --ideas:#7a6e5e;
+}
+* { box-sizing:border-box; }
+body { margin:0; background:var(--brand-near-white); color:var(--brand-brown);
+  font:16px/1.6 Roboto, system-ui, sans-serif; }
+.wrap { max-width:1120px; margin:0 auto; padding:28px 24px 64px; }
+header { display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-bottom:6px; }
+.logo-badge { display:inline-block; background:#342d2d; border-radius:6px; padding:4px 10px 2px;
+  font-family:"Bebas Neue",Oswald,sans-serif; font-size:22px; letter-spacing:.04em; line-height:1.1; }
+.logo-badge .a{color:#ccba9d}.logo-badge .d{color:#ffde59}
+.eyebrow { font-family:Oswald; text-transform:uppercase; letter-spacing:.12em; font-size:13px; color:var(--brand-muted); }
+h1 { font-family:Oswald; font-weight:600; text-transform:uppercase; font-size:40px; line-height:1.1; margin:10px 0 8px; }
+h2 { font-family:Oswald; font-weight:600; text-transform:uppercase; font-size:24px; margin:40px 0 12px; letter-spacing:.02em; }
+h3 { font-family:Oswald; font-weight:600; text-transform:uppercase; font-size:20px; margin:0; }
+p { margin:0 0 10px; }
+.lede { font-size:18px; max-width:880px; }
+.verdict-line { border-left:4px solid var(--brand-amber); background:var(--brand-card); border:1px solid var(--brand-border);
+  border-left:4px solid var(--brand-amber); padding:14px 18px; border-radius:6px; margin:18px 0; }
+.verdict-line b { box-shadow: inset 0 -6px 0 var(--brand-yellow); }
+.card { background:var(--brand-card); border:1px solid var(--brand-border); border-radius:8px; padding:20px 22px; margin:14px 0; }
+table { width:100%; border-collapse:collapse; font-size:15px; }
+th { font-family:Oswald; font-weight:500; text-transform:uppercase; letter-spacing:.06em; font-size:13px;
+  text-align:left; color:var(--brand-muted); border-bottom:2px solid var(--brand-border); padding:8px 10px; }
+td { border-bottom:1px solid var(--brand-border); padding:10px; vertical-align:top; }
+td.n { font-family:Oswald; font-weight:700; color:var(--brand-amber); font-size:20px; width:44px; }
+.pill { display:inline-block; font-family:Oswald; text-transform:uppercase; font-size:12px; letter-spacing:.06em;
+  padding:2px 9px; border-radius:20px; border:1.5px solid currentColor; white-space:nowrap; }
+.p-go{color:var(--go)} .p-later{color:var(--later)} .p-ideas{color:var(--ideas)} .p-no{color:#a33b2c}
+.cards { display:grid; grid-template-columns:1fr; gap:4px; }
+.app-head { display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:6px; }
+.app-letter { font-family:Oswald; font-weight:700; font-size:28px; color:var(--brand-amber); }
+.job { font-style:italic; color:var(--brand-muted); margin-bottom:12px; }
+.cols { display:grid; grid-template-columns: 1.35fr 1fr; gap:22px; }
+@media (max-width:820px){ .cols{grid-template-columns:1fr} h1{font-size:30px} }
+.steps { margin:0; padding-left:0; list-style:none; counter-reset:s; }
+.steps li { counter-increment:s; position:relative; padding:4px 0 4px 34px; }
+.steps li::before { content:counter(s, decimal-leading-zero); position:absolute; left:0; top:4px;
+  font-family:Oswald; font-weight:600; color:var(--brand-amber); }
+.label { font-family:Oswald; text-transform:uppercase; letter-spacing:.08em; font-size:12px; color:var(--brand-muted); margin:10px 0 4px; }
+.facts { font-size:14.5px; }
+.facts div { padding:5px 0; border-bottom:1px dashed var(--brand-border); }
+.facts div:last-child { border-bottom:0; }
+code, .mono { font-family:"Roboto Mono", monospace; font-size:13px; background:var(--brand-surface); padding:1px 5px; border-radius:3px; }
+.uv { font-family:Oswald; font-size:11px; letter-spacing:.06em; color:#a33b2c; text-transform:uppercase; }
+.lands { background:var(--brand-surface); border-radius:6px; padding:10px 12px; margin-top:10px; font-size:14.5px; }
+.note { font-size:14px; color:var(--brand-muted); }
+.dropped { columns:2; column-gap:28px; font-size:14.5px; }
+@media (max-width:820px){ .dropped{columns:1} }
+.dropped div { break-inside:avoid; padding:4px 0; }
+.decide li { margin:6px 0; }
+figure { margin:14px 0; }
+.fignum { display:inline-block; font-family:Oswald; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--brand-amber); margin-bottom:4px; }
+figcaption { font-size:14px; color:var(--brand-muted); margin-top:8px; }
+svg text { font-family: Roboto, sans-serif; }
+a { color:var(--brand-blue); }
+footer { margin-top:40px; font-size:13px; color:var(--brand-muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><span class="logo-badge"><span class="a">Appy</span><span class="d">Dave</span></span>
+<span class="eyebrow">FliVideo · ecosystem research · doc 08 · 2026-11-03</span></header>
+<h1>Trial plan on the M4</h1>
+<section>
+<p class="lede">You asked how to get the useful outside apps <b>running on the M4 and connected into FliStudio</b>,
+shown as if we were using them on a real video project. This is that plan. Nothing has been installed or run yet.</p>
+
+<div class="verdict-line"><b>Verdict:</b> 7 apps are worth trying, all walked through on <b>d01-flivideo-tour</b>.
+Try 3 first (auto-editor, Textream, HyperFrames). That takes about 7 hours of agent time and 3 GB of disk, with no FliStudio
+code change and no Docker. It can all run while you are still testing the pilots.</div>
+
+</section>
+<section>
+<h2>Why d01-flivideo-tour</h2>
+<div class="card">
+<p>It is the <b>only one of the four projects with real footage</b>: 20 Ecamm takes with word-level transcripts,
+13 DJI clips (1.5 GB), 2 FliCast screen recordings, a FliCut cut, a FliEdit edit and a Teletubby script.
+d13, d18 and d19 have scripts and audio but no footage.
+<b>d13-overlay-pilot</b> is the second project, used only for Textream, because it has the full spoken script you are about to record.</p>
+</div>
+
+<section>
+<h2>How each app reaches FliStudio</h2>
+<figure class="card"><span class="fignum">Fig. 1</span>
+<svg viewBox="0 0 1060 520" width="100%" role="img" aria-label="How each app reaches FliStudio"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c8841a"/></marker></defs><rect x="10" y="220.0" width="210" height="90" rx="8" fill="#f0ebe4" stroke="#342d2d" stroke-width="1.5"/><text x="115.0" y="244.0" text-anchor="middle" font-family="Oswald" font-size="16" font-weight="600" fill="#342d2d">FLISTUDIO</text><text x="115.0" y="264.0" text-anchor="middle" font-size="12.5" fill="#7a6e5e">d01-flivideo-tour · :7150</text><path d="M220,265.0 C 300,265.0 300,48 380,48 L 690,48" fill="none" stroke="#c8841a" stroke-width="1.6" marker-end="url(#ar)"/><rect x="392" y="34" width="282" height="26" rx="13" fill="#faf5ec" stroke="#d4cdc4"/><text x="533" y="52" text-anchor="middle" font-family="Oswald" font-size="12.5" letter-spacing="1" fill="#342d2d">LINK-OUT → OPEN LIKE FLICUT</text><rect x="700" y="20" width="350" height="56" rx="8" fill="#ffffff" stroke="#2f7d4a" stroke-width="2"/><text x="716" y="44" font-family="Oswald" font-size="17" font-weight="600" fill="#342d2d">HyperFrames Studio</text><text x="716" y="64" font-size="12.5" fill="#2f7d4a">:7210 · try first</text><path d="M220,265.0 C 300,265.0 300,118 380,118 L 690,118" fill="none" stroke="#c8841a" stroke-width="1.6" marker-end="url(#ar)"/><rect x="392" y="104" width="282" height="26" rx="13" fill="#faf5ec" stroke="#d4cdc4"/><text x="533" y="122" text-anchor="middle" font-family="Oswald" font-size="12.5" letter-spacing="1" fill="#342d2d">URL SCHEME (textream://)</text><rect x="700" y="90" width="350" height="56" rx="8" fill="#ffffff" stroke="#2f7d4a" stroke-width="2"/><text x="716" y="114" font-family="Oswald" font-size="17" font-weight="600" fill="#342d2d">Textream</text><text x="716" y="134" font-size="12.5" fill="#2f7d4a">macOS app · try first</text><path d="M220,265.0 C 300,265.0 300,188 380,188 L 690,188" fill="none" stroke="#c8841a" stroke-width="1.6" marker-end="url(#ar)"/><rect x="392" y="174" width="282" height="26" rx="13" fill="#faf5ec" stroke="#d4cdc4"/><text x="533" y="192" text-anchor="middle" font-family="Oswald" font-size="12.5" letter-spacing="1" fill="#342d2d">FLITOOLS VERB  cut.silence</text><rect x="700" y="160" width="350" height="56" rx="8" fill="#ffffff" stroke="#2f7d4a" stroke-width="2"/><text x="716" y="184" font-family="Oswald" font-size="17" font-weight="600" fill="#342d2d">auto-editor</text><text x="716" y="204" font-size="12.5" fill="#2f7d4a">CLI under :7161 · try first</text><path d="M220,265.0 C 300,265.0 300,258 380,258 L 690,258" fill="none" stroke="#c8841a" stroke-width="1.6" marker-end="url(#ar)"/><rect x="392" y="244" width="282" height="26" rx="13" fill="#faf5ec" stroke="#d4cdc4"/><text x="533" y="262" text-anchor="middle" font-family="Oswald" font-size="12.5" letter-spacing="1" fill="#342d2d">IDEAS → FLICUT REVIEW LANE</text><rect x="700" y="230" width="350" height="56" rx="8" fill="#ffffff" stroke="#a8670f" stroke-width="2"/><text x="716" y="254" font-family="Oswald" font-size="17" font-weight="600" fill="#342d2d">video-use</text><text x="716" y="274" font-size="12.5" fill="#a8670f">CLI + skill · later</text><path d="M220,265.0 C 300,265.0 300,328 380,328 L 690,328" fill="none" stroke="#c8841a" stroke-width="1.6" marker-end="url(#ar)"/><rect x="392" y="314" width="282" height="26" rx="13" fill="#faf5ec" stroke="#d4cdc4"/><text x="533" y="332" text-anchor="middle" font-family="Oswald" font-size="12.5" letter-spacing="1" fill="#342d2d">B-ROLL PILOT → ADAPTER</text><rect x="700" y="300" width="350" height="56" rx="8" fill="#ffffff" stroke="#a8670f" stroke-width="2"/><text x="716" y="324" font-family="Oswald" font-size="17" font-weight="600" fill="#342d2d">Immich</text><text x="716" y="344" font-size="12.5" fill="#a8670f">Docker · M2 · later</text><path d="M220,265.0 C 300,265.0 300,398 380,398 L 690,398" fill="none" stroke="#c8841a" stroke-width="1.6" marker-end="url(#ar)"/><rect x="392" y="384" width="282" height="26" rx="13" fill="#faf5ec" stroke="#d4cdc4"/><text x="533" y="402" text-anchor="middle" font-family="Oswald" font-size="12.5" letter-spacing="1" fill="#342d2d">ENGINE INSIDE FLIEDIT</text><rect x="700" y="370" width="350" height="56" rx="8" fill="#ffffff" stroke="#a8670f" stroke-width="2"/><text x="716" y="394" font-family="Oswald" font-size="17" font-weight="600" fill="#342d2d">MLT / melt</text><text x="716" y="414" font-size="12.5" fill="#a8670f">CLI · later</text><path d="M220,265.0 C 300,265.0 300,468 380,468 L 690,468" fill="none" stroke="#c8841a" stroke-width="1.6" marker-end="url(#ar)"/><rect x="392" y="454" width="282" height="26" rx="13" fill="#faf5ec" stroke="#d4cdc4"/><text x="533" y="472" text-anchor="middle" font-family="Oswald" font-size="12.5" letter-spacing="1" fill="#342d2d">LINK-OUT ONLY</text><rect x="700" y="440" width="350" height="56" rx="8" fill="#ffffff" stroke="#7a6e5e" stroke-width="2"/><text x="716" y="464" font-family="Oswald" font-size="17" font-weight="600" fill="#342d2d">Cap</text><text x="716" y="484" font-size="12.5" fill="#7a6e5e">macOS app · ideas only</text></svg>
+<figcaption>The smallest seam for each app. Green = try first, amber = try later, grey = ideas only. Only HyperFrames would ever need FliStudio code (a new door), and that waits until the pilots are tested.</figcaption>
+</figure>
+</section>
+
+</section>
+<section>
+<h2>Order of play</h2>
+<div class="card" style="padding:8px 12px">
+<table>
+<tr><th></th><th>Step</th><th>Cost</th><th>While you test pilots?</th><th>Go needed</th></tr>
+<tr><td class="n">01</td><td><b>auto-editor → X6</b><br><span class="note">silence cut on a copy of 03-1-flistudio.mov vs FliCut's cut</span></td><td>1.5 h · &lt;100 MB</td><td><span class="pill p-go">yes</span></td><td>X6 + install OK</td></tr>
+<tr><td class="n">02</td><td><b>Textream → X5</b><br><span class="note">push d13's script, read word progress</span></td><td>1.5 h · ~50 MB</td><td><span class="pill p-go">yes</span> <span class="note">not mid-recording</span></td><td>X5 + install OK</td></tr>
+<tr><td class="n">03</td><td><b>HyperFrames → X2</b><br><span class="note">what studio-server binds to, does it need a token</span></td><td>1 h · ~1 GB</td><td><span class="pill p-go">yes</span></td><td>X2</td></tr>
+<tr><td class="n">04</td><td><b>HyperFrames → X1</b><br><span class="note">chapter 03 + 2 DJI clips: cut, ripple, trim, music duck, render</span></td><td>3 h · ~2 GB · 1–3 GB RAM</td><td><span class="pill p-go">yes</span></td><td>X1</td></tr>
+<tr><td class="n">05</td><td><b>my-app entries</b> for what passed<br><span class="note">hyperframes-studio :7210, textream</span></td><td>0.5 h</td><td><span class="pill p-go">yes</span></td><td>"add entries"</td></tr>
+<tr><td class="n">06</td><td><b>video-use → X7</b><br><span class="note">meaning-based cuts on the X6 take</span></td><td>2 h · ElevenLabs credit</td><td><span class="pill p-go">yes</span></td><td>X7 + spend OK</td></tr>
+<tr><td class="n">07</td><td><b>FliStudio button</b> for HyperFrames<br><span class="note">link-out first, then open-like-FliCut</span></td><td>0.5 day</td><td><span class="pill p-no">no</span> <span class="note">FliStudio code</span></td><td>R10 (+ R4 for the folder name)</td></tr>
+<tr><td class="n">08</td><td><b>Immich → X4</b> <span class="note">(recommend the M2)</span></td><td>4 h · 6+ GB containers</td><td><span class="pill p-go">yes</span> <span class="note">other machine</span></td><td>Docker yes (R12) + X4</td></tr>
+<tr><td class="n">09</td><td><b>MLT → X3</b></td><td>3 h</td><td><span class="pill p-go">yes</span></td><td>only if FliEdit's render hurts (R9)</td></tr>
+<tr><td class="n">—</td><td>Cap</td><td>—</td><td>—</td><td>not trialled</td></tr>
+</table>
+</div>
+
+</section>
+<section>
+<h2>The seven apps, on d01</h2>
+<p class="note">Trials always work on <b>copies</b> in <code>~/dev/upstream/scratch/&lt;X&gt;/</code>, never in the project. "Lands in" is where output would go once an app is adopted.
+<span class="uv">Unverified</span> marks anything not checked today.</p>
+
+<div class="cards">
+
+<figure class="card"><span class="fignum">Fig. 2</span>
+<div class="app-head"><span class="app-letter">A</span><h3>auto-editor</h3><span class="pill p-go">try first</span><span class="note">stage: cut · Unlicense</span></div>
+<div class="job">"Cut the dead air in one call" — a silence pass any app can ask for.</div>
+<div class="cols"><div>
+<div class="label">On d01, as if running</div>
+<ol class="steps">
+<li>In FliStudio you open d01, then FliCut on <code>flivideo-tour</code>.</li>
+<li>An agent calls a FliTools verb <code>cut.silence</code> on <code>hub/recordings/03-1-flistudio.mov</code> with FliCut's own settings (pause 0.5 s, padding 0.15 s).</li>
+<li>FliTools runs auto-editor and returns a keep/cut list.</li>
+<li>FliCut shows those cuts as a second lane beside its own. You keep or drop each one.</li>
+</ol>
+<div class="lands"><b>Lands in:</b> <code>-renders/auto-editor/03-1-flistudio.cuts.json</code> · FliStudio shows nothing new; it's FliCut's view.</div>
+</div><div class="facts">
+<div class="label">On the M4</div>
+<div><b>Install:</b> pip / release binary <span class="uv">unverified</span>. Already cloned on M4.</div>
+<div><b>my-app:</b> none. It's a CLI; FliTools (:7161) owns it.</div>
+<div><b>Size:</b> &lt;100 MB disk, &lt;500 MB RAM <span class="uv">unverified</span></div>
+<div><b>Seam:</b> background tool behind a FliTools verb</div>
+<div><b>Proves it:</b> X6, 1.5 h</div>
+</div></div></figure>
+
+<figure class="card"><span class="fignum">Fig. 3</span>
+<div class="app-head"><span class="app-letter">B</span><h3>Textream</h3><span class="pill p-go">try first</span><span class="note">stage: record · MIT · uses d13</span></div>
+<div class="job">"Push the script to the prompter and see where I am." A second prompter an agent can drive.</div>
+<div class="cols"><div>
+<div class="label">On d13, as if running</div>
+<ol class="steps">
+<li>Story Pilot on d13 has the script (<code>script/storypilot/project/script.md</code>).</li>
+<li>You click <b>Send to Textream</b>. FliStudio opens a <code>textream://read?text=…</code> link.</li>
+<li>Textream shows it in the notch and highlights words as you speak.</li>
+<li>An agent reads word progress to know which paragraph you're on.</li>
+</ol>
+<div class="lands"><b>Lands in:</b> nothing new. The script stays in Story Pilot / <code>fli.tubby.json</code>. FliStudio shows a Send to Textream button beside Teletubby.</div>
+</div><div class="facts">
+<div class="label">On the M4</div>
+<div><b>Install:</b> macOS app (DMG / cask) <span class="uv">unverified</span></div>
+<div><b>my-app:</b> <code>textream</code>, set up like Buzz (<code>open -a</code>, no port)</div>
+<div><b>Port:</b> Director 7575, set by the app, free on the M4</div>
+<div><b>Seam:</b> link-out by URL scheme, with no server and no auth question</div>
+<div><b>Proves it:</b> X5, 1.5 h. The question is who can reach port 7575.</div>
+<div class="note">The lean stays: borrow its ideas into Teletubby.</div>
+</div></div></figure>
+
+<figure class="card"><span class="fignum">Fig. 4</span>
+<div class="app-head"><span class="app-letter">C</span><h3>HyperFrames Studio</h3><span class="pill p-go">try first</span><span class="note">stage: edit / motion · Apache-2.0</span></div>
+<div class="job">"An editor for titles, overlays and motion that opens like FliCut." FliEdit keeps assembling the footage.</div>
+<div class="cols"><div>
+<div class="label">On d01, as if running</div>
+<ol class="steps">
+<li>In FliStudio on d01 you click <b>Open in HyperFrames</b> on chapter 03.</li>
+<li>A composition is made from copies of <code>03-1-flistudio.mov</code>, its words file and 2 DJI clips.</li>
+<li>An agent adds a "03 · FliStudio" chapter card, three callouts timed to the words, and a DJI cutaway, then runs <code>hyperframes check</code>.</li>
+<li>Studio opens in the browser on port 7210. You drag a callout and trim the cutaway. The agent sees what you selected and the undo history.</li>
+<li>You click Render. FliEdit picks up the MP4 as an overlay clip.</li>
+</ol>
+<div class="lands"><b>Lands in:</b> <code>fli.motion.03-flistudio/</code> + <code>-renders/motion/03-flistudio.mp4</code> <span class="note">(folder name is a proposal; it needs R4)</span></div>
+</div><div class="facts">
+<div class="label">On the M4</div>
+<div><b>Install:</b> Node 24 (present) + <code>npx hyperframes</code>; Chromium for rendering</div>
+<div><b>my-app:</b> <code>hyperframes-studio</code>, port <b>7210</b> (free)</div>
+<div><b>Size:</b> 495 MB clone + ~1 GB modules/Chromium; render 1–3 GB RAM <span class="uv">unverified</span></div>
+<div><b>Seam:</b> ① link-out to :7210 → ② a new <code>flimotion</code> door so <code>app.launch</code> opens it like FliCut <span class="note">(FliStudio code, so it waits)</span></div>
+<div><b>Proves it:</b> X2 (1 h) then X1 (3 h)</div>
+<div class="note">Correction found today: Overlay Pilot renders with ffmpeg + Pillow, not HyperFrames.</div>
+</div></div></figure>
+
+<figure class="card"><span class="fignum">Fig. 5</span>
+<div class="app-head"><span class="app-letter">D</span><h3>video-use</h3><span class="pill p-later">try later</span><span class="note">stage: cut · MIT</span></div>
+<div class="job">"An agent that proposes cuts by meaning" (repeated points, weak openers), for you to accept in FliCut.</div>
+<div class="cols"><div>
+<div class="label">On d01, as if running</div>
+<ol class="steps">
+<li>Copies of the 20 takes go into a scratch folder.</li>
+<li>A Claude session with video-use packs them into one reading view and proposes cuts, e.g. "drop 01-3 lines 4–6, it repeats 01-2".</li>
+<li>You review the proposals. Nothing is applied automatically.</li>
+</ol>
+<div class="lands"><b>Lands in:</b> <code>-renders/video-use/flivideo-tour.proposals.json</code> · later, a review lane in FliCut</div>
+</div><div class="facts">
+<div class="label">On the M4</div>
+<div><b>Install:</b> <code>uv sync</code> in its clone (already on M4)</div>
+<div><b>Needs:</b> an ElevenLabs key, one paid call per take. Whether it can use FliTools' transcripts instead is <span class="uv">unverified</span></div>
+<div><b>Trust:</b> its README tells the agent to install itself. Install it by hand in scratch.</div>
+<div><b>Seam:</b> ideas only, until X7 finds 2+ cuts you'd keep</div>
+<div><b>Proves it:</b> X7, 2 h, after X6</div>
+</div></div></figure>
+
+<figure class="card"><span class="fignum">Fig. 6</span>
+<div class="app-head"><span class="app-letter">E</span><h3>Immich</h3><span class="pill p-later">try later</span><span class="note">stage: B-roll · AGPL (R13: run unmodified)</span></div>
+<div class="job">"Every B-roll clip in one searchable library", feeding B-roll Pilot.</div>
+<div class="cols"><div>
+<div class="label">On d01, as if running</div>
+<ol class="steps">
+<li>Copies of d01's 13 DJI clips are uploaded with a scoped API key.</li>
+<li>They go in album <i>appydave / d01-flivideo-tour</i> with tags like shot:drone, shot:desk, brand:appydave.</li>
+<li>In B-roll Pilot you ask "find B-roll for: the desk setup" and see three thumbnails.</li>
+<li>You pick one. It's copied into the project.</li>
+</ol>
+<div class="lands"><b>Lands in:</b> <code>footage/</code> + a <code>broll</code> resource in <code>fli.resources.json</code> · an <i>Open in Immich</i> link-out</div>
+</div><div class="facts">
+<div class="label">On the M4</div>
+<div><b>Install:</b> Docker compose. Docker.app is on the M4 but <b>not approved</b> (R12).</div>
+<div><b>Size:</b> ~4–6 GB RAM, ~3 GB images + library <span class="uv">unverified</span>. The M4 has 68 GB free.</div>
+<div><b>my-app:</b> <code>immich</code>, port 7220 → 2283, tailnet only</div>
+<div><b>Seam:</b> background service behind B-roll Pilot + link-out</div>
+<div><b>Proves it:</b> X4, 4 h. <b>Recommend the M2.</b></div>
+</div></div></figure>
+
+<figure class="card"><span class="fignum">Fig. 7</span>
+<div class="app-head"><span class="app-letter">F</span><h3>MLT / melt</h3><span class="pill p-later">try later</span><span class="note">stage: edit render · LGPL</span></div>
+<div class="job">"A second render engine under FliEdit", only if FliEdit's own render gets slow or wrong.</div>
+<div class="cols"><div>
+<div class="label">On d01</div>
+<ol class="steps">
+<li>Copy <code>fli.edit.d01-flivideo-tour-edit.json</code> (1 DJI clip, V1 + A1, 1080p25). It's a small, ready test.</li>
+<li>Translate it to MLT XML and render headless with <code>melt</code>.</li>
+<li>Compare against FliEdit's render at 5 frames.</li>
+</ol>
+<div class="lands"><b>Lands in:</b> <code>-renders/mlt/</code> · FliStudio shows nothing; FliEdit's Render just uses it</div>
+</div><div class="facts">
+<div class="label">On the M4</div>
+<div><b>Install:</b> brew <code>mlt</code> <span class="uv">unverified</span>; not installed</div>
+<div><b>my-app:</b> none (CLI)</div>
+<div><b>Seam:</b> engine inside FliEdit (the FliEdit repo, not FliStudio)</div>
+<div><b>Proves it:</b> X3, 3 h, only if R9 moves</div>
+</div></div></figure>
+
+<figure class="card"><span class="fignum">Fig. 8</span>
+<div class="app-head"><span class="app-letter">G</span><h3>Cap</h3><span class="pill p-ideas">ideas only</span><span class="note">stage: record · AGPL app</span></div>
+<div class="job">"A quick Loom-style share", e.g. a 60-second "here's the d01 cut" with a link.</div>
+<p>You open Cap, record FliStudio showing d01, and get a share link. At most it would be a link-out from FliStudio. FliCast stays the recorder. Revisit only if a Loom-style job shows up (R18).</p>
+</figure>
+
+</div>
+
+</section>
+<section>
+<h2>Dropped</h2>
+<div class="card dropped">
+<div><b>Kdenlive / Shotcut</b>: GUIs over MLT with no agent surface</div>
+<div><b>libopenshot</b>: a library, behind MLT in priority</div>
+<div><b>FilmCraft + Craft apps</b>: still in development; watch them</div>
+<div><b>OpenMontage</b>: an agent-instruction system, not an app; borrow its stage graphs</div>
+<div><b>ResourceSpace</b>: PHP + MySQL for a comparison point</div>
+<div><b>Dam'It</b>: our own design; it stays the design owner</div>
+<div><b>QPrompt</b>: no agent surface</div>
+<div><b>LosslessCut</b>: FliCut already cuts</div>
+<div><b>Recordly · open-recorder · Screenize</b>: format references only</div>
+<div><b>Remotion</b>: already owned</div>
+<div><b>Motion Canvas · Manim</b>: HyperFrames and Remotion cover this</div>
+</div>
+
+</section>
+<section>
+<h2>What you decide (one at a time)</h2>
+<div class="card">
+<ol class="decide">
+<li><b>Approve steps 01–04 as a batch?</b> These are X6, X5, X2 and X1, with installs of auto-editor, Textream and HyperFrames' packages. <i>Recommendation: yes.</i> All of it happens in scratch folders, and nothing touches FliStudio or a pilot.</li>
+<li><b>M4 instead of M2</b> for those four? (Doc 05 said M2.) <i>Recommendation: M4</i>, because FliStudio and d01 are there. Use the M2 for Immich.</li>
+<li><b>Docker for Immich?</b> <i>Recommendation: later</i>, after steps 01–04 report back.</li>
+</ol>
+</div>
+
+</section>
+<footer>Source: <span class="mono">/Users/davidcruwys/dev/ad/flivideo/docs/ecosystem-research/08-trial-plan-on-m4.md</span> · plan only, nothing installed or run · checked today on the M4: FliStudio 136bb92, apps.json, upstream clones, project folders (read only).</footer>
+</div>
+</body>
+</html>

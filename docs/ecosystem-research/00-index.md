@@ -33,6 +33,7 @@ outside candidates, a *possible* target and the register of what needs his appro
 | 05 | [05-research-experiments.md](05-research-experiments.md) | Nine bounded Level-4 experiments (X1–X9) | planned, none run | B3 |
 | 06 | [06-approval-register.md](06-approval-register.md) | 21 rows David rules on | all open | B3 |
 | 07 | [07-research-execution.md](07-research-execution.md) | How the M4/M2 run went, what to reuse | record | B1 + B3 |
+| 08 | [08-trial-plan-on-m4.md](08-trial-plan-on-m4.md) | Trial plan: 7 shortlisted outside apps walked through on d01-flivideo-tour, how each runs on the M4 and reaches FliStudio, one order of play. Visual: `trial-plan-on-m4.html` | plan, nothing run | eco-trial-plan |
 
 ## In one paragraph
 

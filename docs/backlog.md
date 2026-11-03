@@ -55,6 +55,7 @@ put onto a backlog because I'm not there to guide that."
 - **Experiments:** X1–X9 in `/Users/davidcruwys/dev/ad/flivideo/docs/ecosystem-research/05-research-experiments.md`,
   each needs its own go (R21).
 - **Repos it studied:** 8 clones registered in `~/dev/upstream/repos.jsonl`, downloaded on the M2 only.
+- **Trial plan (2026-11-03):** how to run the useful ones on the M4 against d01-flivideo-tour, in order (auto-editor → Textream → HyperFrames X2/X1 → video-use → FliStudio seam → Immich on M2): `/Users/davidcruwys/dev/ad/flivideo/docs/ecosystem-research/08-trial-plan-on-m4.md`.
 
 ## Banked (backlog only)
 
