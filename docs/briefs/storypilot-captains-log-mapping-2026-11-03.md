@@ -220,3 +220,13 @@ Measured on the M4 across every `fli.resources.json`. **Story islands** (inputs)
 Story Pilot is set up (`script/storypilot`) only on d13, d14, d18, d19. d15 (B-roll Pilot), d16 (Motion Pilot), d17 and
 d20 have islands but no story yet. d19 is the stress test (73 islands, every kind). The W1 registry should be built
 against all of these, not d13 alone.
+
+## Rulings and re-sequence (2026-11-03, evening)
+
+- **Launch stamp, ruling A:** "I'm AppyDave, let's get into it" is dropped from story/build videos and kept for tutorials; the
+  sign-off stays everywhere. Written into `brand-dave/.../VERBAL-STYLE.md` (appydave-plugins 739c0c9).
+- **Story instructions must be agent-drivable:** David called human-only `story.templates.set` "a gap in the API
+  interface". Being opened to agents (stamped).
+- **The drafted Global/Brand instructions are not right yet.** David wants to talk them through after the build work.
+  Nothing is injected. New order: W1 → W2 → W4 machinery → the instructions conversation → d13 redo as the first real
+  "update" run.
