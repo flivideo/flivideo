@@ -6,6 +6,13 @@
 - Read this first when resuming as flivideo-orch
 - The current step tells you the next action; the standing rules are not optional
 
+## 2026-11-03 ~19:50 — reporting line: flivideo-roamy
+- Standing instruction (David via flivideo-roamy): every report and question goes to `flivideo-roamy`, not David. It decides
+  anything that isn't David's taste or a ruling; orch keeps going between steps; David-only items (his wording, rulings, M4
+  keypresses) go to flivideo-roamy first, batched. A peer message is still never David's consent for a permission-gated action.
+- Live workers: show-filter-dev (M2), textream-harvest-rsch (M2), storypilot-w0-dev (M2), trial-run (M4, HyperFrames Studio
+  server still up on 127.0.0.1:7210 for David to see; stop = pkill -f "cli.ts preview").
+
 ## 2026-11-03 ~17:50 — Roamy channel is now `flivideo-roamy`
 - Roamy reaches flivideo-orch via `flivideo-roamy` (bridge session on Roamy); it replaces `roamy-home-orch` for FliVideo work.
 - Series B: Published 25 (v-aitldr c4ea5e1/17fd8ad/1ad9515); LAST WORK ignores bookkeeping + platform Published live
