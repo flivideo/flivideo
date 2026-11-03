@@ -64,3 +64,21 @@ Build it from config (`CAPTAINS_LOG_URL`), never hard-code the host.
 - That the FliStudio server on the M4 can reach CL on the M2 (`CAPTAINS_LOG_URL` set on the M4? Tailscale
   reachability from that process).
 - Whether `captures_search` returns duration (the screen shows it; the metadata row above did not).
+
+## Session sources (David's questions, 2026-11-03, d13 source 02 "the spec morning")
+
+A **SESSION** source is a Claude Code conversation (here `8aa7c642`, named `overlay-pilot-spec`, 28 Oct). That one was a
+spec-writing session, not a coding session. David couldn't tell from the panel.
+
+- **SYNTH** = the one-line "why it is here", written by an agent (`by agent:claude-code`). Its job is to say why the
+  source matters to *this* video so David doesn't have to read 58k characters. One sentence is the design, but nothing
+  on screen says so.
+- **RAW** = the words as said. For a session it shows **only David's turns** ("David's own turns · 58,187 characters");
+  Claude's replies are removed. Problems: only the first paragraph of each turn says "David:", so continuations look
+  unattributed. Nothing says Claude's side is hidden. Image placeholders leak through (`[Image #3][Image #4]…`).
+- **Not a JSON viewer.** The source is a `.jsonl` transcript. A JSON tree would show tool calls and plumbing, not the
+  conversation. Better: a chat-style view, with David's turns shown and Claude's turns folded (one click to expand), and
+  the session's kind and purpose in the header.
+
+Proposal (not approved): label RAW "Your words only. Claude's replies hidden [show]", mark every David paragraph, strip
+`[Image #n]` placeholders, and badge the session as "Claude Code session · spec · 28 Oct · overlay-pilot-spec".
