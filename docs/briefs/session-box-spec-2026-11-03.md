@@ -28,3 +28,10 @@ timestamp: 2026-11-03T12:00+07:00
 - Chat stream feel (last N turns), field-test link (page/area David was on when he sent).
 
 ## Ideas log (append as David talks)
+- **12:00 — point-and-ask (BACKLOG, needs David's approval).** David: "we already have Command+Shift… to point at an area of
+  the screen… for adding notes… could we have another modifier, maybe Command+Option+Shift, that does exactly the same thing,
+  but this pops up as a little modal?" Existing gesture: `client/src/components/noteGesture.ts` (⌘⇧ hold → targets with
+  `data-note-target` highlight → click opens the note box; any other key spoils the hold — ⌥ would need to be allowed).
+  Orch rec: **one gesture, two outcomes** — keep ⌘⇧-click; the note box gains "→ ask <session>" next to Save, so an ask is a
+  note that is also sent, carrying the pointed-at target (entity, field, region, label) as context. Alternative: ⌘⌥⇧-click
+  opens the session modal directly. The pointed-at target is the piece that answers "knowing what part of the interface you're on".
