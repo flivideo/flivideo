@@ -59,23 +59,26 @@ a{color:var(--brand-blue)}
 <p class="lede">Story Pilot pulls its sources from six kinds of <b>Document Islands</b>: Claude sessions, Captain's Log captures, spec files, agent notes and media, on three machines. Nothing names an island's nature, so the screen mislabels them, copies the wrong things, and can't reach some at all. And no record says how a script was built, so you can't rerun it or see where a rule came from.</p>
 <div class="verdict"><b>The plan in one line:</b> W0 tests → W1 islands → W2 the Reader plus W3 instructions → W4 rerun with versions and undo. React Flow: <b>not yet</b>. Rerun: <b>build "update" first</b>. Nothing here is built. Code runs on the M2 once you say go.</div>
 
-<h2><span class="n">00</span>Live status: updated 20:01, 3 Nov (Roamy time)</h2>
-<p>Updated at each half-hourly check-in (:13 and :43) when something changes. <b>Needs you right now: nothing.</b></p>
+<h2><span class="n">00</span>Live status: updated 20:38, 3 Nov (Roamy time)</h2>
+<p>Updated at each half-hourly check-in (:13 and :43) when something changes. <b>Needs you right now:</b> nothing urgent. When you get a moment: did your Show selection survive a new tab?</p>
 <figure>
 <div class="fignum">Figure 0 · Status board</div>
 <div class="scroll"><table>
 <tr><th>Step / job</th><th>Machine</th><th>State</th><th>Where it's at</th><th>Needs you?</th></tr>
-<tr><td><b>1 · W0 safety-net tests</b></td><td>M2</td><td><span class="chip warn">running</span></td><td>reading Story Pilot code, 17 min in (unblocked at 20:00)</td><td>no</td></tr>
-<tr><td>2 · W1 Document Islands</td><td>M2</td><td><span class="chip">waiting</span></td><td>starts when step 1 is green</td><td>no (I pick badge names)</td></tr>
-<tr><td>3 · Hook study</td><td>any</td><td><span class="chip">queued</span></td><td>analysis of ~10 recent AppyDave videos</td><td>no</td></tr>
+<tr><td><b>1 · W0 safety-net tests</b></td><td>M2 → M4</td><td><span class="chip ok">done</span></td><td>merged a4f4cb7 · Story Pilot tests 132 → 221, all pass (verified) · 2 known bugs pinned for W1</td><td>no</td></tr>
+<tr><td><b>2 · W1 Document Islands</b></td><td>M2</td><td><span class="chip warn">starting</span></td><td>brief sent: island registry + badges, session dock extract, Captain's Log live card</td><td>no</td></tr>
+<tr><td><b>3 · Hook study</b></td><td>M2</td><td><span class="chip warn">starting</span></td><td>~10 recent AppyDave videos → hook patterns + options for build stories</td><td>no (you read it later)</td></tr>
 <tr><td>4 · W3 story instructions</td><td>M2</td><td><span class="chip">waiting</span></td><td>after 2 and 3</td><td><span class="chip warn">yes</span> wording + launch-stamp ruling</td></tr>
 <tr><td>5 · Redo d13 as an "update"</td><td>M4</td><td><span class="chip">waiting</span></td><td>after 4</td><td><span class="chip warn">yes</span> listen to it</td></tr>
 <tr><td>6 · W2 Reader UI · 7 · W4 rerun</td><td>M2</td><td><span class="chip">waiting</span></td><td>after 5</td><td>try it at the end</td></tr>
-<tr><td>Show-filter fix (remember + ⌘-click hint)</td><td>M2 → M4</td><td><span class="chip warn">finishing</span></td><td>branch pushed, 2 commits. flivideo-orch verifies and merges</td><td>try it after the merge</td></tr>
-<tr><td>Textream vs Teletubby (voice-following)</td><td>M2</td><td><span class="chip warn">running</span></td><td>research, 43 min in</td><td>no</td></tr>
+<tr><td>Show filter: remember your choice</td><td>M4</td><td><span class="chip ok">live</span></td><td>7df0913 · survives new tabs (tested)</td><td>quick check</td></tr>
+<tr><td>Show chips redesign (filled/outline, ⊕/⊖, no hint text)</td><td>M2</td><td><span class="chip warn">running</span></td><td>your go at ~20:20 · screenshots before it reaches you</td><td>look when done</td></tr>
+<tr><td>LAST WORK regression (orch's own)</td><td>M4</td><td><span class="chip ok">fixed</span></td><td>2509f5e · full screen tests 8/8</td><td>no</td></tr>
+<tr><td>Teletubby voice-follow, slice 1 (replay, no mic)</td><td>M2</td><td><span class="chip warn">running</span></td><td>your yes · reports match rate on 3+ real takes</td><td>no</td></tr>
+<tr><td>Textream vs Teletubby research</td><td>M2</td><td><span class="chip ok">done</span></td><td>docs/ecosystem-research/textream-vs-teletubby-harvest.md</td><td>no</td></tr>
 <tr><td>Trial run: auto-editor, Textream, HyperFrames</td><td>M4</td><td><span class="chip ok">done</span></td><td>pass · security fail · partial pass</td><td>no</td></tr>
 <tr><td>HyperFrames Studio left open</td><td>M4</td><td><span class="chip warn">running</span></td><td>view on Roamy: http://127.0.0.1:7210 · stops 21:00</td><td>optional look</td></tr>
-<tr><td>M2 slowdown (iTerm status hook)</td><td>M2</td><td><span class="chip ok">fixed</span></td><td>capped at 3 s at 20:00, workers moving</td><td>no</td></tr>
+<tr><td>M2 slowdown (iTerm status hook)</td><td>M2</td><td><span class="chip ok">fixed</span></td><td>capped at 3 s at 20:00</td><td>no</td></tr>
 </table></div>
 <figcaption>Flow: tests → islands → (Reader UI ∥ instructions) → rerun. Code runs on the M2 via flivideo-orch; flivideo-roamy checks each result before it reaches you.</figcaption>
 </figure>
