@@ -202,3 +202,21 @@ islands** → **W2 Reader UI** and **W3 instructions** (UI "Global/Brand" are st
 shipped Global hidden; *settings* levels are creator › brand › series › video, and only creator and video are filled)
 → **W4 rerun** ("update" first, versions + build record, undo for free). React Flow: not yet, a provenance list
 instead. Single-island re-synthesis is out of scope (Prep's job). First decision asked: go on W0 on the M2.
+
+## Islands across all story videos (coverage pass, 2026-11-03)
+
+Measured on the M4 across every `fli.resources.json`. **Story islands** (inputs) are distinct from **launch outputs**
+(title, thumbnail, description, chapters…), which are not islands.
+
+| Kind | Count | Where they cluster | New risk vs d13 |
+|---|---|---|---|
+| dossier (file) | 55 | d19 38 (appyrigs runs/rigs, brains), d18 6, d17 3, d20 3 | files in **other repos** (appyrigs, brains, apps); readable on the M4 today |
+| claude.ai artifact | 40 | d09 18, d19 17, d06 2 | **behind claude.ai login**: the app can't read it, an agent can (artifacts MCP) |
+| session | 29 | d19 11, d18 8 | 2 unreadable (d14, d19: made on Roamy) |
+| link (web) | 24 | d07 21 | older pre-Story-Pilot kind; 4 broken `file:` links in d07 |
+| capture | 22 | d18 5, d19 5 | same as d13 |
+| note | 13 | d14 4 | none |
+
+Story Pilot is set up (`script/storypilot`) only on d13, d14, d18, d19. d15 (B-roll Pilot), d16 (Motion Pilot), d17 and
+d20 have islands but no story yet. d19 is the stress test (73 islands, every kind). The W1 registry should be built
+against all of these, not d13 alone.
