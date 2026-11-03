@@ -35,3 +35,11 @@ timestamp: 2026-11-03T12:00+07:00
   Orch rec: **one gesture, two outcomes** — keep ⌘⇧-click; the note box gains "→ ask <session>" next to Save, so an ask is a
   note that is also sent, carrying the pointed-at target (entity, field, region, label) as context. Alternative: ⌘⌥⇧-click
   opens the session modal directly. The pointed-at target is the piece that answers "knowing what part of the interface you're on".
+
+## Using it from Roamy (2026-11-03 ~18:10, flivideo-roamy finding)
+- Roamy reaches FliStudio through an ssh tunnel (tmux `m4-flistudio-tunnel`, `-L 7150/7151` → M4 localhost). Requests
+  arrive from 127.0.0.1 with no `tailscale-*` headers, so the loopback guard passes; measured from Roamy:
+  `/api/sessions/live` and `/tail` return **401 "Needs the door token"** (not the 403 loopback refusal). The page fetches
+  the token same-origin, so the box should work from Roamy's browser with **no guard change**.
+- Trust check: the tunnel needs ssh to the M4, which already gives full control of the machine, so this widens nothing.
+- Not yet proven: a real send from Roamy's browser (David to try). Guard stays as is; no tailnet loosening.
