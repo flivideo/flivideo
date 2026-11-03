@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AITLDR production strip — what FliStudio shows today, and what Jan asked for</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Roboto+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light;
+  --ad-brown:#342d2d; --ad-gold:#ccba9d; --ad-yellow:#ffde59; --ad-amber:#c8841a; --ad-muted:#7a6e5e;
+  --ad-cream:#faf5ec; --ad-surface:#f0ebe4; --ad-linen:#e8e0d4; --ad-border:#d4cdc4; --ad-chrome:#1a1515;
+  --ad-dark:#25201e; --ad-blue:#2e91fc; --ad-white:#ffffff;
+  --amber-ink:#885911; --muted-ink:#6d6354; --critical-ink:#9f4841; --ok:#3d7a4a; --red:#b5523f;
+  --ps-idea:#e6d6b2; --ps-script:#dcbf86; --ps-record:#d4a457; --ps-edit:#c8841a; --ps-export:#b0721c;
+  --ps-final:#93622a; --ps-launch:#7a5a34; --ps-publish:#4f7a4a;
+  --font-display:'Bebas Neue',Impact,sans-serif; --font-heading:'Oswald','Arial Narrow',sans-serif;
+  --font-body:'Roboto',Helvetica,sans-serif; --font-mono:'Roboto Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ad-cream);color:var(--ad-brown);font:400 16px/1.6 var(--font-body)}
+a{color:var(--ad-blue)}
+.wrap{max-width:1240px;margin:0 auto;padding:28px 28px 80px}
+.label{font:500 12px var(--font-heading);letter-spacing:.14em;text-transform:uppercase;color:var(--muted-ink)}
+h1{font:600 38px/1.05 var(--font-heading);text-transform:uppercase;letter-spacing:.03em;margin:6px 0 10px}
+h2{font:600 24px/1.1 var(--font-heading);text-transform:uppercase;letter-spacing:.04em;margin:0 0 6px}
+.lede{max-width:70ch;margin:0 0 6px;font-size:17px}
+.badge{display:inline-block;font:600 12px var(--font-heading);letter-spacing:.12em;text-transform:uppercase;border-radius:2px;padding:4px 9px 3px;background:var(--ad-yellow);color:var(--ad-brown)}
+.badge.q{background:var(--ad-surface);border:1px solid var(--ad-border);color:var(--muted-ink)}
+.badge.real{background:#e4efe3;color:#2f5c39;border:1px solid #bcd6bd}
+.badge.mock{background:#fff1d6;color:var(--amber-ink);border:1px solid #ecd39a}
+.verdict{margin:18px 0 0;padding:14px 18px;background:#fff;border:1px solid var(--ad-border);border-left:4px solid var(--ad-amber);border-radius:6px;max-width:900px}
+.verdict b{font-family:var(--font-heading);letter-spacing:.04em;text-transform:uppercase}
+
+/* scene tabs */
+.tabs{display:flex;flex-wrap:wrap;gap:0;margin:26px 0 22px;border:1px solid var(--ad-border);border-radius:6px;background:#fff;overflow:hidden}
+.tab{flex:1 1 180px;text-align:left;padding:11px 16px;border:0;border-right:1px solid var(--ad-border);background:#fff;cursor:pointer;font:inherit;color:inherit}
+.tab:last-child{border-right:0}
+.tab .n{font:500 22px var(--font-heading);color:var(--ad-amber);margin-right:8px}
+.tab .t{font:600 14px var(--font-heading);letter-spacing:.06em;text-transform:uppercase}
+.tab .s{display:block;font-size:12.5px;color:var(--muted-ink);margin-top:1px}
+.tab[aria-selected=true]{background:#fff6d6;box-shadow:inset 0 -3px 0 var(--ad-amber)}
+.tab:hover{background:var(--ad-surface)}
+.tab[aria-selected=true]:hover{background:#fff6d6}
+.scene{display:none}
+.scene.on{display:block}
+.scene-head{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:baseline;margin-bottom:6px}
+.scene-head p{margin:0;color:var(--muted-ink);max-width:75ch}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:24px;align-items:start;margin-top:16px}
+@media (max-width:1050px){.grid{grid-template-columns:1fr}}
+.notes{display:grid;gap:12px}
+.note{background:#fff;border:1px solid var(--ad-border);border-radius:6px;padding:12px 14px;font-size:14.5px;line-height:1.5}
+.note .no{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--ad-amber);color:#fff;font:600 13px var(--font-heading);margin-right:6px;vertical-align:1px}
+.note b{font-family:var(--font-heading);letter-spacing:.03em}
+.note.bad{border-left:4px solid var(--red)}
+.note.good{border-left:4px solid var(--ok)}
+.pin{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--ad-amber);color:#fff;font:600 12px var(--font-heading);vertical-align:middle;margin-left:4px;flex:none}
+
+/* FliStudio window */
+.win{border:1px solid var(--ad-border);border-radius:8px;overflow:hidden;background:var(--ad-cream);box-shadow:0 1px 0 rgba(0,0,0,.03)}
+.topbar{height:52px;background:var(--ad-dark);display:flex;align-items:center;padding:0 20px;gap:18px;color:#fff}
+.burger{width:22px;height:14px;border-top:2px solid #cfc6bb;border-bottom:2px solid #cfc6bb;position:relative}
+.burger:after{content:"";position:absolute;left:0;right:0;top:4px;border-top:2px solid #cfc6bb}
+.wm{font:28px/1 var(--font-display);letter-spacing:.02em}
+.wm .a{color:var(--ad-gold)} .wm .d{color:var(--ad-yellow)}
+.vr{width:1px;height:22px;background:#4a423e}
+.crumbs{font:13px var(--font-mono);display:flex;gap:8px;color:#fff;white-space:nowrap;overflow:hidden}
+.crumbs .sep{color:#8a7f76}
+.crumbs .brand{display:inline-flex;align-items:center;gap:7px}
+.crumbs .dot{width:9px;height:9px;border-radius:50%;background:#0d1428;border:2px solid #00c8ff}
+.topbar .sp{flex:1}
+.topbar .pill{font:12px var(--font-mono);color:var(--ad-gold)}
+.body{display:flex;min-height:360px}
+.rail{width:236px;flex:none;background:var(--ad-surface);border-right:1px solid var(--ad-border);padding:18px 0}
+.rail .rt{padding:0 18px 10px}
+.rrow{display:flex;justify-content:space-between;align-items:baseline;padding:9px 18px;border-bottom:1px solid var(--ad-border);font:500 14px var(--font-heading);letter-spacing:.04em;text-transform:uppercase}
+.rrow:first-of-type{border-top:1px solid var(--ad-border)}
+.rrow .c{font:12px var(--font-mono);color:var(--muted-ink);text-transform:none;letter-spacing:0}
+.rrow.act{background:var(--ad-linen);border-left:3px solid var(--ad-brown);padding-left:15px}
+.rrow.act span:first-child{box-shadow:inset 0 -2px 0 var(--ad-yellow)}
+.rrow.new{outline:2px dashed var(--ad-amber);outline-offset:-3px}
+.rrow .tagnew{font:600 10px var(--font-heading);letter-spacing:.1em;background:var(--ad-amber);color:#fff;border-radius:2px;padding:1px 5px;margin-left:6px;vertical-align:2px}
+.main{flex:1;min-width:0;padding:24px 28px 30px}
+@media (max-width:800px){.rail{display:none}.main{padding:16px}}
+
+/* project status table (brand page) */
+.pshead,.psrow{display:grid;gap:12px;align-items:center;padding:8px 14px}
+.pstbl{background:#fff;border:1px solid var(--ad-border);border-radius:6px;overflow:hidden}
+.pshead{background:var(--ad-brown);color:var(--ad-cream);font:500 11px var(--font-heading);letter-spacing:.12em;text-transform:uppercase}
+.psrow{border-top:1px solid var(--ad-linen);font-size:14px;min-height:42px}
+.psrow.ex{background:repeating-linear-gradient(135deg,#fffaf0 0 8px,#fff 8px 16px);box-shadow:inset 3px 0 0 var(--ad-amber)}
+.psrow .code{font:13px var(--font-mono);color:var(--ad-muted)}
+.psrow .nm{font:13px var(--font-mono);display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.psrow .why{font-size:13px;color:var(--muted-ink);line-height:1.35}
+.psrow .why b{color:var(--ad-brown);font-weight:500}
+.today .pshead,.today .psrow{grid-template-columns:40px minmax(140px,1.1fr) 130px 108px minmax(150px,1fr)}
+.prop .pshead,.prop .psrow{grid-template-columns:40px minmax(130px,.9fr) 208px minmax(220px,1.3fr)}
+@media (max-width:900px){.today .pshead,.today .psrow,.prop .pshead,.prop .psrow{grid-template-columns:36px 1fr}.hide-s{display:none}}
+.boxes{display:inline-flex;gap:3px;vertical-align:middle}
+.b{width:13px;height:13px;border-radius:3px;border:1.5px solid var(--ad-border);background:#fff;flex:none;display:inline-block}
+.b.dn.s-idea{background:var(--ps-idea);border-color:transparent}.b.dn.s-script{background:var(--ps-script);border-color:transparent}
+.b.dn.s-export{background:var(--ps-export);border-color:transparent}
+.b.part{background:linear-gradient(to top,var(--ps-edit) 50%,#fff 50%);border-color:var(--ps-edit)}
+.b.skip{background:#fff;border:1.5px dashed #bdb4a8}
+.stage{display:inline-block;font:600 11.5px var(--font-heading);letter-spacing:.1em;text-transform:uppercase;border-radius:2px;padding:3px 8px 2px;background:var(--ad-surface);border:1px solid var(--ad-border);color:var(--muted-ink)}
+
+/* AITLDR 7-step boxes */
+.sb{display:inline-flex;gap:4px;vertical-align:middle}
+.k{width:24px;height:24px;border-radius:4px;border:1.5px solid var(--ad-border);background:#fff;display:inline-flex;align-items:center;justify-content:center;font:700 13px/1 var(--font-body);position:relative;flex:none}
+.k.done{background:var(--ad-amber);border-color:var(--ad-amber);color:#fff}
+.k.waiting{background:repeating-linear-gradient(135deg,#f4d9a2 0 4px,#fff 4px 8px);border-color:var(--ad-amber);color:var(--amber-ink)}
+.k.gap{background:#fff;border:1.5px dashed var(--red);color:var(--red)}
+.k.open{background:#fff;color:#c4bbae}
+.k.pub.done{background:var(--ps-publish);border-color:var(--ps-publish)}
+.cols{display:inline-grid;grid-template-columns:repeat(7,24px);gap:4px;font:500 9.5px var(--font-heading);letter-spacing:.04em;text-transform:uppercase;text-align:center;color:#d9d0c4}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;margin:12px 0 0;font-size:13px;color:var(--muted-ink);align-items:center}
+.legend .k{width:18px;height:18px;font-size:11px;margin-right:5px}
+.legend span{display:inline-flex;align-items:center}
+.cap{font-size:13px;color:var(--muted-ink);margin:10px 2px 0}
+
+/* project home bits */
+.phead{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px;margin-bottom:4px}
+.pcode{font:500 24px var(--font-heading);color:var(--ad-amber);letter-spacing:.04em}
+.pname{font:600 28px var(--font-heading);letter-spacing:.04em;text-transform:uppercase}
+.ppath{font:12.5px var(--font-mono);color:var(--ad-muted);margin:0 0 16px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ico{display:inline-flex;width:20px;height:18px;border:1px solid var(--ad-border);border-radius:3px;background:#fff;align-items:center;justify-content:center;font:10px var(--font-mono);color:var(--muted-ink)}
+.strip{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border:1px solid var(--ad-border);border-radius:6px;background:#fff;margin-bottom:18px}
+.strip>div{padding:9px 12px;border-right:1px solid var(--ad-border);min-width:0}
+.strip>div:last-child{border-right:0}
+.strip .l{font:500 11px var(--font-heading);letter-spacing:.14em;text-transform:uppercase;color:var(--muted-ink)}
+.strip .f{display:block;margin:4px 0 2px;font:600 16px/1.25 var(--font-heading)}
+.strip .a{font-size:12px;color:var(--muted-ink)}
+.strip .now{background:#fff6d6}
+.prod{background:#fff;border:1px solid var(--ad-border);border-radius:6px;margin-bottom:16px;position:relative}
+.prod.isnew{outline:2px dashed var(--ad-amber);outline-offset:3px}
+.prod .ph{display:flex;align-items:center;gap:10px;padding:11px 18px;background:var(--ad-surface);border-bottom:1px solid var(--ad-border);border-radius:6px 6px 0 0}
+.prod .ph .tt{font:500 14px var(--font-heading);letter-spacing:.04em;text-transform:uppercase}
+.prod .ph .r{margin-left:auto;font-size:13.5px;color:var(--muted-ink)}
+.newtag{position:absolute;top:-12px;right:14px;background:var(--ad-amber);color:#fff;font:600 11px var(--font-heading);letter-spacing:.12em;text-transform:uppercase;padding:2px 9px;border-radius:2px}
+.steps7{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));border-bottom:1px solid var(--ad-border)}
+.steps7>div{padding:11px 10px;border-right:1px solid var(--ad-border);min-width:0}
+.steps7>div:last-child{border-right:0}
+.steps7 .sl{font:500 10.5px var(--font-heading);letter-spacing:.08em;text-transform:uppercase;color:var(--muted-ink);display:flex;flex-direction:column;align-items:flex-start;gap:5px}
+.steps7 .sw{font:600 15px/1.2 var(--font-heading);margin:6px 0 3px}
+.steps7 .se{font-size:12px;color:var(--muted-ink);line-height:1.4;overflow-wrap:anywhere}
+.steps7 .w-done .sw{color:#2f6a3a}.steps7 .w-waiting .sw{color:var(--amber-ink)}.steps7 .w-gap .sw{color:var(--critical-ink)}.steps7 .w-open .sw{color:#9a9084}
+.steps7 .w-waiting{background:#fffaf0}.steps7 .w-gap{background:#fdf4f1}
+@media (max-width:900px){.steps7{grid-template-columns:repeat(2,1fr)}}
+.two{display:grid;grid-template-columns:1.1fr 1fr;gap:0}
+.two>div{padding:14px 18px}
+.two>div+div{border-left:1px solid var(--ad-border)}
+@media (max-width:900px){.two{grid-template-columns:1fr}.two>div+div{border-left:0;border-top:1px solid var(--ad-border)}}
+table.ho{border-collapse:collapse;width:100%;font-size:13.5px}
+table.ho td,table.ho th{padding:6px 8px;border-bottom:1px solid var(--ad-linen);text-align:left;vertical-align:top}
+table.ho th{font:500 11px var(--font-heading);letter-spacing:.12em;text-transform:uppercase;color:var(--muted-ink)}
+table.ho td:first-child{font-family:var(--font-mono);font-size:12.5px}
+.st{font:600 11px var(--font-heading);letter-spacing:.1em;text-transform:uppercase;padding:2px 7px 1px;border-radius:2px;white-space:nowrap}
+.st.back{background:#e4efe3;color:#2f5c39}.st.miss{background:#f6e9e6;color:var(--critical-ink)}.st.opt{background:var(--ad-surface);color:var(--muted-ink)}
+.plan{font-size:13.5px}
+.plan .bar{height:8px;border-radius:4px;background:var(--ad-linen);overflow:hidden;margin:6px 0 10px}
+.plan .bar i{display:block;height:100%;background:var(--ad-amber)}
+.plan .stale{margin-top:10px;padding:9px 11px;border:1px solid #ecd39a;background:#fff8e6;border-radius:4px;font-size:13px;line-height:1.45}
+.plan code,.mono{font-family:var(--font-mono);font-size:12.5px}
+.ttl{font:500 11.5px var(--font-heading);letter-spacing:.12em;text-transform:uppercase;color:var(--muted-ink);margin:0 0 8px}
+
+/* how it decides */
+.how{display:grid;grid-template-columns:minmax(0,1fr);gap:18px}
+.tree{background:var(--ad-dark);color:#efe7da;border-radius:6px;padding:14px 16px;font:12.5px/1.75 var(--font-mono);overflow:auto}
+.tree .tk{display:inline-block;min-width:22px;text-align:center;border-radius:3px;font-weight:700;margin-left:10px;padding:0 5px;font-size:11.5px}
+.tree .y{background:var(--ad-amber);color:#fff}.tree .n{background:transparent;border:1px dashed var(--red);color:#e69a8c}.tree .w{background:repeating-linear-gradient(135deg,#f4d9a2 0 4px,#fff 4px 8px);color:var(--amber-ink)}
+.tree .dim{color:#9c9184}
+.rules{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--ad-border);border-radius:6px;overflow:hidden;font-size:14px}
+.rules th{background:var(--ad-brown);color:var(--ad-cream);font:500 11px var(--font-heading);letter-spacing:.12em;text-transform:uppercase;text-align:left;padding:8px 12px}
+.rules td{padding:9px 12px;border-top:1px solid var(--ad-linen);vertical-align:top}
+.rules td:first-child{font:500 15px var(--font-heading);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+.rules td.warn{color:var(--critical-ink)}
+.panel{background:#fff;border:1px solid var(--ad-border);border-radius:6px;padding:16px 18px}
+.sim{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
+@media (max-width:900px){.sim{grid-template-columns:1fr}}
+.btn{font:600 13px var(--font-heading);letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--ad-brown);background:transparent;color:var(--ad-brown);border-radius:4px;padding:7px 13px 5px;cursor:pointer}
+.btn:hover{background:var(--ad-surface)}
+.btn.pri{background:var(--ad-yellow);border-color:var(--ad-yellow)}
+.btn[aria-pressed=true]{background:var(--ad-brown);color:#fff}
+.chk{display:flex;gap:8px;align-items:center;font-size:14px;padding:5px 0;cursor:pointer;border-bottom:1px solid var(--ad-linen)}
+.chk input{accent-color:var(--ad-amber);width:16px;height:16px}
+.chk .opt{font-size:12px;color:var(--muted-ink)}
+.res{display:flex;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid var(--ad-linen)}
+.res:last-child{border-bottom:0}
+.res .rl{width:150px;font:500 12px var(--font-heading);letter-spacing:.1em;text-transform:uppercase;color:var(--muted-ink);line-height:1.3}
+.res .rt2{font-size:13.5px;line-height:1.35}
+
+/* choices */
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media (max-width:1000px){.cards{grid-template-columns:1fr}}
+.card{background:#fff;border:1px solid var(--ad-border);border-radius:6px;padding:16px 18px;display:flex;flex-direction:column;gap:8px}
+.card.rec{border:2px solid var(--ad-amber);box-shadow:0 0 0 4px #fff6d6}
+.card h3{font:600 20px var(--font-heading);letter-spacing:.04em;text-transform:uppercase;margin:0}
+.card h3 .l{color:var(--ad-amber);margin-right:8px}
+.card .cost{font:500 14px var(--font-heading);letter-spacing:.06em;text-transform:uppercase;color:var(--muted-ink)}
+.card ul{margin:0;padding-left:18px;font-size:14.5px}
+.card li{margin:3px 0}
+.diagram{background:var(--ad-surface);border-radius:4px;padding:10px 12px;font:12px/1.55 var(--font-mono);color:var(--ad-brown);white-space:pre}
+.qs{counter-reset:q;list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.qs li{counter-increment:q;background:#fff;border:1px solid var(--ad-border);border-radius:6px;padding:10px 14px 10px 46px;position:relative;font-size:14.5px}
+.qs li:before{content:counter(q,decimal-leading-zero);position:absolute;left:14px;top:9px;font:500 18px var(--font-heading);color:var(--ad-amber)}
+.qs li .why{display:block;font-size:12.5px;color:var(--muted-ink);margin-top:2px}
+.foot{margin-top:34px;padding-top:14px;border-top:1px solid var(--ad-border);font-size:13px;color:var(--muted-ink);max-width:90ch}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<span class="label">AITLDR production strip · research for David · 2026-11-02</span>
+<h1>Jan asked for a strip. Here is what FliStudio shows now, and what he meant.</h1>
+<p class="lede">Five screens, in order: the AITLDR days as FliStudio's Project status shows them <em>today</em> (real output), the same days with Jan's strip, one project page, how the strip decides, and your three choices.</p>
+<div class="verdict"><b>Verdict:</b> Jan's idea is still right, and today's FliStudio gets AITLDR days visibly wrong. Rebuild it as an AITLDR "recipe" inside Project status (option B). Two of the screens use real data from your Mac; the mock parts are tagged <span class="badge mock">mock</span>.</div>
+
+<div class="tabs" role="tablist" id="tabs">
+  <button class="tab" role="tab" data-s="today"><span class="n">1</span><span class="t">Today</span><span class="s">Project status on AITLDR, real</span></button>
+  <button class="tab" role="tab" data-s="brand"><span class="n">2</span><span class="t">With Jan's strip</span><span class="s">Same days, brand page</span></button>
+  <button class="tab" role="tab" data-s="home"><span class="n">3</span><span class="t">One project</span><span class="s">b23 rights-check page</span></button>
+  <button class="tab" role="tab" data-s="how"><span class="n">4</span><span class="t">How it decides</span><span class="s">Files in, boxes out; try it</span></button>
+  <button class="tab" role="tab" data-s="choose"><span class="n">5</span><span class="t">Your choice</span><span class="s">A / B / C and Jan's questions</span></button>
+</div>
+
+<!-- ============ 1 TODAY ============ -->
+<section class="scene" id="s-today">
+  <div class="scene-head"><h2>1 · What FliStudio shows for AITLDR today</h2><span class="badge real">real data</span></div>
+  <p style="margin:0;color:var(--muted-ink);max-width:80ch">I asked FliStudio's own <span class="mono">project.status</span> (read-only) about each day, b13 to b23. This is its answer, drawn the way the Project status list draws it.</p>
+  <div class="grid">
+    <div>
+      <div class="win">
+        <div class="topbar"><div class="burger"></div><span class="wm"><span class="a">Fli</span><span class="d">Studio</span></span><span class="vr"></span>
+          <div class="crumbs"><span>Brands</span><span class="sep">/</span><span class="brand"><span class="dot"></span>AITLDR</span><span class="sep">/</span><span>Projects</span></div><span class="sp"></span><span class="pill">b13 to b23</span></div>
+        <div class="main">
+          <div class="label" style="margin-bottom:8px">Project status · AITLDR</div>
+          <div class="pstbl today" id="todayTbl"></div>
+          <div class="legend">
+            <span><i class="b dn s-script" style="margin-right:5px"></i>done</span><span><i class="b part" style="margin-right:5px"></i>part done</span><span><i class="b skip" style="margin-right:5px"></i>skipped</span><span><i class="b" style="margin-right:5px"></i>empty</span>
+            <span style="margin-left:6px">Boxes, left to right: Idea · Script · Recorded · Editing · Exported · Final cut · Launch prep · Published</span>
+          </div>
+        </div>
+      </div>
+      <p class="cap">Source: <span class="mono">bin/flistudio project.status --brand aitldr --project &lt;day&gt;</span>, run 2026-11-03 on this Mac. Drawn to match the live list; the real list also has tags, app chips and a pulse column.</p>
+    </div>
+    <div class="notes">
+      <div class="note bad"><span class="no">1</span><b>"Recorded" and "Editing" are skipped.</b> FliStudio's list assumes you record on camera and cut in FliCut. An AITLDR day is made by the team (voice, Alex) and by Remy (animation), so those two boxes are never lit.</div>
+      <div class="note bad"><span class="no">2</span><b>"Exported, next: Final cut"</b> on b18 to b23 — but each of those days has its finished video <em>and</em> its Short on disk. FliStudio's "Final cut" means a pick made in Launch, which AITLDR days do not use. So it nags about a step that is already done.</div>
+      <div class="note bad"><span class="no">3</span><b>It cannot see the steps Jan cares about.</b> Voice, Alex, Animation, Short, and "waiting on the team" appear nowhere. Jan would still have to open plan.md.</div>
+      <div class="note"><b>Why:</b> Project status has one step list for every brand. The code says a brand recipe "can swap it later", but no such switch exists yet.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2 BRAND ============ -->
+<section class="scene" id="s-brand">
+  <div class="scene-head"><h2>2 · The same days, with Jan's strip</h2><span class="badge real">real files</span><span class="badge mock">mock screen</span></div>
+  <p style="margin:0;color:var(--muted-ink);max-width:80ch">Each box is worked out from files on your Mac using the rules from Jan's message (I re-ran those rules on b13 to b23; no one ticked anything). The last row is an invented example, so you can see "waiting on team", because no real day is waiting right now.</p>
+  <div class="grid">
+    <div>
+      <div class="win">
+        <div class="topbar"><div class="burger"></div><span class="wm"><span class="a">Fli</span><span class="d">Studio</span></span><span class="vr"></span>
+          <div class="crumbs"><span>Brands</span><span class="sep">/</span><span class="brand"><span class="dot"></span>AITLDR</span><span class="sep">/</span><span>Projects</span></div><span class="sp"></span><span class="pill">45 days to 450</span></div>
+        <div class="main">
+          <div class="label" style="margin-bottom:8px">Project status · AITLDR <span class="badge" style="margin-left:6px">AITLDR recipe</span></div>
+          <div class="pstbl prop" id="propTbl"></div>
+          <div class="legend" id="legend"></div>
+        </div>
+      </div>
+      <p class="cap">Published is read from Launch's marked YouTube link; I did not evaluate it, so it shows empty for every row.</p>
+    </div>
+    <div class="notes">
+      <div class="note good"><span class="no">1</span><b>One glance answers Jan's question.</b> Which days have a Short, which are stuck. No plan.md, no 100 lines.</div>
+      <div class="note"><span class="no">2</span><b>Dashed red = "gap".</b> The day moved on without this step's file (or the file lives somewhere else). b13 to b15 never had Alex clips in <span class="mono">avatar/</span>; b17 and b23 have no body voice in <span class="mono">voice/</span> on this Mac.</div>
+      <div class="note"><span class="no">3</span><b>Hatched amber = "waiting on team".</b> The handoff went out, the team's files have not come back. This is the state Jan said he loses track of.</div>
+      <div class="note bad"><span class="no">4</span><b>Animation looks wrong for b17 to b23.</b> The 2026-10-15 rule looks in <span class="mono">motion/remotion/</span>. Since b17 the animation is built in <span class="mono">motion/hyperframes/</span>, so the old rule says "open" on finished days. The rule needs updating (question 3 for Jan).</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3 HOME ============ -->
+<section class="scene" id="s-home">
+  <div class="scene-head"><h2>3 · One project page: b23 rights-check</h2><span class="badge mock">mock screen</span><span class="badge real">real b23 facts</span></div>
+  <p style="margin:0;color:var(--muted-ink);max-width:80ch">The project page keeps FliStudio's pipeline strip. The dashed amber box is the new part: Jan's strip, the handoff, and what plan.md says.</p>
+  <div class="grid">
+    <div>
+      <div class="win">
+        <div class="topbar"><div class="burger"></div><span class="wm"><span class="a">Fli</span><span class="d">Studio</span></span><span class="vr"></span>
+          <div class="crumbs"><span>Brands</span><span class="sep">/</span><span class="brand"><span class="dot"></span>AITLDR</span><span class="sep">/</span><span>b23-rights-check</span></div><span class="sp"></span><span class="pill">✎</span></div>
+        <div class="body">
+          <div class="rail">
+            <div class="rt label">Project</div>
+            <div class="rrow act"><span>Overview</span></div>
+            <div class="rrow"><span>Recordings</span><span class="c">0</span></div>
+            <div class="rrow"><span>Videos</span><span class="c">2</span></div>
+            <div class="rrow"><span>Resources</span></div>
+            <div class="rrow"><span>Launch</span><span class="c">0/4</span></div>
+            <div class="rrow"><span>Publish</span></div>
+            <div class="rrow"><span>All files</span></div>
+            <div class="rt label" style="padding-top:22px">Apps</div>
+            <div class="rrow"><span>Teletubby</span></div>
+            <div class="rrow"><span>FliHub</span></div>
+            <div class="rrow"><span>FliCut</span></div>
+          </div>
+          <div class="main">
+            <div class="phead"><span class="pcode">b23</span><span class="pname">rights-check</span><span class="badge q">Series · Day 23</span></div>
+            <div class="ppath"><span class="ico">⌂</span><span class="ico">&gt;_</span> /Users/davidcruwys/dev/video-projects/v-aitldr/b23-rights-check</div>
+            <div class="strip">
+              <div><span class="l">Script</span><span class="f">1 chapter</span><span class="a">Teletubby</span></div>
+              <div><span class="l">Record</span><span class="f">—</span><span class="a">not used here</span></div>
+              <div><span class="l">Edit</span><span class="f">—</span><span class="a">not used here</span></div>
+              <div><span class="l">Overlay</span><span class="f">—</span><span class="a">Overlay Pilot</span></div>
+              <div class="now"><span class="l">Launch</span><span class="f">0 of 4</span><span class="a">titles, thumbnail…</span></div>
+              <div><span class="l">Publish</span><span class="f">Not yet</span><span class="a">no YouTube link</span></div>
+            </div>
+
+            <div class="prod isnew" id="prodBox">
+              <span class="newtag">new · AITLDR only</span>
+              <div class="ph"><span class="tt">Production</span><span class="pin">1</span><span class="badge q">from files</span><span class="r">Day 23 · handoff sent 2026-10-21</span></div>
+              <div class="steps7" id="steps7"></div>
+              <div class="two">
+                <div>
+                  <p class="ttl">Handoff · what the team owes <span class="pin">2</span></p>
+                  <table class="ho">
+                    <tr><th>File</th><th>Who</th><th>State</th></tr>
+                    <tr><td>day23-intro.mp4</td><td>Alex</td><td><span class="st back">back</span></td></tr>
+                    <tr><td>day23-guide.mp4</td><td>Alex</td><td><span class="st miss">not found</span></td></tr>
+                    <tr><td>day23-outro.mp4</td><td>Alex</td><td><span class="st back">back</span></td></tr>
+                    <tr><td>day23-body.wav</td><td>voice</td><td><span class="st miss">not found</span></td></tr>
+                    <tr><td>day23-voice.wav</td><td>voice</td><td><span class="st opt">optional</span></td></tr>
+                  </table>
+                  <p style="font-size:12.5px;color:var(--muted-ink);margin:8px 0 0">plan.md says the team sent "voice over.mp3" instead of <span class="mono">day23-body.wav</span>, and no guide clip. The strip can only see what is in <span class="mono">voice/</span>.</p>
+                </div>
+                <div class="plan">
+                  <p class="ttl">plan.md says <span class="pin">3</span></p>
+                  <b>12 of 19</b> boxes ticked
+                  <div class="bar"><i style="width:63%"></i></div>
+                  <div><b>Next open:</b> <span class="mono">/gap-check</span> against shot-list.md</div>
+                  <div style="margin-top:4px"><b>Loose end:</b> where did <span class="mono">sfx-click … sfx-whoosh.mp3</span> come from?</div>
+                  <div class="stale"><b>The checklist is behind the files.</b> plan.md still shows "HyperFrames → rights-check-final.mp4" and "The Short" as open. Both videos are on disk. This is exactly what Jan wanted to stop reading.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="notes">
+      <div class="note good"><span class="no">1</span><b>The strip sits on the page Jan opens.</b> Seven boxes, each with its reason underneath ("intro + outro in avatar/"), so he can trust it.</div>
+      <div class="note"><span class="no">2</span><b>The handoff table is the "waiting on team" detail.</b> It is read from <span class="mono">script/handoff/handoff.md</span> and checked against <span class="mono">voice/</span> and <span class="mono">avatar/</span>.</div>
+      <div class="note"><span class="no">3</span><b>plan.md stays as notes</b> (next step, loose ends), but is no longer the status.</div>
+      <div class="note bad"><b>Mock caveat:</b> the pipeline strip, rail and header are drawn from FliStudio's code and styles but are not a screenshot. The Production box is my proposal, not built.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4 HOW ============ -->
+<section class="scene" id="s-how">
+  <div class="scene-head"><h2>4 · How it decides — nobody ticks anything</h2><span class="badge real">real b23 folder</span></div>
+  <div class="how" style="margin-top:14px">
+    <div class="sim" style="grid-template-columns:minmax(0,1fr) minmax(0,1.2fr)">
+      <div class="tree" id="tree"></div>
+      <table class="rules">
+        <tr><th>Step</th><th>Done when…</th><th>Team?</th></tr>
+        <tr><td>Script</td><td><span class="mono">script/script.md</span> exists</td><td>—</td></tr>
+        <tr><td>Voice</td><td>an audio file in <span class="mono">voice/</span> (not <span class="mono">short-*</span>)</td><td>team</td></tr>
+        <tr><td>Alex</td><td>an <em>intro</em> and an <em>outro</em> video in <span class="mono">avatar/</span> (not <span class="mono">short-*</span>)</td><td>team</td></tr>
+        <tr><td>Animation</td><td>a video in <span class="mono">-renders/remotion/out</span> or <span class="mono">motion/remotion/out|build</span></td><td class="warn">rule is out of date: b17+ use <span class="mono">motion/hyperframes</span></td></tr>
+        <tr><td>Final</td><td><span class="mono">videos/&lt;skill&gt;/&lt;skill&gt;-final.mp4</span></td><td>—</td></tr>
+        <tr><td>Short</td><td><span class="mono">videos/&lt;skill&gt;-short/…-short-final.mp4</span></td><td>—</td></tr>
+        <tr><td>Published</td><td>Launch has a marked YouTube link</td><td>—</td></tr>
+      </table>
+    </div>
+
+    <div class="panel">
+      <h2 style="font-size:20px">Try it: when does "waiting on team" end?</h2>
+      <p style="margin:4px 0 12px;color:var(--muted-ink);max-width:80ch">This is Jan's question 2, and the one that decides the build. Pretend Day 24 was handed over (an invented example). Tick the files the team sends back, then flip the rule.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px">
+        <span class="label">Rule</span>
+        <button class="btn" id="ruleAny" aria-pressed="true">Ends when any file lands</button>
+        <button class="btn" id="ruleAll" aria-pressed="false">Ends when every owed file is back</button>
+      </div>
+      <div class="sim">
+        <div>
+          <div class="ttl">Files the team sends back</div>
+          <label class="chk"><input type="checkbox" data-f="intro"> <span class="mono">day24-intro.mp4</span> <span class="opt">Alex</span></label>
+          <label class="chk"><input type="checkbox" data-f="outro"> <span class="mono">day24-outro.mp4</span> <span class="opt">Alex</span></label>
+          <label class="chk"><input type="checkbox" data-f="body"> <span class="mono">day24-body.wav</span> <span class="opt">voice</span></label>
+          <label class="chk"><input type="checkbox" data-f="rename"> <span class="mono">voice over.mp3</span> <span class="opt">voice, sent under another name, as b23 was</span></label>
+          <div style="margin-top:10px;display:flex;gap:8px"><button class="btn" id="simAll">Team sends everything</button><button class="btn" id="simNone">Reset</button></div>
+        </div>
+        <div>
+          <div class="ttl">What the strip shows</div>
+          <div class="res"><div class="rl">Voice</div><span class="k" id="rVoice"></span><div class="rt2" id="tVoice"></div></div>
+          <div class="res"><div class="rl">Alex</div><span class="k" id="rAlex"></span><div class="rt2" id="tAlex"></div></div>
+          <div class="res"><div class="rl">Row on the brand page</div><span class="sb" id="rRow"></span><div class="rt2" id="tRow"></div></div>
+        </div>
+      </div>
+      <p class="cap" style="margin-top:12px" id="simNote"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5 CHOOSE ============ -->
+<section class="scene" id="s-choose">
+  <div class="scene-head"><h2>5 · Your choice</h2></div>
+  <p style="margin:0 0 14px;color:var(--muted-ink);max-width:80ch">Recommendation: <b style="color:var(--ad-brown)">B</b>. Costs are orch's estimate, which I agree with.</p>
+  <div class="cards">
+    <div class="card">
+      <h3><span class="l">A</span>Port the old branch</h3>
+      <div class="cost">≈ 2–3 hours</div>
+      <div class="diagram">old branch ──fix 10──▶ main
+                conflicts
+two status screens
+side by side</div>
+      <ul><li>Fastest way to see something</li><li>Tests and fixtures come along</li><li>Two status screens that disagree (screen 1 vs screen 2)</li><li>Re-conflicts whenever FliStudio changes</li></ul>
+    </div>
+    <div class="card rec">
+      <h3><span class="l">B</span>Rebuild as a recipe <span class="badge" style="margin-left:6px">recommended</span></h3>
+      <div class="cost">≈ ½ day</div>
+      <div class="diagram">Project status
+  ├ default steps
+  └ AITLDR recipe
+      7 steps + "waiting"
+one screen, every brand</div>
+      <ul><li>Screens 2 and 3 above, inside the status list that exists</li><li>Reuses only the parser and the b16–b19 test files from the branch</li><li>Touches the shared status code, so it needs care; other brands stay as they are</li><li>Fixes the wrong "Exported, next: Final cut" from screen 1</li></ul>
+    </div>
+    <div class="card">
+      <h3><span class="l">C</span>A small script instead</h3>
+      <div class="cost">≈ 1–2 hours</div>
+      <div class="diagram">aitldr repo
+  └ strip.py  ──▶ prints
+     the 7 boxes for
+     each day</div>
+      <ul><li>No risk to FliStudio</li><li>Works today</li><li>Not on the project page, which is what Jan asked for</li><li>Jan has to run it</li></ul>
+    </div>
+  </div>
+
+  <h2 style="margin-top:30px">Questions only Jan can answer</h2>
+  <ol class="qs" style="margin-top:10px">
+    <li>When does "waiting on team" end: when any file lands, or when every owed file is back?<span class="why">Decides the build. Screen 4 shows the difference. Returned files carry other names (b23's came as "voice over.mp3").</span></li>
+    <li>Is <span class="mono">script/handoff/</span> ever deleted after the files return?<span class="why">The waiting state relies on it existing.</span></li>
+    <li>What proves "Animation is done" now that you build in HyperFrames?<span class="why">The old rule looks in <span class="mono">motion/remotion/</span>, so it reads "open" on b17 to b23 (screen 2, note 4).</span></li>
+    <li>Where does the body voice live once the team sends it?<span class="why">b17 and b23 have none in <span class="mono">voice/</span> on this Mac. Gap, or just a different place?</span></li>
+    <li>Do b13–b15 really have no Alex clips, or do they live elsewhere?<span class="why">They show "gap" (dashed red) today.</span></li>
+    <li>Is the 7-step list right, and is a missing Short (b16) normal?</li>
+    <li>Do you want the strip on the project page, a row on the brand page, or both?</li>
+  </ol>
+</section>
+
+<p class="foot"><b>What this page is, and is not.</b> Screen 1 is FliStudio's own answer, read-only, run on this Mac. Screens 2 and 4 apply Jan's rules (from the archived code and message 009) to your real b13–b23 folders; I re-implemented the rules in a short script, so I did not run the archived code itself. Screens 2 (last row) and 3 are mock-ups; the Day 24 example is invented. I could not check Jan's Mac, so "gap" may mean a file lives only there. Nothing was restored, merged or sent to Jan.<br>Companion text: <span class="mono">/Users/davidcruwys/dev/ad/flivideo/docs/specs/aitldr-strip-reconstruction-2026-11-02.md</span></p>
+</div>
+
+<script>
+(function(){
+  // ---------- real data ----------
+  var TODAY=[ // code, name, boxes (D done, . empty, s skip, p part), stage word, next
+    ['b13','cta-lines','DDssDsp.','Launch prep','Launch prep'],
+    ['b14','timing-sheet','DDssDsp.','Launch prep','Launch prep'],
+    ['b15','upload-pack','DDssDsp.','Launch prep','Launch prep'],
+    ['b16','cut-list','DDssDsp.','Launch prep','Launch prep'],
+    ['b17','captions','DDssDsp.','Launch prep','Launch prep'],
+    ['b18','overlay-pack','DDssD...','Exported','Final cut'],
+    ['b19','sfx-cues','DDssD...','Exported','Final cut'],
+    ['b20','quick-short','DDssD...','Exported','Final cut'],
+    ['b21','angle-lab','DDssD...','Exported','Final cut'],
+    ['b22','avatar-blocks','DDssD...','Exported','Final cut'],
+    ['b23','rights-check','DDssD...','Exported','Final cut']
+  ];
+  var CLS=['s-idea','s-script','s-record','s-edit','s-export','s-final','s-launch','s-publish'];
+  function el(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e}
+  var tt=document.getElementById('todayTbl');
+  tt.appendChild(el('div','pshead','<span>#</span><span>Project</span><span>Status</span><span class="hide-s">Stage</span><span class="hide-s">Next</span>'));
+  TODAY.forEach(function(r){
+    var bx=r[2].split('').map(function(c,i){
+      var cls='b';
+      if(c==='D')cls+=' dn '+(i===4?'s-export':i===1?'s-script':'s-idea');
+      else if(c==='p')cls+=' part';
+      else if(c==='s')cls+=' skip';
+      return '<i class="'+cls+'"></i>';
+    }).join('');
+    var row=el('div','psrow',
+      '<span class="code">'+r[0]+'</span><span class="nm">'+r[1]+'</span><span class="boxes">'+bx+'</span><span class="hide-s"><span class="stage">'+r[3]+'</span></span><span class="why hide-s">next: <b>'+r[4]+'</b></span>');
+    tt.appendChild(row);
+  });
+
+  var STEPS=['Script','Voice','Alex','Animation','Final','Short','Published'];
+  var GL={done:'✓',waiting:'⏳',gap:'!',open:''};
+  // states per day from my re-run of Jan's rules on this Mac
+  var D=[
+    ['b13','cta-lines',['done','done','gap','done','done','done','open'],'Alex: no clips in <b>avatar/</b>, the day went on without'],
+    ['b14','timing-sheet',['done','done','gap','done','done','done','open'],'Alex: no clips in <b>avatar/</b>'],
+    ['b15','upload-pack',['done','done','gap','done','done','done','open'],'Alex: no clips in <b>avatar/</b>'],
+    ['b16','cut-list',['done','done','gap','done','done','open','open'],'<b>No Short.</b> Alex: no clips'],
+    ['b17','captions',['done','gap','gap','open','done','done','open'],'Voice and Alex missing from folders; animation rule is out of date'],
+    ['b18','overlay-pack',['done','done','done','open','done','done','open'],'Complete, apart from the Animation rule'],
+    ['b19','sfx-cues',['done','done','done','open','done','done','open'],'Complete, apart from the Animation rule'],
+    ['b20','quick-short',['done','done','done','open','done','done','open'],'Complete, apart from the Animation rule'],
+    ['b21','angle-lab',['done','done','done','open','done','done','open'],'Complete, apart from the Animation rule'],
+    ['b22','avatar-blocks',['done','done','done','open','done','done','open'],'Complete, apart from the Animation rule'],
+    ['b23','rights-check',['done','gap','done','open','done','done','open'],'No body voice in <b>voice/</b> (team sent "voice over.mp3")'],
+    ['b24','example day',['done','waiting','waiting','open','open','open','open'],'<b>Waiting on team:</b> 4 files owed, handoff sent 3 days ago','ex']
+  ];
+  function boxes(arr){
+    return '<span class="sb">'+arr.map(function(s,i){return '<span class="k '+s+(i===6?' pub':'')+'" title="'+STEPS[i]+': '+s+'">'+GL[s]+'</span>'}).join('')+'</span>';
+  }
+  var pt=document.getElementById('propTbl');
+  pt.appendChild(el('div','pshead','<span>#</span><span>Project</span><span><span class="cols" style="color:#d9d0c4">'+STEPS.map(function(s){return '<span title="'+s+'">'+s.slice(0,3)+'</span>'}).join('')+'</span></span><span class="hide-s">What it says</span>'));
+  D.forEach(function(r){
+    var row=el('div','psrow'+(r[4]?' ex':''),
+      '<span class="code">'+r[0]+'</span><span class="nm">'+r[1]+(r[4]?' <span class="badge mock">example</span>':'')+'</span>'+boxes(r[2])+'<span class="why hide-s">'+r[3]+'</span>');
+    pt.appendChild(row);
+  });
+  document.getElementById('legend').innerHTML=
+    '<span><i class="k done" style="display:inline-flex">✓</i>done</span><span><i class="k waiting" style="display:inline-flex">⏳</i>waiting on team</span><span><i class="k gap" style="display:inline-flex">!</i>gap: later step done, this one has no file</span><span><i class="k open" style="display:inline-flex"></i>open</span><span style="margin-left:4px">Columns: Scr · Voi · Ale · Ani · Fin · Sho · Pub</span>';
+
+  // project page strip (b23)
+  var B23=[
+    ['Script','done','script.md exists'],
+    ['Voice','gap','only short-vo.wav in voice/'],
+    ['Alex','done','intro + outro in avatar/'],
+    ['Animation','open','rule checks remotion/; b23 is in hyperframes/'],
+    ['Final','done','…-final.mp4 on disk'],
+    ['Short','done','…-short-final.mp4 on disk'],
+    ['Published','open','no YouTube link']
+  ];
+  var WORD={done:'Done',waiting:'Waiting on team',gap:'Gap',open:'Open'};
+  document.getElementById('steps7').innerHTML=B23.map(function(s){
+    return '<div class="w-'+s[1]+'"><div class="sl"><span class="k '+s[1]+(s[0]==='Published'?' pub':'')+'" style="width:20px;height:20px;font-size:11px">'+GL[s[1]]+'</span>'+s[0]+'</div><div class="sw">'+WORD[s[1]]+'</div><div class="se">'+s[2]+'</div></div>';
+  }).join('');
+
+  // folder tree (b23)
+  var T=[
+    ['b23-rights-check/',null,''],
+    ['├─ script/',null,''],
+    ['│   ├─ script.md','y','Script'],
+    ['│   └─ handoff/','w','handoff sent: the team owes files'],
+    ['├─ voice/',null,''],
+    ['│   └─ short-vo.wav','n','Voice: only a Short file, which is skipped'],
+    ['├─ avatar/',null,''],
+    ['│   ├─ day23-intro.mp4  day23-outro.mp4','y','Alex'],
+    ['│   └─ short-alex.mp4','dim','skipped (Short)'],
+    ['├─ motion/hyperframes/','n','Animation: rule looks in remotion/'],
+    ['└─ videos/',null,''],
+    ['    ├─ rights-check/rights-check-final.mp4','y','Final'],
+    ['    └─ rights-check-short/…-short-final.mp4','y','Short']
+  ];
+  document.getElementById('tree').innerHTML=T.map(function(l){
+    var tag=l[1]==='y'?'<span class="tk y">✓ '+l[2]+'</span>':l[1]==='n'?'<span class="tk n">! '+l[2]+'</span>':l[1]==='w'?'<span class="tk w">⏳ '+l[2]+'</span>':l[1]==='dim'?'<span class="dim"> ← '+l[2]+'</span>':'';
+    return '<div>'+l[0].replace(/ /g,'&nbsp;')+tag+'</div>';
+  }).join('');
+
+  // ---------- simulator ----------
+  var mode='any';
+  var inputs=[].slice.call(document.querySelectorAll('input[data-f]'));
+  function set(k,s,txt){var e=document.getElementById('r'+k);e.className='k '+s;e.textContent=GL[s];document.getElementById('t'+k).innerHTML=txt}
+  function sim(){
+    var f={};inputs.forEach(function(i){f[i.dataset.f]=i.checked});
+    // Alex: needs intro AND outro in both modes (rule); "any" vs "all" governs when waiting ends
+    var alexN=(f.intro?1:0)+(f.outro?1:0), alexAll=alexN===2;
+    var voiceAny=f.body||f.rename;      // any audio file in voice/ satisfies the voice rule
+    var voiceAll=f.body;                // the owed name is day24-body.wav only
+    var owed=[],got=[];
+    var voice,alex;
+    if(mode==='any'){
+      voice=voiceAny?'done':'waiting';
+      alex=alexN>0?(alexAll?'done':'waiting'):'waiting';
+      if(alexN===1)alex='waiting';
+    }else{
+      voice=voiceAll?'done':'waiting';
+      alex=alexAll?'done':'waiting';
+    }
+    set('Voice',voice,voice==='done'?'Done. '+(f.body?'<span class="mono">day24-body.wav</span> is in voice/.':'<span class="mono">voice over.mp3</span> is in voice/.'):'Waiting on team: nothing usable in voice/ yet.');
+    if(mode==='all'&&f.rename&&!f.body){document.getElementById('tVoice').innerHTML='<b>Still waiting</b> even though a voice file arrived: it is not named <span class="mono">day24-body.wav</span>, so the owed file looks missing.'}
+    set('Alex',alex,alex==='done'?'Done. Intro and outro are in avatar/.':(alexN===1?'Waiting: one of intro / outro is still missing.':'Waiting on team: no Alex clips yet.'));
+    var row=['done',voice,alex,'open','open','open','open'];
+    document.getElementById('rRow').innerHTML=row.map(function(s,i){return '<span class="k '+s+(i===6?' pub':'')+'">'+GL[s]+'</span>'}).join('');
+    var rt=(voice==='done'&&alex==='done')?'Team files all in. Day moves on to Animation.':'Row stays amber until the team files are in.';
+    document.getElementById('tRow').textContent=rt;
+    var note;
+    if(mode==='any')note='"Any file" is simple and never nags, but it turns green after the first clip, even if the outro is still missing. Voice is satisfied by "voice over.mp3" whatever it is called.';
+    else note='"Every owed file" is stricter and truer to the handoff table, but it depends on the team using the exact names. A voice file under another name (as on b23) keeps the row amber forever, or has to be matched by hand.';
+    document.getElementById('simNote').textContent=note;
+  }
+  inputs.forEach(function(i){i.addEventListener('change',sim)});
+  function setMode(m){mode=m;document.getElementById('ruleAny').setAttribute('aria-pressed',m==='any');document.getElementById('ruleAll').setAttribute('aria-pressed',m==='all');sim()}
+  document.getElementById('ruleAny').onclick=function(){setMode('any')};
+  document.getElementById('ruleAll').onclick=function(){setMode('all')};
+  document.getElementById('simAll').onclick=function(){inputs.forEach(function(i){i.checked=i.dataset.f!=='rename'});sim()};
+  document.getElementById('simNone').onclick=function(){inputs.forEach(function(i){i.checked=false});sim()};
+  sim();
+
+  // ---------- tabs ----------
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  function show(id){
+    if(!document.getElementById('s-'+id))id='today';
+    tabs.forEach(function(t){t.setAttribute('aria-selected',t.dataset.s===id)});
+    [].slice.call(document.querySelectorAll('.scene')).forEach(function(s){s.classList.toggle('on',s.id==='s-'+id)});
+    try{history.replaceState(null,'','#'+id)}catch(e){}
+  }
+  tabs.forEach(function(t){t.addEventListener('click',function(){show(t.dataset.s)})});
+  window.addEventListener('hashchange',function(){show(location.hash.slice(1))});
+  show(location.hash.slice(1)||'today');
+})();
+</script>
+</body>
+</html>
