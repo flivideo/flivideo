@@ -19,6 +19,15 @@ Owner: `flivideo-orch`. Each item: David's words, the screenshot, what he does a
 - Direction (to mock, not decided): controls as buttons/icons with key hints in tooltips (same rule as the Reader ‹ › fix),
   quieter provenance text, clearer hierarchy.
 
+## 2. "prepped ⓘ · undo AI arrangement" is not understood (11:35)
+- Screenshot: `/Users/davidcruwys/dev/ad/flivideo/docs/reports/proof-2026-11-03/david-batch-02-prepped-unclear.png`
+- David: "I just don't understand this section." Tooltip reads "Placed and ordered by agent:storypilot-prep · 2 Nov, 12:28 pm".
+- What it is: the prep agent arranged the sources (order, roles, set-aside) on 2 Nov 12:28; the link swaps that arrangement
+  with the one from before it (press again to swap back).
+- Problem: jargon ("prepped", agent id), sits in the ANGLE band though it is about the sources list, and the consequence of
+  the click isn't stated. Direction (to mock): move it to the sources/beats list header, say it in a sentence
+  ("AI put these in order on 2 Nov · put back how they were"), or hide it behind a history control.
+
 ## Related, already shipped today (context for the batch)
 - d65a16d proposals stay after a pick / clear / undo angle / intro readable / "undo AI arrangement".
 - 5b9324e Reader key hints moved onto the buttons.
