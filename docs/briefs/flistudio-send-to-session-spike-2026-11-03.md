@@ -21,6 +21,16 @@ and the text lands in that session's prompt as if he had typed it. Proof first; 
 - Record each send to the project's notes (`fli.notes.jsonl` pattern, `by: human:ui`, `kind: session-send`) so the field
   test leaves a trail — reuse the existing field-trial/notes capture if there is one; say which.
 
+## Slice 2 — read back (David, 2026-11-03 follow-up: "a window into the field I'm typing into, not a full-blown chatbot")
+- Under the box, show the **last 3 messages** (user + assistant text only) of the chosen session, read from its transcript
+  `.jsonl` under `~/.claude/projects/…` (map tmux/session name → transcript with
+  `/Users/davidcruwys/dev/ad/appydave-plugins/overwatch/skills/chaperone/scripts/resolve_session.py` — reuse, don't hand-roll).
+  Refresh after a send (poll every few seconds while the box is open is fine for a spike).
+- The target is changeable from the box (dropdown of live sessions). Remember the last target **per project**
+  (e.g. D13 → `d13-overlaypilot-video`); default for FliStudio code talk is `flivideo-orch`.
+- Out of the spike (note only, don't build): starting a NEW session from the box, and reaping old box-started sessions.
+  Write 3–5 lines on how each would work in the report.
+
 ## Proof
 Start a throwaway tmux session `spike-echo` running `cat`, send text from the box in a real browser, show it arrived
 (`tmux capture-pane`). Screenshot to `/Users/davidcruwys/dev/ad/flivideo/docs/reports/proof-2026-11-03/send-to-session-*.png`.
