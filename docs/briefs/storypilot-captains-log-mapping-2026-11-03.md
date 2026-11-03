@@ -186,3 +186,19 @@ voice-profile.md :17/:29/:106 (mined from his 2025 videos, "fully locked in"). S
   uses, and what other or better hook types fit these build stories. Not for consistency's sake: for understanding.
   Starting point: VERBAL-STYLE.md :71 already names his habitual hook shape (pain/curiosity question, "Maybe you… or
   maybe you…" triple).
+
+## The plan: Document Islands (artifact, 2026-11-03)
+
+**Artifact:** https://claude.ai/artifact/VPGrG5kVDL1zM32Bxe5x8x · source `docs/artifacts/storypilot-document-islands-plan-2026-11-03.html`
+
+Every Story Pilot source is a **Document Island** tapped from elsewhere (Claude session, Captain's Log capture, spec
+file, agent note, media, claude.ai artifact). The island's nature decides its fields, its canonical home, and whether
+we keep it, show it live, or never copy it. Measured: d13's three transcripts exist only on the M4; 2 of 27 session
+islands across projects (d14, d19) were made on Roamy and are unreadable by FliStudio; Captain's Log is reachable from
+the M4 but FliStudio has no client for it. The recommendation is "extract at the dock" for sessions (your turns + anchors +
+hash, written on the machine that holds the transcript). David's nine points become five workstreams: **W0 safety net**
+(132 unit + 10 e2e tests; zero found on the 60k cut, the skill-text leak, the dossier kind and Reader cards) → **W1
+islands** → **W2 Reader UI** and **W3 instructions** (UI "Global/Brand" are story *instructions*, both empty, the
+shipped Global hidden; *settings* levels are creator › brand › series › video, and only creator and video are filled)
+→ **W4 rerun** ("update" first, versions + build record, undo for free). React Flow: not yet, a provenance list
+instead. Single-island re-synthesis is out of scope (Prep's job). First decision asked: go on W0 on the M2.

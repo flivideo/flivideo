@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Story Pilot: Document Islands, one plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300..700&family=Roboto:ital,wght@0,300..700;1,300..700&family=Roboto+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light;
+  --brand-brown:#342d2d; --brand-gold:#ccba9d; --brand-yellow:#ffde59; --brand-amber:#c8841a;
+  --brand-muted:#7a6e5e; --brand-near-white:#faf5ec; --brand-surface:#f0ebe4; --brand-linen:#e8e0d4;
+  --brand-border:#d4cdc4; --brand-chrome:#1a1515; --brand-dark-surface:#25201e; --brand-blue:#2E91FC;
+  --brand-card:#ffffff; --ok:#4f7a4a; --bad:#b5452f; --warn:#c8841a;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--brand-near-white);color:var(--brand-brown);font:17px/1.6 Roboto,system-ui,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 24px 80px}
+header.top{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.logo-badge{display:inline-block;background:#342d2d;border-radius:6px;padding:4px 10px 2px;font-family:"Bebas Neue",Oswald,sans-serif;font-size:26px;letter-spacing:.04em;line-height:1.1}
+.logo-badge .a{color:#ccba9d}.logo-badge .d{color:#ffde59}
+.eyebrow{font-family:Oswald,sans-serif;text-transform:uppercase;letter-spacing:.12em;font-size:13px;color:var(--brand-muted)}
+h1{font-family:Oswald,sans-serif;font-weight:600;text-transform:uppercase;font-size:40px;line-height:1.1;margin:6px 0 10px;letter-spacing:.01em}
+h2{font-family:Oswald,sans-serif;font-weight:500;text-transform:uppercase;font-size:24px;margin:46px 0 8px;letter-spacing:.02em}
+h2 .n{color:var(--brand-amber);margin-right:10px}
+p{margin:8px 0}
+.lede{font-size:19px;max-width:860px}
+.verdict{background:var(--brand-card);border:1px solid var(--brand-border);border-left:4px solid var(--brand-amber);border-radius:8px;padding:16px 20px;margin:18px 0}
+.verdict b{background:linear-gradient(transparent 62%,var(--brand-yellow) 62%)}
+figure{margin:16px 0 8px;background:var(--brand-card);border:1px solid var(--brand-border);border-radius:10px;padding:16px 18px}
+.fignum{font-family:Oswald,sans-serif;text-transform:uppercase;letter-spacing:.08em;font-size:13px;color:var(--brand-amber);font-weight:600}
+figcaption{font-size:15px;color:var(--brand-muted);margin-top:8px}
+figure .cap-top{font-family:Oswald,sans-serif;font-size:17px;text-transform:uppercase;letter-spacing:.03em;margin:2px 0 10px}
+.scroll{overflow-x:auto}
+svg{display:block;width:100%;height:auto}
+svg text{font-family:Roboto,sans-serif;fill:#342d2d}
+svg .h{font-family:Oswald,sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.03em}
+table{border-collapse:collapse;width:100%;font-size:15px;min-width:760px}
+th{font-family:Oswald,sans-serif;font-weight:500;text-transform:uppercase;letter-spacing:.05em;font-size:13px;text-align:left;color:var(--brand-muted);border-bottom:2px solid var(--brand-border);padding:8px 10px}
+td{border-bottom:1px solid var(--brand-linen);padding:9px 10px;vertical-align:top}
+td code,p code,li code{font-family:"Roboto Mono",monospace;font-size:13px;background:var(--brand-surface);padding:1px 5px;border-radius:4px}
+.chip{display:inline-block;font-family:Oswald,sans-serif;font-size:12px;letter-spacing:.06em;text-transform:uppercase;border-radius:20px;padding:1px 9px;border:1px solid var(--brand-border);white-space:nowrap}
+.chip.ok{color:var(--ok);border-color:var(--ok)}.chip.bad{color:var(--bad);border-color:var(--bad)}.chip.warn{color:#8a5a10;border-color:var(--warn)}
+.chip.raw{background:var(--brand-brown);color:#faf5ec;border-color:var(--brand-brown)}.chip.synth{border-style:dashed;color:#8a5a10;border-color:var(--warn)}
+.rec{font-weight:600}
+.out{color:var(--brand-muted);font-size:14px}
+.ask{background:var(--brand-card);border:1px solid var(--brand-border);border-left:4px solid var(--brand-yellow);border-radius:8px;padding:16px 20px;margin-top:20px}
+.limits li{margin:4px 0}
+a{color:var(--brand-blue)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><span class="logo-badge"><span class="a">Appy</span><span class="d">Dave</span></span><span class="eyebrow">FliVideo · Story Pilot · plan · 2026-11-03</span></header>
+<section>
+
+<div class="eyebrow">Your “big mess”, as one plan</div>
+<h1>Every source is an island. Fix the safety net first, then the islands, then the rerun.</h1>
+<p class="lede">Story Pilot pulls its sources from six kinds of <b>Document Islands</b>: Claude sessions, Captain's Log captures, spec files, agent notes and media, on three machines. Nothing names an island's nature, so the screen mislabels them, copies the wrong things, and can't reach some at all. And no record says how a script was built, so you can't rerun it or see where a rule came from.</p>
+<div class="verdict"><b>The plan in one line:</b> W0 tests → W1 islands → W2 the Reader plus W3 instructions → W4 rerun with versions and undo. React Flow: <b>not yet</b>. Rerun: <b>build "update" first</b>. Nothing here is built. Code runs on the M2 once you say go.</div>
+
+<h2><span class="n">01</span>Document Islands: what is out there, and what FliStudio can reach</h2>
+<p>Measured on d13-overlay-pilot (and across all projects for sessions). Solid line: held inside the project. Dashed line: a pointer to somewhere else.</p>
+<figure>
+<div class="fignum">Figure 1 · The island map for d13</div>
+<div class="scroll"><svg viewBox="0 0 960 560" role="img" aria-label="Island map: the d13 project on the M4 with six island kinds around it">
+<defs>
+<pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#d4cdc4" stroke-width="3"/></pattern>
+</defs>
+<!-- machine bands -->
+<rect x="10" y="10" width="940" height="470" rx="12" fill="#faf5ec" stroke="#d4cdc4"/>
+<!-- centre project -->
+<rect x="360" y="190" width="240" height="120" rx="10" fill="#fff" stroke="#342d2d" stroke-width="2"/>
+<text x="480" y="222" text-anchor="middle" class="h" font-size="17">d13 project</text>
+<text x="480" y="244" text-anchor="middle" font-size="13">fli.resources.json · story.json</text>
+<text x="480" y="264" text-anchor="middle" font-size="13">FliStudio reads it on the M4</text>
+<text x="480" y="290" text-anchor="middle" font-size="12" fill="#7a6e5e">v-appydave git repo</text>
+
+<!-- island: sessions M4 (top-left) -->
+<rect x="40" y="40" width="250" height="110" rx="10" fill="#fff" stroke="#4f7a4a" stroke-width="2"/>
+<text x="56" y="66" class="h" font-size="15">Claude sessions · M4</text>
+<text x="56" y="88" font-size="13">3 on d13: 8.5 · 39.7 · 11 MB</text>
+<text x="56" y="108" font-size="13">.jsonl on the machine it ran</text>
+<text x="56" y="130" font-size="12" fill="#4f7a4a">✓ readable: same machine</text>
+<line x1="290" y1="120" x2="360" y2="215" stroke="#342d2d" stroke-width="2" stroke-dasharray="7 5"/>
+
+<!-- island: sessions Roamy (left) -->
+<rect x="40" y="200" width="250" height="110" rx="10" fill="url(#hatch)" stroke="#b5452f" stroke-width="2"/>
+<rect x="46" y="206" width="238" height="98" rx="8" fill="#fff" opacity=".88"/>
+<text x="56" y="228" class="h" font-size="15">Claude sessions · Roamy</text>
+<text x="56" y="250" font-size="13">d14: 41.8 MB · d19: 9.5 MB</text>
+<text x="56" y="270" font-size="13">2 of 27 session islands</text>
+<text x="56" y="292" font-size="12" fill="#b5452f">✗ FliStudio on the M4 can't read</text>
+<line x1="290" y1="255" x2="360" y2="250" stroke="#b5452f" stroke-width="2" stroke-dasharray="7 5"/>
+<text x="318" y="246" font-size="18" fill="#b5452f" text-anchor="middle">×</text>
+
+<!-- island: CL (top-right) -->
+<rect x="670" y="40" width="260" height="110" rx="10" fill="#fff" stroke="#c8841a" stroke-width="2"/>
+<text x="686" y="66" class="h" font-size="15">Captain's Log · M2 service</text>
+<text x="686" y="88" font-size="13">B663 · B667 · B670 (ChatGPT)</text>
+<text x="686" y="108" font-size="13">deep link /?open=B663</text>
+<text x="686" y="130" font-size="12" fill="#8a5a10">◐ reachable, but never called</text>
+<line x1="670" y1="120" x2="600" y2="215" stroke="#c8841a" stroke-width="2" stroke-dasharray="7 5"/>
+
+<!-- island: spec files (right) -->
+<rect x="670" y="200" width="260" height="110" rx="10" fill="#fff" stroke="#4f7a4a" stroke-width="2"/>
+<text x="686" y="226" class="h" font-size="15">Spec / doc files</text>
+<text x="686" y="248" font-size="13">overlay-pilot/spec.md</text>
+<text x="686" y="268" font-size="13">flivideo git repo, absolute path</text>
+<text x="686" y="290" font-size="12" fill="#4f7a4a">✓ on every machine after a pull</text>
+<line x1="670" y1="255" x2="600" y2="250" stroke="#342d2d" stroke-width="2" stroke-dasharray="7 5"/>
+
+<!-- island: notes (bottom-left) -->
+<rect x="200" y="360" width="250" height="100" rx="10" fill="#fff" stroke="#4f7a4a" stroke-width="2"/>
+<text x="216" y="386" class="h" font-size="15">Agent notes</text>
+<text x="216" y="408" font-size="13">text inside fli.resources.json</text>
+<text x="216" y="430" font-size="12" fill="#4f7a4a">✓ the copy IS the canonical</text>
+<line x1="325" y1="360" x2="420" y2="310" stroke="#342d2d" stroke-width="2.5"/>
+
+<!-- island: media (bottom-right) -->
+<rect x="510" y="360" width="250" height="100" rx="10" fill="#fff" stroke="#4f7a4a" stroke-width="2"/>
+<text x="526" y="386" class="h" font-size="15">B-roll / media</text>
+<text x="526" y="408" font-size="13">resources/project/*.jpg</text>
+<text x="526" y="430" font-size="12" fill="#4f7a4a">✓ lives in the project folder</text>
+<line x1="635" y1="360" x2="540" y2="310" stroke="#342d2d" stroke-width="2.5"/>
+
+<!-- legend -->
+<g transform="translate(20,500)">
+<line x1="0" y1="10" x2="40" y2="10" stroke="#342d2d" stroke-width="2.5"/><text x="48" y="15" font-size="13">held in the project</text>
+<line x1="200" y1="10" x2="240" y2="10" stroke="#342d2d" stroke-width="2" stroke-dasharray="7 5"/><text x="248" y="15" font-size="13">pointer (reference)</text>
+<rect x="400" y="2" width="16" height="16" rx="3" fill="#fff" stroke="#c8841a" stroke-width="2"/><text x="424" y="15" font-size="13">reachable, not wired</text>
+<rect x="580" y="2" width="16" height="16" rx="3" fill="url(#hatch)" stroke="#b5452f" stroke-width="2"/><text x="604" y="15" font-size="13">unreachable from FliStudio</text>
+</g>
+</svg></div>
+<figcaption>Measured 2026-11-03: d13's three transcripts exist only on the M4 (none on the M2 or Roamy). Across all projects, 25 of 27 session islands are readable on the M4. The M4 can reach Captain's Log (health 200), but FliStudio has no <code>CAPTAINS_LOG_URL</code> and no Captain's Log client.</figcaption>
+</figure>
+
+<h2><span class="n">02</span>The island's nature decides its fields, home, and copy or pointer</h2>
+<figure>
+<div class="fignum">Figure 2 · Island kinds, as stored today</div>
+<div class="scroll"><table>
+<tr><th>Island kind</th><th>Fields today</th><th>Canonical lives</th><th>Copy or pointer</th><th>Raw or AI-written</th><th>Cross-machine risk</th></tr>
+<tr><td><b>Claude session</b><br><span class="out">02, 04, 06</span></td><td><code>session_id</code> · name · machine · cwd · <code>transcript</code> path · resume · note · why</td><td>the <code>.jsonl</code> on the machine that ran it (MBs)</td><td>pointer</td><td><span class="chip raw">raw</span> your turns · <span class="chip synth">synth</span> note/why</td><td><span class="chip bad">high</span> Roamy/M2 sessions unreadable</td></tr>
+<tr><td><b>Captain's Log capture</b><br><span class="out">01, 05, 08</span></td><td><code>ref {captains-log, B663}</code> · <code>meta.channel</code> (copied) · why</td><td>Captain's Log service on the M2</td><td>pointer, never followed</td><td><span class="chip raw">raw</span> Plaud/Omi · <span class="chip synth">synth</span> ChatGPT dossier (B670)</td><td><span class="chip warn">medium</span> reachable, not wired</td></tr>
+<tr><td><b>Spec / document</b><br><span class="out">03 (badged "dossier")</span></td><td><code>path</code> (absolute) · why</td><td>file in a git repo (flivideo)</td><td>pointer</td><td><span class="chip synth">synth</span> AI-written</td><td><span class="chip ok">low</span> stale until a pull</td></tr>
+<tr><td><b>Agent note</b><br><span class="out">07</span></td><td><code>text</code> (542 chars) · layer · provenance · writtenBy · why</td><td>inside <code>fli.resources.json</code></td><td>copy (it is the canonical)</td><td><span class="chip synth">synth</span></td><td><span class="chip ok">none</span> travels with the project</td></tr>
+<tr><td><b>B-roll / media</b></td><td>relative <code>path</code> · text · meta.broll</td><td>project folder</td><td>held in the project</td><td><span class="chip raw">raw</span> asset</td><td><span class="chip ok">low</span></td></tr>
+<tr><td><b>claude.ai artifact</b> <span class="out">(not on d13)</span></td><td>URL</td><td>claude.ai</td><td>pointer</td><td><span class="chip synth">synth</span></td><td><span class="chip ok">low</span> web</td></tr>
+</table></div>
+<figcaption>The kind badge you see today describes storage, and you read it as nature. That's why 08 says CAPTURE but is a ChatGPT dossier, and 03 says DOSSIER but is a spec.</figcaption>
+</figure>
+
+<figure>
+<div class="fignum">Figure 3 · The rule: keep, show live, never copy, plus "extract at the dock" for sessions</div>
+<div class="scroll"><svg viewBox="0 0 960 324" role="img" aria-label="Three tiers and the dock extract">
+<rect x="10" y="20" width="290" height="190" rx="10" fill="#fff" stroke="#342d2d" stroke-width="2"/>
+<text x="26" y="48" class="h" font-size="16">1 · Keep (FliVideo owns)</text>
+<text x="26" y="76" font-size="14">the pointer (code, path, session id)</text>
+<text x="26" y="98" font-size="14">our title · why it matters</text>
+<text x="26" y="120" font-size="14">status · who attached it</text>
+<text x="26" y="142" font-size="14">small islands whole (notes)</text>
+<text x="26" y="186" font-size="12" fill="#7a6e5e">judgements only FliVideo can make</text>
+<rect x="335" y="20" width="290" height="190" rx="10" fill="#fff" stroke="#c8841a" stroke-width="2" stroke-dasharray="7 5"/>
+<text x="351" y="48" class="h" font-size="16">2 · Show live, don't keep</text>
+<text x="351" y="76" font-size="14">synopsis · date · length · source</text>
+<text x="351" y="98" font-size="14">signal · state · Open ↗ link</text>
+<text x="351" y="120" font-size="14">fetched when the card opens</text>
+<text x="351" y="186" font-size="12" fill="#7a6e5e">the home owns these and they change</text>
+<rect x="660" y="20" width="290" height="190" rx="10" fill="url(#hatch2)" stroke="#b5452f" stroke-width="2"/>
+<defs><pattern id="hatch2" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#f0ebe4" stroke-width="4"/></pattern></defs>
+<text x="676" y="48" class="h" font-size="16">3 · Never copy</text>
+<text x="676" y="76" font-size="14">whole transcripts (MBs)</text>
+<text x="676" y="98" font-size="14">Captain's Log tags, engagement</text>
+<text x="676" y="120" font-size="14">anything we'd have to keep in sync</text>
+<text x="676" y="186" font-size="12" fill="#7a6e5e">copying it is rebuilding the island</text>
+<rect x="10" y="232" width="940" height="82" rx="10" fill="#f0ebe4" stroke="#d4cdc4"/>
+<text x="26" y="256" class="h" font-size="15" fill="#c8841a">Sessions: extract at the dock</text>
+<text x="26" y="280" font-size="14">On attach, on the machine where the transcript lives, write into the project: your turns (skill text removed),</text>
+<text x="26" y="302" font-size="14">turn anchors, a hash, and machine + path. Small, git-synced, never cut at 60k.</text>
+</svg></div>
+<figcaption>Recommendation. This answers the cross-machine problem without copying megabytes: the canonical stays home; the project carries a small, honest extract. The anchors are what make "the canonical text around a synthesis" possible later.</figcaption>
+</figure>
+
+<h2><span class="n">03</span>Before any code: the safety net is decent, with holes exactly where we'd cut</h2>
+<figure>
+<div class="fignum">Figure 4 · Story Pilot tests per file (132 unit + 10 e2e for ~10k lines)</div>
+<div class="scroll"><svg viewBox="0 0 960 600" role="img" aria-label="Bar chart of tests per file with zero-test seams">
+<g font-size="13">
+<text x="10" y="22" class="h" font-size="13" fill="#7a6e5e">Unit tests</text>
+<!-- scale: 1 test = 16px, bar start x=300 -->
+<g transform="translate(0,34)">
+<text x="290" y="14" text-anchor="end">server/story (verbs, brief, sources)</text><rect x="300" y="2" width="448" height="16" fill="#342d2d"/><text x="756" y="15">28</text>
+<text x="290" y="38" text-anchor="end">client/screen</text><rect x="300" y="26" width="416" height="16" fill="#342d2d"/><text x="724" y="39">26</text>
+<text x="290" y="62" text-anchor="end">server/phase2 (source.read, turns)</text><rect x="300" y="50" width="288" height="16" fill="#342d2d"/><text x="596" y="63">18</text>
+<text x="290" y="86" text-anchor="end">server/audio (Listen)</text><rect x="300" y="74" width="208" height="16" fill="#342d2d"/><text x="516" y="87">13</text>
+<text x="290" y="110" text-anchor="end">server/prep</text><rect x="300" y="98" width="176" height="16" fill="#342d2d"/><text x="484" y="111">11</text>
+<text x="290" y="134" text-anchor="end">client/model</text><rect x="300" y="122" width="144" height="16" fill="#342d2d"/><text x="452" y="135">9</text>
+<text x="290" y="158" text-anchor="end">server/angles</text><rect x="300" y="146" width="128" height="16" fill="#342d2d"/><text x="436" y="159">8</text>
+<text x="290" y="182" text-anchor="end">server/settings</text><rect x="300" y="170" width="80" height="16" fill="#c8841a"/><text x="388" y="183">5 ← thin, W3 touches it</text>
+<text x="290" y="206" text-anchor="end">client/board · markdown</text><rect x="300" y="194" width="80" height="16" fill="#342d2d"/><text x="388" y="207">5 · 5</text>
+<text x="290" y="230" text-anchor="end">client/listen · conformance</text><rect x="300" y="218" width="32" height="16" fill="#342d2d"/><text x="340" y="231">2 · 2</text>
+</g>
+<text x="10" y="300" class="h" font-size="13" fill="#7a6e5e">End-to-end (browser) tests</text>
+<g transform="translate(0,312)">
+<text x="290" y="14" text-anchor="end">storypilot-listen</text><rect x="300" y="2" width="80" height="16" fill="#7a6e5e"/><text x="388" y="15">5</text>
+<text x="290" y="38" text-anchor="end">storypilot-prep</text><rect x="300" y="26" width="32" height="16" fill="#7a6e5e"/><text x="340" y="39">2</text>
+<text x="290" y="62" text-anchor="end">look · main · rail</text><rect x="300" y="50" width="16" height="16" fill="#7a6e5e"/><text x="324" y="63">1 each</text>
+</g>
+<text x="10" y="410" class="h" font-size="13" fill="#b5452f">Seams the plan touches with no test found</text>
+<g transform="translate(0,422)">
+<rect x="300" y="2" width="200" height="16" fill="url(#hatch)" stroke="#b5452f"/><text x="290" y="15" text-anchor="end">60k cut (READ_LIMIT)</text><text x="510" y="15">0 · W1/W2</text>
+<rect x="300" y="26" width="200" height="16" fill="url(#hatch)" stroke="#b5452f"/><text x="290" y="39" text-anchor="end">skill text in "your turns"</text><text x="510" y="39">0 · W1</text>
+<rect x="300" y="50" width="200" height="16" fill="url(#hatch)" stroke="#b5452f"/><text x="290" y="63" text-anchor="end">"dossier" kind</text><text x="510" y="63">0 · W1</text>
+<rect x="300" y="74" width="200" height="16" fill="url(#hatch)" stroke="#b5452f"/><text x="290" y="87" text-anchor="end">Reader source cards (e2e)</text><text x="510" y="87">0 · W2</text>
+<rect x="300" y="98" width="200" height="16" fill="url(#hatch)" stroke="#b5452f"/><text x="290" y="111" text-anchor="end">script versions / undo</text><text x="510" y="111">0, doesn't exist yet · W4</text>
+<rect x="300" y="122" width="200" height="16" fill="url(#hatch)" stroke="#b5452f"/><text x="290" y="135" text-anchor="end">transcript on another machine</text><text x="510" y="135">unverified · W1</text>
+</g>
+</g>
+</svg></div>
+<figcaption>Counted by grep on the M4 checkout (<code>b1bdf3e</code>). "No test found" means a keyword search found none. It doesn't prove a test can't exist under another name. Prep already has an undo (<code>story.prep.undo</code>); script edits don't.</figcaption>
+</figure>
+
+<h2><span class="n">04</span>Your nine points become five workstreams, in this order</h2>
+<figure>
+<div class="fignum">Figure 5 · Workstreams and what each one waits on</div>
+<div class="scroll"><svg viewBox="0 0 960 330" role="img" aria-label="Dependency flow of five workstreams">
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#342d2d"/></marker></defs>
+<rect x="10" y="110" width="180" height="110" rx="10" fill="#fff" stroke="#c8841a" stroke-width="2.5"/>
+<text x="26" y="138" class="h" font-size="16" fill="#c8841a">W0 · Safety net</text>
+<text x="26" y="162" font-size="13">tests for the seams</text>
+<text x="26" y="182" font-size="13">we're about to cut</text>
+<text x="26" y="206" font-size="12" fill="#7a6e5e">your point 6</text>
+<rect x="250" y="20" width="200" height="120" rx="10" fill="#fff" stroke="#342d2d" stroke-width="2"/>
+<text x="266" y="48" class="h" font-size="16">W1 · Islands</text>
+<text x="266" y="72" font-size="13">registry of kinds · badges</text>
+<text x="266" y="92" font-size="13">dock extract · CL live card</text>
+<text x="266" y="126" font-size="12" fill="#7a6e5e">points 2 · 3 · 5</text>
+<rect x="250" y="190" width="200" height="120" rx="10" fill="#fff" stroke="#342d2d" stroke-width="2"/>
+<text x="266" y="218" class="h" font-size="16">W3 · Instructions</text>
+<text x="266" y="242" font-size="13">global / brand explained</text>
+<text x="266" y="262" font-size="13">and filled (by you)</text>
+<text x="266" y="296" font-size="12" fill="#7a6e5e">point 9 (+ hook study)</text>
+<rect x="510" y="20" width="200" height="120" rx="10" fill="#fff" stroke="#342d2d" stroke-width="2"/>
+<text x="526" y="48" class="h" font-size="16">W2 · Reader UI</text>
+<text x="526" y="72" font-size="13">cards say what they are</text>
+<text x="526" y="92" font-size="13">chat view · show the rest</text>
+<text x="526" y="126" font-size="12" fill="#7a6e5e">point 1 (+3 visible)</text>
+<rect x="760" y="105" width="190" height="130" rx="10" fill="#fff" stroke="#342d2d" stroke-width="2"/>
+<text x="776" y="133" class="h" font-size="16">W4 · Rerun</text>
+<text x="776" y="157" font-size="13">update / recreate</text>
+<text x="776" y="177" font-size="13">versions · undo</text>
+<text x="776" y="197" font-size="13">build record</text>
+<text x="776" y="222" font-size="12" fill="#7a6e5e">points 4 · 7 · 8</text>
+<line x1="190" y1="150" x2="246" y2="90" stroke="#342d2d" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="190" y1="185" x2="246" y2="245" stroke="#342d2d" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="450" y1="80" x2="506" y2="80" stroke="#342d2d" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="450" y1="110" x2="756" y2="150" stroke="#342d2d" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="450" y1="250" x2="756" y2="200" stroke="#342d2d" stroke-width="2" marker-end="url(#arr)"/>
+</svg></div>
+<figcaption>W2 and W3 can run side by side. W4 needs W1 (stable island identity and hashes) and W3 (instructions that exist to record).</figcaption>
+</figure>
+
+<figure>
+<div class="fignum">Figure 6 · Each workstream: my recommendation, and what stays out</div>
+<div class="scroll"><table>
+<tr><th>Workstream</th><th>Recommendation</th><th>Out of scope</th></tr>
+<tr><td><b>W0 · Safety net</b></td><td class="rec">Tests that pin today's behaviour first: <code>story.source.read</code> per island kind, the 60k cut, skill-text in your turns, settings/instructions resolution, and one Reader e2e. Then change code.</td><td class="out">refactoring, raising coverage for its own sake</td></tr>
+<tr><td><b>W1 · Document Islands</b></td><td class="rec">One registry of island kinds (nature, fields, home, keep/live/never). Badges come from it. Sessions get a dock extract. Captain's Log gets a live card plus <code>/?open=</code>, and use is written back with <code>capture_mark_used</code>.</td><td class="out">copying transcripts; rebuilding Captain's Log; a sync service</td></tr>
+<tr><td><b>W2 · Reader UI</b></td><td class="rec">Badge says what it is (Plaud recording, Claude session, ChatGPT dossier, spec, agent note). Session view: your turns, Claude's folded. "Show the rest" instead of the silent cut. Specs show the one-line take and your 👤 quotes first. Move the Send-to-session box up.</td><td class="out">a JSON viewer; new panels</td></tr>
+<tr><td><b>W3 · Instructions &amp; settings</b></td><td class="rec">Explain on screen where each value comes from. Pre-fill a <b>Global</b> instruction (the build-story spine, un-hidden, plus YouTube craft: hook, but/therefore) and a <b>Brand</b> instruction (AppyDave voice), drafted for you to edit.</td><td class="out">deciding the launch stamp or the hooks for you; editing VERBAL-STYLE.md</td></tr>
+<tr><td><b>W4 · Rerun, versions, provenance</b></td><td class="rec">Every script write saves a version and a build record (islands + hashes, resolved instructions, skill, model, who). Undo steps back one version. Rerun "update" first, "recreate" second. A plain provenance list in the Reader.</td><td class="out">re-synthesising a single island from a custom instruction (that's Prep's job, which already refreshes stale ones); React Flow for now</td></tr>
+</table></div>
+</figure>
+
+<h2><span class="n">05</span>"Global" and "Brand" are two different systems wearing the same words</h2>
+<figure>
+<div class="fignum">Figure 7 · What each level is for, and what is filled today</div>
+<div class="scroll"><svg viewBox="0 0 960 360" role="img" aria-label="Story instructions versus settings levels">
+<text x="10" y="24" class="h" font-size="15">A · Story instructions <tspan fill="#7a6e5e" font-size="12">(the band you see, added 2 Nov)</tspan></text>
+<rect x="10" y="38" width="440" height="70" rx="8" fill="#fff" stroke="#d4cdc4"/>
+<text x="24" y="62" class="h" font-size="14">Global</text><text x="110" y="62" font-size="13">how every video is told, any brand</text>
+<text x="24" y="88" font-size="13" fill="#b5452f">empty: shipped "Storytelling: build story" is HIDDEN</text>
+<rect x="10" y="118" width="440" height="70" rx="8" fill="#fff" stroke="#d4cdc4"/>
+<text x="24" y="142" class="h" font-size="14">Brand</text><text x="110" y="142" font-size="13">this brand's voice and hooks</text>
+<text x="24" y="168" font-size="13" fill="#b5452f">empty: none written</text>
+<text x="10" y="216" font-size="12" fill="#7a6e5e">v-appydave/-storypilot/templates.json · d13's script (30 Oct) predates this band</text>
+
+<text x="500" y="24" class="h" font-size="15">B · Settings levels <tspan fill="#7a6e5e" font-size="12">(in the code, lowest first)</tspan></text>
+<g transform="translate(500,38)">
+<rect x="0" y="0" width="450" height="44" rx="6" fill="#f0ebe4" stroke="#d4cdc4"/><text x="14" y="27" class="h" font-size="13">Defaults</text><text x="120" y="27" font-size="13">2 profiles (build-story long/short)</text>
+<rect x="0" y="52" width="450" height="44" rx="6" fill="#fff" stroke="#4f7a4a" stroke-width="2"/><text x="14" y="79" class="h" font-size="13">Creator · you</text><text x="120" y="79" font-size="13" fill="#4f7a4a">FILLED by an agent, 30 Oct: voice docs, the stamp</text>
+<rect x="0" y="104" width="450" height="44" rx="6" fill="#fff" stroke="#d4cdc4"/><text x="14" y="131" class="h" font-size="13">Brand · AppyDave</text><text x="120" y="131" font-size="13" fill="#b5452f">empty (null)</text>
+<rect x="0" y="156" width="450" height="44" rx="6" fill="#fff" stroke="#d4cdc4"/><text x="14" y="183" class="h" font-size="13">Series</text><text x="120" y="183" font-size="13" fill="#b5452f">empty</text>
+<rect x="0" y="208" width="450" height="44" rx="6" fill="#fff" stroke="#4f7a4a" stroke-width="2"/><text x="14" y="235" class="h" font-size="13">Video · d13</text><text x="120" y="235" font-size="13" fill="#4f7a4a">profile · audience · launch-stamp · notes</text>
+</g>
+<text x="500" y="316" font-size="12" fill="#7a6e5e">higher level wins · each value remembers which level it came from</text>
+<text x="10" y="270" font-size="14">What the skill knew went into <tspan font-weight="700">Creator</tspan>,</text>
+<text x="10" y="292" font-size="14">not into Global or Brand. That's why those look empty</text>
+<text x="10" y="314" font-size="14">even though d13 was built with a voice.</text>
+</svg></div>
+<figcaption>In plain words: <b>instructions</b> say <i>how to tell</i> a story (structure, hooks). <b>Settings</b> are the facts and switches (who you are, audience, catchphrases on/off). Recommendation: pre-fill Global (build-story spine + YouTube craft) and Brand (AppyDave voice, without the stamp unless you keep it). Label the two systems differently on screen.</figcaption>
+</figure>
+
+<h2><span class="n">06</span>Rerun: build "update" first</h2>
+<figure>
+<div class="fignum">Figure 8 · Recreate vs update</div>
+<div class="scroll"><svg viewBox="0 0 960 300" role="img" aria-label="Recreate and update rerun flows">
+<defs><marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#342d2d"/></marker></defs>
+<text x="10" y="30" class="h" font-size="15">Recreate</text>
+<rect x="110" y="12" width="150" height="40" rx="6" fill="#fff" stroke="#342d2d"/><text x="185" y="37" text-anchor="middle" font-size="13">islands</text>
+<rect x="275" y="12" width="190" height="40" rx="6" fill="#fff" stroke="#342d2d"/><text x="370" y="37" text-anchor="middle" font-size="13">instructions + settings</text>
+<rect x="480" y="12" width="150" height="40" rx="6" fill="#fff" stroke="#d4cdc4" stroke-dasharray="5 4"/><text x="555" y="37" text-anchor="middle" font-size="13" fill="#7a6e5e">old script ignored</text>
+<line x1="630" y1="32" x2="706" y2="32" stroke="#342d2d" stroke-width="2" marker-end="url(#arr2)"/>
+<rect x="710" y="12" width="240" height="40" rx="6" fill="#fff" stroke="#342d2d" stroke-width="2"/><text x="830" y="37" text-anchor="middle" font-size="13">new script, version n+1</text>
+<text x="10" y="112" class="h" font-size="15" fill="#c8841a">Update ★</text>
+<rect x="110" y="94" width="150" height="40" rx="6" fill="#fff" stroke="#342d2d"/><text x="185" y="119" text-anchor="middle" font-size="13">same islands</text>
+<rect x="275" y="94" width="190" height="40" rx="6" fill="#fff" stroke="#342d2d"/><text x="370" y="119" text-anchor="middle" font-size="13">instructions + settings</text>
+<rect x="480" y="94" width="150" height="40" rx="6" fill="#fff" stroke="#c8841a" stroke-width="2"/><text x="555" y="119" text-anchor="middle" font-size="13">current script vN</text>
+<rect x="480" y="142" width="150" height="40" rx="6" fill="#fff" stroke="#c8841a" stroke-width="2"/><text x="555" y="167" text-anchor="middle" font-size="13">your change note</text>
+<line x1="630" y1="130" x2="706" y2="130" stroke="#342d2d" stroke-width="2" marker-end="url(#arr2)"/>
+<rect x="710" y="110" width="240" height="40" rx="6" fill="#fff" stroke="#342d2d" stroke-width="2"/><text x="830" y="135" text-anchor="middle" font-size="13">script version n+1</text>
+<rect x="10" y="206" width="940" height="84" rx="10" fill="#f0ebe4" stroke="#d4cdc4"/>
+<text x="26" y="232" class="h" font-size="14">Both write a build record + a version</text>
+<text x="26" y="256" font-size="13">→ undo = step back one version (your "type David, hear it, undo" loop) · → history = compare versions</text>
+<text x="26" y="278" font-size="13">→ runs as an agent job: the button sends the composed instruction to the orchestrator (the Send-to-session path you proved today)</text>
+</svg></div>
+<figcaption>Why update first: d13's script is mostly good and needs structural fixes (the intro, the stamp, the hooks). Recreate throws that work away. FliStudio never writes scripts itself; an agent does, so rerun is "compose and send", not a model call inside the app.</figcaption>
+</figure>
+
+<h2><span class="n">07</span>React Flow provenance view: not yet</h2>
+<figure>
+<div class="fignum">Figure 9 · What d13's build actually was: one step, which a list shows fine</div>
+<div class="scroll"><table>
+<tr><th>#</th><th>Step (session storypilot-dev, M4, 30 Oct 09:53–09:57)</th><th>Inputs</th></tr>
+<tr><td>1</td><td>Pulled your turns from 2 sessions</td><td>spec morning <code>8aa7c642</code> · build <code>62b99237</code></td></tr>
+<tr><td>2</td><td>Read the plan docs</td><td><code>overlay-pilot/spec.md</code> · <code>north-star.md</code></td></tr>
+<tr><td>3</td><td>Attached and ordered the islands</td><td><code>resources.add</code> · <code>story.sources.set</code></td></tr>
+<tr><td>4</td><td>Read your voice guide</td><td><code>VERBAL-STYLE.md</code> (the stamp is its line 55)</td></tr>
+<tr><td>5</td><td>Saved creator settings</td><td>voice docs · 4 catchphrases · swearing light · ~11 words/phrase</td></tr>
+<tr><td>6</td><td>Wrote the script in one pass</td><td>no workflow, no story instructions, no writers-room skill</td></tr>
+</table></div>
+<figcaption><b>No, for now.</b> A graph of one hand-run step is decoration, and today nothing records the inputs, so a graph would be drawn from detective work like this table. Build the <b>build record</b> (W4) and show it as this list in the Reader. Revisit React Flow when two or more real workflows exist to compare.</figcaption>
+</figure>
+
+<h2><span class="n">08</span>The sequence: first step first</h2>
+<figure>
+<div class="fignum">Figure 10 · Seven steps, each waits on your go</div>
+<div class="scroll"><svg viewBox="0 0 960 470" role="img" aria-label="Seven-step sequence">
+<g font-size="14">
+<line x1="40" y1="40" x2="40" y2="430" stroke="#d4cdc4" stroke-width="3"/>
+<g transform="translate(0,20)"><circle cx="40" cy="20" r="18" fill="#c8841a"/><text x="40" y="26" text-anchor="middle" fill="#fff" class="h" font-size="16">1</text><text x="72" y="16" class="h" font-size="15">W0 · Safety net on the M2</text><text x="72" y="36">tests for source.read per kind, the 60k cut, skill text, settings, one Reader e2e</text></g>
+<g transform="translate(0,82)"><circle cx="40" cy="20" r="18" fill="#c8841a"/><text x="40" y="26" text-anchor="middle" fill="#fff" class="h" font-size="16">2</text><text x="72" y="16" class="h" font-size="15">W1 · Islands</text><text x="72" y="36">kind registry · badges · dock extract for sessions · Captain's Log live card + deep link</text></g>
+<g transform="translate(0,144)"><circle cx="40" cy="20" r="18" fill="#c8841a"/><text x="40" y="26" text-anchor="middle" fill="#fff" class="h" font-size="16">3</text><text x="72" y="16" class="h" font-size="15">Hook study (analysis, if you say go)</text><text x="72" y="36">~10 recent AppyDave videos → your hook psychology + better options → feeds step 4</text></g>
+<g transform="translate(0,206)"><circle cx="40" cy="20" r="18" fill="#c8841a"/><text x="40" y="26" text-anchor="middle" fill="#fff" class="h" font-size="16">4</text><text x="72" y="16" class="h" font-size="15">W3 · Instructions</text><text x="72" y="36">we draft Global + Brand; you edit; you rule on the launch stamp</text></g>
+<g transform="translate(0,268)"><circle cx="40" cy="20" r="18" fill="#c8841a"/><text x="40" y="26" text-anchor="middle" fill="#fff" class="h" font-size="16">5</text><text x="72" y="16" class="h" font-size="15">Redo d13 by hand as an "update"</text><text x="72" y="36">same islands + new instructions + current script + your notes; inputs written down = first build record</text></g>
+<g transform="translate(0,330)"><circle cx="40" cy="20" r="18" fill="#c8841a"/><text x="40" y="26" text-anchor="middle" fill="#fff" class="h" font-size="16">6</text><text x="72" y="16" class="h" font-size="15">W2 · Reader UI</text><text x="72" y="36">cards say what they are · chat view · show the rest · box where you can see it</text></g>
+<g transform="translate(0,392)"><circle cx="40" cy="20" r="18" fill="#c8841a"/><text x="40" y="26" text-anchor="middle" fill="#fff" class="h" font-size="16">7</text><text x="72" y="16" class="h" font-size="15">W4 · Rerun buttons, versions, undo, provenance list</text><text x="72" y="36">step 5 done by hand becomes the spec for the button</text></g>
+</g>
+</svg></div>
+<figcaption>Code steps run on the M2, briefed through flivideo-orch. Step 5 gets you a better d13 script without waiting for any feature, and teaches us what the rerun button must record.</figcaption>
+</figure>
+
+<div class="ask"><b>The first decision:</b> say go on step 1, the test safety net on the M2 via flivideo-orch, before anything else changes. My recommendation is yes: the seams we'd change first are exactly the untested ones.</div>
+
+<h2><span class="n">09</span>What this page does not establish</h2>
+<ul class="limits">
+<li>Test counts are a keyword grep of one checkout (<code>b1bdf3e</code>). There is no line-coverage measurement.</li>
+<li>Whether Captain's Log returns a capture's duration through its API (the screen shows it; the metadata row didn't).</li>
+<li>Whether the video-projects repos are synced to the M2, where the code would run. W0 tests should use fixtures either way.</li>
+<li>Who hid the shipped Global instruction on 3 Nov (the file has no stamp).</li>
+<li>The hook study hasn't run; nothing here judges your hooks.</li>
+</ul>
+<p class="out">Source note: <code>flivideo/docs/briefs/storypilot-captains-log-mapping-2026-11-03.md</code> · page: <code>flivideo/docs/artifacts/storypilot-document-islands-plan-2026-11-03.html</code></p>
+</section>
+</div>
+</body>
+</html>
