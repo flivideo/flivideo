@@ -59,22 +59,22 @@ a{color:var(--brand-blue)}
 <p class="lede">Story Pilot pulls its sources from six kinds of <b>Document Islands</b>: Claude sessions, Captain's Log captures, spec files, agent notes and media, on three machines. Nothing names an island's nature, so the screen mislabels them, copies the wrong things, and can't reach some at all. And no record says how a script was built, so you can't rerun it or see where a rule came from.</p>
 <div class="verdict"><b>The plan in one line:</b> W0 tests → W1 islands → W2 the Reader plus W3 instructions → W4 rerun with versions and undo. React Flow: <b>not yet</b>. Rerun: <b>build "update" first</b>. Nothing here is built. Code runs on the M2 once you say go.</div>
 
-<h2><span class="n">00</span>Live status: updated 20:32, 3 Nov (Roamy time)</h2>
-<p>Updated at each half-hourly check-in (:13 and :43) when something changes. <b>Needs you right now:</b> step 4: one ruling (the launch stamp) and edits to two short story instructions.</p>
+<h2><span class="n">00</span>Live status: updated 20:54, 3 Nov (Roamy time)</h2>
+<p>Updated at each half-hourly check-in (:13 and :43) when something changes. <b>Needs you right now:</b> nothing. The story-instructions conversation comes after the build work (your call). The order is now W1 → W2 → W4, then instructions, then the d13 redo as the first "update" run.</p>
 <figure>
 <div class="fignum">Figure 0 · Status board</div>
 <div class="scroll"><table>
 <tr><th>Step / job</th><th>Machine</th><th>State</th><th>Where it's at</th><th>Needs you?</th></tr>
 <tr><td><b>1 · W0 safety-net tests</b></td><td>M2 → M4</td><td><span class="chip ok">done</span></td><td>merged a4f4cb7 · Story Pilot tests 132 → 221, all pass (verified) · 2 known bugs pinned for W1</td><td>no</td></tr>
-<tr><td><b>2 · W1 Document Islands</b></td><td>M2</td><td><span class="chip warn">running</span></td><td>storypilot-w1-dev (Opus): island registry + badges, session dock extract, Captain's Log live card</td><td>no</td></tr>
+<tr><td><b>2 · W1 Document Islands</b></td><td>M2</td><td><span class="chip warn">running</span></td><td>32 min in · storypilot-w1-dev (Opus): island registry + badges, session dock extract, Captain's Log live card</td><td>no</td></tr>
 <tr><td><b>3 · Hook study</b></td><td>M2</td><td><span class="chip ok">done</span></td><td>10 videos: "Are you / Do you wish…?" opener in 8/10, stamp at 30–70 s in 6/10, result-first strongest. 6 build-story hook types with d13 examples</td><td>no</td></tr>
-<tr><td><b>4 · W3 story instructions</b></td><td>you</td><td><span class="chip warn">needs you</span></td><td>drafts ready in chat</td><td><span class="chip warn">yes</span> wording + launch-stamp ruling</td></tr>
-<tr><td>5 · Redo d13 as an "update"</td><td>M4</td><td><span class="chip">waiting</span></td><td>after 4</td><td><span class="chip warn">yes</span> listen to it</td></tr>
-<tr><td>6 · W2 Reader UI · 7 · W4 rerun</td><td>M2</td><td><span class="chip">waiting</span></td><td>after 5</td><td>try it at the end</td></tr>
+<tr><td><b>4 · W3 story instructions</b></td><td>you + me</td><td><span class="chip">later</span></td><td>launch stamp ruled (A: tutorials only) · drafts not right yet, we talk after the build · API gap being closed (templates-dev, M2)</td><td><span class="chip warn">yes</span> wording + launch-stamp ruling</td></tr>
+<tr><td>5 · Redo d13 as an "update"</td><td>M4</td><td><span class="chip">on hold</span></td><td>becomes the first run through W4's rerun button</td><td><span class="chip warn">yes</span> listen to it</td></tr>
+<tr><td>6 · W2 Reader UI · 7 · W4 rerun</td><td>M2</td><td><span class="chip">next</span></td><td>W2 brief ready, sent when W1 merges · then W4</td><td>try it at the end</td></tr>
 <tr><td>Show filter: remember your choice</td><td>M4</td><td><span class="chip ok">live</span></td><td>7df0913 · you confirmed it survives a new tab</td><td>no</td></tr>
-<tr><td>Show chips redesign (filled/outline, ⊕/⊖, no hint text)</td><td>M4</td><td><span class="chip ok">live</span></td><td>1d5ef8b · full screen tests 8/8 · screenshot checked</td><td>try it</td></tr>
+<tr><td>Show chips redesign + dot padding</td><td>M4</td><td><span class="chip ok">live</span></td><td>1d5ef8b · dot inset 35225b5 · gap 1c5bb9b · screens checked</td><td>no</td></tr>
 <tr><td>LAST WORK regression (orch's own)</td><td>M4</td><td><span class="chip ok">fixed</span></td><td>2509f5e · full screen tests 8/8</td><td>no</td></tr>
-<tr><td>Teletubby voice-follow, slice 1 (replay, no mic)</td><td>M2</td><td><span class="chip warn">running</span></td><td>your yes · d01's 20 takes; compared with when you start speaking (no ↓-press log exists)</td><td>no</td></tr>
+<tr><td>Teletubby voice-follow, slice 1 (replay, no mic)</td><td>M4</td><td><span class="chip ok">merged</span></td><td>merged d748f8a (inert) · no verdict yet: no scripted takes to test on</td><td>no</td></tr>
 <tr><td>Textream vs Teletubby research</td><td>M2</td><td><span class="chip ok">done</span></td><td>docs/ecosystem-research/textream-vs-teletubby-harvest.md</td><td>no</td></tr>
 <tr><td>Trial run: auto-editor, Textream, HyperFrames</td><td>M4</td><td><span class="chip ok">done</span></td><td>pass · security fail · partial pass</td><td>no</td></tr>
 <tr><td>HyperFrames Studio left open</td><td>M4</td><td><span class="chip warn">running</span></td><td>view on Roamy: http://127.0.0.1:7210 · stops 21:00</td><td>optional look</td></tr>
