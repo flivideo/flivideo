@@ -6,6 +6,12 @@
 - Read this first when resuming as flivideo-orch
 - The current step tells you the next action; the standing rules are not optional
 
+## 2026-11-03 ~17:50 — Roamy channel is now `flivideo-roamy`
+- Roamy reaches flivideo-orch via `flivideo-roamy` (bridge session on Roamy); it replaces `roamy-home-orch` for FliVideo work.
+- Series B: Published 25 (v-aitldr c4ea5e1/17fd8ad/1ad9515); LAST WORK ignores bookkeeping + platform Published live
+  (flistudio b1bdf3e, fli-core v0.29.0). Held: b26 main id P4c-XkAeJxI until Jan commits his b26 edit; b28–b30 Skool URLs from David.
+- Held for David: trial plan steps 1,2,4 on M4 (doc 08).
+
 ## 2026-11-03 ~15:30 — B686 ecosystem research DONE and filed
 - Map https://claude.ai/artifact/FikDp9d9cn3MzQmo3zpqq6 · docs `docs/ecosystem-research/` (00–07, candidates) ·
   flivideo 6969341, brains 5c7b4502. 15/15 ACs.
