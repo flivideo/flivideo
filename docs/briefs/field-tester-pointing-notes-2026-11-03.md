@@ -37,8 +37,18 @@ Owner: `flivideo-orch`. Related: `/Users/davidcruwys/dev/ad/flivideo/docs/briefs
   Field Tester at once.
 - Selector: keep tagged targets as the default; add a "point at anything" mode (e.g. an extra modifier) that falls back to
   the nearest element with an accessible name, so nothing is unpointable.
-- Unknown: how Anthropic's artefact "click an element and talk about it" packages the element. Not verified — check the
-  official docs before copying any pattern.
+- Anthropic, checked 2026-11-03 (official docs first): **the docs do not say what a selection sends.**
+  - Claude Code desktop docs list only the shortcut "`Cmd Shift S` | Select an element in the Browser"
+    (https://code.claude.com/docs/en/desktop).
+  - Artifacts Help Center: "highlight the text you want changed, click 'Edit with Claude'… Claude makes the edit where you
+    marked it" — docs/markdown text only, payload undocumented (https://support.claude.com/en/articles/9487310).
+  - Claude Design: "Inline comments let you click directly on a specific part of the canvas" — payload undocumented
+    (https://support.claude.com/en/articles/14604416).
+  - Third-party only (azukiazusa.dev, Claude Code Preview): a short tag+class selector (e.g. `<h1>.text-2xl.font-bold`) plus a
+    screenshot of the element. Nothing anywhere mentions data attributes or ARIA.
+  - To know for sure needs a hands-on devtools/network capture of one selection (David offered view-source). Not done.
+  - Implication: nobody documented is doing layers 2+3; our bundle (domain tag + ARIA name + DOM path, plus element text and a
+    screenshot crop) is a superset of the only reported approach.
 
 ## Naming (David: "I saw you use some word called session")
 - **Session** = one Claude Code conversation, running in a terminal (tmux), with a name like `d13-overlaypilot-video`.
