@@ -59,18 +59,18 @@ a{color:var(--brand-blue)}
 <p class="lede">Story Pilot pulls its sources from six kinds of <b>Document Islands</b>: Claude sessions, Captain's Log captures, spec files, agent notes and media, on three machines. Nothing names an island's nature, so the screen mislabels them, copies the wrong things, and can't reach some at all. And no record says how a script was built, so you can't rerun it or see where a rule came from.</p>
 <div class="verdict"><b>The plan in one line:</b> W0 tests → W1 islands → W2 the Reader plus W3 instructions → W4 rerun with versions and undo. React Flow: <b>not yet</b>. Rerun: <b>build "update" first</b>. Nothing here is built. Code runs on the M2 once you say go.</div>
 
-<h2><span class="n">00</span>Live status: updated 20:54, 3 Nov (Roamy time)</h2>
-<p>Updated at each half-hourly check-in (:13 and :43) when something changes. <b>Needs you right now:</b> nothing. The story-instructions conversation comes after the build work (your call). The order is now W1 → W2 → W4, then instructions, then the d13 redo as the first "update" run.</p>
+<h2><span class="n">00</span>Live status: updated 21:54, 3 Nov (Roamy time)</h2>
+<p>Updated at each half-hourly check-in (:13 and :43) when something changes. <b>Needs you right now:</b> one ruling: may your session extracts (your own words only) be committed to the private v-appydave repo? Optional: delete the 4.6 GB HyperFrames leftovers on the M4. The story-instructions conversation comes after the build work (your call). The order is now W1 → W2 → W4, then instructions, then the d13 redo as the first "update" run.</p>
 <figure>
 <div class="fignum">Figure 0 · Status board</div>
 <div class="scroll"><table>
 <tr><th>Step / job</th><th>Machine</th><th>State</th><th>Where it's at</th><th>Needs you?</th></tr>
 <tr><td><b>1 · W0 safety-net tests</b></td><td>M2 → M4</td><td><span class="chip ok">done</span></td><td>merged a4f4cb7 · Story Pilot tests 132 → 221, all pass (verified) · 2 known bugs pinned for W1</td><td>no</td></tr>
-<tr><td><b>2 · W1 Document Islands</b></td><td>M2</td><td><span class="chip warn">running</span></td><td>32 min in · storypilot-w1-dev (Opus): island registry + badges, session dock extract, Captain's Log live card</td><td>no</td></tr>
+<tr><td><b>2 · W1 Document Islands</b></td><td>M4</td><td><span class="chip ok">done</span></td><td>188a202 · tests 222 → 280, all pass (verified) · d13 extracts written (6–28k chars from 8.6–39.8 MB) · Captain's Log live card on</td><td><span class="chip warn">yes</span> git ruling for extracts</td></tr>
 <tr><td><b>3 · Hook study</b></td><td>M2</td><td><span class="chip ok">done</span></td><td>10 videos: "Are you / Do you wish…?" opener in 8/10, stamp at 30–70 s in 6/10, result-first strongest. 6 build-story hook types with d13 examples</td><td>no</td></tr>
-<tr><td><b>4 · W3 story instructions</b></td><td>you + me</td><td><span class="chip">later</span></td><td>launch stamp ruled (A: tutorials only) · drafts not right yet, we talk after the build · API gap being closed (templates-dev, M2)</td><td><span class="chip warn">yes</span> wording + launch-stamp ruling</td></tr>
+<tr><td><b>4 · W3 story instructions</b></td><td>you + me</td><td><span class="chip">later</span></td><td>launch stamp ruled (A: tutorials only) · drafts not right yet, we talk after the build · API gap closed (84f4e5d): instructions are agent-drivable</td><td><span class="chip warn">yes</span> wording + launch-stamp ruling</td></tr>
 <tr><td>5 · Redo d13 as an "update"</td><td>M4</td><td><span class="chip">on hold</span></td><td>becomes the first run through W4's rerun button</td><td><span class="chip warn">yes</span> listen to it</td></tr>
-<tr><td>6 · W2 Reader UI · 7 · W4 rerun</td><td>M2</td><td><span class="chip">next</span></td><td>W2 brief ready, sent when W1 merges · then W4</td><td>try it at the end</td></tr>
+<tr><td><b>6 · W2 Reader UI</b> · 7 · W4 rerun</td><td>M2</td><td><span class="chip warn">running</span></td><td>W2 started 21:30 (badges, Open ↗, chat view, show more, Send-to-session moved) · then W4</td><td>try it at the end</td></tr>
 <tr><td>Show filter: remember your choice</td><td>M4</td><td><span class="chip ok">live</span></td><td>7df0913 · you confirmed it survives a new tab</td><td>no</td></tr>
 <tr><td>Show chips redesign + dot padding</td><td>M4</td><td><span class="chip ok">live</span></td><td>1d5ef8b · dot inset 35225b5 · gap 1c5bb9b · screens checked</td><td>no</td></tr>
 <tr><td>LAST WORK regression (orch's own)</td><td>M4</td><td><span class="chip ok">fixed</span></td><td>2509f5e · full screen tests 8/8</td><td>no</td></tr>
