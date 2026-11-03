@@ -129,3 +129,18 @@ skill already says to skip "Base directory…" turns: the skill-text leak, worke
   DOSSIER and is a spec file. The kind badge describes storage (where it lives), David reads it as content (what it is).
   Proposal: badge = what it is (Plaud recording · Claude session · ChatGPT dossier · spec · agent note); storage goes in
   "Where it came from".
+
+## David thinking out loud: synth + canonical, and how much of the canonical (2026-11-03, not a ruling)
+
+David asked for these to be collected, not answered yet.
+
+- He has been sending things from chat conversations into Story Pilot and doesn't know whether a skill did it. Open:
+  which path attaches sources today (skill? agent verb? by hand?), and is it the same every time?
+- A story wants **synthesised** information *and* the **canonical** data it came from.
+- A conversation can be megabytes. Nobody wants the whole canonical record; they want **the canonical text around where
+  the synthesis came from**, as context.
+- Unsure whether that canonical slice should be **sent** (copied in) or only **referenced** (a pointer to the spot).
+
+Angles to weigh later, not decided: a synthesis that carries anchors into its raw source (session + turn, capture +
+timestamp); reading a window around an anchor instead of the first 60k; copy vs pointer per source kind (a local
+transcript vs a Captain's Log capture on another machine); and how this meets the three-tier store/live/never rule above.
