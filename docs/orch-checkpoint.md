@@ -6,6 +6,18 @@
 - Read this first when resuming as flivideo-orch
 - The current step tells you the next action; the standing rules are not optional
 
+## 2026-11-03 ~23:20 — Story Pilot build queue DONE (all merged, flistudio main dbd1f6a)
+- Merged tonight: W0 a4f4cb7 · W1 188a202 · templates agent-drivable 84f4e5d · W2 c827c92 · W2.1 c968ec7 · tail filter
+  065129d · W4 dbd1f6a (+ chip fixes 35225b5 / 1c5bb9b). Plugin flivideo 2.8.0 (appydave-plugins e72c270). teletubby d748f8a.
+- flistudio `.env` now has CAPTAINS_LOG_URL=https://mac-mini-m2.tail1acb0f.ts.net. e2e uses a stub CL (never the real one).
+- Gate lessons: run the FULL e2e spec for the screen on the M4 (look specs skip on the M2: no d13/d18 data); M2 lacks Python
+  PIL (overlay-pilot render tests fail there only); orphan nodemon after every my-app restart (kill ppid=1 ones).
+- HELD for David (via flivideo-roamy): d13 dock extracts git commit (classifier: sensitive provenance; files on M4 disk,
+  untracked); delete M4 scratch ~/dev/upstream/scratch (X1 4.6 GB) and copy project v-appydave/z99-w4-shots; instruction
+  text → then d13 redo = first W4 "update"; Teletubby ↓-press log ask.
+- Noticed, not mine: v-appydave has uncommitted deletions under _staging/2026-09-22-pocket4-deprecated/ — leave alone.
+- No workers running.
+
 ## 2026-11-03 ~21:10 — ORDER (David via flivideo-roamy)
 - Story Pilot order: W1 islands (running) → W2 Reader UI → W4 rerun machinery (versions, build record, undo, update/recreate).
   The d13 redo (step 5) is ON HOLD until David + flivideo-roamy settle the Global/Brand instructions; it then becomes the
