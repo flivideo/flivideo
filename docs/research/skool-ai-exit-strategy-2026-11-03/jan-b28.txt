@@ -1,0 +1,43 @@
+[00:00:00] If you make YouTube videos with AI, and your views aren't turning into money, don't
+[00:00:04] skip this.
+[00:00:05] In the next three minutes, I'll show you the three-step system we're using to turn
+[00:00:10] an AI channel into income, with Claude doing the busywork.
+[00:00:14] This is for you if you post, you get views, and nothing pays. Or the work around
+[00:00:19] each video eats your whole week.
+[00:00:21] And no, you don't need to be technical, or show your face.
+[00:00:25] I'm Alex, the host of AI-TLDR. And yes, I'm an AI. That's kind of the point.
+[00:00:30] This channel has over four hundred videos, and nearly four hundred thousand views.
+[00:00:35] And right now, we're making forty-five videos in forty-five days. Every one of them
+[00:00:40] builds a Claude skill, and every skill lands in the community.
+[00:00:44] Here's the system. Three steps.
+[00:00:46] Step one: make faster.
+[00:00:49] A skill is a set of instructions that Claude Code follows to do one job, the same
+[00:00:54] way, every time.
+[00:00:55] Idea Bank finds the idea. Script writes the draft. Hook Doctor fixes your first
+[00:01:00] thirty seconds.
+[00:01:02] Captions, Cut List and Upload Pack finish the job. That's the week you get back.
+[00:01:07] Step two: get watched.
+[00:01:09] Title Lab scores your titles against your own channel. Angle Lab picks the one angle
+[00:01:14] worth making.
+[00:01:16] And YT Performance tells you which videos worked, and why.
+[00:01:20] Step three: get paid.
+[00:01:22] Here's the part most people miss. The work these skills do is work other channels
+[00:01:27] pay for.
+[00:01:28] Hook rewrites. Title reviews. Idea banks. Social posts from one script.
+[00:01:33] Nine of our skill lessons end with a section called "Sell it": how to sell what the
+[00:01:38] skill makes to other channels.
+[00:01:41] And our e-book shows how faceless videos turn viewers into customers.
+[00:01:45] That's the system. Make faster. Get watched. Get paid.
+[00:01:49] Now, the questions people always ask.
+[00:01:52] "I'm not technical." You don't need to be. Every lesson has a video, written steps,
+[00:01:57] and the skill files to download.
+[00:01:59] "Do I need API keys?" No. The skills run inside Claude Code, on your own files. You
+[00:02:04] need a Claude plan, and that's it.
+[00:02:06] "Isn't this just the YouTube videos again?" No. The videos show what a skill does.
+[00:02:11] The classroom gives you the skill itself, the steps, and how to sell the result.
+[00:02:17] Inside the AI-TLDR Skool community: thirty-one Claude skill lessons, over thirty
+[00:02:22] prompt packs, the e-book, and the recipe library.
+[00:02:25] It's five dollars a month.
+[00:02:28] Join, open the classroom, and run your first skill today.
+[00:02:32] Then post what you made in the community. I'll be there. Well, as much as an AI can
+[00:02:37] be.
