@@ -144,3 +144,45 @@ David asked for these to be collected, not answered yet.
 Angles to weigh later, not decided: a synthesis that carries anchors into its raw source (session + turn, capture +
 timestamp); reading a window around an anchor instead of the first 60k; copy vs pointer per source kind (a local
 transcript vs a Captain's Log capture on another machine); and how this meets the three-tier store/live/never rule above.
+
+## How the d13 script was actually built (traced 2026-11-03 from the M4 transcripts)
+
+**No workflow and no story instructions.** One agent hand-wrote it in about 4 minutes: session `f7fd0728`
+(`storypilot-dev`, M4, cwd flistudio), 2026-10-30 02:53–02:57Z. That is the same session that had just *built* Story
+Pilot. Global and brand story instructions didn't exist yet. The `writers-room` skills (scribe, story-editor,
+voice-coach, segment-writer, showrunner) were looked at (descriptions only), not used.
+
+Inputs, in order:
+1. David's own turns extracted from sessions `8aa7c642` (spec morning) and `62b99237` (build) → scratchpad.
+2. `flistudio/docs/planning/overlay-pilot/spec.md` + `north-star.md`.
+3. Attached the d13 sources (`resources.add`) and set their story order (`story.sources.set`).
+4. Read `brand-dave/skills/brand/references/appydave/VERBAL-STYLE.md` (searched for VIDEO-STRUCTURE too; none read).
+5. `story.settings.set` at **creator level** (brand appydave): voiceDocs = VERBAL-STYLE.md + `v-appydave/voice-profile.md`;
+   signatures = "I'm AppyDave, let's get into it", "so what we'll do is…", "and see what happens", "how cool is that?".
+   profile `build-story`. Audience set by the agent ("Agent choices, not David's: feel and do are UNSET").
+6. Wrote `d13-script.md` in its scratchpad in one pass, one wording tweak, then `story.brief` + Teletubby handover.
+
+Later: 2026-11-01 `91f6a3e` "rewritten opening"; 2026-11-02 `e78ef2d` three angle intros; 2026-11-03 `3f820d1` dropped
+the stamp from the three intros only (still in the script and in settings).
+
+**Where "I'm AppyDave, let's get into it" comes from:** David's own brand docs. VERBAL-STYLE.md :55 ("Bookend stamps:
+open → I'm AppyDave, let's get into it"), :71 (hook shape → then the launch stamp), :129 (checklist requires it), and
+voice-profile.md :17/:29/:106 (mined from his 2025 videos, "fully locked in"). Story Pilot then places it as the
+`launch-stamp` element `after-hook`. David now rejects it (2026-11-03). To change it: VERBAL-STYLE.md + voice-profile.md
+(the canon), Story Pilot creator settings `voice.signatures`, and d13 `settings.elements.launch-stamp`.
+
+## David thinking out loud, round 2 (2026-11-03, collected, not decided)
+
+- **Regenerate vs modify are different jobs.** Create = custom instruction + all raw material. Modify = the same
+  sources + the *existing script* + a change instruction. Regen must reconnect to the *same* data.
+- **History of scripts?** Know what changed between versions. Unsure if needed.
+- **Undo (concrete need):** David types "David" into a paragraph to hear it through regen, then must delete it and
+  regenerate again. He wants undo.
+- **Provenance diagram:** a small flowchart on the script: which workflow → which major prompts/instructions → which
+  sources. Some rules (like the stamp) live in prose (brand/voice docs), so the diagram must name those docs too.
+- **Structure + YouTube craft:** he wants a story structure *and* regular YouTube mechanics (hooks, cause-and-effect).
+  He doesn't know where to change either today.
+- **Hook study (proposed job, needs go):** analyse ~10 recent AppyDave videos for the psychological hook structure he
+  uses, and what other or better hook types fit these build stories. Not for consistency's sake: for understanding.
+  Starting point: VERBAL-STYLE.md :71 already names his habitual hook shape (pain/curiosity question, "Maybe you… or
+  maybe you…" triple).
