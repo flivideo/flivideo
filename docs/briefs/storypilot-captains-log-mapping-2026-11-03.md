@@ -82,3 +82,18 @@ spec-writing session, not a coding session. David couldn't tell from the panel.
 
 Proposal (not approved): label RAW "Your words only. Claude's replies hidden [show]", mark every David paragraph, strip
 `[Image #n]` placeholders, and badge the session as "Claude Code session · spec · 28 Oct · overlay-pilot-spec".
+
+## Dossier sources (David's questions, 2026-11-03, d13 source 03 "the decisions, in David's words")
+
+Badged **DOSSIER**, but it is **not** a ChatGPT download and **not** a synopsis. It is the Overlay Pilot spec file,
+`flivideo/flistudio/docs/planning/overlay-pilot/spec.md` (resource `r_8fed973320`, `kind: "dossier"`), written by the
+Claude spec session on 28 Oct (commits f24fa5f, b4c9164). The Reader renders its Markdown in full.
+
+- "Dossier" clashes with Captain's Log, where a dossier is a ChatGPT-conversation write-up (e.g. B686). David read it
+  that way. The kind should say what it is: **spec / document**, with the file name and who wrote it.
+- The bold block above the rule is the spec's **header card**, i.e. the document's state, not the story:
+  Status (stage: spec, handed to `flivideo-orch`) · Name (the ruled name R16 + where the code lives) · Session (the
+  Claude session that kept it) · Merged (an older brief folded in, with David's approving quote) · One-line take (the
+  idea in a sentence). "Naming" below the rule is the first body section (name candidates in David's words, collisions).
+- For a story, only the one-line take and the 👤 quotes matter. Proposal (not approved): for document sources, show the
+  one-line take plus David's 👤 quotes first, and fold the header card and full body behind "Open the document".
