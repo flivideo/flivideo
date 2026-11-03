@@ -109,3 +109,23 @@ Claude spec session on 28 Oct (commits f24fa5f, b4c9164). The Reader renders its
   check: `isMeta` / the "Base directory for this skill" prefix); those should be dropped like tool results.
 - **Send to session box** (the chat box, commit 136bb92) renders **below the whole Story Pilot screen**
   (`ProjectHome.tsx`, after `client.Screen`), so it sits at the very bottom of the page, folded. David didn't find it.
+
+## The 60k cut also reaches the AI (David: "will this be a problem for building a story?")
+
+Yes, in a bounded way. `story.source.read` returns the same clipped text, and `flivideo:storypilot-prep` (SKILL.md :88)
+uses it when it is unsure about a source. It mostly places sources from their title and why line, and for long sessions
+it is told to use `abridge` / `sesh:session-archaeology` (full transcript). Risk: endings are often the outcome (source
+04 "…and v2"), so an AI building from the clipped text tells the story without its ending, unwarned. Fix: keep 60k as
+the display limit, let agent callers page (`offset`) or ask for full text, and add "show the rest" for David. (The
+skill already says to skip "Base directory…" turns: the skill-text leak, worked around in instructions, not the app.)
+
+## Note sources and the label tangle (d13 sources 07, 08)
+
+- **NOTE** (07 "the chin bug, and the trackers already built", `r_d48036acd2`): text an agent wrote **straight into
+  the project**. No file or recording sits behind it, which is why "No raw words here". Two SYNTH layers: the note
+  body (by `flivideo-orch`, the facts of the day-two chin fix) and the one-line why (by `agent:storypilot-dev`).
+  "Written in `overlay-chin-dev`" names the session it came out of, but that session is not itself attached as a source.
+- **Label tangle**: 08 is badged CAPTURE but is a **ChatGPT dossier** (CL B670, channel `chatgpt`), while 03 is badged
+  DOSSIER and is a spec file. The kind badge describes storage (where it lives), David reads it as content (what it is).
+  Proposal: badge = what it is (Plaud recording · Claude session · ChatGPT dossier · spec · agent note); storage goes in
+  "Where it came from".
