@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FliVideo Ecosystem Map</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Roboto+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light;
+  --brand-brown: #342d2d; --brand-gold: #ccba9d; --brand-yellow: #ffde59; --brand-amber: #c8841a;
+  --brand-muted: #7a6e5e; --brand-near-white: #faf5ec; --brand-surface: #f0ebe4; --brand-linen: #e8e0d4;
+  --brand-border: #d4cdc4; --brand-chrome: #1a1515; --brand-dark-surface: #25201e; --brand-blue: #2E91FC;
+  --brand-card: #ffffff;
+  --ok: #3f7d4e; --maybe: #c8841a; --none: #a39a8c;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--brand-near-white); color: var(--brand-brown);
+  font: 16px/1.6 Roboto, system-ui, sans-serif; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 28px 24px 80px; }
+header.top { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+.logo-badge { display:inline-block; background:#342d2d; border-radius:6px; padding:4px 10px 2px;
+  font-family:"Bebas Neue",Oswald,sans-serif; font-size: 22px; letter-spacing:.04em; line-height:1.1; }
+.logo-badge .a { color:#ccba9d; } .logo-badge .d { color:#ffde59; }
+.eyebrow { font-family: Oswald, sans-serif; text-transform: uppercase; letter-spacing: .12em; font-size: 13px; color: var(--brand-muted); }
+h1 { font-family: Oswald, sans-serif; text-transform: uppercase; font-weight: 600; font-size: 40px; line-height: 1.1; margin: 10px 0 8px; }
+h2 { font-family: Oswald, sans-serif; text-transform: uppercase; font-weight: 500; font-size: 24px; margin: 52px 0 6px; display: flex; gap: 12px; align-items: baseline; }
+h2 .n { color: var(--brand-amber); font-weight: 600; }
+p.lede { font-size: 18px; max-width: 860px; margin: 0 0 6px; }
+p.note { color: var(--brand-muted); max-width: 860px; margin: 4px 0 14px; }
+.verdict { background: var(--brand-card); border: 1px solid var(--brand-border); border-left: 4px solid var(--brand-yellow);
+  border-radius: 8px; padding: 14px 18px; margin: 18px 0 8px; max-width: 920px; }
+.verdict b { font-family: Oswald, sans-serif; text-transform: uppercase; letter-spacing: .06em; font-weight: 600; }
+figure { margin: 14px 0 6px; background: var(--brand-card); border: 1px solid var(--brand-border); border-radius: 10px; padding: 16px 18px 12px; }
+figure .scroll { overflow-x: auto; }
+figure svg { display: block; width: 100%; height: auto; min-width: 760px; }
+figcaption { font-size: 14px; color: var(--brand-muted); margin-top: 8px; }
+.fignum { font-family: Oswald, sans-serif; text-transform: uppercase; letter-spacing: .08em; color: var(--brand-amber); font-weight: 600; margin-right: 6px; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; min-width: 820px; }
+th { font-family: Oswald, sans-serif; text-transform: uppercase; font-weight: 500; letter-spacing: .05em; font-size: 12px;
+  text-align: left; color: var(--brand-muted); border-bottom: 1px solid var(--brand-border); padding: 6px 8px; }
+td { border-bottom: 1px solid var(--brand-surface); padding: 6px 8px; vertical-align: top; }
+td.c { text-align: center; }
+.dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid var(--brand-border); }
+.dot.lean { background: var(--brand-brown); border-color: var(--brand-brown); }
+.dot.alt { background: transparent; border-color: var(--brand-muted); }
+.dot.no { border-style: dashed; border-color: #ddd5ca; }
+.pill { display: inline-block; font-family: Oswald, sans-serif; text-transform: uppercase; font-size: 11px; letter-spacing: .06em;
+  padding: 1px 8px; border-radius: 10px; border: 1px solid var(--brand-border); color: var(--brand-muted); white-space: nowrap; }
+.pill.open { border-color: var(--brand-amber); color: #8a5a10; }
+.grp td { background: var(--brand-surface); font-family: Oswald, sans-serif; text-transform: uppercase; letter-spacing: .06em; font-size: 12px; color: var(--brand-muted); }
+.legend { display: flex; flex-wrap: wrap; gap: 18px; font-size: 13px; color: var(--brand-muted); margin: 6px 0 10px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.docs { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 10px; margin-top: 10px; }
+.doc { background: var(--brand-card); border: 1px solid var(--brand-border); border-radius: 8px; padding: 10px 14px; }
+.doc .k { font-family: Oswald, sans-serif; color: var(--brand-amber); font-weight: 600; margin-right: 6px; }
+.doc a { color: var(--brand-blue); text-decoration: none; font-weight: 500; }
+.doc a:hover { text-decoration: underline; }
+.doc div { font-size: 13px; color: var(--brand-muted); }
+.limits { border: 1px dashed var(--brand-muted); border-radius: 8px; padding: 12px 18px; margin-top: 14px; max-width: 920px; }
+.limits li { margin: 4px 0; }
+code { font-family: "Roboto Mono", monospace; font-size: 13px; background: var(--brand-surface); padding: 0 4px; border-radius: 3px; }
+footer { margin-top: 40px; font-size: 13px; color: var(--brand-muted); }
+/* svg text */
+svg text { font-family: Roboto, sans-serif; fill: #342d2d; }
+svg .h { font-family: Oswald, sans-serif; text-transform: uppercase; letter-spacing: .05em; font-weight: 600; }
+svg .m { fill: #7a6e5e; }
+svg .mono { font-family: "Roboto Mono", monospace; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <span class="logo-badge"><span class="a">Appy</span><span class="d">Dave</span></span>
+  <span class="eyebrow">B686 · B687 research · 3 Nov 2026 · research only, nothing decided</span>
+</header>
+<section>
+<h1>FliVideo ecosystem map</h1>
+<p class="lede">FliVideo is the one umbrella that is built and whole. Outside it, nothing can replace one of our apps outright.
+The real options are to <b>add</b> two things (a composition editor on HyperFrames, a B-roll library) and to <b>absorb</b> a few ideas and tools.
+Every one of those options is an open row waiting on you.</p>
+<div class="verdict"><b>Verdict:</b> research done, nothing approved. 21 decisions are open; the critical path is
+<b>80-20 reading → Overlay Pilot's renderer → FliMotion</b>, and it should wait until you finish testing the pilots.</div>
+
+</section>
+<section>
+<h2><span class="n">01</span> Four umbrellas — only FliVideo is built</h2>
+<p class="note">Your model from the voice log, checked against what exists. Names and units of work are provisional.</p>
+<figure>
+<div class="scroll">
+<svg viewBox="0 0 1000 300" role="img" aria-label="Four umbrellas as nested boxes">
+  <!-- FliVideo -->
+  <rect x="10" y="10" width="300" height="250" rx="10" fill="#faf5ec" stroke="#342d2d" stroke-width="2"/>
+  <text x="26" y="40" class="h" font-size="20">FliVideo</text>
+  <text x="26" y="60" class="m" font-size="13">unit: a video project</text>
+  <rect x="26" y="74" width="268" height="30" rx="5" fill="#fff" stroke="#342d2d"/><text x="36" y="94" font-size="13">FliStudio — control plane + extensions</text>
+  <rect x="26" y="110" width="268" height="30" rx="5" fill="#fff" stroke="#342d2d"/><text x="36" y="130" font-size="13">FliHub · FliCut · FliCast · FliEdit · Teletubby</text>
+  <rect x="26" y="146" width="268" height="30" rx="5" fill="#fff" stroke="#342d2d"/><text x="36" y="166" font-size="13">3 pilots + Motion Pilot (idea)</text>
+  <rect x="26" y="182" width="268" height="30" rx="5" fill="#fff" stroke="#342d2d"/><text x="36" y="202" font-size="13">FliTools (service) · fli-core (rules)</text>
+  <rect x="26" y="222" width="80" height="24" rx="12" fill="#342d2d"/><text x="66" y="239" text-anchor="middle" font-size="12" class="h" style="fill:#faf5ec">built</text>
+  <!-- AppyFactory -->
+  <rect x="330" y="10" width="220" height="250" rx="10" fill="#faf5ec" stroke="#7a6e5e" stroke-width="1.5"/>
+  <text x="346" y="40" class="h" font-size="20">AppyFactory</text>
+  <text x="346" y="60" class="m" font-size="13">unit: a code repository</text>
+  <rect x="346" y="74" width="188" height="30" rx="5" fill="#fff" stroke="#7a6e5e"/><text x="356" y="94" font-size="13">apps.json · my-app registry</text>
+  <rect x="346" y="110" width="188" height="30" rx="5" fill="#fff" stroke="#7a6e5e"/><text x="356" y="130" font-size="12">AppyRig · AppyRadar · AngelEye</text>
+  <rect x="346" y="146" width="188" height="30" rx="5" fill="#fff" stroke="#7a6e5e" stroke-dasharray="5 4"/><text x="356" y="166" font-size="13" class="m">no control plane</text>
+  <rect x="346" y="222" width="110" height="24" rx="12" fill="none" stroke="#7a6e5e"/><text x="401" y="239" text-anchor="middle" font-size="12" class="h m">parts exist</text>
+  <!-- Community Builder -->
+  <rect x="570" y="10" width="200" height="250" rx="10" fill="#faf5ec" stroke="#a39a8c" stroke-dasharray="6 5"/>
+  <text x="586" y="40" class="h" font-size="18">Community Builder</text>
+  <text x="586" y="60" class="m" font-size="13">unit: learning assets?</text>
+  <rect x="586" y="74" width="168" height="30" rx="5" fill="#fff" stroke="#a39a8c" stroke-dasharray="5 4"/><text x="596" y="94" font-size="13" class="m">Skool group — no app</text>
+  <rect x="586" y="222" width="110" height="24" rx="12" fill="none" stroke="#a39a8c" stroke-dasharray="4 3"/><text x="641" y="239" text-anchor="middle" font-size="12" class="h m">named only</text>
+  <!-- Founder OS -->
+  <rect x="790" y="10" width="200" height="250" rx="10" fill="#faf5ec" stroke="#a39a8c" stroke-dasharray="6 5"/>
+  <text x="806" y="40" class="h" font-size="18">Founder OS</text>
+  <text x="806" y="60" class="m" font-size="13">unit: unknown</text>
+  <rect x="806" y="74" width="168" height="30" rx="5" fill="#fff" stroke="#7a6e5e"/><text x="816" y="94" font-size="13">staff-payments (app)</text>
+  <rect x="806" y="110" width="168" height="30" rx="5" fill="#fff" stroke="#a39a8c" stroke-dasharray="5 4"/><text x="816" y="130" font-size="13" class="m">appy-invoice (spec)</text>
+  <rect x="806" y="222" width="110" height="24" rx="12" fill="none" stroke="#a39a8c" stroke-dasharray="4 3"/><text x="861" y="239" text-anchor="middle" font-size="12" class="h m">named only</text>
+  <!-- feed arrow -->
+  <path d="M310 285 H670 V262" fill="none" stroke="#c8841a" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arr)"/>
+  <text x="420" y="281" font-size="12" style="fill:#8a5a10">video projects feed lessons (inference)</text>
+  <defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#c8841a"/></marker></defs>
+</svg>
+</div>
+<figcaption><span class="fignum">Figure 1</span> Solid = exists in code or registry; dashed = named only. Open naming questions (Studio vs OS, AppyFactory vs Appy Studio) are rows R5–R8.</figcaption>
+</figure>
+
+</section>
+<section>
+<h2><span class="n">02</span> The FliVideo land today — verified from the repos</h2>
+<p class="note">Read from origin/main on 3 Nov (FliStudio <code>e7dea41</code>). Three extensions exist in code; Motion Pilot is an idea. Nothing proposed is drawn here.</p>
+<figure>
+<div class="scroll">
+<svg viewBox="0 0 1000 450" role="img" aria-label="Current FliVideo node graph">
+  <defs><marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#342d2d"/></marker></defs>
+  <rect x="20" y="30" width="330" height="320" rx="12" fill="#f0ebe4" stroke="#342d2d" stroke-width="2"/>
+  <text x="38" y="60" class="h" font-size="18">FliStudio :7150</text>
+  <text x="38" y="80" class="m" font-size="12">control plane · 172 JSON-RPC methods</text>
+  <rect x="38" y="96" width="294" height="34" rx="6" fill="#fff" stroke="#342d2d"/><text x="50" y="118" font-size="13">core verbs — project · export · publish · launch</text>
+  <rect x="30" y="148" width="310" height="140" rx="8" fill="none" stroke="#7a6e5e" stroke-dasharray="2 3"/>
+  <text x="38" y="166" class="h m" font-size="12">extensions (extension-core)</text>
+  <rect x="38" y="176" width="140" height="40" rx="6" fill="#fff" stroke="#342d2d"/><text x="108" y="201" text-anchor="middle" font-size="13">Story Pilot</text>
+  <rect x="192" y="176" width="140" height="40" rx="6" fill="#fff" stroke="#342d2d"/><text x="262" y="201" text-anchor="middle" font-size="13">Overlay Pilot</text>
+  <rect x="38" y="228" width="140" height="40" rx="6" fill="#fff" stroke="#342d2d"/><text x="108" y="253" text-anchor="middle" font-size="13">B-roll Pilot</text>
+  <rect x="192" y="228" width="140" height="40" rx="6" fill="none" stroke="#a39a8c" stroke-dasharray="5 4"/><text x="262" y="253" text-anchor="middle" font-size="13" class="m">Motion Pilot (idea)</text>
+  <text x="38" y="312" class="m" font-size="12">Story + Overlay Pilot: you are testing — untouched</text>
+  <text x="38" y="330" class="m" font-size="12">Overlay Pilot owns a renderer (render.py)</text>
+  <g font-size="13">
+  <rect x="470" y="30" width="200" height="50" rx="6" fill="#fff" stroke="#342d2d"/><text x="482" y="50">FliHub :5101</text><text x="482" y="68" font-size="11" class="m">REST only · calls broll.register</text>
+  <rect x="470" y="92" width="200" height="44" rx="6" fill="#fff" stroke="#342d2d"/><text x="482" y="112">FliCut :7121</text><text x="482" y="128" font-size="11" class="m">58 methods</text>
+  <rect x="470" y="148" width="200" height="44" rx="6" fill="#fff" stroke="#342d2d"/><text x="482" y="168">FliCast :7131</text><text x="482" y="184" font-size="11" class="m">140 methods</text>
+  <rect x="470" y="204" width="200" height="44" rx="6" fill="#fff" stroke="#342d2d"/><text x="482" y="224">FliEdit :7171</text><text x="482" y="240" font-size="11" class="m">70 methods</text>
+  <rect x="470" y="260" width="200" height="44" rx="6" fill="#fff" stroke="#342d2d"/><text x="482" y="280">Teletubby :7111</text><text x="482" y="296" font-size="11" class="m">37 methods</text>
+  <rect x="760" y="250" width="210" height="64" rx="6" fill="#fff" stroke="#342d2d" stroke-width="1.5"/><text x="772" y="274">FliTools :7161 (tool service)</text><text x="772" y="294" font-size="11" class="m">transcribe · speech · face · prompter</text>
+  </g>
+  <g stroke="#342d2d" stroke-width="1.3" fill="none" marker-end="url(#a2)">
+    <path d="M332 113 C400 113 400 55 468 55"/>
+    <path d="M332 113 C400 113 400 114 468 114"/>
+    <path d="M332 113 C400 113 400 170 468 170"/>
+    <path d="M332 113 C400 113 400 226 468 226"/>
+    <path d="M332 113 C400 113 400 282 468 282"/>
+  </g>
+  <g stroke="#c8841a" stroke-width="1.5" fill="none" marker-end="url(#a4b)">
+    <path d="M340 270 H360 V372 H720 V300 H758"/>
+    <path d="M560 372 V306"/>
+  </g>
+  <defs><marker id="a4b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#c8841a"/></marker></defs>
+  <text x="372" y="390" font-size="11" style="fill:#8a5a10">pilots → FliTools (all three) · Story Pilot → Teletubby</text>
+  <text x="400" y="30" font-size="11" class="m">launch doors</text>
+  <rect x="20" y="404" width="950" height="36" rx="6" fill="#e8e0d4" stroke="#d4cdc4"/>
+  <text x="36" y="427" font-size="13"><tspan class="h">fli-core</tspan> v0.28.0 — shared rules, project folders, the door contract · FliStudio + FliCut on v0.28, the other five on v0.26</text>
+</svg>
+</div>
+<figcaption><span class="fignum">Figure 2</span> Black arrows: FliStudio opens each satellite through its door. Amber: extensions calling other apps (seen in code). FliHub calls back into B-roll Pilot. FliHub is the one app an agent cannot drive by JSON-RPC.</figcaption>
+</figure>
+
+</section>
+<section>
+<h2><span class="n">03</span> The 80-20 rule, measured — the count ranks the pilots backwards</h2>
+<p class="note">Your rule: a pilot is mostly read, and its writes ask an app to do the work. Counting read verbs gives the wrong answer.</p>
+<figure>
+<div class="scroll">
+<svg viewBox="0 0 1000 250" role="img" aria-label="Bar chart of query share per pilot">
+  <line x1="200" y1="30" x2="200" y2="200" stroke="#d4cdc4"/>
+  <line x1="200" y1="200" x2="760" y2="200" stroke="#d4cdc4"/>
+  <line x1="648" y1="24" x2="648" y2="200" stroke="#c8841a" stroke-dasharray="5 4"/>
+  <text x="648" y="18" text-anchor="middle" font-size="12" style="fill:#8a5a10">80% line</text>
+  <g font-size="13">
+    <text x="190" y="66" text-anchor="end">Overlay Pilot</text>
+    <rect x="200" y="48" width="431" height="28" fill="#342d2d"/><text x="622" y="67" font-size="12" text-anchor="end" style="fill:#faf5ec">77%</text>
+    <text x="190" y="122" text-anchor="end">B-roll Pilot</text>
+    <rect x="200" y="104" width="258" height="28" fill="#7a6e5e"/><text x="466" y="123" font-size="12">46%</text>
+    <text x="190" y="178" text-anchor="end">Story Pilot</text>
+    <rect x="200" y="160" width="230" height="28" fill="#ccba9d"/><text x="438" y="179" font-size="12">41%</text>
+  </g>
+  <text x="200" y="222" font-size="11" class="m">0%</text><text x="760" y="222" font-size="11" class="m" text-anchor="end">100% of verbs are queries</text>
+  <g font-size="12">
+    <text x="790" y="58" class="h" font-size="12">owns a renderer</text><text x="790" y="74" class="m">spawns python + ffprobe</text>
+    <text x="790" y="114" class="h" font-size="12">some media work</text><text x="790" y="130" class="m">runs ffmpeg itself</text>
+    <text x="790" y="170" class="h" font-size="12" style="fill:#3f7d4e">delegates every write</text><text x="790" y="186" class="m">→ Teletubby, FliTools</text>
+  </g>
+</svg>
+</div>
+<figcaption><span class="fignum">Figure 3</span> Story Pilot fails the count but behaves best; Overlay Pilot passes the count but owns a capability. Proposed test: <b>writes must delegate</b> (R1). Five ways to enforce it are in doc 03 (R2).</figcaption>
+</figure>
+
+</section>
+<section>
+<h2><span class="n">04</span> Twelve capabilities, scanned outside — no outright replacements</h2>
+<figure>
+<div class="scroll">
+<table>
+<tr><th>#</th><th>Capability</th><th>Ours today</th><th>Depth</th><th>Best outside candidate</th><th>What it showed</th></tr>
+<tr><td>1</td><td>Teleprompter</td><td>Teletubby</td><td><span class="pill">deep</span></td><td>Textream (MIT, 4.2k★)</td><td>only drivable prompter: HTTP/WebSocket "Director"</td></tr>
+<tr><td>2</td><td>Screen recording</td><td>FliCast</td><td><span class="pill">light</span></td><td>Cap (24k★)</td><td>Loom-style job, not a switcher</td></tr>
+<tr><td>3</td><td>Timeline editing</td><td>FliEdit</td><td><span class="pill">deep</span></td><td>MLT / Kdenlive (6k★)</td><td>good engine, GUI not agent-drivable</td></tr>
+<tr><td>4</td><td>Automated cutting</td><td>FliCut</td><td><span class="pill">light</span></td><td>auto-editor, video-use</td><td>no Gling-class OSS; useful tool + ideas</td></tr>
+<tr><td>5</td><td>Motion graphics</td><td>Motion Pilot (idea)</td><td><span class="pill">light</span></td><td>Remotion, Motion Canvas</td><td>already owned (Remotion + HyperFrames)</td></tr>
+<tr><td>6</td><td>B-roll library</td><td>B-roll Pilot</td><td><span class="pill">deep</span></td><td>Immich (AGPL, 118k★)</td><td>best API (338 ops); typed tags unproven</td></tr>
+<tr><td>7</td><td>AI orchestration</td><td>the pilots</td><td><span class="pill">deep</span></td><td>OpenMontage (AGPL, 75k★)</td><td>same problem class, as YAML stage graphs</td></tr>
+<tr><td>8</td><td>Scriptwriting</td><td>Story Pilot</td><td><span class="pill">light</span></td><td>none standalone</td><td>Story Pilot stays</td></tr>
+<tr><td>9</td><td>B-roll selection</td><td>B-roll / Story Pilot</td><td><span class="pill">light</span></td><td>folded into 6 + 7</td><td>—</td></tr>
+<tr><td>10</td><td>Overlays</td><td>Overlay Pilot</td><td><span class="pill">deep</span></td><td>HyperFrames (Apache, 78k★)</td><td><b>is an editor surface</b>, not just a renderer</td></tr>
+<tr><td>11</td><td>Craft projects</td><td>—</td><td><span class="pill">light</span></td><td>ArtCraft's 7 apps</td><td>alpha; watch FilmCraft</td></tr>
+<tr><td>12</td><td>Capture routing</td><td>FliHub</td><td><span class="pill">none</span></td><td>—</td><td>you said nothing needed</td></tr>
+</table>
+</div>
+<figcaption><span class="fignum">Figure 4</span> Stars and dates from GitHub on 3 Nov. Deep = code read in a scanned clone; light = brain notes + GitHub only.</figcaption>
+</figure>
+
+</section>
+<section>
+<h2><span class="n">05</span> Per candidate: absorb, add, replace or none</h2>
+<div class="legend"><span><i class="dot lean"></i> the lean (unapproved)</span><span><i class="dot alt"></i> a real option</span><span><i class="dot no"></i> not supported by the evidence</span></div>
+<figure>
+<div class="scroll">
+<table>
+<tr><th>Candidate</th><th>vs ours</th><th class="c">Absorb</th><th class="c">Add</th><th class="c">Replace</th><th class="c">None</th><th>Waits on</th></tr>
+<tr><td><b>HyperFrames Studio</b></td><td>Overlay Pilot / FliEdit</td><td class="c"><i class="dot alt"></i></td><td class="c"><i class="dot lean"></i></td><td class="c"><i class="dot alt"></i></td><td class="c"><i class="dot no"></i></td><td>X2 auth; replace only after X1</td></tr>
+<tr><td><b>MLT</b> (+ Kdenlive)</td><td>FliEdit</td><td class="c"><i class="dot lean"></i></td><td class="c"><i class="dot alt"></i></td><td class="c"><i class="dot no"></i></td><td class="c"><i class="dot alt"></i></td><td>X3, only if render hurts</td></tr>
+<tr><td>libopenshot</td><td>FliEdit</td><td class="c"><i class="dot alt"></i></td><td class="c"><i class="dot no"></i></td><td class="c"><i class="dot no"></i></td><td class="c"><i class="dot lean"></i></td><td>X9</td></tr>
+<tr><td>Shotcut</td><td>FliEdit</td><td class="c"><i class="dot no"></i></td><td class="c"><i class="dot alt"></i></td><td class="c"><i class="dot no"></i></td><td class="c"><i class="dot lean"></i></td><td>—</td></tr>
+<tr><td>FilmCraft</td><td>FliEdit / FliCut</td><td class="c"><i class="dot alt"></i></td><td class="c"><i class="dot alt"></i></td><td class="c"><i class="dot alt"></i></td><td class="c"><i class="dot lean"></i></td><td>maturity (watch)</td></tr>
+<tr><td><b>OpenMontage</b></td><td>the pilots</td><td class="c"><i class="dot lean"></i></td><td class="c"><i class="dot alt"></i></td><td class="c"><i class="dot no"></i></td><td class="c"><i class="dot alt"></i></td><td>AGPL posture (R13) — ideas only</td></tr>
+<tr><td><b>Immich</b></td><td>B-roll Pilot</td><td class="c"><i class="dot no"></i></td><td class="c"><i class="dot lean"></i></td><td class="c"><i class="dot no"></i></td><td class="c"><i class="dot alt"></i></td><td>X4 typed tags + Docker yes</td></tr>
+<tr><td>ResourceSpace</td><td>B-roll Pilot</td><td class="c"><i class="dot alt"></i></td><td class="c"><i class="dot alt"></i></td><td class="c"><i class="dot no"></i></td><td class="c"><i class="dot lean"></i></td><td>—</td></tr>
+<tr><td>Dam'It (own design)</td><td>B-roll Pilot</td><td class="c"><i class="dot alt"></i></td><td class="c"><i class="dot lean"></i></td><td class="c"><i class="dot no"></i></td><td class="c"><i class="dot alt"></i></td><td>Q3 — build own if X4 fails</td></tr>
+<tr><td><b>Textream</b></td><td>Teletubby</td><td class="c"><i class="dot lean"></i></td><td class="c"><i class="dot alt"></i></td><td class="c"><i class="dot alt"></i></td><td class="c"><i class="dot no"></i></td><td>X5 port auth</td></tr>
+<tr><td>QPrompt</td><td>Teletubby</td><td class="c"><i class="dot no"></i></td><td class="c"><i class="dot alt"></i></td><td class="c"><i class="dot no"></i></td><td class="c"><i class="dot lean"></i></td><td>—</td></tr>
+<tr><td><b>auto-editor</b></td><td>FliCut</td><td class="c"><i class="dot lean"></i></td><td class="c"><i class="dot no"></i></td><td class="c"><i class="dot no"></i></td><td class="c"><i class="dot alt"></i></td><td>X6 — as a FliTools tool</td></tr>
+<tr><td><b>video-use</b></td><td>FliCut</td><td class="c"><i class="dot lean"></i></td><td class="c"><i class="dot alt"></i></td><td class="c"><i class="dot no"></i></td><td class="c"><i class="dot alt"></i></td><td>X7 — cut-pass ideas</td></tr>
+<tr><td>LosslessCut</td><td>FliCut</td><td class="c"><i class="dot no"></i></td><td class="c"><i class="dot alt"></i></td><td class="c"><i class="dot no"></i></td><td class="c"><i class="dot lean"></i></td><td>—</td></tr>
+<tr><td>Cap</td><td>FliCast</td><td class="c"><i class="dot alt"></i></td><td class="c"><i class="dot alt"></i></td><td class="c"><i class="dot no"></i></td><td class="c"><i class="dot lean"></i></td><td>a Loom-style job appearing</td></tr>
+<tr><td>Recordly · open-recorder · Screenize</td><td>FliCast</td><td class="c"><i class="dot alt"></i></td><td class="c"><i class="dot no"></i></td><td class="c"><i class="dot no"></i></td><td class="c"><i class="dot lean"></i></td><td>format references only</td></tr>
+<tr><td>Craft projects</td><td>—</td><td class="c"><i class="dot alt"></i></td><td class="c"><i class="dot alt"></i></td><td class="c"><i class="dot no"></i></td><td class="c"><i class="dot lean"></i></td><td>maturity (watch)</td></tr>
+<tr><td>Remotion</td><td>Motion (idea)</td><td class="c"><i class="dot lean"></i></td><td class="c"><i class="dot alt"></i></td><td class="c"><i class="dot no"></i></td><td class="c"><i class="dot no"></i></td><td>kept; HyperFrames first (R20)</td></tr>
+<tr><td>Motion Canvas · Manim</td><td>Motion (idea)</td><td class="c"><i class="dot no"></i></td><td class="c"><i class="dot alt"></i></td><td class="c"><i class="dot no"></i></td><td class="c"><i class="dot lean"></i></td><td>—</td></tr>
+</table>
+</div>
+<figcaption><span class="fignum">Figure 5</span> 19 candidates. The <b>Replace</b> column has no lean anywhere: nothing outside is both mature and agent-drivable enough to retire one of our six apps today.</figcaption>
+</figure>
+
+</section>
+<section>
+<h2><span class="n">06</span> A possible land — if every lean were approved</h2>
+<p class="note">Possible, not planned. Each dashed node is a separate decision.</p>
+<figure>
+<div class="scroll">
+<svg viewBox="0 0 1000 380" role="img" aria-label="Possible target FliVideo land">
+  <defs><marker id="a3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#c8841a"/></marker></defs>
+  <rect x="20" y="30" width="300" height="250" rx="12" fill="#f0ebe4" stroke="#342d2d" stroke-width="2"/>
+  <text x="38" y="58" class="h" font-size="17">FliStudio (exists)</text>
+  <rect x="38" y="76" width="125" height="36" rx="6" fill="#fff" stroke="#342d2d"/><text x="100" y="99" text-anchor="middle" font-size="13">Story Pilot</text>
+  <rect x="177" y="76" width="125" height="36" rx="6" fill="#fff" stroke="#342d2d"/><text x="240" y="99" text-anchor="middle" font-size="13">Overlay Pilot</text>
+  <rect x="38" y="124" width="125" height="36" rx="6" fill="#fff" stroke="#342d2d"/><text x="100" y="147" text-anchor="middle" font-size="13">B-roll Pilot</text>
+  <rect x="177" y="124" width="125" height="36" rx="6" fill="#fff8d6" stroke="#c8841a" stroke-dasharray="5 4"/><text x="240" y="147" text-anchor="middle" font-size="13">Motion Pilot (thin)</text>
+  <text x="38" y="200" class="m" font-size="12">+ FliHub · FliCut · FliCast</text>
+  <text x="38" y="218" class="m" font-size="12">+ FliEdit · Teletubby · FliTools</text>
+  <text x="38" y="236" class="m" font-size="12">all unchanged</text>
+
+  <rect x="470" y="40" width="250" height="64" rx="8" fill="#fff8d6" stroke="#c8841a" stroke-width="1.6" stroke-dasharray="6 4"/>
+  <text x="484" y="64" class="h" font-size="14">FliMotion app</text><text x="484" y="84" font-size="12" class="m">HyperFrames Studio + render · R4 R10</text>
+  <rect x="470" y="130" width="250" height="64" rx="8" fill="#fff8d6" stroke="#c8841a" stroke-width="1.6" stroke-dasharray="6 4"/>
+  <text x="484" y="154" class="h" font-size="14">B-roll library app</text><text x="484" y="174" font-size="12" class="m">Dam'It design over Immich · R12</text>
+  <rect x="470" y="220" width="250" height="56" rx="8" fill="#fff8d6" stroke="#c8841a" stroke-width="1.6" stroke-dasharray="6 4"/>
+  <text x="484" y="244" class="h" font-size="14">cut.silence tool</text><text x="484" y="262" font-size="12" class="m">auto-editor in FliTools · R16</text>
+  <rect x="770" y="220" width="200" height="56" rx="8" fill="#fff8d6" stroke="#c8841a" stroke-width="1.6" stroke-dasharray="6 4"/>
+  <text x="784" y="244" class="h" font-size="14">MLT engine</text><text x="784" y="262" font-size="12" class="m">under FliEdit, if X3 · R11</text>
+
+  <g stroke="#c8841a" stroke-width="1.4" fill="none" stroke-dasharray="5 4" marker-end="url(#a3)">
+    <path d="M302 94 C390 94 390 70 468 70"/>
+    <path d="M302 142 C390 142 390 80 468 80"/>
+    <path d="M100 160 V178 H440 C456 178 456 162 468 162"/>
+    <path d="M320 248 C400 248 400 248 468 248"/>
+  </g>
+  <text x="340" y="62" font-size="11" style="fill:#8a5a10">renderer migrates</text>
+  <text x="180" y="192" font-size="11" style="fill:#8a5a10">B-roll Pilot: find B-roll for a beat</text><text x="340" y="242" font-size="11" style="fill:#8a5a10">FliTools</text>
+
+  <rect x="20" y="310" width="950" height="54" rx="6" fill="#e8e0d4" stroke="#d4cdc4"/>
+  <text x="36" y="333" font-size="13"><tspan class="h">Ideas absorbed, no new box:</tspan> Textream Director → Teletubby (R15) · video-use cut passes → FliCut (R17)</text>
+  <text x="36" y="352" font-size="13">OpenMontage stage graphs + revision caps → pilot specs (R14). FliEdit stays the footage editor (R9).</text>
+</svg>
+</div>
+<figcaption><span class="fignum">Figure 6</span> Solid = exists today; amber dashed = possible. No existing app is removed in this picture.</figcaption>
+</figure>
+
+</section>
+<section>
+<h2><span class="n">07</span> What waits on what</h2>
+<figure>
+<div class="scroll">
+<svg viewBox="0 0 1000 270" role="img" aria-label="Decision dependency flow">
+  <defs><marker id="a4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#342d2d"/></marker></defs>
+  <g font-size="13">
+  <rect x="20" y="30" width="190" height="50" rx="8" fill="#fff" stroke="#c8841a" stroke-width="2"/><text x="34" y="52" class="h" font-size="13">R1 · 80-20 reading</text><text x="34" y="70" font-size="11" class="m">writes must delegate?</text>
+  <rect x="270" y="30" width="210" height="50" rx="8" fill="#fff" stroke="#c8841a" stroke-width="2"/><text x="284" y="52" class="h" font-size="13">R3 · Overlay renderer</text><text x="284" y="70" font-size="11" class="m">an app inside a pilot? (X8)</text>
+  <rect x="540" y="30" width="200" height="50" rx="8" fill="#fff" stroke="#c8841a" stroke-width="2"/><text x="554" y="52" class="h" font-size="13">R4 · FliMotion app</text><text x="554" y="70" font-size="11" class="m">Motion Pilot vs app</text>
+  <rect x="800" y="30" width="180" height="50" rx="8" fill="#fff" stroke="#342d2d"/><text x="814" y="52" class="h" font-size="13">R10 · HyperFrames</text><text x="814" y="70" font-size="11" class="m">editor in FliStudio (X2)</text>
+  <rect x="540" y="120" width="200" height="50" rx="8" fill="#fff" stroke="#342d2d"/><text x="554" y="142" class="h" font-size="13">R9 · FliEdit fate</text><text x="554" y="160" font-size="11" class="m">keep / MLT / replace</text>
+  <rect x="270" y="120" width="210" height="50" rx="8" fill="#fff" stroke="#342d2d"/><text x="284" y="142" class="h" font-size="13">X1 · footage test</text><text x="284" y="160" font-size="11" class="m">can HyperFrames cut footage?</text>
+  <rect x="20" y="200" width="190" height="50" rx="8" fill="#fff" stroke="#342d2d"/><text x="34" y="222" class="h" font-size="13">X4 · Immich test</text><text x="34" y="240" font-size="11" class="m">typed tags + Docker OK?</text>
+  <rect x="270" y="200" width="210" height="50" rx="8" fill="#fff" stroke="#342d2d"/><text x="284" y="222" class="h" font-size="13">R12 · B-roll library</text><text x="284" y="240" font-size="11" class="m">Immich or own store</text>
+  <rect x="540" y="200" width="200" height="50" rx="8" fill="#fff" stroke="#342d2d"/><text x="554" y="222" class="h" font-size="13">R13 · AGPL posture</text><text x="554" y="240" font-size="11" class="m">OpenMontage, Immich, Cap</text>
+  </g>
+  <g stroke="#342d2d" stroke-width="1.4" fill="none" marker-end="url(#a4)">
+    <path d="M210 55 H268"/><path d="M480 55 H538"/><path d="M740 55 H798"/>
+    <path d="M480 145 H538"/><path d="M890 80 C890 145 800 145 742 145"/>
+    <path d="M210 225 H268"/><path d="M540 225 H482"/>
+  </g>
+  <text x="20" y="18" font-size="12" style="fill:#8a5a10" class="h">critical path (amber) — touches Overlay Pilot, so wait until your testing is done</text>
+</svg>
+</div>
+<figcaption><span class="fignum">Figure 7</span> The top row is the critical path. X1–X9 are small experiments, all planned and none run (doc 05).</figcaption>
+</figure>
+
+</section>
+<section>
+<h2><span class="n">08</span> The approval register — 21 rows, all open</h2>
+<p class="note">Nothing is decided until you rule on a row. Reply with row numbers, e.g. "R1 yes, R21 go X8 only".</p>
+<figure>
+<div class="scroll">
+<table>
+<tr><th>#</th><th>Decision</th><th>Recommendation</th><th>Status</th></tr>
+<tr class="grp"><td colspan="4">The guardrail</td></tr>
+<tr><td>R1</td><td>80-20 means…</td><td>"writes must delegate", not a raw read count</td><td><span class="pill open">open</span></td></tr>
+<tr><td>R2</td><td>Who enforces it</td><td>spec-time question + report-only tripwire now; lint rule later</td><td><span class="pill open">open</span></td></tr>
+<tr><td>R3</td><td>Overlay Pilot's renderer = an app inside a pilot?</td><td>measure first (X8); no change while you test</td><td><span class="pill open">open</span></td></tr>
+<tr class="grp"><td colspan="4">Umbrellas</td></tr>
+<tr><td>R5</td><td>Umbrella word: Studio vs OS</td><td>avoid "Studio" (collides with FliStudio)</td><td><span class="pill open">open</span></td></tr>
+<tr><td>R6</td><td>AppyFactory vs Appy Studio</td><td>your naming call</td><td><span class="pill open">open</span></td></tr>
+<tr><td>R7</td><td>Unit of work for every umbrella?</td><td>yes for FliVideo + AppyFactory; Founder OS open</td><td><span class="pill open">open</span></td></tr>
+<tr><td>R8</td><td>Community Builder control plane</td><td>later — start as FliVideo output</td><td><span class="pill open">open</span></td></tr>
+<tr class="grp"><td colspan="4">Editors and motion</td></tr>
+<tr><td>R4</td><td>Motion Pilot vs FliMotion app</td><td>FliMotion app + thin pilots, later, spec first</td><td><span class="pill open">open</span></td></tr>
+<tr><td>R9</td><td>FliEdit's fate</td><td>keep it; HyperFrames for composition; replace only after X1</td><td><span class="pill open">open</span></td></tr>
+<tr><td>R10</td><td>HyperFrames editor inside FliStudio</td><td>add, after X2</td><td><span class="pill open">open</span></td></tr>
+<tr><td>R11</td><td>MLT under FliEdit</td><td>not yet; X3 if render hurts</td><td><span class="pill open">open</span></td></tr>
+<tr><td>R20</td><td>Motion engine: HyperFrames vs Remotion</td><td>HyperFrames first; keep Remotion</td><td><span class="pill open">open</span></td></tr>
+<tr class="grp"><td colspan="4">B-roll, prompting, cutting, capture</td></tr>
+<tr><td>R12</td><td>B-roll library (Joy's tool too)</td><td>Dam'It design over Immich if X4 passes, else own store</td><td><span class="pill open">open</span></td></tr>
+<tr><td>R15</td><td>Teleprompter</td><td>keep Teletubby; absorb Textream ideas</td><td><span class="pill open">open</span></td></tr>
+<tr><td>R16</td><td>auto-editor as a FliTools tool</td><td>yes, after X6</td><td><span class="pill open">open</span></td></tr>
+<tr><td>R17</td><td>video-use ideas into FliCut</td><td>yes, after X7</td><td><span class="pill open">open</span></td></tr>
+<tr><td>R18</td><td>Screen recording</td><td>no change to FliCast</td><td><span class="pill open">open</span></td></tr>
+<tr><td>R19</td><td>Craft projects / FilmCraft</td><td>watch</td><td><span class="pill open">open</span></td></tr>
+<tr class="grp"><td colspan="4">Orchestration, licences, next step</td></tr>
+<tr><td>R13</td><td>AGPL posture</td><td>run unmodified and learn; never copy AGPL code</td><td><span class="pill open">open</span></td></tr>
+<tr><td>R14</td><td>OpenMontage stage graphs into pilot specs</td><td>absorb the idea</td><td><span class="pill open">open</span></td></tr>
+<tr><td>R21</td><td>Run the experiments</td><td>X8 → X2 → X1 (~6 h on the M2), after pilot testing</td><td><span class="pill open">open</span></td></tr>
+</table>
+</div>
+<figcaption><span class="fignum">Figure 8</span> Full options per row in doc 06. Already settled by you, not reopened: FliHub needs nothing · Godot/Three.js/Blender are building blocks · FliTalent is for the future.</figcaption>
+</figure>
+
+</section>
+<section>
+<h2><span class="n">09</span> Nine experiments, none run</h2>
+<figure>
+<div class="scroll">
+<svg viewBox="0 0 1000 330" role="img" aria-label="Experiment timeboxes bar chart">
+  <g font-size="13">
+  <text x="270" y="22" class="h m" font-size="11">hours (timebox)</text>
+  <line x1="280" y1="30" x2="280" y2="310" stroke="#d4cdc4"/>
+  <!-- 1h = 80px -->
+  <text x="270" y="50" text-anchor="end">X8 · trigger numbers (R3)</text><rect x="280" y="36" width="120" height="20" fill="#c8841a"/><text x="408" y="51" font-size="12">1.5 · first</text>
+  <text x="270" y="80" text-anchor="end">X2 · HyperFrames server auth</text><rect x="280" y="66" width="80" height="20" fill="#c8841a"/><text x="368" y="81" font-size="12">1 · second</text>
+  <text x="270" y="110" text-anchor="end">X1 · HyperFrames on footage</text><rect x="280" y="96" width="240" height="20" fill="#c8841a"/><text x="528" y="111" font-size="12">3 · third</text>
+  <text x="270" y="140" text-anchor="end">X4 · Immich typed tags</text><rect x="280" y="126" width="320" height="20" fill="#7a6e5e"/><text x="608" y="141" font-size="12">4 · needs a Docker yes</text>
+  <text x="270" y="170" text-anchor="end">X5 · Textream Director</text><rect x="280" y="156" width="120" height="20" fill="#ccba9d"/><text x="408" y="171" font-size="12">1.5 · any time (M4)</text>
+  <text x="270" y="200" text-anchor="end">X6 · auto-editor vs FliCut</text><rect x="280" y="186" width="120" height="20" fill="#ccba9d"/><text x="408" y="201" font-size="12">1.5 · any time</text>
+  <text x="270" y="230" text-anchor="end">X7 · video-use vs FliCut</text><rect x="280" y="216" width="160" height="20" fill="#ccba9d"/><text x="448" y="231" font-size="12">2 · any time</text>
+  <text x="270" y="260" text-anchor="end">X3 · MLT render of an edit</text><rect x="280" y="246" width="240" height="20" fill="none" stroke="#a39a8c" stroke-dasharray="4 3"/><text x="528" y="261" font-size="12" class="m">3 · only if FliEdit moves</text>
+  <text x="270" y="290" text-anchor="end">X9 · libopenshot JSON</text><rect x="280" y="276" width="120" height="20" fill="none" stroke="#a39a8c" stroke-dasharray="4 3"/><text x="408" y="291" font-size="12" class="m">1.5 · only if FliEdit moves</text>
+  </g>
+  <text x="760" y="60" font-size="12" class="h" style="fill:#8a5a10">amber = critical path</text>
+  <text x="760" y="80" font-size="12" class="m">all on the M2 in scratch folders</text>
+  <text x="760" y="98" font-size="12" class="m">copies of finished media only</text>
+  <text x="760" y="116" font-size="12" class="m">no app repo is edited</text>
+</svg>
+</div>
+<figcaption><span class="fignum">Figure 9</span> Each needs your go by ID (R21). Pass/fail criteria per experiment are in doc 05.</figcaption>
+</figure>
+
+</section>
+<section>
+<h2><span class="n">10</span> Every document</h2>
+<div class="docs">
+  <div class="doc"><span class="k">00</span><a href="https://github.com/flivideo/flivideo/blob/main/docs/ecosystem-research/00-index.md">Index</a><div>reading order, one-paragraph summary</div></div>
+  <div class="doc"><span class="k">01</span><a href="https://github.com/appydave/brains/blob/main/north-star/four-umbrellas-30000ft.md">Four umbrellas, 30,000 ft</a><div>brains repo · provisional</div></div>
+  <div class="doc"><span class="k">02</span><a href="https://github.com/flivideo/flivideo/blob/main/docs/ecosystem-research/02-flivideo-current-state.md">FliVideo current state</a><div>verified · paths, SHAs, ports, doors</div></div>
+  <div class="doc"><span class="k">03</span><a href="https://github.com/flivideo/flivideo/blob/main/docs/ecosystem-research/03-apps-extensions-tools.md">Apps, extensions, tools</a><div>80-20 measured, triggers, 5 enforcement options</div></div>
+  <div class="doc"><span class="k">03b</span><a href="https://github.com/flivideo/flivideo/blob/main/docs/ecosystem-research/03b-capability-landscape.md">Capability landscape</a><div>12 categories → candidates</div></div>
+  <div class="doc"><span class="k">C</span><a href="https://github.com/flivideo/flivideo/tree/main/docs/ecosystem-research/candidates">Candidates (11 files)</a><div>licence, stars, agent surface, security, two questions</div></div>
+  <div class="doc"><span class="k">04</span><a href="https://github.com/flivideo/flivideo/blob/main/docs/ecosystem-research/04-potential-target-architecture.md">Possible target architecture</a><div>4 outcomes × 19 candidates, Q1–Q5</div></div>
+  <div class="doc"><span class="k">05</span><a href="https://github.com/flivideo/flivideo/blob/main/docs/ecosystem-research/05-research-experiments.md">Research experiments</a><div>X1–X9, planned, none run</div></div>
+  <div class="doc"><span class="k">06</span><a href="https://github.com/flivideo/flivideo/blob/main/docs/ecosystem-research/06-approval-register.md">Approval register</a><div>21 rows, full options</div></div>
+  <div class="doc"><span class="k">07</span><a href="https://github.com/flivideo/flivideo/blob/main/docs/ecosystem-research/07-research-execution.md">How the run went</a><div>M4 orchestrated, M2 worked</div></div>
+</div>
+
+<div class="limits">
+<b style="font-family:Oswald;text-transform:uppercase;letter-spacing:.06em">What this does not establish</b>
+<ul>
+<li>No app or candidate was <b>run</b>. "Operational" means registered, has a door and recent commits; candidate verdicts come from reading code and docs.</li>
+<li>The B2 research ran on Sonnet with a <b>scoped</b> security scan (instruction files + phrase grep, not full source). Cap, Remotion, FilmCraft and the Craft apps rest on earlier brain notes, not fresh code reads.</li>
+<li>Verb counts behind Figure 3 come from grep and are approximate.</li>
+<li>Licence notes are a reading of the licence text, not legal advice.</li>
+</ul>
+</div>
+
+</section>
+<footer>Source: <code>/Users/davidcruwys/dev/ad/flivideo/docs/ecosystem-research/ecosystem-map.html</code> · plan: <code>brains/north-star/deliver-2026-11-03-B686-flivideo-ecosystem-research.md</code> · Captain's Log B686 + B687 · built by b686-synth-write on the M4, 3 Nov 2026.</footer>
+</div>
+</body>
+</html>
