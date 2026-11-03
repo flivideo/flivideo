@@ -22,6 +22,8 @@ Selection: GitHub search by stars for "teleprompter", 2026-11-03. Two chosen: th
 - **Two questions**: (1) *Elegant?* Strong: voice-tracked word highlighting, notch/overlay UX. (2) *Agent-drivable safely?* Yes via URL scheme and Director HTTP/WebSocket, given trusted network.
 - **Outcome lean (not approved)**: *absorb ideas* (Director push-a-script flow maps onto Story Pilot → Teletubby); candidate to *add alongside* Teletubby; *replace* only if Teletubby's own features are subsets.
 
+- **Harvest review (2026-11-03, M2)**: voice-following traced in code, full side-by-side with Teletubby, options → [../textream-vs-teletubby-harvest.md](../textream-vs-teletubby-harvest.md).
+
 ## 2. QPrompt
 - **Repo**: https://github.com/Cuperino/QPrompt-Teleprompter (clone `47711f3`).
 - **Licence**: GPL-3.0. **Stars / last commit**: 620★, pushed 2026-11-02, 144 open issues.
