@@ -37,8 +37,38 @@ data it shows, and ideally where it lives in the code.
 
 ## 2 · The lost discussion
 
-**Not found.** Searched David's own turns in session transcripts for aria-label, semantic tagging / ids / labels,
-accessibility labels:
+**Found (correction by flivideo-roamy, 2026-11-04).** It's in `flivideo-orch`'s own transcript on the M4
+(`~/.claude/projects/-Users-davidcruwys-dev-ad-brains/f73fd5e0-e8b2-40ea-a51a-c97dd7efe8db.jsonl`), David's turn at
+**2026-11-03T03:49:03Z (10:49 +07)**. The search below missed it because the session lives under the *brains* project
+folder, not FliVideo's. David, verbatim:
+
+> "what is available for us to know on a page? There are only three things that I can think of:
+> 1. An actual DOM path
+> 2. When Field Tester is annotating the page, it's added some information because Field Tester only allows you to select
+>    certain elements on the page anyway. It's gone through and done something and probably written labels at the same time.
+> 3. Or every element on the page should potentially get some sort of ARIA Am I saying that right, or semantic title,
+>    semantic description, or something like that?
+>
+> Because if we did the third type and it was just something we did as almost a hook, you can't even write the page unless
+> you annotate correctly. This is where the spaghetti rig got involved and used static analysis… 'Are all your elements
+> actually made readable for, say, blind viewers…' …then you could provide both a DOM path and a semantic description. The
+> pros, the conversation needs more the semantic description, but knowing where it is is also important.
+>
+> And then we'd be able to improve the selector because currently, when you do selection, there's a very limited number of
+> boxes that appear… it feels like something is missing.
+>
+> I just want this to be thought of as a backlog or just notes around Field Tester in general"
+
+Orch's reply (03:49:46Z) recommended:
+- send all three with every point: the ARIA name, the hand-placed label and the DOM path;
+- make ARIA naming a gate, as the Spaghetti rig did;
+- add a "point at anything" selector mode that falls back to the nearest named element.
+
+A worker then checked Anthropic's docs: what a click on an element sends isn't documented. That was banked in
+`docs/briefs/field-tester-pointing-notes-2026-11-03.md` (9d5b3aa). **The recommendation below should be re-checked
+against David's three-way framing.**
+
+The original search, for the record:
 
 | Where | Scope | Result |
 |---|---|---|
