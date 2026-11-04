@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FliStudio Fleet Versions — spec page (2026-11-04)</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Roboto+Mono&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;--brown:#342d2d;--gold:#ccba9d;--yellow:#ffde59;--amber:#c8841a;--muted:#7a6e5e;--cream:#faf5ec;--surface:#f0ebe4;--linen:#e8e0d4;--border:#d4cdc4;--card:#fff;--red:#a8321f;--green:#2f6b3a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--brown);font:16px/1.6 Roboto,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:32px 24px 80px}
+h1,h2,h3{font-family:Oswald,sans-serif;text-transform:uppercase;letter-spacing:.02em;margin:0}
+h1{font-size:34px;line-height:1.15;margin:14px 0 8px}
+h2{font-size:22px;margin:40px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--yellow)}
+h3{font-size:16px;margin:18px 0 6px}
+.logo-badge{display:inline-block;background:#342d2d;border-radius:6px;padding:4px 10px 2px;font-family:"Bebas Neue",Oswald,sans-serif;letter-spacing:.04em;line-height:1.1;font-size:22px}
+.logo-badge .a{color:#ccba9d}.logo-badge .d{color:#ffde59}
+.eyebrow{font-family:Oswald;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-size:13px;margin-left:12px}
+.verdict{background:var(--card);border:1px solid var(--border);border-left:5px solid var(--amber);padding:14px 18px;margin:18px 0}
+.card{background:var(--card);border:1px solid var(--border);padding:16px 18px;margin:12px 0}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--border);font-size:14px}
+th{font-family:Oswald;text-transform:uppercase;letter-spacing:.04em;font-size:12px;text-align:left;background:var(--surface);padding:8px 10px;border-bottom:1px solid var(--border)}
+td{padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top}
+code,.mono{font-family:"Roboto Mono",monospace;font-size:13px}
+.ok{color:var(--green)}.bad{color:var(--red)}.mut{color:var(--muted)}
+.cell b{display:block;font-family:"Roboto Mono",monospace;font-size:13px}
+.pill{display:inline-block;font-family:Oswald;text-transform:uppercase;font-size:11px;letter-spacing:.05em;padding:1px 8px;border:1px solid var(--border);background:var(--surface);margin-right:4px}
+.pill.y{background:var(--yellow);border-color:var(--yellow)}
+.pill.r{border-color:var(--red);color:var(--red);background:var(--card)}
+.steps{counter-reset:s;list-style:none;padding:0;margin:8px 0}
+.steps li{counter-increment:s;padding:6px 0 6px 40px;position:relative}
+.steps li:before{content:counter(s,decimal-leading-zero);position:absolute;left:0;font-family:Oswald;font-size:20px;color:var(--amber)}
+.mock{background:var(--card);border:1px solid var(--border);padding:0}
+.mockbar{background:var(--surface);border-bottom:1px solid var(--border);padding:8px 12px;font-family:Oswald;text-transform:uppercase;letter-spacing:.05em;font-size:13px;display:flex;justify-content:space-between}
+.btn{display:inline-block;font-family:Oswald;text-transform:uppercase;font-size:12px;padding:3px 10px;background:var(--yellow);border:1px solid var(--brown)}
+.btn.off{background:var(--surface);border-color:var(--border);color:var(--muted)}
+.rec{border-left:5px solid var(--yellow)}
+</style></head><body><div class="wrap">
+<span class="logo-badge"><span class="a">Appy</span><span class="d">Dave</span></span><span class="eyebrow">FliVideo · spec page · 2026-11-04</span>
+<h1>Bring the Fli apps up to date on other people's machines — from FliStudio</h1>
+<div class="verdict"><b>Verdict: buildable, small, and the risky part is consent, not code.</b> The M2 and Jan's machine are already visibly stale (M2: FliStudio 9 commits behind with 9 uncommitted files; Jan: FliHub 194 commits behind). FliStudio has no version or update verb today. Recommended: a <b>read-only Versions view first</b>, then a consent-gated <b>"Bring to latest"</b> over SSH, with git bundles for Jan. No restarts.</div>
+
+<h2>1 · What exists today (read, not assumed)</h2>
+<figure style="margin:12px 0"><table><tr><th>Thing</th><th>Finding</th><th>Where</th></tr>
+<tr><td>App set</td><td>Registry has 14 <code>group: flivideo</code> apps. The ones with real code and a start mode: <b>FliStudio, FliCut, FliEdit, FliHub, Teletubby, FliCast</b> (+ FliTools launchd service, Storyline, FliVoice, HyperFrames Studio). FliDeck and FliGen are <code>inactive</code>; FliLaunch / FliBrief / FliStack have no app code.</td><td class="mono">~/.config/appydave/apps.json (group flivideo)</td></tr>
+<tr><td>Repos</td><td>All six are separate git repos under <code>~/dev/ad/flivideo/&lt;app&gt;</code>, remote <code>git@github.com:flivideo/&lt;app&gt;.git</code>, branch <code>main</code>.</td><td class="mono">git remote -v per repo</td></tr>
+<tr><td>FliStudio doors</td><td><code>app.launch</code>, <code>app.stop</code>, <code>app.restart</code>, <code>app.stage</code> exist — they start/stop/restart FliHub, FliCut, FliCast, Teletubby on <i>this</i> machine via each app's <code>scripts/app.sh</code>. <b>No</b> verb mentions fleet, machine, version or update (searched the OpenRPC method list).</td><td class="mono">flistudio/api/openrpc.json:22,489,999,1458 · server/src/capabilities/registry.ts:245</td></tr>
+<tr><td>Brief's file ref</td><td><code>capabilities/launch.ts</code> is the <i>YouTube launch</i> feature, not <code>app.launch</code>. The app-launch code is in <code>server/src/launch/</code>.</td><td class="mono">server/src/launch/{launch,doors}.ts</td></tr>
+<tr><td>Lifecycle contract</td><td>Eight verbs (show·status·start·stop·restart·logs·reach). Version/update is not one of them — this spec adds a ninth family.</td><td class="mono">brains/agentic-os/app-lifecycle-contract.md</td></tr>
+<tr><td>Machines</td><td>Roster: roamy, m4-mini, m2-mini, jan-mini (<code>janreyes@100.106.92.117</code>, shared from his own tailnet, DERP/direct), mary-mini, angela-mini. <b>David Kaff is not in the roster — "machine not yet known".</b></td><td class="mono">~/.config/appydave/machines.json</td></tr>
+<tr><td>Jan's access</td><td>SSH works for reads and writes (David's ruling 2026-10-07). GitHub does <b>not</b> work over his SSH (token in desktop keychain) → repo updates travel as <b>git bundles</b>: <code>git fetch f main:refs/remotes/origin/main &amp;&amp; git merge --ff-only</code>.</td><td class="mono">memory: jan-mac-access.md</td></tr></table><figcaption style="font-size:13px;color:#7a6e5e;padding-top:4px"><span class="fignum">Figure 1.</span> What exists today, with sources.</figcaption></figure>
+
+<h2>2 · Versions measured today (real data)</h2>
+<p class="mut">"Behind" = commits between that machine's sha and the M4's <code>main</code>, which equals GitHub <code>origin/main</code> (confirmed with <code>git ls-remote</code> for all six). The M2's own cached <code>origin/main</code> is stale, so it understates (it said 8 and 0 where the truth is 9 and 2).</p>
+<figure class="mock" style="margin:12px 0"><div class="mockbar"><span>Fleet · Versions (mock of the new view, real numbers)</span><span class="mut">checked 2026-11-04 · read-only</span></div>
+<table>
+<tr><th>App</th><th>M4 (this machine)</th><th>M2</th><th>Jan's Mac</th><th>David Kaff</th></tr>
+<tr><td><b>FliStudio</b></td><td class="cell"><b>165626c</b><span class="ok">latest · clean</span></td><td class="cell"><b>065129d</b><span class="bad">9 behind</span> · <span class="bad">9 uncommitted</span><br><span class="btn off">Blocked: uncommitted changes</span></td><td class="cell"><b>44d2fd8</b><span class="bad">3 behind</span> · clean<br><span class="btn">Bring to latest</span></td><td class="mut">machine not yet known</td></tr>
+<tr><td><b>FliCut</b></td><td class="cell"><b>7f1bcfb</b><span class="ok">latest · clean</span></td><td class="cell"><b>7f1bcfb</b><span class="ok">latest · clean</span></td><td class="mut">not installed</td><td class="mut">—</td></tr>
+<tr><td><b>FliEdit</b></td><td class="cell"><b>1ece5df</b><span class="ok">latest · clean</span></td><td class="cell"><b>dc39399</b><span class="bad">2 behind</span> · clean<br><span class="btn">Bring to latest</span></td><td class="mut">not installed</td><td class="mut">—</td></tr>
+<tr><td><b>FliHub</b></td><td class="cell"><b>786bfdf</b><span class="ok">latest · clean</span></td><td class="cell"><b>786bfdf</b><span class="ok">latest · clean</span></td><td class="cell"><b>3b3b2f1</b><span class="bad">194 behind</span> · 1 uncommitted (last commit 2026-04-16)<br><span class="btn off">Blocked: uncommitted changes</span></td><td class="mut">—</td></tr>
+<tr><td><b>Teletubby</b></td><td class="cell"><b>a31fce1</b><span class="ok">latest · clean</span></td><td class="cell"><b>44e0011</b><span class="bad">9 behind</span> · 1 uncommitted<br><span class="btn off">Blocked: uncommitted changes</span></td><td class="mut">not installed</td><td class="mut">—</td></tr>
+<tr><td><b>FliCast</b></td><td class="cell"><b>8213fcd</b><span class="ok">latest · clean</span></td><td class="cell"><b>8213fcd</b><span class="ok">latest · clean</span></td><td class="mut">not installed</td><td class="mut">—</td></tr>
+</table>
+<div style="padding:8px 12px;font-size:13px" class="mut">After a successful pull a cell shows <span class="pill y">update ready · restart pending</span> until the app is restarted (the running process keeps old code). Every cell also shows "last pulled" from <code>.git/FETCH_HEAD</code>/reflog time.</div><figcaption style="padding:6px 12px 10px;font-size:13px;color:#7a6e5e"><span class="fignum">Figure 2.</span> Mock of the Versions view with real shas measured 2026-11-04.</figcaption></figure>
+<p>Notes: all repos on <code>main</code>. Jan's FliHub is a surprise — a nearly-seven-month-old checkout with a local edit; whoever updates it should look at that edit first. Jan has FliStudio but not FliCut/FliEdit/Teletubby/FliCast (he also has FliDeck, FliGen, Vibedeck, fli-brief, not checked).</p>
+
+<h2>3 · The flow</h2>
+<ol class="steps">
+<li><b>Versions</b> (read-only, always safe): for each machine × app run <code>git rev-parse HEAD</code>, branch, <code>status --porcelain</code>, and compare to GitHub's <code>main</code> (<code>ls-remote</code> from FliStudio's own machine — one answer for everyone).</li>
+<li><b>Dry run</b> of "Bring to latest": shows exactly what would happen — commits to apply, files touched, whether <code>package-lock.json</code> changed (so <code>npm install</code> would run). Changes nothing.</li>
+<li><b>Consent</b> (see §5), then <b>apply</b> per app: <code>git fetch</code> → <code>git pull --ff-only</code> → <code>npm ci</code>/<code>install</code> only if the lockfile changed. Never restart.</li>
+<li><b>Refuse, with the reason shown</b>, on: uncommitted changes · not on <code>main</code> · history diverged · no network to the source. No stash, no reset, no force — ever.</li>
+<li><b>After</b>: cell turns to <span class="pill y">update ready · restart pending</span>; the owner restarts when ready (existing <code>app.restart</code> where it applies). FliStudio detects "pending" by comparing the sha at process start with the sha on disk.</li></ol>
+
+<h2>4 · How to reach other machines</h2><figure style="margin:16px 0;background:#fff;border:1px solid #d4cdc4;padding:12px">
+<svg viewBox="0 0 1000 520" width="100%" role="img" aria-label="FliStudio reaches machines by SSH or by bundle">
+<style>text{font-family:Oswald,sans-serif;fill:#342d2d}.s{font-family:Roboto,sans-serif;font-size:14px;fill:#7a6e5e}.t{font-size:18px;text-transform:uppercase}</style>
+<rect x="20" y="190" width="220" height="130" fill="#f0ebe4" stroke="#342d2d" stroke-width="2"/>
+<text class="t" x="40" y="225">FliStudio (M4)</text><text class="s" x="40" y="252">fleet.versions · fleet.update</text><text class="s" x="40" y="274">fixed commands only</text><text class="s" x="40" y="296">logs who · what · sha</text>
+<rect x="400" y="30" width="250" height="110" fill="#fff" stroke="#342d2d" stroke-width="2"/>
+<text class="t" x="420" y="65">M2 · own machine</text><text class="s" x="420" y="92">ssh over Tailscale</text><text class="s" x="420" y="114">David's standing approval</text>
+<rect x="400" y="205" width="250" height="110" fill="#fff" stroke="#342d2d" stroke-width="2"/>
+<text class="t" x="420" y="240">Jan's Mac</text><text class="s" x="420" y="267">ssh read-only for Versions</text><text class="s" x="420" y="289">update = git bundle, owner OK</text>
+<rect x="400" y="380" width="250" height="110" fill="#fff" stroke="#c8841a" stroke-width="2" stroke-dasharray="6 4"/>
+<text class="t" x="420" y="415">David Kaff</text><text class="s" x="420" y="442">machine not yet known</text><text class="s" x="420" y="464">bundle file only (if any)</text>
+<rect x="760" y="30" width="220" height="110" fill="#ffde59" stroke="#342d2d" stroke-width="2"/>
+<text class="t" x="775" y="65">Each repo</text><text class="s" x="775" y="92" style="fill:#342d2d">fetch → ff-only pull</text><text class="s" x="775" y="114" style="fill:#342d2d">npm i if lockfile changed</text>
+<rect x="760" y="205" width="220" height="110" fill="#fff" stroke="#342d2d" stroke-width="2"/>
+<text class="t" x="775" y="240">Then</text><text class="s" x="775" y="267">update ready</text><text class="s" x="775" y="289">restart pending (owner's call)</text>
+<g stroke="#342d2d" stroke-width="2" fill="none"><path d="M240 230 L400 85"/><path d="M240 255 L400 260"/><path d="M240 290 L400 435" stroke-dasharray="6 4"/><path d="M650 85 L760 85"/><path d="M650 260 L760 260"/></g>
+<text class="s" x="270" y="140">(a) ssh</text><text class="s" x="290" y="250">(a)+(c)</text><text class="s" x="270" y="380">(c) bundle</text>
+</svg><figcaption style="font-size:13px;color:#7a6e5e"><span class="fignum">Figure 3.</span> How FliStudio reaches each machine, and what happens on arrival. Dashed = not yet decided.</figcaption></figure>
+<figure style="margin:12px 0"><table><tr><th></th><th>(a) SSH over Tailscale from FliStudio</th><th>(b) Small agent on each machine</th><th>(c) Git bundles</th></tr>
+<tr><td>Effort</td><td>Smallest. Already works for M2 and Jan.</td><td>Largest: build, install and keep updated an agent on each machine — on someone else's Mac.</td><td>Small; already proven with Jan.</td></tr>
+<tr><td>Works for Jan</td><td>Reads yes; <code>git fetch</code> from GitHub no (his keychain).</td><td>Same GitHub problem unless the agent holds creds.</td><td><b>Yes — the only way that is proven.</b></td></tr>
+<tr><td>Security</td><td>FliStudio holds an SSH key that can run anything as that user. Over-powered for "git pull". Mitigate: run only fixed argv, never a free shell; log every call.</td><td>Best: agent exposes only <code>versions</code> and <code>update</code>; owner can read its code and stop it. But it is a new listening service.</td><td>No inbound power needed beyond scp; the owner's own Mac does the merge. Smallest blast radius.</td></tr>
+<tr><td>Owner involvement</td><td>None needed technically — so consent must be policy.</td><td>Natural: agent can ask the owner to approve on-screen.</td><td>Owner (or his Claude liaison) runs the merge step.</td></tr>
+<tr><td>Machines without Tailscale (David Kaff?)</td><td>No.</td><td>No (unless it can reach FliStudio).</td><td><b>Yes</b> — a file is a file.</td></tr></table><figcaption style="font-size:13px;color:#7a6e5e;padding-top:4px"><span class="fignum">Figure 4.</span> Reach options compared: (a) SSH, (b) agent, (c) bundles.</figcaption></figure>
+<div class="card rec"><b>Recommendation: (a) for David's own machines (M2, Roamy), (c) for Jan and anyone off the tailnet, with (b) deferred.</b> Wrap both in one fixed-command layer so FliStudio never sends a free-form shell line: the server owns the four commands (rev-parse, status, fetch/ff-only pull, conditional npm install). SSH is the transport, not the permission model.</div>
+
+<h2>5 · Consent model for other people's machines</h2>
+<figure style="margin:12px 0"><table><tr><th>Question</th><th>Proposal</th></tr>
+<tr><td>Who approves?</td><td>The <b>machine owner</b>, once, in advance (per-app opt-in: "FliStudio may update FliStudio and FliCut on my Mac"). For own machines (M2, Roamy): David's standing approval is enough.</td></tr>
+<tr><td>Reads (Versions)</td><td>Allowed after that one-off opt-in; no per-use prompt. Shows only shas/dirty flags — never file contents.</td></tr>
+<tr><td>Writes (update)</td><td><b>Owner present, per run, for others' machines.</b> FliStudio shows the dry-run and waits for "Approve" from the owner (Jan: via his liaison session / a message to him). Self-approve only for David's machines.</td></tr>
+<tr><td>Scope limits</td><td>Fast-forward only, <code>main</code> only, six named repos only, never a restart, never touches projects or media.</td></tr>
+<tr><td>What's logged</td><td>Who asked (principal, agent or human), machine, app, from-sha → to-sha, dry-run or real, approval who/when, result. Written on both ends (FliStudio door log + a line on the target machine).</td></tr>
+<tr><td>Revocation</td><td>A single machines-config flag per machine: <code>fleetUpdate: off | read-only | on-approval | standing</code>. Default for anything not David's own: <code>off</code>.</td></tr></table><figcaption style="font-size:13px;color:#7a6e5e;padding-top:4px"><span class="fignum">Figure 5.</span> Consent model for other people's machines.</figcaption></figure>
+<p class="mut">The machines.json rule already says shared-in machines get "only what they need, opt-in per item" — this model follows it.</p>
+
+<h2>6 · Agent-drivable verbs</h2>
+<figure style="margin:12px 0"><table><tr><th>Verb</th><th>Does</th><th>Notes</th></tr>
+<tr><td><code>fleet.versions</code></td><td>{ machines?, apps? } → per cell: sha, branch, behind, dirty, lastPulled, restartPending, or <code>notChecked: reason</code></td><td>Read-only; a machine that's offline returns a reason, never an empty list (empty ≠ clean).</td></tr>
+<tr><td><code>fleet.update</code></td><td>{ machine, app, dryRun: true (default), approvalId? } → plan or result</td><td>Real run needs <code>dryRun:false</code> + an approval recorded for non-own machines. Stamped with <code>x-fli-principal</code>. Idempotent: already-latest is a no-op.</td></tr>
+<tr><td><code>fleet.bundle</code></td><td>Build the bundle for a machine whose sha is known; returns path + the exact merge command for the owner</td><td>For the Jan path.</td></tr></table><figcaption style="font-size:13px;color:#7a6e5e;padding-top:4px"><span class="fignum">Figure 6.</span> The agent-drivable verbs.</figcaption></figure>
+
+<h2>7 · Decisions only David can make</h2>
+<div class="card"><b>1. Jan: standing OK or per-run?</b> Recommendation: Versions (read) is standing; Update is per-run with Jan or his liaison saying yes. Reason: it is his machine and a bad pull during his work day costs him, not you.</div>
+<div class="card"><b>2. David Kaff:</b> he isn't in the roster. Is he on Tailscale at all? If not, the answer is bundles only, and someone must define how he receives and applies them. Recommendation: leave him out of v1, add him to <code>machines.json</code> when you know how he connects.</div>
+<p class="mut">Smaller call (not blocking): the M2's FliStudio has 9 uncommitted files and Teletubby 1 — someone should commit or discard them before any update there. That is also a good first real test of the refusal message.</p>
+
+<h2>8 · Not checked</h2>
+<ul><li>David Kaff — no entry, nothing to check.</li><li>Roamy, Mary's and Angela's Macs — outside the ask.</li><li>Jan's FliDeck / FliGen / Vibedeck / fli-brief, and what his 1 uncommitted FliHub file is.</li><li>Whether each app's dependencies (<code>node_modules</code>) match its lockfile on M2/Jan; only shas were read.</li><li>Whether a pull would actually be clean in practice — nothing was fetched or pulled anywhere. This page was built with read-only commands (<code>rev-parse</code>, <code>status</code>, <code>ls-remote</code>, <code>rev-list</code>) over SSH to M2 and Jan.</li></ul>
+</div></body></html>
