@@ -159,6 +159,6 @@ Recommend: **Lab-first + an approved mock per change**, promoted to the main pag
 
 **Gate gotcha (2026-11-04, seen twice):** in a FRESH gate worktree the first `npm run typecheck` exits 2 and the first
 `npm test` shows ~70 server/client files failing to load (0 tests run in them). A second typecheck + test run is green. It's a
-build-order artefact of the fresh install, not the branch: always run typecheck + test twice in a fresh worktree before judging,
+build-order artefact of the fresh install, not the branch: run `npm run build` FIRST in a fresh worktree (then typecheck + test are clean — confirmed 10:00 on guides-section-3),
 and judge on the second run. Separately, `modules/storypilot` `server/angles.test.ts` / `client/reader-view.test.ts` flake under
 full-suite load (pass in isolation).
