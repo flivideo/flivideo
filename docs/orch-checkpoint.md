@@ -6,6 +6,15 @@
 - Read this first when resuming as flivideo-orch
 - The current step tells you the next action; the standing rules are not optional
 
+## 2026-11-04 ~19:25 — FliEdit Lane A complete; Reader live; no workers running
+- FliEdit Lane A A1–A8 merged (fliedit main @ watch-list commit after 434c847): U6 3611285, U5 47fa438 (snap only), U7 96456d3,
+  U4 e7d94e0, U3 85fdb01, H1 4b35cec (duck measured 12 dB; d01 9.1 dB), U2 88cf952, H4 434c847. Real-app screenshots for A2–A8 owed
+  (one pass when David is at the M4). Lane B page now 6 calls (05 link, 06 caption safe-area): https://claude.ai/artifact/QA9wL1Y9Qy8PrnWAsQ7GRh
+- FliStudio: freeze lifted 19:00 (roamy). Reader file-type rendering + syntax colours + fragment-first LIVE (b34d5d3). Route for walk
+  fixes: M2 build → M4 gate → merge → heads-up to flivideo-roamy before restart.
+- Held: AITLDR strip (flistudio aitldr-strip @ 858708c, ungated; David said "hold on", never keep/stop). Teletubby voice-parity
+  (b48c8dd) waits for David at the M4 tomorrow (Allow + bench + live read). Speed control waits on Q2/Q3/Q5.
+
 ## 2026-11-04 ~18:35 — David's rulings via flivideo-roamy; evening freeze on FliStudio
 - Rulings: Teletubby click-a-word-to-jump = NO. Apple speech permission + all Teletubby testing wait until tomorrow (David at the M4);
   no speech-test rerun tonight. voice-parity @ b48c8dd gated (532 tests) but NOT merged — merge + Allow + bench + live read tomorrow.
