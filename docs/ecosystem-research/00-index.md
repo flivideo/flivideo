@@ -29,6 +29,7 @@ outside candidates, a *possible* target and the register of what needs his appro
 | 03 | [03-apps-extensions-tools.md](03-apps-extensions-tools.md) | Definitions, the 80-20 guardrail measured, extraction triggers T1–T5, five enforcement options | proposal | B1 |
 | 03b | [03b-capability-landscape.md](03b-capability-landscape.md) | The 12 capability categories → candidates, depth, owning app | research | B2 |
 | — | [candidates/](candidates/) | 11 files: deep — fliedit-replacement, hyperframes-as-editor, openmontage, broll-dam, teleprompter; light — flicut-alternative, screen-recording, craft-projects, script-writing, remotion, motion-canvas | research | B2 |
+| — | [candidates/hyperframes-vs-fliedit.md](candidates/hyperframes-vs-fliedit.md) | HyperFrames vs FliEdit feature by feature (FliEdit code read @ dc39399), clean-room gaps H1–H5, verified vs not. **Read before FliEdit work resumes** | research 2026-11-04 | orch |
 | — | [textream-vs-teletubby-harvest.md](textream-vs-teletubby-harvest.md) | Textream voice-following traced in code (file:line), feature table with harvest verdicts, voice-follow options (a/b/c) for Teletubby | research, not approved | M2 2026-11-03 |
 | 04 | [04-potential-target-architecture.md](04-potential-target-architecture.md) | Per candidate: absorb / add / replace / none; five design questions; a *possible* diagram | possible | B3 |
 | 05 | [05-research-experiments.md](05-research-experiments.md) | Nine bounded Level-4 experiments (X1–X9) | planned, none run | B3 |
