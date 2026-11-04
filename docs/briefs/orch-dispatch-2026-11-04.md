@@ -38,3 +38,12 @@ overlay-pilot render failures and the d13/d18 look specs skip — note them, don
 - If claude-artifacts isn't available, commit the HTML and say "needs publishing". The `brains/ARTIFACTS.md` row: orch adds
   it when it publishes.
 - Report: artifact URL or "needs publishing", the commits, one line per write-up with its recommendation.
+
+## direction-box-dev — `docs/briefs/storypilot-direction-box-2026-11-04.md` (released ~09:40, after guide-slots merged at 8eaaa19)
+- `git -C ~/dev/ad/flivideo/flistudio fetch origin && git -C ~/dev/ad/flivideo/flistudio worktree add ~/dev/ad/flivideo/flistudio-worktrees/direction-box -b direction-box origin/main` (main = 8eaaa19, includes the Guides tab and `story.brief` guides).
+- Parallel: `help-system-dev` edits Prep.tsx / Listen.tsx. Keep out of those.
+- `story.brief` already returns `guides` — add `direction` beside it; don't reshape it.
+- Priority: David is writing d13 + d18 scripts today. Ship the smallest correct slice first (data, verbs, box, brief, Rerun label/compose); skill + plugin bump in the same branch.
+- appydave-plugins: `git pull` first; commit only the storypilot SKILL.md + flivideo plugin.json; push.
+- Push branch `direction-box`; report: shas, test counts before → after, e2e spec names + pass counts, screenshot paths, the exact `story.direction.set` call.
+- Note for all: on the M4 two module unit tests (`client/reader-view.test.ts`, `server/angles.test.ts`) failed under full-suite load and pass in isolation — timing flakes, pre-existing, not yours.
