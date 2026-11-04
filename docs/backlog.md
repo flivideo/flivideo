@@ -9,6 +9,13 @@ crosses apps.
 David, 2026-10-31 20:47 +07: "I have no idea about the automation spec page or the YouTube daily sync... they should be
 put onto a backlog because I'm not there to guide that."
 
+### Session data copies: one way for every app (2026-11-04)
+
+Story Pilot's dock extract solves "a Claude session only lives on one machine", but only for Story Pilot. David wants
+one unified approach for FliStudio and its extensions, documented and checked against other systems that need the same
+thing. Design note: `/Users/davidcruwys/dev/ad/flivideo/docs/session-data-copies-architecture.md`. Where copies live
+and whether they go into git is **hot** (to be talked through on 2026-11-04). It is not a yes.
+
 ### Automations: "you've recorded, want me to cut it?"
 - **Idea:** status changes trigger an offer of the next step.
 
