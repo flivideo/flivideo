@@ -1,6 +1,13 @@
 ---
 created: 2026-11-03
 timestamp: 2026-11-03T21:30+07:00
+schema: storypilot.guide/1
+id: hook-study
+label: Hook study (2026-11-03)
+type: structure
+level: brand
+gist: How David opens videos (a 'you' pain-or-desire question, premise, then the demo) and six hook structures for build stories — lead with but-therefore or in medias res.
+brands: [appydave]
 ---
 # AppyDave hook study (2026-11-03)
 

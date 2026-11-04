@@ -1,0 +1,30 @@
+diff --git a/-storypilot/templates.json b/-storypilot/templates.json
+index 7cd4d4a..3005700 100644
+--- a/-storypilot/templates.json
++++ b/-storypilot/templates.json
+@@ -1,7 +1,5 @@
+ {
+   "schema": "storypilot.templates/1",
+   "templates": [],
+-  "hidden": [
+-    "build-story-spine"
+-  ]
++  "hidden": []
+ }
+diff --git a/voice-profile.md b/voice-profile.md
+index d9cb8ff..2a2bd17 100644
+--- a/voice-profile.md
++++ b/voice-profile.md
+@@ -1,3 +1,12 @@
++---
++schema: storypilot.guide/1
++id: voice-profile
++label: Voice profile (AppyDave)
++type: verbal
++level: brand
++gist: How David sounds on camera, described from all 182 transcripts — a peer-experimenter not a guru, live run-ons, coined jargon glossed for beginners; VERBAL-STYLE is the rule book.
++brands: [appydave]
++---
+ # AppyDave — Tone of Voice Profile
+ 
+ > Synthesized from all **182 as-aired transcripts** (`voice-corpus.md`), analyzed in 5 era-slices
