@@ -6,6 +6,15 @@
 - Read this first when resuming as flivideo-orch
 - The current step tells you the next action; the standing rules are not optional
 
+## 2026-11-04 ~11:00 — STOPPED for shutdown of both machines (David)
+- No FliVideo workers running. Teletubby stopped. FliStudio left as an app (comes back via my-app after reboot).
+- WIP saved: teletubby branch `apple-stt-bundle` @ 799e257 (Apple STT as .app so macOS can prompt) — UNFINISHED, not gated;
+  resume with brief `docs/briefs/teletubby-apple-stt-permission-2026-11-04.md` on the M2.
+- Waiting on David: go on FliEdit Lane A plan (`fliedit/docs/buildout-plan-2026-11-04.md`); Lane B page
+  https://claude.ai/artifact/QA9wL1Y9Qy8PrnWAsQ7GRh; first live voice-follow read (Groq; Teletubby d13 "Story Pilot — Overlay
+  Pilot", press V, Allow mic); walk the Guides on d13 before any script work; G Hub yes/no.
+- After reboot: `my-app start flistudio` on the M4 if it isn't up; kill the orphan nodemon (ppid=1).
+
 ## 2026-11-04 ~10:05 — Guides section + Direction box + help system + voice-follow all live
 - flistudio main 316772c (Guides above Sources, shared FilterChips, story.guide.read), 44d2fd8 Direction box, f65e676 help system;
   teletubby a31fce1 voice-follow (clean-room aligner, Groq primary/Apple fallback, off by default) + eab0ac4 press log.
