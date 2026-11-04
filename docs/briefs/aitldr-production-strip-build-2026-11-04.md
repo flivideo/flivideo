@@ -34,3 +34,15 @@ Does "waiting" end when ANY owed file lands, or only when EVERY owed file is bac
 
 ## Limits
 Commit and push to main. No merging of the archive branch. Do not restart apps without David's go. Report back to David with a screenshot set, and to the session that briefed you.
+
+## Orch dispatch (flivideo-orch, 2026-11-04 16:35)
+- **Builder:** `aitldr-strip-dev`. **Machine: M4**, because the M2 is powered off (shut down 11:05 for David) and verification
+  needs the real `v-aitldr/b13…b23` folders, which live on the M4.
+- **Worktree, never the live checkout:** `git -C ~/dev/ad/flivideo/flistudio fetch origin && git -C ~/dev/ad/flivideo/flistudio worktree add ~/dev/ad/flivideo/flistudio-worktrees/aitldr-strip -b aitldr-strip origin/main`;
+  `npm install`; **`npm run build` first** (fresh-worktree rule), then typecheck/tests.
+- **Overrides "commit and push to main":** push branch `aitldr-strip` and STOP. Orch gates on the M4 (full unit + FULL e2e incl.
+  `project-status.spec.ts`), merges ff-only, restarts FliStudio via `my-app` (orch's standing job; the brief's "no restart without
+  David's go" is about the builder), and takes the screenshots on real b13–b23.
+- Before → after: save `bin/flistudio project status` output (JSON) for 3 non-AITLDR projects (one appydave, one beauty-and-joy, one
+  voz if present) and diff after — must be identical. Test the "every vs any owed file" constant both ways in unit tests.
+- Report to `flivideo-orch`: sha, test counts before → after, the b13–b23 table (computed vs the brief's expected), the diff result.
