@@ -13,6 +13,7 @@ timestamp: 2026-11-04T08:45+07:00
 re-researching. Written for when FliEdit work resumes; **no FliEdit build is planned by this doc.**
 
 **For Agents**:
+- **What's in sync now lives in one place:** `/Users/davidcruwys/dev/ad/flivideo/fliedit/docs/upstream-watch-hyperframes.md` (state per row; re-check when `hyperframes-studio` bumps its pinned version). This file is the research behind it.
 - Read before any FliEdit feature work, or before arguing R9 (FliEdit's fate) / R10 (HyperFrames as an editor) in
   `/Users/davidcruwys/dev/ad/flivideo/docs/ecosystem-research/06-approval-register.md`.
 - Harvest means **clean room only** (David, 2026-11-04): FliEdit may reproduce a feature it sees in HyperFrames by studying it
