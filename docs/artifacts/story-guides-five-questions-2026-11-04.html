@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Story guides: five questions answered</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600&family=Roboto:ital,wght@0,400;0,500;0,700;1,400&family=Roboto+Mono&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;--brown:#342d2d;--gold:#ccba9d;--yellow:#ffde59;--amber:#c8841a;--muted:#7a6e5e;--cream:#faf5ec;--surface:#f0ebe4;--linen:#e8e0d4;--border:#d4cdc4;--chrome:#1a1515;--dark:#25201e;--blue:#2E91FC;--card:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--brown);font:16px/1.6 Roboto,sans-serif}
+.wrap{max-width:1060px;margin:0 auto;padding:28px 24px 64px}
+header{display:flex;align-items:center;gap:14px}
+.logo-badge{display:inline-block;background:#342d2d;border-radius:6px;padding:4px 10px 2px;font-family:"Bebas Neue",Oswald,sans-serif;letter-spacing:.04em;line-height:1.1;font-size:22px}.logo-badge .a{color:#ccba9d}.logo-badge .d{color:#ffde59}
+.eyebrow{font:500 12px Oswald,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+h1{font:600 34px/1.15 Oswald,sans-serif;text-transform:uppercase;margin:12px 0 6px}
+h2{font:600 22px/1.2 Oswald,sans-serif;text-transform:uppercase;margin:40px 0 8px}h2 .n{color:var(--amber);margin-right:8px}
+.verdict{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--yellow);padding:14px 18px;border-radius:6px;margin:16px 0}
+.verdict ul{margin:6px 0 0;padding-left:20px}
+figure{margin:14px 0 8px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:16px}
+figcaption{font-size:14px;color:var(--muted);margin-top:8px}
+.fignum{font:600 12px Oswald,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-right:6px}
+.scroll{overflow-x:auto}svg{display:block;max-width:100%;height:auto}svg text{font-family:Roboto,sans-serif;fill:#342d2d}
+table{border-collapse:collapse;width:100%;font-size:14.5px}th,td{border-bottom:1px solid var(--border);padding:7px 9px;text-align:left;vertical-align:top}
+th{font:500 12.5px Oswald,sans-serif;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.ok{color:#3f6b3a;font-weight:700}.no{color:#a2412f;font-weight:700}.part{color:#8a5a10;font-weight:700}
+.mono{font-family:"Roboto Mono",monospace;font-size:12.5px}
+a{color:var(--blue)}
+.limits{border:1px dashed var(--border);border-radius:6px;padding:12px 16px;font-size:14px;color:var(--muted)}
+</style>
+</head>
+<body><div class="wrap">
+<section>
+<header><span class="logo-badge"><span class="a">Appy</span><span class="d">Dave</span></span><span class="eyebrow">Story guides · 2026-11-04 night</span></header>
+<h1>Story guides: five questions answered</h1>
+<div class="verdict"><b>In short:</b>
+<ul>
+<li><b>Gists:</b> 5 of 7 match their files; 2 were partly off and are fixed (header only).</li>
+<li><b>VERBAL-STYLE</b> was built for general writing from live demos. It's read by 8 systems; Story Pilot is just one. Keep the forge skills, and give them a "register".</li>
+<li><b>Yes, two verbal styles:</b> live demo and scripted story. The Mike research already made the story <i>structure</i> guide, but it isn't wired into Story Pilot.</li>
+<li><b>The Midas video</b> is a scripted, motion-graphics-heavy explainer. Worth borrowing: open loops, chapter cards, an A/B listening test.</li>
+<li><b>Audio:</b> one tool named (OmniVoice Studio + the OmniVoice model). Free to run, but the model weights are <b>non-commercial</b>. Trial it on the M2 for script previews in your voice, not for published audio.</li>
+</ul></div>
+</section>
+
+<section>
+<h2><span class="n">01</span>Gist audit: every gist against its own file</h2>
+<figure>
+<div class="scroll"><table>
+<tr><th>Guide</th><th>Gist says</th><th>The file says</th><th>Verdict</th></tr>
+<tr><td>build-story</td><td>problem → why → tension → turn → resolution; no drama; not a tutorial</td><td>the same, word for word</td><td class="ok">aligned</td></tr>
+<tr><td>build-short</td><td>one problem, turn, payoff; no greeting</td><td>the same</td><td class="ok">aligned</td></tr>
+<tr><td>VERBAL-STYLE</td><td>casual, "so… now…", mistakes left in, glossed, tinkerer, no hype</td><td>§1–§6</td><td class="ok">aligned</td></tr>
+<tr><td>Voice profile</td><td>peer not guru, live run-ons, glossed jargon</td><td>the same, <b>plus</b> line 139: "spoken register only… for scripts, dial the run-ons down"</td><td class="part">partly → fixed</td></tr>
+<tr><td>Video structure: educational</td><td>stake hook 2–5%, predict → run → react → explain, recap after first payoff, soft asks</td><td>§1–§6</td><td class="ok">aligned</td></tr>
+<tr><td>Hook study</td><td>"lead with but-therefore or in medias res" as a rule</td><td>that's the <b>d13-only</b> recommendation; the study is a survey of 10 openings + 6 options</td><td class="part">partly → fixed</td></tr>
+<tr><td>vOz studio narrative</td><td>symbol and metaphor, mirrors not billboards, door left open</td><td>§1, "I build mirrors, not billboards", "the door must stay open"</td><td class="ok">aligned</td></tr>
+</table></div>
+<figcaption><span class="fignum">Figure 1</span>Two partly off, none flatly wrong now. Tonight's earlier VERBAL-STYLE gist was the one outright miss, already corrected.</figcaption>
+</figure>
+</section>
+
+<section>
+<h2><span class="n">02</span>Who reads VERBAL-STYLE today</h2>
+<figure>
+<div class="scroll"><svg viewBox="0 0 980 300" width="980" role="img" aria-label="VERBAL-STYLE at the centre with eight consumers">
+ <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#7a6e5e"/></marker></defs>
+ <rect x="390" y="120" width="200" height="60" rx="8" fill="#ffde59" stroke="#c8841a"/><text x="490" y="146" text-anchor="middle" font-size="14" font-weight="700">VERBAL-STYLE.md</text><text x="490" y="166" text-anchor="middle" font-size="11">June 2026 · live-demo voice</text>
+ <g font-size="12">
+  <rect x="20" y="20" width="230" height="46" rx="6" fill="#fff" stroke="#c8841a" stroke-width="2"/><text x="32" y="40" font-weight="700">verbal-style-forge</text><text x="32" y="56" font-size="11" fill="#7a6e5e">WRITES it · create / reflect / refresh</text>
+  <rect x="20" y="90" width="230" height="46" rx="6" fill="#fff" stroke="#d4cdc4"/><text x="32" y="110" font-weight="700">structure-forge</text><text x="32" y="126" font-size="11" fill="#7a6e5e">keeps structure apart from voice</text>
+  <rect x="20" y="160" width="230" height="46" rx="6" fill="#fff" stroke="#d4cdc4"/><text x="32" y="180" font-weight="700">brand skill</text><text x="32" y="196" font-size="11" fill="#7a6e5e">"voice, wording, scripts" index</text>
+  <rect x="20" y="230" width="230" height="46" rx="6" fill="#fff" stroke="#d4cdc4"/><text x="32" y="250" font-weight="700">ylo social posts</text><text x="32" y="266" font-size="11" fill="#7a6e5e">YouTube post wording</text>
+  <rect x="730" y="20" width="230" height="46" rx="6" fill="#fff" stroke="#c8841a" stroke-width="2"/><text x="742" y="40" font-weight="700">Story Pilot</text><text x="742" y="56" font-size="11" fill="#7a6e5e">as a guide AND in voiceDocs</text>
+  <rect x="730" y="90" width="230" height="46" rx="6" fill="#fff" stroke="#d4cdc4"/><text x="742" y="110" font-weight="700">writers-room</text><text x="742" y="126" font-size="11" fill="#7a6e5e">scribe + voice-coach (not installed)</text>
+  <rect x="730" y="160" width="230" height="46" rx="6" fill="#fff" stroke="#d4cdc4"/><text x="742" y="180" font-weight="700">eve-maker brand data</text><text x="742" y="196" font-size="11" fill="#7a6e5e">agent persona builder</text>
+  <rect x="730" y="230" width="230" height="46" rx="6" fill="#fff" stroke="#d4cdc4"/><text x="742" y="250" font-weight="700">AITLDR runbook</text><text x="742" y="266" font-size="11" fill="#7a6e5e">via its own AITLDR VERBAL-STYLE</text>
+  <path d="M250 43L388 130M250 113L388 140M250 183L388 160M250 253L388 172" stroke="#d4cdc4" stroke-width="1.5"/>
+  <path d="M590 130L728 43M590 140L728 113M590 160L728 183M590 172L728 253" stroke="#d4cdc4" stroke-width="1.5"/>
+ </g>
+</svg></div>
+<figcaption><span class="fignum">Figure 2</span>Found by grep across appydave-plugins and the apps. Story Pilot is one reader of eight. writers-room is a second script writer reading the same file; that overlap is worth knowing.</figcaption>
+</figure>
+<figure>
+<div class="scroll"><table>
+<tr><th>Question</th><th>Answer</th></tr>
+<tr><td>Built for a different system?</td><td><b>Yes.</b> It was forged in June for "any downstream script, email or post writer", from 14 <i>live demo</i> videos. Story Pilot (Oct–Nov) writes <i>prompter scripts for story videos</i>, a job it was never shaped for</td></tr>
+<tr><td>Reuse the forge, or build something dedicated?</td><td><b>Reuse the forge</b>, and add a <b>register</b> input (live / scripted) so it can make a second style from the same corpus. It already does create, reflect (score) and refresh, and seven other systems depend on its file format. A Story-Pilot-only tool would fork the voice</td></tr>
+</table></div>
+<figcaption><span class="fignum">Figure 3</span>One voice source with variants, not a second voice system.</figcaption>
+</figure>
+</section>
+
+<section>
+<h2><span class="n">03</span>More than one verbal style, and where Mike fits</h2>
+<figure>
+<div class="scroll"><svg viewBox="0 0 980 250" width="980" role="img" aria-label="Guide grid: two verbal guides by appliesTo, two structure guides by appliesTo">
+ <g font-size="12">
+  <text x="20" y="22" font-weight="700" fill="#7a6e5e">TYPE verbal (brand)</text>
+  <rect x="20" y="32" width="300" height="80" rx="6" fill="#fff" stroke="#d4cdc4"/><text x="32" y="54" font-weight="700">VERBAL-STYLE (live demo)</text><text x="32" y="74" fill="#7a6e5e">appliesTo: tutorial · exists</text><text x="32" y="94" fill="#7a6e5e">run-ons, "what we'll do is we'll just…"</text>
+  <rect x="340" y="32" width="300" height="80" rx="6" fill="#ffde59" stroke="#c8841a"/><text x="352" y="54" font-weight="700">VERBAL-STYLE (scripted story)</text><text x="352" y="74">appliesTo: story · NEW</text><text x="352" y="94">seed: spoken-vs-read.md + Mike pacing</text>
+  <text x="20" y="142" font-weight="700" fill="#7a6e5e">TYPE structure (brand)</text>
+  <rect x="20" y="152" width="300" height="80" rx="6" fill="#fff" stroke="#d4cdc4"/><text x="32" y="174" font-weight="700">Video structure: educational</text><text x="32" y="194" fill="#7a6e5e">appliesTo: tutorial · exists</text>
+  <rect x="340" y="152" width="300" height="80" rx="6" fill="#ffde59" stroke="#c8841a"/><text x="352" y="174" font-weight="700">Spoken script template (story)</text><text x="352" y="194">appliesTo: story · EXISTS, not wired</text><text x="352" y="214">openrig/spoken-scripts/ (from Mike)</text>
+  <rect x="680" y="32" width="280" height="200" rx="6" fill="#faf5ec" stroke="#d4cdc4"/>
+  <text x="694" y="56" font-weight="700">What the Mike research made</text>
+  <text x="694" y="80" fill="#7a6e5e">mike-mechanism.md: hook = 4 moves</text>
+  <text x="694" y="98" fill="#7a6e5e">in ~30 s; 2 tension engines; 3 reveals;</text>
+  <text x="694" y="116" fill="#7a6e5e">story lines 8–9 words vs ~11</text>
+  <text x="694" y="142" fill="#3f6b3a" font-weight="700">✓ a structure guide</text>
+  <text x="694" y="160" fill="#7a6e5e">spoken-script-template.md (11 beats)</text>
+  <text x="694" y="186" fill="#a2412f" font-weight="700">✗ no verbal style of its own</text>
+  <text x="694" y="204" fill="#7a6e5e">spoken-vs-read.md is the nearest</text>
+ </g>
+</svg></div>
+<figcaption><span class="fignum">Figure 4</span>Yellow = what's missing from Story Pilot today. The story structure already exists in <span class="mono">brains/openrig/spoken-scripts/</span> and would fill the empty "Structure (brand): story" slot. The scripted-story verbal style would be new, forged from the same corpus with the scripted register.</figcaption>
+</figure>
+</section>
+
+<section>
+<h2><span class="n">04</span>The Midas video, taken apart</h2>
+<figure>
+<div class="scroll"><svg viewBox="0 0 980 120" width="980" role="img" aria-label="Timeline of the Midas video structure">
+ <g font-size="11">
+  <rect x="10" y="30" width="70" height="40" fill="#ffde59" stroke="#c8841a"/><text x="14" y="54">pain: $99/mo</text>
+  <rect x="80" y="30" width="80" height="40" fill="#ffde59" stroke="#c8841a"/><text x="84" y="48">A/B listen</text><text x="84" y="62">"comment A or B"</text>
+  <rect x="160" y="30" width="90" height="40" fill="#f0ebe4" stroke="#d4cdc4"/><text x="164" y="48">promise +</text><text x="164" y="62">open loop: money</text>
+  <rect x="250" y="30" width="60" height="40" fill="#f0ebe4" stroke="#d4cdc4"/><text x="254" y="54">roadmap</text>
+  <rect x="310" y="30" width="110" height="40" fill="#fff" stroke="#d4cdc4"/><text x="314" y="54">what it is, why free</text>
+  <rect x="420" y="30" width="190" height="40" fill="#fff" stroke="#d4cdc4"/><text x="424" y="48">install: Step 1 → Step 7</text><text x="424" y="62">(Claude Code does it)</text>
+  <rect x="610" y="30" width="190" height="40" fill="#fff" stroke="#d4cdc4"/><text x="614" y="48">demos: clone, design,</text><text x="614" y="62">stories, dubbing</text>
+  <rect x="800" y="30" width="60" height="40" fill="#f0ebe4" stroke="#d4cdc4"/><text x="804" y="54">caveats</text>
+  <rect x="860" y="30" width="60" height="40" fill="#ffde59" stroke="#c8841a"/><text x="864" y="54">money loop</text>
+  <rect x="920" y="30" width="50" height="40" fill="#f0ebe4" stroke="#d4cdc4"/><text x="924" y="54">recap+CTA</text>
+  <text x="10" y="20" font-size="12" font-weight="700" fill="#7a6e5e">0:00</text><text x="930" y="20" font-size="12" font-weight="700" fill="#7a6e5e">13:50</text>
+  <text x="80" y="96" fill="#a2412f">⚠ the A/B answer is promised "at the very end" and never said in the transcript</text>
+ </g>
+</svg></div>
+<figcaption><span class="fignum">Figure 5</span>Yellow = engagement devices: a priced pain, a participation test, open loops paid off late. Widths are approximate positions in the transcript.</figcaption>
+</figure>
+<figure>
+<div class="scroll"><table>
+<tr><th>Aspect</th><th>What Midas does</th><th>For FliStudio (story → B-roll → overlay → edit)</th></tr>
+<tr><td>Verbal style</td><td>Fully scripted, short clean sentences, brand tagline ("simple, useful, completely free of the usual hype"), signposted "Step one… Step seven", stacked open loops ("biggest surprise for the end")</td><td><b>Adopt:</b> open loops paid off later, as a Story Pilot structure move. <b>Doesn't apply:</b> the polish level; it's far from your tinkerer voice. Their anti-hype claim sits under a hype title ("UNLIMITED")</td></tr>
+<tr><td>Structure</td><td>Tutorial with a sales arc: pain → test → promise → install → demo → caveats → monetisation → recap</td><td><b>Adopt:</b> a viewer participation beat (A/B) where it's honest. <b>Doesn't apply:</b> the "make money" payoff; it's off your brand</td></tr>
+<tr><td>B-roll</td><td>Mostly motion graphics: dark purple kinetic cards (credits counter, $0 vs pay-per-gen, laptop + waveform), numbered chapter cards ("Section 02 · Installing"). The presenter appears only briefly</td><td><b>Adopt:</b> chapter cards straight from Story Pilot chapters (they already exist as data), and stat cards for numbers in the script. This is B-roll Pilot / Overlay Pilot territory</td></tr>
+<tr><td>Overlays</td><td>Highlighted keyword text ("running locally"), option cards ("Option B"), service tiles</td><td><b>Adopt:</b> keyword highlight. Overlay Pilot's grammar already has "claim / number / list" rows to hang this on</td></tr>
+<tr><td>Code / tooling</td><td>Terminal: <span class="mono">mkdir -p ~/voice-studio</span>, <span class="mono">claude</span>, trust folder, one install prompt; Claude fixes dependency and memory errors; model picker</td><td>Same pattern as your "hand it to Claude" stories; nothing new to borrow</td></tr>
+</table></div>
+<figcaption><span class="fignum">Figure 6</span>From the transcript plus 12 still frames. "Midas" is how the presenter says it; the channel shows as "Maitis".</figcaption>
+</figure>
+</section>
+
+<section>
+<h2><span class="n">05</span>Audio tools named in the video</h2>
+<figure>
+<div class="scroll"><table>
+<tr><th>Tool</th><th>What</th><th>Where it runs</th><th>Licence</th><th>RAM / GPU</th><th>M2 fit</th><th>Would replace</th></tr>
+<tr><td><b>OmniVoice Studio</b> (<a href="https://github.com/debpalash/OmniVoice-Studio">debpalash/OmniVoice-Studio</a>)</td><td>Desktop app: clone, voice design, dubbing, audiobooks, transcribe. Beta</td><td>Local; Apple Silicon via MPS/MLX; no Intel Mac</td><td>App: Apache-2.0 on one index, AGPL-3.0 on another: <b>unconfirmed</b></td><td><b>Not published</b> in what I found; it had MPS memory crashes, now isolated</td><td>OK to trial, on demand only (don't leave it resident)</td><td>ElevenLabs voice cloning / design</td></tr>
+<tr><td><b>OmniVoice</b> model (<a href="https://huggingface.co/k2-fsa/omnivoice">k2-fsa/omnivoice</a>)</td><td>Zero-shot TTS + cloning, 600+ languages</td><td>Local; <a href="https://huggingface.co/mlx-community/OmniVoice">MLX port</a> exists</td><td>Code Apache-2.0; <b>weights CC-BY-NC (non-commercial)</b></td><td>Unmeasured</td><td>Same</td><td>Fine for previews; <b>not</b> for published or client audio</td></tr>
+<tr><td>ElevenLabs v4</td><td>The paid baseline</td><td>Hosted</td><td>Paid, up to $99/mo per the video</td><td>—</td><td>—</td><td>—</td></tr>
+</table></div>
+<figcaption><span class="fignum">Figure 7</span>A <a href="https://www.mindstudio.ai/blog/voicestudio-vs-elevenlabs">MindStudio hands-on review</a> found the default cloning "distorted, barely intelligible", clearly behind ElevenLabs. The video shows it sounding close.</figcaption>
+</figure>
+<figure>
+<div class="scroll"><table>
+<tr><th>Where you use voice today</th><th>Engine</th><th>Would OmniVoice help?</th></tr>
+<tr><td>Story Pilot Listen (hearing a script)</td><td>local TTS, voice <span class="mono">af_heart</span> (a Kokoro voice), free</td><td><b>Yes, the best fit:</b> hear the script in <i>your</i> cloned voice before recording. Non-commercial is fine; it's never published</td></tr>
+<tr><td>FliTools transcription, pass 2</td><td>CrisperWhisper (local) by default; ElevenLabs Scribe optional</td><td>No: that's speech-to-text, not voice</td></tr>
+</table></div>
+<figcaption><span class="fignum">Figure 8</span>FliVideo doesn't pay ElevenLabs for voice today, so there's no bill to cut here. The gain is hearing scripts in your own voice. <b>Trial first: OmniVoice (MLX) on the M2, on demand, for Listen.</b> No install without your go.</figcaption>
+</figure>
+</section>
+
+<section>
+<div class="limits"><b>Not established:</b> OmniVoice's RAM need (not published in what I found); which licence the Studio app really carries; whether the presenter is a real person; the video's view or growth numbers (the brief said "growing fast", and I didn't check). Frames were sampled at 12 moments, not watched in full. Sources: transcript via yt-dlp (13:50, 2,306 words, uploaded 2026-10-31); grep of appydave-plugins and FliVideo apps; the M4 guide files; <span class="mono">brains/openrig/spoken-scripts/</span>; web: <a href="https://github.com/debpalash/OmniVoice-Studio">OmniVoice Studio</a>, <a href="https://huggingface.co/k2-fsa/omnivoice">k2-fsa/omnivoice</a>, <a href="https://www.mindstudio.ai/blog/voicestudio-vs-elevenlabs">MindStudio review</a>, <a href="https://kdnuggets.com/getting-started-with-omnivoice-studio">KDnuggets</a>.</div>
+</section>
+</div></body></html>
