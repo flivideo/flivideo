@@ -464,3 +464,10 @@ Previous: `fc50-waits` merged 2026-10-27 (FliCut main `7bc5a4a`).
 - "D12 really runs 19:35": wrong. `buildPlan` doubled frames at 1,025 joins (+23.8 s); 19:11 is true
 - "Two exports = two files on disk": wrong. Overwritten in place
 - "Disk drop = temp folders or system clones (the Roamy cause)": not on the M4 today. It was swap growth
+
+## 2026-11-05 06:25 — Roamy handed back; David now at the M4 with orch
+- flivideo-roamy stepped back (handover stamped 2026-11-05 ~00:10). Style: execute recs; bring David only "reload, look here"; ONE prose question at a time with a rec.
+- Teletubby main = 5436186 (voicefix c6fd6c5 + voice-parity b48c8dd; 554 pass / 11 skip; pushed). Speech permission granted 05:59 (com.appydave.teletubby.speech). Apple helper now fails "Siri and Dictation are disabled": David to switch on Dictation. Not restarted yet; restart at a break, then voice-selftest.sh, bench (apple+groq), live read d13.
+- Open queue from Roamy, in order: A. wire openrig/spoken-scripts/spoken-script-template.md as "Structure (brand): story" guide (point, header only) + forge VERBAL-STYLE "scripted story" register (from spoken-vs-read.md + Mike pacing) + split §8 every-video vs tutorial-only — rec YES, unasked of David at the M4. B. d13 redo: David writes Direction, then Rerun v4 — NO rerun until he says. C. voiceDocs vs Verbal guides ownership, sign-off wording — David's call later. D. OmniVoice trial on M2 — needs go. F. "Reading the project…" >10 s over tunnel — check on M4.
+- Also held: AITLDR strip merge (asked, unanswered); FliEdit A2–A8 real-app screenshots (needs awake display).
+- Pages: story guides five questions https://claude.ai/artifact/EoTMUn9ci2sLrT13Wvrww1 · VERBAL-STYLE deconstructed https://claude.ai/artifact/4xzc9y2kAvwGPeWzBVvtgM · build-story guides https://claude.ai/artifact/EwzoVcZVWmNyafSCoho4WE
