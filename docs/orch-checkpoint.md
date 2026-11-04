@@ -6,6 +6,18 @@
 - Read this first when resuming as flivideo-orch
 - The current step tells you the next action; the standing rules are not optional
 
+## 2026-11-04 ~09:35 — David out ~1 h ("anything you can manage, do")
+- Merged + live: help system (flistudio f65e676 incl. 8a1fc56; fli-core v0.30.0 tagged 7f23961; brand-dave 4.1.4), press log
+  (teletubby eab0ac4; Teletubby not running on the M4, real-app press-log check needs David presenting). Plugins updated on M4
+  (flivideo 2.10.0, brand-dave 4.1.4) — restart sessions to load.
+- Gating: direction-box (rebased gate-dir 44d2fd8). Running: guides-section-dev (M2; Guides above Sources + shared FilterChips),
+  tubby-voice-dev (M2; clean-room spec frozen sha be9b449…, released to build at 09:3x, then Groq vs Apple bake-off),
+  fliedit-watch-rsch (M4; watch list fliedit 8c0949e, U1–U10; publishing the pairs page).
+- Scripts (d13, d18) ON HOLD by David until every guide is visible on screen and talked through.
+- Speed plan done (docs/research/speed-control-plan-2026-11-04.md, f3970d2) — show David before any code.
+- Asked David: uninstall Logitech G Hub on the M2 (installed 2025-09-12, no Logitech USB device, autostarts 2 launch agents). His call.
+- cl-matchline-build (M2, not ours) waits on David: `npm run app:restart` in ~/dev/ad/apps/captains-log.
+
 ## 2026-11-04 ~09:05 — HyperFrames app live; semantic identity re-checked
 - hyperframes-studio app up (M4 127.0.0.1:7210, ~/dev/ad/apps/hyperframes-studio 63ba5c1, apps.json b6cceee, d01-trial v-appydave c2f0e59). fliedit-sbs (M4) running. hf-door brief held until help-system + guide-slots merge.
 - Semantic identity: David's lost 10:49 discussion found by flivideo-roamy (78d6888); orch re-check appended §6 (add domPath, lint gate before the coverage test, point-at-anything mode).
