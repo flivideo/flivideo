@@ -6,6 +6,15 @@
 - Read this first when resuming as flivideo-orch
 - The current step tells you the next action; the standing rules are not optional
 
+## 2026-11-04 ~21:05 — evening walk builds all live; nothing running
+- FliStudio main f1e54a4: Reader file-type rendering (b34d5d3), typed guides (d78d06f/defbebb; d13 story.brief build words IDENTICAL),
+  Reader guide layout (60cfe46), Reader fixes (20c3b76: anchor links, inline md, used = "in voice docs"), speed step 2 (Viewer 2× / Listen 1×, remembered).
+- fli-core v0.31.0-rc.1 (guides) → v0.32.0 (SpeedControl) → v0.33.0 (rememberedSpeed). FliHub f35299b and FliCut a9aaf12 on the shared control
+  + remembered speed. Gists: VERBAL-STYLE (brand-dave 4.2.1), voice-profile (v-appydave 3f41dd0), hook study (flivideo 4aac9a3), vOz
+  studio-narrative header (v-voz). FliEdit Lane A complete (A1–A8); Lane B page 6 calls.
+- Held: AITLDR strip (flistudio aitldr-strip 858708c, ungated, needs rebase). Teletubby voice-parity b48c8dd → tomorrow at the M4.
+  Real-app screenshots owed: FliEdit A2–A8. Update strip shows hyperframes-studio (no origin) — exclude later.
+
 ## 2026-11-04 ~19:25 — FliEdit Lane A complete; Reader live; no workers running
 - FliEdit Lane A A1–A8 merged (fliedit main @ watch-list commit after 434c847): U6 3611285, U5 47fa438 (snap only), U7 96456d3,
   U4 e7d94e0, U3 85fdb01, H1 4b35cec (duck measured 12 dB; d01 9.1 dB), U2 88cf952, H4 434c847. Real-app screenshots for A2–A8 owed
