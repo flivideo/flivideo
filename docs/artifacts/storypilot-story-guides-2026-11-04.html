@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Story guides: the shelf above the islands</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300..700&family=Roboto:ital,wght@0,300..700;1,400&family=Roboto+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light;
+  --brand-brown:#342d2d; --brand-gold:#ccba9d; --brand-yellow:#ffde59; --brand-amber:#c8841a;
+  --brand-muted:#7a6e5e; --brand-near-white:#faf5ec; --brand-surface:#f0ebe4; --brand-linen:#e8e0d4;
+  --brand-border:#d4cdc4; --brand-chrome:#1a1515; --brand-dark-surface:#25201e; --brand-blue:#2E91FC; --brand-card:#ffffff;
+  --ok:#3d7a4a; --ok-bg:#e6f0e3; --miss:#b0562c; --miss-bg:#fbeee4; --part:#8a6d1f; --part-bg:#fbf3d6;
+}
+* { box-sizing:border-box; }
+body { margin:0; background:var(--brand-near-white); color:var(--brand-brown); font:16px/1.6 Roboto, system-ui, sans-serif; }
+.wrap { max-width:1120px; margin:0 auto; padding:28px 24px 64px; }
+header { display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-bottom:8px; }
+.logo-badge { display:inline-block; background:#342d2d; border-radius:6px; padding:4px 10px 2px; font-family:"Bebas Neue",Oswald,sans-serif; font-size:22px; letter-spacing:.04em; line-height:1.1; }
+.logo-badge .a { color:#ccba9d; } .logo-badge .d { color:#ffde59; }
+.eyebrow { font-family:Oswald,sans-serif; text-transform:uppercase; letter-spacing:.12em; font-size:13px; color:var(--brand-muted); }
+h1 { font-family:Oswald,sans-serif; font-weight:600; font-size:38px; line-height:1.15; margin:10px 0 6px; text-transform:uppercase; }
+h2 { font-family:Oswald,sans-serif; font-weight:500; font-size:24px; text-transform:uppercase; margin:0 0 6px; display:flex; gap:12px; align-items:baseline; }
+h2 .n { color:var(--brand-amber); font-family:"Roboto Mono",monospace; font-size:18px; }
+.lede { font-size:18px; max-width:860px; }
+.verdict { border-left:4px solid var(--brand-amber); background:var(--brand-card); padding:12px 16px; margin:16px 0 8px; border-radius:0 6px 6px 0; max-width:900px; }
+.verdict b { background:linear-gradient(transparent 62%, var(--brand-yellow) 62%); }
+section { margin-top:44px; }
+section > p { max-width:880px; margin:4px 0 12px; }
+figure { margin:12px 0 0; background:var(--brand-card); border:1px solid var(--brand-border); border-radius:8px; padding:16px; }
+figcaption { font-size:14px; color:var(--brand-muted); margin-top:10px; }
+.fignum { font-family:Oswald,sans-serif; text-transform:uppercase; letter-spacing:.06em; color:var(--brand-brown); margin-right:6px; }
+.scroll { overflow-x:auto; }
+table { border-collapse:collapse; width:100%; font-size:14px; }
+th { font-family:Oswald,sans-serif; font-weight:500; text-transform:uppercase; letter-spacing:.04em; font-size:13px; text-align:left; border-bottom:2px solid var(--brand-brown); padding:6px 8px; white-space:nowrap; }
+td { border-bottom:1px solid var(--brand-border); padding:7px 8px; vertical-align:top; }
+td code, p code, li code { font-family:"Roboto Mono",monospace; font-size:12px; background:var(--brand-surface); padding:1px 4px; border-radius:3px; word-break:break-all; }
+.tag { display:inline-block; font-size:11px; font-family:Oswald,sans-serif; text-transform:uppercase; letter-spacing:.05em; padding:1px 7px; border-radius:10px; border:1px solid var(--brand-border); white-space:nowrap; }
+.t-verbal { background:#f3e7d3; } .t-voice { background:#e5ecf3; } .t-struct { background:#e6f0e3; } .t-lens { background:#efe4ef; } .t-visual { background:#f0ebe4; } .t-not { background:#fff; color:var(--brand-muted); }
+.grid td, .grid th { text-align:center; vertical-align:middle; }
+.grid th:first-child, .grid td:first-child { text-align:left; }
+.cell { display:block; border-radius:6px; padding:8px 6px; font-size:12.5px; line-height:1.35; min-height:62px; }
+.c-ok { background:var(--ok-bg); border:1px solid var(--ok); }
+.c-miss { background:var(--miss-bg); border:1.5px dashed var(--miss); }
+.c-part { background:var(--part-bg); border:1px solid var(--part); }
+.c-off { background:repeating-linear-gradient(45deg,#f6f2ec,#f6f2ec 6px,#ece6dd 6px,#ece6dd 12px); border:1px solid var(--brand-border); color:var(--brand-muted); }
+.cell b { display:block; font-family:Oswald,sans-serif; text-transform:uppercase; font-size:11px; letter-spacing:.06em; margin-bottom:2px; }
+.legend { display:flex; gap:14px; flex-wrap:wrap; font-size:13px; margin:0 0 10px; }
+.legend span { display:inline-flex; align-items:center; gap:6px; }
+.sw { width:18px; height:14px; border-radius:3px; display:inline-block; }
+.two { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+@media (max-width:760px){ .two { grid-template-columns:1fr; } h1 { font-size:30px; } }
+.card { border:1px solid var(--brand-border); border-radius:8px; padding:12px 14px; background:var(--brand-card); }
+.card h3 { font-family:Oswald,sans-serif; text-transform:uppercase; font-weight:500; margin:0 0 6px; font-size:17px; }
+.card ul { margin:0; padding-left:18px; font-size:14px; }
+.limits { background:var(--brand-surface); border-radius:8px; padding:14px 18px; }
+.limits li { margin:3px 0; }
+a { color:var(--brand-blue); }
+footer { margin-top:48px; font-size:13px; color:var(--brand-muted); border-top:1px solid var(--brand-border); padding-top:12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <span class="logo-badge"><span class="a">Appy</span><span class="d">Dave</span></span>
+  <span class="eyebrow">Story Pilot · design research · 4 Nov 2026 · not a build</span>
+</header>
+
+<section style="margin-top:8px">
+<h1>Story guides: the shelf above the islands</h1>
+<p class="lede">Document Islands answer <i>what happened</i>. Story guides answer <i>how to tell it</i>: verbal style, voice, structure. Guides need two keys, <b>level</b> and <b>type</b>, and a build should pick them by what kind of video it is.</p>
+<div class="verdict"><b>Verdict:</b> the d13 launch stamp didn't come from a wrong guide but from a <b>flat list</b>. Story Pilot hands every video the same verbal-style docs, whatever the form. The guide was written mostly from tutorials, so a story video inherited tutorial bookends. The fix is in how guides are organised, not in better wording of the Global/Brand boxes.</div>
+</section>
+
+<section>
+<h2><span class="n">01</span>What happened on 30 Oct</h2>
+<p>Traced from the M4 transcript of session <code>f7fd0728</code> (<code>storypilot-dev</code>, 02:53–02:57Z). No workflow and no story instructions existed yet.</p>
+<figure>
+<div class="scroll">
+<svg viewBox="0 0 1040 250" width="100%" style="min-width:820px" role="img" aria-label="Flow of the 30 October build">
+  <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#342d2d"/></marker></defs>
+  <g font-family="Roboto, sans-serif" font-size="13" fill="#342d2d">
+    <rect x="10" y="30" width="180" height="70" rx="8" fill="#fff" stroke="#d4cdc4"/>
+    <text x="100" y="58" text-anchor="middle" font-weight="600">David's own turns</text>
+    <text x="100" y="78" text-anchor="middle" fill="#7a6e5e">2 sessions + spec</text>
+    <rect x="10" y="140" width="180" height="70" rx="8" fill="#f3e7d3" stroke="#c8841a"/>
+    <text x="100" y="168" text-anchor="middle" font-weight="600">VERBAL-STYLE.md</text>
+    <text x="100" y="188" text-anchor="middle" fill="#7a6e5e">one style, all videos</text>
+    <rect x="250" y="140" width="210" height="70" rx="8" fill="#f3e7d3" stroke="#c8841a"/>
+    <text x="355" y="164" text-anchor="middle" font-weight="600">creator settings</text>
+    <text x="355" y="182" text-anchor="middle" fill="#7a6e5e">voiceDocs + signatures:</text>
+    <text x="355" y="199" text-anchor="middle" fill="#b0562c">"I'm AppyDave, let's get into it"</text>
+    <rect x="250" y="30" width="210" height="70" rx="8" fill="#e6f0e3" stroke="#3d7a4a"/>
+    <text x="355" y="58" text-anchor="middle" font-weight="600">profile build-story</text>
+    <text x="355" y="78" text-anchor="middle" fill="#7a6e5e">structure: right</text>
+    <rect x="530" y="85" width="190" height="80" rx="8" fill="#fff" stroke="#342d2d" stroke-width="1.5"/>
+    <text x="625" y="118" text-anchor="middle" font-weight="600">one hand-written pass</text>
+    <text x="625" y="138" text-anchor="middle" fill="#7a6e5e">~4 minutes</text>
+    <rect x="790" y="85" width="230" height="80" rx="8" fill="#fbeee4" stroke="#b0562c" stroke-width="1.5"/>
+    <text x="905" y="112" text-anchor="middle" font-weight="600">d13 script</text>
+    <text x="905" y="132" text-anchor="middle">story structure ✓</text>
+    <text x="905" y="151" text-anchor="middle" fill="#b0562c">tutorial launch stamp ✗</text>
+    <path d="M190,65 L525,110" stroke="#342d2d" fill="none" marker-end="url(#ar)"/>
+    <path d="M190,175 L245,175" stroke="#342d2d" fill="none" marker-end="url(#ar)"/>
+    <path d="M460,65 L525,105" stroke="#342d2d" fill="none" marker-end="url(#ar)"/>
+    <path d="M460,175 L525,145" stroke="#b0562c" stroke-width="2" fill="none" marker-end="url(#ar)"/>
+    <path d="M720,125 L785,125" stroke="#342d2d" fill="none" marker-end="url(#ar)"/>
+    <text x="492" y="236" text-anchor="middle" fill="#b0562c" font-size="12.5">the leak: verbal style applied with no idea what kind of video this was</text>
+  </g>
+</svg>
+</div>
+<figcaption><span class="fignum">Figure 1 · The 30 Oct build</span>Structure was chosen per video (profile <code>build-story</code>). Verbal style wasn't: it came from one creator-level list, so tutorial habits travelled with it.</figcaption>
+</figure>
+</section>
+
+<section>
+<h2><span class="n">02</span>Every guide that exists today</h2>
+<p>Seventeen documents and settings across the AppyDave skills, FliStudio and vOz. They're scattered over four homes, and some say the same thing twice.</p>
+<figure>
+<div class="scroll">
+<table>
+<thead><tr><th>#</th><th>Guide</th><th>Brand</th><th>Type</th><th>Applies to</th><th>Where it lives</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><b>VERBAL-STYLE.md</b> (AppyDave)</td><td>AppyDave</td><td><span class="tag t-verbal">verbal</span></td><td>all videos; stamp now tutorial-only (ruling A, 3 Nov)</td><td><code>appydave-plugins/brand-dave/skills/brand/references/appydave/</code></td></tr>
+<tr><td>2</td><td><b>voice-profile.md</b> "Tone of Voice Profile"</td><td>AppyDave</td><td><span class="tag t-verbal">verbal</span></td><td>all videos; still says the stamp is on <i>every</i> video</td><td><code>video-projects/v-appydave/voice-profile.md</code></td></tr>
+<tr><td>3</td><td>Creator settings <code>voice</code> (signatures, swearing, rhythm)</td><td>AppyDave</td><td><span class="tag t-verbal">verbal</span></td><td>all videos; still lists the stamp</td><td><code>v-appydave/-storypilot/settings.json</code> (M4)</td></tr>
+<tr><td>4</td><td><b>VERBAL-STYLE.md</b> (AITLDR)</td><td>AITLDR</td><td><span class="tag t-verbal">verbal</span></td><td>scripted shorts and explainers</td><td><code>brand-dave/.../references/aitldr/</code></td></tr>
+<tr><td>5</td><td><b>VIDEO-STRUCTURE.md</b> educational v1.1</td><td>AppyDave corpus, format-scoped</td><td><span class="tag t-struct">structure</span></td><td>educational long-form = tutorial / show-and-tell</td><td><code>brand-dave/.../references/_formats/educational/</code></td></tr>
+<tr><td>6</td><td>Hook study (10 recent videos)</td><td>AppyDave</td><td><span class="tag t-struct">structure</span> hooks</td><td>tutorial question-openers vs story hooks</td><td><code>flivideo/docs/research/appydave-hook-study-2026-11-03.md</code></td></tr>
+<tr><td>7</td><td>Profile <b>build-story</b> (long)</td><td>shipped default</td><td><span class="tag t-struct">structure</span></td><td>long build-as-story</td><td><code>flistudio/modules/storypilot/defaults.json</code></td></tr>
+<tr><td>8</td><td>Profile <b>build-short</b></td><td>shipped default</td><td><span class="tag t-struct">structure</span></td><td>short build-as-story</td><td>same</td></tr>
+<tr><td>9</td><td>Template <b>build-story-spine</b> (Global starter)</td><td>shipped; hidden on AppyDave</td><td><span class="tag t-struct">structure</span></td><td>repeats profile #7's spine word for word</td><td>same; <code>-storypilot/templates.json</code> hides it</td></tr>
+<tr><td>10</td><td>Global / Brand story templates</td><td>AppyDave</td><td><span class="tag t-not">empty</span></td><td>none written (list is <code>[]</code>)</td><td><code>v-appydave/-storypilot/templates.json</code> (M4)</td></tr>
+<tr><td>11</td><td><b>studio-narrative.md</b> — vOz Global-Studio View (GSV)</td><td>vOz</td><td><span class="tag t-lens">narrative lens</span></td><td>every vOz story</td><td><code>video-projects/v-voz/docs/brand/</code></td></tr>
+<tr><td>12</td><td><b>brand-variant.md</b> — boy-baker "Project View" (inherits GSV)</td><td>vOz</td><td><span class="tag t-lens">narrative lens</span></td><td>one video project</td><td><code>v-voz/video-projects/boy-baker/data/</code> (also languish-the-artist)</td></tr>
+<tr><td>13</td><td><b>styleguide.md</b> per vOz project</td><td>vOz</td><td><span class="tag t-visual">visual</span></td><td>one video project</td><td><code>v-voz/video-projects/&lt;project&gt;/data/</code></td></tr>
+<tr><td>14</td><td>storytelling-process.md</td><td>vOz</td><td><span class="tag t-struct">structure</span> process</td><td>Storyline-workflow stories</td><td><code>v-voz/docs/</code></td></tr>
+<tr><td>15</td><td>DESIGN.md / VIDEO.md per brand</td><td>all brands</td><td><span class="tag t-visual">visual</span></td><td>look and motion, not words</td><td><code>brand-dave/.../references/&lt;brand&gt;/</code></td></tr>
+<tr><td>16</td><td>Listen voice <code>af_heart</code></td><td>FliStudio</td><td><span class="tag t-voice">voice</span></td><td>read-back audio only</td><td>FliTools speech, Story Pilot Listen</td></tr>
+<tr><td>17</td><td>verbal-style-forge · structure-forge</td><td>tools</td><td><span class="tag t-not">makes guides</span></td><td>build and refresh #1, #4, #5</td><td><code>brand-dave/skills/</code> (context-modes is about output folders, not a guide)</td></tr>
+</tbody>
+</table>
+</div>
+<figcaption><span class="fignum">Figure 2 · Guide inventory</span>Rows 1–3 say the same thing three times, and two of them still put the stamp on every video. Row 9 repeats row 7. Row 10, the box David sees most, is empty.</figcaption>
+</figure>
+</section>
+
+<section>
+<h2><span class="n">03</span>Level × type: what exists, what's missing</h2>
+<p>Rows are David's levels and columns are guide types. AppyDave is shown, with vOz where it fills a cell AppyDave doesn't.</p>
+<figure>
+<div class="legend">
+  <span><i class="sw c-ok"></i>exists</span><span><i class="sw c-part"></i>exists, but flat or duplicated</span><span><i class="sw c-miss"></i>missing (needed)</span><span><i class="sw c-off"></i>empty on purpose</span>
+</div>
+<div class="scroll">
+<table class="grid" style="min-width:860px">
+<thead><tr><th style="width:150px">Level</th><th>Verbal style<br><small>the words</small></th><th>Voice<br><small>the sound</small></th><th>Structure<br><small>short/long · story/tutorial</small></th><th>Narrative lens<br><small>what it stands for</small></th></tr></thead>
+<tbody>
+<tr><td><b>Global</b><br><small>any brand</small></td>
+<td><span class="cell c-off"><b>on purpose</b>how a person speaks is never global</span></td>
+<td><span class="cell c-off"><b>on purpose</b></span></td>
+<td><span class="cell c-ok"><b>exists</b>story spines: build-story, build-short (#7–8); the hook taxonomy is generic</span></td>
+<td><span class="cell c-miss"><b>candidate</b>craft rules that hold anywhere: "no invented drama", "open on the problem"</span></td></tr>
+<tr><td><b>Brand</b><br><small>any video in it</small></td>
+<td><span class="cell c-part"><b>flat · ×3</b>#1, #2, #3: one style for every form; this is where the stamp leaked</span></td>
+<td><span class="cell c-part"><b>partial</b>Listen voice only; no brand voice for AI-narrated brands</span></td>
+<td><span class="cell c-part"><b>tutorial only</b>educational VIDEO-STRUCTURE (#5); no AppyDave story structure</span></td>
+<td><span class="cell c-miss"><b>missing</b>vOz has one (GSV, #11); AppyDave doesn't, beyond cross-brand rules (e.g. showcasing AITLDR)</span></td></tr>
+<tr><td><b>Video project</b><br><small>a group of videos</small></td>
+<td><span class="cell c-off"><b>on purpose</b>usually inherits the brand's</span></td>
+<td><span class="cell c-off"><b>on purpose</b></span></td>
+<td><span class="cell c-miss"><b>missing</b>no slot in Story Pilot; vOz keeps these in folders FliVideo can't see</span></td>
+<td><span class="cell c-miss"><b>missing</b>vOz Project View (#12) exists outside FliVideo</span></td></tr>
+<tr><td><b>Video</b><br><small>one video</small></td>
+<td><span class="cell c-ok"><b>exists</b>element switches, e.g. launch-stamp on/off</span></td>
+<td><span class="cell c-off"><b>on purpose</b></span></td>
+<td><span class="cell c-ok"><b>exists</b>picks a profile (structure)</span></td>
+<td><span class="cell c-part"><b>partial</b>the Angle (one line); no standing "Direction"</span></td></tr>
+</tbody>
+</table>
+</div>
+<figcaption><span class="fignum">Figure 3 · Level × type grid</span>The cell that caused d13 is Brand × Verbal: one document, three copies, no idea whether the video is a tutorial or a story. Visual guides (DESIGN.md, styleguide.md) are left out: they shape the look, not the script.</figcaption>
+</figure>
+</section>
+
+<section>
+<h2><span class="n">04</span>How a build should pick guides</h2>
+<p>Each guide carries two tags: <b>type</b>, and <b>applies to</b> (form: story or tutorial; length: short or long). A build knows the video's form and length, walks the levels from video up to global, and keeps only the guides that match.</p>
+<figure>
+<div class="scroll">
+<svg viewBox="0 0 1040 400" width="100%" style="min-width:860px" role="img" aria-label="Guide resolution flow for d13">
+  <defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#342d2d"/></marker></defs>
+  <g font-family="Roboto, sans-serif" font-size="13" fill="#342d2d">
+    <rect x="10" y="150" width="170" height="90" rx="8" fill="#342d2d"/>
+    <text x="95" y="182" text-anchor="middle" fill="#faf5ec" font-weight="600">d13 video</text>
+    <text x="95" y="203" text-anchor="middle" fill="#faf5ec">form: story/build</text>
+    <text x="95" y="222" text-anchor="middle" fill="#faf5ec">length: long</text>
+    <text x="300" y="30" text-anchor="middle" font-family="Oswald" font-size="14" letter-spacing="1">WALK THE LEVELS</text>
+    <g>
+      <rect x="230" y="50" width="140" height="44" rx="6" fill="#fff" stroke="#d4cdc4"/><text x="300" y="77" text-anchor="middle">video</text>
+      <rect x="230" y="110" width="140" height="44" rx="6" fill="#fff" stroke="#d4cdc4"/><text x="300" y="137" text-anchor="middle">video project</text>
+      <rect x="230" y="170" width="140" height="44" rx="6" fill="#fff" stroke="#d4cdc4"/><text x="300" y="197" text-anchor="middle">brand</text>
+      <rect x="230" y="230" width="140" height="44" rx="6" fill="#fff" stroke="#d4cdc4"/><text x="300" y="257" text-anchor="middle">global</text>
+      <path d="M300,94 L300,106" stroke="#342d2d" marker-end="url(#ar2)"/>
+      <path d="M300,154 L300,166" stroke="#342d2d" marker-end="url(#ar2)"/>
+      <path d="M300,214 L300,226" stroke="#342d2d" marker-end="url(#ar2)"/>
+    </g>
+    <path d="M180,195 L225,195" stroke="#342d2d" marker-end="url(#ar2)"/>
+    <rect x="420" y="120" width="170" height="120" rx="8" fill="#fbf3d6" stroke="#8a6d1f"/>
+    <text x="505" y="150" text-anchor="middle" font-weight="600">filter by tags</text>
+    <text x="505" y="172" text-anchor="middle">applies to story?</text>
+    <text x="505" y="192" text-anchor="middle">applies to long?</text>
+    <text x="505" y="214" text-anchor="middle" fill="#7a6e5e">lower level wins</text>
+    <path d="M370,165 L415,175" stroke="#342d2d" marker-end="url(#ar2)"/>
+    <text x="830" y="30" text-anchor="middle" font-family="Oswald" font-size="14" letter-spacing="1">WHAT D13 GETS</text>
+    <rect x="650" y="48" width="370" height="58" rx="6" fill="#e6f0e3" stroke="#3d7a4a"/>
+    <text x="665" y="72" font-weight="600">Structure</text><text x="665" y="92">build-story spine + a story hook (hook study)</text>
+    <rect x="650" y="116" width="370" height="58" rx="6" fill="#e6f0e3" stroke="#3d7a4a"/>
+    <text x="665" y="140" font-weight="600">Verbal style</text><text x="665" y="160">AppyDave core + the story section</text>
+    <rect x="650" y="184" width="370" height="58" rx="6" fill="#fbeee4" stroke="#b0562c" stroke-dasharray="5 4"/>
+    <text x="665" y="208" font-weight="600" fill="#b0562c">Left out, with the reason shown</text><text x="665" y="228">tutorial bookends: launch stamp, "Maybe you…" triple</text>
+    <rect x="650" y="252" width="370" height="58" rx="6" fill="#fff" stroke="#d4cdc4"/>
+    <text x="665" y="276" font-weight="600">Kept everywhere</text><text x="665" y="296">the sign-off ("I'll see you in the next video")</text>
+    <rect x="650" y="320" width="370" height="58" rx="6" fill="#fff" stroke="#d4cdc4"/>
+    <text x="665" y="344" font-weight="600">Video level on top</text><text x="665" y="364">Angle + (later) David's Direction</text>
+    <path d="M590,170 L645,80" stroke="#342d2d" marker-end="url(#ar2)"/>
+    <path d="M590,178 L645,145" stroke="#342d2d" marker-end="url(#ar2)"/>
+    <path d="M590,190 L645,212" stroke="#b0562c" stroke-dasharray="4 3" marker-end="url(#ar2)"/>
+    <path d="M590,200 L645,280" stroke="#342d2d" marker-end="url(#ar2)"/>
+    <path d="M590,212 L645,345" stroke="#342d2d" marker-end="url(#ar2)"/>
+    <text x="300" y="320" text-anchor="middle" fill="#7a6e5e" font-size="12">A tutorial video walks the same levels</text>
+    <text x="300" y="338" text-anchor="middle" fill="#7a6e5e" font-size="12">and gets VIDEO-STRUCTURE (educational)</text>
+    <text x="300" y="356" text-anchor="middle" fill="#7a6e5e" font-size="12">+ the bookends instead.</text>
+  </g>
+</svg>
+</div>
+<figcaption><span class="fignum">Figure 4 · Resolution flow</span>Tutorial-only rules don't need deleting from the brand guide. They need tagging, so a story build skips them and the build record says why.</figcaption>
+</figure>
+</section>
+
+<section>
+<h2><span class="n">05</span>What "video project" means in FliVideo</h2>
+<p>FliVideo already has a word for one folder (d13 is a "project"), so David's "video project" collides with it. Today's levels:</p>
+<figure>
+<div class="scroll">
+<svg viewBox="0 0 1040 290" width="100%" style="min-width:860px" role="img" aria-label="FliVideo levels compared with vOz">
+  <g font-family="Roboto, sans-serif" font-size="13" fill="#342d2d">
+    <text x="20" y="28" font-family="Oswald" font-size="14" letter-spacing="1">FLIVIDEO TODAY</text>
+    <rect x="20" y="42" width="150" height="52" rx="6" fill="#fff" stroke="#342d2d"/><text x="95" y="66" text-anchor="middle" font-weight="600">brand</text><text x="95" y="84" text-anchor="middle" fill="#7a6e5e" font-size="12">v-appydave</text>
+    <rect x="200" y="42" width="190" height="52" rx="6" fill="#e6f0e3" stroke="#3d7a4a"/><text x="295" y="66" text-anchor="middle" font-weight="600">series</text><text x="295" y="84" text-anchor="middle" fill="#7a6e5e" font-size="12">groups projects · 1 exists</text>
+    <rect x="420" y="42" width="190" height="52" rx="6" fill="#fff" stroke="#d4cdc4"/><text x="515" y="66" text-anchor="middle" font-weight="600">project (folder)</text><text x="515" y="84" text-anchor="middle" fill="#7a6e5e" font-size="12">d13-overlay-pilot</text>
+    <rect x="640" y="42" width="190" height="52" rx="6" fill="#fff" stroke="#d4cdc4"/><text x="735" y="66" text-anchor="middle" font-weight="600">video slot</text><text x="735" y="84" text-anchor="middle" fill="#7a6e5e" font-size="12">project · short · long</text>
+    <path d="M170,68 L196,68 M390,68 L416,68 M610,68 L636,68" stroke="#342d2d"/>
+    <text x="20" y="122" fill="#7a6e5e" font-size="12">Story Pilot settings levels:</text>
+    <text x="200" y="122" fill="#3d7a4a" font-size="12">✓ series</text><text x="420" y="122" fill="#b0562c" font-size="12">✗ no level here</text><text x="640" y="122" fill="#3d7a4a" font-size="12">✓ video</text>
+    <text x="20" y="174" font-family="Oswald" font-size="14" letter-spacing="1">VOZ (OUTSIDE FLIVIDEO)</text>
+    <rect x="20" y="188" width="150" height="52" rx="6" fill="#fff" stroke="#342d2d"/><text x="95" y="212" text-anchor="middle" font-weight="600">brand</text><text x="95" y="230" text-anchor="middle" fill="#7a6e5e" font-size="12">GSV lens</text>
+    <rect x="200" y="188" width="410" height="52" rx="6" fill="#efe4ef" stroke="#8a5a8a"/><text x="405" y="212" text-anchor="middle" font-weight="600">video project (boy-baker)</text><text x="405" y="230" text-anchor="middle" fill="#7a6e5e" font-size="12">Project View + styleguide · one folder, many videos</text>
+    <rect x="640" y="188" width="190" height="52" rx="6" fill="#fff" stroke="#d4cdc4"/><text x="735" y="212" text-anchor="middle" font-weight="600">videos</text><text x="735" y="230" text-anchor="middle" fill="#7a6e5e" font-size="12">long, shorts</text>
+    <path d="M170,214 L196,214 M610,214 L636,214" stroke="#342d2d"/>
+    <text x="860" y="66" font-size="12.5" fill="#342d2d">David's "video project" =</text>
+    <text x="860" y="86" font-size="12.5" fill="#342d2d">a group of videos with</text>
+    <text x="860" y="106" font-size="12.5" fill="#342d2d">its own style + structure</text>
+    <text x="860" y="140" font-size="12.5" fill="#3d7a4a">→ closest today: series</text>
+    <text x="860" y="214" font-size="12.5" fill="#7a6e5e">vOz spans the series</text>
+    <text x="860" y="234" font-size="12.5" fill="#7a6e5e">and folder boxes</text>
+  </g>
+</svg>
+</div>
+<figcaption><span class="fignum">Figure 5 · Levels compared</span>A series already groups projects, already has a Story Pilot settings block, and sits between brand and video. Short vs long is better handled as a structure tag than as another level.</figcaption>
+</figure>
+<p><b>Fit:</b> series fits as the video-project level, with two gaps. It holds no guides yet, only settings fields. And its name is "series": should the screen say "Video project", "Series", or both?</p>
+</section>
+
+<section>
+<h2><span class="n">06</span>Verbal style vs voice: two things, one stored three times</h2>
+<figure>
+<div class="two">
+  <div class="card" style="border-left:4px solid #c8841a">
+    <h3>Verbal style: the words</h3>
+    <ul>
+      <li>Phrases, signatures, rhythm (~11 words a phrase), swearing, hook wording</li>
+      <li>Stored as <b>VERBAL-STYLE.md</b> + <b>voice-profile.md</b> + creator settings <code>voice</code>. All three are mined from the same 182-transcript corpus, so they're one thing written three times</li>
+      <li>Story Pilot's settings field is <i>named</i> <code>voice</code> but holds verbal rules. That name is where the confusion comes from</li>
+      <li>Varies by <b>form</b>: tutorial bookends vs story hook</li>
+    </ul>
+  </div>
+  <div class="card" style="border-left:4px solid #2E91FC">
+    <h3>Voice: the sound</h3>
+    <ul>
+      <li>Which voice reads it, plus pace and delivery: Kokoro <code>af_heart</code> in Listen; an AI narrator for AITLDR-style brands</li>
+      <li>Matters for Listen and AI-voiced videos, not for David reading his own script</li>
+      <li>Varies by <b>brand</b>, rarely by form</li>
+      <li>No guide exists today; just a setting</li>
+    </ul>
+  </div>
+</div>
+<figcaption><span class="fignum">Figure 6 · Verbal vs voice</span>They're two different types. The tangle comes from the word "voice" being used for both.</figcaption>
+</figure>
+</section>
+
+<section>
+<h2><span class="n">07</span>Recommendations</h2>
+<figure>
+<div class="scroll">
+<table>
+<thead><tr><th>#</th><th>Recommendation</th><th>Why</th><th>Effort</th></tr></thead>
+<tbody>
+<tr><td>R1</td><td><b>"Story guide" becomes its own concept</b>, separate from Document Islands: <code>{type, level, applies-to: form/length, pointer to the canon doc}</code>. A pointer, never copied, the same way <code>voiceDocs</code> works today</td><td>Islands are per video and short-lived; guides are layered and long-lived</td><td>design + build</td></tr>
+<tr><td>R2</td><td><b>Tag the form-specific parts of the verbal style</b> (tutorial bookends vs story hook), then build by tag</td><td>Stops the d13 leak at its source without splitting the guide into many files</td><td>doc edit</td></tr>
+<tr><td>R3</td><td><b>One verbal canon per brand.</b> Fold voice-profile.md into VERBAL-STYLE.md; creator settings point to it instead of re-listing signatures</td><td>Three copies drift: two still put the stamp on every video</td><td>doc edit</td></tr>
+<tr><td>R4</td><td><b>Structure guides by form × length</b>: build-story long/short (exist), tutorial = educational VIDEO-STRUCTURE (exists, just point to it), hooks from the hook study. Drop the duplicate build-story-spine template</td><td>Most of the structure already exists; it just isn't wired</td><td>settings</td></tr>
+<tr><td>R5</td><td><b>Video project = series.</b> Give series guide slots</td><td>Already the level between brand and video</td><td>build</td></tr>
+<tr><td>R6</td><td><b>Replace the two flat Global/Brand boxes</b> with a quiet guide shelf: grouped by level and type, showing "used for this video" or "skipped: tutorial only"</td><td>David: the boxes are wrong in nature, not wording</td><td>build</td></tr>
+<tr><td>R7</td><td><b>Reader: headings between story sections</b>: why it mattered · when it mattered · what happened · stories</td><td>Today they run together with no separation</td><td>small build</td></tr>
+</tbody>
+</table>
+</div>
+<figcaption><span class="fignum">Figure 7 · Recommendations</span>R2–R4 are document and settings changes; R1, R5–R7 are FliStudio builds. None start without David's go.</figcaption>
+</figure>
+<div class="limits" style="margin-top:16px">
+<b>Out of scope here:</b>
+<ul>
+<li>Rewriting what any guide says (the story-instructions conversation)</li>
+<li>The per-video Direction box (its own thread)</li>
+<li>Voice cloning or TTS choices</li>
+<li>Moving vOz's guides into FliVideo</li>
+<li>Any code or brief</li>
+</ul>
+<b>Not established:</b>
+<ul>
+<li>Whether other AppyDave forms exist beyond story and tutorial (e.g. news or reaction)</li>
+<li>What belongs at Global: David can't name it yet, and the grid's "candidate" cell is a guess</li>
+<li>vOz guides were read from file headers only, not in full</li>
+</ul>
+</div>
+</section>
+
+<footer>Source: <code>/Users/davidcruwys/dev/ad/flivideo/docs/artifacts/storypilot-story-guides-2026-11-04.html</code> · Design note: <code>flivideo/docs/briefs/storypilot-captains-log-mapping-2026-11-03.md</code> · Research only, 4 Nov 2026, flivideo-roamy</footer>
+</div>
+</body>
+</html>

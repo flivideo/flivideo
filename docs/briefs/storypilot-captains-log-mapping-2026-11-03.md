@@ -230,3 +230,22 @@ against all of these, not d13 alone.
 - **The drafted Global/Brand instructions are not right yet.** David wants to talk them through after the build work.
   Nothing is injected. New order: W1 → W2 → W4 machinery → the instructions conversation → d13 redo as the first real
   "update" run.
+
+## Story guides: the shelf above the islands (research, 2026-11-04)
+
+Artifact: https://claude.ai/artifact/AeA1FzgAaT2iM25aiWuSx1 (source
+`/Users/davidcruwys/dev/ad/flivideo/docs/artifacts/storypilot-story-guides-2026-11-04.html`). Research and design only:
+no build, and no change to any guide. **Summary:**
+- The d13 launch stamp leaked because Story Pilot hands every video one flat, creator-level verbal-style list
+  (VERBAL-STYLE.md + voice-profile.md + settings `voice.signatures`, three copies of one thing, two still putting the stamp
+  on every video), with no idea whether the video is a story or a tutorial. Structure, by contrast, was picked per video
+  (profile `build-story`).
+- Proposal: "story guides" become their own concept, separate from Document Islands. Each guide has a **type** (verbal
+  style = the words; voice = the sound, a separate thing; structure; narrative lens), a **level** (global › brand › video
+  project › video) and an **applies-to** tag (form story/tutorial, length short/long). A build walks the levels and keeps
+  only matching guides, recording what it skipped and why.
+- David's "video project" maps best onto today's **series** (it already groups projects and has a Story Pilot settings
+  block), but series hold no guides yet. Short vs long is better as a structure tag than as a level.
+- The flat Global/Brand boxes would be replaced by a quiet guide shelf. The Reader needs headings between its story
+  sections.
+- Open first decision: whether "video project" = series.
