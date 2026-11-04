@@ -147,4 +147,5 @@ Checked §4 against David's 2026-11-03 10:49 framing and orch's 10:49 reply. Ver
 `src` (dev only). **First slice, amended:** Story Pilot nested targets + the point-at-anything mode + the lint rule at `warn`;
 the coverage test follows.
 
-Still David's: the prefix rename (above), and whether ARIA-on-every-element is a hard gate (`error`) or advisory (`warn`).
+**Ruled (David, 2026-11-04):** the element-naming check starts at `warn`; promote to `error` (blocking) once the existing screens are fixed.
+Still David's: the prefix rename (above).
