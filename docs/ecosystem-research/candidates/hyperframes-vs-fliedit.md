@@ -109,3 +109,10 @@ was also drawing an animated layer and the quality settings differ (draft vs crf
 **Still not verified:** duck audibility — speech and music are mixed, so mean-volume windows (HyperFrames 0–2 s −22.0 dB vs
 4–6 s −26.7 dB; FliEdit −22.7 vs −25.4 dB) cannot isolate the music; no music-only render was made. FliEdit's −6.02 dB not compared
 by ear. One run each; no repeat timings.
+
+## Watch list + UI/UX deep dive — 2026-11-04 (M4)
+
+Owned by FliEdit: `/Users/davidcruwys/dev/ad/flivideo/fliedit/docs/upstream-watch-hyperframes.md` (H1–H5 plus ten UX rows U1–U10;
+screenshot pairs in `fliedit/docs/upstream-watch-assets/`). Re-check whenever the Studio's pinned `hyperframes` version bumps.
+Top UX transfers: U1 light quiet chrome (AppyDave tokens) · U2 clip thumbnails + waveforms · U3 typed inspector header with
+empty-state help · U4 compact transport · U5 icon toggles for snap/link. One FliEdit window and one Studio session only; research, no code.
