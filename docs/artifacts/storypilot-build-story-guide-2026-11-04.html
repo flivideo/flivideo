@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Story Pilot build-story guides (long + short), explained</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600&family=Roboto:ital,wght@0,400;0,500;0,700;1,400&family=Roboto+Mono&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;
+ --brown:#342d2d;--gold:#ccba9d;--yellow:#ffde59;--amber:#c8841a;--muted:#7a6e5e;--cream:#faf5ec;
+ --surface:#f0ebe4;--linen:#e8e0d4;--border:#d4cdc4;--chrome:#1a1515;--dark:#25201e;--blue:#2E91FC;--card:#fff;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--brown);font:16px/1.6 Roboto,sans-serif}
+.wrap{max-width:1040px;margin:0 auto;padding:28px 24px 64px}
+header{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+.logo-badge{display:inline-block;background:#342d2d;border-radius:6px;padding:4px 10px 2px;font-family:"Bebas Neue",Oswald,sans-serif;letter-spacing:.04em;line-height:1.1;font-size:22px}
+.logo-badge .a{color:#ccba9d}.logo-badge .d{color:#ffde59}
+.eyebrow{font:500 12px Oswald,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+h1{font:600 34px/1.15 Oswald,sans-serif;text-transform:uppercase;margin:10px 0 6px}
+h2{font:600 22px/1.2 Oswald,sans-serif;text-transform:uppercase;margin:44px 0 8px}
+h2 .n{color:var(--amber);margin-right:8px}
+p{margin:6px 0 12px}
+.verdict{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--yellow);padding:14px 18px;border-radius:6px;margin:16px 0}
+.verdict b{font-family:Oswald,sans-serif;text-transform:uppercase;letter-spacing:.04em}
+figure{margin:14px 0 8px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:16px}
+figcaption{font-size:14px;color:var(--muted);margin-top:8px}
+.fignum{font:600 12px Oswald,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-right:6px}
+.scroll{overflow-x:auto}
+svg{display:block;max-width:100%;height:auto}
+svg text{font-family:Roboto,sans-serif;fill:#342d2d}
+.mono{font-family:"Roboto Mono",monospace;font-size:13px}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{border-bottom:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top}
+th{font:500 13px Oswald,sans-serif;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.tag{display:inline-block;font:500 11px Oswald,sans-serif;letter-spacing:.08em;text-transform:uppercase;padding:1px 7px;border-radius:10px;border:1px solid var(--border)}
+.tag.ok{border-color:#5f8f5a;color:#3f6b3a}.tag.warn{border-color:var(--amber);color:#8a5a10}
+.limits{border:1px dashed var(--border);border-radius:6px;padding:12px 16px;font-size:14px;color:var(--muted)}
+.quote{font-style:italic}
+</style>
+</head>
+<body><div class="wrap">
+<section><header><span class="logo-badge"><span class="a">Appy</span><span class="d">Dave</span></span><span class="eyebrow">Story Pilot · Guides · 2026-11-04</span></header>
+<h1>The two build-story guides, explained</h1>
+<div class="verdict"><b>Verdict:</b> neither guide is a document. Long form is <b>one paragraph of about 70 words</b> inside Story Pilot's settings file. It tells the script writer to shape a build video as five beats, <b>problem → why it mattered → tension → turn → resolution</b>, and adds two rules: <b>no invented drama</b> and <b>not a tutorial</b>. It's the default for every AppyDave video, and d13's script follows it. <b>Short</b> is a 25-word sibling in the same file: three beats, and no greeting.</div>
+
+</section><section><h2><span class="n">01</span>Where it lives: a paragraph in a settings file</h2>
+<figure>
+<div class="scroll"><svg viewBox="0 0 960 300" width="960" role="img" aria-label="defaults.json contains two profiles; the guide card points at the build-story profile's spine">
+ <rect x="10" y="10" width="940" height="280" rx="8" fill="#f0ebe4" stroke="#d4cdc4"/>
+ <text x="28" y="38" font-size="14" font-weight="700">defaults.json</text>
+ <text x="140" y="38" font-size="12" fill="#7a6e5e">flistudio/modules/storypilot/ · Story Pilot's shipped defaults (lowest level, under creator › brand › series › video)</text>
+ <rect x="28" y="56" width="560" height="214" rx="6" fill="#fff" stroke="#c8841a" stroke-width="2"/>
+ <text x="44" y="80" font-size="13" font-weight="700">profile "build-story" · Build story (long form)</text>
+ <text x="44" y="100" font-size="12" fill="#7a6e5e">form: build-story · length: long · the default ("profile": "build-story")</text>
+ <rect x="44" y="112" width="528" height="146" rx="4" fill="#faf5ec" stroke="#d4cdc4"/>
+ <text x="56" y="132" font-size="12" font-weight="700">spine (the whole guide):</text>
+ <text x="56" y="152" font-size="12" font-style="italic">"Tell how something was built as a story with a real spine:</text>
+ <text x="56" y="170" font-size="12" font-style="italic">the real problem and who had it, why it mattered, the tension</text>
+ <text x="56" y="188" font-size="12" font-style="italic">(what got in the way, what nearly went wrong), the turn, and the</text>
+ <text x="56" y="206" font-size="12" font-style="italic">resolution (what is possible now). Tension and resolution come from</text>
+ <text x="56" y="224" font-size="12" font-style="italic">the sources; never invent drama. Not a tutorial: the viewer should</text>
+ <text x="56" y="242" font-size="12" font-style="italic">understand the idea, not learn every command."</text>
+ <rect x="610" y="56" width="322" height="70" rx="6" fill="#fff" stroke="#d4cdc4"/>
+ <text x="626" y="80" font-size="13" font-weight="700">profile "build-short"</text>
+ <text x="626" y="100" font-size="12" fill="#7a6e5e">One problem, one turn, one payoff,</text>
+ <text x="626" y="116" font-size="12" fill="#7a6e5e">under a minute. (The other guide card)</text>
+ <rect x="610" y="140" width="322" height="58" rx="6" fill="#fff" stroke="#d4cdc4" stroke-dasharray="5 4"/>
+ <text x="626" y="164" font-size="13" font-weight="700">template "build-story-spine"</text>
+ <text x="626" y="182" font-size="12" fill="#7a6e5e">Same words again · hidden for AppyDave</text>
+ <rect x="610" y="212" width="322" height="58" rx="6" fill="#fff" stroke="#d4cdc4"/>
+ <text x="626" y="236" font-size="13" font-weight="700">guides list</text>
+ <text x="626" y="254" font-size="12" fill="#7a6e5e">the pointers behind the Guides cards</text>
+ <path d="M770 212 C 700 200, 640 160, 588 150" fill="none" stroke="#c8841a" stroke-width="2" marker-end="url(#ah)"/>
+ <text x="640" y="206" font-size="11" fill="#8a5a10">card 1 points here</text>
+ <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#c8841a"/></marker></defs>
+</svg></div>
+<figcaption><span class="fignum">Figure 1</span>The guide card is a pointer (<span class="mono">defaults.json#profile=build-story</span>). Click <b>Read →</b> and you see little, because the target is data, not prose.</figcaption>
+</figure>
+
+</section><section><h2><span class="n">02</span>What it asks for: five beats, two rules</h2>
+<figure>
+<div class="scroll"><svg viewBox="0 0 960 250" width="960" role="img" aria-label="Five beats in sequence with d13 chapters mapped beneath">
+ <defs><marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#7a6e5e"/></marker></defs>
+ <g font-size="13">
+  <rect x="10" y="20" width="168" height="64" rx="6" fill="#fff" stroke="#c8841a" stroke-width="2"/><text x="24" y="44" font-weight="700" fill="#c8841a">1</text><text x="40" y="44" font-weight="700">Problem + who</text><text x="24" y="66" font-size="11" fill="#7a6e5e">the real problem, who had it</text>
+  <rect x="198" y="20" width="168" height="64" rx="6" fill="#fff" stroke="#c8841a" stroke-width="2"/><text x="212" y="44" font-weight="700" fill="#c8841a">2</text><text x="228" y="44" font-weight="700">Why it mattered</text><text x="212" y="66" font-size="11" fill="#7a6e5e">the stakes</text>
+  <rect x="386" y="20" width="168" height="64" rx="6" fill="#fff" stroke="#c8841a" stroke-width="2"/><text x="400" y="44" font-weight="700" fill="#c8841a">3</text><text x="416" y="44" font-weight="700">Tension</text><text x="400" y="66" font-size="11" fill="#7a6e5e">what got in the way / nearly broke</text>
+  <rect x="574" y="20" width="168" height="64" rx="6" fill="#fff" stroke="#c8841a" stroke-width="2"/><text x="588" y="44" font-weight="700" fill="#c8841a">4</text><text x="604" y="44" font-weight="700">The turn</text><text x="588" y="66" font-size="11" fill="#7a6e5e">what changed it</text>
+  <rect x="762" y="20" width="188" height="64" rx="6" fill="#fff" stroke="#c8841a" stroke-width="2"/><text x="776" y="44" font-weight="700" fill="#c8841a">5</text><text x="792" y="44" font-weight="700">Resolution</text><text x="776" y="66" font-size="11" fill="#7a6e5e">what is possible now</text>
+  <path d="M178 52H196M366 52H384M554 52H572M742 52H760" stroke="#7a6e5e" stroke-width="2" marker-end="url(#ah2)"/>
+ </g>
+ <text x="10" y="116" font-size="12" font-weight="700" fill="#7a6e5e">d13 Overlay Pilot, script v3: its six chapters landing on the beats</text>
+ <g font-size="12">
+  <rect x="10" y="128" width="168" height="44" rx="4" fill="#faf5ec" stroke="#d4cdc4"/><text x="20" y="148">01 Joy's bottleneck</text><text x="20" y="164" font-size="11" fill="#7a6e5e">"the problem is me"</text>
+  <rect x="198" y="128" width="168" height="44" rx="4" fill="#faf5ec" stroke="#d4cdc4"/><text x="208" y="148">02 Going small with Jan</text><text x="208" y="164" font-size="11" fill="#7a6e5e">setup + choice</text>
+  <rect x="386" y="128" width="168" height="44" rx="4" fill="#faf5ec" stroke="#d4cdc4"/><text x="396" y="148">03 Handing off the build</text><text x="396" y="164" font-size="11" fill="#7a6e5e">04 The check that lied</text>
+  <rect x="574" y="128" width="168" height="44" rx="4" fill="#faf5ec" stroke="#d4cdc4"/><text x="584" y="148">05 Watching it like</text><text x="584" y="164">a viewer → v2</text>
+  <rect x="762" y="128" width="188" height="44" rx="4" fill="#faf5ec" stroke="#d4cdc4"/><text x="772" y="148">06 Nothing was recorded</text><text x="772" y="164" font-size="11" fill="#7a6e5e">→ Story Pilot, next video</text>
+ </g>
+ <rect x="10" y="194" width="460" height="44" rx="6" fill="#fff" stroke="#d4cdc4"/><text x="24" y="214" font-size="13" font-weight="700">Rule A · no invented drama</text><text x="24" y="230" font-size="11" fill="#7a6e5e">tension and resolution must come from the sources</text>
+ <rect x="490" y="194" width="460" height="44" rx="6" fill="#fff" stroke="#d4cdc4"/><text x="504" y="214" font-size="13" font-weight="700">Rule B · not a tutorial</text><text x="504" y="230" font-size="11" fill="#7a6e5e">understand the idea, don't learn every command</text>
+</svg></div>
+<figcaption><span class="fignum">Figure 2</span>The spine in order, with d13's chapters under the beat each one carries. "The check that lied" is the tension, and it comes straight from the dev session, so Rule A holds.</figcaption>
+</figure>
+
+</section><section><h2><span class="n">03</span>The short version: same family, three differences</h2>
+<figure>
+<div class="scroll"><svg viewBox="0 0 960 200" width="960" role="img" aria-label="Long form five beats collapse into short form three beats">
+ <defs><marker id="ah4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#7a6e5e"/></marker></defs>
+ <text x="10" y="22" font-size="12" font-weight="700" fill="#7a6e5e">LONG · build-story</text>
+ <g font-size="12">
+  <rect x="10" y="32" width="170" height="40" rx="5" fill="#fff" stroke="#c8841a" stroke-width="2"/><text x="22" y="57">1 Problem + who</text>
+  <rect x="196" y="32" width="170" height="40" rx="5" fill="#fff" stroke="#d4cdc4" stroke-dasharray="5 4"/><text x="208" y="57" fill="#7a6e5e">2 Why it mattered</text>
+  <rect x="382" y="32" width="170" height="40" rx="5" fill="#fff" stroke="#d4cdc4" stroke-dasharray="5 4"/><text x="394" y="57" fill="#7a6e5e">3 Tension</text>
+  <rect x="568" y="32" width="170" height="40" rx="5" fill="#fff" stroke="#c8841a" stroke-width="2"/><text x="580" y="57">4 The turn</text>
+  <rect x="754" y="32" width="196" height="40" rx="5" fill="#fff" stroke="#c8841a" stroke-width="2"/><text x="766" y="57">5 Resolution</text>
+ </g>
+ <text x="10" y="128" font-size="12" font-weight="700" fill="#7a6e5e">SHORT · build-short (under a minute)</text>
+ <g font-size="12">
+  <rect x="10" y="138" width="170" height="40" rx="5" fill="#ffde59" stroke="#c8841a"/><text x="22" y="163" font-weight="700">One problem</text>
+  <rect x="568" y="138" width="170" height="40" rx="5" fill="#ffde59" stroke="#c8841a"/><text x="580" y="163" font-weight="700">One turn</text>
+  <rect x="754" y="138" width="196" height="40" rx="5" fill="#ffde59" stroke="#c8841a"/><text x="766" y="163" font-weight="700">One payoff</text>
+  <path d="M95 72V136M653 72V136M852 72V136" stroke="#7a6e5e" stroke-width="1.5" marker-end="url(#ah4)"/>
+  <text x="200" y="110" font-size="11" fill="#8a5a10">why-it-mattered and tension lose their own beats</text>
+ </g>
+</svg></div>
+<figcaption><span class="fignum">Figure 3</span>Short keeps three of the five beats (yellow), one of each. The two dashed beats get no slot of their own.</figcaption>
+</figure>
+<figure>
+<div class="scroll"><table>
+<tr><th></th><th>Long · build-story</th><th>Short · build-short</th></tr>
+<tr><td>Words in the guide</td><td>~70</td><td>~25: <span class="quote">"One problem, one turn, one payoff, in under a minute. Open on the problem, not on a greeting. No invented drama."</span></td></tr>
+<tr><td>Beats</td><td>5: problem, why, tension, turn, resolution</td><td>3: problem, turn, payoff</td></tr>
+<tr><td>Length</td><td>long (d13: 1,049 words, ~5:44)</td><td>under a minute</td></tr>
+<tr><td>Opening</td><td>not specified</td><td><b>"Open on the problem, not on a greeting"</b>, so no "I'm AppyDave, let's get into it"</td></tr>
+<tr><td>No invented drama</td><td>yes, spelled out (tension must come from sources)</td><td>yes, one phrase</td></tr>
+<tr><td>Not a tutorial</td><td>yes</td><td><span class="tag warn">missing</span></td></tr>
+<tr><td>Applies to</td><td>everything (the default)</td><td>tagged <span class="mono">length: short</span>, a label only: builds don't filter by it yet</td></tr>
+<tr><td>Duplicate template</td><td>yes (hidden)</td><td>none</td></tr>
+</table></div>
+<figcaption><span class="fignum">Figure 4</span>The differences that matter: short bans the greeting and long doesn't, and short drops "not a tutorial".</figcaption>
+</figure>
+</section><section><h2><span class="n">04</span>How it reaches a script</h2>
+<figure>
+<div class="scroll"><svg viewBox="0 0 960 170" width="960" role="img" aria-label="Pipeline from settings to written script">
+ <defs><marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#7a6e5e"/></marker></defs>
+ <g font-size="12">
+  <rect x="10" y="20" width="200" height="80" rx="6" fill="#fff" stroke="#d4cdc4"/><text x="22" y="44" font-weight="700">1 · Settings pick it</text><text x="22" y="64" fill="#7a6e5e">profile: "build-story"</text><text x="22" y="80" fill="#7a6e5e">default; video can override</text>
+  <rect x="250" y="20" width="200" height="80" rx="6" fill="#fff" stroke="#d4cdc4"/><text x="262" y="44" font-weight="700">2 · story.brief</text><text x="262" y="64" fill="#7a6e5e">hands the agent</text><text x="262" y="80" class="mono" fill="#7a6e5e">activeProfile.spine</text>
+  <rect x="490" y="20" width="220" height="80" rx="6" fill="#fff" stroke="#c8841a" stroke-width="2"/><text x="502" y="44" font-weight="700">3 · storypilot skill, step 5</text><text x="502" y="64" fill="#7a6e5e">"Follow activeProfile.spine"</text><text x="502" y="80" fill="#7a6e5e">+ voice, paragraphs, chapters</text>
+  <rect x="750" y="20" width="200" height="80" rx="6" fill="#fff" stroke="#d4cdc4"/><text x="762" y="44" font-weight="700">4 · build.py</text><text x="762" y="64" fill="#7a6e5e">writes a new version</text><text x="762" y="80" fill="#7a6e5e">+ build record</text>
+  <path d="M210 60H248M450 60H488M710 60H748" stroke="#7a6e5e" stroke-width="2" marker-end="url(#ah3)"/>
+  <text x="10" y="132" font-size="12" fill="#7a6e5e">Also read in step 3 and alongside it: the Direction box (once set), the brand guides (VERBAL-STYLE, Voice profile, Hook study),</text>
+  <text x="10" y="150" font-size="12" fill="#7a6e5e">and any Global/Brand story instructions (templates). The spine sets the shape; those set the voice and the specifics.</text>
+ </g>
+</svg></div>
+<figcaption><span class="fignum">Figure 5</span>The guide card doesn't feed the build: the <b>profile setting</b> does. The card only lets you see and open it.</figcaption>
+</figure>
+
+</section><section><h2><span class="n">05</span>The same words, in three places</h2>
+<figure>
+<div class="scroll"><table>
+<tr><th>Copy</th><th>Where</th><th>Used by builds?</th><th>Note</th></tr>
+<tr><td>Profile <span class="mono">build-story</span> spine</td><td><span class="mono">defaults.json › profiles</span></td><td><span class="tag ok">Yes</span> via <span class="mono">activeProfile</span></td><td>The real one; the guide card points here</td></tr>
+<tr><td>Template <span class="mono">build-story-spine</span></td><td><span class="mono">defaults.json › templates</span></td><td><span class="tag warn">Hidden</span> for AppyDave</td><td>Word-for-word duplicate; shows under "Story instructions" if un-hidden</td></tr>
+<tr><td>Skill paraphrase</td><td><span class="mono">flivideo:storypilot</span> SKILL.md step 5</td><td><span class="tag ok">Yes</span> (the agent reads it)</td><td>Restates the five beats; also mentions the "let's get into it" bookend "if the elements say so"</td></tr>
+</table></div>
+<figcaption><span class="fignum">Figure 6</span>Change the spine in one place and the other two drift. That matters if you ever edit this guide.</figcaption>
+</figure>
+
+</section><section><h2><span class="n">06</span>What this means for tonight's walk</h2>
+<figure>
+<div class="scroll"><table>
+<tr><th>Question</th><th>My take</th></tr>
+<tr><td>Is the guide doing its job?</td><td>Yes: d13 v3 has all five beats, and its tension is real (the check that lied).</td></tr>
+<tr><td>Why does Read → look thin?</td><td>It points into a JSON file. Showing the spine text on the card would fix that.</td></tr>
+<tr><td>Is the "let's get into it" stamp coming from here?</td><td>No. The spine never mentions it. It comes from the voice docs, creator settings and the skill's bookend line, so the Direction box (or the d13 redo) is where it gets dropped.</td></tr>
+<tr><td>Short vs long: which does a video get?</td><td>Whatever its settings name. Today that's long for every video; nothing picks short automatically.</td></tr>
+<tr><td>Should the three copies merge?</td><td>Later, at the planned guides refactor. Not tonight; FliStudio is frozen for the walk.</td></tr>
+</table></div>
+<figcaption><span class="fignum">Figure 7</span>A decision surface: nothing here changes without your go.</figcaption>
+</figure>
+
+</section><section><div class="limits"><b>Not established:</b> I didn't check whether d13 overrides the profile at video level (its story.json says <span class="mono">build-story</span>, the default). I didn't trace every line of how the skill weighs the spine against the brand guides; that weighing happens in the agent, not in code. Sources: <span class="mono">flistudio/modules/storypilot/defaults.json</span>, <span class="mono">server/settings.ts</span> (<span class="mono">activeProfile</span>), <span class="mono">server/index.ts:291</span>, <span class="mono">flivideo:storypilot</span> SKILL.md step 5, d13 script v3, all read on the M4 on 2026-11-04.</div></section>
+</div></body></html>
