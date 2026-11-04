@@ -53,7 +53,7 @@ speedWindow(rate: number, visible = 3, ladder = FORWARD_SPEEDS)
 ```
 - Window = `visible` consecutive rungs, **centred on the active rate**, clamped so it pins at `0.25×` (first rung) and `4×` (last rung) — at the pins the window slides, it does not shrink.
 - Off-ladder rate (FliCut's 1.25× from `[`/`]`, or a stale localStorage value): window is built around the **nearest rung**, and the control shows no active rung (same snap `jkl()` already does, `transport.ts:36-39`).
-- Chevron paging: ‹ / › move the *window* one rung or move the *rate* one rung? **My take: they step the rate** (what the mocks showed as the chevron = slower/faster, same as J/L), so the lit rung stays in the middle. Ruled-in mock is the source — see question Q1.
+- Chevrons: ‹ / › step the *rate* one rung (**decided, Q1**) (what the mocks showed as the chevron = slower/faster, same as J/L), so the lit rung stays in the middle. Source: mocks sections 01 and 06.
 
 **Component** `SpeedControl` in the UI layer:
 ```ts
@@ -101,7 +101,6 @@ Versions: this is a **minor bump** of fli-core (new exports), then each app bump
 | `flihub` | — | **No test touches SpeedControl/WatchPage/VideoPlayerModal** | new: component test + J/K/L in `useVideoPlayback` |
 | `fli-core/test/transport.test.ts` | 14-47 | ladder + `jkl` | keep; add `speedWindow` cases (middle, both pins, off-ladder) + arch-test rule for `ui/` |
 
-Flag: if the arrows don't step the rate (Q1), the e2e clicks need `page.getByRole` on the revealed rung instead.
 
 ### Order of work (and machine)
 All on **M2** (build default; unwatched; `help-system` also is on the M2 per this brief). Run via `flivideo-orch`.
@@ -118,7 +117,7 @@ Steps 2, 3, 4 are independent once 1 lands (parallel). Total ≈ 2–3 working d
 Show David the shared component's look (one screenshot per app skin) **after step 1 and before 2–4** — his decisions say "plan first, show David before code".
 
 ### Still David's call
-- **Q1** Chevrons: step the *rate* (my take, J/L-equivalent, lit rung stays centred) or *page the window* (shows 3 more rungs, rate unchanged until clicked)?
+- **Q1 — DECIDED (flivideo-orch, 2026-11-04; David approved mocks sections 01 and 06):** chevrons step the *rate* exactly like J/L, one rung; the window follows. Not paging. The e2e/unit rewrites above use chevron clicks to move the rate.
 - **Q2** FliHub default speed stays **2×** (current) while others default 1×? (My take: keep 2× — it's a viewing habit; the default is per-app config, not part of the control.)
 - **Q3** FliCut `[` `]` and its `RATES` ladder (adds 1.25×, drops 0.25×/2.5×/3.5×/4×): retire it (shared ladder everywhere), or keep it? (Take: retire; one ladder is the point.)
 - **Q4** Package choice A (`@flivideo/core/ui`, my pick) vs B (sibling) — confirm once help-system-dev decides.
