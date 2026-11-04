@@ -6,11 +6,15 @@
 - Read this first when resuming as flivideo-orch
 - The current step tells you the next action; the standing rules are not optional
 
+## 2026-11-04 ~09:05 — HyperFrames app live; semantic identity re-checked
+- hyperframes-studio app up (M4 127.0.0.1:7210, ~/dev/ad/apps/hyperframes-studio 63ba5c1, apps.json b6cceee, d01-trial v-appydave c2f0e59). fliedit-sbs (M4) running. hf-door brief held until help-system + guide-slots merge.
+- Semantic identity: David's lost 10:49 discussion found by flivideo-roamy (78d6888); orch re-check appended §6 (add domPath, lint gate before the coverage test, point-at-anything mode).
+
 ## 2026-11-04 ~08:10 — four 11-04 briefs (David's go via flivideo-roamy); reporting line now David on the M4 (Roamy offline)
 - Running on the M2 (dispatch notes `docs/briefs/orch-dispatch-2026-11-04.md`, 849dc94): help-system-dev (branch help-system),
   guide-slots-dev (branch guide-slots), writeups-rsch (docs only). Held: Direction box (brief storypilot-direction-box) until
   guide-slots merges — both touch story.brief and the Script/rail area.
-- Found: `~/dev/upstream/scratch` deleted 07:05 today (not by orch), so HyperFrames X1 install + proj are gone; :7210 down since
+- `~/dev/upstream/scratch` deleted 07:05 today by flivideo-roamy on David's word ("let's clean up the 4.7 GB") — intended; so HyperFrames X1 install + proj are gone; :7210 down since
   orch stopped it ~21:02 as timed. v-appydave `_staging/2026-09-22-pocket4-deprecated` deletions = the 2026-10-17 T7 offload
   (91/91 text files byte-identical on T7, 30 MP4s there). Both asked of David.
 

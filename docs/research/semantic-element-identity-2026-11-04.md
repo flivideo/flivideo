@@ -131,3 +131,20 @@ Existing notes keep working because the old `story-script:` target stays the roo
 **Open for David**: whether the `data-note-*` prefix should become `data-el-*` once it serves element chat as well as
 notes. Recommendation: rename only if the field tester's notes log can be migrated; otherwise keep the prefix and
 alias.
+
+## 6 · Re-check against David's three ways (flivideo-orch, 2026-11-04)
+
+Checked §4 against David's 2026-11-03 10:49 framing and orch's 10:49 reply. Verdict: **§4 holds, with three amendments.**
+
+| David's way (10:49) | Orch reply (10:49) | §4 as written | Amendment |
+|---|---|---|---|
+| 1 · DOM path ("knowing where it is is also important") | send it with every point | **Missing.** `path[]` is a data-identity path; `data-src` is a code location (dev only). Neither is the DOM path | Add `domPath` (a stable CSS path, computed by the picker at click time) to the payload. Cheap, works in production builds, and lets an agent re-find the element |
+| 2 · Field Tester's hand labels | send it | ✅ `data-note-target`, extended and nested | none |
+| 3 · ARIA / semantic name on every element, enforced "as a hook… you can't even write the page unless you annotate" (the Spaghetti-rig static-analysis framing) | make ARIA naming a gate | ⚠️ aria is used as a label source, and the gate is a **rendered e2e coverage test** only | Gate at write time too: a JSX lint rule (jsx-a11y-style accessible-name on interactive elements and headings) at `warn` → `error`, matching `ui-rule-test-vs-static-analysis-2026-11-04.md` §7. Keep the rendered coverage test for what lint can't see (text nodes, nesting). Lint first, test second |
+| "the selector… a very limited number of boxes" | add a "point at anything" mode that falls back to the nearest named element | **Missing.** Nesting makes more things *named*, not more things *pickable* | Add a "point at anything" picker mode: any element under the cursor is selectable; it reports its own identity or the nearest ancestor's, plus `domPath` |
+
+**Payload, amended:** `app`, `screen/url`, `path[]` of `{type,id,kind}`, `label` (aria-derived), `domPath`, `words` (capped),
+`src` (dev only). **First slice, amended:** Story Pilot nested targets + the point-at-anything mode + the lint rule at `warn`;
+the coverage test follows.
+
+Still David's: the prefix rename (above), and whether ARIA-on-every-element is a hard gate (`error`) or advisory (`warn`).
