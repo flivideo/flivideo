@@ -156,3 +156,9 @@ Recommend: **Lab-first + an approved mock per change**, promoted to the main pag
 4. Open with David's topic: the Story Pilot problems, using §Expert view. Lead with the fork.
 5. Relay the D19 report when it arrives.
 6. Don't build anything until David rules.
+
+**Gate gotcha (2026-11-04, seen twice):** in a FRESH gate worktree the first `npm run typecheck` exits 2 and the first
+`npm test` shows ~70 server/client files failing to load (0 tests run in them). A second typecheck + test run is green. It's a
+build-order artefact of the fresh install, not the branch: always run typecheck + test twice in a fresh worktree before judging,
+and judge on the second run. Separately, `modules/storypilot` `server/angles.test.ts` / `client/reader-view.test.ts` flake under
+full-suite load (pass in isolation).
