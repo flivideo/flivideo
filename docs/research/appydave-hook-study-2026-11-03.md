@@ -6,7 +6,7 @@ id: hook-study
 label: Hook study (2026-11-03)
 type: structure
 level: brand
-gist: How David opens videos (a 'you' pain-or-desire question, premise, then the demo) and six hook structures for build stories — lead with but-therefore or in medias res.
+gist: "How David opens videos (8 of 10: a 'you' pain-or-desire question, premise, then the demo) and six hook structures for build stories; for d13 it recommends but-therefore or in medias res."
 brands: [appydave]
 ---
 # AppyDave hook study (2026-11-03)
