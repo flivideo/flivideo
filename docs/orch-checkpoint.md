@@ -6,6 +6,15 @@
 - Read this first when resuming as flivideo-orch
 - The current step tells you the next action; the standing rules are not optional
 
+## 2026-11-04 ~18:35 — David's rulings via flivideo-roamy; evening freeze on FliStudio
+- Rulings: Teletubby click-a-word-to-jump = NO. Apple speech permission + all Teletubby testing wait until tomorrow (David at the M4);
+  no speech-test rerun tonight. voice-parity @ b48c8dd gated (532 tests) but NOT merged — merge + Allow + bench + live read tomorrow.
+- Tonight David walks Story Pilot (Guides section, Direction box, a story build) from Roamy via the localhost:7150 tunnel, driven by
+  flivideo-roamy → orch freezes FliStudio main (no merges, no restarts). Held: AITLDR strip (flistudio branch aitldr-strip @ 858708c,
+  ungated). FliEdit Lane A continues: A1–A5 merged (3611285, 47fa438, 96456d3, e7d94e0, 85fdb01), A6 duck building on the M2;
+  real-app screenshots for A2–A5 owed (M4 display asleep).
+- Update strip live (727eec2): shows hyperframes-studio (no origin) — exclude/mark local-only later.
+
 ## 2026-11-04 ~11:00 — STOPPED for shutdown of both machines (David)
 - No FliVideo workers running. Teletubby stopped. FliStudio left as an app (comes back via my-app after reboot).
 - WIP saved: teletubby branch `apple-stt-bundle` @ 799e257 (Apple STT as .app so macOS can prompt) — UNFINISHED, not gated;
