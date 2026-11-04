@@ -6,6 +6,14 @@
 - Read this first when resuming as flivideo-orch
 - The current step tells you the next action; the standing rules are not optional
 
+## 2026-11-04 ~08:10 — four 11-04 briefs (David's go via flivideo-roamy); reporting line now David on the M4 (Roamy offline)
+- Running on the M2 (dispatch notes `docs/briefs/orch-dispatch-2026-11-04.md`, 849dc94): help-system-dev (branch help-system),
+  guide-slots-dev (branch guide-slots), writeups-rsch (docs only). Held: Direction box (brief storypilot-direction-box) until
+  guide-slots merges — both touch story.brief and the Script/rail area.
+- Found: `~/dev/upstream/scratch` deleted 07:05 today (not by orch), so HyperFrames X1 install + proj are gone; :7210 down since
+  orch stopped it ~21:02 as timed. v-appydave `_staging/2026-09-22-pocket4-deprecated` deletions = the 2026-10-17 T7 offload
+  (91/91 text files byte-identical on T7, 30 MP4s there). Both asked of David.
+
 ## 2026-11-03 ~23:20 — Story Pilot build queue DONE (all merged, flistudio main dbd1f6a)
 - Merged tonight: W0 a4f4cb7 · W1 188a202 · templates agent-drivable 84f4e5d · W2 c827c92 · W2.1 c968ec7 · tail filter
   065129d · W4 dbd1f6a (+ chip fixes 35225b5 / 1c5bb9b). Plugin flivideo 2.8.0 (appydave-plugins e72c270). teletubby d748f8a.
