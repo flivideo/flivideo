@@ -474,3 +474,10 @@ Previous: `fc50-waits` merged 2026-10-27 (FliCut main `7bc5a4a`).
 - Pages: story guides five questions https://claude.ai/artifact/EoTMUn9ci2sLrT13Wvrww1 · VERBAL-STYLE deconstructed https://claude.ai/artifact/4xzc9y2kAvwGPeWzBVvtgM · build-story guides https://claude.ai/artifact/EwzoVcZVWmNyafSCoho4WE
 - 06:45 Parked for later today: Teletubby apple-helper selftest timeout (suspect the voicefix probe vs the parity app bundle; M2 worker, don't touch live Teletubby). FliEdit A2–A8 real-app screenshots.
 - STORY PILOT FOCUS (David, morning 11-05). First item: Reader shows build-short.md's header as raw text (schema:/id:/label:… then a literal ---) instead of the guide layout; file's frontmatter is well-formed (starts ---). Then Roamy's A (spoken-script-template as story structure guide + "scripted story" verbal register + §8 split), B (d13 Direction → Rerun v4 only on David's say-so), F (slow "Reading the project…").
+
+## 2026-11-05 ~07:00 — Story Pilot: Reader "bug" + item A held
+
+- **Reader build-short "raw header"**: not a code bug. Live app (RPC `story.guide.read` + fresh Playwright) renders the guide layout correctly; David's tab was a stale pre-restart copy. Told him to reload.
+- **Roamy's item A is ON HOLD** (David, 2026-11-05). Replaced by a **script-style library** mandate: reverse-engineer 3–4 styles (AITLDR Series A old, AITLDR Series B new, AppyDave last 25, Mike/OpenRig + 3 videos, Maitis @maitis-ai) into typed `storypilot.guide/1` structure + verbal-style guides; a matrix page; a recommendation of which styles first. Separate visual/editing lane (frames, cuts) = plan + size estimate only, waiting for go.
+- Gates: any download / install / paid transcription needs David's go after a plan with counts, cost, size. Out of scope: wiring guides into Story Pilot, editing VERBAL-STYLE, d13 rerun, B-roll/auto-edit features.
+- Step 1 running: read-only inventory worker (M4, local subagent) — Series A/B meaning, transcripts on disk, harvest/transcribe tools, disk free.
