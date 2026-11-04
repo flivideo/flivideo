@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>One speed control for four players — mocks</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Roboto+Mono&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;
+--brand-brown:#342d2d;--brand-gold:#ccba9d;--brand-yellow:#ffde59;--brand-amber:#c8841a;--brand-muted:#7a6e5e;
+--brand-near-white:#faf5ec;--brand-surface:#f0ebe4;--brand-linen:#e8e0d4;--brand-border:#d4cdc4;--brand-chrome:#1a1515;
+--brand-dark-surface:#25201e;--brand-blue:#2E91FC;--brand-card:#ffffff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--brand-near-white);color:var(--brand-brown);font-family:Roboto,sans-serif;line-height:1.55}
+main{max-width:1100px;margin:0 auto;padding:40px 24px 80px}
+h1,h2,h3{font-family:Oswald,sans-serif;text-transform:uppercase;letter-spacing:.02em;margin:0}
+h1{font-size:40px;line-height:1.1;font-weight:600}
+h2{font-size:24px;font-weight:600;margin:48px 0 6px}
+h3{font-size:14px;font-weight:600;color:var(--brand-muted);margin:0 0 10px}
+.lede{font-size:18px;max-width:760px;margin:12px 0 0}
+.num{font-family:Oswald;color:var(--brand-amber);font-weight:600;margin-right:8px}
+.sub{color:var(--brand-muted);max-width:760px;margin:0 0 18px}
+.card{background:var(--brand-card);border:1px solid var(--brand-border);border-radius:8px;padding:20px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:800px){.grid2{grid-template-columns:1fr}}
+.rule{border-left:3px solid var(--brand-amber);padding:2px 0 2px 14px;margin:18px 0;max-width:760px}
+
+/* ---- the control ---- */
+.spd{display:inline-flex;align-items:center;gap:4px;font-family:Roboto,sans-serif;font-size:13px}
+.spd .lbl{color:var(--brand-muted);margin-right:4px}
+.spd button{font:inherit;border:1px solid var(--brand-border);background:var(--brand-card);color:var(--brand-brown);
+ border-radius:5px;padding:3px 9px;min-width:46px;cursor:pointer}
+.spd button:hover:not(:disabled){background:var(--brand-linen)}
+.spd button[aria-pressed=true]{background:var(--brand-yellow);border-color:var(--brand-brown);font-weight:700}
+.spd button.step{min-width:28px;padding:3px 6px;font-weight:700}
+.spd button:disabled{opacity:.35;cursor:default}
+.spd.dark button{background:transparent;color:#faf5ec;border-color:#5a504d}
+.spd.dark button:hover:not(:disabled){background:#3a3330}
+.spd.dark button[aria-pressed=true]{background:var(--brand-yellow);color:var(--brand-brown);border-color:var(--brand-yellow)}
+.spd.dark .lbl{color:#cfc6b8}
+.spd.sm button{font-size:11px;padding:2px 6px;min-width:38px}
+.spd.sm button.step{min-width:24px}
+
+/* ---- fake players ---- */
+.frame{border:1px solid var(--brand-border);border-radius:8px;background:var(--brand-card);overflow:hidden}
+.frame .bar{display:flex;align-items:center;gap:8px;padding:6px 12px;background:var(--brand-surface);border-bottom:1px solid var(--brand-border);
+ font-family:Oswald;text-transform:uppercase;font-size:12px;letter-spacing:.05em;color:var(--brand-muted)}
+.pic{background:var(--brand-chrome);aspect-ratio:16/7;display:flex;align-items:center;justify-content:center;color:#7a6e5e;font-family:Roboto Mono;font-size:12px;position:relative}
+.ctl{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:10px 12px;font-size:13px}
+.ctl .mono{font-family:"Roboto Mono",monospace;font-size:12px;color:var(--brand-muted)}
+.btn{border:1px solid var(--brand-border);background:var(--brand-card);border-radius:5px;padding:3px 10px;font-size:13px}
+.btn.y{background:var(--brand-yellow);border-color:var(--brand-brown);font-weight:700}
+.where{font-family:Roboto Mono;font-size:12px;color:var(--brand-muted);padding:8px 12px;border-top:1px solid var(--brand-border);background:var(--brand-near-white)}
+.badge{position:absolute;top:8px;right:8px;background:rgba(26,21,21,.85);color:#faf5ec;border:1px solid #5a504d;border-radius:5px;padding:2px 8px;font-family:Roboto Mono;font-size:12px}
+.darkbar{background:var(--brand-dark-surface);padding:8px 12px;display:flex;align-items:center;gap:12px;color:#faf5ec;font-size:12px;font-family:Roboto Mono}
+.modal{max-width:520px;margin:0 auto;border:1px solid var(--brand-border);border-radius:8px;overflow:hidden;background:var(--brand-card)}
+
+/* ---- tables / states ---- */
+table{border-collapse:collapse;width:100%;background:var(--brand-card);border:1px solid var(--brand-border);font-size:14px}
+th,td{padding:8px 12px;border-bottom:1px solid var(--brand-border);text-align:left;vertical-align:top}
+th{font-family:Oswald;text-transform:uppercase;font-size:12px;letter-spacing:.05em;background:var(--brand-surface)}
+.states{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:800px){.states{grid-template-columns:1fr}}
+figure{margin:0}.fignum{display:block;font-family:Oswald;text-transform:uppercase;font-size:11px;letter-spacing:.06em;color:var(--brand-amber);margin-bottom:8px}
+.state .cap{font-size:13px;color:var(--brand-muted);margin-top:8px}
+.state .row{padding:14px 12px;background:var(--brand-card);border:1px solid var(--brand-border);border-radius:6px;display:flex;justify-content:center}
+.ladder{display:flex;gap:4px;margin:6px 0 0;font-family:"Roboto Mono";font-size:11px;color:var(--brand-muted)}
+.ladder span{flex:1;text-align:center;padding:2px 0;border-radius:3px;background:var(--brand-linen)}
+.ladder span.in{background:var(--brand-yellow);color:var(--brand-brown)}
+.ladder span.cur{background:var(--brand-brown);color:var(--brand-yellow);font-weight:700}
+.kbd{font-family:"Roboto Mono";background:var(--brand-linen);border:1px solid var(--brand-border);border-radius:4px;padding:0 6px}
+.lens{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin:8px 0 14px}
+.lens label{font-size:14px}
+.tip{position:relative;display:inline-block}
+.tipbox{position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:var(--brand-dark-surface);color:#faf5ec;padding:4px 8px;border-radius:5px;font-size:12px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .12s;z-index:3}
+.tip:hover .tipbox,.tip:focus-within .tipbox{opacity:1}
+</style>
+</head>
+<body>
+<main>
+<h1>Ten speed buttons become one control</h1>
+<p class="lede">Show three or five speeds around the current one; chevrons step through the rest. One component, four players. Everything below is live — click the buttons, hover for key tooltips.</p>
+
+<div class="rule"><strong>Recommendation:</strong> the <strong>3-visible</strong> window in the three small bars (Story Pilot, FliStudio, FliHub), the <strong>5-visible</strong> only where there is room and the control is the star (FliCut sits in a toolbar row beside the badge). The chevrons are the same action as J / L, so the keys and the buttons can never disagree.</div>
+
+<div class="lens">
+  <strong>Try it:</strong>
+  <label><input type="radio" name="vis" value="3" checked> 3 visible</label>
+  <label><input type="radio" name="vis" value="5"> 5 visible</label>
+  <span class="sub" style="margin:0">Switches every control on the page.</span>
+</div>
+
+<h2><span class="num">01</span>The shape</h2>
+<p class="sub">The ladder is today's ten rates. The control shows a window of it centred on the current speed (pinned to the ends, so the window never shrinks). The lit button is the current speed.</p>
+<figure class="card"><span class="fignum">Fig 1</span>
+  <h3>Today's ladder → what you see</h3>
+  <div class="ladder" id="ladderDemo"></div>
+  <div style="display:flex;gap:28px;flex-wrap:wrap;margin-top:18px;align-items:center">
+    <div><h3>3-visible</h3><span class="spd" data-ctl></span></div>
+    <div><h3>5-visible</h3><span class="spd" data-ctl data-force="5"></span></div>
+  </div>
+  <p class="sub" style="margin-top:14px">‹ and › move one rung (same as J and L while playing). Clicking a neighbour jumps straight to it. No inline key text: the keys live in the tooltips and the <span class="kbd">?</span> sheet.</p>
+</figure>
+
+<h2><span class="num">02</span>In each real place</h2>
+<p class="sub">Layout copied from today's code, with the ten buttons swapped for the one control.</p>
+
+<figure class="card" style="margin-bottom:16px"><span class="fignum">Fig 2</span>
+  <h3>Story Pilot · Listen <span style="text-transform:none;font-weight:400">— flistudio/modules/storypilot/client/Listen.tsx</span></h3>
+  <div class="frame">
+    <div class="ctl">
+      <span class="btn">⏮</span><span class="btn y">▶ Listen</span><span class="btn">⏭</span>
+      <span class="btn">↺ Replay chapter</span>
+      <label><input type="checkbox" checked> auto-next</label>
+      <span class="spd" data-ctl></span>
+    </div>
+    <div class="where">¶4/22 · ch 2/5 Why it matters · ¶ 0:12 / 0:31 · all 1:48 / 6:02</div>
+  </div>
+  <p class="sub" style="margin:8px 0 0">The "J slower · K 1x · L faster" line is gone; ten buttons → seven controls wide, so the row stops wrapping.</p>
+</figure>
+
+<div class="grid2" style="margin-bottom:16px">
+  <figure class="card"><span class="fignum">Fig 3</span>
+    <h3>FliStudio · video Viewer</h3>
+    <div class="frame">
+      <div class="bar">‹ prev · clip 3 / 12 · next ›</div>
+      <div class="pic">video</div>
+      <div class="ctl"><span class="btn y">Pause</span><span class="mono">0:12 / 0:48 · 14.2 MB</span>
+        <span class="spd sm" data-ctl></span>
+        <span class="spd sm"><span class="lbl">Size</span><button aria-pressed="false">N</button><button aria-pressed="true">L</button></span></div>
+    </div>
+    <p class="sub" style="margin:8px 0 0">Replaces the Speed group in <code>Viewer.tsx</code>; Size stays as is.</p>
+  </figure>
+  <figure class="card"><span class="fignum">Fig 4</span>
+    <h3>FliCut · Player</h3>
+    <div class="frame">
+      <div class="pic">preview<span class="badge">▶ 1×</span></div>
+      <div class="ctl"><span class="btn">❚❚</span><span class="mono">00:00:12:04 / 00:00:48:00</span>
+        <span class="spd sm" style="margin-left:auto" data-ctl></span></div>
+    </div>
+    <p class="sub" style="margin:8px 0 0">Today FliCut has only a readout badge and J/K/L. The control adds click access. The badge keeps its job (and shows reverse, which the ladder does not).</p>
+  </figure>
+</div>
+
+<figure class="card"><span class="fignum">Fig 5</span>
+  <h3>FliHub · playback modal (Recording / Incoming) <span style="text-transform:none;font-weight:400">— shared/VideoControlsBar → SpeedControl</span></h3>
+  <div class="modal">
+    <div class="pic" style="aspect-ratio:16/6">recording-03.mp4</div>
+    <div class="ctl" style="justify-content:space-between">
+      <span class="btn y">Pause</span>
+      <span class="spd" data-ctl></span>
+      <span class="btn">Size: L</span>
+    </div>
+  </div>
+  <p class="sub" style="margin:8px 0 0">This is the one real component today (<code>SpeedControl.tsx</code>, used by the modal and the Watch page). Making it the shared control fixes both at once.</p>
+</figure>
+
+<h2><span class="num">03</span>The edges</h2>
+<p class="sub">At the slowest and fastest rung the window pins to the end and the chevron on that side goes grey. Nothing jumps.</p>
+<figure class="states"><span class="fignum">States</span>
+  <div class="state"><div class="row"><span class="spd" data-ctl data-at="0.25"></span></div><div class="cap"><strong>At 0.25×</strong> — ‹ disabled, window shows the three slowest.</div></div>
+  <div class="state"><div class="row"><span class="spd" data-ctl data-at="1"></span></div><div class="cap"><strong>At 1×</strong> — centred, both chevrons live.</div></div>
+  <div class="state"><div class="row"><span class="spd" data-ctl data-at="4"></span></div><div class="cap"><strong>At 4×</strong> — › disabled, window shows the three fastest.</div></div>
+</figure>
+<figure class="states" style="margin-top:12px"><span class="fignum">States</span>
+  <div class="state"><div class="row"><span class="spd" data-ctl data-at="0.25" data-force="5"></span></div><div class="cap">5-visible at 0.25×</div></div>
+  <div class="state"><div class="row"><span class="spd" data-ctl data-at="1.5" data-force="5"></span></div><div class="cap">5-visible at 1.5×</div></div>
+  <div class="state"><div class="row"><span class="spd" data-ctl data-at="4" data-force="5"></span></div><div class="cap">5-visible at 4×</div></div>
+</figure>
+
+<h2><span class="num">04</span>J / K / L onto the control</h2>
+<p class="sub">No new key logic: the control calls the same pure <code>jkl()</code> in fli-core. The lit button just follows.</p>
+<table>
+<tr><th>Key</th><th>While playing</th><th>While paused</th><th>On the control</th></tr>
+<tr><td><span class="kbd">J</span></td><td>one rung slower (floor 0.25×)</td><td>plays at 0.75×</td><td>= ‹ ; window slides left</td></tr>
+<tr><td><span class="kbd">K</span></td><td>back to 1×, keeps playing</td><td>1×, stays paused</td><td>jumps to 1×, window re-centres</td></tr>
+<tr><td><span class="kbd">L</span></td><td>one rung faster (ceiling 4×)</td><td>plays at 1×</td><td>= › ; window slides right</td></tr>
+</table>
+<p class="sub" style="margin-top:10px">Try it: click in the demo below and press J, K or L.</p>
+<figure class="card" style="display:flex;gap:18px;align-items:center;flex-wrap:wrap"><span class="fignum">Fig 6</span>
+  <span class="spd" data-ctl id="keyDemo" tabindex="0"></span>
+  <span class="mono" id="keyState" style="font-family:'Roboto Mono';font-size:12px;color:var(--brand-muted)">paused · 1×</span>
+</figure>
+
+<h2><span class="num">05</span>Tooltips instead of key text</h2>
+<p class="sub">Hover the buttons. Keys appear only here and in the <span class="kbd">?</span> sheet.</p>
+<figure class="card"><span class="fignum">Fig 7</span><span class="spd" data-ctl data-tips="1"></span></figure>
+
+<h2><span class="num">06</span>What to decide</h2>
+<table>
+<tr><th>Question</th><th>Take</th></tr>
+<tr><td>3 or 5 visible?</td><td>3 everywhere; 5 only if you find 3 fiddly in FliCut. The component takes a <code>visible</code> prop, so it is one line to change.</td></tr>
+<tr><td>Keep the ladder?</td><td>Yes — the ten rates stay (fli-core <code>FORWARD_SPEEDS</code>); only the display changes.</td></tr>
+<tr><td>Where does it live?</td><td>One component in fli-core's UI layer, used by all four. FliCut's ±8× reverse stays on its badge.</td></tr>
+</table>
+</main>
+
+<script>
+const R=[0.25,0.5,0.75,1,1.5,2,2.5,3,3.5,4];
+let VIS=3;
+const fmt=v=>v+'×';
+function windowOf(i,n){let s=i-Math.floor(n/2);s=Math.max(0,Math.min(R.length-n,s));return R.slice(s,s+n)}
+function render(el){
+  const n=+el.dataset.force||VIS;
+  if(el.dataset.at&&!el._v)el._v=+el.dataset.at;
+  if(el._v==null)el._v=1;
+  const i=R.indexOf(el._v), w=windowOf(i,n);
+  const keep=el.querySelector('.lbl');
+  el.innerHTML='';
+  if(!el.classList.contains('nolbl')&&!el.closest('.state')){const l=document.createElement('span');l.className='lbl';l.textContent='Speed';el.appendChild(l)}
+  const tips=el.dataset.tips;
+  const mk=(txt,dis,cb,cls,tip)=>{const b=document.createElement('button');b.type='button';b.textContent=txt;b.disabled=dis;if(cls)b.className=cls;b.onclick=cb;
+    if(tip){b.title=tip;b.setAttribute('aria-label',tip)} return b};
+  const go=v=>{el._v=v;render(el);if(el.id==='keyDemo')keyState()};
+  const wrap=(b,tip)=>{if(!tips)return b;const s=document.createElement('span');s.className='tip';s.appendChild(b);const t=document.createElement('span');t.className='tipbox';t.textContent=tip;s.appendChild(t);return s};
+  el.appendChild(wrap(mk('‹',i===0,()=>go(R[i-1]),'step','Slower (J)'),'Slower — J'));
+  w.forEach(v=>{const b=mk(fmt(v),false,()=>go(v));b.setAttribute('aria-pressed',v===el._v);
+    el.appendChild(v===1?wrap(b,'Normal speed — K'):b)});
+  el.appendChild(wrap(mk('›',i===R.length-1,()=>go(R[i+1]),'step','Faster (L)'),'Faster — L'));
+}
+function all(){document.querySelectorAll('[data-ctl]').forEach(render)}
+document.querySelectorAll('input[name=vis]').forEach(r=>r.onchange=e=>{VIS=+e.target.value;all()});
+all();
+// ladder demo
+const ld=document.getElementById('ladderDemo');
+function ladder(){const w=windowOf(R.indexOf(1),VIS);ld.innerHTML=R.map(v=>`<span class="${v===1?'cur':w.includes(v)?'in':''}">${fmt(v)}</span>`).join('')}
+ladder();document.querySelectorAll('input[name=vis]').forEach(r=>r.addEventListener('change',ladder));
+// J/K/L demo
+let playing=false;
+function keyState(){const e=document.getElementById('keyDemo');document.getElementById('keyState').textContent=(playing?'playing':'paused')+' · '+fmt(e._v)}
+document.addEventListener('keydown',e=>{
+  const d=document.getElementById('keyDemo');const k=e.key.toUpperCase();
+  if(!['J','K','L'].includes(k))return;
+  const i=R.indexOf(d._v);
+  if(k==='K'){d._v=1}
+  else if(k==='L'){d._v=playing?R[Math.min(R.length-1,i+1)]:1;playing=true}
+  else{d._v=playing?R[Math.max(0,i-1)]:0.75;playing=true}
+  render(d);keyState();
+});
+</script>
+</body>
+</html>
