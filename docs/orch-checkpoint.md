@@ -6,6 +6,13 @@
 - Read this first when resuming as flivideo-orch
 - The current step tells you the next action; the standing rules are not optional
 
+## 2026-11-04 ~10:05 — Guides section + Direction box + help system + voice-follow all live
+- flistudio main 316772c (Guides above Sources, shared FilterChips, story.guide.read), 44d2fd8 Direction box, f65e676 help system;
+  teletubby a31fce1 voice-follow (clean-room aligner, Groq primary/Apple fallback, off by default) + eab0ac4 press log.
+- d13 screenshot: docs/screenshots/guides-section-d13-2026-11-04.png (6 guides: 2 global structure, 4 brand). Opened for David.
+- Next with David: walk the guides on screen (scripts held until then); M4 `sudo xcodebuild -license` → Apple bench + first live
+  read on d13; G Hub uninstall yes/no; speed plan review; Open-in-HyperFrames button now unblocked (help-system + guides merged).
+
 ## 2026-11-04 ~09:35 — David out ~1 h ("anything you can manage, do")
 - Merged + live: help system (flistudio f65e676 incl. 8a1fc56; fli-core v0.30.0 tagged 7f23961; brand-dave 4.1.4), press log
   (teletubby eab0ac4; Teletubby not running on the M4, real-app press-log check needs David presenting). Plugins updated on M4
