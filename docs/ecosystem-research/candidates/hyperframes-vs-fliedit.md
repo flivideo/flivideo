@@ -77,5 +77,35 @@ Licence: Apache-2.0 permits reuse, but David's rule is concept-only regardless.
 - **Verified:** FliEdit verbs and ripple code (read 2026-11-04, `dc39399`); FliEdit audit table (2026-10-31 spike);
   HyperFrames X1 operations, render and X2 bind/auth (2026-11-03, M4); HyperFrames Studio app up on 127.0.0.1:7210 with
   project `d01-trial` (2026-11-04, `GET /api/projects` → 200).
-- **Not verified:** that either duck is audible; FliEdit ripple delete on real footage; HyperFrames transitions, captions,
-  speed; render speed of the same composition in both (the side-by-side job will measure it); Studio on a 20-minute project.
+- **Not verified:** that either duck is audible (see side-by-side below: not isolated); FliEdit ripple delete on real footage;
+  HyperFrames transitions, captions, speed; Studio on a 20-minute project. Render speed of the same composition: measured
+  once, below (one run each, unequal settings, so indicative only).
+
+## Side-by-side d01 — 2026-11-04
+
+Same composition (d01 trial, chapter 03: takes 03-1 + 03-2, DJI_0235 at 8 s and DJI_0237 at 45 s for 5 s each, callout 3–7 s,
+music bed at 0.5 ducked 1→0.35→1) built in both editors, 1920×1080, 25 fps, 65.12 s, M4. FliEdit was driven only through its
+JSON-RPC door (hidden, isolated home); no FliEdit code changed. Page: https://claude.ai/artifact/LArug5HPJAjmcaQsXsVJxW
+(source `docs/artifacts/hyperframes-vs-fliedit-d01-2026-11-04.html`).
+
+| | HyperFrames 0.9.9 | FliEdit @ dc39399 |
+|---|---|---|
+| Render | `render -q draft -f 25`: **38.1 s**, 14,204,902 B | `export.start` veryfast crf 20: **13.9 s**, 19,899,570 B |
+| Output | `…/d01-flivideo-tour/hyperframes/renders/d01-trial-hyperframes-draft-25fps.mp4` | `…/hyperframes/renders/d01-trial-fliedit-25fps.mp4` |
+| Edit | `hyperframes/d01-trial/index.html` | `d01-flivideo-tour/fli.edit.d01-hf-sbs.json` |
+
+Steps: takes (✅ `source.add`+`clip.place`), both cutaways (✅ one `cutaway.apply` call, frames 200 and 1125 × 125, fit fill),
+music bed level (✅ `volumeDb −6.02` = 0.5). Frame grabs at 1 s, 10 s and 30 s are visually identical; at 5 s HyperFrames shows the callout.
+
+**Gaps recorded (no workarounds built):**
+- **Callout (H3 + H2):** FliEdit has no text/graphic layer or keyframed animation. Nearest native: `caption.add` (soft subtitle,
+  not an on-frame box). Not used.
+- **Duck (H1):** one `volumeDb` per clip plus fadeIn/fadeOut. Nearest native: split the music clip and fade pieces by hand. Not done.
+- Not a FliEdit gap, a HyperFrames note: composition declares no fps so render defaults to 30; `-f 25` was needed.
+
+**Findings:** the cut-and-assemble half was straightforward and drivable first time; FliEdit rendered ~2.7× faster, though HyperFrames
+was also drawing an animated layer and the quality settings differ (draft vs crf 20), so treat the ratio as indicative.
+
+**Still not verified:** duck audibility — speech and music are mixed, so mean-volume windows (HyperFrames 0–2 s −22.0 dB vs
+4–6 s −26.7 dB; FliEdit −22.7 vs −25.4 dB) cannot isolate the music; no music-only render was made. FliEdit's −6.02 dB not compared
+by ear. One run each; no repeat timings.
