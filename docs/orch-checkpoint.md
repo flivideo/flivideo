@@ -544,3 +544,6 @@ Same worker resumed. Solid map + A* + spacing + upright cards: validator 196 fai
 - FliStudio main 68e6a6e: dep-cruiser 0 errors (narrow rule exception for core's declared /ui entry); update strip skips checkouts with no origin. Gate on M4: build, typecheck, lint clean; e2e 81/81; unit one failure in Listen `audio.test.ts` (stale edit) on the full run, then 13/13 alone and 395/395 twice in the module: flaky under load, cause not found, not caused by this diff. Restarted.
 - Voice clone rerun (M2 `~/dev/labs/voice-poc/page2`, local only): A–D served over an SSH tunnel at 127.0.0.1:7306, ends about 17:10. Waiting for David's ear.
 - Left out: FliEdit screenshots (needs his screen), Apple helper selftest (cause unclear). Workers stopped.
+
+## 2026-11-05 ~15:30 — Voice clone: dead air found, David likes the one-piece take
+David: new ref + one piece "sounded like me". His dead-air report was right: line-by-line generation inserted 0.3 s of digital zeros (`gen.py`), now measured; one-piece takes don't have them. Report on the M2 only. Open: artifact for his friend (not now, assumed David Kaff, sharing is his); longer-script test.
