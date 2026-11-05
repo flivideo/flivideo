@@ -514,3 +514,6 @@ SVG + three.js test: plan with David, waiting for his go (plain M2 session, not 
 
 ## 2026-11-05 ~10:10 — Script-style library: visual lane DONE
 `docs/script-styles/*/VISUAL.md` + `visual-matrix.md` (57ad1ff). 309 MB frames on M2 `~/dev/script-style-frames/`; video deleted. Own-channel video from YouTube: 10 aitldr-old, 3 appydave; I title-matched aitldr-old against T7 aitldr-cold (series B + 45-day plan only, none matched). Nothing reads VISUAL.md yet: B-roll Pilot has no style input. Page updated. Workers stopped. Open with David: four styles; SVG test go; 18 unused captions.
+
+## 2026-11-05 ~10:45 — SVG + three.js test: GO (David)
+Plain M2 session `svg-threejs-test`, brief `docs/briefs/svg-threejs-test-2026-11-05.md`, folder `~/dev/labs/svg-dungeon-test/` on the M2. Not a rig (exec-coord agrees), not the first FliVideo slice; a repeatable pipeline gets written up as a rig candidate. I publish its page when done.
