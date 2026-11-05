@@ -1,0 +1,340 @@
+{
+ "aitldr-new": [
+  {
+   "video_id": "P4c-XkAeJxI",
+   "title": "How to Repurpose YouTube Videos With Claude Code",
+   "duration_s": 207,
+   "source": "FliVideo (M4)",
+   "path": "/Users/davidcruwys/dev/video-projects/v-aitldr/b26-repurpose/videos/repurpose/repurpose-final.mp4"
+  },
+  {
+   "video_id": "XJXg98uMAVY",
+   "title": "Avoid YouTube Copyright Claims With This Claude Skill!",
+   "duration_s": 178,
+   "source": "FliVideo (M4)",
+   "path": "/Users/davidcruwys/dev/video-projects/v-aitldr/b23-rights-check/videos/rights-check/rights-check-final.mp4"
+  },
+  {
+   "video_id": "VtFZNkGYnaU",
+   "title": "Turn Long Videos Into YouTube Shorts Automatically With Claude!",
+   "duration_s": 174,
+   "source": "FliVideo (M4)",
+   "path": "/Users/davidcruwys/dev/video-projects/v-aitldr/b20-quick-short/videos/quick-short/quick-short-final.mp4"
+  },
+  {
+   "video_id": "yh-ko-CwXyg",
+   "title": "I Let Claude Fix My YouTube Captions \u2014 Here's What Happened",
+   "duration_s": 163,
+   "source": "FliVideo (M4)",
+   "path": "/Users/davidcruwys/dev/video-projects/v-aitldr/b17-captions/videos/captions/captions-final.mp4"
+  },
+  {
+   "video_id": "8KhyDQLB0Po",
+   "title": "This Claude Skill Fixed My Animation Timing",
+   "duration_s": 165,
+   "source": "FliVideo (M4)",
+   "path": "/Users/davidcruwys/dev/video-projects/v-aitldr/b14-timing-sheet/videos/timing-sheet/timing-sheet-final.mp4"
+  },
+  {
+   "video_id": "c_9TqD0GlXk",
+   "title": "I Had No B-Roll. This Claude Skill Wrote the Prompts",
+   "duration_s": 134,
+   "source": "FliVideo (M4)",
+   "path": "/Users/davidcruwys/dev/video-projects/v-aitldr/b11-broll-prompts/videos/broll-prompts/broll-prompts-final.mp4"
+  },
+  {
+   "video_id": "TdBL1A7kMd4",
+   "title": "How to sound natural on camera | Claude Cue Cards",
+   "duration_s": 165,
+   "source": "FliVideo (M4)",
+   "path": "/Users/davidcruwys/dev/video-projects/v-aitldr/b08-cue-cards/videos/cue-cards/cue-cards-final.mp4"
+  },
+  {
+   "video_id": "Nrd5PnLkMk4",
+   "title": "This Claude Skill Found What Was Wrong With My YouTube Hooks",
+   "duration_s": 205,
+   "source": "FliVideo (M4)",
+   "path": "/Users/davidcruwys/dev/video-projects/v-aitldr/b06-hook-doctor/videos/hook-doctor/hook-doctor-final.mp4"
+  },
+  {
+   "video_id": "a2EGJnOCpoA",
+   "title": "Want to Know Which Videos Are Killing Your Channel? Watch This Now!",
+   "duration_s": 251,
+   "source": "FliVideo (M4)",
+   "path": "/Users/davidcruwys/dev/video-projects/v-aitldr/b01-yt-performance/videos/yt-performance/yt-performance-final.mp4"
+  },
+  {
+   "video_id": "D3srragTwPQ",
+   "title": "I Stopped Guessing YouTube Titles\u2014This Claude Skill Found My Best One",
+   "duration_s": 127,
+   "source": "FliVideo (M4)",
+   "path": "/Users/davidcruwys/dev/video-projects/v-aitldr/b05-title-lab/videos/title-lab/title-lab-final.mp4",
+   "note": "replaces 8uypPWDhDs8 (b04-shot-list): that project has only a short final, no long final.mp4"
+  }
+ ],
+ "aitldr-old": [
+  {
+   "video_id": "f-fYGjCmbp4",
+   "title": "In KlueLess: The Clue is to do Less",
+   "duration_s": 312,
+   "source": "YouTube",
+   "own_channel_exception": true,
+   "fallback_reason": "not on T7 aitldr-cold or youtube-PUBLISHED/aitldr (those hold only the 2024 a1-a100 series and the b01-b20 series); no title match"
+  },
+  {
+   "video_id": "AWaAj15enVE",
+   "title": "AI Does It ALL: Script, Visuals & Editing! (Next-Level AI Movie Trailers)",
+   "duration_s": 592,
+   "source": "YouTube",
+   "own_channel_exception": true,
+   "fallback_reason": "not on T7 aitldr-cold or youtube-PUBLISHED/aitldr (those hold only the 2024 a1-a100 series and the b01-b20 series); no title match"
+  },
+  {
+   "video_id": "x3SgWqdW-wQ",
+   "title": "From Zero to Viral: AI-Powered Video Ad Creation",
+   "duration_s": 371,
+   "source": "YouTube",
+   "own_channel_exception": true,
+   "fallback_reason": "not on T7 aitldr-cold or youtube-PUBLISHED/aitldr (those hold only the 2024 a1-a100 series and the b01-b20 series); no title match"
+  },
+  {
+   "video_id": "iXu4QeKkSmA",
+   "title": "Animate Multiple Characters Easily with Dzine AI (Lip Sync + Motion)",
+   "duration_s": 360,
+   "source": "YouTube",
+   "own_channel_exception": true,
+   "fallback_reason": "not on T7 aitldr-cold or youtube-PUBLISHED/aitldr (those hold only the 2024 a1-a100 series and the b01-b20 series); no title match"
+  },
+  {
+   "video_id": "z1jM3mF5hCk",
+   "title": "Epic AI Movie Poster Showcase \u2014 50 Styles | Use Chat GPT to Generate",
+   "duration_s": 808,
+   "source": "YouTube",
+   "own_channel_exception": true,
+   "fallback_reason": "not on T7 aitldr-cold or youtube-PUBLISHED/aitldr (those hold only the 2024 a1-a100 series and the b01-b20 series); no title match"
+  },
+  {
+   "video_id": "kMXkKzlKNnQ",
+   "title": "Google's Notebook LM Just Changed Everything!",
+   "duration_s": 436,
+   "source": "YouTube",
+   "own_channel_exception": true,
+   "fallback_reason": "not on T7 aitldr-cold or youtube-PUBLISHED/aitldr (those hold only the 2024 a1-a100 series and the b01-b20 series); no title match"
+  },
+  {
+   "video_id": "ciRCM-SRZII",
+   "title": "I Turned Static Infographics Into Motion Using AI (Nano Banana + Veo 3)",
+   "duration_s": 309,
+   "source": "YouTube",
+   "own_channel_exception": true,
+   "fallback_reason": "not on T7 aitldr-cold or youtube-PUBLISHED/aitldr (those hold only the 2024 a1-a100 series and the b01-b20 series); no title match"
+  },
+  {
+   "video_id": "7O_-z6xaFi4",
+   "title": "I Connected ChatGPT Images 2.0 to Claude (Insane Results)",
+   "duration_s": 609,
+   "source": "YouTube",
+   "own_channel_exception": true,
+   "fallback_reason": "not on T7 aitldr-cold or youtube-PUBLISHED/aitldr (those hold only the 2024 a1-a100 series and the b01-b20 series); no title match"
+  },
+  {
+   "video_id": "lWKzuIjwQvQ",
+   "title": "I Automated Nano Banana With Claude Code Skills",
+   "duration_s": 331,
+   "source": "YouTube",
+   "own_channel_exception": true,
+   "fallback_reason": "not on T7 aitldr-cold or youtube-PUBLISHED/aitldr (those hold only the 2024 a1-a100 series and the b01-b20 series); no title match"
+  },
+  {
+   "video_id": "BA435LYtYho",
+   "title": "How to Create Your Own AI Cartoon Series (Full Workflow)",
+   "duration_s": 322,
+   "source": "YouTube",
+   "own_channel_exception": true,
+   "fallback_reason": "not on T7 aitldr-cold or youtube-PUBLISHED/aitldr (those hold only the 2024 a1-a100 series and the b01-b20 series); no title match"
+  }
+ ],
+ "maitis": [
+  {
+   "video_id": "KscFyux4dVk",
+   "title": "Forget Claude Code: DeepSeek + REA Clones Anything 100% FREE (No Paid API)",
+   "duration_s": 1335,
+   "source": "YouTube",
+   "own_channel_exception": false
+  },
+  {
+   "video_id": "nndv3V5Q7HY",
+   "title": "You Can Clone Any App for FREE (REA + 9Router) Complete End-to-End Tutorial",
+   "duration_s": 664,
+   "source": "YouTube",
+   "own_channel_exception": false
+  },
+  {
+   "video_id": "4b-D8Nr0jQc",
+   "title": "You Can Use Claude Opus 5.5 & Fable 5.1 for FREE (Anyone Can Do This)",
+   "duration_s": 567,
+   "source": "YouTube",
+   "own_channel_exception": false
+  },
+  {
+   "video_id": "I1ISxjjsKNw",
+   "title": "Claude Opus 5.5 Just Killed Expensive Video Editors? (Under $1 Per Video)",
+   "duration_s": 951,
+   "source": "YouTube",
+   "own_channel_exception": false
+  },
+  {
+   "video_id": "qQ9VBlXlSaI",
+   "title": "RIP ChatGPT and Claude? Google Just Dropped Carbon",
+   "duration_s": 401,
+   "source": "YouTube",
+   "own_channel_exception": false
+  },
+  {
+   "video_id": "iaxh4Vt6_SI",
+   "title": "I Tested Every Free AI Tool So You Don't Have To",
+   "duration_s": 1259,
+   "source": "YouTube",
+   "own_channel_exception": false
+  },
+  {
+   "video_id": "WqYoGfbYb7Q",
+   "title": "4 Free Chrome Extensions That Turn Chrome Into an AI Operating System",
+   "duration_s": 629,
+   "source": "YouTube",
+   "own_channel_exception": false
+  },
+  {
+   "video_id": "HTrKAn2qJUE",
+   "title": "The New Claude Can Build Things AI Couldn't Do Before",
+   "duration_s": 644,
+   "source": "YouTube",
+   "own_channel_exception": false
+  },
+  {
+   "video_id": "mVh3YktAhDA",
+   "title": "I Tested Grok 4.7: The Reality Check Nobody Is Talking About",
+   "duration_s": 357,
+   "source": "YouTube",
+   "own_channel_exception": false
+  },
+  {
+   "video_id": "0iFEPUeQyz4",
+   "title": "Is AI Getting Too Dangerous? Claude, Meta, and the Week's Biggest Breakthroughs",
+   "duration_s": 662,
+   "source": "YouTube",
+   "own_channel_exception": false
+  }
+ ],
+ "appydave": [
+  {
+   "video_id": "IL-voVs9IBE",
+   "title": "Asked for a Dog House, Got a Power Plant: OpenRig Agent Teams",
+   "duration_s": 1149,
+   "source": "FliVideo (M4)",
+   "path": "/Users/davidcruwys/dev/video-projects/v-appydave/d12-openrig-agent-teams/job/render-2026-10-27/openrig-agent-teams.mp4"
+  },
+  {
+   "video_id": "M978wEYFz1E",
+   "title": "I Built My Own Recording Apps Around Ecamm Live",
+   "duration_s": 594,
+   "source": "YouTube",
+   "own_channel_exception": true,
+   "fallback_reason": "no matching project/final on M4 T7 (d06/d07/d08 are current FliVideo projects holding only pre-overlay -cut.mp4 or audio, not the published video)"
+  },
+  {
+   "video_id": "kn_54J1fxec",
+   "title": "Which Headshot Goes on My Thumbnail? Now AI Can Choose",
+   "duration_s": 333,
+   "source": "YouTube",
+   "own_channel_exception": true,
+   "fallback_reason": "no matching project/final on M4 T7 (d06/d07/d08 are current FliVideo projects holding only pre-overlay -cut.mp4 or audio, not the published video)"
+  },
+  {
+   "video_id": "AqLhqOCv9X0",
+   "title": "Claude Code Agents Working Together | Swarm Intelligence",
+   "duration_s": 907,
+   "source": "YouTube",
+   "own_channel_exception": true,
+   "fallback_reason": "no matching project/final on M4 T7 (d06/d07/d08 are current FliVideo projects holding only pre-overlay -cut.mp4 or audio, not the published video)"
+  },
+  {
+   "video_id": "Rb6U3Z4DvnM",
+   "title": "This Is Where Vibe Coding Turns Into a Finished Film (Claudemas #11)",
+   "duration_s": 1243,
+   "source": "T7 old copy (M4)",
+   "own_channel_exception": false,
+   "path": "/Volumes/T7/v-appydave-old/c06-12-days-of-claudmas-11/edit-1st/c06-12-days-of-claudmas-11.mp4",
+   "matched_by_title": "#11 -> c06-...-11 (edit-1st only; no final in folder)"
+  },
+  {
+   "video_id": "2jMdt3U4AkA",
+   "title": "From Transcript to Prompt Pack: Designing an AI Prompt Pipeline | Day 9 Claudemas",
+   "duration_s": 900,
+   "source": "T7 old copy (M4)",
+   "own_channel_exception": false,
+   "path": "/Volumes/T7/v-appydave-old/c04-12-days-of-claudmas-09/edit-final/c04-12-days-of-claudmas-09.mp4",
+   "matched_by_title": "Day 9 -> c04-...-09 (edit-final)"
+  },
+  {
+   "video_id": "XA3JZLOgMow",
+   "title": "I Added Music to My AI Story Pipeline (Suno + Claude Code) | Day 7 Claudemas",
+   "duration_s": 735,
+   "source": "T7 old copy (M4)",
+   "own_channel_exception": false,
+   "path": "/Volumes/T7/v-appydave-old/c02-12-days-of-claudmas-07/edit-final/c02-12-days-of-claudmas-07.mov",
+   "matched_by_title": "Day 7 -> c02-...-07 (edit-final .mov)"
+  },
+  {
+   "video_id": "7jCkq3T8nJo",
+   "title": "Build a Multi-Model Image Generator with FAL.AI + KIE.AI (Claudemas Day 4)",
+   "duration_s": 1349,
+   "source": "T7 old copy (M4)",
+   "own_channel_exception": false,
+   "path": "/Volumes/T7/v-appydave-old/b98-12-days-of-claudmas-04/final/b98-12-days-of-claudmas-04.mp4",
+   "matched_by_title": "Day 4 -> b98-...-04"
+  },
+  {
+   "video_id": "aEJCzHKVHTg",
+   "title": "12 Days of Claudemas: Building with Agent SDK \"Day 2\"",
+   "duration_s": 1223,
+   "source": "T7 old copy (M4)",
+   "own_channel_exception": false,
+   "path": "/Volumes/T7/v-appydave-old/b95-12-days-of-claudmas-02/final/b95-12-days-of-claudmas-02.mp4",
+   "matched_by_title": "Day 2 -> b95-...-02"
+  },
+  {
+   "video_id": "-wL35QS_35o",
+   "title": "I Built a Text-to-Speech Generator in 15 Minutes (Claudemas Day 5)",
+   "duration_s": 745,
+   "source": "T7 old copy (M4)",
+   "own_channel_exception": false,
+   "path": "/Volumes/T7/v-appydave-old/b99-12-days-of-claudmas-05/final/b99-12-days-of-claudmas-05.mp4",
+   "matched_by_title": "Day 5 -> b99-...-05"
+  }
+ ],
+ "mike": [
+  {
+   "video_id": "qccsfUnrQ9w",
+   "title": "",
+   "duration_s": null,
+   "source": "YouTube",
+   "own_channel_exception": false
+  },
+  {
+   "video_id": "CYRJDTcTKhQ",
+   "title": "",
+   "duration_s": null,
+   "source": "YouTube",
+   "own_channel_exception": false
+  },
+  {
+   "video_id": "AL-PQuB2wy0",
+   "title": "",
+   "duration_s": null,
+   "source": "YouTube",
+   "own_channel_exception": false
+  }
+ ],
+ "how_picked": "aitldr-new: long only (27), 10 by index 1,4,7,...,26 (evenly spread newest to oldest; b03/b02 skipped as >500MB, swapped for nearest smaller). aitldr-old/appydave/maitis: 10 evenly spaced by index across the selection.json list (round(i*(n-1)/9)). mike: all 3. FliVideo final.mp4 exists only for aitldr-new b01-b26; appydave only d12 render in sampled set (d06/d07 only have pre-overlay -cut.mp4, not used). aitldr-old (pre-FliVideo) and other appydave rows come from YouTube = own-channel exceptions. appydave zfOFf6wMfh0 (7343 s, 2 h livestream-length) swapped for -wL35QS_35o (745 s) to stay in the disk budget. UPDATE 2026-11-05 (orch): own-channel video stopped coming from YouTube; 6 appydave Claudemas rows matched by title (Day N = project NN) to /Volumes/T7/v-appydave-old/<project>/final|edit-final|edit-1st. Remaining YouTube own-channel fallbacks are listed with fallback_reason. aitldr-old frames already taken from YouTube (f-fYGjCmbp4, AWaAj15enVE, x3SgWqdW-wQ, iXu4QeKkSmA, z1jM3mF5hCk) stay."
+}
