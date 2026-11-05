@@ -32,7 +32,7 @@ Videos: KscFyux4dVk, qKsMQg4WB6s, nndv3V5Q7HY, 4b-D8Nr0jQc, MuLGacYq7WA, I1ISxjj
 - Opening (first ~60 words): a number or price ($, "million", a count) **13 of 15**; the word "free" **4**; "Right now,…" opener **3**; "stop scrolling / stop everything you're doing and watch this" **2**; an in-medias-res clip or quote (">>" dialogue) 2.
 - First chapter (the hook block) ends at 0:53-2:30 in the five videos whose chapter lists were read (KscFyux4dVk 2:30, nndv3V5Q7HY 1:05, _TWyiaF_sV0 0:53, sWqlHMUb9ec 1:10, HTrKAn2qJUE 1:00).
 - Close (last 60 words): the word "subscribe" **14 of 15**; "see you in the next one" in the last 200 characters **8**; a direct "drop it in the comments / tell me in the comments" ask **8**.
-- Questions per video median sentence length 12 words; 0-15 questions (median 5).
+- Questions per video: 0-15 (median 5); median sentence 9-16 words.
 - Series framing: "day one / day two of learn AI without paying" in 2 (MuLGacYq7WA, iaxh4Vt6_SI).
 
 ## Interpreted

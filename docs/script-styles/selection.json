@@ -402,9 +402,11 @@
     "views": 68,
     "format": "long",
     "transcript": null,
-    "source": "gap (FliVideo kind=none; orch filling)",
-    "flivideo_project": null,
-    "flivideo_paths": [],
+    "source": "FliVideo script-only (matched by title, orch)",
+    "flivideo_project": "v-aitldr/b26-repurpose",
+    "flivideo_paths": [
+     "/Users/davidcruwys/dev/video-projects/v-aitldr/b26-repurpose/script/script.md"
+    ],
     "text_used": null
    },
    {
@@ -780,9 +782,11 @@
     "views": 246,
     "format": "long",
     "transcript": null,
-    "source": "gap (FliVideo kind=none; orch filling)",
-    "flivideo_project": null,
-    "flivideo_paths": [],
+    "source": "FliVideo script-only (matched by title, orch)",
+    "flivideo_project": "v-aitldr/b04-shot-list",
+    "flivideo_paths": [
+     "/Users/davidcruwys/dev/video-projects/v-aitldr/b04-shot-list/script/script.md"
+    ],
     "text_used": null
    },
    {
@@ -828,9 +832,11 @@
     "views": 63,
     "format": "long",
     "transcript": null,
-    "source": "gap (FliVideo kind=none; orch filling)",
-    "flivideo_project": null,
-    "flivideo_paths": [],
+    "source": "FliVideo project (matched by title, orch)",
+    "flivideo_project": "v-aitldr/b01-yt-performance",
+    "flivideo_paths": [
+     "/Users/davidcruwys/dev/video-projects/v-aitldr/b01-yt-performance/videos/yt-performance/transcripts/yt-performance-final.txt"
+    ],
     "text_used": null
    },
    {
@@ -1041,9 +1047,12 @@
     "views": 15,
     "format": "short",
     "transcript": null,
-    "source": "gap (FliVideo kind=none; orch filling)",
-    "flivideo_project": null,
-    "flivideo_paths": [],
+    "source": "FliVideo project (matched by title, orch)",
+    "flivideo_project": "v-aitldr/b05-title-lab",
+    "flivideo_paths": [
+     "/Users/davidcruwys/dev/video-projects/v-aitldr/b05-title-lab/videos/title-lab-short/transcripts/title-lab-short-final.txt",
+     "/Users/davidcruwys/dev/video-projects/v-aitldr/b05-title-lab/script/short-script.md"
+    ],
     "text_used": null
    },
    {

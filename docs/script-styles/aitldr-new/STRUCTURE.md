@@ -29,7 +29,8 @@ This guide covers the **long format of Series B** (27 videos on @aitldr's /video
 - **Script (planned)**: `script.md` / `short-script.md` from the FliVideo project. Used for the **section skeleton** (22 long scripts, 11 short-scripts). The script files carry production tags (`[ANIMATION]`, `[ON-SCREEN TEXT]`, `[NOTE]`) and section names with planned start times; the spoken text is the `[ON CAMERA]` + `[VOICEOVER]` lines.
 - **Final transcript (spoken)**: `<skill>-final.txt` / `<skill>-short-final.txt`. Used for **words, speaking rate, hooks and closes**. 17 long + 9 short.
 - Where only a script exists (kind=script-only: 5 long b21-b25, 2 short), counts are marked "script".
-- **Gaps** (FliVideo kind=none, orch filling): long `q724ELdSywE`, `P4c-XkAeJxI`, `8uypPWDhDs8`, `a2EGJnOCpoA`; short `UJXxVigGahk`, `iWGZOYoGU-w`, `fm1WrkZ9Bvk`, `6zAtQHHg6Io`, `aZjw4FzKZrM`, `Pi2Ggb2hWM4`, `5r8dGfwSbjI`.
+- **Matched by title (orch, `matched: by title`, not linked in the project)**: `8uypPWDhDs8` (b04-shot-list `script.md`), `a2EGJnOCpoA` (b01-yt-performance final transcript), `5r8dGfwSbjI` short (b05-title-lab short final + `short-script.md`), `P4c-XkAeJxI` (b26-repurpose `script.md`). They were checked after the guide was drafted and change two details only (below); the headline numbers were not recomputed.
+- **Remaining gaps** (FliVideo kind=none, orch filling): long `q724ELdSywE`; short `UJXxVigGahk`, `iWGZOYoGU-w`, `fm1WrkZ9Bvk`, `6zAtQHHg6Io`, `aZjw4FzKZrM`, `Pi2Ggb2hWM4`.
 - The scripts follow a shared template, so this guide describes a template, not a free-form human structure.
 
 ## Measured (python over script and transcript files; long = final transcript where one exists)
@@ -43,7 +44,7 @@ This guide covers the **long format of Series B** (27 videos on @aitldr's /video
 ## Interpreted
 ### Two template generations (script sequence)
 - **Gen 1** (b03-b21, 2026-09-17 to 2026-10-20, 18 scripts): HOOK → VALUE PROMISE ("By the end of this video, you'll know how to…") → MID-CTA ("By the way, I'm Alex, and if you want all my AI workflows, prompt packs, and tools like this, you can join our AI creator community. Links in the description. Let's dive in.") → TOOLS INTRO ("Two things: Claude Code, and a skill called …") → 3-4 beats → BEST HIGHLIGHT → CALL TO ACTION → THUMBNAIL IDEA → NOTES. (b03 and b05 name the third section INTRO instead of MID-CTA.)
-- **Gen 2** "skill-episode variant" (b23-b25, 2026-10-22 to 2026-10-29, 3 scripts, script-only): PROOF (0:00) → THE BREAK (0:05) → THE WHY (0:15) → GUIDE (0:22) → WHAT IT GETS YOU (0:30) → HOW WE MADE IT (1:05) → BEFORE → AFTER (1:50) → GET IT (2:10) → TEASE (2:25). The script's own note: "proof first, setup after 1:30 in two lines… Claude and the skill named at HOW WE MADE IT, about 43% in". b22 (oddec0MA4p8) is a hybrid (HOOK > THE BREAK > THE WHY…).
+- **Gen 2** "skill-episode variant" (b23-b26, 2026-10-22 to 2026-10-30, 4 scripts, script-only; b26 `P4c-XkAeJxI` matched by title confirms the same PROOF…TEASE sequence): PROOF (0:00) → THE BREAK (0:05) → THE WHY (0:15) → GUIDE (0:22) → WHAT IT GETS YOU (0:30) → HOW WE MADE IT (1:05) → BEFORE → AFTER (1:50) → GET IT (2:10) → TEASE (2:25). The script's own note: "proof first, setup after 1:30 in two lines… Claude and the skill named at HOW WE MADE IT, about 43% in". b04 (`8uypPWDhDs8`, matched by title) is a Gen 1 variant with `INTRO` + `STEP 1: INSTALL / STEP 2: RUN IT / STEP 3` beats and a `VERIFY BEFORE RECORDING` block. b22 (oddec0MA4p8) is a hybrid (HOOK > THE BREAK > THE WHY…).
 - TODO(David): is Gen 2 the direction for new scripts, or an experiment?
 
 ### Segment map (Gen 1, the majority)
@@ -54,6 +55,8 @@ This guide covers the **long format of Series B** (27 videos on @aitldr's /video
 5. Body (3-4 beats, each with an animation and an on-screen text card holding a number).
 6. BEST HIGHLIGHT: the part the host would use, with a client angle ("if you edit for other channels, you can hand a client a finished sound pass the same day").
 7. CALL TO ACTION: where to get the skill, one thing to run, a request to reply.
+
+- **First episode** (b01 `a2EGJnOCpoA`, matched by title; 560 words, final transcript) opens on a problem statement ("You're posting videos, but you still don't know what's actually working."), has no "by the end of this video" line and no "Mine did" first-person proof, so the Gen 1 pattern is not yet fixed on day one. The "by the end of this video" count over finals is therefore 16 of 18.
 
 ### Short (~30 s)
 Lines are id'd `H1…` (hook), `S1…` (steps/promise), `C1…` (calls). Most frequent id patterns: H1 S1-S5 C1 (3 of 11 short-scripts), H1 H2 S1 S2 C1 C2… (variants). It reuses the long video's intro and outro avatar clips ("reused intro + outro, no new words, no new avatar" - Gtn1ThkuylU short-script): hook sentence(s), the "By the end of this video, you'll know…" promise, then a CTA with a reply request. 2 of 9 finals contain "by the end of this video".
