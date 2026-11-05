@@ -1,0 +1,1042 @@
+{
+ "schema": "script-styles/selection/1",
+ "generated": "2026-11-05",
+ "status": "selection only; transcript paths + dates for appydave/maitis/mike filled after fetch",
+ "batch": "tubescripts/_batches/2026-11-05-script-styles",
+ "how_picked": {
+  "aitldr-old": "25 of 65 non-Short @aitldr videos >=300s published before 2026-09-15 (dates from M4 metadata.json). Stratified by quarter (2024Q3:1, 2025Q1:2, 2025Q2:3, 2025Q3:4, 2025Q4:4, 2026Q1:4, 2026Q2:4, 2026Q3:3), top views within each quarter. \"Long-form\" = >=5 min: only 19 old videos reach 8 min.",
+  "aitldr-new": "Every @aitldr video published on/after 2026-09-15: 27 on the /videos tab (tagged long, all 2-4.5 min) + 18 on the /shorts tab (tagged short), listed live 2026-11-05.",
+  "appydave": "Newest 25 on the @appydave /videos tab (yt-dlp flat listing, newest first; livestream tab not included).",
+  "mike": "qccsfUnrQ9w, CYRJDTcTKhQ, AL-PQuB2wy0 (given).",
+  "maitis": "@maitis-ai has 16 long-form videos total (+31 Shorts, no streams tab). Sample 15 = 10 most-viewed + 5 newest; the 5 newest were all already in the top 10, so topped up with the next 5 by views (i.e. all but the least-viewed)."
+ },
+ "styles": {
+  "aitldr-old": [
+   {
+    "video_id": "f-fYGjCmbp4",
+    "title": "In KlueLess: The Clue is to do Less",
+    "date": "2024-09-27",
+    "duration_s": 312,
+    "views": 70,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "ZOGacWMMYYI",
+    "title": "Craiyon AI Secrets: Effortless Image Generation",
+    "date": "2025-03-27",
+    "duration_s": 398,
+    "views": 158,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "-BpLUPgwg4A",
+    "title": "Adobe Firefly Creates AMAZING AI Visuals Instantly",
+    "date": "2025-03-21",
+    "duration_s": 332,
+    "views": 107,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "AWaAj15enVE",
+    "title": "AI Does It ALL: Script, Visuals & Editing! (Next-Level AI Movie Trailers)",
+    "date": "2025-04-02",
+    "duration_s": 592,
+    "views": 2100,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "zAtTJGj4Wbg",
+    "title": "How I Made a Consistent Character Story With Just One AI Tool!",
+    "date": "2025-05-28",
+    "duration_s": 370,
+    "views": 1300,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "x3SgWqdW-wQ",
+    "title": "From Zero to Viral: AI-Powered Video Ad Creation",
+    "date": "2025-05-14",
+    "duration_s": 371,
+    "views": 195,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "xeOqo7nB08Q",
+    "title": "Can ChatGPT Make 50 Crazy Art Styles Instantly?",
+    "date": "2025-07-18",
+    "duration_s": 665,
+    "views": 23000,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "lDFyPts_jWI",
+    "title": "Cinematic AI Videos in Seconds?! Hailuo 2 is INSANE!",
+    "date": "2025-09-29",
+    "duration_s": 304,
+    "views": 17000,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "iXu4QeKkSmA",
+    "title": "Animate Multiple Characters Easily with Dzine AI (Lip Sync + Motion)",
+    "date": "2025-08-22",
+    "duration_s": 360,
+    "views": 5100,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "WdvkyImhJIw",
+    "title": "50 AI Avatar Styles That Will Transform Your Faceless YouTube Channel",
+    "date": "2025-09-16",
+    "duration_s": 761,
+    "views": 554,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "7_0Alw1tGVE",
+    "title": "I Brought 50 Art Styles to Life with AI \u2014 The Results Are INSANE",
+    "date": "2025-10-27",
+    "duration_s": 548,
+    "views": 5500,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "z1jM3mF5hCk",
+    "title": "Epic AI Movie Poster Showcase \u2014 50 Styles | Use Chat GPT to Generate",
+    "date": "2025-10-03",
+    "duration_s": 808,
+    "views": 810,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "I1V-ACIpon4",
+    "title": "I Built 50 Real Cities Using AI | ChatGPT + Seedance World Map Animation",
+    "date": "2025-10-20",
+    "duration_s": 569,
+    "views": 671,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "kMXkKzlKNnQ",
+    "title": "Google's Notebook LM Just Changed Everything!",
+    "date": "2025-10-16",
+    "duration_s": 436,
+    "views": 544,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "IgxYt5snV1U",
+    "title": "AI Viral Video Formula 2026: Talking Fruit & Food Health Videos Using ChatGPT + Grok",
+    "date": "2026-01-29",
+    "duration_s": 341,
+    "views": 2700,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "CZXZyMyo_lo",
+    "title": "Build REMOTION videos in 60s | Step by Step Tutorial",
+    "date": "2026-02-03",
+    "duration_s": 439,
+    "views": 2400,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "ciRCM-SRZII",
+    "title": "I Turned Static Infographics Into Motion Using AI (Nano Banana + Veo 3)",
+    "date": "2026-03-26",
+    "duration_s": 309,
+    "views": 911,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "aGxqn6jnSFU",
+    "title": "Turn ONE AI Image into Multiple Angles (Character Consistency) | Higgsfield Nano Banana Pro",
+    "date": "2026-02-24",
+    "duration_s": 365,
+    "views": 822,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "d_YPcRVnAQM",
+    "title": "Higgsfield Storyboard Workflow: From Photos to Full Video",
+    "date": "2026-06-09",
+    "duration_s": 372,
+    "views": 3900,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "7O_-z6xaFi4",
+    "title": "I Connected ChatGPT Images 2.0 to Claude (Insane Results)",
+    "date": "2026-05-03",
+    "duration_s": 609,
+    "views": 2700,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "WRPtQMPw1rg",
+    "title": "I Created an AI Action Movie in Higgsfield Cinema Studio 3.5",
+    "date": "2026-05-08",
+    "duration_s": 556,
+    "views": 795,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "lWKzuIjwQvQ",
+    "title": "I Automated Nano Banana With Claude Code Skills",
+    "date": "2026-04-13",
+    "duration_s": 331,
+    "views": 572,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "XJdxVmNyxmg",
+    "title": "How to Make a Vox-Style Video with ChatGPT + Google Omni",
+    "date": "2026-08-20",
+    "duration_s": 572,
+    "views": 1600,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "sBJo4h1q_0E",
+    "title": "How I Turn ONE Storyboard Into a Full AI Video | Higgsfield + Seedance",
+    "date": "2026-07-12",
+    "duration_s": 350,
+    "views": 872,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "BA435LYtYho",
+    "title": "How to Create Your Own AI Cartoon Series (Full Workflow)",
+    "date": "2026-08-11",
+    "duration_s": 322,
+    "views": 188,
+    "format": "long",
+    "transcript": null
+   }
+  ],
+  "aitldr-new": [
+   {
+    "video_id": "q724ELdSywE",
+    "title": "Why Your YouTube Videos Aren\u2019t Getting Views (Claude Finds the Problem!)",
+    "date": "2026-11-04",
+    "duration_s": 141,
+    "views": 23,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "P4c-XkAeJxI",
+    "title": "How to Repurpose YouTube Videos With Claude Code",
+    "date": "2026-10-30",
+    "duration_s": 207,
+    "views": 68,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "jWuBSWSCp1M",
+    "title": "How I Automate YouTube Community Posts With Claude Code",
+    "date": "2026-10-29",
+    "duration_s": 157,
+    "views": 20,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "9m8ztxRKLRo",
+    "title": "Stop Losing Views! Fix Your YouTube End Screens With Claude",
+    "date": "2026-10-27",
+    "duration_s": 151,
+    "views": 87,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "XJXg98uMAVY",
+    "title": "Avoid YouTube Copyright Claims With This Claude Skill!",
+    "date": "2026-10-22",
+    "duration_s": 178,
+    "views": 151,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "oddec0MA4p8",
+    "title": "This Claude Skill Can Save You Money on AI Avatar Videos",
+    "date": "2026-10-21",
+    "duration_s": 142,
+    "views": 80,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "5VB3b4f__uE",
+    "title": "How I Use Claude Code to Simplify My Video Scripts",
+    "date": "2026-10-20",
+    "duration_s": 163,
+    "views": 228,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "VtFZNkGYnaU",
+    "title": "Turn Long Videos Into YouTube Shorts Automatically With Claude!",
+    "date": "2026-10-18",
+    "duration_s": 174,
+    "views": 471,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "Gtn1ThkuylU",
+    "title": "Stop Adding Sound Effects Manually! Let Claude Do It",
+    "date": "2026-10-15",
+    "duration_s": 148,
+    "views": 394,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "Ew8a157XEYg",
+    "title": "This Claude Skill Turns Your Script Into Ready-to-Use Video Overlays",
+    "date": "2026-10-14",
+    "duration_s": 157,
+    "views": 133,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "yh-ko-CwXyg",
+    "title": "I Let Claude Fix My YouTube Captions \u2014 Here's What Happened",
+    "date": "2026-10-13",
+    "duration_s": 163,
+    "views": 30,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "w4LpBamBkCs",
+    "title": "This Claude Skill Finds Dead Time in Your Videos Automatically",
+    "date": "2026-10-10",
+    "duration_s": 169,
+    "views": 113,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "kHmv8l_VkGM",
+    "title": "This Claude Skill Writes My YouTube Descriptions for Me",
+    "date": "2026-10-08",
+    "duration_s": 165,
+    "views": 75,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "8KhyDQLB0Po",
+    "title": "This Claude Skill Fixed My Animation Timing",
+    "date": "2026-10-06",
+    "duration_s": 165,
+    "views": 112,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "jWfwJqH3gY4",
+    "title": "Stop Reusing the Same YouTube CTA \u2014 Use This Claude Skill",
+    "date": "2026-10-06",
+    "duration_s": 152,
+    "views": 104,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "moRWKeCxOAI",
+    "title": "I Thought I'd Recorded Everything. Claude Checked My Footage and Found 9 Missing Shots",
+    "date": "2026-10-03",
+    "duration_s": 143,
+    "views": 45,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "c_9TqD0GlXk",
+    "title": "I Had No B-Roll. This Claude Skill Wrote the Prompts",
+    "date": "2026-10-02",
+    "duration_s": 134,
+    "views": 299,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "6KEJxgUO0G0",
+    "title": "Protect Your Privacy: The Claude Code Demo Sandbox",
+    "date": "2026-09-30",
+    "duration_s": 132,
+    "views": 77,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "OQTr8bB7GdE",
+    "title": "I Stopped Trusting My AI Voiceover Until Claude Checked Every Line",
+    "date": "2026-09-29",
+    "duration_s": 179,
+    "views": 79,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "TdBL1A7kMd4",
+    "title": "How to sound natural on camera | Claude Cue Cards",
+    "date": "2026-09-25",
+    "duration_s": 165,
+    "views": 28,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "idUuJkfh61k",
+    "title": "Running Out of Video Ideas? Try This Claude Skill",
+    "date": "2026-09-24",
+    "duration_s": 175,
+    "views": 57,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "Nrd5PnLkMk4",
+    "title": "This Claude Skill Found What Was Wrong With My YouTube Hooks",
+    "date": "2026-09-23",
+    "duration_s": 205,
+    "views": 81,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "D3srragTwPQ",
+    "title": "I Stopped Guessing YouTube Titles\u2014This Claude Skill Scores Them for Me",
+    "date": "2026-09-22",
+    "duration_s": 127,
+    "views": 73,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "8uypPWDhDs8",
+    "title": "This Claude Code Skill Creates Your Shot List Before You Record",
+    "date": "2026-09-18",
+    "duration_s": 271,
+    "views": 246,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "0B8UzTL-h6E",
+    "title": "How to Make Thumbnails That Get Views Using AI (Full Tutorial)",
+    "date": "2026-09-17",
+    "duration_s": 262,
+    "views": 188,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "j1Hpvsu79Xg",
+    "title": "This Claude AI Skill Writes Your YouTube Scripts for You",
+    "date": "2026-09-15",
+    "duration_s": 268,
+    "views": 153,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "a2EGJnOCpoA",
+    "title": "Want to Know Which Videos Are Killing Your Channel? Watch This Now!",
+    "date": "2026-09-15",
+    "duration_s": 251,
+    "views": 63,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "UJXxVigGahk",
+    "title": "The CDC really wrote a zombie survival plan in 2011, and it crashed their website",
+    "date": "2026-11-04",
+    "duration_s": null,
+    "views": 693,
+    "format": "short",
+    "transcript": null
+   },
+   {
+    "video_id": "iWGZOYoGU-w",
+    "title": "I Created This Video Using My Vox-Style Skill! (Try It Yourself!)",
+    "date": "2026-10-31",
+    "duration_s": null,
+    "views": 82,
+    "format": "short",
+    "transcript": null
+   },
+   {
+    "video_id": "fm1WrkZ9Bvk",
+    "title": "I Created a Viral FOOH Ad Using ChatGPT + Google Flow!",
+    "date": "2026-10-30",
+    "duration_s": null,
+    "views": 138,
+    "format": "short",
+    "transcript": null
+   },
+   {
+    "video_id": "6zAtQHHg6Io",
+    "title": "I Made Myself Fly Using AI!",
+    "date": "2026-10-29",
+    "duration_s": null,
+    "views": 1300,
+    "format": "short",
+    "transcript": null
+   },
+   {
+    "video_id": "aZjw4FzKZrM",
+    "title": "Vox-style editing makes any video look expensive. Here\u2019s WWII in under a minute",
+    "date": "2026-10-28",
+    "duration_s": null,
+    "views": 84,
+    "format": "short",
+    "transcript": null
+   },
+   {
+    "video_id": "pwi9Oqlkfps",
+    "title": "How to Check Your Videos for Copyright Issues Using Claude",
+    "date": "2026-10-23",
+    "duration_s": null,
+    "views": 214,
+    "format": "short",
+    "transcript": null
+   },
+   {
+    "video_id": "GaExvmBUa0I",
+    "title": "How to fix your messy script in 30 seconds \u23f1\ufe0f #writingtips #productivity #ai",
+    "date": "2026-10-23",
+    "duration_s": null,
+    "views": 278,
+    "format": "short",
+    "transcript": null
+   },
+   {
+    "video_id": "Pi2Ggb2hWM4",
+    "title": "Claude edited this whole video. I didn't open an editing app once  \ud83e\udd2f",
+    "date": "2026-10-20",
+    "duration_s": null,
+    "views": 109,
+    "format": "short",
+    "transcript": null
+   },
+   {
+    "video_id": "0ixwtrYd6mI",
+    "title": "I Accidentally Showed Private Data on YouTube\u2014Here\u2019s the Claude Skill I Use Now",
+    "date": "2026-10-15",
+    "duration_s": null,
+    "views": 65,
+    "format": "short",
+    "transcript": null
+   },
+   {
+    "video_id": "wmnMpetixCM",
+    "title": "My AI Voice Added a Sentence I Never Wrote \u2014 Claude Caught It",
+    "date": "2026-10-14",
+    "duration_s": null,
+    "views": 43,
+    "format": "short",
+    "transcript": null
+   },
+   {
+    "video_id": "g00d9RY7GXo",
+    "title": "Stop Sounding Like You\u2019re Reading Your Script | Claude Cue Cards",
+    "date": "2026-10-13",
+    "duration_s": null,
+    "views": 41,
+    "format": "short",
+    "transcript": null
+   },
+   {
+    "video_id": "Mw6HU-0b7lE",
+    "title": "How I never run out of video ideas",
+    "date": "2026-10-13",
+    "duration_s": null,
+    "views": 53,
+    "format": "short",
+    "transcript": null
+   },
+   {
+    "video_id": "1BVB9cnxL10",
+    "title": "This Claude Skill Caught My Weak Hooks",
+    "date": "2026-10-04",
+    "duration_s": null,
+    "views": 26,
+    "format": "short",
+    "transcript": null
+   },
+   {
+    "video_id": "5r8dGfwSbjI",
+    "title": "Find Your Best YouTube Title Before You Publish",
+    "date": "2026-10-03",
+    "duration_s": null,
+    "views": 15,
+    "format": "short",
+    "transcript": null
+   },
+   {
+    "video_id": "I2xF9A0Rg6s",
+    "title": "Turn Any Script Into a Shot List With Claude",
+    "date": "2026-10-02",
+    "duration_s": null,
+    "views": 83,
+    "format": "short",
+    "transcript": null
+   },
+   {
+    "video_id": "IYlHBYI8Fxs",
+    "title": "This AI Skill Creates Clickable Thumbnails",
+    "date": "2026-10-01",
+    "duration_s": null,
+    "views": 52,
+    "format": "short",
+    "transcript": null
+   },
+   {
+    "video_id": "iKGBS_7OtJw",
+    "title": "Struggling to Write YouTube Scripts? Use This AI Skill Now!",
+    "date": "2026-09-30",
+    "duration_s": null,
+    "views": 42,
+    "format": "short",
+    "transcript": null
+   },
+   {
+    "video_id": "Jr1lwtcNBFU",
+    "title": "Low Views? This Claude Skill Helps You Find Out Why",
+    "date": "2026-09-29",
+    "duration_s": null,
+    "views": 46,
+    "format": "short",
+    "transcript": null
+   }
+  ],
+  "appydave": [
+   {
+    "video_id": "IL-voVs9IBE",
+    "title": "Asked for a Dog House, Got a Power Plant: OpenRig Agent Teams",
+    "date": null,
+    "duration_s": 1149,
+    "views": 366,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "7KLyrUefQ_c",
+    "title": "My OpenRig Agent Team Builds My YouTube Thumbnails",
+    "date": null,
+    "duration_s": 641,
+    "views": 338,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "X8heILK1aeQ",
+    "title": "FliCut: I Taught My Video Editor to Spell Ecamm Live",
+    "date": null,
+    "duration_s": 501,
+    "views": 265,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "M978wEYFz1E",
+    "title": "I Built My Own Recording Apps Around Ecamm Live",
+    "date": null,
+    "duration_s": 594,
+    "views": 157,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "EH_sax6dUaA",
+    "title": "Buzz Is Like Slack, Except My Coworkers Are AI Agents",
+    "date": null,
+    "duration_s": 882,
+    "views": 742,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "kn_54J1fxec",
+    "title": "Which Headshot Goes on My Thumbnail? Now AI Can Choose",
+    "date": null,
+    "duration_s": 333,
+    "views": 120,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "kmau3FiZd6g",
+    "title": "AI That Knows Where Your Face Is (So Graphics Go Around You)",
+    "date": null,
+    "duration_s": 175,
+    "views": 131,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "yFOhSJqU5rk",
+    "title": "How I Get Clean Audio in a Noisy Room (No Studio Needed)",
+    "date": null,
+    "duration_s": 345,
+    "views": 133,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "AqLhqOCv9X0",
+    "title": "Claude Code Agents Working Together | Swarm Intelligence",
+    "date": null,
+    "duration_s": 907,
+    "views": 525,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "W39gHJG0NHE",
+    "title": "6 Parallel Agents: The BMAD Automation Secret",
+    "date": null,
+    "duration_s": 484,
+    "views": 784,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "FcPrU_fr-0A",
+    "title": "I Built 12 Content Creator Tools\u2026 Then Made Them Sing (Claudemas Finale)",
+    "date": null,
+    "duration_s": 1389,
+    "views": 333,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "Rb6U3Z4DvnM",
+    "title": "This Is Where Vibe Coding Turns Into a Finished Film (Claudemas #11)",
+    "date": null,
+    "duration_s": 1243,
+    "views": 377,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "4N36BvvqNxE",
+    "title": "I Connected My AI App to n8n + ComfyUI Workflows (Claudemas Day 10)",
+    "date": null,
+    "duration_s": 745,
+    "views": 354,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "2jMdt3U4AkA",
+    "title": "From Transcript to Prompt Pack: Designing an AI Prompt Pipeline | Day 9 Claudemas",
+    "date": null,
+    "duration_s": 900,
+    "views": 188,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "Pm5lY4gR_Ng",
+    "title": "I Built a Thumbnail Generator in an Hour (Claudemas Day 8)",
+    "date": null,
+    "duration_s": 778,
+    "views": 154,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "Rhvp3G44T1Q",
+    "title": "Tiny Tasks Were Breaking My BMAD Flow \u2014 Here\u2019s the Fix (Tech Debt Tracker)",
+    "date": null,
+    "duration_s": 678,
+    "views": 692,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "XA3JZLOgMow",
+    "title": "I Added Music to My AI Story Pipeline (Suno + Claude Code) | Day 7 Claudemas",
+    "date": null,
+    "duration_s": 735,
+    "views": 1000,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "7dQIYq_MJT0",
+    "title": "Build a Video Generator with FAL.AI + KIE.AI (Claudemas Day 6)",
+    "date": null,
+    "duration_s": 937,
+    "views": 798,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "-wL35QS_35o",
+    "title": "I Built a Text-to-Speech Generator in 15 Minutes (Claudemas Day 5)",
+    "date": null,
+    "duration_s": 745,
+    "views": 552,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "7jCkq3T8nJo",
+    "title": "Build a Multi-Model Image Generator with FAL.AI + KIE.AI (Claudemas Day 4)",
+    "date": null,
+    "duration_s": 1349,
+    "views": 502,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "eD8YX5IRXZ8",
+    "title": "I Gave My AI Agent a Second Brain | #3 of 12 Days of Claudemas",
+    "date": null,
+    "duration_s": 1468,
+    "views": 445,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "aEJCzHKVHTg",
+    "title": "12 Days of Claudemas: Building with Agent SDK \"Day 2\"",
+    "date": null,
+    "duration_s": 1223,
+    "views": 362,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "hEEOXdDi4gM",
+    "title": "12 Days of Claudemas - Day #1 - Application Harness",
+    "date": null,
+    "duration_s": 1800,
+    "views": 639,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "-GKpGdonMbg",
+    "title": "BMAD Method Agent Cheatsheet (From Mary \u2192 Quinn)",
+    "date": null,
+    "duration_s": 1130,
+    "views": 11000,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "zfOFf6wMfh0",
+    "title": "I Built an App That Edits Itself Live | BMAD + Agent SDK",
+    "date": null,
+    "duration_s": 7343,
+    "views": 5400,
+    "format": "long",
+    "transcript": null
+   }
+  ],
+  "maitis": [
+   {
+    "video_id": "KscFyux4dVk",
+    "title": "Forget Claude Code: DeepSeek + REA Clones Anything 100% FREE (No Paid API)",
+    "date": null,
+    "duration_s": 1335,
+    "views": 79000,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "qKsMQg4WB6s",
+    "title": "Claude + This FREE AI Tool = UNLIMITED AI Voice Generation!.",
+    "date": null,
+    "duration_s": 830,
+    "views": 79000,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "nndv3V5Q7HY",
+    "title": "You Can Clone Any App for FREE (REA + 9Router) Complete End-to-End Tutorial",
+    "date": null,
+    "duration_s": 664,
+    "views": 34000,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "4b-D8Nr0jQc",
+    "title": "You Can Use Claude Opus 5.5 & Fable 5.1 for FREE (Anyone Can Do This)",
+    "date": null,
+    "duration_s": 567,
+    "views": 25000,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "MuLGacYq7WA",
+    "title": "Run Claude Code With Unlimited Usage for Free - 9Router",
+    "date": null,
+    "duration_s": 471,
+    "views": 4300,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "I1ISxjjsKNw",
+    "title": "Claude Opus 5.5 Just Killed Expensive Video Editors? (Under $1 Per Video)",
+    "date": null,
+    "duration_s": 951,
+    "views": 2300,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "qQ9VBlXlSaI",
+    "title": "RIP ChatGPT and Claude? Google Just Dropped Carbon",
+    "date": null,
+    "duration_s": 401,
+    "views": 2200,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "R4vFYbQTGbY",
+    "title": "The Ultimate Guide to Free AI: Replace Your Paid Subscriptions Today",
+    "date": null,
+    "duration_s": 604,
+    "views": 1400,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "iaxh4Vt6_SI",
+    "title": "I Tested Every Free AI Tool So You Don't Have To",
+    "date": null,
+    "duration_s": 1259,
+    "views": 1000,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "WqYoGfbYb7Q",
+    "title": "4 Free Chrome Extensions That Turn Chrome Into an AI Operating System",
+    "date": null,
+    "duration_s": 629,
+    "views": 868,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "_TWyiaF_sV0",
+    "title": "I Cloned a Million-Dollar App With Claude (Without Writing Code) - \"Claude + three 3 secret steps \"",
+    "date": null,
+    "duration_s": 802,
+    "views": 852,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "HTrKAn2qJUE",
+    "title": "The New Claude Can Build Things AI Couldn't Do Before",
+    "date": null,
+    "duration_s": 644,
+    "views": 820,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "mVh3YktAhDA",
+    "title": "I Tested Grok 4.7: The Reality Check Nobody Is Talking About",
+    "date": null,
+    "duration_s": 357,
+    "views": 678,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "sWqlHMUb9ec",
+    "title": "Claude Just Killed Adobe (7 Free Apps That Replace It)",
+    "date": null,
+    "duration_s": 472,
+    "views": 498,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "0iFEPUeQyz4",
+    "title": "Is AI Getting Too Dangerous? Claude, Meta, and the Week's Biggest Breakthroughs",
+    "date": null,
+    "duration_s": 662,
+    "views": 460,
+    "format": "long",
+    "transcript": null
+   }
+  ],
+  "mike": [
+   {
+    "video_id": "qccsfUnrQ9w",
+    "title": "",
+    "date": null,
+    "duration_s": null,
+    "views": null,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "CYRJDTcTKhQ",
+    "title": "",
+    "date": null,
+    "duration_s": null,
+    "views": null,
+    "format": "long",
+    "transcript": null
+   },
+   {
+    "video_id": "AL-PQuB2wy0",
+    "title": "",
+    "date": null,
+    "duration_s": null,
+    "views": null,
+    "format": "long",
+    "transcript": null
+   }
+  ]
+ }
+}
