@@ -495,3 +495,7 @@ Previous: `fc50-waits` merged 2026-10-27 (FliCut main `7bc5a4a`).
 - YouTube now only for Maitis (running at 45 s pace) and, after it, the 13 gaps, which land in the published store.
 - Banked: memory `feedback-own-channels-come-from-flivideo`, guard in tube-harvest SKILL.md.
 - Note: David's "visual lane" still queued after Maitis; own-channel video files should come from FliVideo too, not YouTube.
+
+## 2026-11-05 — banked from brains-b0 (no action now)
+- B695: FliVideo builds to move onto OpenRig structures, not terminal workers. Plan `/Users/davidcruwys/dev/ad/brains/openrig/exec-orchestrators-2026-11-05.md`. openrig-orch proposes one pilot slice through the `workshop` rig; chosen together; needs David's go.
+- B692 (Jan call): AI version of the director's chair: mostly no avatar, avatar on for chosen moments from one continuous audio track, lip-synced not regenerated. Jan researching dedicated avatar tools instead of Higgsfield.
