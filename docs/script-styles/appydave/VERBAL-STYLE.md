@@ -14,7 +14,7 @@ id: appydave-verbal
 label: AppyDave — verbal style
 type: verbal
 level: global
-gist: Thinking-aloud Aussie practitioner: "we" and "I'm just going to", "a little bit of", walking through what is on screen, signing off "I'm Happy Dave".
+gist: Thinking-aloud Aussie practitioner: "we" and "I'm just going to", "a little bit of", walking through what is on screen, signing off "I'm AppyDave".
 brands: [appydave]
 appliesTo: {form: tutorial}
 ---
@@ -29,7 +29,7 @@ The 17 store transcripts and 5 project segment sets named in STRUCTURE.md. Capti
 
 ## Measured (per 1,000 words, n=17 store videos)
 "we/our" **47.5** · "I" forms 20.1 · "you" 8.7 · "just" **11.1** · "so" sentence-opener 13.0 · "now" opener 4.8 · "really" 1.4 · "a little bit" 1.5 · "like" 3.6. Speaking rate median 187 wpm.
-Word runs appearing in N of 22 distinct recordings: "a little bit (of)" 21 · "to do is" 20 · "I'm Happy Dave" 20 · "see you in the next video" 19-21 · "we're going to" 20 · "I want to" 20 · "we can see" 20 · "at the moment" 20 · "some sort of" 19 · "have a look at" 16-18 · "let's get into it" 15.
+Word runs appearing in N of 22 distinct recordings: "a little bit (of)" 21 · "to do is" 20 · "I'm AppyDave" 20 · "see you in the next video" 19-21 · "we're going to" 20 · "I want to" 20 · "we can see" 20 · "at the moment" 20 · "some sort of" 19 · "have a look at" 16-18 · "let's get into it" 15.
 Compare Series A/B: AITLDR leans on "you" (29-40 per 1,000) and almost never "we".
 
 ## Interpreted
@@ -45,7 +45,7 @@ Formal-Casual 7 · Serious-Funny 4 · Respectful-Irreverent 4 · Matter-of-fact-
 - Imagine-if open: "Imagine building a self-editing application." (zfOFf6wMfh0)
 - Hand-off phrase: "I'm happy Dave. Let's get into it." (7dQIYq_MJT0)
 - Think-aloud framing: "So what we'll do is look at our quest progress." (7jCkq3T8nJo)
-- Sign-off: "I'm Happy Dave. Please like and subscribe. I'll see you in the next video." (4N36BvvqNxE, FcPrU_fr-0A)
+- Sign-off: "I'm AppyDave. Please like and subscribe. I'll see you in the next video." (4N36BvvqNxE, FcPrU_fr-0A)
 - Honest side-note intro: "Now that was just a quick side quest for me in my video creation process." (kn_54J1fxec outro)
 
 ### Anti-voice
@@ -62,4 +62,4 @@ Sentences 9-17 words (store medians), run-on explaining sentences joined by "and
 - [ ] zero hype adjectives
 
 ## TODO(David)
-- TODO(David): "I'm Happy Dave" is the AppyDave sign-off; keep it in Story Pilot guides?
+- TODO(David): "I'm AppyDave" is the AppyDave sign-off; keep it in Story Pilot guides?

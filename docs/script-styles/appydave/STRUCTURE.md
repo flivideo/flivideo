@@ -14,7 +14,7 @@ id: appydave-structure
 label: AppyDave — structure
 type: structure
 level: global
-gist: A 8-30 minute screen-recorded build-along: a framing question or "day N" recap, "let's get into it", the thing being built with the screen as the script, and a fixed "I'm Happy Dave, like and subscribe, see you in the next video" close.
+gist: A 8-30 minute screen-recorded build-along: a framing question or "day N" recap, "let's get into it", the thing being built with the screen as the script, and a fixed "I'm AppyDave, like and subscribe, see you in the next video" close.
 appliesTo: {form: tutorial, length: long}
 ---
 
@@ -32,7 +32,7 @@ appliesTo: {form: tutorial, length: long}
 ## Measured (python over transcript text)
 - Store videos (n=17): duration median **937 s** (484-7,343), words median **2,961**, speaking rate median **187 wpm** (152-201), questions per minute median **0.33**.
 - Opening shape (first ~15 words, n=17): "Welcome to / It's / This is day N of the 12 days of Claude" **8**; an opening question or "Imagine…" (Are you / Do you love / Could you / Is it possible / Imagine) **6**; other 3.
-- Closing (last 200-500 characters, n=17): "I'm Happy Dave" appears in **20 of 22** distinct recordings (anywhere; the caption also spells it "Abby Dave", "Api Dave", so this undercounts); "like and subscribe" in the last 400 chars **12**; "see you in the next video" in the last 200 chars **11**; a community/Skool link in the last 500 chars **10**.
+- Closing (last 200-500 characters, n=17): "I'm AppyDave" (captions mishear it as "Happy Dave") appears in **20 of 22** distinct recordings (anywhere; the caption also spells it "Abby Dave", "Api Dave", so this undercounts); "like and subscribe" in the last 400 chars **12**; "see you in the next video" in the last 200 chars **11**; a community/Skool link in the last 500 chars **10**.
 - "Let's get into it" in the first 900 characters: **6** of 17.
 - Project segment shares (5 distinct projects; share of that project's segment words):
   - d10 FliCut (X8heILK1aeQ, 8:21): intro 7% · overview 17% · demo 54% · launch/optimising 6% · outro 15%.
@@ -57,7 +57,7 @@ Show the thing working on the screen and talk through it, with a recurring frame
 Series continuity (the 12 days of Claude, 12 videos on 2025-12-25 to 2026-01-05) and next-video teases are the observed devices; no mid-roll recap or re-hook is evident in the sampled openings/closings. Middles were measured, not read in full.
 
 ### 4. Close
-Fixed: community link → "please like and subscribe" → "I'll see you in the next video" → "I'm Happy Dave" (order varies).
+Fixed: community link → "please like and subscribe" → "I'll see you in the next video" → "I'm AppyDave" (order varies).
 
 ## Fidelity checklist
 - [ ] opens with a problem question, an imagine-if, or a "day N" recap in the first 25 words
