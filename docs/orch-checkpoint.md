@@ -481,3 +481,10 @@ Previous: `fc50-waits` merged 2026-10-27 (FliCut main `7bc5a4a`).
 - **Roamy's item A is ON HOLD** (David, 2026-11-05). Replaced by a **script-style library** mandate: reverse-engineer 3–4 styles (AITLDR Series A old, AITLDR Series B new, AppyDave last 25, Mike/OpenRig + 3 videos, Maitis @maitis-ai) into typed `storypilot.guide/1` structure + verbal-style guides; a matrix page; a recommendation of which styles first. Separate visual/editing lane (frames, cuts) = plan + size estimate only, waiting for go.
 - Gates: any download / install / paid transcription needs David's go after a plan with counts, cost, size. Out of scope: wiring guides into Story Pilot, editing VERBAL-STYLE, d13 rerun, B-roll/auto-edit features.
 - Step 1 running: read-only inventory worker (M4, local subagent) — Series A/B meaning, transcripts on disk, harvest/transcribe tools, disk free.
+
+## 2026-11-05 ~07:35 — Script-style library: GO (David)
+- David: Series reading right (B = daily skill series ≥ 2026-09-15; A = Alex era before); "go steps 1-4"; visual lane "run on the M2 … YES".
+- Mike's 3 videos on disk: qccsfUnrQ9w fetched (3,817 w) → tubescripts c6f36be; CYRJDTcTKhQ, AL-PQuB2wy0 already there. Batch `2026-11-05-script-styles`.
+- Text lane: M2 worker `script-styles-build` (sonnet), brief `docs/briefs/script-styles-library-2026-11-05.md` (fe8ca36+). Outputs → `docs/script-styles/`. Background appynet watch running.
+- Visual lane: approved for the M2; launch a second worker once `docs/script-styles/selection.json` is pushed (reuse those videos; ~10/style, 720p, 1 frame/2 s, delete video after frames; ~4 GB transient, ~1.5 GB kept).
+- Gate on M4: parseGuide every guide; then matrix artifact (AppyDave light) opened for David.
