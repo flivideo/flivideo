@@ -290,10 +290,12 @@
     "views": 3900,
     "format": "long",
     "transcript": "~/dev/upstream/tubescripts/aitldr/d_YPcRVnAQM-higgsfield-storyboard-workflow-from-photos-to-full-video.md",
-    "source": "YouTube auto-caption (FliVideo store had none)",
+    "source": "FliVideo store (filled from YouTube captions 2026-11-05)",
     "flivideo_project": null,
-    "flivideo_paths": [],
-    "text_used": "YouTube caption"
+    "flivideo_paths": [
+     "/Users/davidcruwys/dev/video-projects/published/aitldr/videos/d_YPcRVnAQM/transcript.txt"
+    ],
+    "text_used": "YouTube caption (now in FliVideo store)"
    },
    {
     "video_id": "7O_-z6xaFi4",
@@ -348,10 +350,12 @@
     "views": 1600,
     "format": "long",
     "transcript": null,
-    "source": "gap (FliVideo kind=none; orch filling)",
+    "source": "FliVideo store (filled from YouTube captions 2026-11-05)",
     "flivideo_project": null,
-    "flivideo_paths": [],
-    "text_used": "store transcript"
+    "flivideo_paths": [
+     "/Users/davidcruwys/dev/video-projects/published/aitldr/videos/XJdxVmNyxmg/transcript.txt"
+    ],
+    "text_used": "YouTube caption (now in FliVideo store)"
    },
    {
     "video_id": "sBJo4h1q_0E",
@@ -361,10 +365,12 @@
     "views": 872,
     "format": "long",
     "transcript": "~/dev/upstream/tubescripts/aitldr/sBJo4h1q_0E-how-i-turn-one-storyboard-into-a-full-ai-video-higgsfield-se.md",
-    "source": "YouTube auto-caption (FliVideo store had none)",
+    "source": "FliVideo store (filled from YouTube captions 2026-11-05)",
     "flivideo_project": null,
-    "flivideo_paths": [],
-    "text_used": "YouTube caption"
+    "flivideo_paths": [
+     "/Users/davidcruwys/dev/video-projects/published/aitldr/videos/sBJo4h1q_0E/transcript.txt"
+    ],
+    "text_used": "YouTube caption (now in FliVideo store)"
    },
    {
     "video_id": "BA435LYtYho",
@@ -374,10 +380,12 @@
     "views": 188,
     "format": "long",
     "transcript": null,
-    "source": "gap (FliVideo kind=none; orch filling)",
+    "source": "FliVideo store (filled from YouTube captions 2026-11-05)",
     "flivideo_project": null,
-    "flivideo_paths": [],
-    "text_used": "store transcript"
+    "flivideo_paths": [
+     "/Users/davidcruwys/dev/video-projects/published/aitldr/videos/BA435LYtYho/transcript.txt"
+    ],
+    "text_used": "YouTube caption (now in FliVideo store)"
    }
   ],
   "aitldr-new": [
@@ -389,10 +397,12 @@
     "views": 23,
     "format": "long",
     "transcript": null,
-    "source": "gap (FliVideo kind=none; orch filling)",
+    "source": "FliVideo store (filled from YouTube captions 2026-11-05)",
     "flivideo_project": null,
-    "flivideo_paths": [],
-    "text_used": null
+    "flivideo_paths": [
+     "/Users/davidcruwys/dev/video-projects/published/aitldr/videos/q724ELdSywE/transcript.txt"
+    ],
+    "text_used": "YouTube caption (now in FliVideo store)"
    },
    {
     "video_id": "P4c-XkAeJxI",
@@ -847,10 +857,12 @@
     "views": 693,
     "format": "short",
     "transcript": null,
-    "source": "gap (FliVideo kind=none; orch filling)",
+    "source": "FliVideo store (filled from YouTube captions 2026-11-05)",
     "flivideo_project": null,
-    "flivideo_paths": [],
-    "text_used": null
+    "flivideo_paths": [
+     "/Users/davidcruwys/dev/video-projects/published/aitldr/videos/UJXxVigGahk/transcript.txt"
+    ],
+    "text_used": "YouTube caption (now in FliVideo store)"
    },
    {
     "video_id": "iWGZOYoGU-w",
@@ -860,10 +872,12 @@
     "views": 82,
     "format": "short",
     "transcript": null,
-    "source": "gap (FliVideo kind=none; orch filling)",
+    "source": "FliVideo store (filled from YouTube captions 2026-11-05)",
     "flivideo_project": null,
-    "flivideo_paths": [],
-    "text_used": null
+    "flivideo_paths": [
+     "/Users/davidcruwys/dev/video-projects/published/aitldr/videos/iWGZOYoGU-w/transcript.txt"
+    ],
+    "text_used": "YouTube caption (now in FliVideo store)"
    },
    {
     "video_id": "fm1WrkZ9Bvk",
@@ -873,10 +887,12 @@
     "views": 138,
     "format": "short",
     "transcript": null,
-    "source": "gap (FliVideo kind=none; orch filling)",
+    "source": "FliVideo store (filled from YouTube captions 2026-11-05)",
     "flivideo_project": null,
-    "flivideo_paths": [],
-    "text_used": null
+    "flivideo_paths": [
+     "/Users/davidcruwys/dev/video-projects/published/aitldr/videos/fm1WrkZ9Bvk/transcript.txt"
+    ],
+    "text_used": "YouTube caption (now in FliVideo store)"
    },
    {
     "video_id": "6zAtQHHg6Io",
@@ -886,10 +902,12 @@
     "views": 1300,
     "format": "short",
     "transcript": null,
-    "source": "gap (FliVideo kind=none; orch filling)",
+    "source": "FliVideo store (filled from YouTube captions 2026-11-05)",
     "flivideo_project": null,
-    "flivideo_paths": [],
-    "text_used": null
+    "flivideo_paths": [
+     "/Users/davidcruwys/dev/video-projects/published/aitldr/videos/6zAtQHHg6Io/transcript.txt"
+    ],
+    "text_used": "YouTube caption (now in FliVideo store)"
    },
    {
     "video_id": "aZjw4FzKZrM",
@@ -899,10 +917,12 @@
     "views": 84,
     "format": "short",
     "transcript": null,
-    "source": "gap (FliVideo kind=none; orch filling)",
+    "source": "FliVideo store (filled from YouTube captions 2026-11-05)",
     "flivideo_project": null,
-    "flivideo_paths": [],
-    "text_used": null
+    "flivideo_paths": [
+     "/Users/davidcruwys/dev/video-projects/published/aitldr/videos/aZjw4FzKZrM/transcript.txt"
+    ],
+    "text_used": "YouTube caption (now in FliVideo store)"
    },
    {
     "video_id": "pwi9Oqlkfps",
@@ -944,10 +964,12 @@
     "views": 109,
     "format": "short",
     "transcript": null,
-    "source": "gap (FliVideo kind=none; orch filling)",
+    "source": "FliVideo store (filled from YouTube captions 2026-11-05)",
     "flivideo_project": null,
-    "flivideo_paths": [],
-    "text_used": null
+    "flivideo_paths": [
+     "/Users/davidcruwys/dev/video-projects/published/aitldr/videos/Pi2Ggb2hWM4/transcript.txt"
+    ],
+    "text_used": "YouTube caption (now in FliVideo store)"
    },
    {
     "video_id": "0ixwtrYd6mI",

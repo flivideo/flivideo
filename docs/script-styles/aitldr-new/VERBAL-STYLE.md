@@ -2,7 +2,7 @@
 brand: aitldr
 artifact: verbal-style
 version: 1.0.0
-distilled_from: 17 long final transcripts + 5 long scripts (script-only) + 9 short finals + 2 short scripts
+distilled_from: 17 long final transcripts + 5 long scripts (script-only) + 1 long caption fill + 9 short finals + 2 short scripts + 6 short caption fills
 corpus_window: 2026-09-15 … 2026-10-31
 generated: 2026-11-05
 last_updated: 2026-11-05
@@ -50,7 +50,7 @@ Formal-Casual 6 · Serious-Funny 3 · Respectful-Irreverent 3 · Matter-of-fact-
 - Numbers are written as spoken words in the script ("a hundred and fourteen", "Seventy-nine seconds").
 
 ### Anti-voice (observed absent in Series B, present in Series A)
-"Don't forget to like, subscribe, and hit the bell icon…", "insane", "next level", "unbelievable" openers. Measured: the bell line appears in 0 of the 17 Series B finals' endings (the endings are reply asks). TODO(David): ban list.
+"Don't forget to like, subscribe, and hit the bell icon…", "insane", "next level", "unbelievable" openers. Measured: the bell line appears in 0 of the 17 Series B finals' endings (the endings are reply asks); the one exception is the newest long video `q724ELdSywE` (2026-11-04, caption fill), which ends with the full Series A line. Hype: "This is insane." opens the standalone short `Pi2Ggb2hWM4`. TODO(David): ban list.
 
 ### Cadence
 Hook sentences are short and stacked (3-5 sentences of 5-12 words); explanation sentences run 9-14 words. The host names a limitation honestly ("it finds under a third of what I placed by hand").

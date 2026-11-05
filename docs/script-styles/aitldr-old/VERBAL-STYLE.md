@@ -2,7 +2,7 @@
 brand: aitldr
 artifact: verbal-style
 version: 1.0.0
-distilled_from: 23 transcripts (21 FliVideo store + 2 YouTube captions)
+distilled_from: 25 transcripts (21 FliVideo store + 4 filled into the store from YouTube captions)
 corpus_window: 2024-09 … 2026-07
 generated: 2026-11-05
 last_updated: 2026-11-05
@@ -25,11 +25,11 @@ appliesTo: {form: tutorial}
 Tutorial / showcase narration, one host addressing a creator audience.
 
 ## Sources
-The 23 transcripts listed in STRUCTURE.md (transcripts = what was said; there is no script file for this era). Punctuation in many store transcripts is machine-generated, so sentence-level counts were not taken.
+The 25 transcripts listed in STRUCTURE.md (transcripts = what was said; there is no script file for this era). Punctuation in many store transcripts is machine-generated, so sentence-level counts were not taken.
 
-## Measured (per 1,000 words, regex over transcripts, n=21 store)
-"you/your" 29.5 · "I" forms 7.9 · "we/our" 6.2 · "just" 4.2 · "like" (filler and comparison) 8.0 · "now" sentence-opener 2.3 · "so" opener 1.0 · "really" 1.4. Speaking rate median 137 wpm.
-Recurrent word runs (appear in N of 21 videos): "don't forget to like, subscribe, and hit the bell icon for more exciting updates" (14-15), "link in the description" (9-15), "if you want" (13), "in this video" (8), "join our community" (8).
+## Measured (per 1,000 words, regex over whitespace-normalised transcripts, n=25)
+"you/your" 29.1 · "I" forms 9.1 · "we/our" 6.1 · "just" 3.9 · "like" (filler and comparison) 7.7 · "now" sentence-opener 2.4 · "so" opener 1.0 · "really" 1.2. Speaking rate median 141 wpm.
+Recurrent word runs (appear in N of 21 videos): "don't forget to like, subscribe, and hit the bell icon for more exciting updates" (14-15 of 21 store videos; 17 of 19 from 2025-07-18 on across all 25), "if you want" (17 of 25), "in this video" (9 of 25), "join our community" (8 of 25).
 
 ## Interpreted
 ### Essence
@@ -42,14 +42,14 @@ Energetic, benefit-first "you can do this" narration with a standard ending.
 - "Stop scrolling because what you're about to see will change the way you think about art forever." (7_0Alw1tGVE)
 - "What if I told you that with just one tool, chat GPT, you could instantly generate 50 completely different images" (xeOqo7nB08Q)
 - "Writing AI image prompts is a skill most people don't have. Not because it's hard to understand, because it takes years to learn." (lWKzuIjwQvQ)
-- "Don't forget to like, subscribe, and hit the bell icon for more exciting updates." (14 of 15 videos from 2025-07-18)
+- "Don't forget to like, subscribe, and hit the bell icon for more exciting updates." (17 of 19 videos from 2025-07-18)
 - Community offers framed as a gift: "Want the full collection? Join our community where every poster becomes a world." (z1jM3mF5hCk)
 
 ### Anti-voice (observed absent)
 Not measured as absent beyond the sample. TODO(David): which hype words do you want banned for Story Pilot?
 
 ### Cadence
-Median sentence 4-12 words across the 18 transcripts that carry punctuation (most 7-11). Lists of three; the closer repeats the title promise.
+Median sentence 4-12 words across the 23 transcripts that carry punctuation (median of medians 8). Lists of three; the closer repeats the title promise.
 
 ## Fidelity checklist
 - [ ] "you" appears >= 20 times per 1,000 words

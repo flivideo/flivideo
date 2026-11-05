@@ -2,7 +2,7 @@
 format_type: scripted skill-demo (AITLDR Series B, daily Claude-skill series, long ~2-4.5 min + ~30 s short)
 artifact: video-structure
 version: 1.0.0
-distilled_from: 22 long-video scripts (section maps) + 17 final transcripts + 11 short texts (of 45 selected)
+distilled_from: 26 long texts (22 scripts for section maps, 17 final transcripts, 1 caption fill) + 18 short texts (of 45 selected)
 corpus_window: 2026-09-15 … 2026-10-31
 generated: 2026-11-05
 last_updated: 2026-11-05
@@ -30,7 +30,7 @@ This guide covers the **long format of Series B** (27 videos on @aitldr's /video
 - **Final transcript (spoken)**: `<skill>-final.txt` / `<skill>-short-final.txt`. Used for **words, speaking rate, hooks and closes**. 17 long + 9 short.
 - Where only a script exists (kind=script-only: 5 long b21-b25, 2 short), counts are marked "script".
 - **Matched by title (orch, `matched: by title`, not linked in the project)**: `8uypPWDhDs8` (b04-shot-list `script.md`), `a2EGJnOCpoA` (b01-yt-performance final transcript), `5r8dGfwSbjI` short (b05-title-lab short final + `short-script.md`), `P4c-XkAeJxI` (b26-repurpose `script.md`). They were checked after the guide was drafted and change two details only (below); the headline numbers were not recomputed.
-- **Remaining gaps** (FliVideo kind=none, orch filling): long `q724ELdSywE`; short `UJXxVigGahk`, `iWGZOYoGU-w`, `fm1WrkZ9Bvk`, `6zAtQHHg6Io`, `aZjw4FzKZrM`, `Pi2Ggb2hWM4`.
+- **Filled from YouTube captions into the FliVideo store (sources.json note "filled from YouTube captions")**: long `q724ELdSywE`; short `UJXxVigGahk`, `iWGZOYoGU-w`, `fm1WrkZ9Bvk`, `6zAtQHHg6Io`, `aZjw4FzKZrM`, `Pi2Ggb2hWM4`. These are spoken-word captions only (no script). No gaps remain: 27 long + 18 short all have text.
 - The scripts follow a shared template, so this guide describes a template, not a free-form human structure.
 
 ## Measured (python over script and transcript files; long = final transcript where one exists)
@@ -56,10 +56,14 @@ This guide covers the **long format of Series B** (27 videos on @aitldr's /video
 6. BEST HIGHLIGHT: the part the host would use, with a client angle ("if you edit for other channels, you can hand a client a finished sound pass the same day").
 7. CALL TO ACTION: where to get the skill, one thing to run, a request to reply.
 
-- **First episode** (b01 `a2EGJnOCpoA`, matched by title; 560 words, final transcript) opens on a problem statement ("You're posting videos, but you still don't know what's actually working."), has no "by the end of this video" line and no "Mine did" first-person proof, so the Gen 1 pattern is not yet fixed on day one. The "by the end of this video" count over finals is therefore 16 of 18.
+- **First episode** (b01 `a2EGJnOCpoA`, matched by title; 560 words, final transcript) opens on a problem statement ("You're posting videos, but you still don't know what's actually working."), has no "by the end of this video" line and no "Mine did" first-person proof, so the Gen 1 pattern is not yet fixed on day one. The "by the end of this video" count over final transcripts is therefore 16 of 18 (the caption-filled q724ELdSywE has none either, 16 of 19).
+
+- **Newest long, `q724ELdSywE` (2026-11-04, 141 s, 398 words, 169 wpm; caption fill, no project match):** opens with a question ("Ever wonder why one YouTube video gets hundreds of views while another barely gets noticed?"), has no "by the end of this video", and ends with the Series A sign-off "Don't forget to like, subscribe, and hit the bell icon for more exciting updates." So the Series A boilerplate reappears in the newest long video; the Series B reply-ask close does not. One video, so not a trend.
 
 ### Short (~30 s)
 Lines are id'd `H1…` (hook), `S1…` (steps/promise), `C1…` (calls). Most frequent id patterns: H1 S1-S5 C1 (3 of 11 short-scripts), H1 H2 S1 S2 C1 C2… (variants). It reuses the long video's intro and outro avatar clips ("reused intro + outro, no new words, no new avatar" - Gtn1ThkuylU short-script): hook sentence(s), the "By the end of this video, you'll know…" promise, then a CTA with a reply request. 2 of 9 finals contain "by the end of this video".
+
+**Standalone shorts (6 caption fills, 11-68 s, 10-164 words, no scripts)** do not follow the companion pattern: a zombie-survival explainer (`UJXxVigGahk`, 50 s), a monarch-butterfly life-cycle narration (`iWGZOYoGU-w`, 60 s, no "you"), a paper-airplane animation prompt drop (`6zAtQHHg6Io`, 11 s), a 10-word prompt pointer (`fm1WrkZ9Bvk`), the Vox-style editing teaser (`aZjw4FzKZrM`, 68 s) and "Claude edited this whole video" (`Pi2Ggb2hWM4`, 20 s). Their closes are a link/prompt offer: "the prompt is below", "see the link below", "Links in the bio", "Comment Claude". So "short" in Series B is two formats: the ~85-word companion (12 texts incl. 2 script-only) and standalone showcase shorts (6). The guide's short template covers only the companions.
 
 ## Fidelity checklist
 - [ ] a first-person proof or number inside the first 30 words
