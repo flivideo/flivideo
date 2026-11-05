@@ -49,3 +49,4 @@
 
 # And the ecosystem map (front door)
 !README.md
+.claude/settings.local.json
