@@ -504,3 +504,6 @@ Previous: `fc50-waits` merged 2026-10-27 (FliCut main `7bc5a4a`).
 - 10 guides + matrix + coverage at `docs/script-styles/` (b656d78); parseGuide 10/10 on the M4. Page: https://claude.ai/artifact/Sb53xjPe57fX4be9dNjWi8 (source `docs/artifacts/script-styles-matrix-2026-11-05.html`). Rec: offer aitldr-new, mike, appydave, maitis; hold aitldr-old. Waiting for David's verdict. Wiring into Story Pilot still out of scope.
 - 22 pre-ruling aitldr captions remain in tubescripts/aitldr (18 unused); keep-or-delete is David's.
 - Visual lane: M2 worker `script-styles-visual`, brief `docs/briefs/script-styles-visual-2026-11-05.md`.
+
+## 2026-11-05 — HOLD on D18/D19 scripts (David, relayed by exec-coord)
+"Don't do anything on script yet." No D18 intro pick, no D19 angle; he did not choose A. Don't build or write a script, don't prompt the d18/d19 windows. exec-coord says when it lifts. Script-styles visual lane on the M2 continues.
