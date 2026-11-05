@@ -535,3 +535,6 @@ SVG test banked in brains `video-as-code/svg-explainer-technique.md` + sources (
 ## 2026-11-05 ~11:40 — Voice POC done: MONITOR until David listens
 VoxCPM2 8-bit via mlx-audio on the M2: 0.7–1.1x real time, about 6.4 GB memory, 3.5 GB disk, Apache-2.0 + MIT. Word timing not native (separate whisper pass). Report `docs/research/voice-provider-poc-2026-11-05.md`. Page NOT published (holds a clone of David's voice): served only over an SSH tunnel at 127.0.0.1:7305 on the M4, ends itself within 2 h; folder `~/dev/labs/voice-poc/` on the M2. Worker stopped.
 FLAG: `b04-shot-list/voice/tools/generate_day4.py` uses OmniVoice (CC-BY-NC weights); 24 `b*/voice/short-vo.wav` exist. Not established which used OmniVoice or were published. Proposed read-only check; David's call.
+
+## 2026-11-05 ~11:45 — SVG step two done
+Same worker resumed. Solid map + A* + spacing + upright cards: validator 196 failing frames to 0; no game engine. Page https://claude.ai/artifact/4x9ZnMYWahA8q8xLVuqTGC. Banked in brains video-as-code/svg-explainer-technique.md. Worker stopped (resume id 1f8edaf8-e3c4-4383-a695-8012501c9235 in ~/dev/labs on the M2).
