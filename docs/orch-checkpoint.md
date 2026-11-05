@@ -520,3 +520,6 @@ Plain M2 session `svg-threejs-test`, brief `docs/briefs/svg-threejs-test-2026-11
 
 ## 2026-11-05 ~10:50 — SVG + three.js test DONE
 Page https://claude.ai/artifact/E7aJG1xenXboWK6oYxhuMs ; folder on the M2 `~/dev/labs/svg-dungeon-test/` (local git; RESULTS.md, RIG-CANDIDATE.md). Verdict: flat SVG + GSAP in HyperFrames for explainers; three.js for hero shots (camera breaks silently on change); playable as companion. Session stopped. Used hyperframes 0.8.185, an older pin than M4's 0.9.9. Not picked up by anything yet; nothing wired.
+
+## 2026-11-05 ~11:00 — First rig job merged: stale-tab notice (2a7848f)
+M4 gate: build/typecheck clean; unit 0 failed (server 808+2 skipped, client 361); e2e 81/81. Live test: `my-app restart` (server + Vite) reloads an open tab BY ITSELF, no notice; server-only restart (nodemon) shows "Updated · Reload", no reload. So the auto-reload is real; decision with David (rec: leave). David's stale tab: origin still not reproduced. To clean up: 6 dep-cruiser errors from f1e54a4 (Viewer.tsx, Listen.tsx import core/dist/ui directly). `my-app restart` leaves an orphan nodemon each time (killed by hand). Rig down requested from openrig-orch.
