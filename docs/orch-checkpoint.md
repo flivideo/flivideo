@@ -499,3 +499,8 @@ Previous: `fc50-waits` merged 2026-10-27 (FliCut main `7bc5a4a`).
 ## 2026-11-05 — banked from brains-b0 (no action now)
 - B695: FliVideo builds to move onto OpenRig structures, not terminal workers. Plan `/Users/davidcruwys/dev/ad/brains/openrig/exec-orchestrators-2026-11-05.md`. openrig-orch proposes one pilot slice through the `workshop` rig; chosen together; needs David's go.
 - B692 (Jan call): AI version of the director's chair: mostly no avatar, avatar on for chosen moments from one continuous audio track, lip-synced not regenerated. Jan researching dedicated avatar tools instead of Higgsfield.
+
+## 2026-11-05 ~09:20 — Script-style library: text lane DONE
+- 10 guides + matrix + coverage at `docs/script-styles/` (b656d78); parseGuide 10/10 on the M4. Page: https://claude.ai/artifact/Sb53xjPe57fX4be9dNjWi8 (source `docs/artifacts/script-styles-matrix-2026-11-05.html`). Rec: offer aitldr-new, mike, appydave, maitis; hold aitldr-old. Waiting for David's verdict. Wiring into Story Pilot still out of scope.
+- 22 pre-ruling aitldr captions remain in tubescripts/aitldr (18 unused); keep-or-delete is David's.
+- Visual lane: M2 worker `script-styles-visual`, brief `docs/briefs/script-styles-visual-2026-11-05.md`.
