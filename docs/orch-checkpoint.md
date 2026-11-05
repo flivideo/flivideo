@@ -511,3 +511,6 @@ Previous: `fc50-waits` merged 2026-10-27 (FliCut main `7bc5a4a`).
 ## 2026-11-05 — First FliVideo job through a rig (openrig-orch)
 Picked: FliStudio `stale-tab-notice` (reload notice after a restart; click only, no auto-reload). Workshop rig on the M2, fresh clone, stops at a pushed branch; I gate on the M4, merge, restart. Pending: openrig-orch's report.
 SVG + three.js test: plan with David, waiting for his go (plain M2 session, not a rig; exec-coord agrees).
+
+## 2026-11-05 ~10:10 — Script-style library: visual lane DONE
+`docs/script-styles/*/VISUAL.md` + `visual-matrix.md` (57ad1ff). 309 MB frames on M2 `~/dev/script-style-frames/`; video deleted. Own-channel video from YouTube: 10 aitldr-old, 3 appydave; I title-matched aitldr-old against T7 aitldr-cold (series B + 45-day plan only, none matched). Nothing reads VISUAL.md yet: B-roll Pilot has no style input. Page updated. Workers stopped. Open with David: four styles; SVG test go; 18 unused captions.
