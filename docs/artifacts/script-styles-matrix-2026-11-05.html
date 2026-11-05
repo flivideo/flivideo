@@ -131,20 +131,26 @@ code { font: 13px var(--mono); background: var(--surface); padding: 1px 4px; bor
 
 <section class="card">
   <h2>Separate lane: visual and editing style</h2>
-  <p>This feeds B-roll Pilot and auto-editing, not Story Pilot. You approved it for the M2. It starts next, and has its own files, <code>docs/script-styles/&lt;style&gt;/VISUAL.md</code>.</p>
+  <p>This feeds B-roll Pilot and auto-editing, not Story Pilot. Done on the M2. <a href="https://github.com/flivideo/flivideo/blob/main/docs/script-styles/visual-matrix.md">Full matrix</a></p>
   <div class="scroll">
   <table>
-    <thead><tr><th>Style</th><th class="num">Videos</th><th>Where the video comes from</th></tr></thead>
+    <thead><tr><th>Style</th><th class="num">Videos</th><th class="num">Cuts/min</th><th class="num">Median shot</th><th>Looks like</th><th>On-screen text</th><th>Non-presenter share</th><th>Detail</th></tr></thead>
     <tbody>
-      <tr><td class="name">AITLDR new</td><td class="num">10</td><td>FliVideo finals on the M4; no download</td></tr>
-      <tr><td class="name">AppyDave</td><td class="num">10</td><td>FliVideo first; any not on disk are listed before fetching</td></tr>
-      <tr><td class="name">AITLDR old</td><td class="num">10</td><td>Predates the project folders, so probably YouTube; FliVideo is checked first</td></tr>
-      <tr><td class="name">Mike</td><td class="num">3</td><td>YouTube, 720p</td></tr>
-      <tr><td class="name">Maitis</td><td class="num">10</td><td>YouTube, 720p</td></tr>
+      <tr><td class="name">Mike</td><td class="num">3</td><td class="num">0.9</td><td class="num">26.8 s</td><td>Narration over dark animated cards and terminal captures; face-cam rare</td><td>One large heading per card</td><td>90%+, no real footage</td><td><a href="https://github.com/flivideo/flivideo/blob/main/docs/script-styles/mike/VISUAL.md">Visual</a></td></tr>
+      <tr><td class="name">AITLDR new</td><td class="num">10</td><td class="num">1.3</td><td class="num">16.7 s</td><td>Avatar bookends, full-screen motion cards, framed screen capture</td><td>Heavy: headlines, callouts, stat tiles</td><td>75–85%, almost no real footage</td><td><a href="https://github.com/flivideo/flivideo/blob/main/docs/script-styles/aitldr-new/VISUAL.md">Visual</a></td></tr>
+      <tr><td class="name">AppyDave</td><td class="num">10</td><td class="num">1.5</td><td class="num">12.5 s</td><td>Presenter plus screen recording with picture-in-picture</td><td>Light; some diagram cards in 2026</td><td>60–75% screen, almost no cinematic footage</td><td><a href="https://github.com/flivideo/flivideo/blob/main/docs/script-styles/appydave/VISUAL.md">Visual</a></td></tr>
+      <tr><td class="name">AITLDR old</td><td class="num">10</td><td class="num">5.2</td><td class="num">5.2 s</td><td>Two looks: AI image montage, and slide decks</td><td>Captions, section cards, prompt cards</td><td>50%+ or about 100%, by look</td><td><a href="https://github.com/flivideo/flivideo/blob/main/docs/script-styles/aitldr-old/VISUAL.md">Visual</a></td></tr>
+      <tr><td class="name">Maitis</td><td class="num">10</td><td class="num">9.3</td><td class="num">4.5 s</td><td>Host to camera, screens, news clips, stock or generated footage</td><td>Heavy: kinetic captions, headline cards, logos</td><td>50–70%, including real footage</td><td><a href="https://github.com/flivideo/flivideo/blob/main/docs/script-styles/maitis/VISUAL.md">Visual</a></td></tr>
     </tbody>
   </table>
   </div>
-  <p style="margin-top:12px"><b>Records:</b> shot types, cuts per minute, on-screen text and graphics, B-roll share, framing, transitions. <b>Disk (estimate):</b> about 1.5 GB of frames kept at one frame every 2 seconds, and up to 5 GB of video held briefly and deleted after. The M2 has 107 GB free.</p>
+  <ul class="plain" style="margin-top:12px">
+    <li><b>Measured:</b> cuts per minute and shot length come from scene detection on the whole video. <b>By eye:</b> the look, text and share columns come from contact sheets of only a few videos per style, so treat them as rough.</li>
+    <li><b>Cut count misleads on card styles:</b> AITLDR new shows 1.3 cuts a minute, but its picture changes about every 7 seconds through fades and card animation.</li>
+    <li><b>Only Maitis uses real cutaway footage in any quantity.</b> The other four rely on graphics and screens.</li>
+    <li><b>Nothing reads these files yet.</b> B-roll Pilot is a catalogue of assets with no style input, so the worker noted the gap and built nothing.</li>
+    <li><b>Disk:</b> 309 MB of frames kept on the M2 at <code>~/dev/script-style-frames/</code>; working video deleted. 13 of our own videos came from YouTube because no copy was found: all 10 old AITLDR, 3 AppyDave.</li>
+  </ul>
 </section>
 </main>
 </body>
