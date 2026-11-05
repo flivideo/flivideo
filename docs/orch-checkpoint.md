@@ -517,3 +517,6 @@ SVG + three.js test: plan with David, waiting for his go (plain M2 session, not 
 
 ## 2026-11-05 ~10:45 — SVG + three.js test: GO (David)
 Plain M2 session `svg-threejs-test`, brief `docs/briefs/svg-threejs-test-2026-11-05.md`, folder `~/dev/labs/svg-dungeon-test/` on the M2. Not a rig (exec-coord agrees), not the first FliVideo slice; a repeatable pipeline gets written up as a rig candidate. I publish its page when done.
+
+## 2026-11-05 ~10:50 — SVG + three.js test DONE
+Page https://claude.ai/artifact/E7aJG1xenXboWK6oYxhuMs ; folder on the M2 `~/dev/labs/svg-dungeon-test/` (local git; RESULTS.md, RIG-CANDIDATE.md). Verdict: flat SVG + GSAP in HyperFrames for explainers; three.js for hero shots (camera breaks silently on change); playable as companion. Session stopped. Used hyperframes 0.8.185, an older pin than M4's 0.9.9. Not picked up by anything yet; nothing wired.
