@@ -531,3 +531,7 @@ SVG test banked in brains `video-as-code/svg-explainer-technique.md` + sources (
 ## 2026-11-05 — Herdr machines added (David asked)
 `herdr machine add` from the M4: M2 (davidcruwys@100.126.70.25), Roamy (davidcruwys@100.89.32.35). Both reachable, servers running. Agent list empty on both, since workers start in plain tmux. Not checked: how they appear in the app. Herdr setup belongs to exec-coord, told.
 - CORRECTION: those machines went into the Homebrew Herdr TUI, not David's app (app list = `hc machine ls`, per exec-coord; see brains/dev-environment/herdr.md). Don't add or remove machines until David answers exec-coord. No appynet launch change.
+
+## 2026-11-05 ~11:40 — Voice POC done: MONITOR until David listens
+VoxCPM2 8-bit via mlx-audio on the M2: 0.7–1.1x real time, about 6.4 GB memory, 3.5 GB disk, Apache-2.0 + MIT. Word timing not native (separate whisper pass). Report `docs/research/voice-provider-poc-2026-11-05.md`. Page NOT published (holds a clone of David's voice): served only over an SSH tunnel at 127.0.0.1:7305 on the M4, ends itself within 2 h; folder `~/dev/labs/voice-poc/` on the M2. Worker stopped.
+FLAG: `b04-shot-list/voice/tools/generate_day4.py` uses OmniVoice (CC-BY-NC weights); 24 `b*/voice/short-vo.wav` exist. Not established which used OmniVoice or were published. Proposed read-only check; David's call.
