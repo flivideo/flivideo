@@ -526,3 +526,4 @@ M4 gate: build/typecheck clean; unit 0 failed (server 808+2 skipped, client 361)
 
 ## 2026-11-05 ~11:20 — SVG test banked; voice POC started
 SVG test banked in brains `video-as-code/svg-explainer-technique.md` + sources (ideas to build on listed there). Voice POC (David's go): M2 worker `voice-poc`, brief `docs/briefs/voice-provider-poc-2026-11-05.md`, folder `~/dev/labs/voice-poc/`. "FliTalent" not found on disk; worker checks. Viewed from a Herdr tab on the M4.
+- David: FliTalent / Project Synthespian = ideas from Captain's Log and brains, not projects; no build-out now. Voice work stays a proof of concept.
