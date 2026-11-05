@@ -547,3 +547,6 @@ Same worker resumed. Solid map + A* + spacing + upright cards: validator 196 fai
 
 ## 2026-11-05 ~15:30 — Voice clone: dead air found, David likes the one-piece take
 David: new ref + one piece "sounded like me". His dead-air report was right: line-by-line generation inserted 0.3 s of digital zeros (`gen.py`), now measured; one-piece takes don't have them. Report on the M2 only. Open: artifact for his friend (not now, assumed David Kaff, sharing is his); longer-script test.
+
+## 2026-11-05 ~16:40 — Voice chunk test done: D13 in David's clone ready to hear
+M2, `~/dev/labs/voice-poc/page3/` (local only), served over an SSH tunnel at 127.0.0.1:7307, ends about 18:40. 4 chunks at a 300-word limit in one process: 299 s generating for 299 s of audio, peak 17.7 GB, memory back to the loaded model (3.2 GB) after each clear, lowest available about 5.9 GB, swap +0.25 GB, stop rule never fired. Seed repeats byte for byte. Model writes short digital zeros at some chunk ends; the trimmed file removes them. Waiting for David's ear on the joins. Hosted research: https://claude.ai/artifact/EEqUF8vSLTuFjkzdJM6kRR (stay local).
