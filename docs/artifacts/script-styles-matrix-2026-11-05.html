@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Script Style Library</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600&family=Roboto:ital,wght@0,400;0,500;0,700;1,400&family=Roboto+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light;
+  --page: #faf5ec; --card: #ffffff; --ink: #342d2d; --muted: #7a6e5e; --line: #d4cdc4;
+  --yellow: #ffde59; --amber: #c8841a; --surface: #f0ebe4; --link: #1f6fc4; --gold: #ccba9d;
+  --display: Oswald, "Arial Narrow", sans-serif; --body: Roboto, Arial, sans-serif; --mono: "Roboto Mono", Menlo, monospace;
+  /* layout: one 1120px column; summary first, then the matrix, then the evidence behind it */
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--ink); font: 16px/1.55 var(--body); }
+main { max-width: 1120px; margin: 0 auto; padding: 28px 20px 64px; display: grid; gap: 22px; }
+.logo { display: inline-block; background: var(--ink); border-radius: 6px; padding: 4px 10px 2px; font: 20px/1.1 "Bebas Neue", var(--display); letter-spacing: .04em; }
+.logo .a { color: var(--gold); } .logo .d { color: var(--yellow); }
+h1 { font: 500 38px/1.15 var(--display); text-transform: uppercase; margin: 12px 0 6px; text-wrap: balance; }
+h2 { font: 500 21px/1.2 var(--display); text-transform: uppercase; letter-spacing: .02em; margin: 0 0 10px; text-wrap: balance; }
+p { margin: 0 0 10px; max-width: 72ch; } p:last-child { margin-bottom: 0; }
+.sub { color: var(--muted); }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 20px 22px; }
+.verdict { border-left: 5px solid var(--yellow); }
+a { color: var(--link); }
+a:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+.scroll { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 14.5px; font-variant-numeric: tabular-nums; }
+th { font: 500 13px/1.3 var(--display); text-transform: uppercase; letter-spacing: .03em; color: var(--muted); text-align: left; padding: 8px 10px; border-bottom: 2px solid var(--line); vertical-align: bottom; }
+td { padding: 11px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+td.name { font-weight: 700; white-space: nowrap; }
+td.num { text-align: right; white-space: nowrap; } th.num { text-align: right; }
+.pill { display: inline-block; font: 500 12px/1 var(--display); text-transform: uppercase; letter-spacing: .03em; padding: 4px 8px; border-radius: 99px; border: 1px solid var(--line); white-space: nowrap; }
+.pill.first { background: var(--yellow); border-color: var(--yellow); }
+.links { white-space: nowrap; }
+.picks { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.picks li { border-top: 3px solid var(--amber); padding-top: 8px; }
+.picks b { font: 500 17px/1.25 var(--display); text-transform: uppercase; display: block; margin-bottom: 3px; }
+.picks .n { color: var(--amber); margin-right: 6px; }
+ul.plain { margin: 0; padding-left: 18px; display: grid; gap: 6px; max-width: 78ch; }
+.two { display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+code { font: 13px var(--mono); background: var(--surface); padding: 1px 4px; border-radius: 3px; overflow-wrap: anywhere; }
+</style>
+</head>
+<body>
+<main>
+<header>
+  <span class="logo"><span class="a">Appy</span><span class="d">Dave</span></span>
+  <h1>Script style library</h1>
+  <p class="sub">Five styles reverse-engineered for Story Pilot. 5 November 2026. Nothing here is wired into Story Pilot yet.</p>
+</header>
+
+<section class="card verdict">
+  <h2>Offer four styles first; hold old AITLDR back</h2>
+  <ol class="picks">
+    <li><b><span class="n">1</span>AITLDR new</b>The clearest reusable template, with real scripts and timings behind it. For short tutorials.</li>
+    <li><b><span class="n">2</span>Mike</b>The only story-led style here. For long stories. Label it "based on 2 story videos".</li>
+    <li><b><span class="n">3</span>AppyDave</b>Your own long-form voice, thinking aloud over a live screen. For long tutorials.</li>
+    <li><b><span class="n">4</span>Maitis</b>A real second option for long tutorials: the cost-shock hook and heavy chapters. Borrow the structure, not the wording.</li>
+  </ol>
+  <p style="margin-top:14px"><b>What this doesn't show:</b> which style performs best. No view or retention data was joined to the structures, so this ranks how usable each style is as a template, not how well it does on YouTube.</p>
+</section>
+
+<section class="card">
+  <h2>The matrix</h2>
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Style</th><th>Pick</th><th>Structure</th><th>Voice</th><th>Fits</th><th>Sample</th><th>Strongest trait</th><th>Other docs we already have</th></tr></thead>
+    <tbody>
+      <tr><td class="name">AITLDR new<br><span class="sub" style="font-weight:400">Series B, from 15 Sep</span></td><td><span class="pill first">Offer 1st</span></td>
+        <td class="links"><a href="https://github.com/flivideo/flivideo/blob/main/docs/script-styles/aitldr-new/STRUCTURE.md">Structure</a></td><td class="links"><a href="https://github.com/flivideo/flivideo/blob/main/docs/script-styles/aitldr-new/VERBAL-STYLE.md">Voice</a></td>
+        <td>Tutorial, skill demo: 2–3 min plus a 30 s short</td><td>45 of 45: 27 long, 18 short</td><td>Named sections (hook, promise, plug, tools, 3–4 beats, highlight, CTA), with a number in the hook</td><td>Brand VERBAL-STYLE, VIDEO.md</td></tr>
+      <tr><td class="name">Mike<br><span class="sub" style="font-weight:400">OpenRig, Mike Schwarz</span></td><td><span class="pill first">Offer 2nd</span></td>
+        <td class="links"><a href="https://github.com/flivideo/flivideo/blob/main/docs/script-styles/mike/STRUCTURE.md">Structure</a></td><td class="links"><a href="https://github.com/flivideo/flivideo/blob/main/docs/script-styles/mike/VERBAL-STYLE.md">Voice</a></td>
+        <td>Story, long; also one tutorial variant</td><td>3 long, 3 short explainers. <b>Story format rests on 2.</b></td><td>Opens on a bare claim grounded in a real count, traces an incident back, flips the frame at the close</td><td>Spoken-script template, mechanism notes, spoken-vs-read</td></tr>
+      <tr><td class="name">AppyDave</td><td><span class="pill first">Offer 3rd</span></td>
+        <td class="links"><a href="https://github.com/flivideo/flivideo/blob/main/docs/script-styles/appydave/STRUCTURE.md">Structure</a></td><td class="links"><a href="https://github.com/flivideo/flivideo/blob/main/docs/script-styles/appydave/VERBAL-STYLE.md">Voice</a></td>
+        <td>Tutorial, build-along: 8–30 min</td><td>25 videos, 22 distinct recordings. 12 are one series.</td><td>Thinking-aloud "we" over a live screen, a "day N" frame, and the "I'm AppyDave" sign-off</td><td>VERBAL-STYLE, voice profile, hook study, educational VIDEO-STRUCTURE</td></tr>
+      <tr><td class="name">Maitis<br><span class="sub" style="font-weight:400">@maitis-ai</span></td><td><span class="pill first">Offer 4th</span></td>
+        <td class="links"><a href="https://github.com/flivideo/flivideo/blob/main/docs/script-styles/maitis/STRUCTURE.md">Structure</a></td><td class="links"><a href="https://github.com/flivideo/flivideo/blob/main/docs/script-styles/maitis/VERBAL-STYLE.md">Voice</a></td>
+        <td>Tutorial, explainer: 6–22 min</td><td>15 of 16 long-form</td><td>Dollar-figure hook ("this used to cost X, now free"), a chaptered walkthrough</td><td>None</td></tr>
+      <tr><td class="name">AITLDR old<br><span class="sub" style="font-weight:400">Series A, before 15 Sep</span></td><td><span class="pill">Hold</span></td>
+        <td class="links"><a href="https://github.com/flivideo/flivideo/blob/main/docs/script-styles/aitldr-old/STRUCTURE.md">Structure</a></td><td class="links"><a href="https://github.com/flivideo/flivideo/blob/main/docs/script-styles/aitldr-old/VERBAL-STYLE.md">Voice</a></td>
+        <td>Tutorial, showcase: 5–10 min</td><td>25 of 25</td><td>Fixed like-subscribe-bell sign-off and an early community plug; hype-style hooks; replaced by Series B</td><td>Brand VERBAL-STYLE, VIDEO.md</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="sub" style="margin-top:12px">No style has a lens guide yet. Every guide has a valid Story Pilot header (checked on the M4), lists its source videos, keeps measured apart from interpreted, and marks the strategic-intent questions for you as TODO.</p>
+</section>
+
+<section class="card">
+  <h2>Coverage</h2>
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Source</th><th class="num">Wanted</th><th class="num">Found in FliVideo</th><th class="num">From YouTube</th><th class="num">Missing</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td class="name">AITLDR old</td><td class="num">25</td><td class="num">21</td><td class="num">4</td><td class="num">0</td><td>The 4 were added to the FliVideo store</td></tr>
+      <tr><td class="name">AITLDR new, long</td><td class="num">27</td><td class="num">26</td><td class="num">1</td><td class="num">0</td><td>7 have only a script, no final transcript. 3 matched to projects by title.</td></tr>
+      <tr><td class="name">AITLDR new, short</td><td class="num">18</td><td class="num">12</td><td class="num">6</td><td class="num">0</td><td>The 6 are standalone showcase shorts, and 3 of them have under 40 words</td></tr>
+      <tr><td class="name">AppyDave, newest 25</td><td class="num">25</td><td class="num">25</td><td class="num">0</td><td class="num">0</td><td>8 come from project recordings, split in segments</td></tr>
+      <tr><td class="name">Mike</td><td class="num">3</td><td class="num">n/a</td><td class="num">3</td><td class="num">0</td><td>Not our channel. 3 older explainers also measured for voice.</td></tr>
+      <tr><td class="name">Maitis</td><td class="num">15</td><td class="num">n/a</td><td class="num">15</td><td class="num">0</td><td>Not our channel. 10 most-viewed plus 5 newest; 1 long-form and 31 Shorts not sampled.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<div class="two">
+<section class="card">
+  <h2>What Mike's new video changes</h2>
+  <p>Compared with the existing analysis, built on his other two videos. <a href="https://github.com/flivideo/flivideo/blob/main/docs/script-styles/mike/WHAT-CHANGED.md">Full note</a></p>
+  <ul class="plain">
+    <li><b>Holds up:</b> speaking rate (191 wpm), 11-word sentences, honesty brakes, plant and payoff, no hype words.</li>
+    <li><b>Weakened:</b> "barely uses questions" is not his general pattern; this video asks 21. It also has no trace-back reveal and no frame flip at the close.</li>
+    <li><b>New:</b> Mike has a third format, a chaptered tutorial with one real bug carried to a real PR.</li>
+  </ul>
+</section>
+<section class="card">
+  <h2>How far to trust this</h2>
+  <ul class="plain">
+    <li>Old AITLDR and Maitis: openings and closings were read closely, the middles less so.</li>
+    <li>AppyDave has no planned scripts, and its project recordings couldn't give a per-video speaking rate.</li>
+    <li>Mike's story format rests on 2 videos.</li>
+    <li>This is a worker's analysis. I checked the headers and spot-checked some numbers; I didn't re-derive them all.</li>
+  </ul>
+</section>
+</div>
+
+<section class="card">
+  <h2>Separate lane: visual and editing style</h2>
+  <p>This feeds B-roll Pilot and auto-editing, not Story Pilot. You approved it for the M2. It starts next, and has its own files, <code>docs/script-styles/&lt;style&gt;/VISUAL.md</code>.</p>
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Style</th><th class="num">Videos</th><th>Where the video comes from</th></tr></thead>
+    <tbody>
+      <tr><td class="name">AITLDR new</td><td class="num">10</td><td>FliVideo finals on the M4; no download</td></tr>
+      <tr><td class="name">AppyDave</td><td class="num">10</td><td>FliVideo first; any not on disk are listed before fetching</td></tr>
+      <tr><td class="name">AITLDR old</td><td class="num">10</td><td>Predates the project folders, so probably YouTube; FliVideo is checked first</td></tr>
+      <tr><td class="name">Mike</td><td class="num">3</td><td>YouTube, 720p</td></tr>
+      <tr><td class="name">Maitis</td><td class="num">10</td><td>YouTube, 720p</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p style="margin-top:12px"><b>Records:</b> shot types, cuts per minute, on-screen text and graphics, B-roll share, framing, transitions. <b>Disk (estimate):</b> about 1.5 GB of frames kept at one frame every 2 seconds, and up to 5 GB of video held briefly and deleted after. The M2 has 107 GB free.</p>
+</section>
+</main>
+</body>
+</html>
