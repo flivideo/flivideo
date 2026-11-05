@@ -488,3 +488,10 @@ Previous: `fc50-waits` merged 2026-10-27 (FliCut main `7bc5a4a`).
 - Text lane: M2 worker `script-styles-build` (sonnet), brief `docs/briefs/script-styles-library-2026-11-05.md` (fe8ca36+). Outputs → `docs/script-styles/`. Background appynet watch running.
 - Visual lane: approved for the M2; launch a second worker once `docs/script-styles/selection.json` is pushed (reuse those videos; ~10/style, 720p, 1 frame/2 s, delete video after frames; ~4 GB transient, ~1.5 GB kept).
 - Gate on M4: parseGuide every guide; then matrix artifact (AppyDave light) opened for David.
+
+## 2026-11-05 ~08:45 — Script styles: own channels from FliVideo (David's correction)
+- My error: brief told the M2 worker to harvest AITLDR/AppyDave off YouTube despite the stores. Stopped. Mirrors re-synced (`youtube.sync`: aitldr 431, appydave 191).
+- Corpus from FliVideo: 95 selected own-channel videos = 38 store, 35 project transcript, 7 script only, 15 none (2 have captions fetched; 13 gap).
+- YouTube now only for Maitis (running at 45 s pace) and, after it, the 13 gaps, which land in the published store.
+- Banked: memory `feedback-own-channels-come-from-flivideo`, guard in tube-harvest SKILL.md.
+- Note: David's "visual lane" still queued after Maitis; own-channel video files should come from FliVideo too, not YouTube.
