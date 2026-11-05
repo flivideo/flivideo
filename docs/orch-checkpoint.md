@@ -523,3 +523,6 @@ Page https://claude.ai/artifact/E7aJG1xenXboWK6oYxhuMs ; folder on the M2 `~/dev
 
 ## 2026-11-05 ~11:00 — First rig job merged: stale-tab notice (2a7848f)
 M4 gate: build/typecheck clean; unit 0 failed (server 808+2 skipped, client 361); e2e 81/81. Live test: `my-app restart` (server + Vite) reloads an open tab BY ITSELF, no notice; server-only restart (nodemon) shows "Updated · Reload", no reload. So the auto-reload is real; decision with David (rec: leave). David's stale tab: origin still not reproduced. To clean up: 6 dep-cruiser errors from f1e54a4 (Viewer.tsx, Listen.tsx import core/dist/ui directly). `my-app restart` leaves an orphan nodemon each time (killed by hand). Rig down requested from openrig-orch.
+
+## 2026-11-05 ~11:20 — SVG test banked; voice POC started
+SVG test banked in brains `video-as-code/svg-explainer-technique.md` + sources (ideas to build on listed there). Voice POC (David's go): M2 worker `voice-poc`, brief `docs/briefs/voice-provider-poc-2026-11-05.md`, folder `~/dev/labs/voice-poc/`. "FliTalent" not found on disk; worker checks. Viewed from a Herdr tab on the M4.
