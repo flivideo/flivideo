@@ -538,3 +538,9 @@ FLAG: `b04-shot-list/voice/tools/generate_day4.py` uses OmniVoice (CC-BY-NC weig
 
 ## 2026-11-05 ~11:45 — SVG step two done
 Same worker resumed. Solid map + A* + spacing + upright cards: validator 196 failing frames to 0; no game engine. Page https://claude.ai/artifact/4x9ZnMYWahA8q8xLVuqTGC. Banked in brains video-as-code/svg-explainer-technique.md. Worker stopped (resume id 1f8edaf8-e3c4-4383-a695-8012501c9235 in ~/dev/labs on the M2).
+
+## 2026-11-05 ~15:20 — Easy wins (David's go)
+- appydave plugin 11.7.2 (c227c86). my-app restart orphan fix merged (app-registry df40fa0); first real FliStudio restart left one nodemon.
+- FliStudio main 68e6a6e: dep-cruiser 0 errors (narrow rule exception for core's declared /ui entry); update strip skips checkouts with no origin. Gate on M4: build, typecheck, lint clean; e2e 81/81; unit one failure in Listen `audio.test.ts` (stale edit) on the full run, then 13/13 alone and 395/395 twice in the module: flaky under load, cause not found, not caused by this diff. Restarted.
+- Voice clone rerun (M2 `~/dev/labs/voice-poc/page2`, local only): A–D served over an SSH tunnel at 127.0.0.1:7306, ends about 17:10. Waiting for David's ear.
+- Left out: FliEdit screenshots (needs his screen), Apple helper selftest (cause unclear). Workers stopped.
