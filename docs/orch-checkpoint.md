@@ -507,3 +507,7 @@ Previous: `fc50-waits` merged 2026-10-27 (FliCut main `7bc5a4a`).
 
 ## 2026-11-05 — HOLD on D18/D19 scripts (David, relayed by exec-coord)
 "Don't do anything on script yet." No D18 intro pick, no D19 angle; he did not choose A. Don't build or write a script, don't prompt the d18/d19 windows. exec-coord says when it lifts. Script-styles visual lane on the M2 continues.
+
+## 2026-11-05 — First FliVideo job through a rig (openrig-orch)
+Picked: FliStudio `stale-tab-notice` (reload notice after a restart; click only, no auto-reload). Workshop rig on the M2, fresh clone, stops at a pushed branch; I gate on the M4, merge, restart. Pending: openrig-orch's report.
+SVG + three.js test: plan with David, waiting for his go (plain M2 session, not a rig; exec-coord agrees).
