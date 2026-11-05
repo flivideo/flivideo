@@ -530,3 +530,4 @@ SVG test banked in brains `video-as-code/svg-explainer-technique.md` + sources (
 
 ## 2026-11-05 — Herdr machines added (David asked)
 `herdr machine add` from the M4: M2 (davidcruwys@100.126.70.25), Roamy (davidcruwys@100.89.32.35). Both reachable, servers running. Agent list empty on both, since workers start in plain tmux. Not checked: how they appear in the app. Herdr setup belongs to exec-coord, told.
+- CORRECTION: those machines went into the Homebrew Herdr TUI, not David's app (app list = `hc machine ls`, per exec-coord; see brains/dev-environment/herdr.md). Don't add or remove machines until David answers exec-coord. No appynet launch change.
