@@ -559,3 +559,8 @@ M2, `~/dev/labs/voice-poc/page3/` (local only), served over an SSH tunnel at 127
 ## 2026-11-06 ~07:55 — David's go on B698 S0-S3: first stages running on the M2
 - Plan and rules updated from his reply: private brains `north-star/deliver-2026-11-06-B698-storypilot-rework.md`, same page as before. S0 done (M2 login, Pillow, two docs, Story Pilot backup on M4 with restore test). Running on the M2: `s1-reader-fix`, `s2-guide-audit`, `s3-mocks`, `s4a-architect` (no code). Results come to orch for gate/publish.
 - Not approved: S4-S8 code, D13 trials (his go at S8), rig up (his window). D18/D19 hold unchanged. Style extractions stay out of this public repo.
+
+## 2026-11-06 ~08:35 — B698: David away 2 h, "use your best judgement"; S1 merged
+- S1 merged at FliStudio main 115ed99, live (full e2e 82/82 on rerun; first full run had one failure in storypilot-look at width 2000, passed alone 2/2 and in the rerun: flaky under load, cause not found).
+- Running on the M2: s2-guide-audit, s4a2-model-service (design). Next, when both finish: align names, S3b spec, S4.1 on a branch only (no merge, no real-data migration, no rig up).
+- Audio corrected: Kokoro/Listen on M4, VoxCPM2 clone on M2 as lab scripts, durable M4-to-M2 queue only for edit-grade transcription. Delivery file holds rules; mocks https://claude.ai/artifact/FKUxg1RudFMmUsTzZbg1aX
