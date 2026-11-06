@@ -6,6 +6,13 @@
 - Read this first when resuming as flivideo-orch
 - The current step tells you the next action; the standing rules are not optional
 
+## 2026-11-06 ~16:35: Story Pilot rework live; avatar test closed
+- FliStudio main ed422d2: many scripts per video, three parts (Data Islands, Guides, Story), wizard in the Story tab, Focus and read-and-listen, guide library, audio queue with priority, Reader reads project files. fli-core v0.34.0. FliTools 3cc6bb3 on both machines; Kokoro on the M2. Migration flag on in the M4 `.env`; D13 migrated, main script unchanged (md5 894e201b).
+- D13 has six trial scripts, all with Kokoro audio, none in use. D18 and D19 untouched.
+- d21-avatar-cost-test: OmniHuman and Kling cuts placed; InfiniteTalk and Wan 2.2 failed on the vendor's side, charged nothing. Sessions and the capture are attached as resources. Private details are in the brains delivery folder, not here.
+- Open: on-demand read-aloud cache (brand and global guides), "free up audio" action, clone voice in FliTools after David's listen, engine speed as data, the gap check has no beats to read. Workers all stopped; plain workers until Superrig says otherwise.
+- Delivery file and spec: brains `north-star/deliver-2026-11-06-B698-storypilot-rework.md`, `north-star/deliver-B698-output/spec/SPEC.md`.
+
 ## 2026-11-04 ~21:05 — evening walk builds all live; nothing running
 - FliStudio main f1e54a4: Reader file-type rendering (b34d5d3), typed guides (d78d06f/defbebb; d13 story.brief build words IDENTICAL),
   Reader guide layout (60cfe46), Reader fixes (20c3b76: anchor links, inline md, used = "in voice docs"), speed step 2 (Viewer 2× / Listen 1×, remembered).
