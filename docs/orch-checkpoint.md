@@ -6,6 +6,17 @@
 - Read this first when resuming as flivideo-orch
 - The current step tells you the next action; the standing rules are not optional
 
+## 2026-11-06 park prep for the Mac move: nothing running that matters
+- FliStudio main 7c3d6fa is live on the M4 (one commit past the entry below: dot-folder fix for production paths). Comes back with `my-app start flistudio` if it isn't up after the move. No workers running; nothing of mine is mid-change.
+- **First on resume:** `git pull` in brains, flivideo and appydave-plugins; check FliStudio on :7150/:7151 and FliTools on both machines (M2 is a LaunchDaemon, M4 :7161); tell David what waits on him.
+- **Waiting on David:** make the Guide audit page private, then I publish its J/K/L update (ready in brains `north-star/deliver-B698-output/listen/audit/`); share the clean avatar page; pick an avatar face; check OmniHuman v3; rig adoption go (below).
+- **Next build, his go given:** VibeVoice 1.5B in FliTools, M2 only. Private use only.
+- **Held until after the move (exec-coord's advice):** adopting this session as seat `flivideo-orch@exec`. In place with `rig adopt <fragment> --target-rig <rig id> --bind <pod.member>=flivideo-orch`; no near-compaction or reload needed. Recipe: brains `openrig/rigs/exec/README.md`. David hasn't said go.
+- **Throwaway:** the M4 watcher shell and the 7309 tunnel on both machines. They can die.
+- **Keep (M2):** `~/dev/labs/{avatar-test,voice-poc,b698-audit-audio,b698-live}`. Voice clones and the voice sample exist only in `voice-poc` on the M2.
+- Private detail: brains memory `project-avatar-and-voice-2026-11-06`, `north-star/deliver-2026-11-06-B698-storypilot-rework.md`.
+- Not mine, left alone: 15 older untracked proof and runbook files in this repo, about 95 uncommitted changes in `v-appydave`, `davidcruwys/INDEX.md` in brains.
+
 ## 2026-11-06 ~16:35: Story Pilot rework live; avatar test closed
 - FliStudio main ed422d2: many scripts per video, three parts (Data Islands, Guides, Story), wizard in the Story tab, Focus and read-and-listen, guide library, audio queue with priority, Reader reads project files. fli-core v0.34.0. FliTools 3cc6bb3 on both machines; Kokoro on the M2. Migration flag on in the M4 `.env`; D13 migrated, main script unchanged (md5 894e201b).
 - D13 has six trial scripts, all with Kokoro audio, none in use. D18 and D19 untouched.
