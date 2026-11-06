@@ -550,3 +550,8 @@ David: new ref + one piece "sounded like me". His dead-air report was right: lin
 
 ## 2026-11-05 ~16:40 — Voice chunk test done: D13 in David's clone ready to hear
 M2, `~/dev/labs/voice-poc/page3/` (local only), served over an SSH tunnel at 127.0.0.1:7307, ends about 18:40. 4 chunks at a 300-word limit in one process: 299 s generating for 299 s of audio, peak 17.7 GB, memory back to the loaded model (3.2 GB) after each clear, lowest available about 5.9 GB, swap +0.25 GB, stop rule never fired. Seed repeats byte for byte. Model writes short digital zeros at some chunk ends; the trimmed file removes them. Waiting for David's ear on the joins. Hosted research: https://claude.ai/artifact/EEqUF8vSLTuFjkzdJM6kRR (stay local).
+
+## 2026-11-06 ~07:05 — B698 processed: Story Pilot rework plan at David's gate; nothing built
+- B698 (David's Story Pilot walk) read in full. 56-point ledger + plan: private brains `north-star/deliver-2026-11-06-B698-storypilot-rework.md`, page https://claude.ai/artifact/1n9LiNsuF2XePMTECdr4iZ (brains 5f81976d). Deliver window A only: no rig, no script, no build started. Waiting on David's review + go.
+- Where it would run (advice): `workshop-flistudio` on the M2, one slice per mission, M4 gate; queue rows rather than deliver's window B (untested); fallback appynet workers. exec-coord: M2 tmux viewed from Workers tab; check login from a fresh shell. D13 trials need David's explicit go; D18/D19 hold unchanged.
+- Voice joins: fix now in M2 `~/dev/labs/voice-poc` (0b86f78: assemble.py, check_joins.py; gen3 calls them, generation path not run). Check fails on d13-full.mp3, passes on the assembled file. D13 page re-served on the tunnel, http://127.0.0.1:7307/, until ~11:00. David hasn't reported listening.
