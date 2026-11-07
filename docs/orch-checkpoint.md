@@ -6,6 +6,10 @@
 - Read this first when resuming as flivideo-orch
 - The current step tells you the next action; the standing rules are not optional
 
+## 2026-11-07: this session is now a rig seat
+- `flivideo-orch@exec`, adopted in place on David's go; conversation kept, tmux name unchanged. Sign rig commands with `OPENRIG_SESSION_NAME=flivideo-orch@exec`. Never `rig down exec`. Recovery after a reboot: brains `openrig/rigs/exec/README.md`.
+- This replaces the "held" adoption line in the entry below. M4 checked after the move; M2 was offline, so VibeVoice in FliTools still waits for it. Workers stay plain until Superrig says otherwise.
+
 ## 2026-11-06 park prep for the Mac move: nothing running that matters
 - FliStudio main 7c3d6fa is live on the M4 (one commit past the entry below: dot-folder fix for production paths). Comes back with `my-app start flistudio` if it isn't up after the move. No workers running; nothing of mine is mid-change.
 - **First on resume:** `git pull` in brains, flivideo and appydave-plugins; check FliStudio on :7150/:7151 and FliTools on both machines (M2 is a LaunchDaemon, M4 :7161); tell David what waits on him.
