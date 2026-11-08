@@ -323,7 +323,7 @@ The rule is enforced by the server, in `story.script.set`, so it holds on the sc
 | `recreate`, same or different guides | Written here | New script |
 | `kind: build` with no `mode` | Written here | Refused, naming the modes |
 
-**"Guides changed"** compares, by profile key (6.1), what the script would be built from now with what its current words were built from. Words with no recorded build read as the recipe the app already falls back to for them ("as before"). So an Update on a never-built script such as `main` is a version, pressing **Fine** without changing anything stays a version, and that Update's build record gives the words their first profile. Choosing really different guides and then rebuilding is a new script.
+**"Guides changed"** compares, by profile key (6.1), what the script would be built from now with what its current words were built from. Words with no recorded build read as the recipe the app already falls back to for them ("as before"). So an Update on a never-built script such as `main` is a version, pressing **Fine** without changing anything stays a version, and that Update's build record gives the words their first profile. Choosing really different guides and then rebuilding is a new script. If brand or story settings move between writing the words and the next Update, the fallback reads differently and the comparison can say "changed"; once a build has been recorded the comparison uses that record.
 
 **Closing the other ways in:**
 
@@ -332,7 +332,7 @@ The rule is enforced by the server, in `story.script.set`, so it holds on the sc
 - While a Rerun is pending on the script, an agent write with `kind: edit` is refused, naming the pending Rerun.
 - While a Rerun is pending, a build whose `mode` differs from the mode the screen asked for is refused, naming the asked mode. The screen's choice wins over the agent's flag.
 
-An edit, an undo and a restore by a person are never builds and always stay on the script.
+An edit, an undo and a restore by a person are never builds and always stay on the script. One limit stays: an agent that declares `kind: edit` with no Rerun pending can still write regenerated words, and the server cannot tell that from a word change someone asked for.
 
 **The new script** takes the source's direction, angle, chosen recipe and selection, as **New from this** does, and `derivedFrom` names the source. Its history starts at version 1. The answer names it: `scriptId`, `forkedFrom`. `story.build.record` must use that `scriptId`. On a new script's first version `previousVersion` is treated as none. The source's Rerun is marked answered.
 
@@ -356,7 +356,7 @@ Accepted limit: a script from before this change that holds two chips resolves t
 
 The new script is created at the moment the words arrive, so a rebuild abandoned before that creates nothing, and a build refused by the trigger check creates nothing either. It carries `building: true` until `story.build.record` succeeds. Until then it is not live: not in the dropdown or `story.scripts.list`, not counted when resolving which script is meant, not in the label collision set, and `use`, `send` and `recipe.set` on it are refused.
 
-**Retrying.** A record that fails leaves it hidden, and `build.py` says so. A build addressed to a source whose new script is still `building` replaces that hidden script; it never makes a second one. A build addressed to the `building` script itself replaces its words too.
+**Retrying.** A record that fails leaves it hidden, and `build.py` says so. A build addressed to a source whose new script is still `building` replaces that hidden script; it never makes a second one. A build addressed to the `building` script itself replaces its words too. Two retries at once: the last write wins.
 
 Scripts with no words, from **New from this** or a batch, stay listed and read `no words yet`, so they cannot pass for a variant.
 
@@ -410,4 +410,4 @@ Out of scope: a Redo button, removing chips, the Teletubby header. Teletubby sho
 
 Part of steps 1 and 2: `appydave-plugins/flivideo/skills/storypilot/SKILL.md` and `scripts/build.py`.
 
-Checked by reading: the build, record and create paths, Rerun's instruction, the picker, Teletubby's trigger rule. Teletubby's `violations` already reach FliStudio's refusal details, and only the message text drops them. Nothing here has run.
+Checked by reading: the build, record and create paths, Rerun's instruction, the picker, Teletubby's trigger rule. Teletubby's `violations` were being dropped in FliStudio's door, not only in the message; a real run found that where two code readings had not, and the door now carries them.
