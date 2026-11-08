@@ -153,7 +153,7 @@
 ## 2026-11-02 ~20:00 — NOTICE ONLY: Skool-Pilot coming (from skool-david-kaff, on David's ask)
 - New FliVideo-family app, maybe growing into Skool Studio. Nothing built, scope not agreed. **Do not start work.**
 - Loop: Kaff's advice → skill → asset on Skool → Kaff reviews → skill v2 → students get it. Jan applies via agents (as Story Pilot / B-roll Pilot).
-- Read: /Users/davidcruwys/dev/ad/brains/skool/skool-pilot-concept.md · sources /Users/davidcruwys/dev/ad/brains/skool/sources/2026-11-02-kaff-session-2/ · first output https://claude.ai/artifact/FhFgoU1Pg9Dy6iYaLZJqw3
+- Read: /Users/davidcruwys/dev/ad/brains/skool/skool-pilot-concept.md · sources /Users/davidcruwys/dev/ad/brains/skool/sources/2026-11-02-kaff-session-2/ · first output: Jan's Brief, listed in the private ARTIFACTS.md
 - Open for David: Pilot or Studio; FliStudio zone or separate app; Kaff direct vs Claude ingests Looms; how Jan syncs.
 
 ## 2026-11-02 ~19:35 — David's D19 rulings applied (v-appydave c75d044, appyrigs 89431662)
