@@ -12,6 +12,8 @@ status: "for review (spec only, nothing built)"
 
 **For Agents**: Slices 1 and 2 of the `variants` work. Section 5 is the contract both repos build to. Section 8 is what QA tests. Every code reference is relative to its repo (`flistudio`, `teletubby`) on the `variants` branch at the spec's date. Story Pilot paths sit under `flistudio/modules/storypilot/`.
 
+**Round 2 changes this spec.** Section 12 is the current model for Story Pilot's side and names what it supersedes. Sections 5 and 7, Teletubby's side and the publish contract, still stand.
+
 **Page**: [story-variants-and-versions.html](story-variants-and-versions.html) shows the before and after. This file is the record; if they disagree, this one wins.
 
 ## 1. The problem
@@ -290,3 +292,94 @@ Recorded with reasons in the rig's notes, not waiting on anyone:
 3. Variant id is derived from script id plus profile key; nothing new is stored.
 4. Contract lives at Teletubby's door, not in fli-core.
 5. Version number stays off the chip.
+
+## 12. Round 2: every regeneration is its own script
+
+### 12.1 Why
+
+Round 1's contract and Teletubby's side held up. Inside Story Pilot, though, a variant was only a hash on one shared timeline: rebuilding a script with other guides continued the same version list, Undo walked from one variant's words into another's, and the only way to reach an earlier variant was finding its number in History. The talent's words were "each variant has its own version history". Real model rebuilds were also refused at Send, three times out of three, for a trigger rule Story Pilot never checked.
+
+### 12.2 What this supersedes
+
+| Round 1 | Now |
+|---|---|
+| Section 3: one script can hold several profiles, each a variant | One script is one variant. |
+| 6.1: a rebuild of the same script with another profile is a new variant on that script | It is a new script. |
+| 6.1: the variant id is the script id plus a profile hash, derived on every send | The id is stored once per script (12.4). Hashes survive only on chips already published. |
+| 6.1: undo across a rebuild goes back to the earlier variant | Cannot happen for new work: each script's history starts at its own first version. Existing mixed histories stay as they are. |
+| 6.3: default label from voice, build and kind, duplicates allowed | Two variants never show the same default (12.8). |
+| 6.4: `putInUse` runs before the write | After Teletubby accepts it (12.6). |
+| Section 9: a per-variant view of History is out of scope | History is per script, so that is what it now is. |
+
+### 12.3 The rule: what makes a new script
+
+The rule is enforced by the server, in `story.script.set`, so it holds on the screen, in the Copy instruction and for an agent calling the verbs directly. `story.script.set` gains an optional `mode` (`create`, `update`, `recreate`), used with `kind: build`.
+
+| A build arrives | The script has no words yet | The script has words |
+|---|---|---|
+| `create` | Written here | New script |
+| `update`, same guides | Written here | **A version on this script** |
+| `update`, guides changed | Written here | New script |
+| `recreate`, same or different guides | Written here | New script |
+| `kind: build` with no `mode` | Written here | New script |
+
+"Guides changed" means the script's chosen recipe differs, by profile key (6.1), from the recipe its current words were built from. Words with no recorded build have no profile, so any chosen recipe counts as changed. An edit, an undo and a restore are never builds and always stay on the script.
+
+The new script takes the source's direction, angle, chosen recipe and selection, as **New from this** does, and `derivedFrom` names the source. Its history starts at version 1. The answer names it: `scriptId`, `forkedFrom`. `story.build.record` must use that `scriptId`. On a new script's first version `previousVersion` is treated as none. The source's chosen recipe goes back to what its own words were built from, so a later Update there is not read as a guide change. The source's Rerun is marked answered.
+
+### 12.4 The id scheme
+
+`script.json` gains `variantId`, written once.
+
+- A script created from now on: its own script id.
+- An existing script with no stored id, at its next successful Send, resolved in order and then stored:
+  1. Take the newest version marked `published`. Its id is what round 1 would have derived for it, which is the chip it last updated.
+  2. Unless a later build with mode other than `update` changed the profile: a regeneration from before this change, never sent. That takes the id derived from the current words, as round 1 did.
+  3. No published version: the id derived from the current words.
+
+So `main` keeps updating the `main` chip even after an Update records a recipe for the first time, and a chip with a hashed id keeps that id. The version number stays the script's own `n`.
+
+### 12.5 An abandoned or failed rebuild leaves nothing
+
+The new script is created at the moment the words arrive, so a rebuild abandoned before that creates nothing. It carries `building: true` until `story.build.record` succeeds, and until then it is not in the dropdown and is not counted when resolving which script is meant. A record that fails leaves it hidden on disk, and `build.py` says so. Scripts with no words, from **New from this** or a batch, stay listed and read `no words yet`, so they cannot pass for a variant.
+
+### 12.6 Send
+
+**Trigger rule.** Teletubby's rule is unchanged: first trigger on paragraph 1, last on the last paragraph, never backwards. Story Pilot applies the same rule, in `story.script.set` with `kind: build`, before anything is written, so a bad map fails where it is made. The refusal names the trigger and the paragraph to fix.
+
+**A map that goes bad later**, for example an edit that changes the paragraph count: the line beside Send gives the reason instead of "Send it again", and `teletubby.state` is `blocked`.
+
+**Teletubby's own reasons.** When Teletubby refuses anyway, its `violations` reach the Send message rather than "the write would break a domain rule".
+
+**In use.** `putInUse` runs only after Teletubby accepts the write. A refused Send changes nothing about which script is in use.
+
+**Rerun** names the picked script in its instruction, tells the agent which mode it is and what that does, and says to record against the `scriptId` the write answers.
+
+### 12.7 Words on screen
+
+| Place | Says |
+|---|---|
+| Dropdown label | Variant |
+| Dropdown line | label · version · word count · in use, or draft, or no words yet |
+| New from this, tooltip | A new variant with this one's direction and guides (never its words) |
+| Rerun, Update | Update: a new version of this variant |
+| Rerun, Recreate | Recreate: a new variant, this one is kept |
+| Beside Send | "This variant is on Teletubby, the same as here." · "Teletubby has an older version of this variant. Send it again." · "This variant is not on Teletubby yet." · the blocking reason |
+| Label box | Variant label |
+| History | Versions of this variant |
+
+### 12.8 Default labels
+
+Two variants of one story never show the same default. Start from voice · build · kind. Where defaults collide, add whichever of verbal guide, video guide and narrator differs between the colliding scripts. If they still collide, a number is the last resort, in creation order so it stays stable. A custom label is used as typed. A number on one script does not change once its chip exists, because a label change republishes in place.
+
+### 12.9 Done-check
+
+Per-step checks use no model calls. The final proof is in the mission brief and qa owns it: real regenerations with both models across at least three scripts, all sent to a real Teletubby, each variant's own history, and `main` plus an already-published chip updating in place, with controls at round 1's commits showing each check can fail. Word edits are versions and prove nothing about variants.
+
+Testable without a model: the 12.3 table, one row each, through `story.script.set`; the 12.4 resolution on fixtures with published flags; Undo stopping at a new script's first version; a failed record leaving nothing in the dropdown; the 12.6 trigger refusals and the `blocked` state; a refused Send leaving `uses` unchanged; 12.8 collisions.
+
+### 12.10 Out of scope, and what was not checked
+
+Out of scope: a Redo button, removing chips, the Teletubby header. Teletubby should not need to change; its contract is untouched, and it will be named if that proves wrong.
+
+Checked by reading: the build, record and create paths, Rerun's instruction, the picker, Teletubby's trigger rule. Not checked: how Teletubby's `violations` travel through FliStudio's door, which round 1's probe saw dropped and which decides how small that fix is. Nothing here has run.
