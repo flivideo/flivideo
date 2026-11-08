@@ -110,13 +110,13 @@ story for video X                              script  storypilot-<video|project
 
 ```jsonc
 // fli.tubby.json → sets[] → scripts[] → transcripts[]
-{ "id": "main-3f9a1c2e", "kind": "provenance", "corpus": "main-3f9a1c2e",
+{ "id": "main-3f9a1c2e", "kind": "variant", "corpus": "main-3f9a1c2e",
   "talentId": null, "source": "Story Pilot (FliStudio) ...",
   "variant": { "label": "Tolkien · teaching · long", "version": 8 },   // NEW
   "topics": [ ], "triggerSets": [ ] }
 ```
 
-The transcript's `id` **is** the variant id. `corpus` carries it too, because that field is id-format and cannot hold a free-text label. `kind` stays `provenance`, so the rule that only `cadence` needs a `talentId` holds (`domain.ts:151`).
+The transcript's `id` **is** the variant id. `corpus` carries it too, because that field is id-format and cannot hold a free-text label. `kind` is a new value, `variant`: a script may hold only one `provenance` transcript because that is the originator's approved baseline (`domain.ts`, `validateScript`), and a regeneration is not that. A variant mark and the `variant` kind always go together, and `write_transcript` cannot create one.
 
 ### What `write_script` does when `variant` is present
 
@@ -152,7 +152,7 @@ Derived, with nothing new stored:
 ```
 profile   = the recipe the current words were built from:
             walk back from the newest version, following restoredFrom,
-            to the first with build.recipe; else the script's own recipe; else none
+            to the first with build.recipe; else none
 key       = kind + narrator + the ids of the four parts (voice, verbal, build, video)
 variantId = no profile → <scriptId>
             profile    → <scriptId>-<first 8 hex of sha256(key)>
@@ -161,6 +161,7 @@ variantId = no profile → <scriptId>
 | The talent does | Variant | Why |
 |---|---|---|
 | Edits words | Same | Same script, same profile. |
+| Picks a new profile but has not rebuilt | Same | The words were not built from it. `story.recipe.set` only stores a choice, so the script's own recipe is never read here. |
 | Reruns with the same profile | Same, version goes up | No format change. |
 | Reruns the same script with a different profile | **New** | Different key. |
 | Creates a new script from this one and builds it | **New** | Different script id. |
@@ -197,7 +198,7 @@ Transcript and schema gain optional `variant: { label, version }`. `src/shared/d
 
 The existing footer chips. One chip per variant, showing `variant.label ?? corpus`.
 
-- A variant chip does not get the "source" tag. The tag keys off `variant` being absent, not off `kind`, which stays `provenance`.
+- A variant chip does not get the "source" tag: it isn't `provenance`.
 - Label cut at about 24 characters, full label and version in the tooltip. The row scrolls rather than pushing the style chips off the strip.
 - The version number is **not** on the chip: it would be something to read, and nothing about the take depends on it. It shows in the tooltip and setup panel.
 - The arrival dot already means "landed, not yet looked at" and is reused as is, on a variant that is new or changed while not shown.
@@ -214,7 +215,7 @@ The existing footer chips. One chip per variant, showing `variant.label ?? corpu
 | Moved in the last 2 minutes | `app_busy` as today. The variant arrives with its dot and the talent is not moved. |
 | Idle | Moved to the published variant, silently, as a chip press would. They just pressed Send on it. |
 
-To tell variants apart, `TalentActivity.observe()` keeps `transcriptId` (`src/core/stage.ts:77-82` drops it today; `workspace.position` already has it). A change of `transcriptId` counts as the talent moving, unless the window is landing where an agent just asked.
+To tell variants apart, `TalentActivity.observe()` keeps `transcriptId` (`src/core/stage.ts:77-82` drops it today; `workspace.position` already has it). `StageRequest` carries `variantId` too. A change of `transcriptId` counts as the talent moving, unless the window is landing where an agent just asked (`observe()`'s `onRequest` match, which must compare the variant).
 
 ### 7.4 In-place update keeps the position
 
@@ -246,12 +247,16 @@ No field, button or verb in Teletubby changes words, labels or versions. The sel
 |---|---|
 | 2 contract | Teletubby: `write_script` table above, one test per row. FliStudio: `handoverOf` pins the exact call. |
 | 3 Story Pilot | `variantId` table, version tail, fold ends at publish, label default and custom, `video.text` variants. FliStudio generators and doc checks pass. |
-| 4 Teletubby | `reanchorParagraph` cases including insert before, delete, rewrite, and `text` to variant. `stage_select` at the door: script and variant on stage, idle and busy → `applied: false`, step unchanged, no cue. Different variant, idle → moved; busy → `app_busy`. Refresh keeps step with no cue. Real window: live paragraph's top within 1px after republish. FliStudio: `app.stage` with a different variant is not short-circuited. |
-| 5 Acceptance | On the d13 copy, real apps, screenshots. **Step one: with the old unlabelled script on stage, scroll mid-way and publish** (`text` to variant, position kept). Then: edit a few words and republish (position kept, words changed, other paragraphs identical); Send with no remembered position (defect 1, path b); insert a paragraph above and republish (still on the same words: defect 2); generate a second variant with a different profile while busy (chip appears with dot, talent not moved); switch and switch back. |
+| 4 Teletubby | `reanchorParagraph` cases including insert before, delete, rewrite, and `text` to variant. `stage_select` at the door: script and variant on stage, idle and busy → `applied: false`, step unchanged, no cue. Different variant, idle → moved; busy → `app_busy`. Refresh keeps step with no cue. Real window: live paragraph's top within 1px after republish. FliStudio: `app.stage` with a different variant is not short-circuited; with `readPosition` null it does not reset the talent (defect 1, path b, reachable only on a cold start or a failed `list_rigs`, so tested here rather than in a window). |
+| 5 Acceptance | On the d13 copy, real apps, screenshots. **Step one: with the old unlabelled script on stage, scroll mid-way and publish** (`text` to variant, position kept). Then: edit a few words and republish (position kept, words changed; all other paragraphs identical through `get_set` full, and the visible ones checked on stage); direct `stage_select` for the same set, script and variant mid-way, once busy and once after more than 2 real minutes idle (`applied: false, alreadyOnStage: true`, position and top unchanged: defect 1, path a); insert a paragraph above and republish (still on the same words: defect 2); a republish that changes a trigger above the live row enough to re-wrap it (active row in the driven list, Triggers-driven and Paragraph-driven, focus off and `D`; settled delta at most 1px after the new words are in the DOM plus 2 frames); generate a second variant with a different profile while busy (chip appears with dot, talent not moved); publish a variant while idle (talent moved to it); switch and switch back. |
 
 `test_audit`: `dev-team:audit-test-quality` on the new tests. `duration`: from queue timestamps.
 
-**For QA, two things to settle early:** Teletubby's renderer needs Electron's preload (`window.appytron`), so a plain browser on :7110 will not drive it; expect Playwright's Electron mode or equivalent. And the d13 copy sits outside the real brand root, so `context_select` needs a resolvable root for it.
+**How acceptance runs** (settled by a real run): Teletubby through Playwright's `_electron.launch` on the built app, because its renderer needs Electron's preload; FliStudio in an ordinary Playwright browser. Both point at a fixture home whose brand root is the d13 copy.
+
+**The second variant's route**: `story.recipe.set` for a different profile, `story.script.set` with new words and `kind: build`, then `story.build.record`. That is the real server path with no model call; it does not prove anything about real model output.
+
+**Test ids (slice 4)**: `live-row` on the active row in each zone; `live-paragraph` with `data-paragraph-id`; `transcript-chip` with `data-transcript-id` and `data-active`; `arrival-dot`; `cue-card`.
 
 ## 9. Out of scope
 
