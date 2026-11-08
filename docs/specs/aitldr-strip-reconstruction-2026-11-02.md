@@ -4,6 +4,8 @@ timestamp: 2026-11-02T15:10+07:00
 ---
 # AITLDR production strip — reconstruction for David (2026-11-02)
 
+> **Built 2026-11-04** (option B, FliStudio `59d82fe`). What it shows now, and what the mock had that was not built: [aitldr-strip-as-built.md](aitldr-strip-as-built.md).
+
 **By:** `aitldr-strip-rsch`, for David (via `flivideo-orch`). Research only: nothing restored, merged or messaged.
 Sources: Jan's 009, tag `archive/aitldr-production` (`99e8ff2`, `8acc93f`; fork `3ea915d`), orch audit §1, the real `/prod` files in `/Users/davidcruwys/dev/video-projects/v-aitldr/`, FliStudio `main` at `c2719c4`.
 
