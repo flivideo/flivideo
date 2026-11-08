@@ -180,7 +180,7 @@ Part **pins** (content hashes) are excluded: refining a voice guide is not a reg
 
 ### 6.3 Label
 
-- Default: the narrator · the build structure if it adds anything · the kind without `-story`. No profile: the script's title, else `as written`.
+- Default: the voice part (else the narrator) · the build structure if it adds anything · the kind without `-story`. No profile: the script's title, else `as written`.
 - Custom: a text box beside Send to Teletubby, showing the default. `story.script.send` takes an optional `label`, stored per variant in `script.json` (`variantLabels`). Changing it republishes the same version with the new label.
 - Two variants can end up with the same default label. The tooltip shows the id, and the free-text label fixes it.
 
