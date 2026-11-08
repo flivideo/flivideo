@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Story variants and versions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600&family=Roboto:ital,wght@0,400;0,500;0,700;1,400&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout: a light AppyDave spec page. Before/after mock of Teletubby's stage and footer strip, then the publish contract. */
+:root {
+  color-scheme: light;
+  --brown: #342d2d; --gold: #ccba9d; --yellow: #ffde59; --amber: #c8841a;
+  --muted: #7a6e5e; --cream: #faf5ec; --surface: #f0ebe4; --linen: #e8e0d4;
+  --border: #d4cdc4; --chrome: #1a1515; --dark: #25201e; --blue: #2E91FC;
+  --red: #b5524a; --green: #4f7a3f; --card: #ffffff;
+  --display: "Bebas Neue", Oswald, Impact, sans-serif;
+  --head: Oswald, "Arial Narrow", sans-serif;
+  --body: Roboto, system-ui, sans-serif;
+  --mono: "Roboto Mono", ui-monospace, monospace;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: var(--cream); color: var(--brown); font-family: var(--body); font-size: 16px; line-height: 1.55; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 36px 20px 64px; display: grid; gap: 44px; }
+header.page { display: grid; gap: 12px; max-width: 72ch; }
+.logo-badge { display: inline-block; background: var(--brown); border-radius: 6px; padding: 4px 10px 2px; font-family: var(--display); letter-spacing: .04em; line-height: 1.1; font-size: 22px; width: fit-content; }
+.logo-badge .a { color: var(--gold); } .logo-badge .d { color: var(--yellow); }
+.eyebrow, h3 { font-family: var(--head); text-transform: uppercase; letter-spacing: .1em; font-size: 13px; color: var(--amber); font-weight: 600; margin: 0; }
+h1 { font-family: var(--head); font-weight: 600; font-size: clamp(30px, 5vw, 44px); line-height: 1.1; margin: 0; text-transform: uppercase; text-wrap: balance; }
+h2 { font-family: var(--head); font-weight: 600; text-transform: uppercase; font-size: 26px; margin: 0; letter-spacing: .02em; }
+p { margin: 0; max-width: 68ch; }
+header.page p { color: var(--muted); }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 14px; color: var(--muted); }
+.facts b { color: var(--brown); font-weight: 500; }
+section { display: grid; gap: 16px; min-width: 0; }
+code { font-family: var(--mono); font-size: 13px; background: var(--surface); padding: 1px 5px; border-radius: 3px; overflow-wrap: anywhere; }
+pre { margin: 0; background: var(--dark); color: var(--cream); border-radius: 6px; padding: 14px 16px; overflow-x: auto; font-family: var(--mono); font-size: 13px; line-height: 1.5; }
+.quote { font-style: italic; border-left: 3px solid var(--amber); padding: 2px 0 2px 12px; }
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 16px; }
+.step { display: grid; gap: 6px; border-top: 2px solid var(--amber); padding-top: 10px; align-content: start; }
+.step .n { font-family: var(--display); font-size: 34px; line-height: 1; color: var(--amber); }
+.step b { font-family: var(--head); font-weight: 500; font-size: 18px; }
+.step .now { color: var(--muted); font-size: 14px; }
+.ba { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 24px; }
+.ba > div { display: grid; gap: 10px; min-width: 0; align-content: start; }
+.tag { font-family: var(--head); text-transform: uppercase; letter-spacing: .1em; font-size: 12px; font-weight: 600; color: var(--muted); }
+.tag.after { color: var(--amber); }
+.app { background: var(--card); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; font-size: 13px; }
+.stage { padding: 16px 14px; display: grid; gap: 10px; min-height: 170px; align-content: start; }
+.said { color: var(--border); }
+.live { background: #fff7cf; border-left: 3px solid var(--amber); padding: 6px 10px; font-size: 16px; line-height: 1.35; }
+.chg { background: var(--yellow); padding: 0 2px; }
+.next { color: var(--muted); }
+.strip { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 8px 10px; border-top: 1px solid var(--linen); background: #fcfaf6; }
+.chip { border: 1px solid var(--border); border-radius: 4px; padding: 2px 8px; font-size: 11px; color: var(--muted); white-space: nowrap; }
+.chip.on { background: var(--brown); border-color: var(--brown); color: var(--cream); }
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--yellow); border: 1px solid var(--amber); margin-left: 5px; }
+.new { outline: 2px solid var(--yellow); outline-offset: 2px; border-radius: 4px; display: inline-flex; gap: 6px; }
+.sep { width: 1px; height: 14px; background: var(--border); }
+.msg { border-radius: 4px; padding: 8px 10px; font-size: 13px; }
+.msg.ok { background: #eef4ea; color: var(--green); }
+.msg.no { background: #f7ebe9; color: var(--red); }
+.caption { font-size: 14px; color: var(--muted); }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 15px; }
+th { text-align: left; vertical-align: top; font-weight: 500; color: var(--muted); padding: 7px 14px 7px 0; border-top: 1px solid var(--linen); }
+td { padding: 7px 14px 7px 0; border-top: 1px solid var(--linen); vertical-align: top; }
+thead th { font-family: var(--head); text-transform: uppercase; letter-spacing: .06em; font-size: 12px; border-top: 0; }
+.specgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 24px 32px; }
+.specgrid > div { display: grid; gap: 8px; min-width: 0; align-content: start; }
+ul { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; }
+.q { display: grid; gap: 4px; border-top: 1px solid var(--border); padding-top: 12px; }
+.q b { font-family: var(--head); font-weight: 500; font-size: 17px; }
+.src { font-size: 13px; color: var(--muted); overflow-wrap: anywhere; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="page">
+    <span class="logo-badge"><span class="a">Appy</span><span class="d">Dave</span></span>
+    <span class="eyebrow">Spec · Story Pilot to Teletubby · 2026-11-08</span>
+    <h1>Fix a few words mid-take and keep your place. Regenerate and pick from a chip.</h1>
+    <p>Story Pilot already keeps many scripts, each with its own history. The send squeezes them all into one Teletubby slot, and a republish can throw you back to the top.</p>
+    <div class="facts"><span>Sample: <b>d13 test copy (26 paragraphs, 7 Story Pilot scripts)</b></span><span>Status: <b>spec only, not built, in review</b></span></div>
+  </header>
+
+  <section>
+    <h2>Where it hurts</h2>
+    <p class="quote">"Teletubby doesn't really have a concept of variants and that's my problem."</p>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><b>Halfway through, the words suck</b><span class="now">Today: you can resend, but if you've been still for 2 minutes the send puts you back at paragraph 1 with a card over the stage.</span></div>
+      <div class="step"><span class="n">2</span><b>You add a paragraph above where you are</b><span class="now">Today: you silently land one paragraph off, because paragraph numbers are just positions.</span></div>
+      <div class="step"><span class="n">3</span><b>You regenerate in another style</b><span class="now">Today: it overwrites the first one. Teletubby only has one slot per video.</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>What you'd see</h2>
+    <div class="ba">
+      <div>
+        <span class="tag">Before (today), footer strip</span>
+        <div class="app">
+          <div class="stage"><div class="live">The one script Teletubby knows about.</div><div class="next">Whatever you sent last replaced what was here.</div></div>
+          <div class="strip"><span class="chip on">as-written · source</span><span class="sep"></span><span class="chip">near-verbatim</span><span class="chip">compressed-concept</span><span class="chip on">loose-keywords</span></div>
+        </div>
+      </div>
+      <div>
+        <span class="tag after">After: same strip, one chip per variant</span>
+        <div class="app">
+          <div class="stage"><div class="said">The line you already said stays where it was.</div><div class="live">The words you are reading now, with the <span class="chg">few new words</span> swapped in place.</div><div class="next">Everything else is untouched.</div></div>
+          <div class="strip"><span class="new"><span class="chip on">Tolkien · teaching · long</span><span class="chip">Spielberg · short<span class="dot"></span></span></span><span class="sep"></span><span class="chip">near-verbatim</span><span class="chip">compressed-concept</span><span class="chip on">loose-keywords</span></div>
+        </div>
+        <p class="caption">Sample words. The yellow on the words is only to show you here; on the stage nothing highlights them. The dot is the arrival dot Teletubby already has.</p>
+        <div class="msg ok">Story Pilot toast: v8 in place, position kept</div>
+        <div class="msg ok">Story Pilot toast: new variant "Spielberg · short" arrived, not moved</div>
+        <div class="msg no">Refused: Teletubby already has v9 of this variant; v7 is older</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Two words, one meaning each</h2>
+    <div class="scroll"><table>
+      <thead><tr><th>Word</th><th>Means</th><th>You do</th><th>On Teletubby</th></tr></thead>
+      <tr><th>Variant</th><td>One regeneration with a given profile set. Stable id, free-text label, its own history.</td><td>Regenerate with a different structure, voice or style</td><td>A new chip, with a dot. You are not moved.</td></tr>
+      <tr><th>Version</th><td>A word-level edit inside one variant. A number that goes up.</td><td>Change a few words and republish</td><td>The words swap in place. Same chip, same spot.</td></tr>
+    </table></div>
+    <p><b>Where do versions live? Only in Story Pilot.</b> Teletubby holds each variant's current words and shows the number in a tooltip. It has no history and no way back.</p>
+  </section>
+
+  <section>
+    <h2>The one contract</h2>
+    <p>One optional block added to the call Story Pilot already makes. Teletubby's own door owns the type. Story Pilot still never touches <code>fli.tubby.json</code>.</p>
+<pre>script.write {
+  id: "storypilot-project",   // unchanged: one Teletubby script per video
+  name, text, project, video, takeaway, source, triggers, chapters,  // unchanged
+  variant: {                  // NEW, optional
+    id: "main-3f9a1c2e",      // script id + profile fingerprint
+    label: "Tolkien · teaching · long",
+    version: 8                // Story Pilot's own version number
+  }
+}</pre>
+    <div class="scroll"><table>
+      <thead><tr><th>When a publish arrives with</th><th>Teletubby</th></tr></thead>
+      <tr><th>A new variant id</th><td>Adds it at the end. Chips never reorder under you.</td></tr>
+      <tr><th>Same id, higher version</th><td>Replaces that variant in place. Others untouched.</td></tr>
+      <tr><th>Identical content</th><td>Does nothing. No write, no event.</td></tr>
+      <tr><th>Same id, lower version</th><td>Refuses. A late send can't roll back your words.</td></tr>
+      <tr><th>A script with the old unlabelled text</th><td>Drops it on the first variant publish. That's how d13 moves over.</td></tr>
+    </table></div>
+  </section>
+
+  <section>
+    <h2>The spec</h2>
+    <div class="specgrid">
+      <div>
+        <h3>What exists, what is new</h3>
+        <table>
+          <tr><th>Exists</th><td>Scripts with history, undo, audio. The profile. Send. Footer chips. The arrival dot. Position kept on refresh.</td></tr>
+          <tr><th>New in Story Pilot</th><td>Variant id and label worked out at publish. A label box beside Send. A publish closes the 10-second fold.</td></tr>
+          <tr><th>New in Teletubby</th><td>Variants stored on the transcript. Chip shows the label. Keep position by the words, not the paragraph number. Re-staging where you already are does nothing.</td></tr>
+          <tr><th>Fixed in FliStudio</th><td><code>video.text</code> lists variants, so "same or changed" stays true.</td></tr>
+        </table>
+      </div>
+      <div>
+        <h3>Done-check</h3>
+        <table>
+          <tr><th>proof</th><td>Real apps on the d13 copy: publish, scroll, edit, republish. Repeat after 2 idle minutes and after inserting a paragraph above. Second profile. Switch and back.</td></tr>
+          <tr><th>test_audit</th><td><code>dev-team:audit-test-quality</code> on the new tests</td></tr>
+          <tr><th>before_after</th><td>Screenshots in the rig's <code>shots/</code> folder</td></tr>
+          <tr><th>duration</th><td>From the queue timestamps</td></tr>
+        </table>
+        <h3>Out of scope</h3>
+        <ul>
+          <li>Any editing in Teletubby, ever</li>
+          <li>History, diffs or going back in Teletubby</li>
+          <li>Deleting a variant from the selector</li>
+          <li>Highlighting changed words on the stage</li>
+          <li>Generating triggers</li>
+          <li>Merge to main and the M4 deploy</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>What I checked, and what I didn't</h2>
+    <ul>
+      <li>Read the send path, version store, Teletubby's write, refresh, staging and strip code. Every reference is in the record.</li>
+      <li>Measured the d13 copy: one Teletubby script, 26 paragraphs, 6 chapters, 7 Story Pilot scripts, all with triggers.</li>
+      <li>Not run: nothing here has been executed. The three defects come from reading the code. Acceptance checks each one.</li>
+      <li>Not checked: how much the browser already holds the live line still when text above it re-wraps.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Calls already made</h2>
+    <p>You said not to be asked, so these are decided and logged. Each is one sentence to overturn.</p>
+    <div class="q"><b>A variant is a chip on the strip you already use</b><p>Not a separate entry in the script list: no new control to learn, and it stays scoped to this video.</p></div>
+    <div class="q"><b>The version number is Story Pilot's own</b><p>v8 in Teletubby is row 8 in History. Several saves between publishes jump the number by that many, rather than exactly one.</p></div>
+    <div class="q"><b>The version number is not on the chip</b><p>Nothing about the take depends on it. It's in the tooltip.</p></div>
+  </section>
+
+  <p class="src">Record: docs/specs/story-variants-and-versions.md · This page: docs/specs/story-variants-and-versions.html (flivideo repo)</p>
+</div>
+</body>
+</html>
