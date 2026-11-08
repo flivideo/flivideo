@@ -323,7 +323,7 @@ The rule is enforced by the server, in `story.script.set`, so it holds on the sc
 | `recreate`, same or different guides | Written here | New script |
 | `kind: build` with no `mode` | Written here | Refused, naming the modes |
 
-**"Guides changed"** compares, by profile key (6.1), what the script would be built from now with what its current words were built from. Words with no recorded build read as the recipe the app already falls back to for them ("as before"). So an Update on a never-built script such as `main` is a version, pressing **Fine** without changing anything stays a version, and that Update's build record gives the words their first profile. Choosing really different guides and then rebuilding is a new script. If brand or story settings move between writing the words and the next Update, the fallback reads differently and the comparison can say "changed"; once a build has been recorded the comparison uses that record.
+**"Guides changed"** compares, by profile key (6.1), what the script would be built from now with what its current words were built from. Words with no recorded build read as the recipe the app already falls back to for them ("as before"). So an Update on a never-built script such as `main` is a version, pressing **Fine** without changing anything stays a version, and that Update's build record gives the words their first profile. Choosing really different guides and then rebuilding is a new script. A recipe saved by pressing **Fine** on exactly what the wizard offered is marked as such (`defaulted`), because the wizard fills empty slots by itself.
 
 **Closing the other ways in:**
 
@@ -396,7 +396,9 @@ Scripts with no words, from **New from this** or a batch, stay listed and read `
 
 ### 12.8 Default labels
 
-Two variants of one story never show the same default. Start from voice · build · kind, in creation order. Where a script's default collides with an earlier one's, only the newer one changes, so an existing chip's name stays stable: add whichever of verbal guide, video guide and narrator differs. If it still collides, a number is the last resort. The set compared is every listed script of the story, not `building` and not archived. A custom label is used as typed and is not compared.
+**A chip keeps its name.** At a variant's first Send its default is stored as `publishedLabel`, or read from what Teletubby already shows for a chip from before this; a later build cannot rename it.
+
+Otherwise, two variants of one story never show the same default. Start from voice · build · kind, in creation order. Where a script's default collides with an earlier one's, only the newer one changes: add whichever of verbal guide, video guide and narrator actually differs from the one it collides with. If nothing does, a number. The set compared is every listed script of the story, not `building` and not archived. A typed label is used as typed: a default made after it will not land on it, and typing one never moves anyone else's default.
 
 ### 12.9 Done-check
 
