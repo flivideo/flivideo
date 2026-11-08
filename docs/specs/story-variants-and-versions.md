@@ -10,9 +10,9 @@ status: "for review (spec only, nothing built)"
 
 **Purpose**: The model, the one publish contract, and the behaviour both apps must show, so a story can be republished mid-recording and regenerated into a selectable alternative.
 
-**For Agents**: Slices 1 and 2 of the `variants` work. Section 5 is the contract both repos build to. Section 8 is what QA tests. Every code reference is relative to its repo (`flistudio`, `teletubby`) on the `variants` branch at the spec's date.
+**For Agents**: Slices 1 and 2 of the `variants` work. Section 5 is the contract both repos build to. Section 8 is what QA tests. Every code reference is relative to its repo (`flistudio`, `teletubby`) on the `variants` branch at the spec's date. Story Pilot paths sit under `flistudio/modules/storypilot/`.
 
-**Page**: [story-variants-and-versions.html](story-variants-and-versions.html) ([published view](https://claude.ai/artifact/QpfoGnXFSQ6f1rbRWSK2G6)) shows the before and after. This file is the record; if they disagree, this one wins.
+**Page**: [story-variants-and-versions.html](story-variants-and-versions.html) shows the before and after. This file is the record; if they disagree, this one wins.
 
 ## 1. The problem
 
@@ -64,18 +64,18 @@ story for video X                              script  storypilot-<video|project
 | Area | Exists today | New |
 |---|---|---|
 | Story Pilot scripts | Many scripts per story, each with its own `versions/`, undo/redo, audio (`modules/storypilot/server/versions.ts`) | Nothing about storing them |
-| Story Pilot profile | Recipe: kind, style, narrator, four parts (`shared/contracts.ts:699`), recorded per build | Variant id and default label derived from it |
-| Send | `story.script.send`: `context.select`, `script.write`, then `app.stage` (`server/index.ts:1221`). **Every script goes to one id**, `storypilot-<video\|project>`, so a second script overwrites the first (`server/story.ts:275,318`) | `variant` block on the write |
-| Version number | Every saved edit gets `n`. A person's edits within 10s fold into one (`versions.ts:25,223`) | A publish ends the fold window (6.2) |
+| Story Pilot profile | Recipe: kind, style, narrator, four parts (`modules/storypilot/shared/contracts.ts:699`), recorded per build | Variant id and default label derived from it |
+| Send | `story.script.send`: `context.select`, `script.write`, then `app.stage` (`modules/storypilot/server/index.ts:1221`). **Every script goes to one id**, `storypilot-<video\|project>`, so a second script overwrites the first (`modules/storypilot/server/story.ts:275,318`) | `variant` block on the write |
+| Version number | Every saved edit gets `n`. A person's edits within 10s fold into one (`modules/storypilot/server/versions.ts:25,223`) | A publish ends the fold window (6.2) |
 | Teletubby write | `write_script`: same id replaced in place, new id added (`src/core/text-script.ts:192`). Replaces the **whole** script | With `variant`: upsert one transcript, keep the others |
 | Teletubby selector | Transcript chips on the footer strip, showing `corpus` | Chip shows the label |
 | Keep position on refresh | `refresh` re-seats by paragraph id, no cue (`src/renderer/src/store.ts:517`) | Content anchor (7.4); ids are positional, so it is wrong today after an insert |
-| Staging after a send | `stage_select`, applied by `selectScript` | No-op when already on stage (7.3); today it resets to the top |
+| Staging after a send | `app.stage` returns early if the script is already on stage (`server/src/launch/doors.ts:425`); otherwise `stage_select`, applied by `selectScript` | `stage_select` itself no-ops when already on stage (7.3); today, when reached, it resets to the top |
 
 ### Three defects this work must fix (traced in code, not yet reproduced by running)
 
-1. **A republish can send the talent to the top.** After every write, the send calls `app.stage`. `stage_select` refuses only if the talent moved in the last 2 minutes (`TALENT_BUSY_WINDOW_MS`, `src/core/stage.ts:27`). Editing in Story Pilot easily takes longer. The window then runs `applyStageRequest` → `selectScript`, which sets `step: 0` and raises a cue card (`store.ts:905-908, 681-691`). This defeats requirement 2 by itself.
-2. **Paragraph ids are positional.** `p1..pN` are assigned in order on every write (`text-script.ts:85`), so inserting a paragraph before the talent makes "p7" a different paragraph. Refresh trusts the id.
+1. **Re-staging the script already on stage sends the talent to the top, on two paths.** `stage_select` refuses only if the talent moved in the last 2 minutes (`TALENT_BUSY_WINDOW_MS`, `src/core/stage.ts:27`). Once it is accepted, the window runs `applyStageRequest` → `selectScript`, which sets `step: 0` and raises a cue card (`store.ts:905-908, 681-691`). **The screen's Send button normally does not reach this**: `app.stage` returns early when `workspace.position` already shows the set and script (`doors.ts:425`). It is reached by (a) an agent following `story.brief`'s `handover.calls`, which include `stage.select` directly (`story.ts:339-340`), and (b) a Send when there is no remembered position (`readPosition` null: `list_rigs` failed, or the window never wrote `remember_layout`).
+2. **Paragraph ids are positional.** `p1..pN` are assigned in order on every write (`text-script.ts:81`), so inserting a paragraph before the talent makes "p7" a different paragraph. Refresh trusts the id.
 3. **`video.text` joins all transcripts into one text** (`flistudio/server/src/capabilities/video-text.ts`, `paragraphs(c.transcripts ?? c)`). With two variants, Story Pilot's "same/changed" check (`teletubbyState`, `story.ts:284`) would say "changed" forever.
 
 ## 5. The publish contract (slice 2)
@@ -116,7 +116,7 @@ story for video X                              script  storypilot-<video|project
   "topics": [ ], "triggerSets": [ ] }
 ```
 
-The transcript's `id` **is** the variant id. `corpus` carries it too, because that field is id-format and cannot hold a free-text label.
+The transcript's `id` **is** the variant id. `corpus` carries it too, because that field is id-format and cannot hold a free-text label. `kind` stays `provenance`, so the rule that only `cadence` needs a `talentId` holds (`domain.ts:151`).
 
 ### What `write_script` does when `variant` is present
 
@@ -127,8 +127,9 @@ The transcript's `id` **is** the variant id. `corpus` carries it too, because th
 | Same id, higher version | That transcript replaced in place. Every other transcript untouched. |
 | Same id, same version, identical content | `applied: false`, `unchanged: true`. No write, **no change event**. |
 | Same id, same version, different triggers, chapters or label | Replaced in place. The version does not move: the words did not change. |
+| Same id, same version, **different text** | Replaced in place, version unchanged. This happens when a recorded paragraph becomes a "plays here, not read" cue line: `presenterOf` (`segments.ts:109-119`) changes what is sent while the stored version's text is the same. |
 | Same id, **lower** version | Refused `conflict` (409) with `details: { held, sent }`. A late or doubled send can never roll back the words. |
-| Script holds the old unlabelled `text` transcript | Dropped on the first variant publish. That is how d13's existing script moves over, with no migration step. |
+| Script holds the old unlabelled `text` transcript | Dropped on the first variant publish, which is how d13's existing script moves over with no migration step. If `text` is on stage, this counts as an in-place update: see 7.4. |
 
 Without `variant`, behaviour is exactly today's, with one exception: a plain `write_script` on a script that **has** variants is refused `conflict`, because today's whole-script replace would silently delete them.
 
@@ -136,11 +137,11 @@ The successful answer adds `variant: { id, version, previousVersion, created }`.
 
 ### Staging
 
-`stage_select` gains an optional `variantId`. FliStudio's `app.stage` passes it through (`server/src/launch/doors.ts`). See 7.3.
+`stage_select` gains an optional `variantId`. FliStudio's `app.stage` passes it through. Its early return must compare the variant too: `shows()` (`doors.ts:366`) checks set and script only, and `readPosition` (`doors.ts:347`) drops the `transcriptId` that `workspace.position` already carries. Without that fix a new variant published while its script is on stage would never be staged. See 7.3.
 
 ### Read back
 
-`video.text` gives each script a `variants: [{ id, label, version, text }]` (empty for a script with none). Its `text` stays for other callers. `teletubbyState` compares against the variant being sent.
+`video.text` gives each script a `variants: [{ id, label, version, text }]` (empty for a script with none). Its `text` stays for other callers. `teletubbyState` compares the **sent** text (`script.presenter`, as it does today) against that variant's text in Teletubby.
 
 ## 6. Story Pilot behaviour (slice 3)
 
@@ -152,28 +153,29 @@ Derived, with nothing new stored:
 profile   = the recipe the current words were built from:
             walk back from the newest version, following restoredFrom,
             to the first with build.recipe; else the script's own recipe; else none
-key       = kind + style + narrator + the ids of the four parts (voice, verbal, build, video)
+key       = kind + narrator + the ids of the four parts (voice, verbal, build, video)
 variantId = no profile → <scriptId>
             profile    → <scriptId>-<first 8 hex of sha256(key)>
 ```
 
-| David does | Variant | Why |
+| The talent does | Variant | Why |
 |---|---|---|
 | Edits words | Same | Same script, same profile. |
 | Reruns with the same profile | Same, version goes up | No format change. |
 | Reruns the same script with a different profile | **New** | Different key. |
 | Creates a new script from this one and builds it | **New** | Different script id. |
-| Undo or restore | Same, version goes up | Restore writes a new version, and the walk follows `restoredFrom`. |
+| Undo or restore, within one profile | Same, version goes up | Restore writes a new version, and the walk follows `restoredFrom`. |
+| Undo or restore **across a rebuild** in another profile | **Back to the earlier variant**, version goes up | The words are that variant's words again. A publish lands on its chip, and the toast names that chip. |
 
-Part **pins** (content hashes) are excluded: refining a voice guide is not a regeneration in a new profile. Lenses and one-off instructions are excluded for the same reason.
+Part **pins** (content hashes) are excluded: refining a voice guide is not a regeneration in a new profile. Lenses and one-off instructions are excluded for the same reason. **Style** is excluded because it is only the bundle the parts started from: the same four parts chosen by hand or through a bundle are one profile.
 
 ### 6.2 Version
 
 `version` is Story Pilot's own version number `n`, so the number in Teletubby is the row in Story Pilot's History. No second counter.
 
-- It is the `n` of the **oldest version in the unbroken tail with the current words**, so a title or direction row with unchanged words does not bump it.
+- It is the `n` of the **oldest version in the unbroken tail with the current words**, so a title or direction row with unchanged words does not bump it. The comparison is on the **stored version text**, not the presenter text that is sent (see the same-version row in section 5).
 - One saved edit then republish is exactly +1. Several saves between publishes go up by that many; the number still only rises. **Called out for review:** the brief says "version+1", and a separate publish counter would give two numbers both called version.
-- **A publish ends the 10-second fold window.** Stored as `published: true` on the version; `appendVersion` will not fold into a published version. Otherwise an edit right after a send would change the words under an already-published number.
+- **A publish ends the 10-second fold window.** Stored as `published: true` on the version (a new optional field on `StoredVersion`); the fold test in `appendVersion` gains `!head.published`. Otherwise an edit right after a send would change the words under an already-published number.
 
 ### 6.3 Label
 
@@ -183,7 +185,7 @@ Part **pins** (content hashes) are excluded: refining a voice guide is not a reg
 
 ### 6.4 The send
 
-`putInUse` stays. The toast says what happened: `v8 in place, position kept`, `New variant "…" in Teletubby`, or `Teletubby already has this`. A busy talent on a **different** variant reads as `arrived, not moved`, and is not shown as an error.
+`putInUse` stays. The toast says what happened and names the variant: `"…" v8 in place, position kept`, `New variant "…" in Teletubby`, or `Teletubby already has this`. A busy talent on a **different** variant reads as `arrived, not moved`, and is not shown as an error.
 
 ## 7. Teletubby behaviour (slice 4)
 
@@ -195,7 +197,7 @@ Transcript and schema gain optional `variant: { label, version }`. `src/shared/d
 
 The existing footer chips. One chip per variant, showing `variant.label ?? corpus`.
 
-- A variant chip does not get the "source" tag.
+- A variant chip does not get the "source" tag. The tag keys off `variant` being absent, not off `kind`, which stays `provenance`.
 - Label cut at about 24 characters, full label and version in the tooltip. The row scrolls rather than pushing the style chips off the strip.
 - The version number is **not** on the chip: it would be something to read, and nothing about the take depends on it. It shows in the tooltip and setup panel.
 - The arrival dot already means "landed, not yet looked at" and is reused as is, on a variant that is new or changed while not shown.
@@ -203,11 +205,20 @@ The existing footer chips. One chip per variant, showing `variant.label ?? corpu
 
 ### 7.3 Staging never moves a talent already there
 
-`stage_select` with the script and variant already on stage returns `{ applied: false, alreadyOnStage: true }` **before** the busy check. `applyStageRequest` does nothing in that case: no `selectScript`, no step change, no cue. `app.stage` reports `staged` at once.
+`stage_select` with the script and variant already on stage returns `{ applied: false, alreadyOnStage: true }` **before** the busy check. `applyStageRequest` does nothing in that case: no `selectScript`, no step change, no cue. `app.stage` reports `staged` at once. This is the door's own guard: it must hold however the call arrives, not only behind `app.stage`'s early return.
+
+**A different variant of the script on stage:**
+
+| Talent | Result |
+|---|---|
+| Moved in the last 2 minutes | `app_busy` as today. The variant arrives with its dot and the talent is not moved. |
+| Idle | Moved to the published variant, silently, as a chip press would. They just pressed Send on it. |
+
+To tell variants apart, `StageActivity.observe()` keeps `transcriptId` (`src/core/stage.ts:77-82` drops it today; `workspace.position` already has it). A change of `transcriptId` counts as the talent moving, unless the window is landing where an agent just asked.
 
 ### 7.4 In-place update keeps the position
 
-A pure `reanchorParagraph(oldParagraphs, oldId, newParagraphs)` in `src/core`, used by `refresh` when the transcript on stage changed. In order:
+A pure `reanchorParagraph(oldParagraphs, oldId, newParagraphs)` in `src/core`, used by `refresh` when the words of the variant on stage changed. It also runs across the one id change that is an update: when the unlabelled `text` transcript on stage is dropped by the first variant publish, the window follows the variant that replaced it (the only transcript left) and re-anchors by content, instead of falling through to `defaultTranscript` and `correspondingParagraphId`. In order:
 
 1. The same text exists: the match nearest the old index.
 2. Else the best word overlap of at least 0.5 (Dice on lower-cased words), nearest on a tie.
@@ -235,8 +246,8 @@ No field, button or verb in Teletubby changes words, labels or versions. The sel
 |---|---|
 | 2 contract | Teletubby: `write_script` table above, one test per row. FliStudio: `handoverOf` pins the exact call. |
 | 3 Story Pilot | `variantId` table, version tail, fold ends at publish, label default and custom, `video.text` variants. FliStudio generators and doc checks pass. |
-| 4 Teletubby | `reanchorParagraph` cases including insert before, delete, rewrite. `stage_select` already-on-stage while busy and while idle. Refresh keeps step with no cue. Real window: live paragraph's top within 1px after republish. |
-| 5 Acceptance | On the d13 copy, real apps, screenshots: publish; scroll mid-way; edit a few words; republish (position kept, words changed, other paragraphs identical); wait past 2 minutes idle and republish again (still kept: defect 1); insert a paragraph above and republish (still on the same words: defect 2); generate a second variant with a different profile (chip appears with dot, talent not moved); switch and switch back. |
+| 4 Teletubby | `reanchorParagraph` cases including insert before, delete, rewrite, and `text` to variant. `stage_select` at the door: script and variant on stage, idle and busy → `applied: false`, step unchanged, no cue. Different variant, idle → moved; busy → `app_busy`. Refresh keeps step with no cue. Real window: live paragraph's top within 1px after republish. FliStudio: `app.stage` with a different variant is not short-circuited. |
+| 5 Acceptance | On the d13 copy, real apps, screenshots. **Step one: with the old unlabelled script on stage, scroll mid-way and publish** (`text` to variant, position kept). Then: edit a few words and republish (position kept, words changed, other paragraphs identical); Send with no remembered position (defect 1, path b); insert a paragraph above and republish (still on the same words: defect 2); generate a second variant with a different profile while busy (chip appears with dot, talent not moved); switch and switch back. |
 
 `test_audit`: `dev-team:audit-test-quality` on the new tests. `duration`: from queue timestamps.
 
@@ -250,6 +261,7 @@ No field, button or verb in Teletubby changes words, labels or versions. The sel
 - Highlighting what changed on the stage: it would add something to read.
 - Generating triggers for a variant. A variant with none shows the existing "nobody authored them" state (rule 3). All seven d13 scripts have triggers.
 - Elgato Prompter send (`story.prompter.send`), unchanged.
+- A per-variant view of Story Pilot's History. One `versions/` folder serves every variant of a script, so a variant's "own history" is the rows from its profile; Story Pilot's History shows them all together.
 - A shared fli-core type.
 - Migrating Teletubby sets other than by the first publish.
 - Merge to main and M4 deploy.
@@ -258,9 +270,9 @@ No field, button or verb in Teletubby changes words, labels or versions. The sel
 
 **Read**: both repos' CLAUDE.md and agent notes; the code cited above; the talent's session transcripts; the d13 test copy (one Teletubby script, 26 paragraphs, 6 chapters, seven Story Pilot scripts, each with triggers).
 
-**Not run**: nothing here was executed. The three defects are traced from code. Defect 1 is the one that matters most and acceptance checks it directly.
+**Not run**: nothing here was executed. The three defects are traced from code, and independent review confirmed 2 and 3 and corrected the trace of 1.
 
-**Checked, and it adds to slice 4**: the stage position (`StagePosition`, `src/core/stage.ts:29`) holds set, script and paragraph, not the transcript. It gains `transcriptId`, so 7.3 can tell which variant is on stage. A variant switch should count as the talent moving, like any other position change.
+**Checked, and it adds to slice 4**: the stage position (`StagePosition`, `src/core/stage.ts:29`) holds set, script and paragraph, not the transcript. `workspace.position` (`src/shared/rig.ts:118-124`) already has the transcript id; `observe()` drops it. Keeping it is a core change, not a window change (7.3).
 
 **Not checked, could change slice 4's size**: how far Chromium's scroll anchoring already holds the live row when text above it re-wraps. If it does, the re-seat in 7.5 is only a backstop.
 

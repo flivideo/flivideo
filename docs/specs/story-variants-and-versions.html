@@ -81,7 +81,7 @@ ul { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; }
     <span class="logo-badge"><span class="a">Appy</span><span class="d">Dave</span></span>
     <span class="eyebrow">Spec · Story Pilot to Teletubby · 2026-11-08</span>
     <h1>Fix a few words mid-take and keep your place. Regenerate and pick from a chip.</h1>
-    <p>Story Pilot already keeps many scripts, each with its own history. The send squeezes them all into one Teletubby slot, and a republish can throw you back to the top.</p>
+    <p>Story Pilot already keeps many scripts, each with its own history. The send squeezes them all into one Teletubby slot, and a republish doesn't know which variant it is.</p>
     <div class="facts"><span>Sample: <b>d13 test copy (26 paragraphs, 7 Story Pilot scripts)</b></span><span>Status: <b>spec only, not built, in review</b></span></div>
   </header>
 
@@ -89,7 +89,7 @@ ul { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; }
     <h2>Where it hurts</h2>
     <p class="quote">"Teletubby doesn't really have a concept of variants and that's my problem."</p>
     <div class="steps">
-      <div class="step"><span class="n">1</span><b>Halfway through, the words suck</b><span class="now">Today: you can resend, but if you've been still for 2 minutes the send puts you back at paragraph 1 with a card over the stage.</span></div>
+      <div class="step"><span class="n">1</span><b>Halfway through, the words suck</b><span class="now">Today: Send mostly holds your place, but any path that re-stages the script resets you to paragraph 1 with a card over the stage.</span></div>
       <div class="step"><span class="n">2</span><b>You add a paragraph above where you are</b><span class="now">Today: you silently land one paragraph off, because paragraph numbers are just positions.</span></div>
       <div class="step"><span class="n">3</span><b>You regenerate in another style</b><span class="now">Today: it overwrites the first one. Teletubby only has one slot per video.</span></div>
     </div>
@@ -166,7 +166,7 @@ ul { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; }
       <div>
         <h3>Done-check</h3>
         <table>
-          <tr><th>proof</th><td>Real apps on the d13 copy: publish, scroll, edit, republish. Repeat after 2 idle minutes and after inserting a paragraph above. Second profile. Switch and back.</td></tr>
+          <tr><th>proof</th><td>Real apps on the d13 copy: publish, scroll, edit, republish. First step: the old script on stage moves over without moving you. Repeat with no remembered position and after inserting a paragraph above. Second profile. Switch and back.</td></tr>
           <tr><th>test_audit</th><td><code>dev-team:audit-test-quality</code> on the new tests</td></tr>
           <tr><th>before_after</th><td>Screenshots in the rig's <code>shots/</code> folder</td></tr>
           <tr><th>duration</th><td>From the queue timestamps</td></tr>
@@ -189,7 +189,7 @@ ul { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; }
     <ul>
       <li>Read the send path, version store, Teletubby's write, refresh, staging and strip code. Every reference is in the record.</li>
       <li>Measured the d13 copy: one Teletubby script, 26 paragraphs, 6 chapters, 7 Story Pilot scripts, all with triggers.</li>
-      <li>Not run: nothing here has been executed. The three defects come from reading the code. Acceptance checks each one.</li>
+      <li>Not run: nothing here has been executed. The three defects come from reading the code; independent review confirmed two and corrected the third.</li>
       <li>Not checked: how much the browser already holds the live line still when text above it re-wraps.</li>
     </ul>
   </section>
