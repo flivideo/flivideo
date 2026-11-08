@@ -214,7 +214,7 @@ The existing footer chips. One chip per variant, showing `variant.label ?? corpu
 | Moved in the last 2 minutes | `app_busy` as today. The variant arrives with its dot and the talent is not moved. |
 | Idle | Moved to the published variant, silently, as a chip press would. They just pressed Send on it. |
 
-To tell variants apart, `StageActivity.observe()` keeps `transcriptId` (`src/core/stage.ts:77-82` drops it today; `workspace.position` already has it). A change of `transcriptId` counts as the talent moving, unless the window is landing where an agent just asked.
+To tell variants apart, `TalentActivity.observe()` keeps `transcriptId` (`src/core/stage.ts:77-82` drops it today; `workspace.position` already has it). A change of `transcriptId` counts as the talent moving, unless the window is landing where an agent just asked.
 
 ### 7.4 In-place update keeps the position
 
