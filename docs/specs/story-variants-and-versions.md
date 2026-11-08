@@ -313,19 +313,30 @@ Round 1's contract and Teletubby's side held up. Inside Story Pilot, though, a v
 
 ### 12.3 The rule: what makes a new script
 
-The rule is enforced by the server, in `story.script.set`, so it holds on the screen, in the Copy instruction and for an agent calling the verbs directly. `story.script.set` gains an optional `mode` (`create`, `update`, `recreate`), used with `kind: build`.
+The rule is enforced by the server, in `story.script.set`, so it holds on the screen, in the Copy instruction and for an agent calling the verbs directly. `story.script.set` gains an optional `mode` (`create`, `update`, `recreate`), used only with `kind: build`.
 
 | A build arrives | The script has no words yet | The script has words |
 |---|---|---|
 | `create` | Written here | New script |
-| `update`, same guides | Written here | **A version on this script** |
+| `update`, no guide change | Written here | **A version on this script** |
 | `update`, guides changed | Written here | New script |
 | `recreate`, same or different guides | Written here | New script |
-| `kind: build` with no `mode` | Written here | New script |
+| `kind: build` with no `mode` | Written here | Refused, naming the modes |
 
-"Guides changed" means the script's chosen recipe differs, by profile key (6.1), from the recipe its current words were built from. Words with no recorded build have no profile, so any chosen recipe counts as changed. An edit, an undo and a restore are never builds and always stay on the script.
+**"Guides changed"** compares, by profile key (6.1), what the script would be built from now with what its current words were built from. Words with no recorded build read as the recipe the app already falls back to for them ("as before"). So an Update on a never-built script such as `main` is a version, pressing **Fine** without changing anything stays a version, and that Update's build record gives the words their first profile. Choosing really different guides and then rebuilding is a new script.
 
-The new script takes the source's direction, angle, chosen recipe and selection, as **New from this** does, and `derivedFrom` names the source. Its history starts at version 1. The answer names it: `scriptId`, `forkedFrom`. `story.build.record` must use that `scriptId`. On a new script's first version `previousVersion` is treated as none. The source's chosen recipe goes back to what its own words were built from, so a later Update there is not read as a guide change. The source's Rerun is marked answered.
+**Closing the other ways in:**
+
+- An `agent:*` caller must pass `kind`. There is no default for agents; a person's edit still defaults to `edit`.
+- `mode` with anything but `kind: build` is refused.
+- While a Rerun is pending on the script, an agent write with `kind: edit` is refused, naming the pending Rerun.
+- While a Rerun is pending, a build whose `mode` differs from the mode the screen asked for is refused, naming the asked mode. The screen's choice wins over the agent's flag.
+
+An edit, an undo and a restore by a person are never builds and always stay on the script.
+
+**The new script** takes the source's direction, angle, chosen recipe and selection, as **New from this** does, and `derivedFrom` names the source. Its history starts at version 1. The answer names it: `scriptId`, `forkedFrom`. `story.build.record` must use that `scriptId`. On a new script's first version `previousVersion` is treated as none. The source's Rerun is marked answered.
+
+The source's chosen recipe goes back to the guide ids its own words were built from, with pins cleared so they don't read as changed, or to none if its words have no recorded build. A later Update there is then not read as a guide change.
 
 ### 12.4 The id scheme
 
@@ -333,23 +344,31 @@ The new script takes the source's direction, angle, chosen recipe and selection,
 
 - A script created from now on: its own script id.
 - An existing script with no stored id, at its next successful Send, resolved in order and then stored:
-  1. Take the newest version marked `published`. Its id is what round 1 would have derived for it, which is the chip it last updated.
+  1. Take the newest version marked `published`. Its id is what round 1 would have derived for it, walking back from that version and not from the head, which is the chip it last updated.
   2. Unless a later build with mode other than `update` changed the profile: a regeneration from before this change, never sent. That takes the id derived from the current words, as round 1 did.
   3. No published version: the id derived from the current words.
 
 So `main` keeps updating the `main` chip even after an Update records a recipe for the first time, and a chip with a hashed id keeps that id. The version number stays the script's own `n`.
 
+Accepted limit: a script from before this change that holds two chips resolves to the newest one published, so the older chip keeps its words and no script updates it again. Existing mixed histories stay as they are.
+
 ### 12.5 An abandoned or failed rebuild leaves nothing
 
-The new script is created at the moment the words arrive, so a rebuild abandoned before that creates nothing. It carries `building: true` until `story.build.record` succeeds, and until then it is not in the dropdown and is not counted when resolving which script is meant. A record that fails leaves it hidden on disk, and `build.py` says so. Scripts with no words, from **New from this** or a batch, stay listed and read `no words yet`, so they cannot pass for a variant.
+The new script is created at the moment the words arrive, so a rebuild abandoned before that creates nothing, and a build refused by the trigger check creates nothing either. It carries `building: true` until `story.build.record` succeeds. Until then it is not live: not in the dropdown or `story.scripts.list`, not counted when resolving which script is meant, not in the label collision set, and `use`, `send` and `recipe.set` on it are refused.
+
+**Retrying.** A record that fails leaves it hidden, and `build.py` says so. A build addressed to a source whose new script is still `building` replaces that hidden script; it never makes a second one. A build addressed to the `building` script itself replaces its words too.
+
+Scripts with no words, from **New from this** or a batch, stay listed and read `no words yet`, so they cannot pass for a variant.
 
 ### 12.6 Send
 
 **Trigger rule.** Teletubby's rule is unchanged: first trigger on paragraph 1, last on the last paragraph, never backwards. Story Pilot applies the same rule, in `story.script.set` with `kind: build`, before anything is written, so a bad map fails where it is made. The refusal names the trigger and the paragraph to fix.
 
-**A map that goes bad later**, for example an edit that changes the paragraph count: the line beside Send gives the reason instead of "Send it again", and `teletubby.state` is `blocked`.
+**A map that goes bad later**, for example an edit that changes the paragraph count: the line beside Send gives the reason instead of "Send it again", and `teletubby.state` is `blocked`. Send stays clickable, so Teletubby's own answer can still be seen. A build with no triggers at all is allowed, as today.
 
 **Teletubby's own reasons.** When Teletubby refuses anyway, its `violations` reach the Send message rather than "the write would break a domain rule".
+
+**The skill.** `appydave-plugins/flivideo/skills/storypilot/SKILL.md` states the three-part rule, and `scripts/build.py` passes `mode`, records against the `scriptId` the write answers, and stops on a failed record.
 
 **In use.** `putInUse` runs only after Teletubby accepts the write. A refused Send changes nothing about which script is in use.
 
@@ -359,27 +378,36 @@ The new script is created at the moment the words arrive, so a rebuild abandoned
 
 | Place | Says |
 |---|---|
-| Dropdown label | Variant |
-| Dropdown line | label · version · word count · in use, or draft, or no words yet |
+| Dropdown label | Variant (`data-testid="sp-variant-pick"`) |
+| Dropdown line | label · version · word count · in use, if it is · no words yet, if it has none. Nothing for not in use: the glossary rules out "draft". |
 | New from this, tooltip | A new variant with this one's direction and guides (never its words) |
+| The button that makes an empty one | New variant |
 | Rerun, Update | Update: a new version of this variant |
 | Rerun, Recreate | Recreate: a new variant, this one is kept |
+| Fine, toast | "<label>: guides chosen. Rebuild to use them." |
 | Beside Send | "This variant is on Teletubby, the same as here." · "Teletubby has an older version of this variant. Send it again." · "This variant is not on Teletubby yet." · the blocking reason |
 | Label box | Variant label |
-| History | Versions of this variant |
+| History heading | Versions of this variant |
+| Undo and Restore, toasts | "Back to v7 of this variant" |
+
+"Script" stays where it means the words themselves, such as the Script section. "Use for the project" names no noun and stays.
+
+**When a regeneration lands.** The picker stays where it is and nothing moves. A line beside the dropdown says "New variant ready: <label>", with one click to it, until it has been picked once.
 
 ### 12.8 Default labels
 
-Two variants of one story never show the same default. Start from voice · build · kind. Where defaults collide, add whichever of verbal guide, video guide and narrator differs between the colliding scripts. If they still collide, a number is the last resort, in creation order so it stays stable. A custom label is used as typed. A number on one script does not change once its chip exists, because a label change republishes in place.
+Two variants of one story never show the same default. Start from voice · build · kind, in creation order. Where a script's default collides with an earlier one's, only the newer one changes, so an existing chip's name stays stable: add whichever of verbal guide, video guide and narrator differs. If it still collides, a number is the last resort. The set compared is every listed script of the story, not `building` and not archived. A custom label is used as typed and is not compared.
 
 ### 12.9 Done-check
 
 Per-step checks use no model calls. The final proof is in the mission brief and qa owns it: real regenerations with both models across at least three scripts, all sent to a real Teletubby, each variant's own history, and `main` plus an already-published chip updating in place, with controls at round 1's commits showing each check can fail. Word edits are versions and prove nothing about variants.
 
-Testable without a model: the 12.3 table, one row each, through `story.script.set`; the 12.4 resolution on fixtures with published flags; Undo stopping at a new script's first version; a failed record leaving nothing in the dropdown; the 12.6 trigger refusals and the `blocked` state; a refused Send leaving `uses` unchanged; 12.8 collisions.
+Testable without a model: the 12.3 table, one row each, through `story.script.set`; an Update on a never-built script stays a version; Recreate asked and `update` passed is refused; an agent `kind: edit` during a pending Rerun is refused; the 12.4 resolution on fixtures with published flags; Undo stopping at a new script's first version; a failed record leaving nothing in the dropdown; the 12.6 trigger refusals and the `blocked` state; a refused Send leaving `uses` unchanged; 12.8 collisions.
 
 ### 12.10 Out of scope, and what was not checked
 
 Out of scope: a Redo button, removing chips, the Teletubby header. Teletubby should not need to change; its contract is untouched, and it will be named if that proves wrong.
 
-Checked by reading: the build, record and create paths, Rerun's instruction, the picker, Teletubby's trigger rule. Not checked: how Teletubby's `violations` travel through FliStudio's door, which round 1's probe saw dropped and which decides how small that fix is. Nothing here has run.
+Part of steps 1 and 2: `appydave-plugins/flivideo/skills/storypilot/SKILL.md` and `scripts/build.py`.
+
+Checked by reading: the build, record and create paths, Rerun's instruction, the picker, Teletubby's trigger rule. Teletubby's `violations` already reach FliStudio's refusal details, and only the message text drops them. Nothing here has run.
