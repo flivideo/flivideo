@@ -180,7 +180,7 @@ Part **pins** (content hashes) are excluded: refining a voice guide is not a reg
 
 ### 6.3 Label
 
-- Default: the voice or style name · the build structure if it adds anything · the kind without `-story`. No profile: the script's title, else `as written`.
+- Default: the narrator · the build structure if it adds anything · the kind without `-story`. No profile: the script's title, else `as written`.
 - Custom: a text box beside Send to Teletubby, showing the default. `story.script.send` takes an optional `label`, stored per variant in `script.json` (`variantLabels`). Changing it republishes the same version with the new label.
 - Two variants can end up with the same default label. The tooltip shows the id, and the free-text label fixes it.
 
@@ -235,7 +235,7 @@ On an in-place update:
 - Unchanged paragraphs render identical text. The changed words swap; lines after them in that paragraph may re-wrap.
 - The live paragraph stays on the reading line (rule 7). If a change above it shifts layout, it is re-seated with no animation.
 - Anchored by paragraph and line, never by a pixel offset.
-- Voice on: the driver takes the new text and keeps the paragraph, clamping the word index. Mechanism in the same family as a press re-anchor.
+- Voice on: the driver is rebuilt from the new text at the live paragraph, re-anchoring exactly as a press does, so word tracking restarts at that paragraph's first word.
 
 ### 7.6 No editing
 
