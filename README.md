@@ -3,7 +3,7 @@ type: reference
 title: FliVideo — ecosystem map
 description: "The one central map of the FliVideo suite: every app, what it does, its lifecycle bucket, which pipeline stage it owns, and where its own docs live. Points to per-app docs; never copies them."
 created: 2026-09-23
-timestamp: 2026-10-03
+timestamp: 2026-11-09
 status: active
 ---
 
@@ -56,6 +56,18 @@ is Scribe's job.
 | Teletubby | teleprompter: shows and edits scripts | `/Users/davidcruwys/dev/ad/flivideo/teletubby` |
 | fli-core | shared library `@flivideo/core`: project layout, zones, naming contracts | `/Users/davidcruwys/dev/ad/flivideo/fli-core` |
 | FliTools | headless service (launchd `com.appydave.flitools`, :7161) and the suite's one transcriber. Pass 1: Groq, with mlx-whisper as the fallback. Pass 2 (edit-grade, async): CrisperWhisper locally, or ElevenLabs if switched. Memory rules: one job at a time, a memory check first, unload when idle. Design: `docs/briefs/transcription-as-a-service.md` | `/Users/davidcruwys/dev/ad/flivideo/flitools` |
+
+### Pilots — FliStudio extensions
+
+Each pilot is an extension inside FliStudio (`flistudio/modules/`), opened from its project page under **Extensions**.
+
+| Pilot | What it does | Path |
+|---|---|---|
+| Overlay Pilot | on-brand text overlays for finished talking-head videos | `/Users/davidcruwys/dev/ad/flivideo/flistudio/modules/overlay-pilot` |
+| Story Pilot | a video's story settings, ordered sources and script; an agent does the writing, and it publishes to Teletubby | `/Users/davidcruwys/dev/ad/flivideo/flistudio/modules/storypilot` |
+| B-roll Pilot | a catalogue of visual material, each item described on arrival | `/Users/davidcruwys/dev/ad/flivideo/flistudio/modules/broll-pilot` |
+
+Watch Pilot is separate: a standalone library of great videos and why they're great, shaped like a FliStudio extension (`/Users/davidcruwys/dev/ad/flivideo/watch-pilot`).
 
 ### Dormant — will be revived
 
@@ -121,9 +133,9 @@ is tracked in `docs/briefs/doc-skills-blind-review.md`; to see the real state, l
 
 ## Machines
 
-- **M4 Mini**: development (all code) and the transcription server.
-- **Roamy**: editing and using the apps. It is synced from the M4 after every merged fix (pull, install, restart, health check). It never runs pass 2.
-- **M2 (M2 Pro, 32 GB)**: being set up as a full peer and as the transcription worker for pass-2 jobs.
+- **M2 (M2 Pro, 32 GB)**: code changes run here by default (ruling 2026-11-03). It is also the transcription worker for pass-2 jobs.
+- **M4 Mini**: code changes run here only when the work is already in progress here. It hosts FliStudio and the video projects, and is the transcription server.
+- **Roamy**: editing and using the apps; no code changes. It is synced after every merged fix (pull, install, restart, health check). It never runs pass 2.
 
 ## Running the apps
 
