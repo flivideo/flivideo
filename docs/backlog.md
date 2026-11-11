@@ -103,3 +103,17 @@ and whether they go into git is **hot** (to be talked through on 2026-11-04). It
   FliCut we may never need that tool again but we wouldn't actually want to lose that tool in the future... I'm
   thinking of this as a backlog item for a future extension, not as an on-the-fly studio system and not as something
   to do right now."
+- **Story Pilot data island: who added what, and who lets it in, banked 2026-11-11. Not started; not to build now.**
+  *Source:* David, 11 Nov, looking at an AITLDR video's data island in Story Pilot: "I don't think things just go in
+  there because the AI decides. When a human is building a story, the human needs to guide what goes in there a bit."
+  And: "How do we say, 'Stuff is not really relevant'? Is that not relevant at all, yes or no, or is it not relevant
+  for maybe a run?" What happened there: an agent added all 8 items at David's request; the record of who added each
+  one exists (`added.by` / `added.at` in the resources file) but nothing on screen showed it, so the editor believed
+  they had arrived on their own.
+  1. Show provenance on every island item: who added it (a person, or which agent and session), when, and why.
+  2. Agent additions arrive as proposed, not in; a person accepts them into the island (or a per-brand setting allows
+     auto-accept).
+  3. Two kinds of "not relevant": not relevant at all (out of the island, kept as history) vs not for this run (stays
+     in the island, left out of one script's selection). Story Pilot already has per-script selection and set-aside;
+     the screen should make the difference obvious.
+  4. A quick eyeball view: each item's gist in one line, so a person can judge it before a build.
