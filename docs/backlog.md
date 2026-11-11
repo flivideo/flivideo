@@ -93,3 +93,13 @@ and whether they go into git is **hot** (to be talked through on 2026-11-04). It
   - A hand-edit affordance in the script for a comma or one word at recording time.
   - Reading looks as a shared library: a global terminal / white-focus switch usable across all apps, both React and
     Electron (Lab note on C).
+- **Artifact-tools shelf (FliStudio extension), banked 2026-11-11. Not started; not to build now.** A FliStudio
+  extension that holds and organises the prompts and recipes for artifact tools, so any of them can be re-made on
+  demand for a project and improved later. The tools stay out of the apps; only their recipes are kept. Today's tools:
+  the join listening sheet (`flivideo:join-sheet` skill) and the Story Pilot scripts sheet (`flivideo:scripts-sheet`
+  skill), both in appydave-plugins. *Source:* David, 11 Nov, relayed by exec-coord: "since the creation of an artefact
+  is really just the storage of a prompt, I could see a specialised prompt storage mechanism in Fli Studio (designed
+  around just holding and organising prompts for creating artefacts for certain tools on demand)... Once we dial in
+  FliCut we may never need that tool again but we wouldn't actually want to lose that tool in the future... I'm
+  thinking of this as a backlog item for a future extension, not as an on-the-fly studio system and not as something
+  to do right now."
