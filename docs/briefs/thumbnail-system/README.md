@@ -81,6 +81,11 @@ fact sheet ─► recipe pick ─► JSON spec ─► image ─► text layer �
 **Library photos are identity references, not stock poses.** References come from **David's favourites** in the picker (his approved-likeness set, mostly neutrals), chosen by outfit and angle, never by expression. David curates favourites once and never picks per thumbnail. The model invents the performance (see `presenter/appydave.json` → `usage_rule`). Copying a cutout by expression match is what made test 1 look like Canva.
 
 
+**How the presenter is placed** (observed in the D07–D13 runs, Nov 2026):
+- **Invented scene:** the model draws the presenter straight into it, using the identity references.
+- **Real app screen as the background:** the model draws the presenter alone on a flat backdrop (pure green `#00FF00`, or a flat pale colour). A script then keys the presenter out with a threshold key plus despill, places them on the real screenshot, and adds the headline afterwards. Two pairs so far: D12 pair D and D13 pair A.
+- **Green slots are a separate thing:** flat-green areas inside a drawn scene where a real screen or thumbnail is inserted later. The presenter isn't touched.
+
 Specs never embed or upload photos. They name a **role** (e.g. `surprised`, `pointing-right`) plus an optional file id. The library is resolved at run time: the portraits-rsch location once it's decided, otherwise the 2024 cutouts. Changing the library changes no spec.
 
 ## Status and next step
